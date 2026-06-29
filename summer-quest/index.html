@@ -165,6 +165,14 @@
   .levbtn:hover{border-color:var(--sky)}
   .levbtn.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 
+  /* chess lock */
+  .panel.lock{text-align:center;background:linear-gradient(135deg,#fff,#F3EEFB);border-color:#E0D5F2}
+  .lockbig{font-size:3.4rem;line-height:1}
+  .lockgo{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+  .lockgo .btn{background:var(--berry)}
+  .land.locked{filter:grayscale(.55);opacity:.92}
+  .land.locked::after{content:"🔒";position:absolute;inset:0;display:grid;place-items:center;font-size:2.6rem;background:rgba(35,43,61,.34);border-radius:var(--r)}
+
   /* Activity / project cards */
   .acard{border:1px solid var(--line);border-radius:16px;padding:16px;background:var(--card);box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:8px}
   .acard.is-done{background:#F3FBF5;border-color:#BfE6C9}
@@ -345,6 +353,23 @@
     <div class="topback"><button class="back" data-go="home">← Back to map</button></div>
     <div class="vhead"><div class="vic" style="background:var(--berry)">♟️</div><div><h2>Chess Castle</h2><p>Learn chess one step at a time. Finish a lesson for +5 XP, and play online to practice.</p></div></div>
 
+    <div class="panel lock" id="chessLock" style="display:none">
+      <div class="lockbig">🔒</div>
+      <h3 style="font-size:1.5rem">Chess is locked right now</h3>
+      <p style="max-width:42ch;margin:8px auto 0">The Chess Castle opens after you do some learning! Earn <b><span id="chessNeed">30</span> more points</b> today in Math, French, Reading, Science or Life Smarts, then come back to play. ♟️</p>
+      <div class="progress" style="max-width:360px;margin:16px auto 6px"><i id="chessBar"></i></div>
+      <p class="note"><b id="chessHave">0</b> / <span id="chessGoalN">30</span> learning points today</p>
+      <div class="lockgo">
+        <button class="btn" data-go="math">🔢 Math</button>
+        <button class="btn" data-go="french">🇫🇷 French</button>
+        <button class="btn" data-go="reading">📖 Reading</button>
+        <button class="btn" data-go="science">🔬 Science</button>
+        <button class="btn" data-go="life">🧭 Life Smarts</button>
+      </div>
+      <div class="parentbox" style="max-width:480px;margin:16px auto 0">👪 <b>Grown-up:</b> chess unlocks after <span id="chessGoalN2">30</span> learning points each day. <button class="markbtn" id="chessGoalBtn" style="margin-top:6px">Change the goal</button></div>
+    </div>
+
+    <div id="chessContent">
     <div class="panel">
       <p class="eyebrow">How each piece moves</p>
       <table class="moves">
@@ -370,6 +395,7 @@
         <div class="acard"><h4>🧩 Lichess.org</h4><p class="note">Free puzzles and games. Try “Puzzles” for a daily brain workout.</p><a class="markbtn" href="https://lichess.org/training" target="_blank" rel="noopener">Open Lichess puzzles →</a></div>
       </div>
     </div>
+    </div><!-- /chessContent -->
   </section>
 
   <!-- ============ CREATE ============ -->
@@ -434,6 +460,7 @@ const defaultState = () => ({
   sound: true,
   speak: true,
   level: "med",
+  chessGoal: 30,
   xp: 0,
   streak: 0,
   lastActive: "",
@@ -445,7 +472,7 @@ const defaultState = () => ({
   maker: { done: [] },
   reading: { done: [], correct: 0, writing: {} },
   life: { correct: 0 },
-  daily: { date: "", math:false, french:false, explore:false, create:false }
+  daily: { date: "", math:false, french:false, explore:false, create:false, learnXP:0 }
 });
 
 let S = load();
@@ -459,7 +486,25 @@ function load(){
 }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 
-function addXP(n){ S.xp += n; save(); renderStats(); }
+function addXP(n, opts){
+  S.xp += n;
+  if(!(opts && opts.chess)){ S.daily.learnXP = (S.daily.learnXP||0) + n; }   // learning earns chess time
+  save(); renderStats();
+}
+function chessGoal(){ return S.chessGoal || 30; }
+function chessUnlocked(){ return (S.daily.learnXP||0) >= chessGoal(); }
+function renderChessGate(){
+  const goal=chessGoal(), have=S.daily.learnXP||0, unlocked=have>=goal;
+  document.getElementById("chessLock").style.display = unlocked ? "none" : "";
+  document.getElementById("chessContent").style.display = unlocked ? "" : "none";
+  if(!unlocked){
+    document.getElementById("chessNeed").textContent = goal-have;
+    document.getElementById("chessHave").textContent = have;
+    document.getElementById("chessGoalN").textContent = goal;
+    document.getElementById("chessGoalN2").textContent = goal;
+    document.getElementById("chessBar").style.width = Math.min(100, have/goal*100) + "%";
+  }
+}
 
 /* streak + daily reset */
 (function dailyBoot(){
@@ -472,7 +517,7 @@ function addXP(n){ S.xp += n; save(); renderStats(); }
     S.lastActive = t;
   }
   if(S.daily.date !== t){
-    S.daily = { date:t, math:false, french:false, explore:false, create:false };
+    S.daily = { date:t, math:false, french:false, explore:false, create:false, learnXP:0 };
   }
   save();
 })();
@@ -573,6 +618,7 @@ function go(id){
   if(id==="french") resetFrMenu();
   if(id==="reading") resetReadMenu();
   if(id==="life") resetLifeMenu();
+  if(id==="chess") renderChessGate();
 }
 document.addEventListener("click", e=>{
   const t = e.target.closest("[data-go]");
@@ -590,12 +636,26 @@ function renderStats(){
   document.getElementById("p-french").textContent = S.french.correct + " right";
   document.getElementById("p-science").textContent = S.science.done.length + " done";
   document.getElementById("p-create").textContent = S.create.done.length + " done";
-  document.getElementById("p-chess").textContent = S.chess.done.length + "/4 done";
   document.getElementById("p-maker").textContent = S.maker.done.length + " built";
   document.getElementById("p-read").textContent = S.reading.done.length + " read";
   document.getElementById("p-life").textContent = S.life.correct + " learned";
+  // chess: locked until enough learning points today
+  const unlocked = chessUnlocked();
+  const chessCard = document.querySelector(".land.l-chess");
+  if(chessCard) chessCard.classList.toggle("locked", !unlocked);
+  document.getElementById("p-chess").textContent = unlocked
+    ? "🔓 " + S.chess.done.length + "/4 lessons"
+    : "🔒 " + (S.daily.learnXP||0) + "/" + chessGoal();
+  renderChessGate();
+  announceChessUnlock(unlocked);
   renderBadges();
   announceBadges();
+}
+let chessWasUnlocked = null;
+function announceChessUnlock(unlocked){
+  if(chessWasUnlocked === null){ chessWasUnlocked = unlocked; return; }
+  if(unlocked && !chessWasUnlocked){ toast("🔓 Chess Castle unlocked! ♟️"); Sound.fanfare(); }
+  chessWasUnlocked = unlocked;
 }
 
 function setName(){
@@ -623,6 +683,12 @@ function paintSpeak(){
 document.getElementById("speakBtn").addEventListener("click", ()=>{
   S.speak = !S.speak; save(); paintSpeak();
   if(S.speak) Speech.speak("Hi! I can read to you.","en"); else Speech.stop();
+});
+
+/* let a grown-up change the daily chess-unlock goal */
+document.getElementById("chessGoalBtn").addEventListener("click", ()=>{
+  const v = prompt("How many learning points should unlock chess each day?\n(Math/French = 2 each, Reading = 3, Science = 10)", chessGoal());
+  if(v!==null){ const n=parseInt(v,10); if(!isNaN(n) && n>=0){ S.chessGoal=n; save(); renderStats(); } }
 });
 
 /* difficulty selector (renders into every .levelbar) */
@@ -1514,7 +1580,7 @@ function toggleDone(land, id, xp, rerender, dailyKey){
   const arr = S[land].done;
   const i = arr.indexOf(id);
   if(i===-1){
-    arr.push(id); addXP(xp); Sound.reward();
+    arr.push(id); addXP(xp, land==="chess"?{chess:true}:undefined); Sound.reward();
     toast("+"+xp+" XP! ⭐");
     if(dailyKey) markDaily(dailyKey);
   } else {
