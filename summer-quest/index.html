@@ -158,6 +158,13 @@
   .skill span{display:block;font-size:.8rem;color:var(--ink-soft)}
   .skill .emo{font-size:1.6rem}
 
+  /* difficulty selector */
+  .levelbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:14px 0}
+  .levlabel{font-family:var(--display);font-weight:700;font-size:.85rem;color:var(--ink-soft);margin-right:2px}
+  .levbtn{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 14px;font-weight:700;font-size:.88rem;box-shadow:var(--shadow-sm)}
+  .levbtn:hover{border-color:var(--sky)}
+  .levbtn.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
   /* Activity / project cards */
   .acard{border:1px solid var(--line);border-radius:16px;padding:16px;background:var(--card);box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:8px}
   .acard.is-done{background:#F3FBF5;border-color:#BfE6C9}
@@ -230,6 +237,8 @@
 
     <div class="weekribbon" id="weekRibbon" aria-label="Choose the week"></div>
 
+    <div class="levelbar" aria-label="Choose difficulty"></div>
+
     <div class="mission">
       <h2>🎯 Today's Mission <span class="note" id="missionDate" style="font-weight:400"></span></h2>
       <p class="note">Tap each one when you finish. Complete all four for a bonus star!</p>
@@ -260,6 +269,7 @@
     <div class="topback"><button class="back" data-go="home">← Back to map</button></div>
     <div class="vhead"><div class="vic" style="background:var(--sky)">🔢</div><div><h2>Math Mountain</h2><p>Pick a skill, answer the questions, earn XP. Each correct answer = +2 XP.</p></div></div>
     <div class="panel" id="mathMenu">
+      <div class="levelbar"></div>
       <p class="eyebrow">Choose your climb</p>
       <div class="skillgrid" id="mathSkills" style="margin-top:10px"></div>
     </div>
@@ -423,6 +433,7 @@ const defaultState = () => ({
   name: "",
   sound: true,
   speak: true,
+  level: "med",
   xp: 0,
   streak: 0,
   lastActive: "",
@@ -614,6 +625,19 @@ document.getElementById("speakBtn").addEventListener("click", ()=>{
   if(S.speak) Speech.speak("Hi! I can read to you.","en"); else Speech.stop();
 });
 
+/* difficulty selector (renders into every .levelbar) */
+function renderLevels(){
+  document.querySelectorAll(".levelbar").forEach(bar=>{
+    bar.innerHTML = `<span class="levlabel">Difficulty:</span>` + LEVELS.map(k=>
+      `<button class="levbtn ${L()===k?'on':''}" data-lev="${k}">${LEVEL_META[k].emo} ${LEVEL_META[k].name}</button>`).join("");
+  });
+}
+document.addEventListener("click", e=>{
+  const b = e.target.closest("[data-lev]"); if(!b) return;
+  S.level = b.dataset.lev; save(); Sound.click(); renderLevels();
+  toast(LEVEL_META[S.level].emo+" "+LEVEL_META[S.level].name+" mode");
+});
+
 /* announce newly-earned badges with a sound + toast */
 let knownBadges = null;
 function announceBadges(){
@@ -713,13 +737,20 @@ const MATH_SKILLS = [
   {id:"sub",   emo:"➖", name:"Big Subtracting",desc:"3-digit take-away"},
 ];
 
+/* current difficulty level helper */
+const LEVELS = ["easy","med","hard"];
+const LEVEL_META = { easy:{name:"Easy",emo:"🌱"}, med:{name:"Medium",emo:"⭐"}, hard:{name:"Hard",emo:"🔥"} };
+function L(){ return LEVELS.includes(S.level) ? S.level : "med"; }
+
 function makeLogicQ(){
-  const kind=pick(["next_add","next_double","next_sub","odd","order","day","riddle"]);
-  if(kind==="next_add"){ const a=rnd(2,20), d=pick([3,4,6,7,9,11,25,50]);
+  const lv=L(), hard=lv==="hard", easy=lv==="easy";
+  const kind=pick(easy ? ["next_add","next_double","odd","order","day"]
+                       : ["next_add","next_double","next_sub","odd","order","day","riddle","riddle"]);
+  if(kind==="next_add"){ const a=rnd(2,20), d=easy?pick([2,3,5,10]):hard?pick([12,15,20,25,50,100]):pick([3,4,6,7,9,11,25,50]);
     return {prompt:`What comes next?\n${a}, ${a+d}, ${a+2*d}, ${a+3*d}, ?`, answer:a+4*d, mode:"input", word:true}; }
-  if(kind==="next_double"){ const a=pick([1,2,3,4,5]);
+  if(kind==="next_double"){ const a=easy?pick([1,2,3]):pick([1,2,3,4,5]);
     return {prompt:`What comes next?\n${a}, ${a*2}, ${a*4}, ${a*8}, ?`, answer:a*16, mode:"input", word:true}; }
-  if(kind==="next_sub"){ const start=rnd(70,140), d=pick([3,4,5,6,7,9,10]);
+  if(kind==="next_sub"){ const start=hard?rnd(160,400):rnd(70,140), d=hard?pick([7,9,11,12,15,20]):pick([3,4,5,6,7,9,10]);
     return {prompt:`What comes next?\n${start}, ${start-d}, ${start-2*d}, ${start-3*d}, ?`, answer:start-4*d, mode:"input", word:true}; }
   if(kind==="odd"){ // odd-one-out
     const evens=[]; while(evens.length<3){ const e=rnd(2,25)*2; if(!evens.includes(e)) evens.push(e); }
@@ -762,46 +793,63 @@ const THING = [["stickers","sticker"],["marbles","marble"],["cookies","cookie"],
                ["beads","bead"],["candies","candy"]];
 
 function makeWordProblem(){
+  const lv=L();
   const kid=pick(KIDS), kid2=pick(KIDS.filter(k=>k!==kid)), th=pick(THING);
   const t=th[0], t1=th[1];
+  // number ranges per difficulty
+  const R = lv==="easy"
+    ? {addA:[10,90],addB:[5,60],subA:[20,99],mB:[2,6],mE:[2,8],dK:[2,5],dE:[2,6],cmp:[10,90],msB:[2,4],msE:[3,8],msX:[3,15],tE:[3,8],tB:[2,4],tEat:[2,10]}
+    : lv==="hard"
+    ? {addA:[1500,8900],addB:[800,5600],subA:[2500,9500],mB:[8,15],mE:[9,20],dK:[6,12],dE:[8,20],cmp:[600,4500],msB:[5,9],msE:[8,20],msX:[20,150],tE:[8,20],tB:[4,8],tEat:[10,60]}
+    : {addA:[240,890],addB:[120,640],subA:[420,960],mB:[4,12],mE:[6,15],dK:[4,9],dE:[4,12],cmp:[120,480],msB:[3,7],msE:[5,12],msX:[6,40],tE:[5,12],tB:[3,6],tEat:[4,15]};
+  const rr=p=>rnd(p[0],p[1]);
   const kind=pick(["add","sub","mult","div","twostep","twostep","multistep","compare"]);
-  if(kind==="add"){ const a=rnd(240,890),b=rnd(120,640);
+  if(kind==="add"){ const a=rr(R.addA),b=rr(R.addB);
     return {prompt:`${kid} has ${a} ${t}. ${kid2} gives ${kid} ${b} more. How many ${t} does ${kid} have now?`, answer:a+b}; }
-  if(kind==="sub"){ const a=rnd(420,960),b=rnd(80,a-40);
+  if(kind==="sub"){ const a=rr(R.subA),b=rnd(Math.max(1,Math.floor(a*0.2)),Math.floor(a*0.85));
     return {prompt:`There were ${a} ${t} in a jar. ${b} were taken out. How many ${t} are left?`, answer:a-b}; }
-  if(kind==="mult"){ const boxes=rnd(4,12),each=rnd(6,15);
+  if(kind==="mult"){ const boxes=rr(R.mB),each=rr(R.mE);
     return {prompt:`There are ${boxes} bags. Each bag has ${each} ${t}. How many ${t} are there in total?`, answer:boxes*each}; }
-  if(kind==="div"){ const kids=rnd(4,9),each=rnd(4,12); const tot=kids*each;
+  if(kind==="div"){ const kids=rr(R.dK),each=rr(R.dE); const tot=kids*each;
     return {prompt:`${kid} shares ${tot} ${t} equally between ${kids} friends. How many ${t} does each friend get?`, answer:each}; }
-  if(kind==="compare"){ const a=rnd(120,480),b=rnd(120,480);
+  if(kind==="compare"){ const a=rr(R.cmp),b=rr(R.cmp);
     return {prompt:`${kid} has ${a} ${t} and ${kid2} has ${b} ${t}. How many more ${t} does ${a>b?kid:kid2} have than ${a>b?kid2:kid}?`, answer:Math.abs(a-b)}; }
-  if(kind==="multistep"){ const bags=rnd(3,7),each=rnd(5,12),extra=rnd(6,40); const tot=bags*each+extra;
+  if(kind==="multistep"){ const bags=rr(R.msB),each=rr(R.msE),extra=rr(R.msX); const tot=bags*each+extra;
     return {prompt:`${kid} has ${bags} boxes with ${each} ${t} in each box, plus ${extra} loose ${t}. How many ${t} in total?`, answer:tot}; }
   // two-step (multiply then subtract)
-  const each=rnd(5,12),bags=rnd(3,6),eat=rnd(4,15); const tot=each*bags;
+  const each=rr(R.tE),bags=rr(R.tB); const tot=each*bags; const eat=rnd(R.tEat[0],Math.min(R.tEat[1],tot-1));
   return {prompt:`${kid} buys ${bags} bags with ${each} ${t} in each. Then ${kid} gives away ${eat} ${t1}. How many ${t} are left?`, answer:tot-eat};
 }
 function makeMoneyProblem(){
+  const lv=L(), small=lv==="easy", big=lv==="hard";
   const kid=pick(KIDS);
   const kind=pick(["change","total","each"]);
-  if(kind==="change"){ const cost=rnd(3,18), paid=pick([10,20,50].filter(p=>p>cost)) || 20;
+  if(kind==="change"){ const cost=small?rnd(2,9):big?rnd(15,85):rnd(3,18);
+    const paid=pick((small?[10,20]:big?[50,100]:[10,20,50]).filter(p=>p>cost)) || (big?100:20);
     return {prompt:`${kid} buys a toy for $${cost} and pays with a $${paid} bill. How much change ($) does ${kid} get back?`, answer:paid-cost}; }
-  if(kind==="total"){ const price=rnd(3,9), n=rnd(2,6);
+  if(kind==="total"){ const price=small?rnd(2,6):big?rnd(8,25):rnd(3,9), n=small?rnd(2,4):big?rnd(4,9):rnd(2,6);
     return {prompt:`Each book costs $${price}. ${kid} buys ${n} books. How much does ${kid} pay in total ($)?`, answer:price*n}; }
-  const price=rnd(2,8), n=rnd(2,5), paid=price*n+rnd(2,12);
+  const price=small?rnd(2,5):big?rnd(6,18):rnd(2,8), n=small?rnd(2,4):big?rnd(3,7):rnd(2,5), paid=price*n+(big?rnd(5,30):rnd(2,12));
   return {prompt:`${kid} buys ${n} pens at $${price} each and pays $${paid}. How much change ($) does ${kid} get?`, answer:paid-(price*n)};
 }
 
 function makeMathQ(type){
+  const lv=L();
   switch(type){
     case "word":  { const q=makeWordProblem(); q.mode="input"; q.word=true; return q; }
     case "logic": return makeLogicQ();
     case "money": { const q=makeMoneyProblem(); q.mode="input"; q.word=true; return q; }
-    case "add":   { const a=rnd(180,760),b=rnd(120,480); return {prompt:`${a} + ${b} = ?`, answer:a+b, mode:"input"}; }
-    case "sub":   { const a=rnd(420,990),b=rnd(90,a-40); return {prompt:`${a} − ${b} = ?`, answer:a-b, mode:"input"}; }
-    case "mult":  { let a,b; if(Math.random()<0.45){ a=rnd(11,29); b=rnd(3,9); } else { a=rnd(3,12); b=rnd(3,12); }
+    case "add":   { let a,b; if(lv==="easy"){a=rnd(10,90);b=rnd(5,60);} else if(lv==="hard"){a=rnd(1500,8900);b=rnd(900,6500);} else {a=rnd(240,890);b=rnd(120,640);}
+                    return {prompt:`${a} + ${b} = ?`, answer:a+b, mode:"input"}; }
+    case "sub":   { let a; if(lv==="easy"){a=rnd(30,99);} else if(lv==="hard"){a=rnd(3000,9500);} else {a=rnd(420,990);}
+                    const b=rnd(Math.max(1,Math.floor(a*0.2)),Math.floor(a*0.85)); return {prompt:`${a} − ${b} = ?`, answer:a-b, mode:"input"}; }
+    case "mult":  { let a,b;
+                    if(lv==="easy"){ a=rnd(2,9); b=rnd(2,9); }
+                    else if(lv==="hard"){ a=rnd(12,40); b=rnd(11,20); }
+                    else { if(Math.random()<0.45){ a=rnd(11,29); b=rnd(3,9); } else { a=rnd(3,12); b=rnd(3,12); } }
                     return {prompt:`${a} × ${b} = ?`, answer:a*b, mode:"input"}; }
-    case "div":   { const b=rnd(3,12),ans=rnd(4,15); return {prompt:`${b*ans} ÷ ${b} = ?`, answer:ans, mode:"input"}; }
+    case "div":   { let b,ans; if(lv==="easy"){b=rnd(2,9);ans=rnd(2,9);} else if(lv==="hard"){b=rnd(6,15);ans=rnd(11,30);} else {b=rnd(3,12);ans=rnd(4,15);}
+                    return {prompt:`${b*ans} ÷ ${b} = ?`, answer:ans, mode:"input"}; }
   }
 }
 let mathState=null;
@@ -1210,6 +1258,57 @@ const READING = [
      {q:"Qu'apportent-ils dans la cabane?", choices:["des jouets","des livres et des biscuits","un ballon"], a:1},
    ],
    write:"✍️ Comment serait ta cabane secrète? Écris 2 ou 3 phrases."},
+
+  {id:"grenier", emo:"🔍", title:"Le mystère du grenier", level:4,
+   text:["Un samedi pluvieux, Camille s'ennuyait à la maison. Comme elle ne pouvait pas jouer dehors, sa grand-mère lui a proposé d'explorer le vieux grenier.",
+         "Camille a monté l'escalier étroit, une lampe de poche à la main. Le grenier était sombre et plein de poussière, et de vieilles boîtes étaient empilées dans tous les coins.",
+         "Soudain, elle a entendu un petit bruit. Son cœur battait très fort. Lentement, elle s'est approchée d'une vieille malle de bois.",
+         "Derrière la malle, elle a découvert un chaton gris, tout tremblant. Le pauvre animal s'était caché là pour échapper à l'orage.",
+         "Camille l'a pris doucement dans ses bras pour le réchauffer. Sa grand-mère a souri et a dit qu'ils pouvaient le garder.",
+         "Camille a décidé de l'appeler « Tonnerre », en souvenir de l'orage du jour où elle l'avait trouvé."],
+   qs:[
+     {q:"Pourquoi Camille s'ennuyait-elle au début?", choices:["elle était malade","elle ne pouvait pas jouer dehors à cause de la pluie","elle n'avait pas d'amis"], a:1},
+     {q:"Qu'a-t-elle apporté pour explorer le grenier?", choices:["une lampe de poche","un parapluie","un livre"], a:0},
+     {q:"Pourquoi son cœur battait-il très fort?", choices:["elle avait couru","elle a entendu un bruit mystérieux","elle avait froid"], a:1},
+     {q:"Pourquoi le chaton s'était-il caché dans le grenier?", choices:["il cherchait de la nourriture","il avait peur de l'orage","il aimait la poussière"], a:1},
+     {q:"Pourquoi Camille a-t-elle choisi le nom « Tonnerre »?", choices:["à cause de l'orage du jour où elle l'a trouvé","parce que le chaton était bruyant","c'était le nom d'un film"], a:0},
+     {q:"Quel mot décrit le mieux Camille dans cette histoire?", choices:["paresseuse","curieuse et gentille","peureuse"], a:1},
+   ],
+   write:"✍️ Imagine la suite : que font Camille et Tonnerre le lendemain? Écris 4 ou 5 phrases."},
+
+  {id:"course", emo:"🚴", title:"La grande course de vélo", level:4,
+   text:["Marc s'entraînait depuis des semaines pour la grande course de vélo du village. Chaque matin, avant l'école, il pédalait plusieurs fois autour du parc.",
+         "Le jour de la course, le soleil brillait. Vingt enfants attendaient sur la ligne de départ, le cœur plein d'excitation et un peu de nervosité.",
+         "Au signal, tout le monde est parti très vite. Après quelques minutes, Marc était en troisième position, juste derrière deux coureurs qui roulaient côte à côte.",
+         "À mi-chemin, l'un des deux coureurs est tombé sur le sentier. Marc aurait pu continuer pour gagner, mais il a ralenti pour vérifier si le garçon allait bien.",
+         "Une fois rassuré, Marc est reparti, mais il avait perdu du temps. Il a finalement terminé la course en cinquième place.",
+         "Marc n'a pas gagné de médaille, mais tous les gens l'ont félicité pour sa gentillesse. Au fond, il était très fier de lui."],
+   qs:[
+     {q:"Depuis combien de temps Marc s'entraînait-il?", choices:["depuis un jour","depuis des semaines","depuis une heure"], a:1},
+     {q:"Comment se sentaient les enfants au départ?", choices:["fatigués","excités et un peu nerveux","fâchés"], a:1},
+     {q:"En quelle position était Marc au début de la course?", choices:["premier","troisième","dernier"], a:1},
+     {q:"Pourquoi Marc a-t-il ralenti à mi-chemin?", choices:["il était fatigué","pour aider un coureur tombé","son vélo était brisé"], a:1},
+     {q:"Pourquoi Marc a-t-il terminé seulement cinquième?", choices:["il s'est perdu","il avait perdu du temps en aidant l'autre garçon","il a abandonné"], a:1},
+     {q:"Quelle est la leçon de cette histoire?", choices:["gagner est tout ce qui compte","la gentillesse est plus importante que gagner","il ne faut jamais aider les autres"], a:1},
+   ],
+   write:"✍️ Raconte un moment où tu as aidé quelqu'un, même si c'était difficile. Écris 4 ou 5 phrases."},
+
+  {id:"quebec", emo:"🏰", title:"Un voyage à Québec", level:4,
+   text:["Pendant les vacances d'été, la famille de Sophie a visité la ville de Québec. C'est l'une des plus vieilles villes du Canada.",
+         "Ils ont marché dans le Vieux-Québec, avec ses rues étroites et ses jolies maisons en pierre. Sophie avait l'impression d'être entrée dans un conte de fées.",
+         "Ils ont aussi vu le Château Frontenac, un grand hôtel célèbre qui ressemble à un véritable château. Sophie a pris des dizaines de photos.",
+         "Un guide leur a expliqué que la ville avait été fondée il y a plus de 400 ans par un explorateur nommé Samuel de Champlain.",
+         "Le soir, toute la famille a mangé une délicieuse poutine dans un petit restaurant. C'est un plat québécois fait de frites, de fromage et de sauce.",
+         "Avant de dormir, Sophie a écrit dans son journal que c'était le plus beau voyage de toute sa vie."],
+   qs:[
+     {q:"Quelle ville la famille a-t-elle visitée?", choices:["Montréal","Québec","Toronto"], a:1},
+     {q:"Comment sont les maisons du Vieux-Québec?", choices:["en pierre","en bois","en verre"], a:0},
+     {q:"Pourquoi Sophie se sentait-elle dans un conte de fées?", choices:["à cause des vieilles rues et maisons","parce qu'il neigeait","parce qu'elle dormait"], a:0},
+     {q:"Qui a fondé la ville de Québec?", choices:["Samuel de Champlain","Jacques Cartier","le guide"], a:0},
+     {q:"De quoi est faite la poutine?", choices:["de riz et de poulet","de frites, de fromage et de sauce","de pain et de fromage"], a:1},
+     {q:"Comment Sophie a-t-elle trouvé son voyage?", choices:["ennuyeux","le plus beau de sa vie","trop fatigant"], a:1},
+   ],
+   write:"✍️ Quelle ville aimerais-tu visiter, et pourquoi? Écris 4 ou 5 phrases."},
 ];
 
 let readState=null;
@@ -1218,7 +1317,7 @@ function resetReadMenu(){
   document.getElementById("readPlay").style.display="none";
   document.getElementById("readList").innerHTML = READING.map(r=>{
     const done=S.reading.done.includes(r.id);
-    return `<button class="skill" data-story="${r.id}"><span class="emo">${r.emo}</span><b>${done?'✓ ':''}${r.title}</b><span>${["Facile","Moyen","Défi"][r.level-1]} · ${r.qs.length} questions</span></button>`;
+    return `<button class="skill" data-story="${r.id}"><span class="emo">${r.emo}</span><b>${done?'✓ ':''}${r.title}</b><span>${["Facile","Moyen","Défi","Primaire 4 📘"][r.level-1]} · ${r.qs.length} questions</span></button>`;
   }).join("");
 }
 document.getElementById("readList").addEventListener("click",e=>{
@@ -1446,6 +1545,7 @@ document.getElementById("resetBtn").addEventListener("click",()=>{
 paintName();
 paintSound();
 paintSpeak();
+renderLevels();
 renderStats();
 renderRibbon();
 renderMission();
