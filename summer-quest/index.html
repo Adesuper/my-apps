@@ -116,6 +116,8 @@
   .bookpanel p{margin:0 0 10px}
   .qblock{border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:12px;background:var(--card)}
   .qblock .qtxt{font-weight:700;font-family:var(--display);margin-bottom:8px}
+  .qspeak{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:1px 7px;font-size:.85rem;cursor:pointer;vertical-align:middle}
+  .qspeak:hover{border-color:var(--book)}
   .opt.sel{border-color:var(--book);background:#FBF1E8}
   .writebox{margin-top:16px;border:1px dashed var(--book);border-radius:14px;padding:14px;background:#FFFBF4}
   .writebox textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:10px;padding:10px;font-family:var(--body);font-size:1rem;resize:vertical;margin-top:8px}
@@ -209,6 +211,8 @@
       <span class="chip">⭐ <b id="s-xp">0</b> XP</span>
       <span class="chip">🏅 <b id="s-badges">0</b></span>
       <span class="chip">🔥 <b id="s-streak">0</b> day</span>
+      <button class="namebtn" id="soundBtn" title="Turn sound on or off" aria-label="Toggle sound" style="padding:7px 12px">🔊</button>
+      <button class="namebtn" id="speakBtn" title="Read questions aloud on or off" aria-label="Toggle read aloud" style="padding:7px 12px">🗣️</button>
       <button class="namebtn" id="nameBtn">👋 Set name</button>
     </div>
   </div>
@@ -417,6 +421,8 @@ const todayStr = () => new Date().toISOString().slice(0,10);
 
 const defaultState = () => ({
   name: "",
+  sound: true,
+  speak: true,
   xp: 0,
   streak: 0,
   lastActive: "",
@@ -461,6 +467,77 @@ function addXP(n){ S.xp += n; save(); renderStats(); }
 })();
 
 /* ============================================================
+   SOUND — generated in-app (no audio files needed)
+   ============================================================ */
+const Sound = (function(){
+  let ctx=null;
+  function ac(){
+    if(!ctx){ try{ ctx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ return null; } }
+    if(ctx.state==="suspended") ctx.resume();
+    return ctx;
+  }
+  function tone(freq,start,dur,type,vol){
+    const c=ac(); if(!c) return;
+    const o=c.createOscillator(), g=c.createGain();
+    o.type=type||"sine"; o.frequency.value=freq;
+    const t=c.currentTime+start;
+    g.gain.setValueAtTime(0.0001,t);
+    g.gain.exponentialRampToValueAtTime(vol||0.18, t+0.015);
+    g.gain.exponentialRampToValueAtTime(0.0001, t+dur);
+    o.connect(g).connect(c.destination);
+    o.start(t); o.stop(t+dur+0.03);
+  }
+  function seq(notes,type,vol){ notes.forEach(n=>tone(n.f,n.t,n.d,type,vol)); }
+  const on = ()=> S.sound;
+  return {
+    correct(){ if(!on())return; seq([{f:659,t:0,d:.12},{f:784,t:.1,d:.12},{f:1047,t:.2,d:.2}],"sine",.18); },
+    wrong(){   if(!on())return; seq([{f:330,t:0,d:.16},{f:247,t:.12,d:.22}],"sine",.16); },
+    reward(){  if(!on())return; seq([{f:784,t:0,d:.1},{f:1047,t:.09,d:.1},{f:1319,t:.18,d:.22}],"triangle",.17); },
+    badge(){   if(!on())return; seq([{f:523,t:0,d:.12},{f:659,t:.1,d:.12},{f:784,t:.2,d:.12},{f:1047,t:.3,d:.28}],"triangle",.2); },
+    fanfare(){ if(!on())return; seq([{f:523,t:0,d:.13},{f:659,t:.12,d:.13},{f:784,t:.24,d:.13},{f:1047,t:.36,d:.32}],"square",.13); },
+    click(){   if(!on())return; tone(880,0,.05,"sine",.06); }
+  };
+})();
+
+/* ============================================================
+   SPEECH — reads questions & stories aloud (browser voice)
+   ============================================================ */
+const Speech = (function(){
+  const synth = window.speechSynthesis || null;
+  let voices = [];
+  function load(){ if(synth) voices = synth.getVoices() || []; }
+  if(synth){ load(); if(synth.onvoiceschanged !== undefined) synth.onvoiceschanged = load; }
+  function voiceFor(lang){
+    const pref = lang==="fr" ? ["fr-ca","fr-fr","fr"] : ["en-ca","en-us","en-gb","en"];
+    for(const p of pref){ const v = voices.find(v=>v.lang && v.lang.toLowerCase().startsWith(p)); if(v) return v; }
+    return null;
+  }
+  function clean(text){
+    return String(text)
+      .replace(/×/g," times ").replace(/÷/g," divided by ")
+      .replace(/−/g," minus ").replace(/=/g," equals ")
+      .replace(/\+/g," plus ").replace(/\?/g,"").replace(/\n/g,". ")
+      .replace(/¢/g," cents").replace(/\$/g,"");
+  }
+  return {
+    available: !!synth,
+    speak(text, lang){
+      if(!S.speak || !synth || !text) return;
+      try{
+        synth.cancel();
+        const u = new SpeechSynthesisUtterance(lang==="fr" ? String(text) : clean(text));
+        u.lang = lang==="fr" ? "fr-CA" : "en-US";
+        const v = voiceFor(lang||"en"); if(v) u.voice = v;
+        u.rate = lang==="fr" ? 0.9 : 0.95;
+        u.pitch = 1.05;
+        synth.speak(u);
+      }catch(e){}
+    },
+    stop(){ try{ if(synth) synth.cancel(); }catch(e){} }
+  };
+})();
+
+/* ============================================================
    WEEK PLAN
    ============================================================ */
 const WEEKS = [
@@ -478,6 +555,7 @@ const WEEKS = [
    NAVIGATION
    ============================================================ */
 function go(id){
+  Speech.stop();
   document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active", v.id===id));
   window.scrollTo({top:0, behavior:"smooth"});
   if(id==="math") resetMathMenu();
@@ -487,7 +565,7 @@ function go(id){
 }
 document.addEventListener("click", e=>{
   const t = e.target.closest("[data-go]");
-  if(t) go(t.dataset.go);
+  if(t){ Sound.click(); go(t.dataset.go); }
 });
 
 /* ============================================================
@@ -506,6 +584,7 @@ function renderStats(){
   document.getElementById("p-read").textContent = S.reading.done.length + " read";
   document.getElementById("p-life").textContent = S.life.correct + " learned";
   renderBadges();
+  announceBadges();
 }
 
 function setName(){
@@ -518,6 +597,30 @@ function paintName(){
   document.getElementById("nameBtn").textContent = "👋 " + nm;
 }
 document.getElementById("nameBtn").addEventListener("click", setName);
+
+function paintSound(){ document.getElementById("soundBtn").textContent = S.sound ? "🔊" : "🔇"; }
+document.getElementById("soundBtn").addEventListener("click", ()=>{
+  S.sound = !S.sound; save(); paintSound();
+  if(S.sound) Sound.correct();   // little preview when turning on
+});
+
+function paintSpeak(){
+  const b=document.getElementById("speakBtn");
+  b.textContent = S.speak ? "🗣️" : "🤫";
+  if(!Speech.available){ b.style.display="none"; }   // hide if browser has no voice
+}
+document.getElementById("speakBtn").addEventListener("click", ()=>{
+  S.speak = !S.speak; save(); paintSpeak();
+  if(S.speak) Speech.speak("Hi! I can read to you.","en"); else Speech.stop();
+});
+
+/* announce newly-earned badges with a sound + toast */
+let knownBadges = null;
+function announceBadges(){
+  const cur = earnedBadges();
+  if(knownBadges === null){ knownBadges = new Set(cur.map(b=>b.id)); return; }
+  cur.forEach(b=>{ if(!knownBadges.has(b.id)){ knownBadges.add(b.id); toast("🏅 New badge: "+b.name+"!"); Sound.badge(); } });
+}
 
 /* ===== Badges ===== */
 const BADGES = [
@@ -590,7 +693,7 @@ function markDaily(k){
     S.daily[k]=true;
     const all = S.daily.math&&S.daily.french&&S.daily.explore&&S.daily.create;
     save(); renderMission();
-    if(all){ addXP(15); toast("🎉 Daily Mission complete! +15 bonus XP"); }
+    if(all){ addXP(15); Sound.fanfare(); toast("🎉 Daily Mission complete! +15 bonus XP"); }
   }
 }
 
@@ -645,6 +748,12 @@ const LOGIC_RIDDLES=[
   {q:"Add me to myself and you get 14. What number am I?", a:7},
   {q:"I am one less than 6 × 5. What number am I?", a:29},
   {q:"There are 7 days in a week. How many days are in 3 weeks?", a:21},
+  {q:"There are 5 boxes with 6 balls in each. How many balls altogether?", a:30},
+  {q:"If you multiply me by 4 you get 36. What number am I?", a:9},
+  {q:"If 3 apples cost 12 dollars, how much does 1 apple cost?", a:4},
+  {q:"A spider has 8 legs. How many legs do 4 spiders have?", a:32},
+  {q:"I am halfway between 40 and 60. What number am I?", a:50},
+  {q:"6 friends each have 5 stickers. How many stickers in total?", a:30},
 ];
 
 const KIDS  = ["Maya","Leo","Zoe","Noah","Amara","Ravi","Léa","Theo","Sara","Felix"];
@@ -655,18 +764,22 @@ const THING = [["stickers","sticker"],["marbles","marble"],["cookies","cookie"],
 function makeWordProblem(){
   const kid=pick(KIDS), kid2=pick(KIDS.filter(k=>k!==kid)), th=pick(THING);
   const t=th[0], t1=th[1];
-  const kind=pick(["add","sub","mult","div","twostep"]);
-  if(kind==="add"){ const a=rnd(120,560),b=rnd(40,330);
+  const kind=pick(["add","sub","mult","div","twostep","twostep","multistep","compare"]);
+  if(kind==="add"){ const a=rnd(240,890),b=rnd(120,640);
     return {prompt:`${kid} has ${a} ${t}. ${kid2} gives ${kid} ${b} more. How many ${t} does ${kid} have now?`, answer:a+b}; }
-  if(kind==="sub"){ const a=rnd(250,820),b=rnd(40,a-20);
+  if(kind==="sub"){ const a=rnd(420,960),b=rnd(80,a-40);
     return {prompt:`There were ${a} ${t} in a jar. ${b} were taken out. How many ${t} are left?`, answer:a-b}; }
-  if(kind==="mult"){ const boxes=rnd(3,9),each=rnd(4,12);
+  if(kind==="mult"){ const boxes=rnd(4,12),each=rnd(6,15);
     return {prompt:`There are ${boxes} bags. Each bag has ${each} ${t}. How many ${t} are there in total?`, answer:boxes*each}; }
-  if(kind==="div"){ const kids=rnd(3,8),each=rnd(3,10); const tot=kids*each;
+  if(kind==="div"){ const kids=rnd(4,9),each=rnd(4,12); const tot=kids*each;
     return {prompt:`${kid} shares ${tot} ${t} equally between ${kids} friends. How many ${t} does each friend get?`, answer:each}; }
-  // two-step
-  const each=rnd(3,8),bags=rnd(2,5),eat=rnd(2,8); const tot=each*bags;
-  return {prompt:`${kid} buys ${bags} bags with ${each} ${t} in each. Then ${kid} loses ${eat} ${t1}. How many ${t} are left?`, answer:tot-eat};
+  if(kind==="compare"){ const a=rnd(120,480),b=rnd(120,480);
+    return {prompt:`${kid} has ${a} ${t} and ${kid2} has ${b} ${t}. How many more ${t} does ${a>b?kid:kid2} have than ${a>b?kid2:kid}?`, answer:Math.abs(a-b)}; }
+  if(kind==="multistep"){ const bags=rnd(3,7),each=rnd(5,12),extra=rnd(6,40); const tot=bags*each+extra;
+    return {prompt:`${kid} has ${bags} boxes with ${each} ${t} in each box, plus ${extra} loose ${t}. How many ${t} in total?`, answer:tot}; }
+  // two-step (multiply then subtract)
+  const each=rnd(5,12),bags=rnd(3,6),eat=rnd(4,15); const tot=each*bags;
+  return {prompt:`${kid} buys ${bags} bags with ${each} ${t} in each. Then ${kid} gives away ${eat} ${t1}. How many ${t} are left?`, answer:tot-eat};
 }
 function makeMoneyProblem(){
   const kid=pick(KIDS);
@@ -686,8 +799,9 @@ function makeMathQ(type){
     case "money": { const q=makeMoneyProblem(); q.mode="input"; q.word=true; return q; }
     case "add":   { const a=rnd(180,760),b=rnd(120,480); return {prompt:`${a} + ${b} = ?`, answer:a+b, mode:"input"}; }
     case "sub":   { const a=rnd(420,990),b=rnd(90,a-40); return {prompt:`${a} − ${b} = ?`, answer:a-b, mode:"input"}; }
-    case "mult":  { const a=rnd(2,12),b=rnd(2,12); return {prompt:`${a} × ${b} = ?`, answer:a*b, mode:"input"}; }
-    case "div":   { const b=rnd(2,12),ans=rnd(2,12); return {prompt:`${b*ans} ÷ ${b} = ?`, answer:ans, mode:"input"}; }
+    case "mult":  { let a,b; if(Math.random()<0.45){ a=rnd(11,29); b=rnd(3,9); } else { a=rnd(3,12); b=rnd(3,12); }
+                    return {prompt:`${a} × ${b} = ?`, answer:a*b, mode:"input"}; }
+    case "div":   { const b=rnd(3,12),ans=rnd(4,15); return {prompt:`${b*ans} ÷ ${b} = ?`, answer:ans, mode:"input"}; }
   }
 }
 let mathState=null;
@@ -718,6 +832,9 @@ function nextMathQ(){
   promptEl.textContent=q.prompt;
   if(q.word){ promptEl.style.fontSize="1.25rem"; promptEl.style.lineHeight="1.5"; promptEl.style.maxWidth="34ch"; promptEl.style.margin="0 auto"; promptEl.style.whiteSpace="pre-line"; }
   else { promptEl.style.fontSize=""; promptEl.style.lineHeight=""; promptEl.style.maxWidth=""; promptEl.style.margin=""; promptEl.style.whiteSpace=""; }
+  promptEl.style.cursor="pointer"; promptEl.title="🔊 Tap to hear it again";
+  promptEl.onclick=()=>Speech.speak(q.prompt,"en");
+  Speech.speak(q.prompt,"en");
   const area=document.getElementById("mathArea");
   if(q.mode==="input"){
     area.innerHTML=`<div><input class="qinput" id="mathInput" inputmode="numeric" autocomplete="off"></div>
@@ -732,11 +849,13 @@ function nextMathQ(){
   }
 }
 function mathRight(){
+  Sound.correct();
   mathState.correct++; S.math.correct++; addXP(2);
   const fb=document.getElementById("mathFb"); fb.textContent=pick(["Yes! 🎉","Correct! ⭐","Nailed it! 💪","Bravo! 🙌"]); fb.className="feedback ok";
   setTimeout(nextMathQ,800);
 }
 function mathWrong(ans){
+  Sound.wrong();
   const fb=document.getElementById("mathFb"); fb.textContent="Almost — the answer is "+ans; fb.className="feedback no";
   setTimeout(nextMathQ,1500);
 }
@@ -751,6 +870,7 @@ function checkMathChoice(btn){
   else { btn.classList.add("wrong"); mathWrong(mathState.q.answer); }
 }
 function finishMath(){
+  Sound.reward();
   const c=mathState.correct;
   document.getElementById("mathArea").innerHTML=`<button class="btn big" id="mathAgain">Play again 🔁</button>`;
   document.getElementById("mathPrompt").textContent = c===5?"Perfect round! 🏆":(c>=3?"Great work! 🌟":"Good try! 💪");
@@ -821,16 +941,20 @@ function checkFr(btn){
   document.querySelectorAll("#frChoices .opt").forEach(b=>b.disabled=true);
   const fb=document.getElementById("frFb");
   if(btn.dataset.fr===frState.correct_word.fr){
+    Sound.correct();
     btn.classList.add("right"); frState.correct++; S.french.correct++; addXP(2);
     fb.textContent=pick(["Oui! 🎉","Parfait! ⭐","Très bien! 🙌","Bravo! 💪"]); fb.className="feedback ok";
   } else {
+    Sound.wrong();
     btn.classList.add("wrong");
     document.querySelectorAll("#frChoices .opt").forEach(b=>{ if(b.dataset.fr===frState.correct_word.fr) b.classList.add("right"); });
     fb.textContent="C'est « "+frState.correct_word.fr+" »"; fb.className="feedback no";
   }
+  setTimeout(()=>Speech.speak(frState.correct_word.fr,"fr"), 350);  // hear the French pronunciation
   setTimeout(nextFrQ, 1200);
 }
 function finishFr(){
+  Sound.reward();
   const c=frState.correct;
   document.getElementById("frCue").textContent = c>=4?"🏆":(c>=3?"🌟":"💪");
   document.getElementById("frChoices").innerHTML=`<button class="btn big" id="frAgain" style="grid-column:1/-1">Encore! Play again 🔁</button>`;
@@ -1107,13 +1231,20 @@ function openReading(id){
   readState={story, answers:{}, checked:false};
   document.getElementById("readMenu").style.display="none";
   document.getElementById("readPlay").style.display="";
+  const fullText = story.title + ". " + story.text.join(" ");
   document.getElementById("readText").innerHTML =
-    `<h3>${story.emo} ${story.title}</h3>` + story.text.map(p=>`<p>${p}</p>`).join("");
+    `<h3>${story.emo} ${story.title}</h3>` + story.text.map(p=>`<p>${p}</p>`).join("") +
+    `<button class="markbtn" id="listenStory" style="margin-top:6px">🔊 Écouter l'histoire</button>`;
+  document.getElementById("listenStory").onclick = ()=>Speech.speak(fullText,"fr");
   document.getElementById("readQs").innerHTML = story.qs.map((q,qi)=>
     `<div class="qblock" data-qi="${qi}">
-       <div class="qtxt">${qi+1}. ${q.q}</div>
+       <div class="qtxt">${qi+1}. ${q.q} <button class="qspeak" data-qi="${qi}" title="Écouter la question">🔊</button></div>
        <div class="choices">${q.choices.map((c,ci)=>`<button class="opt" data-ci="${ci}">${c}</button>`).join("")}</div>
      </div>`).join("");
+  document.querySelectorAll("#readQs .qspeak").forEach(b=>b.addEventListener("click",ev=>{
+    ev.stopPropagation(); Speech.speak(story.qs[Number(b.dataset.qi)].q,"fr");
+  }));
+  Speech.speak(fullText,"fr");   // read the story to him when it opens
   document.querySelectorAll("#readQs .opt").forEach(b=>b.addEventListener("click",function(){
     if(readState.checked) return;
     const qi=Number(this.closest(".qblock").dataset.qi);
@@ -1144,6 +1275,7 @@ document.getElementById("readCheck").addEventListener("click",()=>{
     });
     if(readState.answers[qi]===q.a) correct++;
   });
+  Sound.reward();
   addXP(correct*3);
   S.reading.correct += correct;
   if(!S.reading.done.includes(story.id)) S.reading.done.push(story.id);
@@ -1162,7 +1294,7 @@ document.getElementById("writeSave").addEventListener("click",()=>{
   const first = !S.reading.writing[id];
   S.reading.writing[id]=txt;
   save();
-  if(first){ addXP(10); toast("Bravo, petit auteur! +10 XP ✍️"); }
+  if(first){ addXP(10); Sound.reward(); toast("Bravo, petit auteur! +10 XP ✍️"); }
   renderStats();
   fb.textContent="Texte sauvegardé! 💾"; fb.className="feedback ok";
 });
@@ -1243,7 +1375,10 @@ function nextLifeQ(){
   if(lifeState.n>=lifeState.pool.length){ finishLife(); return; }
   const q=lifeState.pool[lifeState.n]; lifeState.q=q;
   document.getElementById("lifeN").textContent=lifeState.n+1;
-  document.getElementById("lifePrompt").textContent=q.q;
+  const lp=document.getElementById("lifePrompt");
+  lp.textContent=q.q; lp.style.cursor="pointer"; lp.title="🔊 Tap to hear it again";
+  lp.onclick=()=>Speech.speak(q.q,"en");
+  Speech.speak(q.q,"en");
   document.getElementById("lifeTip").style.display="none";
   const fb=document.getElementById("lifeFb"); fb.textContent=""; fb.className="feedback";
   document.getElementById("lifeChoices").innerHTML=q.choices.map((c,ci)=>
@@ -1254,15 +1389,16 @@ function checkLife(btn){
   const q=lifeState.q;
   document.querySelectorAll("#lifeChoices .opt").forEach((b,ci)=>{ b.disabled=true; if(ci===q.a) b.classList.add("right"); });
   const fb=document.getElementById("lifeFb");
-  if(Number(btn.dataset.ci)===q.a){ lifeState.correct++; S.life.correct++; addXP(3);
+  if(Number(btn.dataset.ci)===q.a){ Sound.correct(); lifeState.correct++; S.life.correct++; addXP(3);
     fb.textContent=pick(["Correct! ⭐","Yes! 🎉","Smart! 💡","Nailed it! 💪"]); fb.className="feedback ok"; }
-  else { btn.classList.add("wrong"); fb.textContent="Good try!"; fb.className="feedback no"; }
+  else { Sound.wrong(); btn.classList.add("wrong"); fb.textContent="Good try!"; fb.className="feedback no"; }
   if(q.tip){ const tip=document.getElementById("lifeTip"); tip.innerHTML="💡 <b>Good to know:</b> "+q.tip; tip.style.display=""; }
   lifeState.n++;
   const delay=q.tip?2600:1300;
   setTimeout(nextLifeQ, delay);
 }
 function finishLife(){
+  Sound.reward();
   const c=lifeState.correct, total=lifeState.pool.length;
   document.getElementById("lifePrompt").textContent = c===total?"Brilliant! 🏆":(c>=3?"Well done! 🌟":"Keep learning! 💪");
   document.getElementById("lifeChoices").innerHTML=`<button class="btn big" id="lifeAgain" style="grid-column:1/-1">Play again 🔁</button>`;
@@ -1279,7 +1415,7 @@ function toggleDone(land, id, xp, rerender, dailyKey){
   const arr = S[land].done;
   const i = arr.indexOf(id);
   if(i===-1){
-    arr.push(id); addXP(xp);
+    arr.push(id); addXP(xp); Sound.reward();
     toast("+"+xp+" XP! ⭐");
     if(dailyKey) markDaily(dailyKey);
   } else {
@@ -1308,6 +1444,8 @@ document.getElementById("resetBtn").addEventListener("click",()=>{
    INIT
    ============================================================ */
 paintName();
+paintSound();
+paintSpeak();
 renderStats();
 renderRibbon();
 renderMission();
