@@ -1,0 +1,1324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Summer Quest — STEM, Math, French, Chess & Maker Adventures</title>
+<style>
+  /* ===== Design tokens ===== */
+  :root{
+    --paper:#FFF9F0;        /* warm sunlit ground */
+    --paper-2:#FFF3E2;
+    --card:#FFFFFF;
+    --ink:#232B3D;          /* deep slate navy */
+    --ink-soft:#5A6378;
+    --line:#ECE2D2;         /* warm hairline */
+    --sun:#FFB627;          /* golden */
+    --coral:#FF5C39;        /* energy / french */
+    --teal:#14998A;         /* maker */
+    --sky:#2D7DD2;          /* math */
+    --berry:#7A4FB5;        /* chess */
+    --leaf:#3FA34D;         /* science */
+    --book:#A0522D;         /* reading */
+    --life:#C2407A;         /* real-world / life smarts */
+    --good:#2E9E5B;
+    --shadow:0 10px 30px rgba(35,43,61,.10);
+    --shadow-sm:0 4px 14px rgba(35,43,61,.08);
+    --r:18px;
+    --maxw:1100px;
+    --display:"Trebuchet MS","Segoe UI",system-ui,sans-serif;
+    --body:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;
+    --mono:"Consolas",ui-monospace,"SF Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:var(--body);
+    background:
+      radial-gradient(1200px 500px at 90% -10%, rgba(255,182,39,.16), transparent 60%),
+      radial-gradient(900px 500px at -10% 0%, rgba(20,153,138,.10), transparent 55%),
+      var(--paper);
+    color:var(--ink);
+    line-height:1.55;
+    -webkit-text-size-adjust:100%;
+  }
+  h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.12;text-wrap:balance;margin:0}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 18px}
+  .eyebrow{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;font-weight:700;color:var(--ink-soft)}
+  button{font-family:var(--body);cursor:pointer}
+  :focus-visible{outline:3px solid var(--sky);outline-offset:2px;border-radius:8px}
+  a{color:var(--sky)}
+
+  /* ===== Top bar ===== */
+  .bar{position:sticky;top:0;z-index:30;background:rgba(255,249,240,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .bar-in{display:flex;align-items:center;gap:14px;min-height:64px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:1.15rem}
+  .logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--coral),var(--sun));display:grid;place-items:center;color:#fff;font-size:1.1rem;box-shadow:var(--shadow-sm)}
+  .stats{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .chip{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-weight:700;font-size:.9rem;box-shadow:var(--shadow-sm)}
+  .chip b{font-variant-numeric:tabular-nums}
+  .namebtn{background:var(--ink);color:#fff;border:none;border-radius:999px;padding:7px 14px;font-weight:700;font-size:.9rem}
+
+  /* ===== Views ===== */
+  .view{display:none;animation:rise .35s ease}
+  .view.active{display:block}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.view{animation:none}}
+
+  /* ===== Hero / home ===== */
+  .hero{padding:26px 0 10px}
+  .hello{font-size:clamp(1.7rem,4.5vw,2.7rem)}
+  .hello .name{color:var(--coral)}
+  .sub{color:var(--ink-soft);max-width:60ch;margin-top:6px}
+
+  .weekribbon{display:flex;gap:8px;overflow-x:auto;padding:14px 0 6px;scrollbar-width:thin}
+  .wk{flex:0 0 auto;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:8px 12px;text-align:center;min-width:104px;box-shadow:var(--shadow-sm)}
+  .wk b{display:block;font-family:var(--display);font-size:.95rem}
+  .wk span{font-size:.72rem;color:var(--ink-soft)}
+  .wk.cur{border-color:var(--coral);box-shadow:0 0 0 2px rgba(255,92,57,.18),var(--shadow-sm)}
+  .wk-theme{font-size:.7rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em}
+
+  /* Daily mission */
+  .mission{background:linear-gradient(135deg,#fff,#FFF6E8);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow);margin-top:8px}
+  .mission h2{font-size:1.25rem;display:flex;align-items:center;gap:10px}
+  .tasks{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-top:14px}
+  .task{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:left;transition:transform .12s ease,border-color .12s}
+  .task:hover{transform:translateY(-2px)}
+  .task .tk{width:26px;height:26px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;flex:0 0 auto;font-weight:900;color:#fff;background:#fff;color:transparent}
+  .task.done .tk{background:var(--good);border-color:var(--good);color:#fff}
+  .task .tt{font-weight:700;font-size:.95rem}
+  .task .td{font-size:.8rem;color:var(--ink-soft)}
+  .progress{height:10px;background:var(--paper-2);border-radius:999px;overflow:hidden;margin-top:14px;border:1px solid var(--line)}
+  .progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--sun),var(--coral));width:0;transition:width .5s ease}
+
+  /* Lands grid */
+  .lands{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin:22px 0 30px}
+  .land{position:relative;text-align:left;border:none;border-radius:var(--r);padding:20px;color:#fff;min-height:148px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .14s ease,box-shadow .14s}
+  .land:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(35,43,61,.18)}
+  .land .ic{position:absolute;top:14px;right:16px;font-size:2.4rem;filter:drop-shadow(0 3px 6px rgba(0,0,0,.2))}
+  .land h3{font-size:1.35rem}
+  .land p{margin:4px 0 0;font-size:.85rem;opacity:.92}
+  .land .pill{position:absolute;top:16px;left:18px;background:rgba(255,255,255,.22);border-radius:999px;padding:3px 10px;font-size:.72rem;font-weight:700}
+  .l-math{background:linear-gradient(140deg,#2D7DD2,#1B5C9E)}
+  .l-french{background:linear-gradient(140deg,#FF5C39,#E23E66)}
+  .l-science{background:linear-gradient(140deg,#3FA34D,#1F8A6B)}
+  .l-chess{background:linear-gradient(140deg,#7A4FB5,#54327E)}
+  .l-create{background:linear-gradient(140deg,#FFB627,#FF8A2B);color:#3a2a00}
+  .l-create h3,.l-create p{color:#3a2a00}
+  .l-maker{background:linear-gradient(140deg,#14998A,#0E7C8E)}
+  .l-read{background:linear-gradient(140deg,#A0522D,#7A3B1E)}
+  .l-life{background:linear-gradient(140deg,#C2407A,#8E2D5C)}
+  .tipbox{margin-top:12px;background:#FDF0F5;border:1px dashed var(--life);border-radius:12px;padding:10px 12px;font-size:.92rem;text-align:left}
+
+  /* reading */
+  .bookpanel{font-family:Georgia,"Times New Roman",serif;font-size:1.12rem;line-height:1.75;background:#FFFDF7;border:1px solid var(--line);border-left:5px solid var(--book);border-radius:14px;padding:18px 20px;color:#2c2418}
+  .bookpanel h3{font-family:Georgia,serif;font-size:1.4rem;margin-bottom:8px;color:var(--book)}
+  .bookpanel p{margin:0 0 10px}
+  .qblock{border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:12px;background:var(--card)}
+  .qblock .qtxt{font-weight:700;font-family:var(--display);margin-bottom:8px}
+  .opt.sel{border-color:var(--book);background:#FBF1E8}
+  .writebox{margin-top:16px;border:1px dashed var(--book);border-radius:14px;padding:14px;background:#FFFBF4}
+  .writebox textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:10px;padding:10px;font-family:var(--body);font-size:1rem;resize:vertical;margin-top:8px}
+
+  /* ===== Sub-view shell ===== */
+  .topback{display:flex;align-items:center;gap:12px;padding:20px 0 6px}
+  .back{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-weight:700;box-shadow:var(--shadow-sm)}
+  .vhead{display:flex;align-items:center;gap:14px;margin:6px 0 4px}
+  .vhead .vic{width:54px;height:54px;border-radius:14px;display:grid;place-items:center;font-size:1.7rem;color:#fff;box-shadow:var(--shadow-sm)}
+  .vhead h2{font-size:1.7rem}
+  .vhead p{color:var(--ink-soft);font-size:.9rem;margin:2px 0 0}
+
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow-sm);margin:16px 0}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+
+  /* Buttons */
+  .btn{border:none;border-radius:12px;padding:11px 18px;font-weight:700;font-size:1rem;background:var(--ink);color:#fff;box-shadow:var(--shadow-sm)}
+  .btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+  .btn.big{padding:14px 22px;font-size:1.05rem;border-radius:14px}
+  .btn:disabled{opacity:.5;cursor:default}
+  .choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:8px}
+  .opt{border:2px solid var(--line);background:var(--card);border-radius:14px;padding:16px;font-size:1.25rem;font-weight:700;font-family:var(--display)}
+  .opt:hover{border-color:var(--sky)}
+  .opt.right{border-color:var(--good);background:#EAF8EF;color:var(--good)}
+  .opt.wrong{border-color:var(--coral);background:#FFEDE8;color:var(--coral)}
+
+  /* Practice card */
+  .qcard{text-align:center;padding:14px 6px}
+  .qbig{font-family:var(--display);font-weight:700;font-size:clamp(2rem,8vw,3.4rem);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+  .qcue{font-size:3.4rem;line-height:1}
+  .qinput{font-family:var(--display);font-size:2rem;width:160px;text-align:center;border:2px solid var(--line);border-radius:14px;padding:8px;margin:10px}
+  .feedback{min-height:28px;font-weight:700;font-family:var(--display);font-size:1.1rem}
+  .feedback.ok{color:var(--good)} .feedback.no{color:var(--coral)}
+  .skillgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+  .skill{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:14px;box-shadow:var(--shadow-sm)}
+  .skill:hover{border-color:var(--sky);transform:translateY(-2px)}
+  .skill b{font-family:var(--display);font-size:1.05rem}
+  .skill span{display:block;font-size:.8rem;color:var(--ink-soft)}
+  .skill .emo{font-size:1.6rem}
+
+  /* Activity / project cards */
+  .acard{border:1px solid var(--line);border-radius:16px;padding:16px;background:var(--card);box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:8px}
+  .acard.is-done{background:#F3FBF5;border-color:#BfE6C9}
+  .acard h4{font-size:1.1rem;display:flex;gap:8px;align-items:center}
+  .tag{display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 8px;border-radius:999px;background:var(--paper-2);color:var(--ink-soft);border:1px solid var(--line)}
+  .tag.t1{color:var(--leaf)} .tag.t2{color:var(--sun)} .tag.t3{color:var(--coral)}
+  .acard ul{margin:4px 0 0;padding-left:18px;font-size:.88rem;color:var(--ink-soft)}
+  .acard .why{font-size:.85rem;background:var(--paper);border-radius:10px;padding:8px 10px;border:1px dashed var(--line)}
+  .markbtn{align-self:flex-start;margin-top:auto;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 14px;font-weight:700;font-size:.85rem}
+  .markbtn.is-done{background:var(--good);color:#fff;border-color:var(--good)}
+  code,pre{font-family:var(--mono)}
+  pre{background:#1d2433;color:#e7edf6;border-radius:12px;padding:12px 14px;overflow-x:auto;font-size:.82rem;margin:6px 0 0}
+
+  /* Lessons (chess) */
+  .lesson{border:1px solid var(--line);border-radius:14px;background:var(--card);margin-top:10px;overflow:hidden}
+  .lesson summary{list-style:none;cursor:pointer;padding:14px 16px;font-family:var(--display);font-weight:700;display:flex;align-items:center;gap:10px}
+  .lesson summary::-webkit-details-marker{display:none}
+  .lesson[open] summary{border-bottom:1px solid var(--line)}
+  .lesson .body{padding:14px 16px;font-size:.92rem}
+  .lessdone{margin-left:auto}
+  table.moves{width:100%;border-collapse:collapse;font-size:.9rem}
+  table.moves td,table.moves th{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+  table.moves th{font-family:var(--display)}
+  .pc{font-size:1.4rem}
+
+  /* Badges */
+  .badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-top:12px}
+  .badge{text-align:center;border:1px solid var(--line);border-radius:14px;padding:14px 8px;background:var(--card);opacity:.45;filter:grayscale(.7)}
+  .badge.on{opacity:1;filter:none;border-color:var(--sun);box-shadow:0 0 0 2px rgba(255,182,39,.18)}
+  .badge .bi{font-size:2rem}
+  .badge b{display:block;font-family:var(--display);font-size:.85rem;margin-top:4px}
+  .badge span{font-size:.72rem;color:var(--ink-soft)}
+
+  .note{font-size:.85rem;color:var(--ink-soft)}
+  .parentbox{background:var(--paper-2);border:1px dashed var(--line);border-radius:12px;padding:10px 12px;font-size:.85rem;color:var(--ink-soft);margin-top:8px}
+  .parentbox b{color:var(--ink)}
+
+  footer{border-top:1px solid var(--line);margin-top:40px;padding:24px 0 40px;color:var(--ink-soft);font-size:.85rem}
+
+  /* toast */
+  #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(30px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:999px;font-weight:700;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.3s;z-index:50}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <div class="brand"><span class="logo">⛺</span> Summer Quest</div>
+    <div class="stats">
+      <span class="chip">⭐ <b id="s-xp">0</b> XP</span>
+      <span class="chip">🏅 <b id="s-badges">0</b></span>
+      <span class="chip">🔥 <b id="s-streak">0</b> day</span>
+      <button class="namebtn" id="nameBtn">👋 Set name</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ HOME ============ -->
+  <section id="home" class="view active">
+    <div class="hero">
+      <p class="eyebrow">8-week summer expedition</p>
+      <h1 class="hello">Hi <span class="name" id="heroName">Explorer</span> — ready for today's adventure?</h1>
+      <p class="sub">Pick a land to explore, finish your daily mission, and collect badges all summer. A little bit each day keeps your brain strong and your hands busy!</p>
+    </div>
+
+    <div class="weekribbon" id="weekRibbon" aria-label="Choose the week"></div>
+
+    <div class="mission">
+      <h2>🎯 Today's Mission <span class="note" id="missionDate" style="font-weight:400"></span></h2>
+      <p class="note">Tap each one when you finish. Complete all four for a bonus star!</p>
+      <div class="tasks" id="taskList"></div>
+      <div class="progress"><i id="missionBar"></i></div>
+    </div>
+
+    <div class="lands">
+      <button class="land l-math" data-go="math"><span class="ic">🔢</span><span class="pill" id="p-math">0 done</span><h3>Math Mountain</h3><p>Climb with number puzzles & quick games</p></button>
+      <button class="land l-french" data-go="french"><span class="ic">🇫🇷</span><span class="pill" id="p-french">0 done</span><h3>French Forest</h3><p>Grow your French words & reading</p></button>
+      <button class="land l-read" data-go="reading"><span class="ic">📖</span><span class="pill" id="p-read">0 read</span><h3>Reading Corner</h3><p>Read French stories & answer questions</p></button>
+      <button class="land l-science" data-go="science"><span class="ic">🔬</span><span class="pill" id="p-science">0 done</span><h3>Science Lab</h3><p>Real experiments you can do at home</p></button>
+      <button class="land l-chess" data-go="chess"><span class="ic">♟️</span><span class="pill" id="p-chess">0 done</span><h3>Chess Castle</h3><p>Learn to play, step by step</p></button>
+      <button class="land l-create" data-go="create"><span class="ic">🎨</span><span class="pill" id="p-create">0 done</span><h3>Creator Studio</h3><p>Invent, build & imagine challenges</p></button>
+      <button class="land l-maker" data-go="maker"><span class="ic">🤖</span><span class="pill" id="p-maker">0 done</span><h3>Maker Garage</h3><p>Build real projects with your Raspberry Pi</p></button>
+      <button class="land l-life" data-go="life"><span class="ic">🧭</span><span class="pill" id="p-life">0 learned</span><h3>Life Smarts</h3><p>Real-world know-how: money, time, safety</p></button>
+    </div>
+
+    <div class="panel">
+      <p class="eyebrow">Trophy shelf</p>
+      <h2 style="font-size:1.3rem;margin-top:4px">Badges to collect 🏅</h2>
+      <div class="badges" id="badgeShelf"></div>
+    </div>
+  </section>
+
+  <!-- ============ MATH ============ -->
+  <section id="math" class="view">
+    <div class="topback"><button class="back" data-go="home">← Back to map</button></div>
+    <div class="vhead"><div class="vic" style="background:var(--sky)">🔢</div><div><h2>Math Mountain</h2><p>Pick a skill, answer the questions, earn XP. Each correct answer = +2 XP.</p></div></div>
+    <div class="panel" id="mathMenu">
+      <p class="eyebrow">Choose your climb</p>
+      <div class="skillgrid" id="mathSkills" style="margin-top:10px"></div>
+    </div>
+    <div class="panel" id="mathPlay" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <button class="btn ghost" id="mathQuit">← Pick another skill</button>
+        <span class="chip">Question <b id="mathN">1</b>/5</span>
+      </div>
+      <div class="qcard">
+        <div id="mathPrompt" class="qbig">—</div>
+        <div id="mathArea"></div>
+        <div class="feedback" id="mathFb"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FRENCH ============ -->
+  <section id="french" class="view">
+    <div class="topback"><button class="back" data-go="home">← Back to map</button></div>
+    <div class="vhead"><div class="vic" style="background:var(--coral)">🇫🇷</div><div><h2>French Forest — La forêt française</h2><p>Choisis un thème. Look at the picture, pick the right French word. +2 XP each!</p></div></div>
+    <div class="panel" id="frMenu">
+      <p class="eyebrow">Choisis un thème · Choose a theme</p>
+      <div class="skillgrid" id="frThemes" style="margin-top:10px"></div>
+    </div>
+    <div class="panel" id="frPlay" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <button class="btn ghost" id="frQuit">← Autre thème</button>
+        <span class="chip">Question <b id="frN">1</b>/5</span>
+      </div>
+      <div class="qcard">
+        <div class="note" id="frPromptLabel">Quel est le bon mot? · Which word is right?</div>
+        <div id="frCue" class="qcue">❓</div>
+        <div class="choices" id="frChoices"></div>
+        <div class="feedback" id="frFb"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ READING ============ -->
+  <section id="reading" class="view">
+    <div class="topback"><button class="back" data-go="home">← Back to map</button></div>
+    <div class="vhead"><div class="vic" style="background:var(--book)">📖</div><div><h2>Reading Corner — Coin lecture</h2><p>Read a story in French, then answer the questions. Each right answer = +3 XP, and writing = +10 XP!</p></div></div>
+    <div class="parentbox">📚 <b>Grown-up tip:</b> for the first stories, read them <i>together</i> out loud, then let him answer on his own. Reading aloud builds confidence fast.</div>
+    <div class="panel" id="readMenu">
+      <p class="eyebrow">Choisis une histoire · Choose a story</p>
+      <div class="skillgrid" id="readList" style="margin-top:10px"></div>
+    </div>
+    <div class="panel" id="readPlay" style="display:none">
+      <button class="btn ghost" id="readQuit">← Autre histoire</button>
+      <div class="bookpanel" id="readText" style="margin-top:14px"></div>
+      <div id="readQs"></div>
+      <button class="btn big" id="readCheck" style="margin-top:14px">Vérifier mes réponses ✓</button>
+      <div class="feedback" id="readFb"></div>
+      <div class="writebox">
+        <b id="writePrompt">✍️ À toi d'écrire!</b>
+        <textarea id="writeArea" placeholder="Écris ici en français…"></textarea>
+        <button class="btn" id="writeSave" style="margin-top:8px">Sauvegarder mon texte 💾</button>
+        <div class="feedback" id="writeFb"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCIENCE ============ -->
+  <section id="science" class="view">
+    <div class="topback"><button class="back" data-go="home">← Back to map</button></div>
+    <div class="vhead"><div class="vic" style="background:var(--leaf)">🔬</div><div><h2>Science Lab</h2><p>Hands-on experiments with stuff you have at home. Mark each one done for +10 XP.</p></div></div>
+    <div class="parentbox">👩‍🔬 <b>Grown-up tip:</b> these are kitchen-safe, but stay nearby for spills and anything hot. Talk about the “why” together — that’s where the learning sticks.</div>
+    <div class="grid2" id="scienceGrid" style="margin-top:16px"></div>
+  </section>
+
+  <!-- ============ CHESS ============ -->
+  <section id="chess" class="view">
+    <div class="topback"><button class="back" data-go="home">← Back to map</button></div>
+    <div class="vhead"><div class="vic" style="background:var(--berry)">♟️</div><div><h2>Chess Castle</h2><p>Learn chess one step at a time. Finish a lesson for +5 XP, and play online to practice.</p></div></div>
+
+    <div class="panel">
+      <p class="eyebrow">How each piece moves</p>
+      <table class="moves">
+        <tr><th>Piece</th><th>How it moves</th></tr>
+        <tr><td><span class="pc">♟️</span> Pawn</td><td>Forward 1 square (2 on its first move). Captures diagonally.</td></tr>
+        <tr><td><span class="pc">♜</span> Rook</td><td>Straight lines — up, down, left, right — as far as it likes.</td></tr>
+        <tr><td><span class="pc">♝</span> Bishop</td><td>Diagonals only, as far as it likes. Stays on one colour.</td></tr>
+        <tr><td><span class="pc">♞</span> Knight</td><td>An “L” shape: 2 + 1. The only piece that jumps over others!</td></tr>
+        <tr><td><span class="pc">♛</span> Queen</td><td>Any direction, any distance. The most powerful piece.</td></tr>
+        <tr><td><span class="pc">♚</span> King</td><td>One square in any direction. Protect it — if it’s trapped, the game ends.</td></tr>
+      </table>
+    </div>
+
+    <div class="panel">
+      <p class="eyebrow">Your 4-week chess journey</p>
+      <div id="chessLessons"></div>
+    </div>
+
+    <div class="panel">
+      <p class="eyebrow">Practice online (free & kid-safe)</p>
+      <div class="grid2" style="margin-top:8px">
+        <div class="acard"><h4>♟️ ChessKid.com</h4><p class="note">Made just for kids — cartoon lessons, puzzles and safe play. Best place to start.</p><a class="markbtn" href="https://www.chesskid.com" target="_blank" rel="noopener">Open ChessKid →</a></div>
+        <div class="acard"><h4>🧩 Lichess.org</h4><p class="note">Free puzzles and games. Try “Puzzles” for a daily brain workout.</p><a class="markbtn" href="https://lichess.org/training" target="_blank" rel="noopener">Open Lichess puzzles →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CREATE ============ -->
+  <section id="create" class="view">
+    <div class="topback"><button class="back" data-go="home">← Back to map</button></div>
+    <div class="vhead"><div class="vic" style="background:var(--sun);color:#3a2a00">🎨</div><div><h2>Creator Studio</h2><p>Big-imagination challenges. There are no wrong answers! Finish one for +10 XP.</p></div></div>
+    <div class="grid2" id="createGrid" style="margin-top:16px"></div>
+  </section>
+
+  <!-- ============ MAKER ============ -->
+  <section id="maker" class="view">
+    <div class="topback"><button class="back" data-go="home">← Back to map</button></div>
+    <div class="vhead"><div class="vic" style="background:var(--teal)">🤖</div><div><h2>Maker Garage — Raspberry Pi 4 + Freenove kit</h2><p>A project ladder using your Freenove Starter Kit. Climb one rung at a time! +15 XP each.</p></div></div>
+    <div class="parentbox">🛠️ <b>Grown-up tip:</b> open the <b>Freenove tutorial</b> (the PDF/HTML that came with the kit, or its GitHub download) and follow the matching project. Use the kit’s Python code — these cards tell you <i>what</i> you’re building and <i>why</i> it’s cool. Always power off the Pi before changing wires.</div>
+    <div class="grid2" id="makerGrid" style="margin-top:16px"></div>
+  </section>
+
+  <!-- ============ LIFE SMARTS ============ -->
+  <section id="life" class="view">
+    <div class="topback"><button class="back" data-go="home">← Back to map</button></div>
+    <div class="vhead"><div class="vic" style="background:var(--life)">🧭</div><div><h2>Life Smarts</h2><p>Real-world know-how every grown-up uses: money, time, safety, your world & staying healthy. +3 XP per question.</p></div></div>
+    <div class="parentbox">🧭 <b>Grown-up tip:</b> these are great conversation starters at dinner or in the car. After he answers, ask him “why?” — explaining it out loud is how it sticks for real life.</div>
+    <div class="panel" id="lifeMenu">
+      <p class="eyebrow">Choose a real-world topic</p>
+      <div class="skillgrid" id="lifeTopics" style="margin-top:10px"></div>
+    </div>
+    <div class="panel" id="lifePlay" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <button class="btn ghost" id="lifeQuit">← Other topic</button>
+        <span class="chip">Question <b id="lifeN">1</b>/5</span>
+      </div>
+      <div class="qcard">
+        <div id="lifePrompt" class="qbig" style="font-size:1.25rem;line-height:1.5;max-width:36ch;margin:0 auto">—</div>
+        <div class="choices" id="lifeChoices"></div>
+        <div class="feedback" id="lifeFb"></div>
+        <div class="tipbox" id="lifeTip" style="display:none"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <p><b>Summer Quest</b> · A learn-and-build adventure built for one curious 8-year-old. Progress saves automatically on this device.</p>
+  <p class="note">For grown-ups: this complements his school work (math & French) and adds STEM, chess and real electronics with the Raspberry Pi. Aim for ~20–45 focused minutes, then go play. Boredom builds creativity too.</p>
+  <p class="note"><button class="markbtn" id="resetBtn" style="margin-top:6px">↺ Reset all progress</button></p>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+"use strict";
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const KEY = "summerQuest.v1";
+const todayStr = () => new Date().toISOString().slice(0,10);
+
+const defaultState = () => ({
+  name: "",
+  xp: 0,
+  streak: 0,
+  lastActive: "",
+  math: { correct: 0 },
+  french: { correct: 0 },
+  science: { done: [] },
+  create: { done: [] },
+  chess: { done: [] },
+  maker: { done: [] },
+  reading: { done: [], correct: 0, writing: {} },
+  life: { correct: 0 },
+  daily: { date: "", math:false, french:false, explore:false, create:false }
+});
+
+let S = load();
+
+function load(){
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(!raw) return defaultState();
+    return Object.assign(defaultState(), JSON.parse(raw));
+  }catch(e){ return defaultState(); }
+}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+
+function addXP(n){ S.xp += n; save(); renderStats(); }
+
+/* streak + daily reset */
+(function dailyBoot(){
+  const t = todayStr();
+  if(S.lastActive !== t){
+    const y = new Date(Date.now()-86400000).toISOString().slice(0,10);
+    if(S.lastActive === y) S.streak += 1;
+    else if(S.lastActive === "") S.streak = 1;
+    else S.streak = 1;
+    S.lastActive = t;
+  }
+  if(S.daily.date !== t){
+    S.daily = { date:t, math:false, french:false, explore:false, create:false };
+  }
+  save();
+})();
+
+/* ============================================================
+   WEEK PLAN
+   ============================================================ */
+const WEEKS = [
+  {n:1, theme:"Build & Machines", emo:"🏗️"},
+  {n:2, theme:"Lights & Code",    emo:"💡"},
+  {n:3, theme:"Water & Weather",  emo:"🌦️"},
+  {n:4, theme:"Sensors & Robots", emo:"🤖"},
+  {n:5, theme:"Space & Sky",      emo:"🚀"},
+  {n:6, theme:"Sound & Music",    emo:"🎵"},
+  {n:7, theme:"Nature & Life",    emo:"🌱"},
+  {n:8, theme:"Big Inventor",     emo:"🏆"}
+];
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+function go(id){
+  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active", v.id===id));
+  window.scrollTo({top:0, behavior:"smooth"});
+  if(id==="math") resetMathMenu();
+  if(id==="french") resetFrMenu();
+  if(id==="reading") resetReadMenu();
+  if(id==="life") resetLifeMenu();
+}
+document.addEventListener("click", e=>{
+  const t = e.target.closest("[data-go]");
+  if(t) go(t.dataset.go);
+});
+
+/* ============================================================
+   STATS + PILLS + BADGES + MISSION RENDER
+   ============================================================ */
+function renderStats(){
+  document.getElementById("s-xp").textContent = S.xp;
+  document.getElementById("s-streak").textContent = S.streak;
+  document.getElementById("s-badges").textContent = earnedBadges().length;
+  document.getElementById("p-math").textContent = S.math.correct + " right";
+  document.getElementById("p-french").textContent = S.french.correct + " right";
+  document.getElementById("p-science").textContent = S.science.done.length + " done";
+  document.getElementById("p-create").textContent = S.create.done.length + " done";
+  document.getElementById("p-chess").textContent = S.chess.done.length + "/4 done";
+  document.getElementById("p-maker").textContent = S.maker.done.length + " built";
+  document.getElementById("p-read").textContent = S.reading.done.length + " read";
+  document.getElementById("p-life").textContent = S.life.correct + " learned";
+  renderBadges();
+}
+
+function setName(){
+  const n = prompt("What's your name, explorer?", S.name || "");
+  if(n && n.trim()){ S.name = n.trim().slice(0,20); save(); paintName(); }
+}
+function paintName(){
+  const nm = S.name || "Explorer";
+  document.getElementById("heroName").textContent = nm;
+  document.getElementById("nameBtn").textContent = "👋 " + nm;
+}
+document.getElementById("nameBtn").addEventListener("click", setName);
+
+/* ===== Badges ===== */
+const BADGES = [
+  {id:"first",  bi:"🌟", name:"First Steps",   need:"Earn 10 XP",        test:s=>s.xp>=10},
+  {id:"math",   bi:"🧮", name:"Math Star",     need:"25 right answers",  test:s=>s.math.correct>=25},
+  {id:"mathpro",bi:"📐", name:"Number Ninja",  need:"75 right answers",  test:s=>s.math.correct>=75},
+  {id:"fr",     bi:"📚", name:"Mot Master",    need:"25 French words",   test:s=>s.french.correct>=25},
+  {id:"reader", bi:"📖", name:"Petit Lecteur",  need:"Read 3 stories",    test:s=>s.reading.done.length>=3},
+  {id:"author", bi:"✍️", name:"Petit Auteur",   need:"Write on 3 stories",test:s=>Object.keys(s.reading.writing).length>=3},
+  {id:"sci",    bi:"⚗️", name:"Scientist",     need:"5 experiments",     test:s=>s.science.done.length>=5},
+  {id:"chess",  bi:"♟️", name:"Chess Cadet",   need:"All 4 chess lessons",test:s=>s.chess.done.length>=4},
+  {id:"create", bi:"🎨", name:"Big Imagineer", need:"5 creative quests", test:s=>s.create.done.length>=5},
+  {id:"life",   bi:"🧭", name:"Life Smarts",    need:"20 real-world Qs",  test:s=>s.life.correct>=20},
+  {id:"build",  bi:"🔌", name:"Maker",         need:"3 Pi projects",     test:s=>s.maker.done.length>=3},
+  {id:"buildpro",bi:"🤖",name:"Robot Engineer",need:"6 Pi projects",    test:s=>s.maker.done.length>=6},
+  {id:"streak", bi:"🔥", name:"On Fire",       need:"5-day streak",      test:s=>s.streak>=5},
+  {id:"xp250",  bi:"🏅", name:"Quest Hero",    need:"250 XP",            test:s=>s.xp>=250},
+  {id:"xp500",  bi:"👑", name:"Summer Legend", need:"500 XP",            test:s=>s.xp>=500},
+];
+function earnedBadges(){ return BADGES.filter(b=>b.test(S)); }
+function renderBadges(){
+  const shelf = document.getElementById("badgeShelf");
+  shelf.innerHTML = BADGES.map(b=>{
+    const on = b.test(S);
+    return `<div class="badge ${on?'on':''}"><div class="bi">${b.bi}</div><b>${b.name}</b><span>${on?'Unlocked!':b.need}</span></div>`;
+  }).join("");
+}
+
+/* ===== Week ribbon ===== */
+function curWeek(){
+  // first Quest week starts the date the app is first used; simple: rotate by day-of-week count from lastActive baseline
+  return Number(localStorage.getItem(KEY+".week")||1);
+}
+function setWeek(n){ localStorage.setItem(KEY+".week", n); renderRibbon(); renderMission(); }
+function renderRibbon(){
+  const cw = curWeek();
+  document.getElementById("weekRibbon").innerHTML = WEEKS.map(w=>
+    `<button class="wk ${w.n===cw?'cur':''}" data-week="${w.n}">
+       <span class="wk-theme">Week ${w.n}</span>
+       <b>${w.emo}</b>
+       <span>${w.theme}</span>
+     </button>`).join("");
+}
+document.getElementById("weekRibbon").addEventListener("click", e=>{
+  const t = e.target.closest("[data-week]"); if(t) setWeek(Number(t.dataset.week));
+});
+
+/* ===== Daily mission ===== */
+function renderMission(){
+  const w = WEEKS[curWeek()-1];
+  const d = new Date();
+  document.getElementById("missionDate").textContent =
+    "· " + d.toLocaleDateString(undefined,{weekday:"long",month:"short",day:"numeric"}) + " · Theme: " + w.theme;
+  const tasks = [
+    {k:"math",   tt:"Climb Math Mountain", td:"Finish 1 math round", go:"math", done:S.daily.math},
+    {k:"french", tt:"Visit French Forest", td:"Finish 1 French round", go:"french", done:S.daily.french},
+    {k:"explore",tt:"Explore "+w.emo+" "+w.theme, td:"Do a Lab or Maker project", go:"science", done:S.daily.explore},
+    {k:"create", tt:"Imagine something", td:"Try a Creator challenge", go:"create", done:S.daily.create},
+  ];
+  document.getElementById("taskList").innerHTML = tasks.map(t=>
+    `<button class="task ${t.done?'done':''}" data-go="${t.go}">
+       <span class="tk">✓</span>
+       <span><span class="tt">${t.tt}</span><br><span class="td">${t.td}</span></span>
+     </button>`).join("");
+  const done = tasks.filter(t=>t.done).length;
+  document.getElementById("missionBar").style.width = (done/4*100)+"%";
+}
+function markDaily(k){
+  if(!S.daily[k]){
+    S.daily[k]=true;
+    const all = S.daily.math&&S.daily.french&&S.daily.explore&&S.daily.create;
+    save(); renderMission();
+    if(all){ addXP(15); toast("🎉 Daily Mission complete! +15 bonus XP"); }
+  }
+}
+
+/* ============================================================
+   MATH
+   ============================================================ */
+const rnd = (a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+const pick = arr => arr[Math.floor(Math.random()*arr.length)];
+
+const MATH_SKILLS = [
+  {id:"word",  emo:"📖", name:"Word Problems", desc:"Read & solve a story"},
+  {id:"logic", emo:"🧠", name:"Logic & Patterns", desc:"Find the pattern, crack the puzzle"},
+  {id:"money", emo:"🪙", name:"Money Problems",desc:"Shopping & change"},
+  {id:"mult",  emo:"✖️", name:"Times Tables",  desc:"×2 up to ×12"},
+  {id:"div",   emo:"➗", name:"Division",       desc:"Share it out evenly"},
+  {id:"add",   emo:"➕", name:"Big Adding",     desc:"3-digit sums"},
+  {id:"sub",   emo:"➖", name:"Big Subtracting",desc:"3-digit take-away"},
+];
+
+function makeLogicQ(){
+  const kind=pick(["next_add","next_double","next_sub","odd","order","day","riddle"]);
+  if(kind==="next_add"){ const a=rnd(2,20), d=pick([3,4,6,7,9,11,25,50]);
+    return {prompt:`What comes next?\n${a}, ${a+d}, ${a+2*d}, ${a+3*d}, ?`, answer:a+4*d, mode:"input", word:true}; }
+  if(kind==="next_double"){ const a=pick([1,2,3,4,5]);
+    return {prompt:`What comes next?\n${a}, ${a*2}, ${a*4}, ${a*8}, ?`, answer:a*16, mode:"input", word:true}; }
+  if(kind==="next_sub"){ const start=rnd(70,140), d=pick([3,4,5,6,7,9,10]);
+    return {prompt:`What comes next?\n${start}, ${start-d}, ${start-2*d}, ${start-3*d}, ?`, answer:start-4*d, mode:"input", word:true}; }
+  if(kind==="odd"){ // odd-one-out
+    const evens=[]; while(evens.length<3){ const e=rnd(2,25)*2; if(!evens.includes(e)) evens.push(e); }
+    let odd=rnd(2,25)*2+1; const opts=[...evens,odd].sort(()=>Math.random()-0.5);
+    return {prompt:"Which is the ODD ONE OUT?\n(three are even, one is odd)", answer:String(odd), mode:"choice", choices:opts, word:true}; }
+  if(kind==="order"){ const ns=pick(KIDS), kids=[]; while(kids.length<3){ const k=pick(KIDS); if(!kids.includes(k)) kids.push(k); }
+    const askTall=Math.random()<0.5;
+    return {prompt:`${kids[0]} is taller than ${kids[1]}.\n${kids[1]} is taller than ${kids[2]}.\nWho is the ${askTall?'TALLEST':'SHORTEST'}?`,
+      answer: askTall?kids[0]:kids[2], mode:"choice", choices:[...kids].sort(()=>Math.random()-0.5), word:true}; }
+  if(kind==="day"){ const days=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+    const i=rnd(0,6), n=rnd(1,4); const ans=days[(i+n)%7];
+    const opts=[ans]; while(opts.length<3){ const d=pick(days); if(!opts.includes(d)) opts.push(d); }
+    return {prompt:`If today is ${days[i]}, what day will it be in ${n} day${n>1?'s':''}?`, answer:ans, mode:"choice", choices:opts.sort(()=>Math.random()-0.5), word:true}; }
+  // riddle
+  const r=pick(LOGIC_RIDDLES);
+  return {prompt:r.q, answer:r.a, mode:"input", word:true};
+}
+const LOGIC_RIDDLES=[
+  {q:"I am even, I am between 20 and 30, and my two digits add up to 4. What number am I?", a:22},
+  {q:"Double me and you get 18. What number am I?", a:9},
+  {q:"Half of me is 8. What number am I?", a:16},
+  {q:"I am between 30 and 40 and I am a multiple of 5. What number am I?", a:35},
+  {q:"I am 3 tens and 4 ones. What number am I?", a:34},
+  {q:"I am the number of legs on 3 dogs. What number am I?", a:12},
+  {q:"I am the number you get when you count by 5 four times (5, 10, 15…). What number am I?", a:20},
+  {q:"Add me to myself and you get 14. What number am I?", a:7},
+  {q:"I am one less than 6 × 5. What number am I?", a:29},
+  {q:"There are 7 days in a week. How many days are in 3 weeks?", a:21},
+];
+
+const KIDS  = ["Maya","Leo","Zoe","Noah","Amara","Ravi","Léa","Theo","Sara","Felix"];
+const THING = [["stickers","sticker"],["marbles","marble"],["cookies","cookie"],["cards","card"],
+               ["apples","apple"],["pencils","pencil"],["coins","coin"],["books","book"],
+               ["beads","bead"],["candies","candy"]];
+
+function makeWordProblem(){
+  const kid=pick(KIDS), kid2=pick(KIDS.filter(k=>k!==kid)), th=pick(THING);
+  const t=th[0], t1=th[1];
+  const kind=pick(["add","sub","mult","div","twostep"]);
+  if(kind==="add"){ const a=rnd(120,560),b=rnd(40,330);
+    return {prompt:`${kid} has ${a} ${t}. ${kid2} gives ${kid} ${b} more. How many ${t} does ${kid} have now?`, answer:a+b}; }
+  if(kind==="sub"){ const a=rnd(250,820),b=rnd(40,a-20);
+    return {prompt:`There were ${a} ${t} in a jar. ${b} were taken out. How many ${t} are left?`, answer:a-b}; }
+  if(kind==="mult"){ const boxes=rnd(3,9),each=rnd(4,12);
+    return {prompt:`There are ${boxes} bags. Each bag has ${each} ${t}. How many ${t} are there in total?`, answer:boxes*each}; }
+  if(kind==="div"){ const kids=rnd(3,8),each=rnd(3,10); const tot=kids*each;
+    return {prompt:`${kid} shares ${tot} ${t} equally between ${kids} friends. How many ${t} does each friend get?`, answer:each}; }
+  // two-step
+  const each=rnd(3,8),bags=rnd(2,5),eat=rnd(2,8); const tot=each*bags;
+  return {prompt:`${kid} buys ${bags} bags with ${each} ${t} in each. Then ${kid} loses ${eat} ${t1}. How many ${t} are left?`, answer:tot-eat};
+}
+function makeMoneyProblem(){
+  const kid=pick(KIDS);
+  const kind=pick(["change","total","each"]);
+  if(kind==="change"){ const cost=rnd(3,18), paid=pick([10,20,50].filter(p=>p>cost)) || 20;
+    return {prompt:`${kid} buys a toy for $${cost} and pays with a $${paid} bill. How much change ($) does ${kid} get back?`, answer:paid-cost}; }
+  if(kind==="total"){ const price=rnd(3,9), n=rnd(2,6);
+    return {prompt:`Each book costs $${price}. ${kid} buys ${n} books. How much does ${kid} pay in total ($)?`, answer:price*n}; }
+  const price=rnd(2,8), n=rnd(2,5), paid=price*n+rnd(2,12);
+  return {prompt:`${kid} buys ${n} pens at $${price} each and pays $${paid}. How much change ($) does ${kid} get?`, answer:paid-(price*n)};
+}
+
+function makeMathQ(type){
+  switch(type){
+    case "word":  { const q=makeWordProblem(); q.mode="input"; q.word=true; return q; }
+    case "logic": return makeLogicQ();
+    case "money": { const q=makeMoneyProblem(); q.mode="input"; q.word=true; return q; }
+    case "add":   { const a=rnd(180,760),b=rnd(120,480); return {prompt:`${a} + ${b} = ?`, answer:a+b, mode:"input"}; }
+    case "sub":   { const a=rnd(420,990),b=rnd(90,a-40); return {prompt:`${a} − ${b} = ?`, answer:a-b, mode:"input"}; }
+    case "mult":  { const a=rnd(2,12),b=rnd(2,12); return {prompt:`${a} × ${b} = ?`, answer:a*b, mode:"input"}; }
+    case "div":   { const b=rnd(2,12),ans=rnd(2,12); return {prompt:`${b*ans} ÷ ${b} = ?`, answer:ans, mode:"input"}; }
+  }
+}
+let mathState=null;
+function resetMathMenu(){
+  document.getElementById("mathMenu").style.display="";
+  document.getElementById("mathPlay").style.display="none";
+  document.getElementById("mathSkills").innerHTML = MATH_SKILLS.map(s=>
+    `<button class="skill" data-skill="${s.id}"><span class="emo">${s.emo}</span><b>${s.name}</b><span>${s.desc}</span></button>`).join("");
+}
+document.getElementById("mathSkills").addEventListener("click",e=>{
+  const t=e.target.closest("[data-skill]"); if(t) startMath(t.dataset.skill);
+});
+document.getElementById("mathQuit").addEventListener("click", resetMathMenu);
+function startMath(type){
+  mathState={type, n:0, correct:0};
+  document.getElementById("mathMenu").style.display="none";
+  document.getElementById("mathPlay").style.display="";
+  nextMathQ();
+}
+function nextMathQ(){
+  if(mathState.n>=5){ finishMath(); return; }
+  mathState.n++;
+  document.getElementById("mathN").textContent=mathState.n;
+  document.getElementById("mathFb").textContent="";
+  document.getElementById("mathFb").className="feedback";
+  const q=makeMathQ(mathState.type); mathState.q=q;
+  const promptEl=document.getElementById("mathPrompt");
+  promptEl.textContent=q.prompt;
+  if(q.word){ promptEl.style.fontSize="1.25rem"; promptEl.style.lineHeight="1.5"; promptEl.style.maxWidth="34ch"; promptEl.style.margin="0 auto"; promptEl.style.whiteSpace="pre-line"; }
+  else { promptEl.style.fontSize=""; promptEl.style.lineHeight=""; promptEl.style.maxWidth=""; promptEl.style.margin=""; promptEl.style.whiteSpace=""; }
+  const area=document.getElementById("mathArea");
+  if(q.mode==="input"){
+    area.innerHTML=`<div><input class="qinput" id="mathInput" inputmode="numeric" autocomplete="off"></div>
+      <button class="btn big" id="mathCheck">Check ✓</button>`;
+    const inp=document.getElementById("mathInput");
+    inp.focus();
+    inp.addEventListener("keydown",ev=>{ if(ev.key==="Enter") checkMathInput(); });
+    document.getElementById("mathCheck").addEventListener("click",checkMathInput);
+  } else {
+    area.innerHTML=`<div class="choices">${q.choices.map(c=>`<button class="opt" data-c="${c}">${c}</button>`).join("")}</div>`;
+    area.querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>checkMathChoice(b)));
+  }
+}
+function mathRight(){
+  mathState.correct++; S.math.correct++; addXP(2);
+  const fb=document.getElementById("mathFb"); fb.textContent=pick(["Yes! 🎉","Correct! ⭐","Nailed it! 💪","Bravo! 🙌"]); fb.className="feedback ok";
+  setTimeout(nextMathQ,800);
+}
+function mathWrong(ans){
+  const fb=document.getElementById("mathFb"); fb.textContent="Almost — the answer is "+ans; fb.className="feedback no";
+  setTimeout(nextMathQ,1500);
+}
+function checkMathInput(){
+  const inp=document.getElementById("mathInput"); if(inp.value==="")return;
+  document.getElementById("mathCheck").disabled=true; inp.disabled=true;
+  if(Number(inp.value)===mathState.q.answer) mathRight(); else mathWrong(mathState.q.answer);
+}
+function checkMathChoice(btn){
+  document.querySelectorAll("#mathArea .opt").forEach(b=>b.disabled=true);
+  if(btn.dataset.c===String(mathState.q.answer)){ btn.classList.add("right"); mathRight(); }
+  else { btn.classList.add("wrong"); mathWrong(mathState.q.answer); }
+}
+function finishMath(){
+  const c=mathState.correct;
+  document.getElementById("mathArea").innerHTML=`<button class="btn big" id="mathAgain">Play again 🔁</button>`;
+  document.getElementById("mathPrompt").textContent = c===5?"Perfect round! 🏆":(c>=3?"Great work! 🌟":"Good try! 💪");
+  const fb=document.getElementById("mathFb"); fb.textContent=`You got ${c} out of 5 right.`; fb.className="feedback ok";
+  document.getElementById("mathAgain").addEventListener("click",()=>startMath(mathState.type));
+  markDaily("math");
+}
+
+/* ============================================================
+   FRENCH
+   ============================================================ */
+const FR_THEMES = [
+  {id:"animaux", emo:"🐾", name:"Les animaux", en:"Animals", words:[
+    {emoji:"🐶",fr:"le chien"},{emoji:"🐱",fr:"le chat"},{emoji:"🐦",fr:"l'oiseau"},
+    {emoji:"🐟",fr:"le poisson"},{emoji:"🐴",fr:"le cheval"},{emoji:"🐮",fr:"la vache"},
+    {emoji:"🐷",fr:"le cochon"},{emoji:"🐰",fr:"le lapin"},{emoji:"🐻",fr:"l'ours"},{emoji:"🦊",fr:"le renard"}]},
+  {id:"couleurs", emo:"🎨", name:"Les couleurs", en:"Colours", words:[
+    {emoji:"🟥",fr:"rouge"},{emoji:"🟦",fr:"bleu"},{emoji:"🟩",fr:"vert"},{emoji:"🟨",fr:"jaune"},
+    {emoji:"⬛",fr:"noir"},{emoji:"⬜",fr:"blanc"},{emoji:"🟧",fr:"orange"},{emoji:"🟪",fr:"violet"},{emoji:"🟫",fr:"brun"},{emoji:"🩷",fr:"rose"}]},
+  {id:"aliments", emo:"🍎", name:"Les aliments", en:"Food", words:[
+    {emoji:"🍎",fr:"la pomme"},{emoji:"🍌",fr:"la banane"},{emoji:"🍞",fr:"le pain"},{emoji:"🧀",fr:"le fromage"},
+    {emoji:"🥛",fr:"le lait"},{emoji:"🥚",fr:"l'œuf"},{emoji:"🍓",fr:"la fraise"},{emoji:"🥕",fr:"la carotte"},{emoji:"🍪",fr:"le biscuit"},{emoji:"🍊",fr:"l'orange"}]},
+  {id:"famille", emo:"👪", name:"La famille", en:"Family", words:[
+    {emoji:"👩",fr:"la mère"},{emoji:"👨",fr:"le père"},{emoji:"👦",fr:"le garçon"},{emoji:"👧",fr:"la fille"},
+    {emoji:"👶",fr:"le bébé"},{emoji:"👵",fr:"la grand-mère"},{emoji:"👴",fr:"le grand-père"},{emoji:"👫",fr:"les amis"}]},
+  {id:"nombres", emo:"🔢", name:"Les nombres", en:"Numbers", words:[
+    {emoji:"1️⃣",fr:"un"},{emoji:"2️⃣",fr:"deux"},{emoji:"3️⃣",fr:"trois"},{emoji:"4️⃣",fr:"quatre"},
+    {emoji:"5️⃣",fr:"cinq"},{emoji:"6️⃣",fr:"six"},{emoji:"7️⃣",fr:"sept"},{emoji:"8️⃣",fr:"huit"},{emoji:"9️⃣",fr:"neuf"},{emoji:"🔟",fr:"dix"}]},
+  {id:"ecole", emo:"🎒", name:"À l'école", en:"At school", words:[
+    {emoji:"📕",fr:"le livre"},{emoji:"✏️",fr:"le crayon"},{emoji:"🖊️",fr:"le stylo"},{emoji:"🎒",fr:"le sac"},
+    {emoji:"✂️",fr:"les ciseaux"},{emoji:"📏",fr:"la règle"},{emoji:"🪑",fr:"la chaise"},{emoji:"🖍️",fr:"le marqueur"}]},
+];
+let frState=null;
+function resetFrMenu(){
+  document.getElementById("frMenu").style.display="";
+  document.getElementById("frPlay").style.display="none";
+  document.getElementById("frThemes").innerHTML = FR_THEMES.map(t=>
+    `<button class="skill" data-theme="${t.id}"><span class="emo">${t.emo}</span><b>${t.name}</b><span>${t.en}</span></button>`).join("");
+}
+document.getElementById("frThemes").addEventListener("click",e=>{
+  const t=e.target.closest("[data-theme]"); if(t) startFr(t.dataset.theme);
+});
+document.getElementById("frQuit").addEventListener("click", resetFrMenu);
+function startFr(id){
+  const theme=FR_THEMES.find(t=>t.id===id);
+  frState={theme, n:0, correct:0};
+  document.getElementById("frMenu").style.display="none";
+  document.getElementById("frPlay").style.display="";
+  nextFrQ();
+}
+function nextFrQ(){
+  if(frState.n>=5){ finishFr(); return; }
+  frState.n++;
+  document.getElementById("frN").textContent=frState.n;
+  const fb=document.getElementById("frFb"); fb.textContent=""; fb.className="feedback";
+  const words=frState.theme.words;
+  const correct=pick(words);
+  const opts=[correct];
+  while(opts.length<4){ const w=pick(words); if(!opts.includes(w)) opts.push(w); }
+  opts.sort(()=>Math.random()-0.5);
+  frState.correct_word=correct;
+  document.getElementById("frCue").textContent=correct.emoji;
+  document.getElementById("frChoices").innerHTML=opts.map(o=>
+    `<button class="opt" data-fr="${o.fr}">${o.fr}</button>`).join("");
+  document.querySelectorAll("#frChoices .opt").forEach(b=>b.addEventListener("click",()=>checkFr(b)));
+}
+function checkFr(btn){
+  document.querySelectorAll("#frChoices .opt").forEach(b=>b.disabled=true);
+  const fb=document.getElementById("frFb");
+  if(btn.dataset.fr===frState.correct_word.fr){
+    btn.classList.add("right"); frState.correct++; S.french.correct++; addXP(2);
+    fb.textContent=pick(["Oui! 🎉","Parfait! ⭐","Très bien! 🙌","Bravo! 💪"]); fb.className="feedback ok";
+  } else {
+    btn.classList.add("wrong");
+    document.querySelectorAll("#frChoices .opt").forEach(b=>{ if(b.dataset.fr===frState.correct_word.fr) b.classList.add("right"); });
+    fb.textContent="C'est « "+frState.correct_word.fr+" »"; fb.className="feedback no";
+  }
+  setTimeout(nextFrQ, 1200);
+}
+function finishFr(){
+  const c=frState.correct;
+  document.getElementById("frCue").textContent = c>=4?"🏆":(c>=3?"🌟":"💪");
+  document.getElementById("frChoices").innerHTML=`<button class="btn big" id="frAgain" style="grid-column:1/-1">Encore! Play again 🔁</button>`;
+  const fb=document.getElementById("frFb"); fb.textContent=`Tu as eu ${c} sur 5! (${c} out of 5)`; fb.className="feedback ok";
+  document.getElementById("frAgain").addEventListener("click",()=>startFr(frState.theme.id));
+  markDaily("french");
+}
+
+/* ============================================================
+   SCIENCE LAB
+   ============================================================ */
+const SCIENCE = [
+  {id:"volcano", emo:"🌋", name:"Erupting Volcano", level:1, mats:["Baking soda","Vinegar","Dish soap","Red food colour","A cup or bottle"],
+   steps:["Put 2 spoons of baking soda in the cup","Add a squirt of dish soap and a drop of colour","Pour in vinegar and stand back!"],
+   why:"The baking soda (a base) and vinegar (an acid) react and make carbon-dioxide gas — the bubbles are the gas escaping!"},
+  {id:"density", emo:"🧪", name:"Rainbow Density Tower", level:2, mats:["Honey or syrup","Dish soap","Water + colour","Cooking oil","A tall clear glass"],
+   steps:["Slowly pour each liquid in: honey, then soap, then coloured water, then oil","Pour gently down the side","Watch them stack in layers!"],
+   why:"Heavier liquids sink and lighter ones float. That’s called density — it’s why oil floats on water."},
+  {id:"walking", emo:"🌈", name:"Walking Water", level:1, mats:["6 cups","Paper towel","Water","Red, yellow & blue food colour"],
+   steps:["Fill cups 1,3,5 with coloured water (leave 2,4,6 empty)","Fold paper towels and bridge each cup to the next","Wait — colours ‘walk’ across and mix!"],
+   why:"Water climbs the paper by capillary action, then new colours appear where two primary colours meet."},
+  {id:"crystal", emo:"💎", name:"Grow a Crystal", level:3, mats:["Sugar or salt","Hot water (grown-up)","A jar","String + pencil"],
+   steps:["Stir lots of sugar into hot water until no more dissolves","Hang a string into the jar","Wait several days and watch crystals grow!"],
+   why:"As water slowly evaporates, the sugar it can’t hold turns back into solid crystals."},
+  {id:"circuit", emo:"💡", name:"Paper Circuit", level:2, mats:["Coin battery (CR2032)","An LED","Tape","Paper"],
+   steps:["Lay the LED legs on the paper","Tape each leg to one side of the battery","The long leg goes to the + side — it lights up!"],
+   why:"Electricity flows in a loop called a circuit. Break the loop and the light goes off."},
+  {id:"tower", emo:"🏗️", name:"Tallest Straw Tower", level:1, mats:["Straws","Tape","A small toy to hold on top"],
+   steps:["Build the tallest tower you can from straws and tape","Try triangles — they’re super strong","Can it hold your toy for 10 seconds?"],
+   why:"Engineers use triangle shapes because they don’t squish — they spread the weight."},
+  {id:"rocket", emo:"🎈", name:"Balloon Rocket", level:2, mats:["A balloon","String","A straw","Tape"],
+   steps:["Thread string through a straw and tie it tight across a room","Tape a blown-up (not tied!) balloon to the straw","Let go and watch it zoom!"],
+   why:"Air rushing out the back pushes the balloon forward — that’s Newton’s 3rd law, like a real rocket."},
+  {id:"slime", emo:"🫧", name:"Cloud in a Jar", level:2, mats:["A jar with lid","Hot water (grown-up)","Ice","Hairspray"],
+   steps:["Put a little hot water in the jar","Quickly spray hairspray inside and put the lid (with ice on top)","A cloud forms inside!"],
+   why:"Warm wet air meets cold air and the water turns into tiny droplets — exactly how real clouds form."},
+];
+function renderScience(){
+  document.getElementById("scienceGrid").innerHTML = SCIENCE.map(a=>{
+    const done=S.science.done.includes(a.id);
+    return `<div class="acard ${done?'is-done':''}">
+      <span class="tag t${a.level}">Level ${a.level} · ${["Easy","Medium","Patience"][a.level-1]}</span>
+      <h4>${a.emo} ${a.name}</h4>
+      <div class="note"><b>You need:</b> ${a.mats.join(", ")}</div>
+      <ul>${a.steps.map(s=>`<li>${s}</li>`).join("")}</ul>
+      <div class="why">🤔 <b>Why it works:</b> ${a.why}</div>
+      <button class="markbtn ${done?'is-done':''}" data-sci="${a.id}">${done?'✓ Done!':'Mark done +10 XP'}</button>
+    </div>`;
+  }).join("");
+}
+document.getElementById("scienceGrid").addEventListener("click",e=>{
+  const t=e.target.closest("[data-sci]"); if(!t) return;
+  toggleDone("science", t.dataset.sci, 10, renderScience, "explore");
+});
+
+/* ============================================================
+   CREATOR STUDIO
+   ============================================================ */
+const CREATE = [
+  {id:"machine", emo:"⚙️", name:"Invent a Machine", prompt:"Design a crazy machine that does your least-favourite chore for you. Draw it and label every part. What powers it?"},
+  {id:"creature",emo:"🐲", name:"New Creature", prompt:"Invent an animal that lives in the clouds. What does it eat? How does it move? Give it a name and draw it."},
+  {id:"comic",   emo:"💥", name:"3-Panel Comic", prompt:"Draw a tiny comic with a beginning, a problem, and a funny ending. Just 3 boxes!"},
+  {id:"city",    emo:"🏙️", name:"City of the Future", prompt:"Build (LEGO, blocks or cardboard) a tiny city for the year 3000. How do people travel? Where does the power come from?"},
+  {id:"junk",    emo:"📦", name:"Junk-Box Robot", prompt:"Using only recycling (boxes, caps, tape), build a robot. Give it a job and a name."},
+  {id:"story",   emo:"📖", name:"Story Starter", prompt:"Finish this story: ‘The door in the tree had never been open before, but today it was…’"},
+  {id:"whatif",  emo:"❓", name:"What If…?", prompt:"What if it rained upside-down? Draw what the world would look like and how people would stay dry."},
+  {id:"bridge",  emo:"🌉", name:"Paper Bridge", prompt:"Make a bridge from ONE sheet of paper that holds 10 coins. You can fold but not cut. How strong can you make it?"},
+  {id:"map",     emo:"🗺️", name:"Treasure Map", prompt:"Draw a treasure map of your home or yard with secret paths, traps and an X. Then make someone follow it!"},
+  {id:"song",    emo:"🎵", name:"Make a Jingle", prompt:"Make up a short song or rap about your favourite thing. Bonus: add a beat by tapping the table."},
+];
+function dayIndex(){ return new Date().getDate() % CREATE.length; }
+function renderCreate(){
+  const todayId = CREATE[dayIndex()].id;
+  document.getElementById("createGrid").innerHTML = CREATE.map(a=>{
+    const done=S.create.done.includes(a.id);
+    const star = a.id===todayId ? `<span class="tag t2">⭐ Today's pick</span>` : "";
+    return `<div class="acard ${done?'is-done':''}">
+      ${star}
+      <h4>${a.emo} ${a.name}</h4>
+      <p style="margin:0">${a.prompt}</p>
+      <button class="markbtn ${done?'is-done':''}" data-cr="${a.id}">${done?'✓ I did it!':'I did it +10 XP'}</button>
+    </div>`;
+  }).join("");
+}
+document.getElementById("createGrid").addEventListener("click",e=>{
+  const t=e.target.closest("[data-cr]"); if(!t) return;
+  toggleDone("create", t.dataset.cr, 10, renderCreate, "create");
+});
+
+/* ============================================================
+   CHESS LESSONS
+   ============================================================ */
+const CHESS = [
+  {id:"w1", title:"Week 1 · Meet the pieces", body:"Set up the board (white square on the bottom-right). Learn one piece a day. Play ‘capture games’: just pawns first, then add a piece each day. Goal: know how every piece moves without thinking."},
+  {id:"w2", title:"Week 2 · Check & checkmate", body:"‘Check’ means the king is attacked — you MUST get out of it. ‘Checkmate’ means the king can’t escape: that wins the game! Play full slow games and say “check” out loud."},
+  {id:"w3", title:"Week 3 · 3 golden rules", body:"1) Control the centre with your pawns. 2) Bring your knights and bishops out early. 3) Never leave a piece where it can be taken for free — always ask ‘is it safe?’ before you move."},
+  {id:"w4", title:"Week 4 · Win the endgame", body:"Practise the King + Queen checkmate against a lone king (push it to the edge!). Do 5 puzzles a day on ChessKid or Lichess. You’re officially a chess player now! ♟️"},
+];
+function renderChess(){
+  document.getElementById("chessLessons").innerHTML = CHESS.map(l=>{
+    const done=S.chess.done.includes(l.id);
+    return `<details class="lesson">
+      <summary>${done?'✅':'📘'} ${l.title}
+        <button class="markbtn lessdone ${done?'is-done':''}" data-ch="${l.id}">${done?'Done':'Finish +5'}</button>
+      </summary>
+      <div class="body">${l.body}</div>
+    </details>`;
+  }).join("");
+}
+document.getElementById("chessLessons").addEventListener("click",e=>{
+  const t=e.target.closest("[data-ch]"); if(!t) return;
+  e.preventDefault(); e.stopPropagation();
+  toggleDone("chess", t.dataset.ch, 5, renderChess, null);
+});
+
+/* ============================================================
+   MAKER GARAGE — Freenove Raspberry Pi 4
+   ============================================================ */
+const MAKER = [
+  {id:"blink", emo:"💡", name:"1 · Blinking LED", level:1, parts:"1 LED, resistor, breadboard, jumper wires",
+   build:"Make a single LED turn on and off, like a heartbeat.",
+   learn:"Your first output! The Pi sends power on a GPIO pin, then turns it off, over and over.",
+   code:"# from the Freenove 'Blink' project\nimport RPi.GPIO as GPIO, time\nGPIO.setmode(GPIO.BCM); GPIO.setup(17, GPIO.OUT)\nwhile True:\n    GPIO.output(17, True);  time.sleep(0.5)\n    GPIO.output(17, False); time.sleep(0.5)"},
+  {id:"button", emo:"🔘", name:"2 · Button + LED", level:1, parts:"1 LED, 1 push button, resistors",
+   build:"Press a button to turn the light on. Let go — it turns off.",
+   learn:"Your first INPUT. The Pi reads whether the button is pressed and decides what to do.",
+   code:null},
+  {id:"breathe", emo:"🌬️", name:"3 · Breathing LED", level:2, parts:"1 LED, resistor",
+   build:"Make the LED slowly fade brighter and dimmer, like it’s breathing.",
+   learn:"PWM — turning the light on/off super fast to control brightness. Magic!",
+   code:null},
+  {id:"rgb", emo:"🌈", name:"4 · Rainbow RGB LED", level:2, parts:"1 RGB LED, 3 resistors",
+   build:"Mix red, green and blue to make ANY colour — even purple and white.",
+   learn:"All screen colours are made from just R, G and B mixed together.",
+   code:null},
+  {id:"buzzer", emo:"🔔", name:"5 · Doorbell Buzzer", level:2, parts:"Buzzer, push button, transistor",
+   build:"Press the button to make a buzzer beep — build a real doorbell!",
+   learn:"Controlling sound, and using a transistor as a tiny electronic switch.",
+   code:null},
+  {id:"traffic", emo:"🚦", name:"6 · Traffic Light", level:2, parts:"Red, yellow & green LEDs, resistors",
+   build:"Program a real traffic-light sequence: green → yellow → red → repeat.",
+   learn:"Timing and sequences — telling the Pi to do steps in the right order.",
+   code:null},
+  {id:"nightlight", emo:"🌙", name:"7 · Automatic Night Light", level:3, parts:"Photoresistor, ADC module, LED",
+   build:"A light that turns ON by itself when the room gets dark.",
+   learn:"Reading a sensor (light level) and making a decision from it.",
+   code:null},
+  {id:"servo", emo:"🦾", name:"8 · Moving Arm (Servo)", level:3, parts:"Servo motor",
+   build:"Make a little arm sweep left and right to any angle you choose.",
+   learn:"Servos turn to exact positions — the start of real robotics!",
+   code:null},
+  {id:"radar", emo:"📡", name:"9 · Distance / Parking Sensor", level:3, parts:"Ultrasonic sensor (HC-SR04)",
+   build:"Measure how far away your hand is — and beep faster as it gets closer, like a car parking sensor.",
+   learn:"Sound waves bounce back; the Pi times the echo to measure distance.",
+   code:null},
+  {id:"weather", emo:"🌡️", name:"10 · Weather Station", level:4, parts:"DHT11 sensor, LCD1602 screen",
+   build:"Read the room’s temperature and humidity and show it on a little screen.",
+   learn:"Combining a sensor + a display = your first real gadget!",
+   code:null},
+];
+function renderMaker(){
+  document.getElementById("makerGrid").innerHTML = MAKER.map(p=>{
+    const done=S.maker.done.includes(p.id);
+    const lv=["Starter","Easy","Builder","Inventor"][p.level-1];
+    return `<div class="acard ${done?'is-done':''}">
+      <span class="tag">${lv}</span>
+      <h4>${p.emo} ${p.name}</h4>
+      <p style="margin:0"><b>Build:</b> ${p.build}</p>
+      <div class="note"><b>Parts:</b> ${p.parts}</div>
+      <div class="why">🧠 <b>You learn:</b> ${p.learn}</div>
+      ${p.code?`<pre>${p.code.replace(/</g,"&lt;")}</pre>`:""}
+      <button class="markbtn ${done?'is-done':''}" data-mk="${p.id}">${done?'✓ Built it!':'Built it +15 XP'}</button>
+    </div>`;
+  }).join("");
+}
+document.getElementById("makerGrid").addEventListener("click",e=>{
+  const t=e.target.closest("[data-mk]"); if(!t) return;
+  toggleDone("maker", t.dataset.mk, 15, renderMaker, "explore");
+});
+
+/* ============================================================
+   READING CORNER — French stories + comprehension
+   ============================================================ */
+const READING = [
+  {id:"chien", emo:"🐶", title:"Le chien de Léa", level:1,
+   text:["Léa a un petit chien. Il s'appelle Max. Max est brun et blanc.",
+         "Chaque matin, Léa et Max vont au parc. Max aime courir après le ballon rouge.",
+         "Après le parc, Max boit de l'eau et dort sur son coussin."],
+   qs:[
+     {q:"Comment s'appelle le chien?", choices:["Max","Léo","Rex"], a:0},
+     {q:"De quelles couleurs est Max?", choices:["noir et gris","brun et blanc","jaune"], a:1},
+     {q:"Où vont Léa et Max chaque matin?", choices:["à l'école","au magasin","au parc"], a:2},
+     {q:"Que fait Max après le parc?", choices:["il dort","il mange un gâteau","il nage"], a:0},
+   ],
+   write:"✍️ Écris 2 phrases sur un animal que tu aimes. (Write 2 sentences about an animal you like.)"},
+
+  {id:"fete", emo:"🎂", title:"La fête de Noah", level:1,
+   text:["Aujourd'hui, c'est l'anniversaire de Noah. Il a huit ans.",
+         "Sa maman fait un grand gâteau au chocolat. Ses amis arrivent à deux heures.",
+         "Ils jouent dans le jardin et mangent du gâteau. Noah reçoit un beau vélo rouge. Il est très content!"],
+   qs:[
+     {q:"Quel âge a Noah?", choices:["sept ans","huit ans","dix ans"], a:1},
+     {q:"Quel gâteau fait sa maman?", choices:["au chocolat","à la vanille","aux fraises"], a:0},
+     {q:"À quelle heure arrivent les amis?", choices:["à une heure","à deux heures","à trois heures"], a:1},
+     {q:"Quel cadeau reçoit Noah?", choices:["un ballon","un livre","un vélo rouge"], a:2},
+   ],
+   write:"✍️ Quel cadeau aimerais-tu pour ton anniversaire? Écris 2 phrases."},
+
+  {id:"plage", emo:"🏖️", title:"Une journée à la plage", level:2,
+   text:["En été, la famille va à la plage. Le soleil est chaud et le ciel est bleu.",
+         "Emma construit un château de sable. Son frère cherche des coquillages.",
+         "L'après-midi, ils mangent des sandwichs et nagent dans la mer. Quelle belle journée!"],
+   qs:[
+     {q:"En quelle saison va la famille à la plage?", choices:["en hiver","en été","en automne"], a:1},
+     {q:"Que construit Emma?", choices:["un château de sable","un bateau","une cabane"], a:0},
+     {q:"Que cherche son frère?", choices:["des poissons","des coquillages","des cailloux"], a:1},
+     {q:"Que font-ils l'après-midi?", choices:["ils dorment","ils nagent dans la mer","ils rentrent à la maison"], a:1},
+   ],
+   write:"✍️ Décris ta journée idéale en été. Écris 2 ou 3 phrases."},
+
+  {id:"chat", emo:"🐱", title:"Le chat curieux", level:2,
+   text:["Minou est un chat très curieux. Un jour, il voit une boîte ouverte dans la cuisine.",
+         "Il saute dans la boîte pour explorer. Mais la boîte glisse et roule jusqu'au salon!",
+         "Minou a un peu peur, puis il trouve ça amusant. Maintenant, c'est son jeu préféré."],
+   qs:[
+     {q:"Comment est Minou?", choices:["curieux","fatigué","triste"], a:0},
+     {q:"Que voit-il dans la cuisine?", choices:["une souris","une boîte ouverte","un oiseau"], a:1},
+     {q:"Où roule la boîte?", choices:["dans le jardin","jusqu'au salon","dans la chambre"], a:1},
+     {q:"À la fin, comment trouve-t-il ça?", choices:["ennuyeux","amusant","effrayant"], a:1},
+   ],
+   write:"✍️ Invente une petite aventure pour Minou le chat. Écris 2 ou 3 phrases."},
+
+  {id:"robot", emo:"🤖", title:"Le robot de Théo", level:3,
+   text:["Théo aime les sciences. Avec son Raspberry Pi, il construit un petit robot.",
+         "Le robot a deux roues et une lumière qui clignote. Théo écrit le code tout seul.",
+         "Quand il appuie sur un bouton, le robot avance et dit « Bonjour! ». Théo est très fier de son invention."],
+   qs:[
+     {q:"Qu'est-ce que Théo aime?", choices:["les sciences","le sport","la musique"], a:0},
+     {q:"Avec quoi construit-il son robot?", choices:["des Lego","un Raspberry Pi","du carton"], a:1},
+     {q:"Que fait la lumière du robot?", choices:["elle clignote","elle reste éteinte","elle change de couleur"], a:0},
+     {q:"Que dit le robot quand on appuie sur le bouton?", choices:["« Au revoir! »","« Bonjour! »","« Merci! »"], a:1},
+   ],
+   write:"✍️ Si tu construisais un robot, que ferait-il? Écris 2 ou 3 phrases."},
+
+  {id:"cabane", emo:"🌳", title:"La cabane dans l'arbre", level:3,
+   text:["Dans le jardin de grand-papa, il y a un grand arbre. Léo et sa sœur Zoé veulent une cabane.",
+         "Grand-papa les aide avec du bois et des clous. Ils travaillent tout le week-end.",
+         "Enfin, la cabane est prête! Léo et Zoé y montent avec des livres et des biscuits. C'est leur endroit secret."],
+   qs:[
+     {q:"Où se trouve le grand arbre?", choices:["dans le parc","dans le jardin de grand-papa","à l'école"], a:1},
+     {q:"Qui aide les enfants?", choices:["grand-papa","leur maman","un voisin"], a:0},
+     {q:"Combien de temps travaillent-ils?", choices:["une heure","tout le week-end","un mois"], a:1},
+     {q:"Qu'apportent-ils dans la cabane?", choices:["des jouets","des livres et des biscuits","un ballon"], a:1},
+   ],
+   write:"✍️ Comment serait ta cabane secrète? Écris 2 ou 3 phrases."},
+];
+
+let readState=null;
+function resetReadMenu(){
+  document.getElementById("readMenu").style.display="";
+  document.getElementById("readPlay").style.display="none";
+  document.getElementById("readList").innerHTML = READING.map(r=>{
+    const done=S.reading.done.includes(r.id);
+    return `<button class="skill" data-story="${r.id}"><span class="emo">${r.emo}</span><b>${done?'✓ ':''}${r.title}</b><span>${["Facile","Moyen","Défi"][r.level-1]} · ${r.qs.length} questions</span></button>`;
+  }).join("");
+}
+document.getElementById("readList").addEventListener("click",e=>{
+  const t=e.target.closest("[data-story]"); if(t) openReading(t.dataset.story);
+});
+document.getElementById("readQuit").addEventListener("click", resetReadMenu);
+
+function openReading(id){
+  const story=READING.find(r=>r.id===id);
+  readState={story, answers:{}, checked:false};
+  document.getElementById("readMenu").style.display="none";
+  document.getElementById("readPlay").style.display="";
+  document.getElementById("readText").innerHTML =
+    `<h3>${story.emo} ${story.title}</h3>` + story.text.map(p=>`<p>${p}</p>`).join("");
+  document.getElementById("readQs").innerHTML = story.qs.map((q,qi)=>
+    `<div class="qblock" data-qi="${qi}">
+       <div class="qtxt">${qi+1}. ${q.q}</div>
+       <div class="choices">${q.choices.map((c,ci)=>`<button class="opt" data-ci="${ci}">${c}</button>`).join("")}</div>
+     </div>`).join("");
+  document.querySelectorAll("#readQs .opt").forEach(b=>b.addEventListener("click",function(){
+    if(readState.checked) return;
+    const qi=Number(this.closest(".qblock").dataset.qi);
+    readState.answers[qi]=Number(this.dataset.ci);
+    this.closest(".choices").querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));
+    this.classList.add("sel");
+  }));
+  const fb=document.getElementById("readFb"); fb.textContent=""; fb.className="feedback";
+  document.getElementById("readCheck").disabled=false;
+  // writing
+  document.getElementById("writePrompt").textContent=story.write;
+  document.getElementById("writeArea").value = S.reading.writing[id] || "";
+  document.getElementById("writeFb").textContent="";
+}
+document.getElementById("readCheck").addEventListener("click",()=>{
+  const story=readState.story;
+  if(Object.keys(readState.answers).length < story.qs.length){
+    const fb=document.getElementById("readFb"); fb.textContent="Réponds à toutes les questions d'abord 🙂"; fb.className="feedback no"; return;
+  }
+  readState.checked=true;
+  let correct=0;
+  story.qs.forEach((q,qi)=>{
+    const block=document.querySelector(`#readQs .qblock[data-qi="${qi}"]`);
+    block.querySelectorAll(".opt").forEach((o,ci)=>{
+      o.disabled=true; o.classList.remove("sel");
+      if(ci===q.a) o.classList.add("right");
+      else if(ci===readState.answers[qi]) o.classList.add("wrong");
+    });
+    if(readState.answers[qi]===q.a) correct++;
+  });
+  addXP(correct*3);
+  S.reading.correct += correct;
+  if(!S.reading.done.includes(story.id)) S.reading.done.push(story.id);
+  save(); renderStats(); resetReadMenu(); // refresh checkmarks for next time
+  document.getElementById("readCheck").disabled=true;
+  const fb=document.getElementById("readFb");
+  fb.textContent=`Tu as eu ${correct} sur ${story.qs.length} bonnes réponses! (+${correct*3} XP)`;
+  fb.className="feedback ok";
+  markDaily("french");
+});
+document.getElementById("writeSave").addEventListener("click",()=>{
+  const txt=document.getElementById("writeArea").value.trim();
+  const fb=document.getElementById("writeFb");
+  if(txt.length<3){ fb.textContent="Écris quelque chose d'abord 🙂"; fb.className="feedback no"; return; }
+  const id=readState.story.id;
+  const first = !S.reading.writing[id];
+  S.reading.writing[id]=txt;
+  save();
+  if(first){ addXP(10); toast("Bravo, petit auteur! +10 XP ✍️"); }
+  renderStats();
+  fb.textContent="Texte sauvegardé! 💾"; fb.className="feedback ok";
+});
+
+/* ============================================================
+   LIFE SMARTS — real-world knowledge
+   ============================================================ */
+const LIFE = [
+  {id:"money", emo:"💰", name:"Money Smarts", en:"Saving & spending", qs:[
+    {q:"You want a toy, but you also need new shoes. Which should you buy first?", choices:["The toy","The shoes — that's a need","Neither"], a:1, tip:"Needs (like shoes) come before wants (like toys). Wants can wait!"},
+    {q:"What does it mean to SAVE money?", choices:["Spend it all today","Keep some for later","Throw it away"], a:1, tip:"Saving means putting money aside now so you have it when you need it later."},
+    {q:"A snack costs $3 and you pay with a $5 bill. How much change?", choices:["$2","$3","$8"], a:0, tip:"Change = what you paid − the price. $5 − $3 = $2."},
+    {q:"What is a budget?", choices:["A plan for your money","A type of coin","A kind of store"], a:0, tip:"A budget is a plan that decides how much to spend and how much to save."},
+    {q:"Which of these is a NEED?", choices:["Candy","Food and water","A video game"], a:1, tip:"Needs keep us alive and healthy. Everything else is a 'want'."},
+    {q:"If you save $2 every week, how much will you have after 4 weeks?", choices:["$6","$8","$4"], a:1, tip:"$2 × 4 = $8. Small savings add up over time!"},
+  ]},
+  {id:"time", emo:"⏰", name:"Time & Calendar", en:"Clocks, days & seasons", qs:[
+    {q:"How many minutes are in one hour?", choices:["30","60","100"], a:1, tip:"60 minutes = 1 hour."},
+    {q:"How many days are in one week?", choices:["5","7","10"], a:1},
+    {q:"How many months are in one year?", choices:["10","12","7"], a:1},
+    {q:"The big hand points to 12 and the small hand to 3. What time is it?", choices:["3 o'clock","12 o'clock","6 o'clock"], a:0, tip:"The small hand shows the hour; the big hand on 12 means 'o'clock'."},
+    {q:"Which season comes right after winter?", choices:["Spring","Summer","Fall"], a:0},
+    {q:"How many seconds are in one minute?", choices:["60","30","100"], a:0},
+  ]},
+  {id:"measure", emo:"📏", name:"Measure & Cook", en:"Units & the kitchen", qs:[
+    {q:"What do we use to measure how heavy something is?", choices:["A ruler","A scale (kilograms)","A clock"], a:1},
+    {q:"Which is longer: 1 metre or 1 centimetre?", choices:["1 metre","1 centimetre","They're equal"], a:0, tip:"1 metre = 100 centimetres."},
+    {q:"What unit do we measure milk or juice in?", choices:["Litres","Kilograms","Metres"], a:0},
+    {q:"Water turns to ice at what temperature?", choices:["0°C","50°C","100°C"], a:0, tip:"Water freezes at 0°C and boils at 100°C."},
+    {q:"A recipe needs 2 cups of flour. You make it twice. How many cups total?", choices:["2","4","6"], a:1, tip:"Doubling a recipe means doubling each amount: 2 × 2 = 4."},
+    {q:"Which tool measures temperature?", choices:["Thermometer","Ruler","Scale"], a:0},
+  ]},
+  {id:"safety", emo:"🚑", name:"Safety & Help", en:"Staying safe", qs:[
+    {q:"What number do you call in an emergency in Canada?", choices:["911","411","123"], a:0, tip:"Call 911 for fire, police, or an ambulance — only in a real emergency."},
+    {q:"Before crossing the street you should…", choices:["Run as fast as you can","Stop and look left, right, left","Close your eyes"], a:1},
+    {q:"A stranger offers you candy to come with them. You should…", choices:["Go with them","Say NO and tell a trusted adult","Take the candy"], a:1, tip:"Never go anywhere with a stranger. Find a parent or trusted adult."},
+    {q:"If there is a fire, you should…", choices:["Hide under the bed","Get out and call for help","Keep playing"], a:1, tip:"Get low, get out, stay out — then call for help."},
+    {q:"Is it okay to tell someone online where you live?", choices:["Yes, always","No — keep it private","Only your address"], a:1, tip:"Never share personal info online. Tell a parent if someone asks."},
+    {q:"If you get lost in a store, the best thing to do is…", choices:["Walk outside alone","Find a worker or cashier for help","Sit and cry"], a:1},
+  ]},
+  {id:"world", emo:"🌍", name:"My World", en:"Canada & the Earth", qs:[
+    {q:"What country do we live in?", choices:["Canada","France","Brazil"], a:0},
+    {q:"What is the capital city of Canada?", choices:["Toronto","Ottawa","Montréal"], a:1, tip:"Ottawa is the capital of Canada."},
+    {q:"In Québec, many people speak which language every day?", choices:["French","Spanish","German"], a:0},
+    {q:"How many continents are there on Earth?", choices:["5","7","10"], a:1},
+    {q:"Which is bigger?", choices:["A city","A country","They're the same"], a:1, tip:"A country contains many cities inside it."},
+    {q:"What do we call the giant body of salt water?", choices:["A pond","An ocean","A puddle"], a:1},
+  ]},
+  {id:"health", emo:"🥗", name:"Healthy Me", en:"Body & habits", qs:[
+    {q:"About how many hours of sleep does a kid your age need?", choices:["2–3 hours","9–11 hours","20 hours"], a:1, tip:"Kids need about 9–11 hours of sleep to grow and focus."},
+    {q:"Which is the healthiest snack?", choices:["An apple","A chocolate bar","A bag of chips"], a:0},
+    {q:"How often should you brush your teeth?", choices:["Once a week","Twice a day","Never"], a:1},
+    {q:"What should you always do before eating?", choices:["Wash your hands","Watch TV","Jump around"], a:0, tip:"Washing hands removes germs that can make you sick."},
+    {q:"Which keeps your body strong?", choices:["Exercise and play","Sitting all day","Skipping meals"], a:0},
+    {q:"What should you drink lots of every day?", choices:["Water","Soda","Energy drinks"], a:0},
+  ]},
+];
+let lifeState=null;
+function resetLifeMenu(){
+  document.getElementById("lifeMenu").style.display="";
+  document.getElementById("lifePlay").style.display="none";
+  document.getElementById("lifeTopics").innerHTML = LIFE.map(t=>
+    `<button class="skill" data-topic="${t.id}"><span class="emo">${t.emo}</span><b>${t.name}</b><span>${t.en}</span></button>`).join("");
+}
+document.getElementById("lifeTopics").addEventListener("click",e=>{
+  const t=e.target.closest("[data-topic]"); if(t) startLife(t.dataset.topic);
+});
+document.getElementById("lifeQuit").addEventListener("click", resetLifeMenu);
+function startLife(id){
+  const topic=LIFE.find(t=>t.id===id);
+  const pool=[...topic.qs].sort(()=>Math.random()-0.5).slice(0,5);
+  lifeState={topic, pool, n:0, correct:0};
+  document.getElementById("lifeMenu").style.display="none";
+  document.getElementById("lifePlay").style.display="";
+  nextLifeQ();
+}
+function nextLifeQ(){
+  if(lifeState.n>=lifeState.pool.length){ finishLife(); return; }
+  const q=lifeState.pool[lifeState.n]; lifeState.q=q;
+  document.getElementById("lifeN").textContent=lifeState.n+1;
+  document.getElementById("lifePrompt").textContent=q.q;
+  document.getElementById("lifeTip").style.display="none";
+  const fb=document.getElementById("lifeFb"); fb.textContent=""; fb.className="feedback";
+  document.getElementById("lifeChoices").innerHTML=q.choices.map((c,ci)=>
+    `<button class="opt" data-ci="${ci}">${c}</button>`).join("");
+  document.querySelectorAll("#lifeChoices .opt").forEach(b=>b.addEventListener("click",()=>checkLife(b)));
+}
+function checkLife(btn){
+  const q=lifeState.q;
+  document.querySelectorAll("#lifeChoices .opt").forEach((b,ci)=>{ b.disabled=true; if(ci===q.a) b.classList.add("right"); });
+  const fb=document.getElementById("lifeFb");
+  if(Number(btn.dataset.ci)===q.a){ lifeState.correct++; S.life.correct++; addXP(3);
+    fb.textContent=pick(["Correct! ⭐","Yes! 🎉","Smart! 💡","Nailed it! 💪"]); fb.className="feedback ok"; }
+  else { btn.classList.add("wrong"); fb.textContent="Good try!"; fb.className="feedback no"; }
+  if(q.tip){ const tip=document.getElementById("lifeTip"); tip.innerHTML="💡 <b>Good to know:</b> "+q.tip; tip.style.display=""; }
+  lifeState.n++;
+  const delay=q.tip?2600:1300;
+  setTimeout(nextLifeQ, delay);
+}
+function finishLife(){
+  const c=lifeState.correct, total=lifeState.pool.length;
+  document.getElementById("lifePrompt").textContent = c===total?"Brilliant! 🏆":(c>=3?"Well done! 🌟":"Keep learning! 💪");
+  document.getElementById("lifeChoices").innerHTML=`<button class="btn big" id="lifeAgain" style="grid-column:1/-1">Play again 🔁</button>`;
+  document.getElementById("lifeTip").style.display="none";
+  const fb=document.getElementById("lifeFb"); fb.textContent=`You got ${c} out of ${total} right!`; fb.className="feedback ok";
+  document.getElementById("lifeAgain").addEventListener("click",()=>startLife(lifeState.topic.id));
+  markDaily("explore");
+}
+
+/* ============================================================
+   SHARED: toggle done
+   ============================================================ */
+function toggleDone(land, id, xp, rerender, dailyKey){
+  const arr = S[land].done;
+  const i = arr.indexOf(id);
+  if(i===-1){
+    arr.push(id); addXP(xp);
+    toast("+"+xp+" XP! ⭐");
+    if(dailyKey) markDaily(dailyKey);
+  } else {
+    arr.splice(i,1); S.xp=Math.max(0,S.xp-xp); save(); renderStats();
+  }
+  save(); rerender(); renderStats();
+}
+
+/* ============================================================
+   TOAST + RESET
+   ============================================================ */
+let toastT;
+function toast(msg){
+  const el=document.getElementById("toast");
+  el.textContent=msg; el.classList.add("show");
+  clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove("show"),1800);
+}
+document.getElementById("resetBtn").addEventListener("click",()=>{
+  if(confirm("Reset ALL progress and start the summer fresh?")){
+    localStorage.removeItem(KEY); localStorage.removeItem(KEY+".week");
+    S=defaultState(); save(); location.reload();
+  }
+});
+
+/* ============================================================
+   INIT
+   ============================================================ */
+paintName();
+renderStats();
+renderRibbon();
+renderMission();
+renderScience();
+renderCreate();
+renderChess();
+renderMaker();
+resetMathMenu();
+resetFrMenu();
+resetReadMenu();
+resetLifeMenu();
+</script>
+</body>
+</html>
