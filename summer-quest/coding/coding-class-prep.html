@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Ready for Coding Class 💻</title>
+<style>
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  :root{
+    --ink:#152238; --blue:#2563eb; --cyan:#0891b2; --green:#16a34a;
+    --amber:#d97706; --pink:#db2777; --soft:#e7f0ff; --card:#fff;
+  }
+  body{
+    font-family:'Trebuchet MS',system-ui,sans-serif; color:var(--ink);
+    line-height:1.55; background:linear-gradient(160deg,#eef4ff,#e6fbff); padding:0 0 60px;
+  }
+  header{
+    text-align:center; padding:40px 18px 32px; color:#fff;
+    background:linear-gradient(135deg,#2563eb,#0891b2);
+    border-radius:0 0 34px 34px; box-shadow:0 10px 30px rgba(37,99,235,.3);
+  }
+  header h1{ font-size:2.2rem; }
+  header p{ font-size:1.12rem; margin-top:8px; opacity:.96; }
+  .badge{ display:inline-block; background:rgba(255,255,255,.2); padding:5px 16px; border-radius:999px;
+    font-weight:bold; margin-bottom:12px; letter-spacing:.5px;}
+  .wrap{ max-width:820px; margin:0 auto; padding:0 16px; }
+  .card{ background:var(--card); border-radius:22px; padding:26px 24px; margin:22px 0;
+    box-shadow:0 8px 22px rgba(30,60,120,.10); border:3px solid #e3edff;}
+  h2{ color:var(--blue); font-size:1.5rem; margin-bottom:10px; display:flex; gap:10px; align-items:center;}
+  h3{ color:var(--cyan); margin:16px 0 6px; }
+  p{ font-size:1.06rem; margin:8px 0; }
+  .tag{ display:inline-block; background:var(--soft); color:var(--blue); padding:3px 12px;
+    border-radius:999px; font-size:.85rem; font-weight:bold; margin-bottom:6px;}
+  .big{ font-size:1.25rem; text-align:center; font-weight:bold; color:var(--blue); margin:12px 0;}
+  .tip{ background:#fffbeb; border-left:6px solid var(--amber); padding:10px 14px; border-radius:10px; margin:12px 0;}
+  /* robot demo */
+  .robotbox{ background:#f0f9ff; border:3px dashed var(--cyan); border-radius:18px; padding:18px; text-align:center;}
+  .grid{ display:grid; grid-template-columns:repeat(5,54px); gap:4px; justify-content:center; margin:14px auto;}
+  .cell{ width:54px; height:54px; background:#fff; border:2px solid #cfe6f5; border-radius:8px;
+    display:flex; align-items:center; justify-content:center; font-size:1.8rem;}
+  .cell.goal{ background:#dcfce7; border-color:var(--green);}
+  .cmds{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:10px 0;}
+  .cmds button{ font-family:inherit; cursor:pointer; border:none; background:var(--blue); color:#fff;
+    font-size:1.3rem; width:52px; height:46px; border-radius:12px; box-shadow:0 3px 0 #1d4ed8;}
+  .cmds button:active{ transform:translateY(2px); box-shadow:0 1px 0 #1d4ed8;}
+  .program{ min-height:48px; background:#fff; border:2px solid #cfe6f5; border-radius:12px;
+    padding:8px; margin:8px auto; display:flex; gap:6px; flex-wrap:wrap; justify-content:center; align-items:center; font-size:1.5rem;}
+  .runbtns{ display:flex; gap:10px; justify-content:center; margin-top:8px;}
+  .run{ background:var(--green); color:#fff; font-family:inherit; cursor:pointer; border:none;
+    font-size:1.05rem; padding:10px 22px; border-radius:999px; box-shadow:0 4px 0 #15803d;}
+  .clear{ background:#94a3b8; color:#fff; font-family:inherit; cursor:pointer; border:none;
+    font-size:1.05rem; padding:10px 22px; border-radius:999px;}
+  .msg{ font-weight:bold; font-size:1.15rem; min-height:28px; margin-top:10px; color:var(--blue);}
+  /* order game */
+  .steps{ display:flex; flex-direction:column; gap:8px; margin-top:10px;}
+  .step{ background:#fff; border:2px solid #d7e3f5; border-radius:12px; padding:12px 14px;
+    font-size:1.08rem; cursor:pointer; display:flex; align-items:center; gap:10px; transition:.12s;}
+  .step:hover{ background:var(--soft);}
+  .step .num{ background:var(--blue); color:#fff; width:28px; height:28px; border-radius:50%;
+    display:inline-flex; align-items:center; justify-content:center; font-weight:bold; flex-shrink:0;}
+  .step.picked{ opacity:.45; pointer-events:none;}
+  .ordermsg{ font-weight:bold; text-align:center; min-height:28px; margin-top:12px; font-size:1.15rem;}
+  /* scratch blocks */
+  .blocks{ max-width:340px; margin:10px auto;}
+  .blk{ color:#fff; padding:12px 16px; font-weight:bold; font-size:1.05rem; border-radius:8px; margin:-2px 0;
+    box-shadow:0 2px 4px rgba(0,0,0,.12);}
+  .blk.evt{ background:#f59e0b;} .blk.motion{ background:#4c97ff;} .blk.look{ background:#9966ff;}
+  .blk.ctrl{ background:#ff8c1a;}
+  .wordbank{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
+  .wordbank span{ background:var(--soft); color:var(--blue); padding:6px 12px; border-radius:999px; font-weight:bold; font-size:.95rem;}
+  footer{ text-align:center; color:#64748b; font-size:.95rem; margin-top:30px; padding:0 20px;}
+  ol{ margin:8px 0 8px 22px;} ol li{ margin:6px 0; font-size:1.05rem;}
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">WEEK 1 • WEDNESDAY</div>
+  <h1>Get Ready for Coding Class 💻</h1>
+  <p>You'll learn what coding is, meet Scratch, and make an animated greeting. Here's a head start!</p>
+</header>
+
+<div class="wrap">
+
+  <!-- What is coding -->
+  <div class="card">
+    <span class="tag">FIRST THING</span>
+    <h2>🤔 What is coding?</h2>
+    <p><b>Coding</b> means giving a computer a list of instructions to follow. A computer is powerful but not clever on its own — it does <b>exactly</b> what you tell it, in <b>exactly</b> the order you say it.</p>
+    <p class="big">You are the boss. The computer is the worker. 👷</p>
+    <p>If you tell it the wrong step, it will happily do the wrong thing! That's why coders think carefully about every step. Finding and fixing a wrong step is called <b>debugging</b> 🐛.</p>
+  </div>
+
+  <!-- Algorithm -->
+  <div class="card">
+    <span class="tag">BIG WORD, EASY IDEA</span>
+    <h2>📋 What is an algorithm?</h2>
+    <p>An <b>algorithm</b> is just a <b>step-by-step plan</b> to get something done — like a recipe. You already use algorithms every day!</p>
+    <p>Brushing your teeth is an algorithm:</p>
+    <ol>
+      <li>Pick up the toothbrush</li>
+      <li>Put toothpaste on it</li>
+      <li>Brush your teeth</li>
+      <li>Rinse your mouth</li>
+    </ol>
+    <p>Swap two steps and it goes wrong — you can't brush before the toothpaste is on! <b>Order matters.</b> That's the #1 rule coders live by.</p>
+  </div>
+
+  <!-- Order game -->
+  <div class="card">
+    <span class="tag">YOUR TURN</span>
+    <h2>🥪 Build the Algorithm</h2>
+    <p>Here are the steps to make a peanut-butter sandwich — but they're mixed up! Click them in the <b>right order</b>, from first to last.</p>
+    <div class="steps" id="steps"></div>
+    <div class="ordermsg" id="ordermsg"></div>
+    <div style="text-align:center"><button class="clear" onclick="resetOrder()">↺ Start over</button></div>
+  </div>
+
+  <!-- Robot / commands -->
+  <div class="card">
+    <span class="tag">THINK LIKE A CODER</span>
+    <h2>🤖 Program the Robot</h2>
+    <p>The robot 🤖 wants to reach the star ⭐. Tap arrow buttons to build a <b>program</b> (a list of instructions), then press <b>Run</b> and watch it follow your steps <b>one at a time</b>.</p>
+    <div class="robotbox">
+      <div class="grid" id="grid"></div>
+      <div class="cmds">
+        <button onclick="addCmd('up')">⬆️</button>
+        <button onclick="addCmd('down')">⬇️</button>
+        <button onclick="addCmd('left')">⬅️</button>
+        <button onclick="addCmd('right')">➡️</button>
+      </div>
+      <div class="program" id="program"><span style="font-size:.95rem;color:#94a3b8">Your program shows up here…</span></div>
+      <div class="runbtns">
+        <button class="run" onclick="runProgram()">▶ Run</button>
+        <button class="clear" onclick="clearProgram()">🗑 Clear</button>
+      </div>
+      <div class="msg" id="robotmsg"></div>
+    </div>
+    <div class="tip">💡 If the robot misses the star, don't worry — that's a <b>bug</b>. Real coders test, spot the bug, and fix it. Getting it wrong is part of coding!</div>
+  </div>
+
+  <!-- Scratch -->
+  <div class="card">
+    <span class="tag">MEET YOUR TOOL</span>
+    <h2>🐱 What is Scratch?</h2>
+    <p><b>Scratch</b> is the app you'll use in class. Instead of typing code, you <b>snap colourful blocks together</b> like LEGO. Each block is one instruction, and they stack to make an algorithm.</p>
+    <p>The characters you control are called <b>sprites</b> (the cat is the famous one 🐱). You press the <b>green flag</b> 🟢 to start your program.</p>
+    <h3>A block stack looks like this:</h3>
+    <div class="blocks">
+      <div class="blk evt">when 🟢 clicked</div>
+      <div class="blk look">say "Hello!" for 2 seconds</div>
+      <div class="blk motion">move 10 steps</div>
+      <div class="blk ctrl">wait 1 second</div>
+      <div class="blk look">say "I can code!"</div>
+    </div>
+    <p style="margin-top:12px">Read it top to bottom — that's the algorithm the cat will follow. See? You can already read Scratch!</p>
+  </div>
+
+  <!-- Project preview + words -->
+  <div class="card">
+    <span class="tag">THE CLASS PROJECT</span>
+    <h2>🎬 Your first project: an Animated Greeting</h2>
+    <p>By the end of Wednesday you'll make a sprite that <b>says hello and moves</b> — your own little animation. If you want to brainstorm now:</p>
+    <ol>
+      <li>What should your sprite <b>say</b>? (e.g. "Hi, I'm [your name]!")</li>
+      <li>Should it <b>move</b>, <b>spin</b>, or <b>change colour</b>?</li>
+      <li>What background would look cool?</li>
+    </ol>
+    <h3>⭐ Words to walk in knowing:</h3>
+    <div class="wordbank">
+      <span>code = instructions</span>
+      <span>algorithm = step-by-step plan</span>
+      <span>sprite = character</span>
+      <span>block = one instruction</span>
+      <span>green flag = start</span>
+      <span>bug = a mistake</span>
+      <span>debug = fix it</span>
+      <span>loop = repeat</span>
+    </div>
+    <p style="margin-top:12px">If you know these 8 words, you'll be one of the most ready kids in the room. 🌟</p>
+  </div>
+
+  <footer>
+    You're ready for Wednesday! 🚀<br>
+    <span style="font-size:.88rem">For grown-ups: this covers Week 1 (coding, algorithms, Scratch, animated greeting). Optional warm-up — try free blocks at
+    <b>scratch.mit.edu</b> (works in a browser; no install needed). No pressure before class — the game above is enough.</span>
+  </footer>
+</div>
+
+<script>
+/* ----- Sandwich ordering game ----- */
+const correctOrder = [
+  "Get two slices of bread 🍞",
+  "Open the peanut butter jar 🥜",
+  "Spread peanut butter on one slice 🔪",
+  "Put the two slices together 🥪",
+  "Take a bite! 😋"
+];
+let shuffled = [...correctOrder].sort((a,b)=> (a.length%3)-(b.length%3) || a.localeCompare(b));
+// ensure not already in order
+if(shuffled.join()===correctOrder.join()) shuffled.reverse();
+let nextIndex=0;
+function drawSteps(){
+  const box=document.getElementById('steps'); box.innerHTML='';
+  nextIndex=0; document.getElementById('ordermsg').textContent='';
+  shuffled.forEach(txt=>{
+    const d=document.createElement('div'); d.className='step';
+    d.innerHTML=`<span class="num">?</span> ${txt}`;
+    d.onclick=()=>pickStep(d,txt);
+    box.appendChild(d);
+  });
+}
+function pickStep(el,txt){
+  if(txt===correctOrder[nextIndex]){
+    nextIndex++;
+    el.classList.add('picked');
+    el.querySelector('.num').textContent=nextIndex;
+    el.querySelector('.num').style.background='#16a34a';
+    if(nextIndex===correctOrder.length){
+      document.getElementById('ordermsg').textContent='🎉 Perfect algorithm! The order is exactly right.';
+      document.getElementById('ordermsg').style.color='#16a34a';
+    } else {
+      document.getElementById('ordermsg').textContent=`Nice! Step ${nextIndex} done. What comes next?`;
+      document.getElementById('ordermsg').style.color='#2563eb';
+    }
+  } else {
+    document.getElementById('ordermsg').textContent='🐛 That step comes later. Think: what has to happen first?';
+    document.getElementById('ordermsg').style.color='#db2777';
+  }
+}
+function resetOrder(){ drawSteps(); }
+drawSteps();
+
+/* ----- Robot grid ----- */
+const SIZE=5;
+const start={x:0,y:4}, goal={x:4,y:0};
+let robot={...start};
+let program=[];
+const arrows={up:'⬆️',down:'⬇️',left:'⬅️',right:'➡️'};
+function drawGrid(){
+  const g=document.getElementById('grid'); g.innerHTML='';
+  for(let y=0;y<SIZE;y++){
+    for(let x=0;x<SIZE;x++){
+      const c=document.createElement('div'); c.className='cell';
+      if(x===goal.x&&y===goal.y){ c.classList.add('goal'); c.textContent='⭐'; }
+      if(x===robot.x&&y===robot.y){ c.textContent='🤖'; }
+      g.appendChild(c);
+    }
+  }
+}
+function addCmd(dir){ program.push(dir); renderProgram(); }
+function renderProgram(){
+  const p=document.getElementById('program');
+  if(program.length===0){ p.innerHTML='<span style="font-size:.95rem;color:#94a3b8">Your program shows up here…</span>'; return;}
+  p.innerHTML=program.map(d=>arrows[d]).join(' ');
+}
+function clearProgram(){ program=[]; robot={...start}; renderProgram(); drawGrid(); document.getElementById('robotmsg').textContent='';}
+function runProgram(){
+  robot={...start}; drawGrid();
+  document.getElementById('robotmsg').textContent='Running…';
+  let i=0;
+  const timer=setInterval(()=>{
+    if(i>=program.length){
+      clearInterval(timer);
+      if(robot.x===goal.x&&robot.y===goal.y){
+        document.getElementById('robotmsg').textContent='🎉 You reached the star! Great program!';
+        document.getElementById('robotmsg').style.color='#16a34a';
+      } else {
+        document.getElementById('robotmsg').textContent='🐛 Missed the star! Adjust your steps and Run again.';
+        document.getElementById('robotmsg').style.color='#db2777';
+      }
+      return;
+    }
+    const d=program[i];
+    if(d==='up') robot.y=Math.max(0,robot.y-1);
+    if(d==='down') robot.y=Math.min(SIZE-1,robot.y+1);
+    if(d==='left') robot.x=Math.max(0,robot.x-1);
+    if(d==='right') robot.x=Math.min(SIZE-1,robot.x+1);
+    drawGrid(); i++;
+  }, 400);
+}
+drawGrid();
+</script>
+</body>
+</html>

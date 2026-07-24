@@ -108,6 +108,7 @@
   .l-maker{background:linear-gradient(140deg,#14998A,#0E7C8E)}
   .l-read{background:linear-gradient(140deg,#A0522D,#7A3B1E)}
   .l-life{background:linear-gradient(140deg,#C2407A,#8E2D5C)}
+  .l-python{background:linear-gradient(140deg,#22A06B,#0E7490)}
   .tipbox{margin-top:12px;background:#FDF0F5;border:1px dashed var(--life);border-radius:12px;padding:10px 12px;font-size:.92rem;text-align:left}
 
   /* reading */
@@ -262,7 +263,28 @@
       <button class="land l-chess" data-go="chess"><span class="ic">♟️</span><span class="pill" id="p-chess">0 done</span><h3>Chess Castle</h3><p>Learn to play, step by step</p></button>
       <button class="land l-create" data-go="create"><span class="ic">🎨</span><span class="pill" id="p-create">0 done</span><h3>Creator Studio</h3><p>Invent, build & imagine challenges</p></button>
       <button class="land l-maker" data-go="maker"><span class="ic">🤖</span><span class="pill" id="p-maker">0 done</span><h3>Maker Garage</h3><p>Build real projects with your Raspberry Pi</p></button>
+      <button class="land l-python" data-go="python"><span class="ic">🐍</span><span class="pill" id="p-python">0 learned</span><h3>Python Playground</h3><p>Code quizzes: print, input, variables & math</p></button>
       <button class="land l-life" data-go="life"><span class="ic">🧭</span><span class="pill" id="p-life">0 learned</span><h3>Life Smarts</h3><p>Real-world know-how: money, time, safety</p></button>
+    </div>
+
+    <div class="panel">
+      <p class="eyebrow">Extra helpers</p>
+      <h2 style="font-size:1.3rem;margin-top:4px">Special lessons for right now ✨</h2>
+      <p class="note" style="margin-top:2px">Two focused mini-lessons that open in their own page. Use the back button to come back to the map.</p>
+      <div class="lands" style="margin:16px 0 0">
+        <a class="land" href="maths/division-fun.html" style="background:linear-gradient(140deg,#2D7DD2,#5B39B5);text-decoration:none">
+          <span class="ic">➗</span><span class="pill">New!</span>
+          <h3>Division Made Clear</h3><p>Play the sharing machine & solve your real homework</p>
+        </a>
+        <a class="land" href="coding/coding-class-prep.html" style="background:linear-gradient(140deg,#0891b2,#16a34a);text-decoration:none">
+          <span class="ic">💻</span><span class="pill">Class prep</span>
+          <h3>Coding Class Prep</h3><p>Algorithms, Scratch & a robot game</p>
+        </a>
+        <a class="land" href="python/python-power-up.html" style="background:linear-gradient(140deg,#16a34a,#0f766e);text-decoration:none">
+          <span class="ic">🐍</span><span class="pill">New!</span>
+          <h3>Python Power-Up</h3><p>print, input & your own calculator apps you can run</p>
+        </a>
+      </div>
     </div>
 
     <div class="panel">
@@ -413,6 +435,29 @@
     <div class="grid2" id="makerGrid" style="margin-top:16px"></div>
   </section>
 
+  <!-- ============ PYTHON PLAYGROUND ============ -->
+  <section id="python" class="view">
+    <div class="topback"><button class="back" data-go="home">← Back to map</button></div>
+    <div class="vhead"><div class="vic" style="background:#0E7490">🐍</div><div><h2>Python Playground</h2><p>Quiz yourself on real Python code: print, variables, input & math. +3 XP per right answer.</p></div></div>
+    <div class="parentbox">🐍 <b>Want the full lesson?</b> Open <a href="python/python-power-up.html">Python Power-Up</a> for the guide plus 5 programs he can actually run.</div>
+    <div class="panel" id="pyMenu">
+      <p class="eyebrow">Choose a coding topic</p>
+      <div class="skillgrid" id="pyTopics" style="margin-top:10px"></div>
+    </div>
+    <div class="panel" id="pyPlay" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <button class="btn ghost" id="pyQuit">← Other topic</button>
+        <span class="chip">Question <b id="pyN">1</b>/5</span>
+      </div>
+      <div class="qcard">
+        <div id="pyPrompt" class="qbig" style="font-size:1.15rem;line-height:1.5;max-width:40ch;margin:0 auto">—</div>
+        <div class="choices" id="pyChoices"></div>
+        <div class="feedback" id="pyFb"></div>
+        <div class="tipbox" id="pyTip" style="display:none"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ LIFE SMARTS ============ -->
   <section id="life" class="view">
     <div class="topback"><button class="back" data-go="home">← Back to map</button></div>
@@ -472,6 +517,7 @@ const defaultState = () => ({
   maker: { done: [] },
   reading: { done: [], correct: 0, writing: {} },
   life: { correct: 0 },
+  python: { correct: 0 },
   daily: { date: "", math:false, french:false, explore:false, create:false, learnXP:0 }
 });
 
@@ -618,6 +664,7 @@ function go(id){
   if(id==="french") resetFrMenu();
   if(id==="reading") resetReadMenu();
   if(id==="life") resetLifeMenu();
+  if(id==="python") resetPyMenu();
   if(id==="chess") renderChessGate();
 }
 document.addEventListener("click", e=>{
@@ -639,6 +686,7 @@ function renderStats(){
   document.getElementById("p-maker").textContent = S.maker.done.length + " built";
   document.getElementById("p-read").textContent = S.reading.done.length + " read";
   document.getElementById("p-life").textContent = S.life.correct + " learned";
+  document.getElementById("p-python").textContent = S.python.correct + " learned";
   // chess: locked until enough learning points today
   const unlocked = chessUnlocked();
   const chessCard = document.querySelector(".land.l-chess");
@@ -724,6 +772,8 @@ const BADGES = [
   {id:"chess",  bi:"♟️", name:"Chess Cadet",   need:"All 4 chess lessons",test:s=>s.chess.done.length>=4},
   {id:"create", bi:"🎨", name:"Big Imagineer", need:"5 creative quests", test:s=>s.create.done.length>=5},
   {id:"life",   bi:"🧭", name:"Life Smarts",    need:"20 real-world Qs",  test:s=>s.life.correct>=20},
+  {id:"coder",  bi:"🐍", name:"Code Cadet",     need:"15 Python answers", test:s=>(s.python?s.python.correct:0)>=15},
+  {id:"coderpro",bi:"👾",name:"Python Pro",     need:"40 Python answers", test:s=>(s.python?s.python.correct:0)>=40},
   {id:"build",  bi:"🔌", name:"Maker",         need:"3 Pi projects",     test:s=>s.maker.done.length>=3},
   {id:"buildpro",bi:"🤖",name:"Robot Engineer",need:"6 Pi projects",    test:s=>s.maker.done.length>=6},
   {id:"streak", bi:"🔥", name:"On Fire",       need:"5-day streak",      test:s=>s.streak>=5},
@@ -1574,6 +1624,125 @@ function finishLife(){
 }
 
 /* ============================================================
+   PYTHON PLAYGROUND  (code quizzes: print, variables, input,
+   math and — the big one — IF / ELSE decisions)
+   ============================================================ */
+const PYTHON = [
+  {id:"ifelse", emo:"🔀", name:"If / Else", en:"Making choices in code", qs:[
+    {q:"What does the word if help a program do?", choices:["Make a choice / a decision","Print a picture","Nothing at all"], a:0, tip:"if lets the program decide: do THIS only when something is true."},
+    {code:"age = 8\nif age >= 8:\n    print(\"Big kid!\")\nelse:\n    print(\"Little kid\")", q:"What does this print?", choices:["Big kid!","Little kid","Both lines"], a:0, tip:"age is 8, and 8 >= 8 is true, so the if line runs and else is skipped."},
+    {q:"Which word runs when the if test is NOT true?", choices:["else","print","input"], a:0, tip:"else is the 'otherwise' branch — it runs only when the if was false."},
+    {q:"What must go right after an if test, before the next line?", choices:[": (a colon)","; (a semicolon)",". (a full stop)"], a:0, tip:"Python needs a colon, then the next lines are indented (spaced in)."},
+    {q:"The lines that belong INSIDE an if must be…", choices:["indented (spaced in)","in CAPITAL LETTERS","deleted"], a:0, tip:"Indenting (usually 4 spaces) tells Python 'these lines belong to the if'."},
+    {q:"What is elif short for?", choices:["else if — check another test","electric if","end if"], a:0, tip:"elif lets you check a second question if the first if was false."},
+    {code:"score = 10\nif score > 20:\n    print(\"Amazing\")\nelif score > 5:\n    print(\"Good job\")\nelse:\n    print(\"Try again\")", q:"What does this print?", choices:["Good job","Amazing","Try again"], a:0, tip:"10 is not more than 20, but it IS more than 5, so the elif line runs."},
+    {q:"In an if test, which sign means 'is equal to'?", choices:["==  (two equals)","=  (one equal)","=!"], a:0, tip:"One = puts a value in a box. Two == asks 'are these the same?'"},
+  ]},
+  {id:"print", emo:"📢", name:"Print & Output", en:"Showing words on screen", qs:[
+    {q:"What does print() do?", choices:["Shows words on the screen","Deletes your files","Turns off the computer"], a:0, tip:"print() displays whatever you put inside the brackets."},
+    {code:"print(\"Hello!\")", q:"What appears on the screen?", choices:["Hello!","\"Hello!\" with quotes","print"], a:0, tip:"The quotation marks tell Python where the text starts and ends — they don't show."},
+    {code:"print(2 + 3)", q:"What appears on the screen?", choices:["5","2 + 3","23"], a:0, tip:"No quotes around 2 + 3, so Python does the math first, then prints 5."},
+    {code:"print(\"2 + 3\")", q:"What appears on the screen?", choices:["2 + 3","5","23"], a:0, tip:"With quotes it stays as plain text, so it prints exactly 2 + 3."},
+    {q:"What goes around text you want to print?", choices:["Quotation marks","Nothing","A colon"], a:0, tip:"Text (a 'string') always needs quotes around it."},
+    {q:"How do you print two things at once, like print(\"Hi\", name)?", choices:["Separate them with a comma","Add a full stop","You can't"], a:0, tip:"A comma lets print show several things with a space between them."},
+  ]},
+  {id:"vars", emo:"📦", name:"Variables", en:"Boxes that hold values", qs:[
+    {q:"What is a variable?", choices:["A box that stores a value","A kind of loop","A colour"], a:0, tip:"A variable is a labelled box — you put a value in and use it later by name."},
+    {code:"name = \"Leo\"", q:"What is stored in name?", choices:["Leo","name","nothing"], a:0, tip:"The = sign puts the text Leo into the box called name."},
+    {code:"x = 5\nx = 10", q:"What is x now?", choices:["10","5","15"], a:0, tip:"The new value replaces the old one, so x becomes 10."},
+    {code:"a = 3\nb = 4\nprint(a + b)", q:"What does this print?", choices:["7","34","ab"], a:0, tip:"a holds 3 and b holds 4, so a + b is 7."},
+    {q:"Which is a good name for a variable that holds someone's age?", choices:["age","123","if"], a:0, tip:"Names should describe what's inside, can't start with a number, and can't be a Python keyword like if."},
+    {q:"Are Age and age the same variable in Python?", choices:["No — capital letters matter","Yes, always","Only on Mondays"], a:0, tip:"Python is case-sensitive, so Age and age are two different boxes."},
+  ]},
+  {id:"input", emo:"⌨️", name:"Input", en:"Asking the user to type", qs:[
+    {q:"What does input() do?", choices:["Asks the user to type something","Draws a picture","Closes the program"], a:0, tip:"input() waits for the person to type and press Enter."},
+    {q:"What kind of value does input() always give back?", choices:["Text (a string)","A number","A colour"], a:0, tip:"Even when you type digits, input gives you text until you change it."},
+    {code:"age = int(input(\"Age? \"))", q:"Why is int() wrapped around input here?", choices:["To turn the typed text into a number","To make it louder","To delete it"], a:0, tip:"int() changes text like \"8\" into the number 8 so you can do math."},
+    {code:"name = input(\"Name? \")", q:"Where does the typed answer go?", choices:["Into the box called name","Into print","Nowhere"], a:0, tip:"The answer is stored in the variable name so you can use it later."},
+    {q:"When you run input(\"Name? \"), what shows on the screen first?", choices:["Name?","input","nothing"], a:0, tip:"The text inside the brackets is the question shown to the user."},
+    {q:"You typed 5 into input() and it won't add. Why?", choices:["It's text, not a number yet","5 is too big","Python is broken"], a:0, tip:"Wrap it in int() first: int(input(...)) — then it's a real number."},
+  ]},
+  {id:"math", emo:"➗", name:"Math in Code", en:"Doing sums with symbols", qs:[
+    {q:"What does the * symbol do in Python?", choices:["Multiply","Add","Draw a star"], a:0, tip:"* means times. So 3 * 4 is 12."},
+    {code:"print(10 / 2)", q:"What does this print?", choices:["5.0","5 times","102"], a:0, tip:"/ divides. 10 divided by 2 is 5 (Python shows it as 5.0)."},
+    {code:"print(7 - 2)", q:"What does this print?", choices:["5","72","9"], a:0, tip:"- subtracts: 7 take away 2 is 5."},
+    {q:"Which symbol adds two numbers?", choices:["+","x","and"], a:0, tip:"+ is plus. In code we use * for times, not x."},
+    {code:"print(7 % 2)", q:"What does % (modulo) give you here?", choices:["1 — the remainder","3.5","72"], a:0, tip:"% gives the leftover. 7 shared into 2s leaves 1 over."},
+    {code:"print(2 * 3 + 1)", q:"What does this print?", choices:["7","8","12"], a:0, tip:"Python multiplies first (2 * 3 = 6), then adds 1, so 7."},
+  ]},
+];
+let pyState=null;
+function resetPyMenu(){
+  document.getElementById("pyMenu").style.display="";
+  document.getElementById("pyPlay").style.display="none";
+  document.getElementById("pyTopics").innerHTML = PYTHON.map(t=>
+    `<button class="skill" data-topic="${t.id}"><span class="emo">${t.emo}</span><b>${t.name}</b><span>${t.en}</span></button>`).join("");
+}
+document.getElementById("pyTopics").addEventListener("click",e=>{
+  const t=e.target.closest("[data-topic]"); if(t) startPy(t.dataset.topic);
+});
+document.getElementById("pyQuit").addEventListener("click", resetPyMenu);
+function startPy(id){
+  const topic=PYTHON.find(t=>t.id===id);
+  const pool=[...topic.qs].sort(()=>Math.random()-0.5).slice(0,5);
+  pyState={topic, pool, n:0, correct:0};
+  document.getElementById("pyMenu").style.display="none";
+  document.getElementById("pyPlay").style.display="";
+  nextPyQ();
+}
+function nextPyQ(){
+  if(pyState.n>=pyState.pool.length){ finishPy(); return; }
+  const q=pyState.pool[pyState.n]; pyState.q=q;
+  document.getElementById("pyN").textContent=pyState.n+1;
+  // Build the prompt safely: an optional code box (monospace, keeps line breaks) + the question.
+  const pp=document.getElementById("pyPrompt");
+  pp.innerHTML="";
+  if(q.code){
+    const pre=document.createElement("pre");
+    pre.style.cssText="text-align:left;background:#0f172a;color:#e2e8f0;padding:12px 14px;border-radius:10px;font-family:'Consolas','Courier New',monospace;font-size:.95rem;line-height:1.45;overflow-x:auto;margin:0 0 12px;white-space:pre";
+    pre.textContent=q.code;
+    pp.appendChild(pre);
+  }
+  const qd=document.createElement("div");
+  qd.textContent=q.q; qd.style.cursor="pointer"; qd.title="🔊 Tap to hear the question";
+  qd.onclick=()=>Speech.speak(q.q,"en");
+  pp.appendChild(qd);
+  Speech.speak(q.q,"en");
+  document.getElementById("pyTip").style.display="none";
+  const fb=document.getElementById("pyFb"); fb.textContent=""; fb.className="feedback";
+  // Build choices with textContent so code symbols (== > % etc.) are always safe.
+  const box=document.getElementById("pyChoices"); box.innerHTML="";
+  q.choices.forEach((c,ci)=>{
+    const b=document.createElement("button");
+    b.className="opt"; b.dataset.ci=ci; b.textContent=c;
+    b.addEventListener("click",()=>checkPy(b));
+    box.appendChild(b);
+  });
+}
+function checkPy(btn){
+  const q=pyState.q;
+  document.querySelectorAll("#pyChoices .opt").forEach((b,ci)=>{ b.disabled=true; if(ci===q.a) b.classList.add("right"); });
+  const fb=document.getElementById("pyFb");
+  if(Number(btn.dataset.ci)===q.a){ Sound.correct(); pyState.correct++; S.python.correct++; addXP(3); save(); renderStats();
+    fb.textContent=pick(["Correct! ⭐","Yes! 🎉","Nice code! 💻","Nailed it! 💪"]); fb.className="feedback ok"; }
+  else { Sound.wrong(); btn.classList.add("wrong"); fb.textContent="Good try!"; fb.className="feedback no"; }
+  if(q.tip){ const tip=document.getElementById("pyTip"); tip.innerHTML="💡 <b>Good to know:</b> "+q.tip; tip.style.display=""; }
+  pyState.n++;
+  const delay=q.tip?2800:1300;
+  setTimeout(nextPyQ, delay);
+}
+function finishPy(){
+  Sound.reward();
+  const c=pyState.correct, total=pyState.pool.length;
+  document.getElementById("pyPrompt").textContent = c===total?"Brilliant coder! 🏆":(c>=3?"Well done! 🌟":"Keep coding! 💪");
+  document.getElementById("pyChoices").innerHTML=`<button class="btn big" id="pyAgain" style="grid-column:1/-1">Play again 🔁</button>`;
+  document.getElementById("pyTip").style.display="none";
+  const fb=document.getElementById("pyFb"); fb.textContent=`You got ${c} out of ${total} right!`; fb.className="feedback ok";
+  document.getElementById("pyAgain").addEventListener("click",()=>startPy(pyState.topic.id));
+  markDaily("create");
+}
+
+/* ============================================================
    SHARED: toggle done
    ============================================================ */
 function toggleDone(land, id, xp, rerender, dailyKey){
@@ -1623,6 +1792,7 @@ resetMathMenu();
 resetFrMenu();
 resetReadMenu();
 resetLifeMenu();
+resetPyMenu();
 </script>
 </body>
 </html>

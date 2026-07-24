@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Power-Up 🐍</title>
+<style>
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  :root{
+    --ink:#0f2033; --blue:#2563eb; --cyan:#0891b2; --green:#16a34a;
+    --amber:#d97706; --pink:#db2777; --soft:#e7f0ff; --card:#fff; --code:#0f172a;
+  }
+  body{ font-family:'Trebuchet MS',system-ui,sans-serif; color:var(--ink); line-height:1.55;
+    background:linear-gradient(160deg,#eaf7ee,#e6f2ff); padding:0 0 60px; }
+  header{ text-align:center; padding:40px 18px 32px; color:#fff;
+    background:linear-gradient(135deg,#16a34a,#0891b2); border-radius:0 0 34px 34px;
+    box-shadow:0 10px 30px rgba(8,145,178,.3); }
+  header h1{ font-size:2.2rem; } header p{ font-size:1.12rem; margin-top:8px; opacity:.96; }
+  .badge{ display:inline-block; background:rgba(255,255,255,.2); padding:5px 16px; border-radius:999px;
+    font-weight:bold; margin-bottom:12px; letter-spacing:.5px; }
+  .wrap{ max-width:820px; margin:0 auto; padding:0 16px; }
+  .card{ background:var(--card); border-radius:22px; padding:26px 24px; margin:22px 0;
+    box-shadow:0 8px 22px rgba(20,80,60,.10); border:3px solid #e0f0e6; }
+  h2{ color:var(--green); font-size:1.5rem; margin-bottom:10px; display:flex; gap:10px; align-items:center; }
+  h3{ color:var(--cyan); margin:16px 0 6px; }
+  p{ font-size:1.06rem; margin:8px 0; }
+  .tag{ display:inline-block; background:#e8f6ee; color:var(--green); padding:3px 12px;
+    border-radius:999px; font-size:.85rem; font-weight:bold; margin-bottom:6px; }
+  .big{ font-size:1.2rem; text-align:center; font-weight:bold; color:var(--green); margin:12px 0; }
+  .tip{ background:#fffbeb; border-left:6px solid var(--amber); padding:10px 14px; border-radius:10px; margin:12px 0; }
+  pre{ background:var(--code); color:#e2e8f0; border-radius:14px; padding:16px 18px; overflow-x:auto;
+    font-family:'Consolas','SF Mono',monospace; font-size:.95rem; line-height:1.5; margin:10px 0; }
+  .kw{ color:#c792ea; } .str{ color:#a5e075; } .fn{ color:#82aaff; } .num{ color:#f78c6c; } .cm{ color:#7c8aa0; font-style:italic; }
+  .out{ background:#0b1220; color:#7CFC9B; border-radius:12px; padding:12px 16px; font-family:'Consolas',monospace;
+    font-size:.95rem; white-space:pre-wrap; margin-top:8px; border-left:4px solid var(--green); }
+  .bad{ border-left-color:var(--pink); color:#ffb4c8; }
+  /* try-it consoles */
+  .console{ background:#f0f9ff; border:3px dashed var(--cyan); border-radius:18px; padding:18px; }
+  .console label{ display:block; font-weight:bold; margin:8px 0 2px; }
+  .console input{ font-family:inherit; font-size:1.05rem; padding:8px 12px; border:2px solid #cfe6f5;
+    border-radius:10px; width:160px; }
+  .runbtn{ background:var(--green); color:#fff; border:none; font-family:inherit; cursor:pointer;
+    font-size:1.05rem; padding:10px 22px; border-radius:999px; box-shadow:0 4px 0 #12803a; margin-top:12px; }
+  .runbtn:active{ transform:translateY(2px); box-shadow:0 2px 0 #12803a; }
+  .screen{ background:#0b1220; color:#7CFC9B; border-radius:12px; padding:14px 16px; font-family:'Consolas',monospace;
+    font-size:1rem; white-space:pre-wrap; margin-top:14px; min-height:40px; }
+  /* program list */
+  .prog{ border:2px solid #d7ecdd; border-radius:16px; padding:14px 16px; margin:12px 0; background:#fbfffc; }
+  .prog h4{ font-size:1.12rem; color:var(--blue); display:flex; align-items:center; gap:8px; }
+  .prog .file{ font-family:'Consolas',monospace; background:#eef4ff; color:var(--blue); padding:2px 8px;
+    border-radius:6px; font-size:.85rem; }
+  .prog .what{ font-size:.98rem; color:#41586e; margin-top:4px; }
+  ol{ margin:8px 0 8px 22px; } ol li{ margin:6px 0; }
+  .steps li{ font-size:1.05rem; }
+  footer{ text-align:center; color:#5b7085; font-size:.95rem; margin-top:30px; padding:0 20px; }
+  footer b{ color:var(--ink); }
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">PYTHON • WEEK 5</div>
+  <h1>Python Power-Up 🐍</h1>
+  <p>You've left the blocks behind — now you type real code, like the pros. Let's make it click.</p>
+</header>
+
+<div class="wrap">
+
+  <div class="card">
+    <span class="tag">WHAT CHANGED</span>
+    <h2>From Scratch blocks to real code</h2>
+    <p>In Scratch you <b>snapped blocks</b> together. In <b>Python</b> you <b>type</b> the instructions instead. Same idea — a list of steps the computer follows from <b>top to bottom</b> — just written as words. Python is a real language that grown-up engineers use to build games, apps, and even the tech behind AI.</p>
+    <p class="big">You're not playing at coding anymore. You're actually coding. 💪</p>
+  </div>
+
+  <div class="card">
+    <span class="tag">SKILL 1</span>
+    <h2>🗣️ print( ) — make the computer talk</h2>
+    <p><code>print</code> shows a message on the screen. The words go inside quotes.</p>
+    <pre><span class="fn">print</span>(<span class="str">"Hello! I am learning Python."</span>)</pre>
+    <div class="out">Hello! I am learning Python.</div>
+  </div>
+
+  <div class="card">
+    <span class="tag">SKILL 2</span>
+    <h2>📦 Variables — boxes that remember</h2>
+    <p>A <b>variable</b> is a labelled box that holds a value so you can use it later. You make one with an <b>=</b> sign.</p>
+    <pre><span class="cm"># put values into boxes named score and name</span>
+score = <span class="num">100</span>
+name  = <span class="str">"Alex"</span>
+<span class="fn">print</span>(name)
+<span class="fn">print</span>(score)</pre>
+    <div class="out">Alex
+100</div>
+    <p>Now the computer <i>remembers</i> those values. You can change them any time.</p>
+  </div>
+
+  <div class="card">
+    <span class="tag">SKILL 3 — THE BIG ONE</span>
+    <h2>⌨️ input( ) and the sneaky trap</h2>
+    <p><code>input</code> asks the user to type something. Here's the trap that fools almost everyone:</p>
+    <p class="big">input() ALWAYS gives you text — even when you type numbers!</p>
+    <p>So if you try to add two inputs, Python glues the text together instead of adding:</p>
+    <pre>a = <span class="fn">input</span>(<span class="str">"First number: "</span>)   <span class="cm"># you type 5</span>
+b = <span class="fn">input</span>(<span class="str">"Second number: "</span>)  <span class="cm"># you type 5</span>
+<span class="fn">print</span>(a + b)</pre>
+    <div class="out bad">55        &lt;-- oops! it stuck "5" and "5" together, not 5 + 5</div>
+    <p>The fix: wrap the input in <code>int( )</code> to turn the text into a real <b>number</b> first. 🔑</p>
+    <pre>a = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"First number: "</span>))   <span class="cm"># now it's a number</span>
+b = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Second number: "</span>))
+<span class="fn">print</span>(a + b)</pre>
+    <div class="out">10        &lt;-- yes! real math now</div>
+    <div class="tip">💡 Remember this rule and you'll never be stuck on a calculator program: <b>numbers from input() need int() around them.</b></div>
+  </div>
+
+  <div class="card">
+    <span class="tag">SKILL 4</span>
+    <h2>➕ The math operators</h2>
+    <p>Python does arithmetic with these symbols:</p>
+    <pre>+   add          <span class="cm">7 + 2  = 9</span>
+-   subtract     <span class="cm">7 - 2  = 5</span>
+*   multiply     <span class="cm">7 * 2  = 14</span>
+/   divide       <span class="cm">7 / 2  = 3.5</span>
+//  divide, whole number only   <span class="cm">7 // 2 = 3</span>
+%   remainder (what's left over) <span class="cm">7 % 2  = 1</span></pre>
+    <div class="tip">🍕 See <code>//</code> and <code>%</code>? That's the exact <b>"each gets…"</b> and <b>"leftover…"</b> from your division homework — now the computer does it for you!</div>
+  </div>
+
+  <div class="card">
+    <span class="tag">SKILL 5</span>
+    <h2>✨ f-strings — put a value inside a sentence</h2>
+    <p>Start the quotes with <b>f</b>, then drop a variable inside <b>{ }</b>. Super handy.</p>
+    <pre>name = <span class="str">"Alex"</span>
+age  = <span class="num">9</span>
+<span class="fn">print</span>(<span class="str">f"Hi {name}, next year you'll be {age + 1}!"</span>)</pre>
+    <div class="out">Hi Alex, next year you'll be 10!</div>
+  </div>
+
+  <!-- Try it -->
+  <div class="card">
+    <span class="tag">TRY IT RIGHT HERE</span>
+    <h2>🎮 See your programs run</h2>
+    <p>These work just like the real Python programs in your folder. Type a number and press Run!</p>
+
+    <h3>⏳ Age-in-Time Machine</h3>
+    <div class="console">
+      <label for="ageIn">How many years old are you?</label>
+      <input id="ageIn" type="number" value="9" min="1" max="120">
+      <div><button class="runbtn" onclick="runAge()">▶ Run</button></div>
+      <div class="screen" id="ageOut">Your answer will appear here…</div>
+    </div>
+
+    <h3 style="margin-top:20px">🍕 Pizza Party Divider</h3>
+    <div class="console">
+      <label for="slicesIn">How many pizza slices?</label>
+      <input id="slicesIn" type="number" value="13" min="1">
+      <label for="friendsIn">How many friends sharing?</label>
+      <input id="friendsIn" type="number" value="4" min="1">
+      <div><button class="runbtn" onclick="runPizza()">▶ Run</button></div>
+      <div class="screen" id="pizzaOut">Your answer will appear here…</div>
+    </div>
+  </div>
+
+  <!-- Your programs -->
+  <div class="card">
+    <span class="tag">YOUR PROGRAMS</span>
+    <h2>📂 5 programs to run and change</h2>
+    <p>Open these from the <code>python</code> folder. Run one, then try the little <b>"TRY THIS"</b> ideas written at the bottom of each file.</p>
+
+    <div class="prog"><h4>🧮 Hello Calculator <span class="file">1_hello_calculator.py</span></h4>
+      <div class="what">The one you built in class — enter two numbers, get add, subtract, multiply and divide all at once. Start here.</div></div>
+    <div class="prog"><h4>💰 Pocket Money Planner <span class="file">2_pocket_money.py</span></h4>
+      <div class="what">Type what you want to buy and your weekly pocket money — it tells you how many weeks to save. Uses f-strings.</div></div>
+    <div class="prog"><h4>⏳ Age-in-Time Machine <span class="file">3_age_in_time.py</span></h4>
+      <div class="what">Turns your age into days, hours, minutes and millions of seconds. Great for showing off.</div></div>
+    <div class="prog"><h4>🍕 Pizza Party Divider <span class="file">4_pizza_party.py</span></h4>
+      <div class="what">Shares slices fairly and shows leftovers — the same division and remainder you do in math.</div></div>
+    <div class="prog"><h4>🚀 Super Calculator <span class="file">5_super_calculator.py</span></h4>
+      <div class="what"><b>Level-up:</b> YOU pick + − × or ÷ and it does that one. Introduces <code>if / elif</code> choices.</div></div>
+  </div>
+
+  <!-- How to run -->
+  <div class="card">
+    <span class="tag">HOW TO RUN THEM</span>
+    <h2>▶️ Running a Python program</h2>
+    <ol class="steps">
+      <li>Open the program the same way your teacher showed you (usually <b>IDLE</b>, <b>Thonny</b>, or <b>VS Code</b>).</li>
+      <li>Open the <code>.py</code> file from the <code>python</code> folder.</li>
+      <li>Press <b>Run</b> (in IDLE/Thonny that's the <b>F5</b> key).</li>
+      <li>Type your answers in the black output window when it asks, and press <b>Enter</b>.</li>
+    </ol>
+    <div class="tip">💡 No tools installed yet? You can also run Python free in a web browser at <b>python.org</b> → "Launch Interactive Shell", or your teacher's class website. The programs work the same.</div>
+  </div>
+
+  <footer>
+    You're writing real code now — keep going! 🐍<br>
+    <span style="font-size:.88rem">For grown-ups: this reinforces today's Week-5 lesson (print, input, variables, arithmetic). The key concept to check he understands is <b>int(input(...))</b> — that inputs are text until you convert them. Programs are kept emoji-free in their output so they never crash on Windows terminals; run them in IDLE/Thonny for the friendliest experience.</span>
+  </footer>
+</div>
+
+<script>
+function runAge(){
+  const age = parseInt(document.getElementById('ageIn').value)||0;
+  const days = age*365, hours = days*24, minutes = hours*60, seconds = minutes*60;
+  document.getElementById('ageOut').textContent =
+    `Whoa! Here is your age measured different ways:\n`+
+    `About ${days.toLocaleString()} days old\n`+
+    `About ${hours.toLocaleString()} hours old\n`+
+    `About ${minutes.toLocaleString()} minutes old\n`+
+    `About ${seconds.toLocaleString()} seconds old!`;
+}
+function runPizza(){
+  const slices = parseInt(document.getElementById('slicesIn').value)||0;
+  const friends = parseInt(document.getElementById('friendsIn').value)||1;
+  const each = Math.floor(slices/friends), left = slices%friends;
+  let msg = `Each friend gets ${each} slices.\nThere are ${left} slices left over.\n`;
+  msg += left===0 ? "Perfect sharing -- nothing left!" : "Someone gets seconds! Who will it be?";
+  document.getElementById('pizzaOut').textContent = msg;
+}
+runAge(); runPizza();
+</script>
+</body>
+</html>
