@@ -263,7 +263,7 @@
       <button class="land l-chess" data-go="chess"><span class="ic">♟️</span><span class="pill" id="p-chess">0 done</span><h3>Chess Castle</h3><p>Learn to play, step by step</p></button>
       <button class="land l-create" data-go="create"><span class="ic">🎨</span><span class="pill" id="p-create">0 done</span><h3>Creator Studio</h3><p>Invent, build & imagine challenges</p></button>
       <button class="land l-maker" data-go="maker"><span class="ic">🤖</span><span class="pill" id="p-maker">0 done</span><h3>Maker Garage</h3><p>Build real projects with your Raspberry Pi</p></button>
-      <button class="land l-python" data-go="python"><span class="ic">🐍</span><span class="pill" id="p-python">0 learned</span><h3>Python Playground</h3><p>Code quizzes: print, input, variables & math</p></button>
+      <button class="land l-python" data-go="python"><span class="ic">🐍</span><span class="pill" id="p-python">0 learned</span><h3>Python Playground</h3><p>Code quizzes: if/else, loops, lists, variables & more</p></button>
       <button class="land l-life" data-go="life"><span class="ic">🧭</span><span class="pill" id="p-life">0 learned</span><h3>Life Smarts</h3><p>Real-world know-how: money, time, safety</p></button>
     </div>
 
@@ -438,7 +438,7 @@
   <!-- ============ PYTHON PLAYGROUND ============ -->
   <section id="python" class="view">
     <div class="topback"><button class="back" data-go="home">← Back to map</button></div>
-    <div class="vhead"><div class="vic" style="background:#0E7490">🐍</div><div><h2>Python Playground</h2><p>Quiz yourself on real Python code: print, variables, input & math. +3 XP per right answer.</p></div></div>
+    <div class="vhead"><div class="vic" style="background:#0E7490">🐍</div><div><h2>Python Playground</h2><p>Quiz yourself on real Python code: if/else, loops, lists, booleans, text, variables & math. +3 XP per right answer.</p></div></div>
     <div class="parentbox">🐍 <b>Want the full lesson?</b> Open <a href="python/python-power-up.html">Python Power-Up</a> for the guide plus 5 programs he can actually run.</div>
     <div class="panel" id="pyMenu">
       <p class="eyebrow">Choose a coding topic</p>
@@ -1637,6 +1637,52 @@ const PYTHON = [
     {q:"What is elif short for?", choices:["else if — check another test","electric if","end if"], a:0, tip:"elif lets you check a second question if the first if was false."},
     {code:"score = 10\nif score > 20:\n    print(\"Amazing\")\nelif score > 5:\n    print(\"Good job\")\nelse:\n    print(\"Try again\")", q:"What does this print?", choices:["Good job","Amazing","Try again"], a:0, tip:"10 is not more than 20, but it IS more than 5, so the elif line runs."},
     {q:"In an if test, which sign means 'is equal to'?", choices:["==  (two equals)","=  (one equal)","=!"], a:0, tip:"One = puts a value in a box. Two == asks 'are these the same?'"},
+    {code:"temp = 30\nif temp > 25:\n    print(\"Hot\")\nelse:\n    print(\"Cool\")", q:"What does this print?", choices:["Hot","Cool","Warm"], a:0, tip:"30 is bigger than 25, so the if line runs and prints Hot."},
+    {q:"Which sign means 'greater than'?", choices:[">","<","="], a:0, tip:"The open, wide side of > points at the BIGGER number."},
+    {q:"Which sign means 'less than or equal to'?", choices:["<=",">=","=<"], a:0, tip:"<= is true when the left side is smaller OR the same."},
+    {q:"Which sign checks 'is NOT equal to'?", choices:["!=","=!","><"], a:0, tip:"!= means 'these two are different'."},
+    {code:"age = 10\nif age > 5 and age < 12:\n    print(\"Just right\")\nelse:\n    print(\"Nope\")", q:"What does this print?", choices:["Just right","Nope","Error"], a:0, tip:"'and' needs BOTH parts true. 10 is more than 5 AND less than 12, so both are true."},
+    {code:"day = \"Sat\"\nif day == \"Sat\" or day == \"Sun\":\n    print(\"Weekend!\")\nelse:\n    print(\"School day\")", q:"What does this print?", choices:["Weekend!","School day","Sat"], a:0, tip:"'or' is true if EITHER side is true. day is \"Sat\", so it's the weekend."},
+    {code:"mark = 55\nif mark >= 90:\n    print(\"A\")\nelif mark >= 50:\n    print(\"B\")\nelse:\n    print(\"Keep trying\")", q:"What does this print?", choices:["B","A","Keep trying"], a:0, tip:"55 isn't 90 or more, but it IS 50 or more, so the elif gives B."},
+    {q:"What does not do in  if not raining:", choices:["Flips true and false around","Deletes the if","Prints the word not"], a:0, tip:"not raining is true when raining is False — so it runs when it's NOT raining."},
+    {code:"x = 5\nif x == 5:\n    print(\"Five!\")", q:"What does this print?", choices:["Five!","nothing","Error"], a:0, tip:"== checks if x is 5. It really is, so it prints Five!"},
+    {q:"How many else parts can a single if have?", choices:["At most one","As many as you want","Exactly three"], a:0, tip:"One if gets at most one else — but you can put many elif lines in between."},
+    {code:"lives = 0\nif lives > 0:\n    print(\"Play on\")\nelse:\n    print(\"Game over\")", q:"What does this print?", choices:["Game over","Play on","Both"], a:0, tip:"0 is not greater than 0, so the if is false and the else line runs."},
+  ]},
+  {id:"bools", emo:"✅", name:"True or False", en:"Yes/no questions in code", qs:[
+    {q:"What are the only two boolean values in Python?", choices:["True and False","Yes and No","On and Off"], a:0, tip:"They start with a capital letter: True and False."},
+    {code:"print(5 > 3)", q:"What does this print?", choices:["True","False","5"], a:0, tip:"5 really is bigger than 3, so the answer is True."},
+    {code:"print(4 == 4)", q:"What does this print?", choices:["True","False","8"], a:0, tip:"== asks 'are they the same?' 4 and 4 are, so True."},
+    {code:"print(5 != 5)", q:"What does this print?", choices:["False","True","0"], a:0, tip:"!= means 'different'. 5 and 5 are the same, so it's False."},
+    {code:"print(True and False)", q:"What does this print?", choices:["False","True","Maybe"], a:0, tip:"'and' is only True when BOTH sides are True. One is False, so False."},
+    {code:"print(True or False)", q:"What does this print?", choices:["True","False","Both"], a:0, tip:"'or' is True when EITHER side is True."},
+    {code:"print(not True)", q:"What does this print?", choices:["False","True","not"], a:0, tip:"'not' flips it: not True becomes False."},
+  ]},
+  {id:"loops", emo:"🔁", name:"Loops", en:"Repeating things", qs:[
+    {q:"What is a loop for?", choices:["Doing something over and over","Storing a name","Printing once"], a:0, tip:"A loop repeats code so you don't have to type it many times."},
+    {code:"for i in range(3):\n    print(\"Hi\")", q:"How many times does Hi print?", choices:["3 times","1 time","0 times"], a:0, tip:"range(3) makes the loop run 3 times."},
+    {code:"for i in range(3):\n    print(i)", q:"What numbers print?", choices:["0, then 1, then 2","1, then 2, then 3","3 times Hi"], a:0, tip:"range counts from 0, so you get 0, 1, 2."},
+    {q:"How many numbers does range(5) give you?", choices:["5 (0,1,2,3,4)","6","4"], a:0, tip:"range(5) starts at 0 and stops before 5, so that's five numbers."},
+    {code:"total = 0\nfor n in [2, 3, 5]:\n    total = total + n\nprint(total)", q:"What does this print?", choices:["10","235","3"], a:0, tip:"It adds 2 + 3 + 5 as it loops, ending at 10."},
+    {code:"count = 1\nwhile count <= 3:\n    print(count)\n    count = count + 1", q:"What numbers print?", choices:["1, 2, 3","3, 2, 1","forever"], a:0, tip:"A while loop repeats as long as its test is true. Here: 1, 2, 3."},
+    {q:"What can make a while loop run FOREVER by mistake?", choices:["Never changing the test value","Adding a comment","Using print"], a:0, tip:"If the condition never becomes false, the loop never stops. Always update the counter!"},
+    {code:"for letter in \"cat\":\n    print(letter)", q:"How many letters print?", choices:["3 (c, a, t)","1","0"], a:0, tip:"A for loop can walk through each letter of a word."},
+  ]},
+  {id:"lists", emo:"📋", name:"Lists", en:"Holding many things at once", qs:[
+    {q:"What is a list in Python?", choices:["A group of items in one box","A single number","A colour"], a:0, tip:"A list holds many values, written in [ ] and split by commas."},
+    {code:"fruits = [\"apple\", \"banana\", \"pear\"]\nprint(fruits[0])", q:"What does this print?", choices:["apple","banana","pear"], a:0, tip:"Counting starts at 0, so fruits[0] is the FIRST item, apple."},
+    {code:"fruits = [\"apple\", \"banana\", \"pear\"]\nprint(fruits[1])", q:"What does this print?", choices:["banana","apple","pear"], a:0, tip:"fruits[1] is the second item, because 0 was the first."},
+    {code:"nums = [10, 20, 30]\nprint(len(nums))", q:"What does this print?", choices:["3","30","60"], a:0, tip:"len() counts how many items are in the list — here, 3."},
+    {q:"How do you add a new item to a list called pets?", choices:["pets.append(item)","pets.add(item)","pets.more(item)"], a:0, tip:".append() sticks a new item onto the end of the list."},
+    {code:"scores = [5, 8, 2]\nprint(scores[0] + scores[2])", q:"What does this print?", choices:["7","10","13"], a:0, tip:"scores[0] is 5 and scores[2] is 2, so 5 + 2 = 7."},
+  ]},
+  {id:"strings", emo:"🔤", name:"Text & f-strings", en:"Playing with words", qs:[
+    {q:"What is a 'string' in Python?", choices:["Some text in quotes","A kind of number","A loop"], a:0, tip:"A string is text, always written inside quotes like \"hello\"."},
+    {code:"print(\"sun\" + \"shine\")", q:"What does this print?", choices:["sunshine","sun shine","sun+shine"], a:0, tip:"+ joins two strings together with no space in between."},
+    {code:"print(len(\"dog\"))", q:"What does this print?", choices:["3","dog","1"], a:0, tip:"len() counts the letters: d, o, g — that's 3."},
+    {code:"name = \"Leo\"\nprint(f\"Hi {name}!\")", q:"What does this print?", choices:["Hi Leo!","Hi {name}!","Hi name!"], a:0, tip:"An f-string swaps {name} for what's inside the box: Leo."},
+    {q:"What is special about an f-string (f\"...\")?", choices:["You can drop values inside { }","It makes text bigger","It deletes text"], a:0, tip:"The f lets you put variables straight into a sentence using { }."},
+    {code:"print(\"wow\".upper())", q:"What does this print?", choices:["WOW","wow","Wow"], a:0, tip:".upper() turns every letter into a CAPITAL letter."},
   ]},
   {id:"print", emo:"📢", name:"Print & Output", en:"Showing words on screen", qs:[
     {q:"What does print() do?", choices:["Shows words on the screen","Deletes your files","Turns off the computer"], a:0, tip:"print() displays whatever you put inside the brackets."},
