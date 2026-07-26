@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Français — Prêt pour la 3e année 🇫🇷</title>
+<style>
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  :root{
+    --ink:#1a2233; --blue:#2563eb; --violet:#7c3aed; --rose:#e11d48;
+    --green:#16a34a; --amber:#d97706; --card:#fff;
+  }
+  body{ font-family:'Trebuchet MS',system-ui,sans-serif; color:var(--ink); line-height:1.55;
+    background:linear-gradient(160deg,#eef2ff,#fdf2f8); padding:0 0 60px; }
+  header{ text-align:center; padding:38px 18px 30px; color:#fff;
+    background:linear-gradient(135deg,#2563eb,#7c3aed); border-radius:0 0 34px 34px;
+    box-shadow:0 10px 30px rgba(124,58,237,.28); }
+  header h1{ font-size:2.1rem; } header p{ font-size:1.1rem; margin-top:8px; opacity:.96; }
+  .badge{ display:inline-block; background:rgba(255,255,255,.2); padding:5px 16px; border-radius:999px;
+    font-weight:bold; margin-bottom:12px; letter-spacing:.5px; }
+  .wrap{ max-width:860px; margin:0 auto; padding:0 16px; }
+  .card{ background:var(--card); border-radius:22px; padding:24px 22px; margin:20px 0;
+    box-shadow:0 8px 22px rgba(40,40,90,.09); border:3px solid #e6e9ff; }
+  h2{ color:var(--violet); font-size:1.4rem; margin-bottom:8px; display:flex; gap:10px; align-items:center; }
+  h3{ color:var(--blue); margin:16px 0 6px; }
+  p{ font-size:1.05rem; margin:8px 0; }
+  .tag{ display:inline-block; background:#ede9fe; color:var(--violet); padding:3px 12px;
+    border-radius:999px; font-size:.82rem; font-weight:bold; margin-bottom:6px; letter-spacing:.3px; }
+  .tip{ background:#fffbeb; border-left:6px solid var(--amber); padding:10px 14px; border-radius:10px; margin:12px 0; font-size:1rem; }
+  .grown{ background:#f0fdf4; border-left:6px solid var(--green); padding:10px 14px; border-radius:10px; margin:12px 0; font-size:.95rem; }
+  table{ border-collapse:collapse; width:100%; margin:10px 0; font-size:1rem; }
+  th,td{ border:1px solid #e2e5f5; padding:7px 10px; text-align:left; }
+  th{ background:#eef2ff; color:var(--blue); }
+  td b{ color:var(--rose); }
+  .ex{ background:#f5f3ff; border-radius:10px; padding:4px 8px; font-style:italic; color:#5b21b6; }
+  ul{ margin:8px 0 8px 22px; } li{ margin:5px 0; }
+  /* quiz */
+  .skillgrid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; margin-top:12px; }
+  .skill{ background:linear-gradient(140deg,#eef2ff,#fdf2f8); border:2px solid #e6e9ff; border-radius:16px;
+    padding:12px 10px; text-align:center; cursor:pointer; font-family:inherit; transition:transform .1s; }
+  .skill:hover{ transform:translateY(-2px); border-color:var(--violet); }
+  .skill .emo{ font-size:1.7rem; display:block; } .skill b{ display:block; margin:4px 0 2px; color:var(--ink); font-size:.98rem; }
+  .skill span.d{ font-size:.8rem; color:#6b7280; }
+  #play{ display:none; }
+  .qbar{ display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+  .chip{ background:#ede9fe; color:var(--violet); padding:4px 12px; border-radius:999px; font-weight:bold; font-size:.9rem; }
+  .ghost{ background:#fff; border:2px solid #d6d9f0; color:var(--violet); border-radius:999px; padding:6px 14px; cursor:pointer; font-family:inherit; font-weight:bold; }
+  #prompt{ font-size:1.2rem; font-weight:bold; text-align:center; margin:10px auto 16px; max-width:44ch; }
+  .choices{ display:grid; gap:10px; }
+  .opt{ background:#fff; border:2px solid #dfe3f6; border-radius:14px; padding:13px 16px; font-size:1.08rem;
+    font-family:inherit; cursor:pointer; text-align:center; transition:all .12s; }
+  .opt:hover{ border-color:var(--violet); }
+  .opt.right{ background:#dcfce7; border-color:var(--green); color:#166534; font-weight:bold; }
+  .opt.wrong{ background:#ffe4e6; border-color:var(--rose); color:#9f1239; }
+  .fb{ text-align:center; font-weight:bold; min-height:26px; margin-top:12px; }
+  .fb.ok{ color:var(--green); } .fb.no{ color:var(--rose); }
+  .tipbox{ background:#fffbeb; border-left:6px solid var(--amber); padding:10px 14px; border-radius:10px; margin-top:10px; display:none; }
+  .big{ background:var(--violet); color:#fff; border:none; font-family:inherit; cursor:pointer; font-size:1.05rem;
+    padding:12px 24px; border-radius:999px; box-shadow:0 4px 0 #5b21b6; }
+  .big:active{ transform:translateY(2px); box-shadow:0 2px 0 #5b21b6; }
+  footer{ text-align:center; color:#6b7280; font-size:.95rem; margin-top:28px; padding:0 20px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">FRANÇAIS • 3ᵉ ANNÉE</div>
+  <h1>Prêt pour la 3ᵉ année ! 🇫🇷</h1>
+  <p>Une longueur d'avance sur la grammaire, la conjugaison et le vocabulaire de l'année.</p>
+</header>
+
+<div class="wrap">
+
+  <div class="card">
+    <span class="tag">COMMENT ÇA MARCHE</span>
+    <h2>📚 D'abord j'apprends, ensuite je m'entraîne</h2>
+    <p>En haut il y a des <b>fiches à retenir</b> (les règles les plus utiles de l'année). En bas, un <b>jeu-questionnaire</b> avec 15 sujets : choisis un sujet, réponds à 5 questions, et recommence autant que tu veux !</p>
+    <p class="big" style="display:block;text-align:center;color:var(--violet);background:none;box-shadow:none;font-weight:bold">Tu peux faire une fiche par jour. Petit à petit, tu seras prêt ! 💪</p>
+  </div>
+
+  <!-- ============ STUDY CARDS ============ -->
+  <div class="card">
+    <span class="tag">FICHE 1</span>
+    <h2>♀️ Le féminin des noms et des adjectifs</h2>
+    <p><b>Règle générale :</b> on ajoute un <b>-e</b>. <span class="ex">un ami → une amie · grand → grande</span></p>
+    <table>
+      <tr><th>Si le mot finit par…</th><th>Au féminin</th><th>Exemple</th></tr>
+      <tr><td>-er</td><td><b>-ère</b></td><td>premier → première</td></tr>
+      <tr><td>-eux</td><td><b>-euse</b></td><td>heureux → heureuse</td></tr>
+      <tr><td>-f</td><td><b>-ve</b></td><td>neuf → neuve</td></tr>
+      <tr><td>consonne à doubler</td><td>double + <b>e</b></td><td>chat → chatte · bon → bonne</td></tr>
+      <tr><td>déjà un -e</td><td>ne change pas</td><td>rouge → rouge</td></tr>
+    </table>
+    <div class="tip">💡 Quelques mots changent complètement : un <b>homme</b> → une <b>femme</b>, un <b>garçon</b> → une <b>fille</b>.</div>
+  </div>
+
+  <div class="card">
+    <span class="tag">FICHE 2</span>
+    <h2>♦️ Le pluriel des noms et des adjectifs</h2>
+    <p><b>Règle générale :</b> on ajoute un <b>-s</b>. <span class="ex">un chat → des chats</span></p>
+    <table>
+      <tr><th>Si le mot finit par…</th><th>Au pluriel</th><th>Exemple</th></tr>
+      <tr><td>-s, -x ou -z</td><td>ne change <b>pas</b></td><td>une souris → des souris</td></tr>
+      <tr><td>-au, -eau, -eu</td><td>ajoute <b>-x</b></td><td>un gâteau → des gâteaux · un jeu → des jeux</td></tr>
+      <tr><td>-al</td><td>devient <b>-aux</b></td><td>un cheval → des chevaux</td></tr>
+      <tr><td>-ou</td><td>presque tous <b>-s</b></td><td>un trou → des trous</td></tr>
+    </table>
+    <div class="tip">💡 7 mots en <b>-ou</b> prennent un -x : bijou, caillou, chou, genou, hibou, joujou, pou → des bij<b>oux</b>, des gen<b>oux</b>…</div>
+  </div>
+
+  <div class="card">
+    <span class="tag">FICHE 3</span>
+    <h2>⏱️ L'échelle du temps des verbes</h2>
+    <p>Voici le verbe <b>aimer</b> conjugué avec <i>je</i> pour voir la différence entre les temps :</p>
+    <table>
+      <tr><th>Temps</th><th>Quand ?</th><th>Exemple (je)</th></tr>
+      <tr><td>Présent</td><td>maintenant</td><td>j'<b>aime</b></td></tr>
+      <tr><td>Imparfait</td><td>avant, ça durait</td><td>j'<b>aimais</b></td></tr>
+      <tr><td>Futur simple</td><td>plus tard</td><td>j'<b>aimerai</b></td></tr>
+      <tr><td>Futur proche</td><td>bientôt</td><td>je <b>vais aimer</b></td></tr>
+      <tr><td>Conditionnel</td><td>ce qui pourrait arriver</td><td>j'<b>aimerais</b></td></tr>
+      <tr><td>Participe présent</td><td>en train de…</td><td>en <b>aimant</b></td></tr>
+    </table>
+    <div class="tip">💡 Terminaisons utiles &mdash; <b>Présent :</b> -e, -es, -e, -ons, -ez, -ent. <b>Imparfait :</b> -ais, -ais, -ait, -ions, -iez, -aient. <b>Futur :</b> -rai, -ras, -ra, -rons, -rez, -ront. <b>Conditionnel :</b> -rais, -rais, -rait, -rions, -riez, -raient.</div>
+  </div>
+
+  <div class="card">
+    <span class="tag">FICHE 4</span>
+    <h2>🔊 Les homophones (mots qui sonnent pareil)</h2>
+    <table>
+      <tr><th>Mot</th><th>Ça veut dire…</th><th>Truc</th></tr>
+      <tr><td><b>a</b> / <b>à</b></td><td>a = verbe avoir · à = vers, à</td><td>« il <b>a</b> » = il possède</td></tr>
+      <tr><td><b>et</b> / <b>est</b></td><td>et = and · est = verbe être</td><td>« il <b>est</b> » = he is</td></tr>
+      <tr><td><b>on</b> / <b>ont</b></td><td>on = pronom · ont = verbe avoir</td><td>« ils <b>ont</b> » = they have</td></tr>
+      <tr><td><b>son</b> / <b>sont</b></td><td>son = à lui · sont = verbe être</td><td>« ils <b>sont</b> » = they are</td></tr>
+      <tr><td><b>ou</b> / <b>où</b></td><td>ou = or · où = à quel endroit</td><td>« <b>où</b> ? » = un lieu</td></tr>
+    </table>
+    <div class="tip">💡 Astuce : si tu peux remplacer par <b>« avait »</b>, c'est <b>a</b> ou <b>ont</b>/<b>était(ent)</b>. Si tu peux dire <b>« and »</b>, c'est <b>et</b>.</div>
+  </div>
+
+  <!-- ============ QUIZ ============ -->
+  <div class="card" id="menu">
+    <span class="tag">JEU-QUESTIONNAIRE</span>
+    <h2>🎮 Choisis un sujet à travailler</h2>
+    <p>15 sujets tirés directement de ton programme de 3ᵉ année. Chaque partie pose 5 questions au hasard.</p>
+    <div class="skillgrid" id="topics"></div>
+  </div>
+
+  <div class="card" id="play">
+    <div class="qbar">
+      <button class="ghost" id="quit">← Autre sujet</button>
+      <span class="chip">Question <b id="qn">1</b>/5</span>
+    </div>
+    <div id="prompt">—</div>
+    <div class="choices" id="choices"></div>
+    <div class="fb" id="fb"></div>
+    <div class="tipbox" id="tipbox"></div>
+  </div>
+
+  <footer>
+    Bon travail — tu prends de l'avance ! 🌟<br>
+    <span style="font-size:.88rem">Pour les parents : ce module couvre le programme de grammaire, de conjugaison et de vocabulaire de la 3ᵉ année (nom, déterminant, adjectif et accords, féminin/pluriel, pronoms, groupe du nom, la phrase, le sujet et l'accord du verbe, les temps du verbe, les homophones et le vocabulaire). Faites-en une fiche à la fois. Après chaque bonne réponse, demandez-lui « pourquoi ? » — l'expliquer à voix haute, c'est ça qui fait retenir.</span>
+  </footer>
+</div>
+
+<script>
+"use strict";
+const pick = a => a[Math.floor(Math.random()*a.length)];
+
+const TOPICS = [
+  {id:"nom", emo:"📛", name:"Le nom", d:"genre & nombre", qs:[
+    {q:"Un nom PROPRE commence toujours par…", choices:["une majuscule","une minuscule","un chiffre"], a:0, tip:"Léo, Montréal, la France — les noms propres prennent une majuscule."},
+    {q:"Lequel est un nom commun ?", choices:["chien","Montréal","Léo"], a:0, tip:"Un nom commun (chien, table, ville) désigne les choses en général."},
+    {q:"Le « genre » d'un nom, c'est…", choices:["masculin ou féminin","singulier ou pluriel","grand ou petit"], a:0, tip:"un / une nous montre le genre."},
+    {q:"Le « nombre » d'un nom, c'est…", choices:["singulier ou pluriel","masculin ou féminin","le prix"], a:0, tip:"un chat = singulier, des chats = pluriel."},
+    {q:"« une école » est de genre…", choices:["féminin","masculin","pluriel"], a:0, tip:"On dit UNE école, donc c'est féminin."},
+    {q:"Quel mot est le nom dans « Le petit chien aboie » ?", choices:["chien","petit","aboie"], a:0, tip:"Le nom désigne la personne, l'animal ou la chose : chien."},
+  ]},
+  {id:"det", emo:"🔖", name:"Le déterminant", d:"le, la, un, mes…", qs:[
+    {q:"Le déterminant se place… le nom.", choices:["juste avant","après","loin de"], a:0, tip:"le chien, une fleur, mes amis — toujours devant le nom."},
+    {q:"Lequel est un déterminant ?", choices:["mes","chien","court"], a:0, tip:"le, la, les, un, une, des, mon, ce… sont des déterminants."},
+    {q:"Complète : ___ pomme (féminin singulier).", choices:["une","un","des"], a:0, tip:"pomme est féminin → une pomme."},
+    {q:"Complète : ___ amis (pluriel).", choices:["des","un","une"], a:0, tip:"plusieurs → des amis."},
+    {q:"Complète : ___ garçon (masculin singulier).", choices:["un","une","des"], a:0, tip:"garçon est masculin → un garçon."},
+    {q:"« ce » et « cette » servent à…", choices:["montrer (celui-là)","compter","poser une question"], a:0, tip:"ce livre, cette maison — on montre de quoi on parle."},
+  ]},
+  {id:"adj", emo:"✨", name:"L'adjectif", d:"décrire & accorder", qs:[
+    {q:"L'adjectif sert à…", choices:["décrire le nom","décrire le verbe","ne rien faire"], a:0, tip:"grand, rouge, gentil — il donne des détails sur le nom."},
+    {q:"Dans « une fleur rouge », l'adjectif est…", choices:["rouge","fleur","une"], a:0, tip:"rouge décrit la fleur."},
+    {q:"L'adjectif s'accorde avec le nom…", choices:["en genre et en nombre","seulement le lundi","jamais"], a:0, tip:"masculin/féminin ET singulier/pluriel."},
+    {q:"« des chats noir___ » →", choices:["noirs","noir","noire"], a:0, tip:"chats est au pluriel → on ajoute -s à l'adjectif."},
+    {q:"« une robe vert___ » →", choices:["verte","vert","verts"], a:0, tip:"robe est féminin → verte."},
+    {q:"Après être : « Elles sont content___ » →", choices:["contentes","content","contente"], a:0, tip:"elles = féminin pluriel → -es."},
+    {q:"« Le chien est petit. » Pour une chienne : « La chienne est ___ »", choices:["petite","petit","petits"], a:0, tip:"féminin singulier → petite."},
+  ]},
+  {id:"fem", emo:"♀️", name:"Le féminin", d:"règles de formation", qs:[
+    {q:"Règle générale du féminin : on ajoute souvent…", choices:["un -e","un -s","rien"], a:0, tip:"grand → grande, ami → amie."},
+    {q:"« un ami » au féminin →", choices:["une amie","une amis","une ami"], a:0, tip:"on ajoute un -e."},
+    {q:"« heureux » au féminin →", choices:["heureuse","heureuxe","heureus"], a:0, tip:"-eux devient -euse."},
+    {q:"« premier » au féminin →", choices:["première","premiere","premiers"], a:0, tip:"-er devient -ère (avec accent)."},
+    {q:"« chat » au féminin →", choices:["chatte","chate","chats"], a:0, tip:"on double la consonne puis -e : chatte."},
+    {q:"Certains mots changent tout : « un homme » →", choices:["une femme","une homme","une hommee"], a:0, tip:"des mots très différents : homme/femme, garçon/fille."},
+  ]},
+  {id:"plur", emo:"♦️", name:"Le pluriel", d:"règles de formation", qs:[
+    {q:"Règle générale du pluriel : on ajoute…", choices:["un -s","un -e","rien"], a:0, tip:"un chat → des chats."},
+    {q:"Un mot qui finit déjà par -s, -x ou -z, au pluriel…", choices:["ne change pas","ajoute -s","ajoute -e"], a:0, tip:"une souris → des souris."},
+    {q:"« un gâteau » au pluriel →", choices:["des gâteaux","des gâteaus","des gâteau"], a:0, tip:"-eau prend un -x."},
+    {q:"« un jeu » au pluriel →", choices:["des jeux","des jeus","des jeu"], a:0, tip:"-eu prend un -x."},
+    {q:"« un cheval » au pluriel →", choices:["des chevaux","des chevals","des chevaus"], a:0, tip:"-al devient -aux."},
+    {q:"« un trou » au pluriel →", choices:["des trous","des troux","des trou"], a:0, tip:"la plupart des mots en -ou prennent un -s."},
+    {q:"« un genou » au pluriel →", choices:["des genoux","des genous","des genou"], a:0, tip:"genou fait partie des 7 mots en -ou qui prennent un -x."},
+  ]},
+  {id:"pron", emo:"👤", name:"Les pronoms", d:"je, tu, il, elle…", qs:[
+    {q:"Les pronoms de conjugaison sont…", choices:["je, tu, il, elle, nous, vous, ils, elles","le, la, les","un, une, des"], a:0, tip:"Ce sont eux qui commandent la terminaison du verbe."},
+    {q:"Un pronom sert à…", choices:["remplacer un nom ou un GN","décrire un nom","compter"], a:0, tip:"« Léo court » → « Il court »."},
+    {q:"« Léo joue. » On remplace Léo par…", choices:["Il","Elle","Nous"], a:0, tip:"Léo est un garçon (une personne) → Il."},
+    {q:"« Les filles chantent. » On remplace par…", choices:["Elles","Ils","Il"], a:0, tip:"féminin pluriel → Elles."},
+    {q:"« Maman et moi partons. » On peut dire…", choices:["Nous partons","Ils partent","Vous partez"], a:0, tip:"moi + une autre personne = nous."},
+    {q:"« Toi et Léa » se remplace par…", choices:["Vous","Nous","Ils"], a:0, tip:"toi + une autre personne = vous."},
+  ]},
+  {id:"gn", emo:"🧩", name:"Le groupe du nom", d:"GN & accords", qs:[
+    {q:"Un groupe du nom (GN) contient au moins…", choices:["un déterminant + un nom","deux verbes","un point"], a:0, tip:"le chien, une belle fleur."},
+    {q:"Dans « les petits chats gris », le nom-noyau est…", choices:["chats","petits","gris"], a:0, tip:"le noyau, c'est le nom principal : chats."},
+    {q:"Dans le GN, tout s'accorde avec…", choices:["le nom","le verbe","rien"], a:0, tip:"le déterminant et les adjectifs suivent le nom."},
+    {q:"« un chien noir » au pluriel →", choices:["des chiens noirs","des chien noir","un chiens noirs"], a:0, tip:"tout le GN passe au pluriel."},
+    {q:"« la grande maison » au pluriel →", choices:["les grandes maisons","les grande maison","la grandes maisons"], a:0, tip:"déterminant + adjectif + nom, tout au pluriel."},
+    {q:"« un beau jardin » au pluriel →", choices:["de beaux jardins","des beau jardin","un beaux jardins"], a:0, tip:"beau → beaux (comme -eau), et jardin → jardins."},
+  ]},
+  {id:"phrase", emo:"🔤", name:"La phrase", d:"positive, négative, ?, !", qs:[
+    {q:"Une phrase commence par… et finit par…", choices:["une majuscule / un point","un chiffre / une virgule","rien / rien"], a:0, tip:"Majuscule au début, point (ou ? ou !) à la fin."},
+    {q:"Phrase négative : « Je ___ mange ___ de bonbons. »", choices:["ne … pas","très … bien","est … et"], a:0, tip:"ne … pas encadre le verbe."},
+    {q:"« Je joue dehors. » en phrase négative →", choices:["Je ne joue pas dehors.","Je joue pas dehors dehors.","Joue je dehors."], a:0, tip:"on ajoute ne … pas autour du verbe."},
+    {q:"Quel signe termine une QUESTION ?", choices:["?","!","."], a:0, tip:"Le point d'interrogation ferme une question."},
+    {q:"Quel signe montre une forte émotion ?", choices:["!","?","."], a:0, tip:"Le point d'exclamation : Bravo !"},
+    {q:"Lequel est un mot interrogatif ?", choices:["Pourquoi","Parce que","Bonjour"], a:0, tip:"qui, que, où, quand, comment, pourquoi… servent à questionner."},
+    {q:"« ___ vas-tu ? » (à quel endroit)", choices:["Où","Ou","Houx"], a:0, tip:"Où (avec accent) indique un lieu."},
+  ]},
+  {id:"sujet", emo:"🧑‍🏫", name:"Sujet & verbe", d:"l'accord du verbe", qs:[
+    {q:"Le sujet dit… fait l'action.", choices:["qui","quand","combien"], a:0, tip:"On demande « Qui est-ce qui… ? »"},
+    {q:"Dans « Les oiseaux volent », le sujet est…", choices:["Les oiseaux","volent","haut"], a:0, tip:"Qui vole ? Les oiseaux."},
+    {q:"Le verbe s'accorde avec…", choices:["le sujet","l'adjectif","le point"], a:0, tip:"C'est le sujet qui commande la terminaison."},
+    {q:"« Les enfants ___ » (jouer, présent)", choices:["jouent","joue","joues"], a:0, tip:"ils/elles → -ent."},
+    {q:"« Nous ___ » (aimer, présent)", choices:["aimons","aime","aimez"], a:0, tip:"nous → -ons."},
+    {q:"« Tu ___ » (finir, présent)", choices:["finis","finit","finent"], a:0, tip:"tu → -s : tu finis."},
+  ]},
+  {id:"present", emo:"⏱️", name:"Le présent", d:"aimer, finir, avoir…", qs:[
+    {q:"Un verbe à l'infinitif, c'est sa forme…", choices:["non conjuguée (aimer, finir)","au passé","avec un sujet"], a:0, tip:"C'est le verbe « tout nu », comme dans le dictionnaire."},
+    {q:"Dans « aimer » : radical + terminaison =", choices:["aim + er","a + imer","aime + r"], a:0, tip:"Le radical (aim-) ne bouge pas, la terminaison change."},
+    {q:"Présent — « j'___ » (aimer)", choices:["aime","aimes","aimer"], a:0, tip:"je → -e : j'aime."},
+    {q:"Présent — « vous ___ » (finir)", choices:["finissez","finisez","finit"], a:0, tip:"finir : nous finissons, vous finissez."},
+    {q:"Présent — « il ___ » (avoir)", choices:["a","as","ai"], a:0, tip:"j'ai, tu as, il a."},
+    {q:"Présent — « nous ___ » (être)", choices:["sommes","êtes","sont"], a:0, tip:"je suis, tu es, il est, nous sommes, vous êtes, ils sont."},
+    {q:"Présent — « ils ___ » (aller)", choices:["vont","allent","va"], a:0, tip:"je vais, tu vas, il va, nous allons, vous allez, ils vont."},
+  ]},
+  {id:"passefutur", emo:"📅", name:"Imparfait & futur", d:"avant & plus tard", qs:[
+    {q:"L'imparfait raconte le… (avant, ça durait)", choices:["passé","futur","présent"], a:0, tip:"Terminaisons : -ais, -ais, -ait, -ions, -iez, -aient."},
+    {q:"Imparfait — « j'___ » (aimer)", choices:["aimais","aimai","aime"], a:0, tip:"radical + -ais : j'aimais."},
+    {q:"Imparfait — « nous ___ » (être)", choices:["étions","serons","sommes"], a:0, tip:"j'étais, tu étais, il était, nous étions…"},
+    {q:"Le futur simple raconte le…", choices:["futur (plus tard)","passé","présent"], a:0, tip:"Terminaisons : -rai, -ras, -ra, -rons, -rez, -ront."},
+    {q:"Futur simple — « tu ___ » (aimer)", choices:["aimeras","aimais","aimes"], a:0, tip:"tu aimeras (plus tard)."},
+    {q:"Futur simple — « ils ___ » (être)", choices:["seront","étaient","sont"], a:0, tip:"je serai, tu seras… ils seront."},
+    {q:"Futur PROCHE — « Je ___ manger. » (bientôt)", choices:["vais","irai","allé"], a:0, tip:"aller au présent + infinitif : je vais manger."},
+  ]},
+  {id:"condpp", emo:"💫", name:"Conditionnel & p. présent", d:"pourrait… / en -ant", qs:[
+    {q:"Le conditionnel dit ce qui « pourrait » arriver. « J'___ » (aimer)", choices:["aimerais","aimerai","aime"], a:0, tip:"J'aimerais un jus, s'il te plaît. (-rais)"},
+    {q:"Conditionnel — « nous ___ » (être)", choices:["serions","serons","étions"], a:0, tip:"nous serions (ça pourrait arriver)."},
+    {q:"Le participe présent se termine par…", choices:["-ant","-er","-é"], a:0, tip:"manger → mangeant ; en marchant."},
+    {q:"« finir » au participe présent →", choices:["finissant","finant","fini"], a:0, tip:"en finissant mon travail…"},
+    {q:"« aller » au participe présent →", choices:["allant","allé","va"], a:0, tip:"en allant à l'école."},
+  ]},
+  {id:"homo", emo:"🔊", name:"Les homophones", d:"a/à, et/est, on/ont…", qs:[
+    {q:"« Il ___ content. » (est / et)", choices:["est","et","ait"], a:0, tip:"est = verbe être (il est = he is)."},
+    {q:"« un chat ___ un chien » (et / est)", choices:["et","est","ai"], a:0, tip:"et = « and » : on additionne deux choses."},
+    {q:"« Je vais ___ l'école. » (a / à)", choices:["à","a","as"], a:0, tip:"à = direction, endroit."},
+    {q:"« Elle ___ un vélo. » (a / à)", choices:["a","à","as"], a:0, tip:"elle a = elle possède (verbe avoir)."},
+    {q:"« Ils ___ des jouets. » (ont / on)", choices:["ont","on","onh"], a:0, tip:"ont = verbe avoir (ils ont = they have)."},
+    {q:"« ___ joue dehors. » (On / Ont)", choices:["On","Ont","Onh"], a:0, tip:"On = pronom (comme « il »)."},
+    {q:"« Mes amis ___ gentils. » (sont / son)", choices:["sont","son","sons"], a:0, tip:"sont = verbe être (ils sont = they are)."},
+    {q:"« C'est ___ ballon. » (son / sont)", choices:["son","sont","sson"], a:0, tip:"son = à lui : son ballon."},
+  ]},
+  {id:"vocab", emo:"📖", name:"Le vocabulaire", d:"synonymes, familles", qs:[
+    {q:"Un SYNONYME est un mot qui veut dire…", choices:["presque la même chose","le contraire","rien"], a:0, tip:"content ≈ heureux."},
+    {q:"Synonyme de « content » ?", choices:["heureux","triste","grand"], a:0, tip:"content et heureux se ressemblent."},
+    {q:"Synonyme de « rapide » ?", choices:["vite","lent","petit"], a:0, tip:"rapide ≈ vite."},
+    {q:"Une FAMILLE de mots partage…", choices:["une même base","la même couleur","le même prix"], a:0, tip:"dent, dentiste, dentaire — tous autour de « dent »."},
+    {q:"Dans le dictionnaire, les mots sont classés…", choices:["par ordre alphabétique","par couleur","par taille"], a:0, tip:"a, b, c, d… jusqu'à z."},
+    {q:"Quel mot vient en premier dans le dictionnaire ?", choices:["chat","cheval","chien"], a:0, tip:"cha… avant che… avant chi…"},
+  ]},
+  {id:"regles", emo:"✏️", name:"Petits pièges", d:"muettes, apostrophe, m/b/p", qs:[
+    {q:"Une lettre muette est une lettre qu'on…", choices:["ne prononce pas","crie","efface"], a:0, tip:"le -d de « grand », le -t de « chat »."},
+    {q:"Devant b, m ou p, on écrit souvent…", choices:["m","n","rien"], a:0, tip:"tomber, emmener, important (un m, pas un n)."},
+    {q:"« le ami » avec l'apostrophe →", choices:["l'ami","le ami","lami"], a:0, tip:"le/la + voyelle → l' : l'ami, l'école."},
+    {q:"« je aime » →", choices:["j'aime","je aime","jaime"], a:0, tip:"je + voyelle → j' : j'aime."},
+    {q:"La virgule dans une liste sert à…", choices:["séparer les éléments","finir la phrase","ne rien faire"], a:0, tip:"J'ai un chien, un chat et un lapin."},
+    {q:"La lettre « c » devant e ou i se prononce…", choices:["comme un s (cerise)","comme un k (carotte)","comme un z"], a:0, tip:"ce, ci → son [s] ; ca, co, cu → son [k]."},
+  ]},
+];
+
+let state=null;
+const $ = id => document.getElementById(id);
+
+function renderMenu(){
+  $("menu").style.display=""; $("play").style.display="none";
+  $("topics").innerHTML = TOPICS.map(t=>
+    `<button class="skill" data-id="${t.id}"><span class="emo">${t.emo}</span><b>${t.name}</b><span class="d">${t.d}</span></button>`).join("");
+}
+$("topics").addEventListener("click",e=>{
+  const b=e.target.closest("[data-id]"); if(b) start(b.dataset.id);
+});
+$("quit").addEventListener("click", renderMenu);
+
+function start(id){
+  const topic=TOPICS.find(t=>t.id===id);
+  const pool=[...topic.qs].sort(()=>Math.random()-0.5).slice(0,5);
+  state={topic, pool, n:0, correct:0};
+  $("menu").style.display="none"; $("play").style.display="";
+  next();
+}
+function next(){
+  if(state.n>=state.pool.length){ finish(); return; }
+  const q=state.pool[state.n]; state.q=q;
+  $("qn").textContent=state.n+1;
+  $("prompt").textContent=q.q;
+  $("tipbox").style.display="none";
+  const fb=$("fb"); fb.textContent=""; fb.className="fb";
+  const box=$("choices"); box.innerHTML="";
+  q.choices.forEach((c,ci)=>{
+    const b=document.createElement("button");
+    b.className="opt"; b.dataset.ci=ci; b.textContent=c;
+    b.addEventListener("click",()=>check(b));
+    box.appendChild(b);
+  });
+}
+function check(btn){
+  const q=state.q;
+  document.querySelectorAll("#choices .opt").forEach((b,ci)=>{ b.disabled=true; if(ci===q.a) b.classList.add("right"); });
+  const fb=$("fb");
+  if(Number(btn.dataset.ci)===q.a){ state.correct++;
+    fb.textContent=pick(["Bravo ! ⭐","Oui ! 🎉","Parfait ! 💡","Excellent ! 💪"]); fb.className="fb ok"; }
+  else { btn.classList.add("wrong"); fb.textContent="Bon essai !"; fb.className="fb no"; }
+  if(q.tip){ const t=$("tipbox"); t.innerHTML="💡 <b>À retenir :</b> "+q.tip; t.style.display=""; }
+  state.n++;
+  setTimeout(next, q.tip?2800:1300);
+}
+function finish(){
+  const c=state.correct, total=state.pool.length;
+  $("prompt").textContent = c===total?"Superbe ! 🏆":(c>=3?"Bien joué ! 🌟":"Continue, tu progresses ! 💪");
+  $("choices").innerHTML=`<button class="big" id="again" style="justify-self:center">Rejouer 🔁</button>`;
+  $("tipbox").style.display="none";
+  const fb=$("fb"); fb.textContent=`Tu as ${c} bonnes réponses sur ${total} !`; fb.className="fb ok";
+  $("again").addEventListener("click",()=>start(state.topic.id));
+}
+renderMenu();
+</script>
+</body>
+</html>
