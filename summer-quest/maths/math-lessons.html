@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Math Lessons — Grade 3 🧮</title>
+<style>
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  :root{ --ink:#12203a; --blue:#1d4ed8; --teal:#0e7490; --rose:#e11d48; --green:#15803d; --amber:#b45309; --paper:#fff; }
+  body{ font-family:'Segoe UI',system-ui,sans-serif; color:var(--ink); line-height:1.6; background:#f5f7fb; padding:0 0 60px; }
+  header{ text-align:center; padding:36px 18px 24px; color:#fff; background:linear-gradient(135deg,#0e7490,#1d4ed8); }
+  header h1{ font-size:1.9rem; } header p{ margin-top:8px; opacity:.95; }
+  .badge{ display:inline-block; background:rgba(255,255,255,.2); padding:5px 16px; border-radius:999px; font-weight:bold; margin-bottom:12px; letter-spacing:.5px; font-size:.9rem; }
+  .wrap{ max-width:900px; margin:0 auto; padding:0 18px; }
+  .toc{ background:#fff; border-radius:16px; padding:20px 24px; margin:20px 0; border:1px solid #eceef6; box-shadow:0 4px 16px rgba(20,30,70,.07); }
+  .toc h2{ color:var(--blue); font-size:1.2rem; margin-bottom:10px; }
+  .toc ol{ columns:2; margin-left:20px; } .toc a{ color:var(--blue); text-decoration:none; }
+  .lesson{ background:var(--paper); border-radius:16px; padding:22px 24px; margin:18px 0; border:1px solid #eceef6; box-shadow:0 4px 16px rgba(20,30,70,.07); }
+  .lesson h2{ color:var(--blue); font-size:1.35rem; display:flex; gap:10px; align-items:center; border-bottom:2px solid #eef2ff; padding-bottom:8px; margin-bottom:6px; }
+  .num{ background:var(--teal); color:#fff; border-radius:8px; padding:2px 10px; font-size:.95rem; }
+  h3{ color:var(--teal); margin:14px 0 4px; font-size:1rem; text-transform:uppercase; letter-spacing:.4px; }
+  p{ margin:7px 0; } a{ color:var(--blue); }
+  ul,ol{ margin:6px 0 6px 22px; } li{ margin:5px 0; }
+  .obj{ background:#eef2ff; border-radius:10px; padding:10px 14px; font-weight:600; color:#1e3a8a; }
+  .idea{ background:#ecfeff; border-left:5px solid var(--teal); padding:12px 16px; border-radius:8px; margin:10px 0; }
+  .board{ background:#0f172a; color:#e2e8f0; border-radius:12px; padding:14px 18px; font-size:1.02rem; margin:10px 0; font-family:'Consolas','Courier New',monospace; }
+  .board b{ color:#7CFC9B; } .board .x{ color:#ffb4c8; }
+  .act{ background:#f0fdf4; border-left:5px solid var(--green); padding:12px 16px; border-radius:8px; margin:10px 0; }
+  .ex{ background:#fffdf5; border:1px dashed #e0c98a; border-radius:10px; padding:12px 16px; margin:10px 0; }
+  details.key{ margin-top:10px; background:#fef2f2; border:1px solid #fecaca; border-radius:8px; padding:6px 14px; }
+  details.key summary{ cursor:pointer; font-weight:bold; color:var(--rose); }
+  .quiz{ display:inline-block; background:var(--blue); color:#fff; text-decoration:none; padding:6px 14px; border-radius:999px; font-size:.9rem; font-weight:bold; margin-top:10px; }
+  table{ border-collapse:collapse; width:100%; margin:8px 0; font-size:.95rem; } th,td{ border:1px solid #e5e7f0; padding:6px 9px; text-align:left; } th{ background:#eef2ff; color:var(--blue); }
+  .top{ position:sticky; top:0; background:#fff; border-bottom:1px solid #eceef6; padding:8px 18px; text-align:center; z-index:5; }
+  .top a{ color:var(--teal); text-decoration:none; font-weight:bold; margin:0 8px; font-size:.9rem; }
+  footer{ text-align:center; color:#6b7280; font-size:.92rem; margin-top:24px; padding:0 20px; }
+  @media print{ body{ background:#fff; } .lesson,.toc{ box-shadow:none; border:1px solid #ccc; break-inside:avoid; } header{ color:#000; background:#fff; } .top{ display:none; } }
+</style>
+</head>
+<body>
+<div class="top"><a href="../math-teacher-guide.html">← Teacher guide</a> · <a href="math-grade3-prep.html">Practice page</a> · <a href="javascript:window.print()">🖨️ Print</a></div>
+<header>
+  <div class="badge">MATH LESSONS • GRADE 3 • 22 LESSONS</div>
+  <h1>Grade 3 Math 🧮</h1>
+  <p>Ready-to-teach lessons: the idea, worked examples, an activity, and exercises with answer keys.</p>
+</header>
+
+<div class="wrap">
+  <div class="toc">
+    <h2>📋 The 22 lessons</h2>
+    <ol>
+      <li><a href="#l1">Place value</a></li>
+      <li><a href="#l2">Expanded form &amp; comparing</a></li>
+      <li><a href="#l3">Estimating &amp; rounding</a></li>
+      <li><a href="#l4">Even/odd, prime/composite</a></li>
+      <li><a href="#l5">Patterns &amp; counting big sets</a></li>
+      <li><a href="#l6">+/− facts &amp; mental math</a></li>
+      <li><a href="#l7">Big +/− with regrouping</a></li>
+      <li><a href="#l8">Missing terms &amp; equivalent expressions</a></li>
+      <li><a href="#l9">Multiplication &amp; the tables</a></li>
+      <li><a href="#l10">Division</a></li>
+      <li><a href="#l11">Multi-digit multiplication</a></li>
+      <li><a href="#l12">Fractions</a></li>
+      <li><a href="#l13">Decimals &amp; money</a></li>
+      <li><a href="#l14">Symmetry &amp; reflection</a></li>
+      <li><a href="#l15">The coordinate grid</a></li>
+      <li><a href="#l16">Angles &amp; lines</a></li>
+      <li><a href="#l17">Polygons</a></li>
+      <li><a href="#l18">Solids &amp; nets</a></li>
+      <li><a href="#l19">Length, perimeter &amp; area</a></li>
+      <li><a href="#l20">Time</a></li>
+      <li><a href="#l21">Volume, capacity &amp; mass</a></li>
+      <li><a href="#l22">Data &amp; probability</a></li>
+    </ol>
+    <p style="margin-top:10px;font-size:.92rem;color:#6b7280">💡 Flow for each lesson: read the <b>objective</b> → present <b>the idea</b> and <b>board examples</b> → do the <b>activity</b> together → student does the <b>exercises</b> (answers hidden under “Show answers”) → practise on the <b>practice page</b>.</p>
+  </div>
+
+  <div class="lesson" id="l1">
+    <h2><span class="num">1</span> 🔢 Place value</h2>
+    <div class="obj">🎯 Objective: read and write numbers to the ten-thousands and state the value of each digit.</div>
+    <h3>The idea</h3>
+    <div class="idea">Each digit has a <b>place</b>: ones, tens, hundreds, thousands, ten-thousands. A digit's <b>value</b> = the digit × its place. The same digit is worth different amounts depending on where it sits.</div>
+    <h3>On the board</h3>
+    <div class="board">3,742 → <b>3</b> thousands, <b>7</b> hundreds, <b>4</b> tens, <b>2</b> ones<br>The 7 is worth <b>700</b>, not 7.</div>
+    <div class="act">✏️ Activity: build 2,516 with base-ten blocks (or draw squares=100, lines=10, dots=1). Then ask “what is the 5 worth?”</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>In 5,281, what is the value of the 2?</li>
+        <li>Which digit is in the hundreds place of 4,073?</li>
+        <li>Write “six thousand, four hundred nine” in digits.</li>
+        <li>What number is 4 thousands, 0 hundreds, 5 tens, 6 ones?</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. 200  2. 0  3. 6,409  4. 4,056</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Place value”</a>
+  </div>
+
+  <div class="lesson" id="l2">
+    <h2><span class="num">2</span> 🧱 Expanded form &amp; comparing</h2>
+    <div class="obj">🎯 Objective: write a number in expanded form and compare/order numbers with &lt;, &gt;, =.</div>
+    <h3>The idea</h3>
+    <div class="idea"><b>Expanded form</b> = the sum of each digit's value. To <b>compare</b>, line up the places and read from the <b>left</b>; the first place where they differ decides. <b>&gt;</b> means “greater”, <b>&lt;</b> means “less”.</div>
+    <h3>On the board</h3>
+    <div class="board">3,742 = 3000 + 700 + 40 + 2<br>3,742 <b>&gt;</b> 3,724  (same thousands &amp; hundreds; 4 tens beats 2 tens)</div>
+    <div class="act">✏️ Activity: the “left-to-right duel” — write two 4-digit numbers, race to spot the first place that differs.</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>Write 2,650 in expanded form.</li>
+        <li>Put &lt;, &gt; or =: 4,318 __ 4,381</li>
+        <li>Put &lt;, &gt; or =: 7,900 __ 7,900</li>
+        <li>Order from least to greatest: 1,205 · 1,052 · 1,250</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. 2000 + 600 + 50  2. &lt;  3. =  4. 1,052 · 1,205 · 1,250</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Compare &amp; order”</a>
+  </div>
+
+  <div class="lesson" id="l3">
+    <h2><span class="num">3</span> 🎯 Estimating &amp; rounding</h2>
+    <div class="obj">🎯 Objective: round to the nearest ten/hundred and estimate to check if an answer is reasonable.</div>
+    <h3>The idea</h3>
+    <div class="idea">To round, look at the digit <b>to the right</b> of the place you're rounding to: <b>5 or more → round up</b>, <b>4 or less → stay</b>. Estimating = round first, then add/subtract the round numbers.</div>
+    <h3>On the board</h3>
+    <div class="board">47 → nearest ten = <b>50</b>  ·  823 → nearest hundred = <b>800</b><br>Estimate 38 + 41 ≈ 40 + 40 = <b>80</b></div>
+    <div class="act">✏️ Activity: use a number line 40–50 and mark 47 — which ten is it closer to?</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>Round 63 to the nearest ten.</li>
+        <li>Round 85 to the nearest ten.</li>
+        <li>Round 472 to the nearest hundred.</li>
+        <li>Estimate 29 + 52 by rounding to tens.</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. 60  2. 90  3. 500  4. 30 + 50 = 80</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Rounding”</a>
+  </div>
+
+  <div class="lesson" id="l4">
+    <h2><span class="num">4</span> ⚖️ Even/odd, prime/composite</h2>
+    <div class="obj">🎯 Objective: sort numbers as even/odd and as prime/composite.</div>
+    <h3>The idea</h3>
+    <div class="idea"><b>Even</b> numbers end in 0,2,4,6,8 (they split into two equal groups); <b>odd</b> end in 1,3,5,7,9. A <b>prime</b> has exactly two factors (1 and itself). A <b>composite</b> has more than two. (1 is neither.)</div>
+    <h3>On the board</h3>
+    <div class="board">24 → even (ends in 4)  ·  7 → prime (only 1×7)<br>12 → composite (factors 1, 2, 3, 4, 6, 12)</div>
+    <div class="act">✏️ Activity: try to make an even array (2 equal rows) for 7 counters — it won't work → 7 is odd &amp; prime.</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>Even or odd? a) 38  b) 51</li>
+        <li>Is 9 prime or composite?</li>
+        <li>Is 11 prime or composite?</li>
+        <li>List all the factors of 8.</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. a) even  b) odd  2. composite (1, 3, 9)  3. prime  4. 1, 2, 4, 8</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Number types”</a>
+  </div>
+
+  <div class="lesson" id="l5">
+    <h2><span class="num">5</span> 🔁 Patterns &amp; counting big sets</h2>
+    <div class="obj">🎯 Objective: find and extend a number pattern; count a large set by grouping.</div>
+    <h3>The idea</h3>
+    <div class="idea">A <b>pattern</b> follows a rule (add, subtract, or multiply the same each time). Find the rule, then extend it. To count many objects, <b>group into equal bunches</b> (tens or fives) and skip-count.</div>
+    <h3>On the board</h3>
+    <div class="board">4, 8, 12, 16, __  → rule +4 → <b>20</b><br>100, 90, 80, __ → rule −10 → <b>70</b></div>
+    <div class="act">✏️ Activity: pour out a handful of beans; group by tens and skip-count 10, 20, 30…</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>Next number: 5, 10, 15, 20, __</li>
+        <li>Next number: 30, 27, 24, __</li>
+        <li>What is the rule for 2, 4, 8, 16? What comes next?</li>
+        <li>6 bags of 10 marbles = __ marbles</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. 25  2. 21  3. doubling (×2); next is 32  4. 60</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Patterns”</a>
+  </div>
+
+  <div class="lesson" id="l6">
+    <h2><span class="num">6</span> ➕ +/− facts &amp; mental math</h2>
+    <div class="obj">🎯 Objective: recall addition/subtraction facts to 20 using smart strategies.</div>
+    <h3>The idea</h3>
+    <div class="idea">Strategies beat memorising: <b>make 10</b> (bridging), <b>doubles</b> &amp; near-doubles, <b>+10 / −10</b>, and using a fact you know. <b>Fact families</b> link + and − (7+5=12 ⇒ 12−5=7).</div>
+    <h3>On the board</h3>
+    <div class="board">8 + 5 → 8 + 2 = 10, then + 3 = <b>13</b><br>7 + 6 → double 6 is 12, + 1 = <b>13</b><br>15 − 9 → 15 − 10 = 5, then + 1 = <b>6</b></div>
+    <div class="act">✏️ Activity: flash 10 fact cards; for each, ask “which strategy did you use?”</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>Make-10: 9 + 6 = __</li>
+        <li>Near double: 6 + 7 = __</li>
+        <li>14 − 8 = __</li>
+        <li>7 + 5 = 12, so 12 − 5 = __</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. 15  2. 13  3. 6  4. 7</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “+/− facts”</a>
+  </div>
+
+  <div class="lesson" id="l7">
+    <h2><span class="num">7</span> 🧮 Big +/− with regrouping</h2>
+    <div class="obj">🎯 Objective: add and subtract 3-digit numbers with carrying and borrowing.</div>
+    <h3>The idea</h3>
+    <div class="idea">Line numbers up by place. Work <b>right to left</b>. <b>Carry</b> when a column makes 10+ (10 ones become 1 ten). <b>Borrow</b> when the top digit is smaller than the bottom (1 ten becomes 10 ones).</div>
+    <h3>On the board</h3>
+    <div class="board">348 + 276:  8+6=14 (write 4, carry 1) · 4+7+1=12 (write 2, carry 1) · 3+2+1=6 → <b>624</b><br>503 − 178:  borrow to get → <b>325</b></div>
+    <div class="act">✏️ Activity: do 348 + 276 once with base-ten blocks, trading 10 ones for a ten, before the written way.</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>265 + 137 = __</li>
+        <li>428 + 385 = __</li>
+        <li>640 − 275 = __</li>
+        <li>700 − 458 = __</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. 402  2. 813  3. 365  4. 242</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Big +/−”</a>
+  </div>
+
+  <div class="lesson" id="l8">
+    <h2><span class="num">8</span> ❓ Missing terms &amp; equivalent expressions</h2>
+    <div class="obj">🎯 Objective: find an unknown in an equation, and tell whether two expressions are equal.</div>
+    <h3>The idea</h3>
+    <div class="idea">To find a <b>missing term</b>, use the <b>inverse</b> operation (undo it). To add, subtract back; to subtract, add back. Two expressions are <b>equivalent</b> if they have the same value.</div>
+    <h3>On the board</h3>
+    <div class="board">7 + __ = 12 → 12 − 7 = <b>5</b><br>__ − 4 = 9 → 9 + 4 = <b>13</b><br>Is 4 + 5 = 3 + 6? both are 9 → <b>yes</b></div>
+    <div class="act">✏️ Activity: use a balance scale (or drawing) — both sides must weigh the same.</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>6 + __ = 15</li>
+        <li>__ − 8 = 7</li>
+        <li>20 − __ = 12</li>
+        <li>True or false: 5 + 7 = 6 + 6</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. 9  2. 15  3. 8  4. true (both are 12)</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Missing terms”</a>
+  </div>
+
+  <div class="lesson" id="l9">
+    <h2><span class="num">9</span> ✖️ Multiplication &amp; the tables</h2>
+    <div class="obj">🎯 Objective: understand × as equal groups/arrays and recall the tables to 10.</div>
+    <h3>The idea</h3>
+    <div class="idea">Multiplication is <b>equal groups</b>: 4 × 3 = 4 groups of 3 = 12. An <b>array</b> (rows × columns) shows the same thing — and shows why 4 × 3 = 3 × 4. Learn tables in order: 2, 5, 10 → 4 → 3 → 9 → squares → 6, 7, 8.</div>
+    <h3>On the board</h3>
+    <div class="board">3 × 4 = 3 rows of 4 dots = <b>12</b><br>Only the “hard” facts to drill: 3×6, 3×7, 3×8, 4×6, 4×7, 4×8, 6×7, 6×8, 7×8</div>
+    <div class="act">✏️ Activity: build 4 × 6 as an array of dots, then turn the paper 90° — it becomes 6 × 4, same total.</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>3 groups of 5 = __</li>
+        <li>7 × 4 = __</li>
+        <li>6 × 8 = __</li>
+        <li>If 8 × 3 = 24, what is 3 × 8?</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. 15  2. 28  3. 48  4. 24 (order doesn't change the product)</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Times tables”</a>
+  </div>
+
+  <div class="lesson" id="l10">
+    <h2><span class="num">10</span> ➗ Division</h2>
+    <div class="obj">🎯 Objective: understand ÷ as equal sharing/grouping and use the ×↔÷ link.</div>
+    <h3>The idea</h3>
+    <div class="idea">Division means <b>share equally</b> (12 ÷ 3 = share 12 into 3 groups → 4 each) or <b>make groups</b> (how many 3s in 12? → 4). It's the <b>opposite of ×</b>: 3 × 4 = 12, so 12 ÷ 4 = 3 and 12 ÷ 3 = 4.</div>
+    <h3>On the board</h3>
+    <div class="board">15 ÷ 3 = <b>5</b>  ·  20 ÷ 4 = <b>5</b><br>Fact family: 6 × 7 = 42 → 42 ÷ 6 = 7 → 42 ÷ 7 = 6</div>
+    <div class="act">✏️ Activity: deal 18 cards equally to 3 players — how many each? Now to 6 players?</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>18 ÷ 3 = __</li>
+        <li>28 ÷ 4 = __</li>
+        <li>35 ÷ 5 = __</li>
+        <li>6 × 9 = 54, so 54 ÷ 9 = __</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. 6  2. 7  3. 7  4. 6</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Division”</a>
+  </div>
+
+  <div class="lesson" id="l11">
+    <h2><span class="num">11</span> ✳️ Multi-digit multiplication</h2>
+    <div class="obj">🎯 Objective: multiply a 2-digit number by a 1-digit number.</div>
+    <h3>The idea</h3>
+    <div class="idea">Split the 2-digit number into <b>tens + ones</b> (the area method), multiply each part, then add. 23 × 4 = (20 × 4) + (3 × 4) = 80 + 12 = 92.</div>
+    <h3>On the board</h3>
+    <div class="board">23 × 4:  20 × 4 = 80,  3 × 4 = 12,  80 + 12 = <b>92</b><br>Written: 4 × 3 = 12 (write 2, carry 1); 4 × 2 = 8, + 1 = 9 → <b>92</b></div>
+    <div class="act">✏️ Activity: draw a 2-box area model (tens box, ones box) for 15 × 4 and fill each box.</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>13 × 3 = __</li>
+        <li>24 × 2 = __</li>
+        <li>15 × 4 = __</li>
+        <li>32 × 3 = __</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. 39  2. 48  3. 60  4. 96</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Multi-digit ×”</a>
+  </div>
+
+  <div class="lesson" id="l12">
+    <h2><span class="num">12</span> 🍕 Fractions</h2>
+    <div class="obj">🎯 Objective: read a fraction, compare fractions, and recognise equivalent fractions.</div>
+    <h3>The idea</h3>
+    <div class="idea">A fraction is <b>equal parts of one whole</b>. The <b>bottom</b> (denominator) = how many equal parts the whole is cut into; the <b>top</b> (numerator) = how many you take. With the same bottom, the bigger top is bigger. <b>Equivalent</b> fractions name the same amount (1/2 = 2/4).</div>
+    <h3>On the board</h3>
+    <div class="board">3/4 = 3 of 4 equal parts shaded<br>1/4 &lt; 3/4  ·  but 1/8 &lt; 1/4 (eighths are smaller pieces!)  ·  1/2 = 2/4 = 3/6</div>
+    <div class="act">✏️ Activity: fold a paper strip in halves, then quarters — show 1/2 = 2/4 by lining them up.</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>A pizza is cut into 8 equal slices; you eat 3. What fraction did you eat?</li>
+        <li>Which is bigger: 2/5 or 4/5?</li>
+        <li>Which is bigger: 1/3 or 1/6?</li>
+        <li>Fill in: 1/2 = __/4</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. 3/8  2. 4/5  3. 1/3  4. 2/4 (top = 2)</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Fractions”</a>
+  </div>
+
+  <div class="lesson" id="l13">
+    <h2><span class="num">13</span> 💵 Decimals &amp; money</h2>
+    <div class="obj">🎯 Objective: read decimals (tenths/hundredths), link them to money and fractions, and add/subtract them.</div>
+    <h3>The idea</h3>
+    <div class="idea">Decimals show parts of a whole: 0.1 = 1/10, 0.5 = 5/10 = 1/2. Money is the easy doorway: $3.75 = 3 dollars and 75 cents. To add/subtract, <b>line up the decimal points</b>.</div>
+    <div class="idea" style="border-left-color:var(--rose);background:#fef2f2">🌍 At school he sees a <b>comma</b>: « 3,75 ». Tell him <b>3,75 (school) = 3.75 (here)</b> — same number.</div>
+    <h3>On the board</h3>
+    <div class="board">0.5 = 1/2  ·  $2.50 + $1.25 = <b>$3.75</b>  ·  0.7 + 0.2 = <b>0.9</b></div>
+    <div class="act">✏️ Activity: use real coins — show $0.50 as two quarters, and 0.5 as half a dollar.</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>Write 0.5 as a fraction.</li>
+        <li>$4.25 + $3.50 = __</li>
+        <li>$10.00 − $6.75 = __</li>
+        <li>Which is more: 0.6 or 0.60?</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. 1/2 (or 5/10)  2. $7.75  3. $3.25  4. they are equal</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Decimals &amp; money”</a>
+  </div>
+
+  <div class="lesson" id="l14">
+    <h2><span class="num">14</span> 🦋 Symmetry &amp; reflection</h2>
+    <div class="obj">🎯 Objective: find lines of symmetry, reflect a shape, and recognise a repeating frieze.</div>
+    <h3>The idea</h3>
+    <div class="idea">A shape has a <b>line of symmetry</b> if it folds onto itself exactly. A <b>reflection</b> is a mirror flip across a line. A <b>frieze</b> is a border pattern that repeats by <b>sliding</b>.</div>
+    <h3>On the board</h3>
+    <div class="board">Square → 4 lines of symmetry  ·  “A” → 1 (vertical)  ·  “S” → 0<br>Reflect a flag shape across a vertical mirror line.</div>
+    <div class="act">✏️ Activity: fold letters cut from paper to test symmetry; make a frieze by stamping the same shape along a line.</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>How many lines of symmetry does a square have?</li>
+        <li>Does the letter “H” have a line of symmetry?</li>
+        <li>Does the letter “R” have a line of symmetry?</li>
+        <li>A frieze repeats by ___ (sliding / growing)?</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. 4  2. yes (2: vertical &amp; horizontal)  3. no  4. sliding</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Geometry”</a>
+  </div>
+
+  <div class="lesson" id="l15">
+    <h2><span class="num">15</span> 📍 The coordinate grid</h2>
+    <div class="obj">🎯 Objective: locate and name points on a grid with an ordered pair.</div>
+    <h3>The idea</h3>
+    <div class="idea">A point is named by an <b>ordered pair</b> (across, then up). Start at 0, go <b>right</b> the first number, then <b>up</b> the second: (right, up).</div>
+    <h3>On the board</h3>
+    <div class="board">(3, 2) → 3 right, 2 up  ·  Remember: <b>across before up</b> (“crawl before you climb”).</div>
+    <div class="act">✏️ Activity: play “treasure grid” — hide a star at a pair and have him find it, then swap roles.</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>In (4, 1), which number says how far to go RIGHT?</li>
+        <li>Start at 0; go 2 right and 5 up. Write the pair.</li>
+        <li>Point A is 0 right and 3 up. Write it.</li>
+        <li>Which comes first in a pair — across or up?</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. 4  2. (2, 5)  3. (0, 3)  4. across (right)</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Geometry”</a>
+  </div>
+
+  <div class="lesson" id="l16">
+    <h2><span class="num">16</span> 📐 Angles &amp; lines</h2>
+    <div class="obj">🎯 Objective: identify right/acute/obtuse angles and parallel/perpendicular lines.</div>
+    <h3>The idea</h3>
+    <div class="idea">A <b>right angle</b> is a square corner (like the corner of a page). Smaller = <b>acute</b>, bigger = <b>obtuse</b>. <b>Parallel</b> lines never meet (train tracks); <b>perpendicular</b> lines cross at a right angle (a “+”).</div>
+    <h3>On the board</h3>
+    <div class="board">Corner of paper = right angle  ·  ‖ train tracks = parallel  ·  + = perpendicular</div>
+    <div class="act">✏️ Activity: use the corner of a card to test which classroom angles are right, smaller, or bigger.</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>What do we call a “square corner” angle?</li>
+        <li>Parallel or perpendicular: railway tracks?</li>
+        <li>Parallel or perpendicular: the two lines of a “+”?</li>
+        <li>An angle smaller than a right angle is called ___.</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. a right angle  2. parallel  3. perpendicular  4. acute</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Geometry”</a>
+  </div>
+
+  <div class="lesson" id="l17">
+    <h2><span class="num">17</span> ⬡ Polygons</h2>
+    <div class="obj">🎯 Objective: recognise and name polygons by their number of sides.</div>
+    <h3>The idea</h3>
+    <div class="idea">A <b>polygon</b> is a closed shape made only of straight sides. Named by sides: triangle (3), quadrilateral (4), pentagon (5), hexagon (6). A circle is <b>not</b> a polygon — it's curved.</div>
+    <h3>On the board</h3>
+    <div class="board">△ triangle = 3 sides · ▢ quadrilateral = 4 · ⬠ pentagon = 5 · ⬡ hexagon = 6</div>
+    <div class="act">✏️ Activity: hunt for polygons around the room and count each one's sides.</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>How many sides does a pentagon have?</li>
+        <li>A shape with 4 straight sides is a ___.</li>
+        <li>Is a circle a polygon?</li>
+        <li>How many sides does a hexagon have?</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. 5  2. quadrilateral  3. no (it is curved)  4. 6</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Geometry”</a>
+  </div>
+
+  <div class="lesson" id="l18">
+    <h2><span class="num">18</span> 📦 Solids &amp; nets</h2>
+    <div class="obj">🎯 Objective: describe prisms and pyramids and recognise their nets.</div>
+    <h3>The idea</h3>
+    <div class="idea"><b>Prisms</b> have two identical ends and rectangle sides (a cereal box, a can). <b>Pyramids</b> have one base and triangle sides meeting at a point. A <b>net</b> is the solid unfolded flat.</div>
+    <h3>On the board</h3>
+    <div class="board">Cube → 6 square faces; its net = 6 squares<br>Rectangular prism = box · Triangular pyramid = 4 triangle faces</div>
+    <div class="act">✏️ Activity: unfold an empty box and lay it flat — that flat shape is its net; count the faces.</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>How many faces does a cube have?</li>
+        <li>A pyramid's side faces are shaped like ___.</li>
+        <li>The flat, unfolded version of a solid is called a ___.</li>
+        <li>A cereal box is a ___ (prism / pyramid)?</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. 6  2. triangles  3. net  4. prism (a rectangular prism)</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Geometry”</a>
+  </div>
+
+  <div class="lesson" id="l19">
+    <h2><span class="num">19</span> 📏 Length, perimeter &amp; area</h2>
+    <div class="obj">🎯 Objective: measure length (metric), and tell perimeter apart from area.</div>
+    <h3>The idea</h3>
+    <div class="idea">Length: mm, cm, m, km (<b>100 cm = 1 m</b>). <b>Perimeter</b> = the distance all the way <b>around</b> the edge (add every side). <b>Area</b> = the space <b>inside</b>, counted in squares.</div>
+    <h3>On the board</h3>
+    <div class="board">Rectangle 4 cm by 3 cm:<br>Perimeter = 4 + 3 + 4 + 3 = <b>14 cm</b>  ·  Area = 4 × 3 = <b>12 squares</b></div>
+    <div class="act">✏️ Activity: on grid paper, draw a rectangle; walk a finger around the edge (perimeter) then colour the squares inside (area).</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>1 metre = ___ cm</li>
+        <li>Perimeter of a square with side 5 cm?</li>
+        <li>Area of a 6-by-2 rectangle (in squares)?</li>
+        <li>Perimeter of a rectangle 7 cm by 3 cm?</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. 100  2. 20 cm  3. 12  4. 20 cm</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Measurement”</a>
+  </div>
+
+  <div class="lesson" id="l20">
+    <h2><span class="num">20</span> ⏰ Time</h2>
+    <div class="obj">🎯 Objective: know time units and read an analog clock.</div>
+    <h3>The idea</h3>
+    <div class="idea">60 seconds = 1 minute · 60 minutes = 1 hour · 24 hours = 1 day · 7 days = 1 week · 12 months = 1 year. On a clock, the <b>short hand</b> = hour, the <b>long hand</b> = minutes, and each number = <b>5 minutes</b>.</div>
+    <h3>On the board</h3>
+    <div class="board">Long hand on 3 → 15 minutes  ·  Long hand on 6 → 30 minutes (half past)</div>
+    <div class="act">✏️ Activity: set a paper clock to “3:30”, “quarter past 4”, and “10 to 6”.</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>How many minutes in 1 hour?</li>
+        <li>The long hand points to 6 — how many minutes past the hour?</li>
+        <li>How many days in a week?</li>
+        <li>It is 4:00. In 30 minutes it will be ___.</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. 60  2. 30  3. 7  4. 4:30</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Measurement”</a>
+  </div>
+
+  <div class="lesson" id="l21">
+    <h2><span class="num">21</span> 🧴 Volume, capacity &amp; mass</h2>
+    <div class="obj">🎯 Objective: choose sensible units for capacity and mass, and understand volume.</div>
+    <h3>The idea</h3>
+    <div class="idea"><b>Capacity</b> = how much a container holds (mL, L; <b>1000 mL = 1 L</b>). <b>Mass</b> = how heavy (g, kg; <b>1000 g = 1 kg</b>). <b>Volume</b> = the space a solid takes up (count unit cubes).</div>
+    <h3>On the board</h3>
+    <div class="board">Water bottle ≈ 500 mL · 1 L = 1000 mL · Bag of sugar = 1 kg = 1000 g<br>A tower of 8 unit cubes → volume = <b>8</b></div>
+    <div class="act">✏️ Activity: pour a 500 mL bottle twice into a 1 L jug — show 500 + 500 = 1000 mL = 1 L.</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>1 litre = ___ mL</li>
+        <li>1 kilogram = ___ g</li>
+        <li>Which unit for the mass of an apple: g or kg?</li>
+        <li>Which holds more: 2 L or 1500 mL?</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. 1000  2. 1000  3. grams (g)  4. 2 L (= 2000 mL)</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Measurement”</a>
+  </div>
+
+  <div class="lesson" id="l22">
+    <h2><span class="num">22</span> 📊 Data &amp; probability</h2>
+    <div class="obj">🎯 Objective: read tables/bar graphs, judge likelihood, and count combinations.</div>
+    <h3>The idea</h3>
+    <div class="idea">A <b>table</b> or <b>bar graph</b> organises data — the tallest bar shows the most. <b>Probability</b> is how likely something is: certain · likely · unlikely · impossible. <b>Combinations</b>: multiply the choices (2 shirts × 3 shorts = 6 outfits).</div>
+    <h3>On the board</h3>
+    <div class="board">Tallest bar = most popular  ·  Rolling a 7 on a 1–6 die = impossible<br>2 breads × 3 fillings = <b>6</b> sandwiches</div>
+    <div class="act">✏️ Activity: list all outfits from 2 tops and 3 bottoms — count them, then check with 2 × 3.</div>
+    <div class="ex"><h3 style="margin-top:0">Exercises</h3>
+      <ol>
+        <li>On a bar graph, the tallest bar shows the ___ (most / least).</li>
+        <li>Rolling a 7 on a normal die is ___ (certain / impossible).</li>
+        <li>A bag has 9 red and 1 blue marble. Drawing red is ___ (likely / unlikely).</li>
+        <li>2 kinds of bread × 3 fillings = ___ sandwiches.</li>
+      </ol>
+      <details class="key"><summary>Show answers</summary><p>1. most  2. impossible  3. likely  4. 6</p></details>
+    </div>
+    <a class="quiz" href="math-grade3-prep.html">▶ Practice: “Data &amp; probability”</a>
+  </div>
+
+  <footer>
+    Happy teaching! 🌟 Each lesson runs in about 30–40 minutes.<br>
+    <span>Grade 3 Math lessons (English). Print with the 🖨️ button at the top.</span>
+  </footer>
+</div>
+</body>
+</html>

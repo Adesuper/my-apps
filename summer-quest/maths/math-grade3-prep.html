@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 3 Math — Get Ready! 🧮</title>
+<style>
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  :root{ --ink:#12203a; --blue:#1d4ed8; --teal:#0e7490; --rose:#e11d48; --green:#15803d; --amber:#b45309; --card:#fff; }
+  body{ font-family:'Trebuchet MS',system-ui,sans-serif; color:var(--ink); line-height:1.55; background:linear-gradient(160deg,#e0f2fe,#eef2ff); padding:0 0 60px; }
+  header{ text-align:center; padding:38px 18px 30px; color:#fff; background:linear-gradient(135deg,#0e7490,#1d4ed8); border-radius:0 0 34px 34px; box-shadow:0 10px 30px rgba(29,78,216,.28); }
+  header h1{ font-size:2.1rem; } header p{ font-size:1.1rem; margin-top:8px; opacity:.96; }
+  .badge{ display:inline-block; background:rgba(255,255,255,.2); padding:5px 16px; border-radius:999px; font-weight:bold; margin-bottom:12px; letter-spacing:.5px; }
+  .wrap{ max-width:860px; margin:0 auto; padding:0 16px; }
+  .card{ background:var(--card); border-radius:22px; padding:24px 22px; margin:20px 0; box-shadow:0 8px 22px rgba(20,40,90,.09); border:3px solid #e0f0fb; }
+  h2{ color:var(--teal); font-size:1.4rem; margin-bottom:8px; display:flex; gap:10px; align-items:center; }
+  p{ font-size:1.05rem; margin:8px 0; }
+  .tag{ display:inline-block; background:#e0f2fe; color:var(--teal); padding:3px 12px; border-radius:999px; font-size:.82rem; font-weight:bold; margin-bottom:6px; letter-spacing:.3px; }
+  .tip{ background:#fffbeb; border-left:6px solid var(--amber); padding:10px 14px; border-radius:10px; margin:12px 0; font-size:1rem; }
+  table{ border-collapse:collapse; width:100%; margin:10px 0; font-size:1rem; }
+  th,td{ border:1px solid #dbe4f3; padding:7px 10px; text-align:center; } th{ background:#eff6ff; color:var(--blue); }
+  td b{ color:var(--rose); }
+  .skillgrid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; margin-top:12px; }
+  .skill{ background:linear-gradient(140deg,#e0f2fe,#eef2ff); border:2px solid #e0f0fb; border-radius:16px; padding:12px 10px; text-align:center; cursor:pointer; font-family:inherit; transition:transform .1s; }
+  .skill:hover{ transform:translateY(-2px); border-color:var(--teal); }
+  .skill .emo{ font-size:1.6rem; display:block; } .skill b{ display:block; margin:4px 0 2px; color:var(--ink); font-size:.96rem; }
+  .skill span.d{ font-size:.78rem; color:#6b7280; }
+  #play{ display:none; }
+  .qbar{ display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+  .chip{ background:#e0f2fe; color:var(--teal); padding:4px 12px; border-radius:999px; font-weight:bold; font-size:.9rem; }
+  .ghost{ background:#fff; border:2px solid #cfe0f5; color:var(--teal); border-radius:999px; padding:6px 14px; cursor:pointer; font-family:inherit; font-weight:bold; }
+  #prompt{ font-size:1.25rem; font-weight:bold; text-align:center; margin:10px auto 16px; max-width:42ch; }
+  .choices{ display:grid; gap:10px; }
+  .opt{ background:#fff; border:2px solid #dbe4f3; border-radius:14px; padding:13px 16px; font-size:1.1rem; font-family:inherit; cursor:pointer; text-align:center; transition:all .12s; }
+  .opt:hover{ border-color:var(--teal); }
+  .opt.right{ background:#dcfce7; border-color:var(--green); color:#166534; font-weight:bold; }
+  .opt.wrong{ background:#ffe4e6; border-color:var(--rose); color:#9f1239; }
+  .fb{ text-align:center; font-weight:bold; min-height:26px; margin-top:12px; }
+  .fb.ok{ color:var(--green); } .fb.no{ color:var(--rose); }
+  .tipbox{ background:#fffbeb; border-left:6px solid var(--amber); padding:10px 14px; border-radius:10px; margin-top:10px; display:none; }
+  .big{ background:var(--teal); color:#fff; border:none; font-family:inherit; cursor:pointer; font-size:1.05rem; padding:12px 24px; border-radius:999px; box-shadow:0 4px 0 #0b566b; }
+  .big:active{ transform:translateY(2px); box-shadow:0 2px 0 #0b566b; }
+  footer{ text-align:center; color:#6b7280; font-size:.95rem; margin-top:28px; padding:0 20px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">MATH • GRADE 3</div>
+  <h1>Get Ready for Grade 3 Math! 🧮</h1>
+  <p>A head start on place value, times tables, fractions, measurement and more.</p>
+</header>
+
+<div class="wrap">
+
+  <div class="card">
+    <span class="tag">HOW IT WORKS</span>
+    <h2>📚 Learn a little, then practise</h2>
+    <p>At the top are <b>study cards</b> (the facts worth memorising). Below is a <b>quiz</b> with 16 topics — pick one, answer 5 questions, and play again as often as you like!</p>
+  </div>
+
+  <div class="card">
+    <span class="tag">CARD 1</span>
+    <h2>🔢 Place value</h2>
+    <p>Each digit's <b>value</b> depends on its place. Example: <b>3,742</b></p>
+    <table>
+      <tr><th>Thousands</th><th>Hundreds</th><th>Tens</th><th>Ones</th></tr>
+      <tr><td><b>3</b><br>3000</td><td><b>7</b><br>700</td><td><b>4</b><br>40</td><td><b>2</b><br>2</td></tr>
+    </table>
+    <div class="tip">💡 The 7 is worth <b>700</b>, not 7. To compare numbers, look from the <b>left</b> — the first place that differs wins.</div>
+  </div>
+
+  <div class="card">
+    <span class="tag">CARD 2</span>
+    <h2>✖️ Times tables — smart order</h2>
+    <p>Learn them in this order (easy → tricky): <b>2, 5, 10</b> → <b>4</b> (double the 2s) → <b>3</b> → <b>9</b> → squares (2×2, 3×3…) → <b>6, 7, 8</b>.</p>
+    <div class="tip">💡 Once you know 0, 1, 2, 5 and 10, only a few facts are “hard”: 3×6, 3×7, 3×8, 4×6, 4×7, 4×8, 6×7, 6×8, 7×8. And 4×6 = 6×4 — so you only learn each one once!</div>
+  </div>
+
+  <div class="card">
+    <span class="tag">CARD 3</span>
+    <h2>🍕 Fractions &amp; decimals</h2>
+    <p>The <b>bottom</b> number = how many equal parts; the <b>top</b> = how many you take. Bigger bottom = <b>smaller</b> pieces (1/8 &lt; 1/4).</p>
+    <table>
+      <tr><th>Fraction</th><th>Decimal</th><th>Money</th></tr>
+      <tr><td>1/2</td><td>0.5</td><td>$0.50</td></tr>
+      <tr><td>1/4</td><td>0.25</td><td>$0.25</td></tr>
+      <tr><td>1/10</td><td>0.1</td><td>$0.10</td></tr>
+    </table>
+    <div class="tip">💡 At school you'll see a comma: <b>3,5</b> means the same as <b>3.5</b>.</div>
+  </div>
+
+  <div class="card">
+    <span class="tag">CARD 4</span>
+    <h2>📏 Measurement facts</h2>
+    <table>
+      <tr><td>100 cm = <b>1 m</b></td><td>1000 mL = <b>1 L</b></td></tr>
+      <tr><td>1000 g = <b>1 kg</b></td><td>60 min = <b>1 hour</b></td></tr>
+    </table>
+    <div class="tip">💡 <b>Perimeter</b> = the distance <i>around</i> the edge (add the sides). <b>Area</b> = the space <i>inside</i>, counted in squares.</div>
+  </div>
+
+  <div class="card" id="menu">
+    <span class="tag">QUIZ</span>
+    <h2>🎮 Pick a topic</h2>
+    <p>16 topics from your Grade 3 year. Each game gives you 5 questions.</p>
+    <div class="skillgrid" id="topics"></div>
+  </div>
+
+  <div class="card" id="play">
+    <div class="qbar">
+      <button class="ghost" id="quit">← Other topic</button>
+      <span class="chip">Question <b id="qn">1</b>/5</span>
+    </div>
+    <div id="prompt">—</div>
+    <div class="choices" id="choices"></div>
+    <div class="fb" id="fb"></div>
+    <div class="tipbox" id="tipbox"></div>
+  </div>
+
+  <footer>
+    Great work — you're getting ahead! 🌟<br>
+    <span style="font-size:.88rem">For grown-ups: this practises the Grade 3 math program (place value, operations, fractions, decimals, geometry, measurement, data &amp; probability). Do a topic or two at a time. After a correct answer, ask “how do you know?”</span>
+  </footer>
+</div>
+
+<script>
+"use strict";
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const shuffle = a => { const r=[...a]; for(let i=r.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [r[i],r[j]]=[r[j],r[i]]; } return r; };
+
+// In every question, choices[0] is the correct answer; the engine shuffles them at display time.
+const TOPICS = [
+  {id:"place", emo:"🔢", name:"Place value", d:"tens, hundreds…", qs:[
+    {q:"In 5,281, what is the value of the 2?", choices:["200","20","2"], tip:"The 2 is in the hundreds place → 200."},
+    {q:"Which digit is in the hundreds place of 4,073?", choices:["0","4","7"], tip:"4 thousands, 0 hundreds, 7 tens, 3 ones."},
+    {q:"“Six thousand, four hundred nine” in digits is…", choices:["6,409","6,049","649"], tip:"No tens → put a 0 in the tens place: 6,409."},
+    {q:"In 3,742, the 7 is worth…", choices:["700","70","7"], tip:"It sits in the hundreds place."},
+    {q:"What number is 4 thousands, 0 hundreds, 5 tens, 6 ones?", choices:["4,056","4,506","456"], tip:"0 holds the hundreds place: 4,056."},
+    {q:"In 8,315, the 8 means…", choices:["8 thousands","8 hundreds","8 tens"], tip:"Leftmost digit here is the thousands."},
+  ]},
+  {id:"compare", emo:"⚖️", name:"Compare & order", d:"<, >, =", qs:[
+    {q:"Put the right sign: 4,318 __ 4,381", choices:["<",">","="], tip:"Same thousands & hundreds; 1 ten < 8 tens → <."},
+    {q:"Put the right sign: 7,900 __ 7,900", choices:["=","<",">"], tip:"Exactly the same number."},
+    {q:"2,650 in expanded form is…", choices:["2000 + 600 + 50","2000 + 650","265 + 0"], tip:"Add each digit's value."},
+    {q:"Which is the LEAST: 1,205 · 1,052 · 1,250?", choices:["1,052","1,205","1,250"], tip:"Compare the hundreds: 0 < 2."},
+    {q:"Which is the GREATEST: 3,400 · 3,040 · 3,004?", choices:["3,400","3,040","3,004"], tip:"Compare hundreds: 4 > 0."},
+    {q:"Put the right sign: 5,600 __ 5,060", choices:[">","<","="], tip:"6 hundreds > 0 hundreds → >."},
+  ]},
+  {id:"round", emo:"🎯", name:"Rounding", d:"nearest 10 / 100", qs:[
+    {q:"Round 63 to the nearest ten.", choices:["60","70","63"], tip:"3 is less than 5 → round down to 60."},
+    {q:"Round 85 to the nearest ten.", choices:["90","80","85"], tip:"5 → round up to 90."},
+    {q:"Round 472 to the nearest hundred.", choices:["500","400","470"], tip:"Tens digit is 7 (5+) → up to 500."},
+    {q:"Estimate 29 + 52 by rounding to tens.", choices:["80","70","90"], tip:"30 + 50 = 80."},
+    {q:"Round 148 to the nearest hundred.", choices:["100","200","150"], tip:"48 is less than 50 → down to 100."},
+    {q:"To round, look at the digit to the…", choices:["right","left","top"], tip:"5 or more → up; 4 or less → stay."},
+  ]},
+  {id:"types", emo:"🔟", name:"Number types", d:"even/odd, prime", qs:[
+    {q:"Is 38 even or odd?", choices:["even","odd","neither"], tip:"Ends in 8 → even."},
+    {q:"Is 51 even or odd?", choices:["odd","even","neither"], tip:"Ends in 1 → odd."},
+    {q:"Is 9 prime or composite?", choices:["composite","prime","even"], tip:"Factors 1, 3, 9 → more than two → composite."},
+    {q:"Is 11 prime or composite?", choices:["prime","composite","even"], tip:"Only 1 and 11 → prime."},
+    {q:"All the factors of 8 are…", choices:["1, 2, 4, 8","1, 8","2, 4"], tip:"Numbers that divide 8 evenly."},
+    {q:"A prime number has exactly…", choices:["2 factors","1 factor","3 factors"], tip:"1 and itself only."},
+  ]},
+  {id:"patterns", emo:"🔁", name:"Patterns", d:"find the rule", qs:[
+    {q:"Next number: 5, 10, 15, 20, __", choices:["25","24","30"], tip:"Rule: +5."},
+    {q:"Next number: 30, 27, 24, __", choices:["21","22","20"], tip:"Rule: −3."},
+    {q:"What is the rule for 2, 4, 8, 16?", choices:["×2 (doubling)","+2","+4"], tip:"Each is double the one before."},
+    {q:"What comes after 16 in 2, 4, 8, 16?", choices:["32","24","18"], tip:"16 × 2 = 32."},
+    {q:"6 bags of 10 marbles = …", choices:["60","16","600"], tip:"Skip-count by tens: 10, 20, … 60."},
+    {q:"Next number: 100, 90, 80, __", choices:["70","60","90"], tip:"Rule: −10."},
+  ]},
+  {id:"addsub", emo:"➕", name:"+/− facts", d:"mental math", qs:[
+    {q:"9 + 6 = ?", choices:["15","16","14"], tip:"Make 10: 9 + 1 = 10, then + 5."},
+    {q:"6 + 7 = ?", choices:["13","12","14"], tip:"Near double: double 6 is 12, + 1."},
+    {q:"14 − 8 = ?", choices:["6","7","5"], tip:"14 − 10 = 4, then + 2."},
+    {q:"7 + 5 = 12, so 12 − 5 = ?", choices:["7","6","5"], tip:"Fact family — undo the addition."},
+    {q:"Double 8 = ?", choices:["16","18","15"], tip:"8 + 8."},
+    {q:"15 − 9 = ?", choices:["6","7","5"], tip:"15 − 10 = 5, then + 1."},
+  ]},
+  {id:"bigaddsub", emo:"🧮", name:"Big +/−", d:"regrouping", qs:[
+    {q:"265 + 137 = ?", choices:["402","392","412"], tip:"5+7=12 carry 1; 6+3+1=10 carry 1; 2+1+1=4."},
+    {q:"428 + 385 = ?", choices:["813","803","713"], tip:"Carry twice."},
+    {q:"640 − 275 = ?", choices:["365","375","265"], tip:"Borrow from the tens and hundreds."},
+    {q:"700 − 458 = ?", choices:["242","252","342"], tip:"Borrow across the zeros."},
+    {q:"348 + 276 = ?", choices:["624","614","524"], tip:"8+6=14 carry 1; 4+7+1=12 carry 1; 3+2+1=6."},
+    {q:"Carrying means 10 ones become…", choices:["1 ten","1 hundred","10 tens"], tip:"That's why you carry a 1 to the next column."},
+  ]},
+  {id:"missing", emo:"❓", name:"Missing terms", d:"find the unknown", qs:[
+    {q:"6 + __ = 15", choices:["9","8","21"], tip:"15 − 6 = 9."},
+    {q:"__ − 8 = 7", choices:["15","1","56"], tip:"7 + 8 = 15."},
+    {q:"20 − __ = 12", choices:["8","32","12"], tip:"20 − 12 = 8."},
+    {q:"True or false: 5 + 7 = 6 + 6", choices:["true","false","can't tell"], tip:"Both sides make 12 → true."},
+    {q:"3 + __ = 10", choices:["7","6","13"], tip:"10 − 3 = 7."},
+    {q:"To find a missing added number, you…", choices:["subtract","add again","multiply"], tip:"Use the inverse operation."},
+  ]},
+  {id:"times", emo:"✖️", name:"Times tables", d:"× to 10", qs:[
+    {q:"3 groups of 5 = ?", choices:["15","8","35"], tip:"3 × 5."},
+    {q:"7 × 4 = ?", choices:["28","24","32"], tip:"Double 7 is 14, double again is 28."},
+    {q:"6 × 8 = ?", choices:["48","54","42"], tip:"6 × 8 = 48."},
+    {q:"8 × 3 is the same as 3 × 8. What is it?", choices:["24","27","21"], tip:"Order doesn't change the product."},
+    {q:"9 × 6 = ?", choices:["54","45","56"], tip:"The digits of the nine-times answers add to 9: 5+4=9."},
+    {q:"7 × 8 = ?", choices:["56","54","64"], tip:"A tricky one worth memorising: 56."},
+  ]},
+  {id:"division", emo:"➗", name:"Division", d:"share equally", qs:[
+    {q:"18 ÷ 3 = ?", choices:["6","5","9"], tip:"3 × 6 = 18."},
+    {q:"28 ÷ 4 = ?", choices:["7","6","8"], tip:"4 × 7 = 28."},
+    {q:"35 ÷ 5 = ?", choices:["7","6","8"], tip:"5 × 7 = 35."},
+    {q:"6 × 9 = 54, so 54 ÷ 9 = ?", choices:["6","9","8"], tip:"Fact family."},
+    {q:"12 shared equally among 3 = ?", choices:["4","3","6"], tip:"12 ÷ 3."},
+    {q:"Division is the opposite of…", choices:["multiplication","addition","subtraction"], tip:"× and ÷ undo each other."},
+  ]},
+  {id:"multidigit", emo:"✳️", name:"Multi-digit ×", d:"2-digit × 1", qs:[
+    {q:"13 × 3 = ?", choices:["39","36","33"], tip:"(10×3) + (3×3) = 30 + 9."},
+    {q:"24 × 2 = ?", choices:["48","46","44"], tip:"(20×2) + (4×2) = 40 + 8."},
+    {q:"15 × 4 = ?", choices:["60","45","50"], tip:"(10×4) + (5×4) = 40 + 20."},
+    {q:"32 × 3 = ?", choices:["96","93","69"], tip:"(30×3) + (2×3) = 90 + 6."},
+    {q:"20 × 4 = ?", choices:["80","24","8"], tip:"2 × 4 = 8, then add the zero."},
+    {q:"23 × 4 = ?", choices:["92","82","86"], tip:"80 + 12 = 92."},
+  ]},
+  {id:"fractions", emo:"🍕", name:"Fractions", d:"parts of a whole", qs:[
+    {q:"A pizza has 8 equal slices; you eat 3. What fraction?", choices:["3/8","8/3","5/8"], tip:"3 taken out of 8 equal parts."},
+    {q:"Which is bigger: 2/5 or 4/5?", choices:["4/5","2/5","equal"], tip:"Same bottom → bigger top wins."},
+    {q:"Which is bigger: 1/3 or 1/6?", choices:["1/3","1/6","equal"], tip:"Thirds are bigger pieces than sixths."},
+    {q:"1/2 = __/4", choices:["2/4","1/4","3/4"], tip:"Two quarters make one half."},
+    {q:"The bottom number of a fraction tells…", choices:["how many equal parts","how many you take","the total"], tip:"The denominator = number of equal parts."},
+    {q:"Which fraction equals 1/2?", choices:["2/4","2/3","1/4"], tip:"2/4 is the same amount."},
+  ]},
+  {id:"decimals", emo:"💵", name:"Decimals & money", d:"tenths, dollars", qs:[
+    {q:"0.5 written as a fraction is…", choices:["1/2","1/5","5"], tip:"5 tenths = one half."},
+    {q:"$4.25 + $3.50 = ?", choices:["$7.75","$7.55","$8.75"], tip:"Line up the decimal points."},
+    {q:"$10.00 − $6.75 = ?", choices:["$3.25","$3.75","$4.25"], tip:"10.00 − 6.75."},
+    {q:"Which is more: 0.6 or 0.60?", choices:["they are equal","0.6","0.60"], tip:"0.6 and 0.60 are the same value."},
+    {q:"0.7 + 0.2 = ?", choices:["0.9","0.09","1.0"], tip:"7 tenths + 2 tenths = 9 tenths."},
+    {q:"At school, 3.5 is written as…", choices:["3,5","35","3;5"], tip:"French/Québec uses a comma for decimals."},
+  ]},
+  {id:"geometry", emo:"📐", name:"Geometry", d:"shapes & angles", qs:[
+    {q:"How many lines of symmetry does a square have?", choices:["4","2","1"], tip:"Vertical, horizontal and both diagonals."},
+    {q:"A “square corner” angle is called…", choices:["a right angle","an acute angle","an obtuse angle"], tip:"Like the corner of a page."},
+    {q:"Railway tracks are…", choices:["parallel","perpendicular","curved"], tip:"They never meet."},
+    {q:"How many sides does a pentagon have?", choices:["5","6","4"], tip:"Penta = five."},
+    {q:"How many faces does a cube have?", choices:["6","4","8"], tip:"Six squares."},
+    {q:"On a grid, (3, 2) means…", choices:["3 right, 2 up","2 right, 3 up","3 up, 2 right"], tip:"Across before up."},
+    {q:"Is a circle a polygon?", choices:["no, it is curved","yes"], tip:"Polygons have straight sides only."},
+  ]},
+  {id:"measurement", emo:"📏", name:"Measurement", d:"length, time…", qs:[
+    {q:"1 metre = ?", choices:["100 cm","10 cm","1000 cm"], tip:"100 centimetres in a metre."},
+    {q:"Perimeter of a square with side 5 cm?", choices:["20 cm","10 cm","25 cm"], tip:"5 + 5 + 5 + 5."},
+    {q:"Area of a 6-by-2 rectangle (in squares)?", choices:["12","16","8"], tip:"6 × 2 = 12 squares inside."},
+    {q:"1 litre = ?", choices:["1000 mL","100 mL","10 mL"], tip:"A big bottle."},
+    {q:"1 kilogram = ?", choices:["1000 g","100 g","500 g"], tip:"1000 grams."},
+    {q:"How many minutes in 1 hour?", choices:["60","30","100"], tip:"60 minutes."},
+    {q:"Perimeter is the distance…", choices:["around the edge","inside","across the middle"], tip:"Area is the space inside; perimeter is around."},
+  ]},
+  {id:"data", emo:"📊", name:"Data & probability", d:"graphs, chance", qs:[
+    {q:"On a bar graph, the tallest bar shows the…", choices:["most","least","middle"], tip:"Taller bar = bigger amount."},
+    {q:"Rolling a 7 on a normal 1–6 die is…", choices:["impossible","certain","likely"], tip:"There is no 7 on the die."},
+    {q:"A bag has 9 red and 1 blue marble. Drawing red is…", choices:["likely","unlikely","impossible"], tip:"Many more red than blue."},
+    {q:"2 kinds of bread × 3 fillings = … sandwiches", choices:["6","5","23"], tip:"Multiply the choices: 2 × 3."},
+    {q:"Something sure to happen is…", choices:["certain","impossible","unlikely"], tip:"Certain = will definitely happen."},
+    {q:"2 shirts × 4 shorts = … outfits", choices:["8","6","24"], tip:"2 × 4 = 8."},
+  ]},
+];
+
+let state=null;
+const $ = id => document.getElementById(id);
+
+function renderMenu(){
+  $("menu").style.display=""; $("play").style.display="none";
+  $("topics").innerHTML = TOPICS.map(t=>
+    `<button class="skill" data-id="${t.id}"><span class="emo">${t.emo}</span><b>${t.name}</b><span class="d">${t.d}</span></button>`).join("");
+}
+$("topics").addEventListener("click",e=>{ const b=e.target.closest("[data-id]"); if(b) start(b.dataset.id); });
+$("quit").addEventListener("click", renderMenu);
+
+function start(id){
+  const topic=TOPICS.find(t=>t.id===id);
+  const pool=shuffle(topic.qs).slice(0,5);
+  state={topic, pool, n:0, correct:0};
+  $("menu").style.display="none"; $("play").style.display="";
+  next();
+}
+function next(){
+  if(state.n>=state.pool.length){ finish(); return; }
+  const q=state.pool[state.n]; state.q=q;
+  $("qn").textContent=state.n+1;
+  $("prompt").textContent=q.q;
+  $("tipbox").style.display="none";
+  const fb=$("fb"); fb.textContent=""; fb.className="fb";
+  // choices[0] is correct; shuffle for display and remember which is right.
+  const opts=shuffle(q.choices.map((text,i)=>({text, correct:i===0})));
+  const box=$("choices"); box.innerHTML="";
+  opts.forEach(o=>{
+    const b=document.createElement("button");
+    b.className="opt"; b.textContent=o.text; b.dataset.correct=o.correct?"1":"0";
+    b.addEventListener("click",()=>check(b));
+    box.appendChild(b);
+  });
+}
+function check(btn){
+  const q=state.q;
+  document.querySelectorAll("#choices .opt").forEach(b=>{ b.disabled=true; if(b.dataset.correct==="1") b.classList.add("right"); });
+  const fb=$("fb");
+  if(btn.dataset.correct==="1"){ state.correct++;
+    fb.textContent=pick(["Correct! ⭐","Yes! 🎉","Nice! 💡","You got it! 💪"]); fb.className="fb ok"; }
+  else { btn.classList.add("wrong"); fb.textContent="Good try!"; fb.className="fb no"; }
+  if(q.tip){ const t=$("tipbox"); t.innerHTML="💡 <b>Remember:</b> "+q.tip; t.style.display=""; }
+  state.n++;
+  setTimeout(next, q.tip?2600:1300);
+}
+function finish(){
+  const c=state.correct, total=state.pool.length;
+  $("prompt").textContent = c===total?"Brilliant! 🏆":(c>=3?"Well done! 🌟":"Keep practising! 💪");
+  $("choices").innerHTML=`<button class="big" id="again" style="justify-self:center">Play again 🔁</button>`;
+  $("tipbox").style.display="none";
+  const fb=$("fb"); fb.textContent=`You got ${c} out of ${total} right!`; fb.className="fb ok";
+  $("again").addEventListener("click",()=>start(state.topic.id));
+}
+renderMenu();
+</script>
+</body>
+</html>

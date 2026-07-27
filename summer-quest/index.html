@@ -298,6 +298,7 @@
   <section id="math" class="view">
     <div class="topback"><button class="back" data-go="home">← Back to map</button></div>
     <div class="vhead"><div class="vic" style="background:var(--sky)">🔢</div><div><h2>Math Mountain</h2><p>Pick a skill, answer the questions, earn XP. Each correct answer = +2 XP.</p></div></div>
+    <div class="parentbox">🧮 <b>Getting ready for Grade 3 math?</b> Open <a href="maths/math-grade3-prep.html">Get Ready for Grade 3 Math</a> — study cards + a 16-topic quiz on place value, times tables, fractions, measurement & more.</div>
     <div class="panel" id="mathMenu">
       <div class="levelbar"></div>
       <p class="eyebrow">Choose your climb</p>
@@ -488,7 +489,8 @@
   <p><b>Summer Quest</b> · A learn-and-build adventure built for one curious 8-year-old. Progress saves automatically on this device.</p>
   <p class="note">For grown-ups: this complements his school work (math & French) and adds STEM, chess and real electronics with the Raspberry Pi. Aim for ~20–45 focused minutes, then go play. Boredom builds creativity too.</p>
   <p class="note"><button class="markbtn" id="resetBtn" style="margin-top:6px">↺ Reset all progress</button>
-    <button class="markbtn" id="teacherBtn" style="margin-top:6px;margin-left:8px">👩‍🏫 Teacher / Enseignant area</button></p>
+    <button class="markbtn" id="teacherBtn" style="margin-top:6px;margin-left:8px">🇫🇷 French teacher area</button>
+    <button class="markbtn" id="mathTeacherBtn" style="margin-top:6px;margin-left:8px">🧮 Math teacher area</button></p>
 </footer>
 
 <div id="toast"></div>
@@ -1821,13 +1823,15 @@ document.getElementById("resetBtn").addEventListener("click",()=>{
     S=defaultState(); save(); location.reload();
   }
 });
-// Grown-up gate for the teacher area (keeps answer keys away from the child).
-document.getElementById("teacherBtn").addEventListener("click",()=>{
+// Grown-up gate for the teacher areas (keeps answer keys away from the child).
+function grownUpGate(dest){
   const ans=prompt("For grown-ups / réservé aux adultes.\nQuestion: 12 × 11 = ?");
   if(ans===null) return;
-  if(ans.trim()==="132"){ window.open("enseignant.html","_blank"); }
+  if(ans.trim()==="132"){ window.open(dest,"_blank"); }
   else { toast("That's for grown-ups 🙂"); }
-});
+}
+document.getElementById("teacherBtn").addEventListener("click",()=>grownUpGate("enseignant.html"));
+document.getElementById("mathTeacherBtn").addEventListener("click",()=>grownUpGate("math-teacher.html"));
 
 /* ============================================================
    INIT
