@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Python if / else — Practice</title>
+<style>
+  @page { size: A4; margin: 15mm 16mm; }
+  *{ box-sizing:border-box; }
+  body{ font-family:'Segoe UI',Arial,sans-serif; color:#14203a; line-height:1.5; margin:0; font-size:12pt; }
+  h1{ font-size:22pt; color:#0e7490; margin:0 0 2px; }
+  .sub{ color:#475569; margin:0 0 14px; font-size:11pt; }
+  h2{ font-size:14pt; color:#7c3aed; margin:18px 0 4px; border-bottom:2px solid #eee; padding-bottom:3px; }
+  h3{ font-size:12.5pt; color:#0e7490; margin:14px 0 2px; }
+  p{ margin:5px 0; }
+  .intro{ background:#f0f9ff; border:1px solid #bae6fd; border-radius:8px; padding:10px 14px; margin:10px 0 4px; }
+  .prog{ border:1px solid #e2e8f0; border-radius:8px; padding:8px 12px 10px; margin:10px 0; page-break-inside:avoid; }
+  .what{ color:#475569; font-size:11pt; margin:2px 0 6px; }
+  pre{ background:#f6f8fa; border:1px solid #d7dee8; border-radius:6px; padding:9px 12px; font-family:'Consolas','Courier New',monospace; font-size:10.5pt; line-height:1.45; white-space:pre; overflow:visible; margin:6px 0; }
+  .kw{ color:#7c3aed; font-weight:bold; } .fn{ color:#0e7490; font-weight:bold; } .st{ color:#166534; } .cm{ color:#94a3b8; }
+  .try{ background:#fffbeb; border-left:4px solid #d97706; padding:4px 10px; margin-top:6px; font-size:10.5pt; }
+  .file{ font-family:'Consolas',monospace; background:#eef2ff; color:#1d4ed8; padding:1px 7px; border-radius:5px; font-size:10pt; }
+  .challenge{ background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:8px 14px; margin:8px 0; page-break-inside:avoid; }
+  .line{ border-bottom:1px dashed #94a3b8; height:18px; margin:8px 0; }
+  .pagebreak{ page-break-before:always; }
+  .kit{ background:#faf5ff; border:1px solid #e9d5ff; border-radius:8px; padding:8px 14px; margin:8px 0; }
+  .warn{ background:#fef2f2; border-left:4px solid #e11d48; padding:6px 12px; margin:8px 0; font-size:11pt; }
+  table{ border-collapse:collapse; width:100%; font-size:10.5pt; margin:6px 0; }
+  td,th{ border:1px solid #d7dee8; padding:5px 8px; text-align:left; } th{ background:#eef2ff; }
+  .foot{ color:#94a3b8; font-size:9.5pt; text-align:center; margin-top:14px; }
+</style>
+</head>
+<body>
+
+  <h1>Python: <span style="color:#7c3aed">if / else</span> 🐍</h1>
+  <p class="sub">Programs that ask a question, then <b>decide what to do</b>. Type them, run them, then try the little changes.</p>
+
+  <div class="intro">
+    <b>Two things every program below uses:</b><br>
+    • <span class="fn">input(</span><span class="st">"..."</span><span class="fn">)</span> asks the user to type something. Wrap it in <span class="fn">int(</span>…<span class="fn">)</span> to turn typed text into a number.<br>
+    • <span class="kw">if</span> / <span class="kw">elif</span> / <span class="kw">else</span> choose what happens. Don't forget the <b>colon :</b> and the <b>spaces</b> (indent) on the next line.
+  </div>
+  <p style="font-size:10.5pt;color:#475569"><b>How to run:</b> open the file in Thonny or IDLE, press <b>Run</b> (F5), and answer in the black window. Each program is saved in your <span class="file">python</span> folder.</p>
+
+  <div class="prog">
+    <h3>1. Age Checker <span class="file">6_age_checker.py</span></h3>
+    <p class="what">Asks your name and age, then says something different for big kids.</p>
+<pre><span class="cm"># input() asks; int() makes it a number</span>
+name = <span class="fn">input</span>(<span class="st">"What is your name? "</span>)
+age  = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"How old are you? "</span>))
+
+<span class="kw">if</span> age &gt;= 8:
+    <span class="fn">print</span>(<span class="st">"Wow "</span> + name + <span class="st">", you are a big kid!"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="st">"Hi "</span> + name + <span class="st">", you are a little star!"</span>)</pre>
+    <div class="try">✏️ <b>Try this:</b> add an <span class="kw">elif</span> age &gt;= 13 that prints <i>"You are a teenager!"</i></div>
+  </div>
+
+  <div class="prog">
+    <h3>2. Secret Door <span class="file">7_secret_door.py</span></h3>
+    <p class="what">A password checker. <b>==</b> asks "are these two the same?"</p>
+<pre><span class="fn">print</span>(<span class="st">"=== Secret Door ==="</span>)
+code = <span class="fn">input</span>(<span class="st">"Enter the secret word: "</span>)
+
+<span class="kw">if</span> code == <span class="st">"dragon"</span>:
+    <span class="fn">print</span>(<span class="st">"Correct! The door opens. Welcome in!"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="st">"Wrong word. The door stays shut."</span>)</pre>
+    <div class="try">✏️ <b>Try this:</b> change the secret word, then add an <span class="kw">elif</span> for a second word like <span class="st">"phoenix"</span>.</div>
+  </div>
+
+  <div class="prog">
+    <h3>3. Even or Odd <span class="file">8_even_or_odd.py</span> — this is your MATH class, in code!</h3>
+    <p class="what"><b>%</b> gives the remainder. If a number ÷ 2 leaves 0, it is even.</p>
+<pre>num = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"Type a whole number: "</span>))
+
+<span class="kw">if</span> num % 2 == 0:
+    <span class="fn">print</span>(<span class="fn">str</span>(num) + <span class="st">" is EVEN."</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="fn">str</span>(num) + <span class="st">" is ODD."</span>)</pre>
+    <div class="try">✏️ <b>Try this:</b> test 10, 7, 24 and 51. Then change 2 to 5 to test "counts by 5".</div>
+  </div>
+
+  <div class="prog">
+    <h3>4. Weather Helper <span class="file">9_weather_helper.py</span></h3>
+    <p class="what"><span class="kw">elif</span> lets you check <b>more than two</b> choices.</p>
+<pre>weather = <span class="fn">input</span>(<span class="st">"Weather? (sunny / rainy / snowy) "</span>)
+
+<span class="kw">if</span> weather == <span class="st">"sunny"</span>:
+    <span class="fn">print</span>(<span class="st">"Wear your sunglasses and a hat!"</span>)
+<span class="kw">elif</span> weather == <span class="st">"rainy"</span>:
+    <span class="fn">print</span>(<span class="st">"Take an umbrella and your boots."</span>)
+<span class="kw">elif</span> weather == <span class="st">"snowy"</span>:
+    <span class="fn">print</span>(<span class="st">"Put on a warm coat and gloves."</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="st">"Hmm, I do not know that weather."</span>)</pre>
+    <div class="try">✏️ <b>Try this:</b> add an <span class="kw">elif</span> for <span class="st">"windy"</span>. (Careful: "Sunny" is not the same as "sunny"!)</div>
+  </div>
+
+  <div class="prog">
+    <h3>5. Number Duel <span class="file">10_number_duel.py</span></h3>
+    <p class="what">Two numbers go in; <span class="kw">if</span> / <span class="kw">elif</span> / <span class="kw">else</span> find the bigger one.</p>
+<pre>a = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"First number:  "</span>))
+b = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"Second number: "</span>))
+
+<span class="kw">if</span> a &gt; b:
+    <span class="fn">print</span>(<span class="fn">str</span>(a) + <span class="st">" is bigger."</span>)
+<span class="kw">elif</span> a &lt; b:
+    <span class="fn">print</span>(<span class="fn">str</span>(b) + <span class="st">" is bigger."</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="st">"They are equal!"</span>)</pre>
+    <div class="try">✏️ <b>Try this:</b> also print their total, a + b.</div>
+  </div>
+
+  <div class="prog">
+    <h3>6. Mini Quiz <span class="file">11_mini_quiz.py</span></h3>
+    <p class="what">Everything together: input + <span class="kw">if</span>/<span class="kw">else</span> + keeping a score.</p>
+<pre>score = 0
+
+ans1 = <span class="fn">input</span>(<span class="st">"Q1: What is 7 x 8?  "</span>)
+<span class="kw">if</span> ans1 == <span class="st">"56"</span>:
+    <span class="fn">print</span>(<span class="st">"Correct!"</span>)
+    score = score + 1
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="st">"The answer is 56."</span>)
+
+<span class="fn">print</span>(<span class="st">"You scored "</span> + <span class="fn">str</span>(score))</pre>
+    <div class="try">✏️ <b>Try this:</b> add a second question and add 1 to the score when it's right.</div>
+  </div>
+
+  <h2>✍️ Your turn — write these yourself</h2>
+  <div class="challenge">
+    <b>Challenge 1 — Colour reply.</b> Ask for a colour. Print a different message for <b>red</b>, <b>blue</b> and <b>green</b>, and an <span class="kw">else</span> for anything else.
+    <div class="line"></div><div class="line"></div><div class="line"></div>
+  </div>
+  <div class="challenge">
+    <b>Challenge 2 — Rollercoaster.</b> Ask the rider's height in cm. If it is <b>120 or more</b>, print "You can ride!" — otherwise "Grow a little more first."
+    <div class="line"></div><div class="line"></div><div class="line"></div>
+  </div>
+  <div class="challenge">
+    <b>Challenge 3 — Your own idea.</b> Ask the user something, then use <span class="kw">if</span> / <span class="kw">elif</span> / <span class="kw">else</span> to reply.
+    <div class="line"></div><div class="line"></div><div class="line"></div>
+  </div>
+
+  <!-- ================= PAGE 2: RASPBERRY PI PROJECT ================= -->
+  <div class="pagebreak"></div>
+  <h1>🔌 Build it for real: <span style="color:#7c3aed">Secret Door</span></h1>
+  <p class="sub">Take program #2 off the screen and into the real world with your Raspberry Pi + Freenove kit. Do <b>Step 1</b> first (just lights &amp; a beep), then add the screen in <b>Step 2</b>.</p>
+
+  <div class="warn">👨‍👩‍👧 <b>Grown-up helps with the wiring.</b> Always power the Pi <b>OFF</b> before connecting wires, and use the 220 Ω resistors with the LEDs.</div>
+
+  <h2>STEP 1 — lights &amp; buzzer only (no screen yet)</h2>
+  <p>Start here — it's the easiest wiring and there's nothing to install. Type the code and a light + beep react. That's the whole <span class="kw">if</span> / <span class="kw">else</span>, now with real lights!</p>
+  <h3>Parts</h3>
+  <p>1 green LED · 1 red LED · two 220 Ω resistors · 1 buzzer · breadboard · jumper wires. <b>(No screen needed yet.)</b></p>
+  <h3>Wiring (BCM pin numbers)</h3>
+  <table>
+    <tr><th>Part</th><th>Connect to</th></tr>
+    <tr><td>Green LED (+ 220 Ω)</td><td>GPIO17 (pin 11) → resistor → LED → GND</td></tr>
+    <tr><td>Red LED (+ 220 Ω)</td><td>GPIO27 (pin 13) → resistor → LED → GND</td></tr>
+    <tr><td>Buzzer</td><td>GPIO22 (pin 15) → buzzer → GND</td></tr>
+  </table>
+  <h3>The code <span class="file">secret_door_simple_pi.py</span></h3>
+<pre><span class="kw">from</span> gpiozero <span class="kw">import</span> LED, Buzzer
+<span class="kw">from</span> time <span class="kw">import</span> sleep
+
+green  = LED(17)
+red    = LED(27)
+buzzer = Buzzer(22)
+
+SECRET = <span class="st">"dragon"</span>           <span class="cm"># change to your own word!</span>
+
+code = <span class="fn">input</span>(<span class="st">"Enter the secret word: "</span>)
+
+<span class="kw">if</span> code == SECRET:
+    <span class="fn">print</span>(<span class="st">"Correct! Green light on."</span>)
+    green.on()
+    buzzer.on(); sleep(0.2); buzzer.off()
+    sleep(3); green.off()
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="st">"Wrong word. Red light on."</span>)
+    red.on()
+    sleep(3); red.off()</pre>
+
+  <h2 class="pagebreak">STEP 2 — add the screen (LCD1602)</h2>
+  <p>Once Step 1 works, add the little LCD screen so the message shows on the door itself. You keep the same lights &amp; buzzer and just add the screen.</p>
+  <h3>What it does</h3>
+  <p>You type a secret word. If it's right, the screen says <b>"Welcome in"</b>, the <b>green</b> light turns on and the buzzer gives a happy beep. If it's wrong, the screen says <b>"Door stays shut"</b> and the <b>red</b> light turns on. Same <span class="kw">if</span> / <span class="kw">else</span> — now on a real screen!</p>
+
+  <h3>Extra part &amp; wiring for the screen</h3>
+  <p>Add the <b>LCD1602</b> screen (the I²C one, 4 pins) to the Step 1 build:</p>
+  <table>
+    <tr><th>Part</th><th>Connect to</th></tr>
+    <tr><td>LCD1602 (I²C)</td><td>GND→GND · VCC→5V · SDA→GPIO2 (pin 3) · SCL→GPIO3 (pin 5)</td></tr>
+  </table>
+
+  <h3>Get the Pi ready for the screen (grown-up, once)</h3>
+  <ol style="font-size:11pt">
+    <li>Turn on I²C: <span class="file">sudo raspi-config</span> → Interface Options → I2C → Yes.</li>
+    <li>Find the screen's address: <span class="file">i2cdetect -y 1</span> (usually <b>0x27</b> or <b>0x3f</b>).</li>
+    <li>Copy the file <span class="file">LCD1602.py</span> from the kit's <b>"I2C LCD1602"</b> lesson into the same folder as the program.</li>
+  </ol>
+
+  <h3>The code <span class="file">secret_door_pi.py</span></h3>
+<pre><span class="kw">from</span> gpiozero <span class="kw">import</span> LED, Buzzer
+<span class="kw">from</span> time <span class="kw">import</span> sleep
+<span class="kw">import</span> LCD1602               <span class="cm"># from your Freenove kit</span>
+
+green  = LED(17)
+red    = LED(27)
+buzzer = Buzzer(22)
+
+SECRET = <span class="st">"dragon"</span>           <span class="cm"># change to your own word!</span>
+
+LCD1602.init(0x27, 1)       <span class="cm"># use YOUR address if not 0x27</span>
+LCD1602.clear()
+LCD1602.write(0, 0, <span class="st">"Secret Door"</span>)
+LCD1602.write(0, 1, <span class="st">"Type the code..."</span>)
+
+code = <span class="fn">input</span>(<span class="st">"Enter the secret word: "</span>)
+
+<span class="kw">if</span> code == SECRET:
+    LCD1602.clear()
+    LCD1602.write(0, 0, <span class="st">"Correct!"</span>)
+    LCD1602.write(0, 1, <span class="st">"Welcome in :)"</span>)
+    green.on()
+    buzzer.on(); sleep(0.2); buzzer.off()
+    sleep(3); green.off()
+<span class="kw">else</span>:
+    LCD1602.clear()
+    LCD1602.write(0, 0, <span class="st">"Wrong word!"</span>)
+    LCD1602.write(0, 1, <span class="st">"Door stays shut"</span>)
+    red.on()
+    sleep(3); red.off()
+
+LCD1602.clear()</pre>
+
+  <div class="try">🚀 <b>Level up once it works:</b> add an <span class="kw">elif</span> for a special "boss" code that shows a different message · give 3 tries before it locks · make the buzzer beep twice when correct.</div>
+
+  <p class="foot">Made for a curious coder. if / else — the superpower that lets a program decide. 🐍</p>
+
+</body>
+</html>
