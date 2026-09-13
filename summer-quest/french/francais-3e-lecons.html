@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Français 3ᵉ — Je comprends, puis je m'entraîne</title>
+<style>
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  :root{
+    --ink:#1a2233; --blue:#2563eb; --violet:#7c3aed; --rose:#e11d48;
+    --green:#16a34a; --amber:#d97706; --card:#fff; --grey:#6b7280;
+  }
+  body{ font-family:'Trebuchet MS',system-ui,sans-serif; color:var(--ink); line-height:1.55;
+    background:linear-gradient(160deg,#eef2ff,#fdf2f8); padding:0 0 60px; }
+  header{ text-align:center; padding:38px 18px 30px; color:#fff;
+    background:linear-gradient(135deg,#2563eb,#7c3aed); border-radius:0 0 34px 34px;
+    box-shadow:0 10px 30px rgba(124,58,237,.28); }
+  header h1{ font-size:2.1rem; } header p{ font-size:1.08rem; margin-top:8px; opacity:.96; }
+  .badge{ display:inline-block; background:rgba(255,255,255,.2); padding:5px 16px; border-radius:999px;
+    font-weight:bold; margin-bottom:12px; letter-spacing:.5px; }
+  .wrap{ max-width:880px; margin:0 auto; padding:0 16px; }
+  .card{ background:var(--card); border-radius:22px; padding:24px 22px; margin:20px 0;
+    box-shadow:0 8px 22px rgba(40,40,90,.09); border:3px solid #e6e9ff; scroll-margin-top:14px; }
+  h2{ color:var(--violet); font-size:1.38rem; margin-bottom:8px; }
+  h3{ color:var(--blue); margin:18px 0 6px; font-size:1.08rem; }
+  p{ font-size:1.04rem; margin:8px 0; }
+  .tag{ display:inline-block; background:#ede9fe; color:var(--violet); padding:3px 12px;
+    border-radius:999px; font-size:.8rem; font-weight:bold; margin-bottom:6px; letter-spacing:.3px; }
+  .tip{ background:#fffbeb; border-left:6px solid var(--amber); padding:10px 14px; border-radius:10px; margin:12px 0; }
+  .trap{ background:#fff1f2; border-left:6px solid var(--rose); padding:10px 14px; border-radius:10px; margin:12px 0; }
+  .grown{ background:#f0fdf4; border-left:6px solid var(--green); padding:10px 14px; border-radius:10px; margin:12px 0; font-size:.95rem; }
+  table{ border-collapse:collapse; width:100%; margin:10px 0; font-size:1rem; }
+  th,td{ border:1px solid #e2e5f5; padding:7px 10px; text-align:left; vertical-align:top; }
+  th{ background:#eef2ff; color:var(--blue); }
+  td b{ color:var(--rose); }
+  .ex{ background:#f5f3ff; border-radius:10px; padding:3px 8px; font-style:italic; color:#5b21b6; }
+  ul,ol{ margin:8px 0 8px 22px; } li{ margin:5px 0; }
+  /* sommaire */
+  .toc{ display:grid; grid-template-columns:repeat(auto-fill,minmax(158px,1fr)); gap:9px; margin-top:12px; }
+  .toc a{ background:linear-gradient(140deg,#eef2ff,#fdf2f8); border:2px solid #e6e9ff; border-radius:14px;
+    padding:9px 10px; text-decoration:none; color:var(--ink); font-size:.92rem; transition:transform .1s; }
+  .toc a:hover{ transform:translateY(-2px); border-color:var(--violet); }
+  .toc a b{ display:block; color:var(--violet); font-size:.74rem; letter-spacing:.4px; }
+  /* entrainement */
+  .drills{ margin-top:6px; }
+  .dr{ border:2px solid #e9ecfb; border-radius:14px; padding:12px 14px; margin:10px 0; background:#fcfcff; }
+  .dr .qtxt{ font-size:1.04rem; margin-bottom:8px; }
+  .lvl{ float:right; font-size:.72rem; font-weight:bold; padding:2px 9px; border-radius:999px; margin-left:8px; }
+  .l1{ background:#dcfce7; color:#166534; } .l2{ background:#dbeafe; color:#1e40af; }
+  .l3{ background:#fef3c7; color:#92400e; } .l4{ background:#fae8ff; color:#86198f; }
+  .l5{ background:#ffe4e6; color:#9f1239; }
+  .dr input{ width:100%; font-family:inherit; font-size:1rem; padding:9px 12px; border:2px solid #dfe3f6;
+    border-radius:10px; background:#fff; }
+  .dr input:focus{ outline:none; border-color:var(--violet); }
+  .rowbtn{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:9px; }
+  .rev{ background:#fff; border:2px solid #d6d9f0; color:var(--violet); border-radius:999px; padding:6px 15px;
+    cursor:pointer; font-family:inherit; font-weight:bold; font-size:.92rem; }
+  .rev:hover{ border-color:var(--violet); background:#f5f3ff; }
+  .sol{ display:none; background:#f0fdf4; border-left:6px solid var(--green); padding:9px 13px;
+    border-radius:10px; margin-top:9px; font-size:1rem; }
+  .sol .why{ display:block; color:#3f6212; font-size:.94rem; margin-top:5px; }
+  .self{ border:2px solid #dfe3f6; background:#fff; border-radius:999px; padding:5px 12px; cursor:pointer;
+    font-family:inherit; font-size:.9rem; }
+  .self.on{ background:#dcfce7; border-color:var(--green); font-weight:bold; }
+  .self.on.no{ background:#ffe4e6; border-color:var(--rose); }
+  .score{ font-size:.9rem; color:var(--grey); font-weight:bold; }
+  /* tuteur */
+  .spk{ background:#ede9fe; border:2px solid #ddd6fe; color:var(--violet); border-radius:999px;
+    cursor:pointer; font-size:.95rem; padding:2px 9px; font-family:inherit; margin-left:6px; vertical-align:middle; }
+  .spk:hover{ background:#ddd6fe; }
+  .spk.playing{ background:var(--violet); color:#fff; }
+  .check{ background:var(--green); border:none; color:#fff; border-radius:999px; padding:7px 17px;
+    cursor:pointer; font-family:inherit; font-weight:bold; font-size:.95rem; }
+  .check:hover{ background:#15803d; }
+  .fbx{ display:none; border-radius:10px; padding:9px 13px; margin-top:9px; font-size:1rem; border-left:6px solid; }
+  .fbx.ok{ display:block; background:#f0fdf4; border-color:var(--green); }
+  .fbx.almost{ display:block; background:#fffbeb; border-color:var(--amber); }
+  .fbx.no{ display:block; background:#fff1f2; border-color:var(--rose); }
+  .fbx b.verdict{ display:block; font-size:1.05rem; margin-bottom:3px; }
+  .fbx .why{ display:block; font-size:.94rem; margin-top:6px; color:#3f4a63; }
+  .fbx ul{ margin:6px 0 0 20px; font-size:.95rem; }
+  .yours{ font-family:'Consolas',monospace; background:#fff; border:1px dashed #cbd5e1;
+    border-radius:8px; padding:2px 8px; }
+  .readbar{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; background:#f5f3ff;
+    border:2px solid #e6e9ff; border-radius:14px; padding:10px 14px; margin-top:12px; font-size:.97rem; }
+  .readbar label{ cursor:pointer; display:flex; align-items:center; gap:7px; }
+  .readbar input[type=checkbox]{ width:18px; height:18px; accent-color:var(--violet); }
+  .toolbar{ display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;
+    background:#f5f3ff; border-radius:12px; padding:8px 12px; margin-top:10px; }
+  /* quiz */
+  .skillgrid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; margin-top:12px; }
+  .skill{ background:linear-gradient(140deg,#eef2ff,#fdf2f8); border:2px solid #e6e9ff; border-radius:16px;
+    padding:12px 10px; text-align:center; cursor:pointer; font-family:inherit; transition:transform .1s; }
+  .skill:hover{ transform:translateY(-2px); border-color:var(--violet); }
+  .skill .emo{ font-size:1.6rem; display:block; }
+  .skill b{ display:block; margin:4px 0 2px; font-size:.95rem; }
+  .skill span.d{ font-size:.78rem; color:var(--grey); }
+  #play{ display:none; }
+  .qbar{ display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; gap:8px; }
+  .chip{ background:#ede9fe; color:var(--violet); padding:4px 12px; border-radius:999px; font-weight:bold; font-size:.9rem; }
+  .ghost{ background:#fff; border:2px solid #d6d9f0; color:var(--violet); border-radius:999px; padding:6px 14px;
+    cursor:pointer; font-family:inherit; font-weight:bold; }
+  #prompt{ font-size:1.16rem; font-weight:bold; text-align:center; margin:10px auto 16px; max-width:46ch; }
+  .choices{ display:grid; gap:10px; }
+  .opt{ background:#fff; border:2px solid #dfe3f6; border-radius:14px; padding:12px 16px; font-size:1.06rem;
+    font-family:inherit; cursor:pointer; text-align:center; transition:all .12s; }
+  .opt:hover{ border-color:var(--violet); }
+  .opt.right{ background:#dcfce7; border-color:var(--green); color:#166534; font-weight:bold; }
+  .opt.wrong{ background:#ffe4e6; border-color:var(--rose); color:#9f1239; }
+  .fb{ text-align:center; font-weight:bold; min-height:26px; margin-top:12px; }
+  .fb.ok{ color:var(--green); } .fb.no{ color:var(--rose); }
+  .tipbox{ background:#fffbeb; border-left:6px solid var(--amber); padding:10px 14px; border-radius:10px; margin-top:10px; display:none; }
+  .big{ background:var(--violet); color:#fff; border:none; font-family:inherit; cursor:pointer; font-size:1.05rem;
+    padding:12px 24px; border-radius:999px; box-shadow:0 4px 0 #5b21b6; }
+  .big:active{ transform:translateY(2px); box-shadow:0 2px 0 #5b21b6; }
+  .passage{ background:#f8fafc; border:2px dashed #cbd5e1; border-radius:14px; padding:14px 16px; margin:12px 0; }
+  .passage p{ margin:7px 0; }
+  footer{ text-align:center; color:var(--grey); font-size:.95rem; margin-top:28px; padding:0 20px; }
+  a.up{ display:inline-block; margin-top:10px; font-size:.85rem; color:var(--violet); }
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">FRANÇAIS • 3ᵉ ANNÉE</div>
+  <h1>Je comprends, puis je m'entraîne 🇫🇷</h1>
+  <p>18 leçons — chaque notion expliquée, plein d'exemples, et beaucoup d'exercices pour s'entraîner.</p>
+</header>
+
+<div class="wrap">
+
+  <div class="card" id="top">
+    <span class="tag">COMMENT ÇA MARCHE</span>
+    <h2>🗺️ Le plan de chaque leçon</h2>
+    <p>Chaque leçon suit toujours les <b>mêmes 5 étapes</b> :</p>
+    <ol>
+      <li>🧠 <b>Comprendre</b> — l'idée expliquée simplement.</li>
+      <li>👀 <b>Exemples</b> — plusieurs, pour bien voir la règle en action.</li>
+      <li>🔑 <b>Le truc</b> — la petite astuce à retenir pour ne plus se tromper.</li>
+      <li>⚠️ <b>Le piège</b> — l'erreur que presque tout le monde fait.</li>
+      <li>✍️ <b>À toi !</b> — les exercices. Écris ta réponse, <i>ensuite</i> clique sur « Voir la réponse ».</li>
+    </ol>
+    <div class="tip">💡 La règle d'or : <b>écris d'abord, vérifie ensuite.</b> Regarder la réponse avant d'essayer, ça n'apprend rien du tout. Se tromper puis comprendre pourquoi, ça apprend énormément.</div>
+    <p>Après chaque exercice, dis-toi : « <b>pourquoi</b> c'est cette réponse ? » Si tu peux l'expliquer à voix haute, c'est gagné.</p>
+    <h3>Sommaire</h3>
+    <div class="toc" id="toc"></div>
+  </div>
+
+  <!-- ============================ LEÇON 1 ============================ -->
+  <div class="card" id="phrase">
+    <span class="tag">LEÇON 1</span>
+    <h2>🔤 La phrase</h2>
+    <h3>🧠 Comprendre</h3>
+    <p>Une <b>phrase</b>, c'est un groupe de mots qui dit quelque chose de <b>complet</b>. Pour être une vraie phrase, il faut trois choses :</p>
+    <ul>
+      <li>une <b>majuscule</b> au début ;</li>
+      <li>un <b>point</b> à la fin (<b>.</b> <b>?</b> <b>!</b>) ;</li>
+      <li>et surtout un <b>verbe conjugué</b>.</li>
+    </ul>
+    <p>Il existe <b>4 types</b> de phrases (ce qu'elle fait) et <b>2 formes</b> (positive ou négative).</p>
+    <h3>👀 Exemples</h3>
+    <table>
+      <tr><th>Type</th><th>Ça sert à…</th><th>Exemple</th></tr>
+      <tr><td>Déclarative</td><td>raconter, dire</td><td>L'avion décolle à midi<b>.</b></td></tr>
+      <tr><td>Interrogative</td><td>poser une question</td><td>Où as-tu rangé tes outils<b> ?</b></td></tr>
+      <tr><td>Exclamative</td><td>montrer une émotion</td><td>Quel bruit incroyable<b> !</b></td></tr>
+      <tr><td>Impérative</td><td>donner un ordre, un conseil</td><td>Range tes outils<b>.</b></td></tr>
+    </table>
+    <table>
+      <tr><th>Forme positive</th><th>Forme négative</th></tr>
+      <tr><td>Je construis une fusée.</td><td>Je <b>ne</b> construis <b>pas</b> de fusée.</td></tr>
+      <tr><td>Il pleut encore.</td><td>Il <b>ne</b> pleut <b>plus</b>.</td></tr>
+      <tr><td>J'ai déjà vu ce moteur.</td><td>Je <b>n'</b>ai <b>jamais</b> vu ce moteur.</td></tr>
+      <tr><td>Il reste quelque chose.</td><td>Il <b>ne</b> reste <b>rien</b>.</td></tr>
+    </table>
+    <div class="tip">🔑 <b>Le truc :</b> pour savoir si c'est une phrase, cherche le <b>verbe conjugué</b>. Pas de verbe → pas de phrase. Et la négation vient toujours en <b>deux morceaux</b> qui encadrent le verbe : ne… pas, ne… plus, ne… jamais, ne… rien.</div>
+    <div class="trap">⚠️ <b>Le piège :</b> « Le gros avion rouge du hangar. » — c'est long, mais il n'y a <b>aucun verbe</b> : ce n'est <b>pas</b> une phrase, c'est seulement un groupe du nom. À l'oral on oublie souvent le « ne » (« j'ai pas faim ») ; à l'écrit, il est <b>obligatoire</b>.</div>
+    <h3>✍️ À toi !</h3>
+    <div class="drills" data-l="phrase"></div>
+    <a class="up" href="#top">↑ Sommaire</a>
+  </div>
+
+  <!-- ============================ LEÇON 2 ============================ -->
+  <div class="card" id="nom">
+    <span class="tag">LEÇON 2</span>
+    <h2>📛 Le nom</h2>
+    <h3>🧠 Comprendre</h3>
+    <p>Le <b>nom</b> sert à nommer : une personne, un animal, une chose, un lieu, une idée. C'est le mot le plus important de la phrase, parce que <b>tout le reste s'accorde avec lui</b>.</p>
+    <ul>
+      <li><b>Nom commun</b> : il nomme en général → un pilote, une ville, un moteur. (petite lettre)</li>
+      <li><b>Nom propre</b> : il nomme quelqu'un ou quelque chose de précis → Israël, Gatineau, le Boeing. (<b>majuscule</b>)</li>
+    </ul>
+    <p>Chaque nom possède un <b>genre</b> (masculin ou féminin) et un <b>nombre</b> (singulier ou pluriel).</p>
+    <h3>👀 Exemples</h3>
+    <table>
+      <tr><th>Nom</th><th>Commun / propre</th><th>Genre</th><th>Nombre</th></tr>
+      <tr><td>un moteur</td><td>commun</td><td>masculin</td><td>singulier</td></tr>
+      <tr><td>des hélices</td><td>commun</td><td>féminin</td><td>pluriel</td></tr>
+      <tr><td>Montréal</td><td>propre</td><td>—</td><td>singulier</td></tr>
+      <tr><td>le courage</td><td>commun (une idée)</td><td>masculin</td><td>singulier</td></tr>
+    </table>
+    <div class="tip">🔑 <b>Le truc :</b> pour vérifier qu'un mot est un nom, essaie de mettre <b>« un », « une » ou « des » devant</b>. « une vitesse » ✔ c'est un nom. « une court » ✘ ce n'en est pas un (c'est un verbe).</div>
+    <div class="trap">⚠️ <b>Le piège :</b> un même mot peut changer de métier ! Dans « le <b>pouvoir</b> du moteur », <i>pouvoir</i> est un nom. Dans « je <b>peux</b> le faire », c'est un verbe. Regarde toujours ce qu'il y a <b>devant</b> le mot.</div>
+    <h3>✍️ À toi !</h3>
+    <div class="drills" data-l="nom"></div>
+    <a class="up" href="#top">↑ Sommaire</a>
+  </div>
+
+  <!-- ============================ LEÇON 3 ============================ -->
+  <div class="card" id="det">
+    <span class="tag">LEÇON 3</span>
+    <h2>🔖 Le déterminant</h2>
+    <h3>🧠 Comprendre</h3>
+    <p>Le <b>déterminant</b> est le petit mot placé <b>juste avant le nom</b>. Il annonce le nom, et il nous dit son <b>genre</b> et son <b>nombre</b>.</p>
+    <h3>👀 Exemples</h3>
+    <table>
+      <tr><th>Famille</th><th>Déterminants</th><th>Exemple</th></tr>
+      <tr><td>Articles définis</td><td>le, la, l', les</td><td><b>le</b> hangar, <b>les</b> pistes</td></tr>
+      <tr><td>Articles indéfinis</td><td>un, une, des</td><td><b>un</b> tournevis, <b>des</b> vis</td></tr>
+      <tr><td>Possessifs</td><td>mon, ma, mes, ton, ta, tes, son, sa, ses, notre, nos, votre, vos, leur, leurs</td><td><b>mes</b> outils, <b>leur</b> projet</td></tr>
+      <tr><td>Démonstratifs</td><td>ce, cet, cette, ces</td><td><b>cette</b> aile, <b>ces</b> câbles</td></tr>
+      <tr><td>Numéraux</td><td>deux, trois, quinze…</td><td><b>trois</b> roues</td></tr>
+    </table>
+    <div class="tip">🔑 <b>Le truc :</b> le déterminant est un <b>détective de genre</b>. Tu ne sais pas si « avion » est masculin ou féminin ? Dis-le à voix haute : « <b>un</b> avion » → masculin. Le déterminant te donne toujours la réponse.</div>
+    <div class="trap">⚠️ <b>Le piège :</b> devant une voyelle ou un h muet, on utilise <b>cet</b> (masculin) et <b>mon / ton / son</b> même au féminin : <span class="ex">cet avion · cet hélicoptère · mon école</span> (et non « ma école »). C'est juste pour que ce soit plus facile à prononcer.</div>
+    <h3>✍️ À toi !</h3>
+    <div class="drills" data-l="det"></div>
+    <a class="up" href="#top">↑ Sommaire</a>
+  </div>
+
+  <!-- ============================ LEÇON 4 ============================ -->
+  <div class="card" id="adj">
+    <span class="tag">LEÇON 4</span>
+    <h2>✨ L'adjectif</h2>
+    <h3>🧠 Comprendre</h3>
+    <p>L'<b>adjectif</b> décrit le nom : il dit comment il est. Et surtout : il <b>s'accorde</b> avec le nom, en <b>genre</b> et en <b>nombre</b>. L'adjectif obéit toujours au nom, jamais l'inverse.</p>
+    <h3>👀 Exemples</h3>
+    <table>
+      <tr><th>Le nom est…</th><th>Adjectif</th><th>Exemple</th></tr>
+      <tr><td>masculin singulier</td><td>rien à ajouter</td><td>un moteur <b>puissant</b></td></tr>
+      <tr><td>féminin singulier</td><td>+ <b>e</b></td><td>une voiture <b>puissante</b></td></tr>
+      <tr><td>masculin pluriel</td><td>+ <b>s</b></td><td>des moteurs <b>puissants</b></td></tr>
+      <tr><td>féminin pluriel</td><td>+ <b>es</b></td><td>des voitures <b>puissantes</b></td></tr>
+    </table>
+    <p>L'adjectif peut se placer <b>avant</b> le nom (un <b>grand</b> avion), <b>après</b> le nom (un avion <b>rapide</b>), ou plus loin, <b>après le verbe être</b> (l'avion est <b>rapide</b>). Même dans ce cas, il s'accorde !</p>
+    <div class="tip">🔑 <b>Le truc :</b> avant d'écrire la fin d'un adjectif, pose-toi la question : « il décrit <b>quel</b> nom ? » Trouve le nom, regarde son genre et son nombre, et copie-les sur l'adjectif.</div>
+    <div class="trap">⚠️ <b>Le piège :</b> quand l'adjectif est loin du nom, on l'oublie. <span class="ex">Les hélices de l'avion sont <b>abîmées</b>.</span> Ce sont les <b>hélices</b> (féminin pluriel) qui sont abîmées, pas l'avion. Le nom le plus proche n'est pas toujours le bon !</div>
+    <h3>✍️ À toi !</h3>
+    <div class="drills" data-l="adj"></div>
+    <a class="up" href="#top">↑ Sommaire</a>
+  </div>
+
+  <!-- ============================ LEÇON 5 ============================ -->
+  <div class="card" id="gn">
+    <span class="tag">LEÇON 5</span>
+    <h2>🧩 Le groupe du nom et les accords</h2>
+    <h3>🧠 Comprendre</h3>
+    <p>Un <b>groupe du nom</b> (GN), c'est une petite équipe de mots qui travaillent autour d'un nom. Le nom est le <b>noyau</b> : c'est le chef de l'équipe. Les autres mots (déterminant, adjectifs) sont ses <b>expansions</b>.</p>
+    <p>Dans un GN, l'accord se transmet <b>comme une chaîne</b> : le noyau donne son genre et son nombre à tout le reste.</p>
+    <h3>👀 Exemples</h3>
+    <table>
+      <tr><th>Groupe du nom</th><th>Noyau</th><th>Genre / nombre</th></tr>
+      <tr><td>les <b>hélices</b> argentées</td><td>hélices</td><td>féminin pluriel</td></tr>
+      <tr><td>ce vieux <b>tournevis</b> rouillé</td><td>tournevis</td><td>masculin singulier</td></tr>
+      <tr><td>de magnifiques <b>fusées</b> blanches</td><td>fusées</td><td>féminin pluriel</td></tr>
+    </table>
+    <p>Au pluriel, <b>tout</b> le groupe change :</p>
+    <p><span class="ex">un petit robot gris → <b>des</b> petit<b>s</b> robot<b>s</b> gris</span> · <span class="ex">la grande roue → <b>les</b> grande<b>s</b> roue<b>s</b></span></p>
+    <div class="tip">🔑 <b>Le truc :</b> souligne le nom-noyau, écris au-dessus « f.pl. » ou « m.s. », puis <b>recopie cette étiquette</b> sur chaque mot du groupe. C'est exactement ce que font les élèves les plus forts en dictée.</div>
+    <div class="trap">⚠️ <b>Le piège :</b> « une boîte de <b>vis</b> » — le noyau est <b>boîte</b> (féminin singulier), pas <i>vis</i>. On écrit donc « une <b>petite</b> boîte de vis ». Le complément qui suit « de » n'est pas le chef !</div>
+    <h3>✍️ À toi !</h3>
+    <div class="drills" data-l="gn"></div>
+    <a class="up" href="#top">↑ Sommaire</a>
+  </div>
+
+  <!-- ============================ LEÇON 6 ============================ -->
+  <div class="card" id="fem">
+    <span class="tag">LEÇON 6</span>
+    <h2>♀️ Le féminin</h2>
+    <h3>🧠 Comprendre</h3>
+    <p><b>Règle générale :</b> on ajoute un <b>-e</b> à la fin. <span class="ex">un ami → une amie · grand → grande</span></p>
+    <p>Mais certaines terminaisons se transforment. Les voici :</p>
+    <h3>👀 Exemples</h3>
+    <table>
+      <tr><th>Si ça finit par…</th><th>Au féminin</th><th>Exemples</th></tr>
+      <tr><td>-e (déjà)</td><td>ne change <b>pas</b></td><td>rouge → rouge · rapide → rapide</td></tr>
+      <tr><td>-er</td><td>-<b>ère</b></td><td>premier → première · léger → légère</td></tr>
+      <tr><td>-eux</td><td>-<b>euse</b></td><td>heureux → heureuse · courageux → courageuse</td></tr>
+      <tr><td>-eur (métier)</td><td>-<b>euse</b></td><td>un vendeur → une vendeuse</td></tr>
+      <tr><td>-teur</td><td>-<b>trice</b></td><td>un inventeur → une inventrice · acteur → actrice</td></tr>
+      <tr><td>-f</td><td>-<b>ve</b></td><td>neuf → neuve · actif → active</td></tr>
+      <tr><td>-el, -eil, -en, -on, -et</td><td>on <b>double</b> la consonne + e</td><td>cruel → cruelle · ancien → ancienne · bon → bonne · muet → muette</td></tr>
+      <tr><td>consonne à doubler</td><td>double + e</td><td>un chat → une chatte</td></tr>
+    </table>
+    <div class="tip">🔑 <b>Le truc :</b> prononce le mot au féminin dans ta tête. Si tu <b>entends</b> une nouvelle consonne à la fin (peti<b>t</b>e, gran<b>d</b>e), c'est qu'il faut écrire un -e. Le féminin, ça <b>réveille</b> la lettre muette.</div>
+    <div class="trap">⚠️ <b>Le piège :</b> quelques mots changent complètement et il faut les connaître par cœur : beau → <b>belle</b>, nouveau → <b>nouvelle</b>, vieux → <b>vieille</b>, fou → <b>folle</b>, blanc → <b>blanche</b>, doux → <b>douce</b>, long → <b>longue</b>, frais → <b>fraîche</b>, sec → <b>sèche</b>, faux → <b>fausse</b>.</div>
+    <h3>✍️ À toi !</h3>
+    <div class="drills" data-l="fem"></div>
+    <a class="up" href="#top">↑ Sommaire</a>
+  </div>
+
+  <!-- ============================ LEÇON 7 ============================ -->
+  <div class="card" id="plur">
+    <span class="tag">LEÇON 7</span>
+    <h2>♦️ Le pluriel</h2>
+    <h3>🧠 Comprendre</h3>
+    <p><b>Règle générale :</b> on ajoute un <b>-s</b>. <span class="ex">un moteur → des moteurs</span> Ce -s ne s'entend presque jamais : c'est pour ça qu'il faut <b>réfléchir</b>, pas écouter.</p>
+    <h3>👀 Exemples</h3>
+    <table>
+      <tr><th>Si ça finit par…</th><th>Au pluriel</th><th>Exemples</th></tr>
+      <tr><td>-s, -x, -z</td><td>ne change <b>pas</b></td><td>une souris → des souris · un nez → des nez</td></tr>
+      <tr><td>-au, -eau, -eu</td><td>+ <b>x</b></td><td>un tuyau → des tuyaux · un bateau → des bateaux · un jeu → des jeux</td></tr>
+      <tr><td>-al</td><td>-<b>aux</b></td><td>un cheval → des chevaux · un signal → des signaux</td></tr>
+      <tr><td>-ail</td><td>+ s (sauf 7)</td><td>un détail → des détails · <b>mais</b> un travail → des trav<b>aux</b></td></tr>
+      <tr><td>-ou</td><td>+ s (sauf 7)</td><td>un trou → des trous · <b>mais</b> un genou → des gen<b>oux</b></td></tr>
+    </table>
+    <div class="tip">🔑 <b>Le truc :</b> les 7 mots en <b>-ou</b> qui prennent un <b>x</b> se retiennent avec une phrase rigolote : <i>« Viens mon <b>chou</b>, mets un <b>caillou</b> sur le <b>genou</b> du <b>hibou</b> plein de <b>poux</b>, avec ton <b>bijou</b> et ton <b>joujou</b>. »</i></div>
+    <div class="trap">⚠️ <b>Le piège :</b> exceptions à connaître — un <b>festival</b> → des festival<b>s</b>, un <b>bal</b> → des bal<b>s</b>, un <b>carnaval</b> → des carnaval<b>s</b>, un <b>pneu</b> → des pneu<b>s</b>. Et un <b>œil</b> → des <b>yeux</b> !</div>
+    <h3>✍️ À toi !</h3>
+    <div class="drills" data-l="plur"></div>
+    <a class="up" href="#top">↑ Sommaire</a>
+  </div>
+
+  <!-- ============================ LEÇON 8 ============================ -->
+  <div class="card" id="verbe">
+    <span class="tag">LEÇON 8</span>
+    <h2>🏃 Le verbe et l'infinitif</h2>
+    <h3>🧠 Comprendre</h3>
+    <p>Le <b>verbe</b> dit ce qu'on <b>fait</b> ou ce qu'on <b>est</b>. C'est le seul mot de la phrase qui <b>change quand on change le temps</b>.</p>
+    <p>L'<b>infinitif</b>, c'est le nom du verbe, sa forme « au repos », celle du dictionnaire : <i>construire, finir, voler</i>. On classe les verbes en <b>3 groupes</b> :</p>
+    <h3>👀 Exemples</h3>
+    <table>
+      <tr><th>Groupe</th><th>Infinitif en…</th><th>Exemples</th></tr>
+      <tr><td>1<sup>er</sup></td><td>-<b>er</b></td><td>construire ✘ · <b>voler, brancher, dessiner, programmer</b></td></tr>
+      <tr><td>2<sup>e</sup></td><td>-<b>ir</b> (nous fin<b>issons</b>)</td><td>finir, réussir, atterrir, choisir, grandir</td></tr>
+      <tr><td>3<sup>e</sup></td><td>tous les autres</td><td>être, avoir, aller, faire, prendre, voir, pouvoir, dire, venir, écrire</td></tr>
+    </table>
+    <p>Un verbe conjugué = un <b>radical</b> (le début, qui ne bouge presque pas) + une <b>terminaison</b> (la fin, qui change tout le temps).<br>
+    <span class="ex">nous dessin|ons · vous dessin|ez · ils dessin|aient</span></p>
+    <div class="tip">🔑 <b>Le truc pour reconnaître un verbe :</b> mets la phrase à un autre temps. Le mot qui <b>change</b>, c'est le verbe. <span class="ex">Le robot <b>avance</b>. → Hier, le robot <b>avançait</b>.</span> « robot » n'a pas bougé, « avance » oui → c'est le verbe.</div>
+    <div class="trap">⚠️ <b>Le piège :</b> « aller » finit par -er mais c'est un verbe du <b>3<sup>e</sup> groupe</b> (je vais, nous allons) — il est trop irrégulier pour le 1<sup>er</sup>. Et attention : « courir », « ouvrir », « partir » finissent par -ir mais ne font pas « nous courissons » → 3<sup>e</sup> groupe.</div>
+    <h3>✍️ À toi !</h3>
+    <div class="drills" data-l="verbe"></div>
+    <a class="up" href="#top">↑ Sommaire</a>
+  </div>
+
+  <!-- ============================ LEÇON 9 ============================ -->
+  <div class="card" id="sujet">
+    <span class="tag">LEÇON 9</span>
+    <h2>👑 Le sujet et l'accord du verbe</h2>
+    <h3>🧠 Comprendre</h3>
+    <p>Le <b>sujet</b>, c'est celui qui <b>commande</b> le verbe : c'est lui qui fait l'action. Le verbe doit <b>obéir</b> au sujet et prendre la bonne terminaison.</p>
+    <p>Pour trouver le sujet, pose la question : « <b>Qui est-ce qui</b> + verbe ? » ou encadre-le avec « <b>C'est … qui</b> ».</p>
+    <h3>👀 Exemples</h3>
+    <table>
+      <tr><th>Phrase</th><th>Question</th><th>Sujet</th></tr>
+      <tr><td>Israël programme un robot.</td><td>Qui est-ce qui programme ?</td><td>Israël (= il)</td></tr>
+      <tr><td>Les deux avions atterrissent.</td><td>Qui est-ce qui atterrit ?</td><td>Les deux avions (= ils)</td></tr>
+      <tr><td>Dans le hangar dorment trois vieux moteurs.</td><td>Qui est-ce qui dort ?</td><td>trois vieux moteurs (= ils)</td></tr>
+      <tr><td>Papa et moi réparons le vélo.</td><td>Qui est-ce qui répare ?</td><td>Papa et moi (= nous)</td></tr>
+    </table>
+    <div class="tip">🔑 <b>Le truc :</b> remplace le sujet par un pronom (<b>il, elle, ils, elles, nous, vous</b>) et la terminaison devient évidente. « Les élèves de ma classe » → <b>ils</b> → « ils travaill<b>ent</b> ». Retiens aussi : <b>ils/elles → -nt</b>, presque toujours.</div>
+    <div class="trap">⚠️ <b>Le piège :</b> le sujet n'est pas toujours juste avant le verbe ! <span class="ex">Le pilote <b>des deux petits avions</b> vérifi<b>e</b> les moteurs.</span> Qui vérifie ? <b>Le pilote</b> (un seul) → « vérifie », pas « vérifient ». Ne te laisse pas piéger par le mot pluriel qui traîne juste avant.</div>
+    <h3>✍️ À toi !</h3>
+    <div class="drills" data-l="sujet"></div>
+    <a class="up" href="#top">↑ Sommaire</a>
+  </div>
+
+  <!-- ============================ LEÇON 10 ============================ -->
+  <div class="card" id="present">
+    <span class="tag">LEÇON 10</span>
+    <h2>⏱️ Le présent</h2>
+    <h3>🧠 Comprendre</h3>
+    <p>Le <b>présent</b>, c'est <b>maintenant</b> — ou quelque chose qui est toujours vrai (« la Terre tourne autour du Soleil »).</p>
+    <h3>👀 Exemples</h3>
+    <table>
+      <tr><th>Pronom</th><th>-er (dessiner)</th><th>-ir (finir)</th><th>être</th><th>avoir</th><th>aller</th><th>faire</th></tr>
+      <tr><td>je / j'</td><td>dessin<b>e</b></td><td>fin<b>is</b></td><td>suis</td><td>ai</td><td>vais</td><td>fais</td></tr>
+      <tr><td>tu</td><td>dessin<b>es</b></td><td>fin<b>is</b></td><td>es</td><td>as</td><td>vas</td><td>fais</td></tr>
+      <tr><td>il / elle / on</td><td>dessin<b>e</b></td><td>fin<b>it</b></td><td>est</td><td>a</td><td>va</td><td>fait</td></tr>
+      <tr><td>nous</td><td>dessin<b>ons</b></td><td>fin<b>issons</b></td><td>sommes</td><td>avons</td><td>allons</td><td>faisons</td></tr>
+      <tr><td>vous</td><td>dessin<b>ez</b></td><td>fin<b>issez</b></td><td>êtes</td><td>avez</td><td>allez</td><td><b>faites</b></td></tr>
+      <tr><td>ils / elles</td><td>dessin<b>ent</b></td><td>fin<b>issent</b></td><td>sont</td><td>ont</td><td>vont</td><td><b>font</b></td></tr>
+    </table>
+    <div class="tip">🔑 <b>Le truc :</b> pour les verbes en <b>-er</b>, la chanson des terminaisons : <b>e – es – e – ons – ez – ent</b>. Elle marche pour des milliers de verbes ! Et rappelle-toi que <b>-e, -es, -ent</b> se prononcent tous pareil : c'est ta tête qui choisit, pas ton oreille.</div>
+    <div class="trap">⚠️ <b>Le piège :</b> « ils dessin<b>ent</b> » — le <b>-ent</b> est muet, on n'entend rien du tout. Chaque fois que le sujet est <b>ils</b> ou <b>elles</b>, arrête-toi et vérifie ta terminaison.</div>
+    <h3>✍️ À toi !</h3>
+    <div class="drills" data-l="present"></div>
+    <a class="up" href="#top">↑ Sommaire</a>
+  </div>
+
+  <!-- ============================ LEÇON 11 ============================ -->
+  <div class="card" id="imparfait">
+    <span class="tag">LEÇON 11</span>
+    <h2>🌙 L'imparfait</h2>
+    <h3>🧠 Comprendre</h3>
+    <p>L'<b>imparfait</b> raconte le passé qui <b>durait</b>, qui se <b>répétait</b>, ou qui <b>décrit</b> un décor. C'est le temps des histoires : « Il <b>était</b> une fois… »</p>
+    <p>La bonne nouvelle : les terminaisons sont <b>les mêmes pour absolument tous les verbes</b>.</p>
+    <h3>👀 Exemples</h3>
+    <table>
+      <tr><th>Pronom</th><th>Terminaison</th><th>voler</th><th>finir</th><th>être</th><th>avoir</th><th>faire</th></tr>
+      <tr><td>je / j'</td><td>-<b>ais</b></td><td>volais</td><td>finissais</td><td>étais</td><td>avais</td><td>faisais</td></tr>
+      <tr><td>tu</td><td>-<b>ais</b></td><td>volais</td><td>finissais</td><td>étais</td><td>avais</td><td>faisais</td></tr>
+      <tr><td>il / elle / on</td><td>-<b>ait</b></td><td>volait</td><td>finissait</td><td>était</td><td>avait</td><td>faisait</td></tr>
+      <tr><td>nous</td><td>-<b>ions</b></td><td>volions</td><td>finissions</td><td>étions</td><td>avions</td><td>faisions</td></tr>
+      <tr><td>vous</td><td>-<b>iez</b></td><td>voliez</td><td>finissiez</td><td>étiez</td><td>aviez</td><td>faisiez</td></tr>
+      <tr><td>ils / elles</td><td>-<b>aient</b></td><td>volaient</td><td>finissaient</td><td>étaient</td><td>avaient</td><td>faisaient</td></tr>
+    </table>
+    <div class="tip">🔑 <b>Le truc en 2 étapes :</b> ① conjugue d'abord avec <b>nous</b> au présent → <i>nous finiss<b>ons</b></i> ; ② enlève <b>-ons</b> et colle la terminaison → <i>je finiss<b>ais</b></i>. Ça marche pour tous les verbes… sauf <b>être</b> (j'étais), le seul rebelle.</div>
+    <div class="trap">⚠️ <b>Le piège :</b> ne confonds pas <b>-ai</b> et <b>-ais</b>. « je jou<b>ais</b> » = avant, ça durait. « je jou<b>erai</b> » = demain. Astuce : si tu peux ajouter « … quand j'étais petit », c'est l'imparfait.</div>
+    <h3>✍️ À toi !</h3>
+    <div class="drills" data-l="imparfait"></div>
+    <a class="up" href="#top">↑ Sommaire</a>
+  </div>
+
+  <!-- ============================ LEÇON 12 ============================ -->
+  <div class="card" id="futur">
+    <span class="tag">LEÇON 12</span>
+    <h2>🚀 Le futur simple et le futur proche</h2>
+    <h3>🧠 Comprendre</h3>
+    <p>Les deux parlent de <b>plus tard</b>, mais pas de la même façon :</p>
+    <ul>
+      <li><b>Futur proche</b> = <i>aller</i> au présent + infinitif → « je <b>vais</b> décoller » (c'est pour bientôt, c'est presque sûr).</li>
+      <li><b>Futur simple</b> = un seul mot, l'infinitif + une terminaison → « je décoller<b>ai</b> » (plus tard, à l'écrit surtout).</li>
+    </ul>
+    <h3>👀 Exemples</h3>
+    <table>
+      <tr><th>Pronom</th><th>Terminaison</th><th>voler</th><th>finir</th><th>être</th><th>avoir</th><th>aller</th><th>faire</th></tr>
+      <tr><td>je / j'</td><td>-<b>rai</b></td><td>volerai</td><td>finirai</td><td>serai</td><td>aurai</td><td>irai</td><td>ferai</td></tr>
+      <tr><td>tu</td><td>-<b>ras</b></td><td>voleras</td><td>finiras</td><td>seras</td><td>auras</td><td>iras</td><td>feras</td></tr>
+      <tr><td>il / elle / on</td><td>-<b>ra</b></td><td>volera</td><td>finira</td><td>sera</td><td>aura</td><td>ira</td><td>fera</td></tr>
+      <tr><td>nous</td><td>-<b>rons</b></td><td>volerons</td><td>finirons</td><td>serons</td><td>aurons</td><td>irons</td><td>ferons</td></tr>
+      <tr><td>vous</td><td>-<b>rez</b></td><td>volerez</td><td>finirez</td><td>serez</td><td>aurez</td><td>irez</td><td>ferez</td></tr>
+      <tr><td>ils / elles</td><td>-<b>ront</b></td><td>voleront</td><td>finiront</td><td>seront</td><td>auront</td><td>iront</td><td>feront</td></tr>
+    </table>
+    <div class="tip">🔑 <b>Le truc :</b> au futur simple, il y a <b>toujours un R</b> avant la terminaison. Si tu n'entends pas de « r », ce n'est pas du futur ! Et les terminaisons ressemblent au verbe <b>avoir</b> : ai, as, a, (av)ons, (av)ez, ont.</div>
+    <div class="trap">⚠️ <b>Le piège :</b> on garde le <b>e</b> de l'infinitif même s'il ne s'entend pas : « il jou<b>e</b>ra », « tu étudi<b>e</b>ras », « nous cré<b>e</b>rons ». Ne l'oublie pas à l'écrit.</div>
+    <h3>✍️ À toi !</h3>
+    <div class="drills" data-l="futur"></div>
+    <a class="up" href="#top">↑ Sommaire</a>
+  </div>
+
+  <!-- ============================ LEÇON 13 ============================ -->
+  <div class="card" id="passecompose">
+    <span class="tag">LEÇON 13</span>
+    <h2>📦 Le passé composé</h2>
+    <h3>🧠 Comprendre</h3>
+    <p>Le <b>passé composé</b> raconte une action du passé qui est <b>terminée</b>. Il est « composé » parce qu'il se fabrique avec <b>deux mots</b> :</p>
+    <p style="text-align:center;font-size:1.1rem"><b>avoir</b> ou <b>être</b> au présent &nbsp;+&nbsp; <b>participe passé</b></p>
+    <h3>👀 Exemples</h3>
+    <table>
+      <tr><th>Verbe</th><th>Participe passé</th><th>Passé composé</th></tr>
+      <tr><td>verbes en -er</td><td>-<b>é</b></td><td>j'ai dessin<b>é</b>, tu as vol<b>é</b></td></tr>
+      <tr><td>verbes en -ir</td><td>-<b>i</b></td><td>il a fin<b>i</b>, nous avons chois<b>i</b></td></tr>
+      <tr><td>faire / prendre / voir</td><td>fait / pris / vu</td><td>j'ai <b>fait</b>, tu as <b>pris</b>, il a <b>vu</b></td></tr>
+      <tr><td>être / avoir</td><td>été / eu</td><td>j'ai <b>été</b>, il a <b>eu</b></td></tr>
+      <tr><td>aller, partir, venir, tomber, rester…</td><td>avec <b>être</b> !</td><td>je <b>suis</b> allé, elle <b>est</b> partie</td></tr>
+    </table>
+    <p><b>Avec être, le participe s'accorde avec le sujet :</b><br>
+    <span class="ex">il est parti · elle est parti<b>e</b> · ils sont parti<b>s</b> · elles sont parti<b>es</b></span></p>
+    <div class="tip">🔑 <b>Le truc é ou er ?</b> Remplace par <b>« vendre »</b> (un verbe du 3<sup>e</sup> groupe). Si « vendre » sonne bien → écris <b>-er</b>. Si c'est « vendu » qui sonne bien → écris <b>-é</b>. <span class="ex">Il va <i>vendre</i> ✔ → il va dessin<b>er</b>. Il a <i>vendu</i> ✔ → il a dessin<b>é</b>.</span></div>
+    <div class="trap">⚠️ <b>Le piège :</b> avec <b>avoir</b>, le participe ne bouge <b>pas</b> : « elles ont mang<b>é</b> » (et non « mangées »). Avec <b>être</b>, il s'accorde : « elles sont parti<b>es</b> ». Regarde toujours l'auxiliaire d'abord.</div>
+    <h3>✍️ À toi !</h3>
+    <div class="drills" data-l="passecompose"></div>
+    <a class="up" href="#top">↑ Sommaire</a>
+  </div>
+
+  <!-- ============================ LEÇON 14 ============================ -->
+  <div class="card" id="homo">
+    <span class="tag">LEÇON 14</span>
+    <h2>🔊 Les homophones</h2>
+    <h3>🧠 Comprendre</h3>
+    <p>Des <b>homophones</b>, ce sont des mots qui se <b>prononcent pareil</b> mais qui s'<b>écrivent différemment</b> parce qu'ils ne veulent pas dire la même chose. Ton oreille ne peut pas t'aider : il faut un <b>test</b>.</p>
+    <h3>👀 Exemples et tests</h3>
+    <table>
+      <tr><th>Mots</th><th>Le test à faire</th><th>Exemple</th></tr>
+      <tr><td><b>a</b> / <b>à</b></td><td>remplace par <b>avait</b> → si ça marche, c'est <b>a</b></td><td>Il <b>a</b> (avait) un vélo. Il va <b>à</b> l'école.</td></tr>
+      <tr><td><b>et</b> / <b>est</b></td><td>remplace par <b>était</b> → si ça marche, c'est <b>est</b></td><td>Il <b>est</b> (était) grand <b>et</b> fort.</td></tr>
+      <tr><td><b>on</b> / <b>ont</b></td><td>remplace par <b>avaient</b> → c'est <b>ont</b></td><td>Ils <b>ont</b> (avaient) faim. <b>On</b> part !</td></tr>
+      <tr><td><b>son</b> / <b>sont</b></td><td>remplace par <b>étaient</b> → c'est <b>sont</b></td><td>Ils <b>sont</b> (étaient) là avec <b>son</b> chien.</td></tr>
+      <tr><td><b>ou</b> / <b>où</b></td><td>remplace par <b>ou bien</b> → c'est <b>ou</b></td><td>Bleu <b>ou</b> (ou bien) rouge ? <b>Où</b> es-tu ?</td></tr>
+      <tr><td><b>ce</b> / <b>se</b></td><td><b>se</b> se met devant un verbe</td><td><b>Ce</b> robot <b>se</b> déplace.</td></tr>
+      <tr><td><b>mes</b> / <b>mais</b></td><td>remplace par <b>pourtant</b> → c'est <b>mais</b></td><td><b>Mes</b> outils sont là, <b>mais</b> pas la clé.</td></tr>
+      <tr><td><b>la</b> / <b>là</b> / <b>l'a</b></td><td>la = déterminant · là = l'endroit · l'a = l'avait</td><td><b>La</b> voiture est <b>là</b>. Papa <b>l'a</b> (l'avait) lavée.</td></tr>
+    </table>
+    <div class="tip">🔑 <b>Le truc :</b> les homophones avec un <b>accent</b> (à, où, là) montrent presque toujours un <b>endroit</b> ou une <b>direction</b>. Ceux sans accent sont des petits mots-outils ou des verbes.</div>
+    <div class="trap">⚠️ <b>Le piège :</b> ne devine jamais. <b>Fais le test à voix basse</b>, à chaque fois. Deux secondes de test valent mieux qu'une faute. C'est l'erreur numéro 1 dans les dictées.</div>
+    <h3>✍️ À toi !</h3>
+    <div class="drills" data-l="homo"></div>
+    <a class="up" href="#top">↑ Sommaire</a>
+  </div>
+
+  <!-- ============================ LEÇON 15 ============================ -->
+  <div class="card" id="ortho">
+    <span class="tag">LEÇON 15</span>
+    <h2>🔤 L'orthographe : les sons difficiles</h2>
+    <h3>🧠 Comprendre</h3>
+    <p>En français, une même lettre peut faire <b>deux sons</b> selon la lettre qui la suit. Ce ne sont pas des caprices : ce sont des règles, et elles marchent toujours.</p>
+    <h3>👀 Exemples</h3>
+    <table>
+      <tr><th>Règle</th><th>Explication</th><th>Exemples</th></tr>
+      <tr><td><b>c</b> ou <b>ç</b></td><td>c fait [s] devant e, i, y. Devant a, o, u → il faut <b>ç</b></td><td>cerise, cible · <b>ç</b>a, gar<b>ç</b>on, re<b>ç</b>u</td></tr>
+      <tr><td><b>g</b>, <b>ge</b>, <b>gu</b></td><td>g fait [j] devant e, i, y. On ajoute <b>e</b> devant a/o, et <b>u</b> pour garder [g]</td><td>girafe · nous man<b>ge</b>ons, un pi<b>ge</b>on · <b>gu</b>itare, ba<b>gu</b>e</td></tr>
+      <tr><td><b>s</b> ou <b>ss</b></td><td>entre 2 voyelles, un seul s fait [z]. Pour le son [s] → <b>ss</b></td><td>la ro<b>s</b>e [z] · la bo<b>ss</b>e [s], un des<b>s</b>in</td></tr>
+      <tr><td><b>m</b> devant m, b, p</td><td>on écrit <b>m</b> au lieu de n</td><td>e<b>mm</b>ener, no<b>mb</b>re, si<b>mp</b>le, la<b>mp</b>e</td></tr>
+      <tr><td>é / è / ê</td><td>é = son fermé · è, ê = son ouvert</td><td>l'<b>é</b>cole · le p<b>è</b>re · la t<b>ê</b>te</td></tr>
+    </table>
+    <p><b>Les mots invariables</b> (à connaître par cœur, ils ne changent jamais) : <span class="ex">toujours · beaucoup · souvent · parfois · jamais · maintenant · pendant · depuis · alors · aussi · surtout · plusieurs · quelquefois · vraiment · longtemps</span></p>
+    <div class="tip">🔑 <b>Le truc :</b> avant d'écrire un mot difficile, dis-le lentement en <b>découpant les syllabes</b> : gar-çon, lam-pe, des-sin. Chaque syllabe t'indique la lettre à choisir.</div>
+    <div class="trap">⚠️ <b>Le piège :</b> « nous mangons » ✘ → sans le <b>e</b>, on lirait « man-gons » avec le son [g]. Il faut écrire « nous man<b>ge</b>ons ». Pareil : « nous lan<b>ce</b>… » ✘ → « nous lan<b>ç</b>ons ».</div>
+    <h3>✍️ À toi !</h3>
+    <div class="drills" data-l="ortho"></div>
+    <a class="up" href="#top">↑ Sommaire</a>
+  </div>
+
+  <!-- ============================ LEÇON 16 ============================ -->
+  <div class="card" id="vocab">
+    <span class="tag">LEÇON 16</span>
+    <h2>📚 Le vocabulaire</h2>
+    <h3>🧠 Comprendre</h3>
+    <p>Plus tu connais de mots, plus tu comprends vite ce que tu lis — et plus tes textes deviennent intéressants. Cinq outils à maîtriser :</p>
+    <h3>👀 Exemples</h3>
+    <table>
+      <tr><th>Outil</th><th>Ça veut dire…</th><th>Exemples</th></tr>
+      <tr><td><b>Synonyme</b></td><td>presque le même sens</td><td>rapide = vite, véloce · content = joyeux, heureux</td></tr>
+      <tr><td><b>Antonyme</b></td><td>le sens contraire</td><td>rapide ≠ lent · monter ≠ descendre · possible ≠ impossible</td></tr>
+      <tr><td><b>Famille de mots</b></td><td>même racine</td><td>vol, voler, s'envoler, survol, volant</td></tr>
+      <tr><td><b>Préfixe</b> (au début)</td><td>change le sens</td><td><b>re</b>faire (encore) · <b>in</b>utile (pas) · <b>dé</b>brancher (le contraire)</td></tr>
+      <tr><td><b>Suffixe</b> (à la fin)</td><td>change la classe du mot</td><td>invent<b>eur</b> · rapid<b>ement</b> · construc<b>tion</b> · petit<b>esse</b></td></tr>
+      <tr><td><b>Mot générique</b></td><td>le mot qui regroupe</td><td><i>véhicule</i> regroupe : voiture, camion, avion, vélo</td></tr>
+    </table>
+    <div class="tip">🔑 <b>Le truc :</b> face à un mot inconnu, ne saute pas la phrase ! Cherche ① un <b>mot de la même famille</b> que tu connais (<i>déneiger</i> → neige), ② les <b>indices autour</b> dans la phrase. C'est exactement ce qu'on te demandera dans les examens de lecture.</div>
+    <div class="trap">⚠️ <b>Le piège :</b> attention au <b>sens figuré</b>. « Il a <b>dévoré</b> son livre » ne veut pas dire qu'il l'a mangé, mais qu'il l'a lu très vite. Le contexte décide toujours du sens.</div>
+    <h3>✍️ À toi !</h3>
+    <div class="drills" data-l="vocab"></div>
+    <a class="up" href="#top">↑ Sommaire</a>
+  </div>
+
+  <!-- ============================ LEÇON 17 ============================ -->
+  <div class="card" id="lecture">
+    <span class="tag">LEÇON 17</span>
+    <h2>🔎 Lire et comprendre</h2>
+    <h3>🧠 Comprendre</h3>
+    <p>Il y a <b>trois sortes</b> de questions après un texte, et il faut savoir les reconnaître :</p>
+    <ul>
+      <li>🟢 <b>Repérer</b> — la réponse est écrite dans le texte, presque mot pour mot.</li>
+      <li>🟡 <b>Déduire (inférer)</b> — la réponse n'est <b>pas</b> écrite : tu dois l'assembler avec des indices. « Le sol était mouillé et Léa a ouvert son parapluie » → il pleut, même si le mot « pluie » n'apparaît pas.</li>
+      <li>🔵 <b>Réagir / expliquer</b> — tu dois donner ton avis <b>et le justifier avec le texte</b>.</li>
+    </ul>
+    <p>L'<b>idée principale</b>, c'est ce dont parle le texte <b>en entier</b>, pas seulement une phrase intéressante.</p>
+    <h3>👀 Exemple : lis ce court texte</h3>
+    <div class="passage">
+      <p><b>Le premier vol des frères Wright</b></p>
+      <p>Le 17 décembre 1903, sur une plage venteuse de Caroline du Nord, deux frères poussent une étrange machine de bois et de toile. Orville s'allonge sur l'aile. Le moteur tousse, les hélices tournent, et l'appareil quitte le sol pendant douze secondes à peine.</p>
+      <p>Douze secondes. Aujourd'hui, cela paraît ridicule : un avion moderne traverse l'Atlantique en six heures. Pourtant, ce minuscule saut de 36 mètres a changé le monde. Wilbur et Orville avaient compris ce que personne n'avait réussi avant eux : pour voler, il ne suffit pas de monter, il faut aussi pouvoir <b>diriger</b> l'appareil dans les airs.</p>
+    </div>
+    <table>
+      <tr><th>Question</th><th>Sorte</th><th>Comment on trouve</th></tr>
+      <tr><td>En quelle année a eu lieu ce vol ?</td><td>🟢 Repérer</td><td>c'est écrit : 1903</td></tr>
+      <tr><td>Pourquoi la plage était-elle un bon endroit ?</td><td>🟡 Déduire</td><td>« venteuse » → le vent aide l'avion à décoller</td></tr>
+      <tr><td>Quelle est l'idée principale du texte ?</td><td>🔵 Expliquer</td><td>un vol très court, mais une invention capitale : savoir diriger</td></tr>
+    </table>
+    <div class="tip">🔑 <b>Le truc :</b> quand tu réponds, <b>montre ta preuve</b> : « Je le sais parce que le texte dit “…” ». Un correcteur donne toujours plus de points à une réponse qui cite le texte.</div>
+    <div class="trap">⚠️ <b>Le piège :</b> répondre avec ce que tu <b>sais déjà</b> au lieu de ce que le texte <b>dit</b>. Tu connais peut-être plein de choses sur les avions — mais ici, seule compte la réponse qui vient <b>de ce texte</b>.</div>
+    <h3>✍️ À toi !</h3>
+    <div class="drills" data-l="lecture"></div>
+    <a class="up" href="#top">↑ Sommaire</a>
+  </div>
+
+  <!-- ============================ LEÇON 18 ============================ -->
+  <div class="card" id="ecrire">
+    <span class="tag">LEÇON 18</span>
+    <h2>✏️ Écrire une phrase riche</h2>
+    <h3>🧠 Comprendre</h3>
+    <p>Une phrase pauvre dit le minimum. Une <b>phrase riche</b> répond à plusieurs questions : <b>qui ? fait quoi ? où ? quand ? comment ? pourquoi ?</b></p>
+    <h3>👀 Exemples</h3>
+    <table>
+      <tr><th>Étape</th><th>Phrase</th></tr>
+      <tr><td>Pauvre</td><td>L'avion décolle.</td></tr>
+      <tr><td>+ comment</td><td>L'avion décolle <b>lentement</b>.</td></tr>
+      <tr><td>+ où</td><td>L'avion décolle lentement <b>de la piste mouillée</b>.</td></tr>
+      <tr><td>+ quand</td><td><b>Au lever du soleil</b>, l'avion décolle lentement de la piste mouillée.</td></tr>
+      <tr><td>+ un détail</td><td>Au lever du soleil, <b>le vieil avion rouge</b> décolle lentement de la piste mouillée <b>dans un vacarme énorme</b>.</td></tr>
+    </table>
+    <p>Pour relier tes phrases entre elles, utilise des <b>connecteurs</b> :<br>
+    <span class="ex">d'abord · ensuite · puis · enfin · parce que · c'est pourquoi · mais · pourtant · alors · par exemple</span></p>
+    <div class="tip">🔑 <b>Le truc :</b> écris ta phrase simple d'abord, puis ajoute <b>une seule information à la fois</b>. Et varie les débuts de phrase : si tes trois phrases commencent par « Il », le texte devient plat.</div>
+    <div class="trap">⚠️ <b>Le piège :</b> une phrase trop longue avec dix « et » n'est pas une phrase riche, c'est une phrase <b>fatigante</b>. Deux bonnes phrases valent mieux qu'une phrase interminable. Et n'oublie jamais de <b>relire</b> : majuscules, points, accords.</div>
+    <h3>✍️ À toi !</h3>
+    <div class="drills" data-l="ecrire"></div>
+    <a class="up" href="#top">↑ Sommaire</a>
+  </div>
+
+  <!-- ============================ QUIZ ============================ -->
+  <div class="card" id="menu">
+    <span class="tag">LE DÉFI</span>
+    <h2>🎮 Le défi rapide</h2>
+    <p>Choisis un sujet : <b>8 questions</b> tirées au hasard, à choix multiple. Tu peux recommencer autant de fois que tu veux — les questions changent d'ordre à chaque partie.</p>
+    <div class="skillgrid" id="topics"></div>
+  </div>
+
+  <div class="card" id="play">
+    <div class="qbar">
+      <button class="ghost" id="quit">← Autre sujet</button>
+      <span class="chip">Question <b id="qn">1</b>/8</span>
+      <span class="chip" id="sc">✅ 0</span>
+    </div>
+    <div id="prompt">—</div>
+    <div class="choices" id="choices"></div>
+    <div class="fb" id="fb"></div>
+    <div class="tipbox" id="tipbox"></div>
+  </div>
+
+
+  <footer>
+    Une leçon par jour, et l'année est à toi ! 🌟<br>
+    <span style="font-size:.88rem" id="parentnote"></span>
+  </footer>
+</div>
+
+<script>
+"use strict";
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const shuffle = a => a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]);
+
+/* =====================================================================
+   BANQUE DE QUESTIONS
+   dr  = entraînement (l'enfant écrit sa réponse, puis vérifie)
+   qz  = quiz à choix multiple  (a = index de la bonne réponse)
+   lvl = niveau 1 → 5
+   ===================================================================== */
+const LESSONS = [];
+LESSONS.push(
+{id:"phrase", emo:"🔤", name:"La phrase", sub:"types & formes",
+ dr:[
+  {q:"Récris correctement : « les avions décollent à midi »", a:"Les avions décollent à midi.", why:"Majuscule au début, point à la fin.", lvl:1},
+  {q:"Combien de phrases ? « Le robot avance. Il tourne à gauche. Puis il s'arrête. »", a:"3 phrases", why:"On compte les points : chaque point ferme une phrase.", lvl:1},
+  {q:"Quel type de phrase ? « Où as-tu rangé tes outils ? »", a:"Une phrase interrogative", why:"Elle pose une question et finit par un point d'interrogation.", lvl:1},
+  {q:"Quel type de phrase ? « Range tes outils avant le souper. »", a:"Une phrase impérative", why:"Elle donne un ordre ou un conseil. Le sujet n'est pas écrit.", lvl:2},
+  {q:"Ajoute la ponctuation : « quelle vitesse incroyable »", a:"Quelle vitesse incroyable !", why:"Elle montre une émotion : c'est une phrase exclamative.", lvl:2},
+  {q:"Mets à la forme négative : « Israël construit une fusée. »", a:"Israël ne construit pas de fusée.", why:"La négation encadre le verbe : ne … pas. Et « une » devient « de » après une négation.", lvl:2},
+  {q:"Mets à la forme positive : « Je n'ai jamais vu ce moteur. »", a:"J'ai déjà vu ce moteur.", why:"On enlève les deux morceaux de la négation (n'… jamais).", lvl:3},
+  {q:"Transforme en phrase interrogative : « Tu as fini ton programme. »", a:"As-tu fini ton programme ? (ou : Est-ce que tu as fini ton programme ?)", why:"Deux façons : inverser le sujet et le verbe, ou ajouter « Est-ce que ».", lvl:2},
+  {q:"Est-ce une phrase ? « Le grand hangar bleu du village. » Explique.", a:"Non. Il n'y a aucun verbe conjugué : c'est seulement un groupe du nom.", why:"Long ≠ complet. Sans verbe conjugué, pas de phrase.", lvl:3},
+  {q:"« Le pilote monte dans l'avion et il attache sa ceinture. » Combien de verbes conjugués ?", a:"2 : monte et attache", why:"Une seule phrase peut contenir plusieurs verbes conjugués, reliés par « et ».", lvl:3},
+  {q:"Mets à la forme négative : « Il reste encore quelque chose dans la boîte. »", a:"Il ne reste plus rien dans la boîte.", why:"« encore » devient « ne … plus », et « quelque chose » devient « rien ».", lvl:4},
+  {q:"Écris une phrase exclamative d'au moins 8 mots sur un décollage.", a:"Exemple : Quel vacarme extraordinaire fait cet avion quand il décolle !", why:"Une exclamative commence souvent par Quel / Quelle / Comme et finit par « ! ».", lvl:4}
+ ],
+ qz:[
+  {q:"Pour être une vraie phrase, il faut absolument…", c:["un verbe conjugué","un adjectif","une virgule"], a:0, tip:"Pas de verbe conjugué → ce n'est pas une phrase.", lvl:1},
+  {q:"« Ferme la porte du hangar. » est une phrase…", c:["impérative","interrogative","exclamative"], a:0, tip:"Elle donne un ordre : impérative.", lvl:1},
+  {q:"Laquelle n'est PAS une phrase ?", c:["Le moteur du petit avion rouge.","Le moteur tourne.","Range-le !"], a:0, tip:"Aucun verbe conjugué : c'est un groupe du nom.", lvl:2},
+  {q:"Forme négative de « Il a des outils. »", c:["Il n'a pas d'outils.","Il a pas des outils.","Il n'a pas des outils."], a:0, tip:"ne … pas, et « des » devient « d' » après la négation.", lvl:3},
+  {q:"« ne … jamais » sert à…", c:["mettre la phrase à la forme négative","poser une question","décrire un nom"], a:0, tip:"C'est une négation en deux morceaux.", lvl:1},
+  {q:"Combien de phrases ? « Il pleut. Nous restons dedans. »", c:["2","1","3"], a:0, tip:"Deux points = deux phrases.", lvl:1},
+  {q:"« Comme ce robot est rapide » se termine par…", c:["!","?","…"], a:0, tip:"« Comme… » annonce une exclamation.", lvl:2},
+  {q:"Dans « Léa branche le fil et le voyant s'allume. », il y a…", c:["1 phrase et 2 verbes conjugués","2 phrases","1 phrase et 1 verbe"], a:0, tip:"branche et s'allume sont tous les deux conjugués, dans une seule phrase.", lvl:4}
+ ]},
+
+{id:"nom", emo:"📛", name:"Le nom", sub:"commun, propre, genre",
+ dr:[
+  {q:"Relève les noms : « Le pilote range ses outils dans le hangar. »", a:"pilote, outils, hangar", why:"Devant chacun, on peut mettre un / une / des : ce sont des noms.", lvl:1},
+  {q:"« Gatineau » est un nom commun ou un nom propre ?", a:"Un nom propre", why:"C'est le nom précis d'une ville → majuscule.", lvl:1},
+  {q:"Quel est le genre de « école » ? Comment le sais-tu ?", a:"Féminin — on dit « une école ».", why:"Le déterminant révèle toujours le genre.", lvl:2},
+  {q:"Quel est le genre de « avion » ?", a:"Masculin — « un avion ».", why:"Même si ça commence par une voyelle, le genre ne change pas.", lvl:2},
+  {q:"« des hélices » : genre et nombre ?", a:"Féminin pluriel", why:"une hélice → féminin ; « des » → pluriel.", lvl:2},
+  {q:"Combien de noms communs dans : « Israël a construit un pont avec ses blocs. » ?", a:"2 : pont et blocs", why:"Israël est un nom propre, il ne compte pas dans les noms communs.", lvl:3},
+  {q:"Dans « le pouvoir du moteur », le mot « pouvoir » est-il un nom ou un verbe ?", a:"Un nom", why:"Il y a un déterminant devant (« le »). Dans « je peux voler », ce serait un verbe.", lvl:4},
+  {q:"Écris trois noms qui appartiennent à la catégorie « véhicule ».", a:"Exemples : une voiture, un camion, un avion, un vélo, un train", why:"« véhicule » est le mot générique qui les regroupe tous.", lvl:2},
+  {q:"Lequel n'est PAS un nom : rapidement · vitesse · roue · capot ?", a:"rapidement", why:"On ne peut pas dire « une rapidement ». C'est un adverbe, il décrit le verbe.", lvl:3},
+  {q:"« Nous avons visité Ottawa au mois de mai. » Relève le nom propre.", a:"Ottawa (un seul)", why:"Attention : en français, les mois s'écrivent en minuscule — « mai » est un nom commun.", lvl:4}
+ ],
+ qz:[
+  {q:"Un nom propre commence toujours par…", c:["une majuscule","une minuscule","un déterminant"], a:0, tip:"Israël, Gatineau, le Québec.", lvl:1},
+  {q:"Le genre d'un nom, c'est…", c:["masculin ou féminin","singulier ou pluriel","long ou court"], a:0, tip:"un / une nous le montre.", lvl:1},
+  {q:"Quel test prouve qu'un mot est un nom ?", c:["mettre un / une / des devant","le mettre à la fin","le dire fort"], a:0, tip:"« une vitesse » ✔ · « une court » ✘", lvl:2},
+  {q:"« des outils » est…", c:["masculin pluriel","féminin pluriel","masculin singulier"], a:0, tip:"un outil → masculin ; des → pluriel.", lvl:2},
+  {q:"Dans « la classe de madame Roy », combien de noms propres ?", c:["1","2","0"], a:0, tip:"Roy. « madame » et « classe » sont des noms communs.", lvl:3},
+  {q:"« le courage » est un nom qui désigne…", c:["une idée","un animal","un lieu"], a:0, tip:"Les noms peuvent aussi nommer des idées : la joie, la peur, le courage.", lvl:3},
+  {q:"Lequel est féminin ?", c:["une hélice","un moteur","un tournevis"], a:0, tip:"On dit UNE hélice.", lvl:1},
+  {q:"Dans « Ce moteur a beaucoup de puissance. », le nom-noyau du dernier groupe est…", c:["puissance","beaucoup","moteur"], a:0, tip:"« de la puissance » → puissance est bien un nom.", lvl:4}
+ ]},
+
+{id:"det", emo:"🔖", name:"Le déterminant", sub:"le, un, mes, ce…",
+ dr:[
+  {q:"Complète : ___ hélice (féminin singulier)", a:"une hélice", why:"hélice est féminin.", lvl:1},
+  {q:"Complète : ___ outils (pluriel)", a:"des outils (ou : les outils, mes outils)", why:"Plusieurs → un déterminant pluriel.", lvl:1},
+  {q:"Complète avec un démonstratif : ___ avion vole bas.", a:"Cet avion vole bas.", why:"Devant une voyelle, « ce » devient « cet ».", lvl:3},
+  {q:"Complète avec un possessif (à moi) : ___ école est grande.", a:"Mon école est grande.", why:"Même si « école » est féminin, on dit « mon » devant une voyelle : c'est plus facile à prononcer.", lvl:3},
+  {q:"Relève les déterminants : « Mes deux amis ont perdu leur ballon dans ce jardin. »", a:"Mes, deux, leur, ce", why:"Chacun est placé juste devant un nom.", lvl:3},
+  {q:"« ___ élèves de la classe » — donne trois déterminants possibles.", a:"Les élèves / Ces élèves / Mes élèves (ou : des, quinze…)", why:"Tous marquent le pluriel.", lvl:2},
+  {q:"Dans « la roue de la voiture », combien de déterminants ?", a:"2 : la (roue) et la (voiture)", why:"Chaque nom a son propre déterminant.", lvl:3},
+  {q:"Remplace le déterminant par un possessif : « le vélo (à toi) »", a:"ton vélo", why:"mon/ton/son = à moi / à toi / à lui.", lvl:2},
+  {q:"Pourquoi écrit-on « cet hélicoptère » et non « ce hélicoptère » ?", a:"Parce que le h est muet : on entend une voyelle au début, donc « ce » devient « cet ».", why:"Comme dans « cet avion », « cet oiseau ».", lvl:4},
+  {q:"Corrige : « Ces robot avance vite. »", a:"Ce robot avance vite.", why:"« avance » est au singulier → il faut un déterminant singulier : ce.", lvl:4}
+ ],
+ qz:[
+  {q:"Le déterminant se place…", c:["juste avant le nom","après le verbe","à la fin de la phrase"], a:0, tip:"le chien, une fleur, mes amis.", lvl:1},
+  {q:"Lequel est un déterminant ?", c:["cette","court","vite"], a:0, tip:"cette maison — il annonce un nom.", lvl:1},
+  {q:"Complète : ___ avion (démonstratif)", c:["cet","cette","ce"], a:0, tip:"Devant une voyelle : cet.", lvl:3},
+  {q:"« leurs » indique…", c:["que ça appartient à plusieurs personnes","un lieu","une question"], a:0, tip:"leur / leurs = à eux.", lvl:2},
+  {q:"Dans « trois grosses valises », le déterminant est…", c:["trois","grosses","valises"], a:0, tip:"Un nombre peut être un déterminant.", lvl:2},
+  {q:"Le déterminant nous renseigne sur…", c:["le genre et le nombre du nom","le temps du verbe","le sens du texte"], a:0, tip:"un → masculin singulier ; des → pluriel.", lvl:2},
+  {q:"Complète : ___ amie (à moi)", c:["mon","ma","mes"], a:0, tip:"Devant une voyelle, on dit « mon amie » même au féminin.", lvl:4},
+  {q:"Combien de déterminants : « Le pilote de mon avion a ouvert la porte. » ?", c:["3","2","4"], a:0, tip:"Le, mon, la.", lvl:4}
+ ]},
+
+{id:"adj", emo:"✨", name:"L'adjectif", sub:"décrire & accorder",
+ dr:[
+  {q:"Accorde : « une porte (ouvert) »", a:"une porte ouverte", why:"porte = féminin singulier → + e.", lvl:1},
+  {q:"Accorde : « des moteurs (puissant) »", a:"des moteurs puissants", why:"moteurs = masculin pluriel → + s.", lvl:1},
+  {q:"Accorde : « des voitures (rapide) »", a:"des voitures rapides", why:"rapide finit déjà par -e : on ajoute seulement le s du pluriel.", lvl:2},
+  {q:"Accorde : « Les fusées sont (blanc). »", a:"Les fusées sont blanches.", why:"blanc → blanche au féminin, puis + s. Même après le verbe être, l'adjectif s'accorde.", lvl:3},
+  {q:"Relève les adjectifs : « Le vieux camion rouge transporte de lourdes caisses. »", a:"vieux, rouge, lourdes", why:"Chacun décrit un nom : camion (vieux, rouge), caisses (lourdes).", lvl:2},
+  {q:"Accorde : « une (beau) invention »", a:"une belle invention", why:"beau → belle au féminin (mot irrégulier).", lvl:3},
+  {q:"Accorde : « des (nouveau) outils »", a:"de nouveaux outils", why:"nouveau → nouveaux au pluriel (comme -eau → -eaux).", lvl:3},
+  {q:"Accorde : « Les hélices de l'avion sont (abîmé). »", a:"Les hélices de l'avion sont abîmées.", why:"Ce sont les hélices (féminin pluriel) qui sont abîmées, pas l'avion. Le mot le plus proche n'est pas toujours le bon !", lvl:4},
+  {q:"Accorde : « Israël et Léa sont (content). »", a:"Israël et Léa sont contents.", why:"Un garçon + une fille → on accorde au masculin pluriel.", lvl:4},
+  {q:"Accorde : « une chemise et un pantalon (bleu) »", a:"une chemise et un pantalon bleus", why:"Deux noms, dont un masculin → masculin pluriel.", lvl:5}
+ ],
+ qz:[
+  {q:"L'adjectif s'accorde avec…", c:["le nom qu'il décrit","le verbe","le déterminant seulement"], a:0, tip:"En genre ET en nombre.", lvl:1},
+  {q:"« des chats noir___ »", c:["noirs","noir","noire"], a:0, tip:"chats = masculin pluriel.", lvl:1},
+  {q:"« Elles sont content___ »", c:["contentes","content","contents"], a:0, tip:"elles = féminin pluriel.", lvl:2},
+  {q:"« des voitures neuf___ » →", c:["neuves","neufs","neuve"], a:0, tip:"neuf → neuve au féminin, + s au pluriel.", lvl:3},
+  {q:"Dans « une longue piste mouillée », il y a…", c:["2 adjectifs","1 adjectif","3 adjectifs"], a:0, tip:"longue et mouillée décrivent tous deux « piste ».", lvl:2},
+  {q:"« Les roues du camion sont sale___ »", c:["sales","sale","salées"], a:0, tip:"Ce sont les ROUES qui sont sales : féminin pluriel.", lvl:4},
+  {q:"« un (vieux) maison » — quelle est la bonne forme ?", c:["une vieille maison","un vieux maison","une vieux maison"], a:0, tip:"maison est féminin → une vieille maison.", lvl:3},
+  {q:"« Mon frère et ma sœur sont grand___ »", c:["grands","grandes","grand"], a:0, tip:"masculin + féminin → masculin pluriel.", lvl:5}
+ ]},
+
+{id:"gn", emo:"🧩", name:"Le groupe du nom", sub:"noyau & accords",
+ dr:[
+  {q:"Quel est le nom-noyau de « les grandes roues noires » ?", a:"roues", why:"C'est le chef du groupe : tout le reste s'accorde avec lui.", lvl:1},
+  {q:"Mets au pluriel : « un petit robot gris »", a:"des petits robots gris", why:"gris finit déjà par -s : il ne change pas.", lvl:2},
+  {q:"Mets au pluriel : « la grande roue »", a:"les grandes roues", why:"Tout le groupe passe au pluriel : déterminant, adjectif et nom.", lvl:1},
+  {q:"Mets au pluriel : « un beau jardin »", a:"de beaux jardins", why:"beau → beaux (comme -eau → -eaux).", lvl:3},
+  {q:"Mets au singulier : « des vieux moteurs bruyants »", a:"un vieux moteur bruyant", why:"On enlève les marques du pluriel partout. vieux ne change pas au masculin singulier.", lvl:3},
+  {q:"Quel est le noyau de « une boîte de vis » ?", a:"boîte", why:"« de vis » est un complément : il ne commande pas l'accord.", lvl:4},
+  {q:"Accorde : « une (petit) boîte de vis »", a:"une petite boîte de vis", why:"On accorde avec boîte (féminin singulier), pas avec vis.", lvl:4},
+  {q:"« les nouvelles pièces du moteur » : genre et nombre du noyau ?", a:"pièces — féminin pluriel", why:"C'est lui qui donne « nouvelles » et « les ».", lvl:3},
+  {q:"Corrige : « des petit avions rouge »", a:"des petits avions rouges", why:"Tous les mots du groupe prennent la marque du pluriel.", lvl:3},
+  {q:"Corrige : « la roues de la voiture sont neuve »", a:"Les roues de la voiture sont neuves.", why:"Le noyau « roues » est féminin pluriel : le déterminant, le verbe et l'adjectif suivent.", lvl:5}
+ ],
+ qz:[
+  {q:"Dans « les petits chats gris », le noyau est…", c:["chats","petits","gris"], a:0, tip:"Le nom principal du groupe.", lvl:1},
+  {q:"« un chien noir » au pluriel →", c:["des chiens noirs","des chien noir","un chiens noirs"], a:0, tip:"Tout le groupe change.", lvl:1},
+  {q:"« un tuyau percé » au pluriel →", c:["des tuyaux percés","des tuyaus percés","des tuyaux percé"], a:0, tip:"-au → -aux, et l'adjectif prend un s.", lvl:3},
+  {q:"Dans « une pile de vieux journaux », le noyau est…", c:["pile","journaux","vieux"], a:0, tip:"C'est UNE pile : le reste complète.", lvl:4},
+  {q:"Un groupe du nom contient au minimum…", c:["un déterminant et un nom","un verbe","deux adjectifs"], a:0, tip:"le chien, une fleur.", lvl:1},
+  {q:"« ce gros câble » au pluriel →", c:["ces gros câbles","ces gros câble","ce gros câbles"], a:0, tip:"ce → ces ; gros finit par s, il ne bouge pas.", lvl:2},
+  {q:"« des ailes (blanc) » →", c:["blanches","blancs","blanche"], a:0, tip:"ailes = féminin pluriel → blanches.", lvl:3},
+  {q:"Corrige : « les grande maison »", c:["les grandes maisons","la grande maison","les grande maisons"], a:0, tip:"Tout le groupe doit s'accorder au pluriel.", lvl:2}
+ ]},
+
+{id:"fem", emo:"♀️", name:"Le féminin", sub:"règles de formation",
+ dr:[
+  {q:"« un ami » au féminin", a:"une amie", why:"Règle générale : on ajoute un -e.", lvl:1},
+  {q:"« heureux » au féminin", a:"heureuse", why:"-eux devient -euse.", lvl:1},
+  {q:"« premier » au féminin", a:"première", why:"-er devient -ère (avec un accent grave).", lvl:2},
+  {q:"« neuf » au féminin", a:"neuve", why:"-f devient -ve.", lvl:2},
+  {q:"« un inventeur » au féminin", a:"une inventrice", why:"-teur devient souvent -trice (acteur → actrice).", lvl:3},
+  {q:"« bon » au féminin", a:"bonne", why:"On double la consonne avant d'ajouter le -e.", lvl:2},
+  {q:"« rouge » au féminin", a:"rouge (il ne change pas)", why:"Le mot finit déjà par -e.", lvl:1},
+  {q:"« un vieux camion » → « une ___ voiture »", a:"une vieille voiture", why:"vieux → vieille : à connaître par cœur.", lvl:3},
+  {q:"« léger » et « muet » au féminin", a:"légère et muette", why:"-er → -ère ; -et → -ette (on double le t).", lvl:3},
+  {q:"« blanc, doux, long, faux » au féminin", a:"blanche, douce, longue, fausse", why:"Ce sont des irréguliers : ils s'apprennent par cœur.", lvl:4},
+  {q:"Pourquoi écrit-on « une chatte » avec deux t ?", a:"Parce qu'on double la consonne finale avant d'ajouter le -e, pour qu'on entende le son [t].", why:"Le féminin réveille souvent une lettre muette.", lvl:4}
+ ],
+ qz:[
+  {q:"« courageux » au féminin →", c:["courageuse","courageuxe","courageus"], a:0, tip:"-eux → -euse.", lvl:1},
+  {q:"« un boulanger » au féminin →", c:["une boulangère","une boulangere","une boulangeuse"], a:0, tip:"-er → -ère.", lvl:2},
+  {q:"« actif » au féminin →", c:["active","activee","actife"], a:0, tip:"-f → -ve.", lvl:2},
+  {q:"« beau » au féminin →", c:["belle","beaue","beau"], a:0, tip:"Irrégulier : beau → belle.", lvl:2},
+  {q:"« ancien » au féminin →", c:["ancienne","anciene","ancien"], a:0, tip:"On double le n.", lvl:3},
+  {q:"Lequel NE change PAS au féminin ?", c:["calme","petit","gentil"], a:0, tip:"Il finit déjà par -e.", lvl:2},
+  {q:"« un directeur » au féminin →", c:["une directrice","une directeuse","une directeure"], a:0, tip:"-teur → -trice.", lvl:3},
+  {q:"« sec » au féminin →", c:["sèche","secque","sece"], a:0, tip:"Irrégulier : sec → sèche.", lvl:4}
+ ]},
+
+{id:"plur", emo:"♦️", name:"Le pluriel", sub:"règles de formation",
+ dr:[
+  {q:"« un moteur » au pluriel", a:"des moteurs", why:"Règle générale : on ajoute un -s.", lvl:1},
+  {q:"« une souris » au pluriel", a:"des souris", why:"Un mot qui finit déjà par -s, -x ou -z ne change pas.", lvl:1},
+  {q:"« un tuyau » au pluriel", a:"des tuyaux", why:"-au, -eau, -eu prennent un -x.", lvl:2},
+  {q:"« un cheval » au pluriel", a:"des chevaux", why:"-al devient -aux.", lvl:2},
+  {q:"« un trou » au pluriel", a:"des trous", why:"La plupart des mots en -ou prennent simplement un -s.", lvl:2},
+  {q:"« un genou » au pluriel", a:"des genoux", why:"C'est l'un des 7 mots en -ou qui prennent un -x.", lvl:3},
+  {q:"« un travail » au pluriel", a:"des travaux", why:"Exception : -ail → -aux (mais un détail → des détails).", lvl:4},
+  {q:"« un pneu » et « un festival » au pluriel", a:"des pneus et des festivals", why:"Deux exceptions à retenir : elles ne suivent pas la règle du -x ni du -aux.", lvl:4},
+  {q:"« un œil » au pluriel", a:"des yeux", why:"Complètement irrégulier : à connaître par cœur.", lvl:3},
+  {q:"Mets tout au pluriel : « le nouveau bateau du journal »", a:"les nouveaux bateaux des journaux", why:"-eau → -eaux et -al → -aux : tout le groupe suit.", lvl:5}
+ ],
+ qz:[
+  {q:"« un gâteau » au pluriel →", c:["des gâteaux","des gâteaus","des gâteau"], a:0, tip:"-eau prend un x.", lvl:1},
+  {q:"« un nez » au pluriel →", c:["des nez","des nezs","des nezx"], a:0, tip:"Il finit déjà par z : rien ne change.", lvl:1},
+  {q:"« un signal » au pluriel →", c:["des signaux","des signals","des signeaux"], a:0, tip:"-al → -aux.", lvl:2},
+  {q:"« un caillou » au pluriel →", c:["des cailloux","des caillous","des cailloues"], a:0, tip:"Un des 7 mots en -ou avec un x.", lvl:3},
+  {q:"« un bal » au pluriel →", c:["des bals","des baux","des balx"], a:0, tip:"Exception : bal, carnaval, festival prennent un s.", lvl:4},
+  {q:"« un détail » au pluriel →", c:["des détails","des détaux","des détailx"], a:0, tip:"La plupart des -ail prennent un s ; travail est l'exception.", lvl:4},
+  {q:"« un jeu » au pluriel →", c:["des jeux","des jeus","des jeues"], a:0, tip:"-eu prend un x.", lvl:1},
+  {q:"« un feu rouge » au pluriel →", c:["des feux rouges","des feus rouges","des feux rouge"], a:0, tip:"Le nom ET l'adjectif changent.", lvl:3}
+ ]},
+
+{id:"verbe", emo:"🏃", name:"Le verbe", sub:"infinitif & groupes",
+ dr:[
+  {q:"Quel est le verbe conjugué : « Le robot avance lentement. » ?", a:"avance", why:"C'est le mot qui change si on change le temps (hier, il avançait).", lvl:1},
+  {q:"Donne l'infinitif de « nous construisons »", a:"construire", why:"L'infinitif est la forme du dictionnaire.", lvl:2},
+  {q:"Donne l'infinitif de « ils finissent »", a:"finir", why:"Verbe du 2e groupe : nous finissons.", lvl:2},
+  {q:"À quel groupe appartient « dessiner » ?", a:"1er groupe", why:"Il finit par -er (et ce n'est pas « aller »).", lvl:1},
+  {q:"À quel groupe appartient « aller » ? Attention !",a:"3e groupe", why:"Il finit par -er, mais il est bien trop irrégulier (je vais, nous allons) pour être du 1er groupe.", lvl:4},
+  {q:"À quel groupe appartient « atterrir » ?", a:"2e groupe", why:"On dit « nous atterrissons » → 2e groupe.", lvl:3},
+  {q:"À quel groupe appartient « courir » ?", a:"3e groupe", why:"Il finit par -ir mais on ne dit pas « nous courissons » → 3e groupe.", lvl:4},
+  {q:"Sépare le radical et la terminaison : « nous programmons »", a:"programm | ons", why:"Le radical ne bouge presque pas, la terminaison change selon le temps et la personne.", lvl:3},
+  {q:"Relève les 2 verbes conjugués : « Israël branche la pile et le voyant s'allume. »", a:"branche et s'allume", why:"Deux actions, donc deux verbes conjugués.", lvl:3},
+  {q:"Dans « Il faut ranger les outils », quel verbe est à l'infinitif ?", a:"ranger", why:"« faut » est conjugué ; « ranger » reste à l'infinitif car il suit un autre verbe.", lvl:4}
+ ],
+ qz:[
+  {q:"L'infinitif, c'est…", c:["la forme du verbe dans le dictionnaire","le verbe au présent","le verbe avec « je »"], a:0, tip:"voler, finir, prendre.", lvl:1},
+  {q:"« finir » appartient au…", c:["2e groupe","1er groupe","3e groupe"], a:0, tip:"nous finissons → 2e groupe.", lvl:2},
+  {q:"Comment repérer le verbe dans une phrase ?", c:["on change le temps : le mot qui change est le verbe","c'est toujours le 2e mot","c'est le mot le plus long"], a:0, tip:"Hier, aujourd'hui, demain : teste !", lvl:2},
+  {q:"« aller » est du…", c:["3e groupe","1er groupe","2e groupe"], a:0, tip:"Trop irrégulier pour le 1er groupe.", lvl:4},
+  {q:"Dans « nous voyageons », le radical est…", c:["voyage","nous","ons"], a:0, tip:"radical + terminaison -ons.", lvl:3},
+  {q:"Lequel est un verbe du 1er groupe ?", c:["programmer","prendre","venir"], a:0, tip:"Il finit par -er.", lvl:1},
+  {q:"« ouvrir » est du…", c:["3e groupe","2e groupe","1er groupe"], a:0, tip:"On ne dit pas « nous ouvrissons ».", lvl:4},
+  {q:"Dans « Je veux réparer mon vélo », le verbe conjugué est…", c:["veux","réparer","vélo"], a:0, tip:"« réparer » reste à l'infinitif.", lvl:3}
+ ]},
+
+{id:"sujet", emo:"👑", name:"Le sujet", sub:"accord du verbe",
+ dr:[
+  {q:"Trouve le sujet : « Israël programme un robot. »", a:"Israël", why:"Qui est-ce qui programme ? Israël. On peut dire « C'est Israël qui programme ».", lvl:1},
+  {q:"Trouve le sujet : « Les deux avions atterrissent. »", a:"Les deux avions", why:"Qui est-ce qui atterrit ? Les deux avions (= ils).", lvl:1},
+  {q:"Par quel pronom peux-tu remplacer « Papa et moi » ?", a:"nous", why:"moi + une autre personne = nous.", lvl:2},
+  {q:"Accorde : « Les élèves (travailler) au présent. »", a:"Les élèves travaillent.", why:"ils → -ent (qu'on n'entend pas !).", lvl:2},
+  {q:"Accorde : « Le pilote des deux petits avions (vérifier) les moteurs. »", a:"Le pilote … vérifie les moteurs.", why:"Qui vérifie ? LE PILOTE, un seul. Le mot pluriel juste avant le verbe est un piège.", lvl:4},
+  {q:"Trouve le sujet : « Dans le hangar dorment trois vieux moteurs. »", a:"trois vieux moteurs", why:"Le sujet est parfois placé APRÈS le verbe.", lvl:4},
+  {q:"Accorde : « Toi et ton frère (construire) une cabane. »", a:"Toi et ton frère construisez une cabane.", why:"toi + une autre personne = vous → -ez.", lvl:4},
+  {q:"Accorde : « Ma sœur et moi (aller) au parc. »", a:"Ma sœur et moi allons au parc.", why:"= nous → -ons.", lvl:3},
+  {q:"Corrige : « Les robots avance vite. »", a:"Les robots avancent vite.", why:"Sujet pluriel → terminaison -ent.", lvl:2},
+  {q:"Corrige : « La boîte de vis sont tombées. »", a:"La boîte de vis est tombée.", why:"Le sujet est « la boîte » (singulier), pas « vis ».", lvl:5}
+ ],
+ qz:[
+  {q:"Pour trouver le sujet, on demande…", c:["Qui est-ce qui + verbe ?","Où ?","Comment ?"], a:0, tip:"Ou bien : « C'est … qui ».", lvl:1},
+  {q:"« Les enfants (jouer) dehors. »", c:["jouent","joue","jouons"], a:0, tip:"ils → -ent.", lvl:1},
+  {q:"« Le sac de billes (être) lourd. »", c:["est","sont","étaient"], a:0, tip:"Le sujet est « le sac », au singulier.", lvl:4},
+  {q:"« Nathan et moi (partir) demain. »", c:["partons","partent","pars"], a:0, tip:"= nous.", lvl:3},
+  {q:"Le verbe s'accorde avec…", c:["son sujet","son complément","l'adjectif"], a:0, tip:"Le sujet commande toujours.", lvl:1},
+  {q:"« Sous le lit (dormir) deux chats. »", c:["dorment","dort","dormaient"], a:0, tip:"Le sujet « deux chats » est placé après le verbe.", lvl:4},
+  {q:"« Vous (finir) votre travail. »", c:["finissez","finis","finissent"], a:0, tip:"vous → -ez (2e groupe : -issez).", lvl:2},
+  {q:"« Les roues du camion (tourner) vite. »", c:["tournent","tourne","tournes"], a:0, tip:"Ce sont les ROUES qui tournent.", lvl:3}
+ ]}
+);
+
+LESSONS.push(
+{id:"present", emo:"⏱️", name:"Le présent", sub:"maintenant",
+ dr:[
+  {q:"Conjugue : « je (dessiner) » au présent", a:"je dessine", why:"1er groupe : e – es – e – ons – ez – ent.", lvl:1},
+  {q:"Conjugue : « nous (finir) » au présent", a:"nous finissons", why:"2e groupe : on ajoute -iss- avant la terminaison.", lvl:2},
+  {q:"Conjugue : « ils (programmer) » au présent", a:"ils programment", why:"Le -ent est muet : on ne l'entend pas, mais il est obligatoire.", lvl:2},
+  {q:"Conjugue « être » avec vous et avec ils", a:"vous êtes / ils sont", why:"Verbe irrégulier à connaître par cœur.", lvl:2},
+  {q:"Conjugue « avoir » avec tu et avec nous", a:"tu as / nous avons", why:"Attention : « tu as » sans accent (à ≠ a).", lvl:2},
+  {q:"Conjugue : « vous (faire) » au présent", a:"vous faites", why:"Irrégulier : ce n'est PAS « vous faisez ».", lvl:3},
+  {q:"Conjugue : « ils (aller) » au présent", a:"ils vont", why:"Irrégulier : je vais, tu vas, il va, nous allons, vous allez, ils vont.", lvl:3},
+  {q:"Complète : « Le moteur (tourner) et les hélices (démarrer). »", a:"Le moteur tourne et les hélices démarrent.", why:"Chaque verbe s'accorde avec SON sujet : moteur (singulier), hélices (pluriel).", lvl:3},
+  {q:"Corrige : « Les élèves écoute le professeur. »", a:"Les élèves écoutent le professeur.", why:"Sujet pluriel → -ent.", lvl:2},
+  {q:"Conjugue : « nous (prendre) » et « ils (prendre) »", a:"nous prenons / ils prennent", why:"3e groupe irrégulier : le radical change (prend-, pren-, prenn-).", lvl:4},
+  {q:"Écris une phrase au présent avec « nous » et le verbe « construire ».", a:"Exemple : Nous construisons une rampe pour la voiture téléguidée.", why:"nous construisons (3e groupe).", lvl:4}
+ ],
+ qz:[
+  {q:"Terminaisons du présent, 1er groupe :", c:["e, es, e, ons, ez, ent","ais, ais, ait, ions, iez, aient","rai, ras, ra, rons, rez, ront"], a:0, tip:"C'est la chanson des verbes en -er.", lvl:1},
+  {q:"« ils (chanter) » →", c:["chantent","chante","chantons"], a:0, tip:"ils → -ent, muet.", lvl:1},
+  {q:"« nous (finir) » →", c:["finissons","finons","finissent"], a:0, tip:"2e groupe : -issons.", lvl:2},
+  {q:"« vous (faire) » →", c:["faites","faisez","faitez"], a:0, tip:"Irrégulier célèbre.", lvl:3},
+  {q:"« tu (avoir) » →", c:["as","a","à"], a:0, tip:"tu as (verbe avoir).", lvl:2},
+  {q:"« elles (être) » →", c:["sont","son","est"], a:0, tip:"« son » sans t est un déterminant.", lvl:2},
+  {q:"« il (prendre) » →", c:["prend","prends","prent"], a:0, tip:"je prends, tu prends, il prend.", lvl:3},
+  {q:"« Les avions (décoller) l'un après l'autre. »", c:["décollent","décolle","décollons"], a:0, tip:"Sujet pluriel.", lvl:2}
+ ]},
+
+{id:"imparfait", emo:"🌙", name:"L'imparfait", sub:"le passé qui durait",
+ dr:[
+  {q:"Conjugue : « je (voler) » à l'imparfait", a:"je volais", why:"Terminaison -ais.", lvl:1},
+  {q:"Conjugue : « nous (jouer) » à l'imparfait", a:"nous jouions", why:"-ions. Attention au i qu'on n'entend presque pas.", lvl:3},
+  {q:"Conjugue : « ils (finir) » à l'imparfait", a:"ils finissaient", why:"Base « nous finissons » → finiss- + aient.", lvl:3},
+  {q:"Conjugue : « il (être) » à l'imparfait", a:"il était", why:"Seul verbe qui ne suit pas la règle du « nous ».", lvl:2},
+  {q:"Conjugue : « tu (avoir) » à l'imparfait", a:"tu avais", why:"nous avons → av- + ais.", lvl:2},
+  {q:"Conjugue : « nous (faire) » à l'imparfait", a:"nous faisions", why:"nous faisons → fais- + ions.", lvl:3},
+  {q:"Transforme au passé : « Chaque samedi, je répare mon vélo. »", a:"Chaque samedi, je réparais mon vélo.", why:"Action qui se répétait → imparfait.", lvl:2},
+  {q:"Présent ou imparfait ? « Quand j'étais petit, je jouais dans le sable. »", a:"Imparfait (les deux verbes)", why:"On raconte un passé qui durait.", lvl:1},
+  {q:"Quelle est la différence entre « je jouais » et « je jouerai » ?", a:"« je jouais » = avant (imparfait) ; « je jouerai » = plus tard (futur).", why:"Le futur contient toujours un R avant la terminaison.", lvl:4},
+  {q:"Explique la méthode en 2 étapes pour trouver l'imparfait de « choisir ».", a:"① nous choisissons ② on enlève -ons et on ajoute la terminaison : je choisissais.", why:"Cette méthode marche pour tous les verbes sauf être.", lvl:4},
+  {q:"Écris une phrase à l'imparfait qui décrit un vieux hangar.", a:"Exemple : Le vieux hangar sentait l'huile et ses portes grinçaient à chaque coup de vent.", why:"L'imparfait sert à décrire le décor d'une histoire.", lvl:5}
+ ],
+ qz:[
+  {q:"Terminaisons de l'imparfait :", c:["ais, ais, ait, ions, iez, aient","e, es, e, ons, ez, ent","rai, ras, ra, rons, rez, ront"], a:0, tip:"Elles sont les mêmes pour TOUS les verbes.", lvl:1},
+  {q:"« ils (regarder) » à l'imparfait →", c:["regardaient","regardait","regarderont"], a:0, tip:"ils → -aient.", lvl:1},
+  {q:"« nous (être) » à l'imparfait →", c:["étions","serions","sommes"], a:0, tip:"j'étais, nous étions.", lvl:2},
+  {q:"Pour former l'imparfait, on part de…", c:["« nous » au présent","l'infinitif","« je » au futur"], a:0, tip:"nous finissons → je finissais.", lvl:3},
+  {q:"« Avant, il (habiter) à Gatineau. »", c:["habitait","habite","habitera"], a:0, tip:"« Avant » annonce le passé.", lvl:1},
+  {q:"Lequel est à l'imparfait ?", c:["je marchais","je marcherai","je marche"], a:0, tip:"-ais = imparfait.", lvl:2},
+  {q:"« vous (dire) » à l'imparfait →", c:["disiez","disez","direz"], a:0, tip:"nous disons → dis- + iez.", lvl:4},
+  {q:"L'imparfait sert surtout à…", c:["décrire ou raconter ce qui durait","donner un ordre","parler de demain"], a:0, tip:"Il était une fois…", lvl:2}
+ ]},
+
+{id:"futur", emo:"🚀", name:"Le futur", sub:"simple & proche",
+ dr:[
+  {q:"Conjugue : « je (voler) » au futur simple", a:"je volerai", why:"infinitif + ai.", lvl:1},
+  {q:"Conjugue : « nous (finir) » au futur simple", a:"nous finirons", why:"infinitif + ons.", lvl:2},
+  {q:"Mets au futur proche : « je décolle »", a:"je vais décoller", why:"aller au présent + infinitif.", lvl:1},
+  {q:"Conjugue : « il (être) » au futur simple", a:"il sera", why:"Radical irrégulier : ser-.", lvl:2},
+  {q:"Conjugue : « ils (avoir) » au futur simple", a:"ils auront", why:"Radical irrégulier : aur-.", lvl:2},
+  {q:"Conjugue : « nous (aller) » et « tu (faire) » au futur simple", a:"nous irons / tu feras", why:"aller → ir- ; faire → fer-.", lvl:3},
+  {q:"Conjugue : « il (jouer) » au futur simple", a:"il jouera", why:"On garde le -e de l'infinitif même si on ne l'entend pas.", lvl:3},
+  {q:"Futur simple ou futur proche ? « Demain, nous allons visiter le musée. »", a:"Futur proche", why:"aller + infinitif = futur proche.", lvl:2},
+  {q:"Récris au futur simple : « Demain, nous allons visiter le musée. »", a:"Demain, nous visiterons le musée.", why:"Un seul mot au lieu de deux.", lvl:3},
+  {q:"Corrige : « L'année prochaine, je serais en 4e année. »", a:"L'année prochaine, je serai en 4e année.", why:"« serais » est un conditionnel (ce qui pourrait arriver). Ici c'est sûr → futur : serai.", lvl:5},
+  {q:"Écris une phrase au futur simple sur un projet que tu construiras.", a:"Exemple : Cet été, je construirai une voiture téléguidée avec un moteur et deux piles.", why:"Vérifie le R du futur : construi-R-ai.", lvl:4}
+ ],
+ qz:[
+  {q:"Au futur simple, on trouve toujours…", c:["un R avant la terminaison","un accent","deux mots"], a:0, tip:"je volerai, il finira, nous serons.", lvl:2},
+  {q:"« tu (chanter) » au futur simple →", c:["chanteras","chantera","chantais"], a:0, tip:"tu → -ras.", lvl:1},
+  {q:"« nous (aller) » au futur simple →", c:["irons","allerons","allons"], a:0, tip:"Radical irrégulier : ir-.", lvl:3},
+  {q:"Le futur proche se forme avec…", c:["aller au présent + infinitif","être + participe passé","avoir + infinitif"], a:0, tip:"je vais partir.", lvl:1},
+  {q:"« il (faire) » au futur simple →", c:["fera","faira","ferait"], a:0, tip:"faire → fer-.", lvl:3},
+  {q:"« vous (avoir) » au futur simple →", c:["aurez","avez","auriez"], a:0, tip:"aur- + ez.", lvl:2},
+  {q:"Lequel est au futur ?", c:["je partirai","je partais","je pars"], a:0, tip:"-rai = futur.", lvl:1},
+  {q:"« Elle (étudier) demain. » au futur simple :", c:["étudiera","étudira","étudiéra"], a:0, tip:"On garde le -e de l'infinitif : étudie + ra.", lvl:4}
+ ]},
+
+{id:"passecompose", emo:"📦", name:"Le passé composé", sub:"avoir/être + participe",
+ dr:[
+  {q:"Conjugue : « j'(dessiner) » au passé composé", a:"j'ai dessiné", why:"avoir au présent + participe en -é.", lvl:1},
+  {q:"Conjugue : « nous (finir) » au passé composé", a:"nous avons fini", why:"Participe des verbes en -ir : -i.", lvl:2},
+  {q:"Conjugue : « elle (partir) » au passé composé", a:"elle est partie", why:"partir se conjugue avec ÊTRE → le participe s'accorde avec le sujet.", lvl:3},
+  {q:"Conjugue : « ils (aller) » au passé composé", a:"ils sont allés", why:"Avec être, on accorde : allé + s.", lvl:3},
+  {q:"Conjugue : « tu (faire) » et « il (prendre) » au passé composé", a:"tu as fait / il a pris", why:"Participes irréguliers : fait, pris, vu, mis, dit.", lvl:3},
+  {q:"« er » ou « é » ? « Il va (répar…) le moteur. »", a:"réparer", why:"Test : « Il va VENDRE » ✔ → donc infinitif en -er.", lvl:3},
+  {q:"« er » ou « é » ? « Il a (répar…) le moteur. »", a:"réparé", why:"Test : « Il a VENDU » ✔ → donc participe en -é.", lvl:3},
+  {q:"Corrige : « Elles ont mangées la pizza. »", a:"Elles ont mangé la pizza.", why:"Avec AVOIR, le participe ne s'accorde pas avec le sujet.", lvl:4},
+  {q:"Corrige : « Elles sont arrivé en retard. »", a:"Elles sont arrivées en retard.", why:"Avec ÊTRE, le participe s'accorde : féminin pluriel → -ées.", lvl:4},
+  {q:"Récris au passé composé : « Je tombe et je me relève. »", a:"Je suis tombé et je me suis relevé.", why:"tomber et se relever utilisent l'auxiliaire être.", lvl:5},
+  {q:"Écris une phrase au passé composé qui raconte une expérience de science.", a:"Exemple : Hier, j'ai branché la pile et l'ampoule s'est allumée.", why:"Vérifie l'auxiliaire de chaque verbe : avoir ou être ?", lvl:4}
+ ],
+ qz:[
+  {q:"Le passé composé se forme avec…", c:["avoir ou être + participe passé","le verbe seul","aller + infinitif"], a:0, tip:"Deux mots : c'est pour ça qu'il est « composé ».", lvl:1},
+  {q:"Participe passé de « choisir » →", c:["choisi","choisé","choisit"], a:0, tip:"Verbes en -ir → -i.", lvl:2},
+  {q:"« elle (venir) » au passé composé →", c:["elle est venue","elle a venu","elle est venu"], a:0, tip:"venir → être, et on accorde au féminin.", lvl:4},
+  {q:"« Ils ont (voir) un avion. »", c:["vu","voir","vus"], a:0, tip:"Participe irrégulier : vu. Avec avoir, pas d'accord.", lvl:3},
+  {q:"« Je vais (dessin…) une fusée. »", c:["dessiner","dessiné","dessinez"], a:0, tip:"Test : « je vais vendre » → infinitif.", lvl:3},
+  {q:"« J'ai (termin…) mon devoir. »", c:["terminé","terminer","terminez"], a:0, tip:"Test : « j'ai vendu » → participe.", lvl:3},
+  {q:"Avec l'auxiliaire AVOIR, le participe passé…", c:["ne s'accorde pas avec le sujet","s'accorde toujours","disparaît"], a:0, tip:"Elles ont mangé (sans s).", lvl:4},
+  {q:"« Nous sommes (rester) à la maison. »", c:["restés","rester","resté"], a:0, tip:"Avec être : nous → pluriel → restés.", lvl:4}
+ ]},
+
+{id:"homo", emo:"🔊", name:"Les homophones", sub:"a/à, et/est, on/ont…",
+ dr:[
+  {q:"a ou à ? « Il ___ un nouveau vélo. »", a:"Il a un nouveau vélo.", why:"Test : « il AVAIT un vélo » ✔ → c'est le verbe avoir : a.", lvl:1},
+  {q:"a ou à ? « Nous allons ___ l'école. »", a:"Nous allons à l'école.", why:"« avait » ne marche pas → c'est à, qui indique le lieu.", lvl:1},
+  {q:"et ou est ? « Mon frère ___ grand ___ fort. »", a:"Mon frère est grand et fort.", why:"« était grand » ✔ → est. Puis « grand ET fort » relie deux mots.", lvl:2},
+  {q:"on ou ont ? « Ils ___ fini leur projet. »", a:"Ils ont fini leur projet.", why:"« ils AVAIENT fini » ✔ → ont.", lvl:2},
+  {q:"son ou sont ? « Les outils ___ dans ___ sac. »", a:"Les outils sont dans son sac.", why:"« étaient » ✔ → sont. Puis « son sac » = le sac à lui.", lvl:3},
+  {q:"ou ou où ? « ___ as-tu rangé la clé ? »", a:"Où as-tu rangé la clé ?", why:"Il s'agit d'un endroit → où avec accent.", lvl:2},
+  {q:"ce ou se ? « ___ robot ___ déplace tout seul. »", a:"Ce robot se déplace tout seul.", why:"« se » se place devant un verbe ; « ce » devant un nom.", lvl:3},
+  {q:"mes ou mais ? « ___ outils sont là, ___ pas la perceuse. »", a:"Mes outils sont là, mais pas la perceuse.", why:"Test : « pourtant » ✔ → mais.", lvl:3},
+  {q:"la, là ou l'a ? « ___ voiture est ___ ; papa ___ lavée. »", a:"La voiture est là ; papa l'a lavée.", why:"la = déterminant · là = l'endroit · l'a = « l'avait ».", lvl:5},
+  {q:"Corrige : « Ont a gagner la partie et il est content. »", a:"On a gagné la partie et il est content.", why:"« On » = pronom ; « a gagné » = passé composé (test : il a vendu).", lvl:5}
+ ],
+ qz:[
+  {q:"« Il ___ dix ans. »", c:["a","à","as"], a:0, tip:"« il avait dix ans » ✔ → a.", lvl:1},
+  {q:"« Elle ___ partie ___ midi. »", c:["est … à","et … a","est … a"], a:0, tip:"était ✔ → est ; midi est un moment → à.", lvl:3},
+  {q:"« Les élèves ___ terminé. »", c:["ont","on","onts"], a:0, tip:"avaient ✔ → ont.", lvl:2},
+  {q:"« ___ va au parc. »", c:["On","Ont","Onts"], a:0, tip:"On = pronom, comme « il ».", lvl:1},
+  {q:"« Ces livres ___ à moi. »", c:["sont","son","cent"], a:0, tip:"étaient ✔ → sont.", lvl:2},
+  {q:"« Tu préfères le bleu ___ le rouge ? »", c:["ou","où","ous"], a:0, tip:"« ou bien » ✔ → ou sans accent.", lvl:2},
+  {q:"« Il ___ lave les mains. »", c:["se","ce","ceux"], a:0, tip:"Devant un verbe → se.", lvl:3},
+  {q:"« Je voulais venir ___ j'étais malade. »", c:["mais","mes","mets"], a:0, tip:"« pourtant » ✔ → mais.", lvl:3}
+ ]},
+
+{id:"ortho", emo:"🔤", name:"L'orthographe", sub:"sons difficiles",
+ dr:[
+  {q:"c ou ç ? « un gar___on »", a:"un garçon", why:"Devant a, o, u, il faut une cédille pour faire le son [s].", lvl:1},
+  {q:"c ou ç ? « une ___erise »", a:"une cerise", why:"Devant e, i, y, le c fait déjà [s] : pas de cédille.", lvl:2},
+  {q:"Écris « manger » avec nous, au présent.", a:"nous mangeons", why:"On ajoute un e pour garder le son [j] devant le o.", lvl:3},
+  {q:"Écris « lancer » avec nous, au présent.", a:"nous lançons", why:"Cédille devant le o pour garder le son [s].", lvl:3},
+  {q:"s ou ss ? « un des___in »", a:"un dessin", why:"Entre deux voyelles, un seul s ferait [z] (desin = « dezin »).", lvl:2},
+  {q:"s ou ss ? « une ro___e (la fleur) »", a:"une rose", why:"Ici on veut le son [z] : un seul s.", lvl:2},
+  {q:"n ou m ? « no___bre » et « la___pe »", a:"nombre et lampe", why:"Devant m, b, p, on écrit m au lieu de n.", lvl:3},
+  {q:"Corrige : « Il tra vaille tou jour dans le jardin. »", a:"Il travaille toujours dans le jardin.", why:"« toujours » est un mot invariable : il prend toujours un s.", lvl:3},
+  {q:"Cite cinq mots invariables.", a:"Exemples : toujours, beaucoup, souvent, jamais, pendant, alors, surtout", why:"Ils ne changent jamais d'orthographe, quel que soit le contexte.", lvl:2},
+  {q:"é ou è ? « la r___gle du p___re »", a:"la règle du père", why:"Son ouvert [è] → accent grave.", lvl:4},
+  {q:"Corrige : « Nous plaçons les gaufres et nous mangons. »", a:"Nous plaçons les gaufres et nous mangeons.", why:"lancer/placer → ç devant o ; manger → ge devant o.", lvl:5}
+ ],
+ qz:[
+  {q:"Devant a, o, u, pour faire le son [s], on écrit…", c:["ç","c","ss"], a:0, tip:"ça, garçon, reçu.", lvl:1},
+  {q:"« nous (manger) » →", c:["mangeons","mangons","manjons"], a:0, tip:"Le e garde le son [j].", lvl:3},
+  {q:"Entre deux voyelles, « ss » fait le son…", c:["[s]","[z]","[ch]"], a:0, tip:"bosse [s] · rose [z].", lvl:2},
+  {q:"Devant m, b, p, on écrit…", c:["m","n","rien"], a:0, tip:"nombre, simple, emmener.", lvl:2},
+  {q:"Lequel est bien écrit ?", c:["longtemps","lontemps","longtems"], a:0, tip:"Mot invariable à retenir.", lvl:3},
+  {q:"Lequel est un mot invariable ?", c:["beaucoup","grand","rapide"], a:0, tip:"Il ne s'accorde jamais.", lvl:2},
+  {q:"« gu » sert à…", c:["garder le son [g] devant e et i","faire le son [j]","faire le son [k]"], a:0, tip:"guitare, bague, guerre.", lvl:4},
+  {q:"Lequel est bien écrit ?", c:["une leçon","une lecon","une lesson"], a:0, tip:"ç devant le o.", lvl:1}
+ ]},
+
+{id:"vocab", emo:"📚", name:"Le vocabulaire", sub:"synonymes, familles",
+ dr:[
+  {q:"Donne un synonyme de « rapide ».", a:"vite, véloce, prompt (ex. : un train rapide = un train véloce)", why:"Un synonyme a presque le même sens.", lvl:1},
+  {q:"Donne l'antonyme de « monter ».", a:"descendre", why:"L'antonyme, c'est le contraire.", lvl:1},
+  {q:"Donne l'antonyme de « possible » en utilisant un préfixe.", a:"impossible", why:"Le préfixe im- / in- veut dire « pas ».", lvl:2},
+  {q:"Écris trois mots de la famille de « vol ».", a:"voler, s'envoler, survol, volant, envol", why:"Même racine → même famille.", lvl:2},
+  {q:"Que veut dire le préfixe « re- » dans « redémarrer » ?", a:"encore, une deuxième fois", why:"refaire, relire, rebrancher.", lvl:2},
+  {q:"Que veut dire le préfixe « dé- » dans « débrancher » ?", a:"le contraire de brancher", why:"défaire, décoller, déplier.", lvl:3},
+  {q:"Trouve le mot générique : voiture, camion, avion, vélo.", a:"un véhicule (ou : un moyen de transport)", why:"Le mot générique regroupe toute la catégorie.", lvl:2},
+  {q:"Que signifie « Il a dévoré son livre » ?", a:"Il l'a lu très vite, avec beaucoup d'intérêt.", why:"C'est un sens figuré : il n'a rien mangé du tout !", lvl:4},
+  {q:"Le mot « déneiger » est inconnu. Comment devines-tu son sens ?", a:"Je vois « neige » à l'intérieur et le préfixe « dé- » (enlever) → enlever la neige.", why:"Chercher un mot connu à l'intérieur, c'est la meilleure stratégie de lecture.", lvl:4},
+  {q:"Remplace « dit » par un verbe plus précis : « — Attention ! dit le pilote. »", a:"Exemples : cria, hurla, avertit, s'exclama", why:"Choisir un mot précis rend un texte beaucoup plus vivant.", lvl:5}
+ ],
+ qz:[
+  {q:"Un synonyme de « content » est…", c:["joyeux","triste","rapide"], a:0, tip:"Presque le même sens.", lvl:1},
+  {q:"L'antonyme de « lourd » est…", c:["léger","gros","dur"], a:0, tip:"Le contraire.", lvl:1},
+  {q:"Dans « inutile », le préfixe « in- » veut dire…", c:["pas","encore","très"], a:0, tip:"inutile = pas utile.", lvl:2},
+  {q:"Quel mot n'est PAS de la famille de « terre » ?", c:["terrible","atterrir","souterrain"], a:0, tip:"terrible vient de « terreur », pas de « terre ».", lvl:5},
+  {q:"« fleur, rose, tulipe, marguerite » : le mot générique est…", c:["fleur","rose","jardin"], a:0, tip:"Il regroupe tous les autres.", lvl:2},
+  {q:"Dans « constructeur », le suffixe « -eur » indique…", c:["celui qui fait l'action","le contraire","un lieu"], a:0, tip:"inventeur, chanteur, moteur.", lvl:3},
+  {q:"« Il est resté cloué sur place » veut dire…", c:["il n'a pas bougé, tellement il était surpris","on l'a attaché avec des clous","il a marché vite"], a:0, tip:"Sens figuré.", lvl:4},
+  {q:"« démonter » veut dire…", c:["défaire ce qui est monté","monter encore","monter vite"], a:0, tip:"Le préfixe dé- inverse l'action.", lvl:2}
+ ]},
+
+{id:"lecture", emo:"🔎", name:"Lire et comprendre", sub:"repérer & déduire",
+ dr:[
+  {q:"(Texte des frères Wright) En quelle année a eu lieu le premier vol ?", a:"En 1903 (le 17 décembre 1903).", why:"Question de repérage : la réponse est écrite dans le texte.", lvl:1},
+  {q:"(Texte) Combien de temps a duré ce premier vol ?", a:"Douze secondes.", why:"Repérage direct.", lvl:1},
+  {q:"(Texte) Pourquoi une plage venteuse est-elle un bon endroit pour un premier vol ?", a:"Parce que le vent aide l'appareil à décoller (et le sable est plus doux à l'atterrissage).", why:"Question d'inférence : le texte dit « venteuse », mais il ne t'explique pas pourquoi. Tu dois le déduire.", lvl:3},
+  {q:"(Texte) Quelle découverte des frères Wright était vraiment nouvelle ?", a:"Qu'il ne suffit pas de monter : il faut pouvoir DIRIGER l'appareil dans les airs.", why:"C'est écrit à la fin, mais il faut relire attentivement pour l'isoler.", lvl:2},
+  {q:"(Texte) L'auteur écrit « Douze secondes. » tout seul, en début de paragraphe. Pourquoi ?", a:"Pour insister, pour nous faire remarquer à quel point c'est court.", why:"L'auteur fait un choix d'écriture pour créer un effet. C'est une question de niveau supérieur.", lvl:5},
+  {q:"(Texte) Quelle est l'idée principale du texte ?", a:"Un vol minuscule (12 secondes, 36 mètres) qui a pourtant changé le monde, grâce à l'idée de diriger l'appareil.", why:"L'idée principale résume TOUT le texte, pas juste un détail.", lvl:4},
+  {q:"(Texte) Vrai ou faux : la machine était en métal. Justifie avec le texte.", a:"Faux. Le texte dit « une étrange machine de bois et de toile ».", why:"Toujours citer la preuve : « je le sais parce que le texte dit… ».", lvl:2},
+  {q:"(Texte) Que veut dire « le moteur tousse » ?", a:"Le moteur a du mal à démarrer, il fait des ratés.", why:"Sens figuré : un moteur ne tousse pas vraiment.", lvl:4},
+  {q:"Quelles sont les trois sortes de questions de lecture ?", a:"① repérer (c'est écrit) ② déduire / inférer (il faut assembler des indices) ③ réagir et expliquer avec le texte.", why:"Savoir quel type de question on te pose t'aide à savoir où chercher.", lvl:3},
+  {q:"« Le sol brillait et Léa a ouvert son parapluie. » Que s'est-il passé ? Quels indices ?", a:"Il pleut (ou il vient de pleuvoir). Indices : le sol mouillé qui brille + le parapluie.", why:"Le mot « pluie » n'apparaît jamais : c'est une inférence.", lvl:3}
+ ],
+ qz:[
+  {q:"Une question d'inférence, c'est une question dont la réponse…", c:["n'est pas écrite : il faut la déduire des indices","est écrite mot pour mot","n'a pas de réponse"], a:0, tip:"On assemble les indices du texte.", lvl:2},
+  {q:"L'idée principale d'un texte, c'est…", c:["ce dont parle le texte en entier","la première phrase","le détail le plus amusant"], a:0, tip:"Elle résume tout.", lvl:2},
+  {q:"Pour bien justifier une réponse, il faut…", c:["citer un passage du texte","dire ce qu'on sait déjà","répondre le plus vite possible"], a:0, tip:"« Je le sais parce que le texte dit… »", lvl:2},
+  {q:"« Marc frissonnait et cherchait ses mitaines. » On peut déduire que…", c:["il fait froid","il a peur du noir","il est en retard"], a:0, tip:"frissonner + mitaines = froid.", lvl:3},
+  {q:"Si tu ne connais pas un mot dans un texte, la meilleure stratégie est…", c:["chercher un mot connu à l'intérieur et lire autour","sauter la phrase","deviner au hasard"], a:0, tip:"déneiger → neige.", lvl:3},
+  {q:"Avant de répondre aux questions, il vaut mieux…", c:["lire le texte en entier une fois","répondre au hasard","lire seulement le titre"], a:0, tip:"Puis relire le passage utile pour chaque question.", lvl:1},
+  {q:"« Le vieux moteur toussait. » Ici, « toussait » veut dire…", c:["fonctionnait mal, avec des ratés","était malade","faisait du bruit exprès"], a:0, tip:"Sens figuré.", lvl:4},
+  {q:"Une erreur fréquente en compréhension de lecture est…", c:["répondre avec ce qu'on sait déjà au lieu de ce que dit le texte","relire le texte","souligner les mots importants"], a:0, tip:"Seul le texte fait foi.", lvl:4}
+ ]},
+
+{id:"ecrire", emo:"✏️", name:"Écrire", sub:"phrases riches",
+ dr:[
+  {q:"Enrichis avec un « comment » : « L'avion décolle. »", a:"Exemple : L'avion décolle lentement.", why:"Un adverbe ou un groupe de mots répond à « comment ? ».", lvl:1},
+  {q:"Enrichis avec un « où » : « L'avion décolle lentement. »", a:"Exemple : L'avion décolle lentement de la piste mouillée.", why:"On ajoute une information à la fois.", lvl:2},
+  {q:"Enrichis avec un « quand » au début : « Le robot avance. »", a:"Exemple : Après le signal, le robot avance.", why:"Commencer par le « quand » varie les débuts de phrase.", lvl:2},
+  {q:"Ajoute deux adjectifs : « Le camion transporte des caisses. »", a:"Exemple : Le vieux camion rouge transporte de lourdes caisses.", why:"Attention aux accords : lourdes s'accorde avec caisses.", lvl:2},
+  {q:"Relie ces deux phrases avec « parce que » : « Israël sourit. Son programme fonctionne. »", a:"Israël sourit parce que son programme fonctionne.", why:"Le connecteur « parce que » donne la cause.", lvl:2},
+  {q:"Relie avec « mais » : « Le moteur tourne. L'hélice ne bouge pas. »", a:"Le moteur tourne, mais l'hélice ne bouge pas.", why:"« mais » marque l'opposition.", lvl:3},
+  {q:"Corrige cette phrase trop longue : « Je prends la pile et je branche le fil et l'ampoule s'allume et je suis content. »", a:"Exemple : Je prends la pile et je branche le fil. L'ampoule s'allume : je suis très content !", why:"Trop de « et » fatigue le lecteur. Coupe en deux phrases.", lvl:4},
+  {q:"Écris 3 phrases qui décrivent un hangar d'avions, sans commencer deux fois par le même mot.", a:"Exemple : Le hangar sent l'huile et le métal chaud. Au fond, un vieil avion rouge attend sa réparation. Dehors, la pluie tambourine sur le toit de tôle.", why:"Varier les débuts de phrase rend un texte agréable à lire.", lvl:4},
+  {q:"Écris un petit paragraphe (4 phrases) avec : d'abord, ensuite, puis, enfin — sur la construction d'un objet.", a:"Exemple : D'abord, j'ai dessiné mon plan. Ensuite, j'ai découpé le carton. Puis j'ai collé les roues. Enfin, j'ai testé ma voiture sur la rampe.", why:"Les connecteurs mettent tes idées en ordre.", lvl:4},
+  {q:"Quelles trois choses faut-il toujours vérifier en relisant ?", a:"① les majuscules et les points ② les accords (GN et verbe) ③ les homophones (a/à, et/est, on/ont).", why:"Trois vérifications rapides évitent la majorité des fautes.", lvl:3},
+  {q:"Écris une phrase riche (qui ? quoi ? où ? quand ? comment ?) sur un lancement de fusée.", a:"Exemple : Au petit matin, l'énorme fusée blanche s'est élevée lentement au-dessus du pas de tir, dans un grondement assourdissant.", why:"Relis-toi : accords, ponctuation, et un verbe précis.", lvl:5}
+ ],
+ qz:[
+  {q:"Une phrase riche répond à des questions comme…", c:["où ? quand ? comment ?","quel jour sommes-nous ?","combien ça coûte ?"], a:0, tip:"On ajoute des informations utiles.", lvl:1},
+  {q:"Le connecteur « parce que » sert à donner…", c:["la cause","le lieu","le temps"], a:0, tip:"Pourquoi ? Parce que…", lvl:2},
+  {q:"Quel connecteur marque une opposition ?", c:["pourtant","ensuite","d'abord"], a:0, tip:"mais, pourtant, cependant.", lvl:3},
+  {q:"Quand on relit son texte, on vérifie surtout…", c:["les accords, les points et les homophones","la couleur du stylo","la longueur du titre"], a:0, tip:"Les trois vérifications qui sauvent.", lvl:2},
+  {q:"Commencer trois phrases de suite par « Il »…", c:["rend le texte plat : il faut varier","est recommandé","est obligatoire"], a:0, tip:"Varie les débuts.", lvl:3},
+  {q:"Pour ordonner les étapes d'un texte, on utilise…", c:["d'abord, ensuite, puis, enfin","très, beaucoup, encore","le, la, les"], a:0, tip:"Ce sont des connecteurs de temps.", lvl:2},
+  {q:"Une phrase avec six « et » à la suite…", c:["doit être coupée en plusieurs phrases","est une phrase riche","est bien écrite"], a:0, tip:"Deux bonnes phrases valent mieux qu'une interminable.", lvl:3},
+  {q:"Quel verbe est le plus précis pour « — Au secours ! ___ l'enfant. » ?", c:["hurla","dit","fit"], a:0, tip:"Un verbe précis rend la scène vivante.", lvl:4}
+ ]}
+);
+
+/* ===================== SOMMAIRE ===================== */
+const toc = document.getElementById("toc");
+LESSONS.forEach((L,i)=>{
+  const a = document.createElement("a");
+  a.href = "#"+L.id;
+  a.innerHTML = "<b>LEÇON "+(i+1)+"</b>"+L.emo+" "+L.name;
+  toc.appendChild(a);
+});
+
+/* ===================== ENTRAÎNEMENT ===================== */
+const KEY = "fr3-lecons-v1";
+let store = {};
+try { store = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch(e){ store = {}; }
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch(e){} };
+
+document.querySelectorAll(".drills").forEach(box => {
+  const L = LESSONS.find(x => x.id === box.dataset.l);
+  if(!L) return;
+
+  const bar = document.createElement("div");
+  bar.className = "toolbar";
+  bar.innerHTML = '<span class="score"></span>';
+  const reset = document.createElement("button");
+  reset.className = "rev";
+  reset.textContent = "↺ Recommencer cette leçon";
+  bar.appendChild(reset);
+  box.appendChild(bar);
+  const scoreEl = bar.querySelector(".score");
+
+  const refresh = () => {
+    let ok = 0, done = 0;
+    L.dr.forEach((d,i) => {
+      const v = store[L.id+"-"+i];
+      if(v){ done++; if(v === "ok") ok++; }
+    });
+    scoreEl.textContent = done
+      ? "✅ " + ok + " réussis sur " + done + " faits  (total : " + L.dr.length + " exercices)"
+      : "Aucun exercice coché pour l'instant — " + L.dr.length + " à faire.";
+  };
+
+  L.dr.forEach((d,i) => {
+    const key = L.id + "-" + i;
+    const el = document.createElement("div");
+    el.className = "dr";
+    el.innerHTML =
+      '<div class="qtxt"><span class="lvl l'+d.lvl+'">NIVEAU '+d.lvl+'</span><b>'+(i+1)+'.</b> '+d.q+'</div>'+
+      '<input type="text" placeholder="Écris ta réponse ici, puis vérifie…">'+
+      '<div class="rowbtn">'+
+        '<button class="rev">👀 Voir la réponse</button>'+
+        '<button class="self ok">✅ J\'avais bon</button>'+
+        '<button class="self no">🔁 À revoir</button>'+
+      '</div>'+
+      '<div class="sol"><b>Réponse :</b> '+d.a+'<span class="why">💡 '+d.why+'</span></div>';
+
+    const sol = el.querySelector(".sol");
+    const bOk = el.querySelector(".self.ok");
+    const bNo = el.querySelector(".self.no");
+
+    el.querySelector(".rev").addEventListener("click", e => {
+      const open = sol.style.display === "block";
+      sol.style.display = open ? "none" : "block";
+      e.target.textContent = open ? "👀 Voir la réponse" : "🙈 Cacher la réponse";
+    });
+    const mark = val => {
+      store[key] = val;
+      save();
+      bOk.classList.toggle("on", val === "ok");
+      bNo.classList.toggle("on", val === "no");
+      refresh();
+    };
+    bOk.addEventListener("click", () => mark("ok"));
+    bNo.addEventListener("click", () => mark("no"));
+    if(store[key] === "ok") bOk.classList.add("on");
+    if(store[key] === "no") bNo.classList.add("on");
+
+    box.insertBefore(el, bar);
+  });
+
+  reset.addEventListener("click", () => {
+    L.dr.forEach((d,i) => { delete store[L.id+"-"+i]; });
+    save();
+    box.querySelectorAll(".self").forEach(b => b.classList.remove("on"));
+    box.querySelectorAll(".sol").forEach(s => { s.style.display = "none"; });
+    box.querySelectorAll(".rev").forEach(b => {
+      if(b !== reset) b.textContent = "👀 Voir la réponse";
+    });
+    box.querySelectorAll("input").forEach(inp => { inp.value = ""; });
+    refresh();
+  });
+
+  refresh();
+});
+
+/* ===================== LE DÉFI (quiz) ===================== */
+const menu = document.getElementById("menu");
+const play = document.getElementById("play");
+const grid = document.getElementById("topics");
+const promptEl = document.getElementById("prompt");
+const choicesEl = document.getElementById("choices");
+const fbEl = document.getElementById("fb");
+const tipEl = document.getElementById("tipbox");
+const qnEl = document.getElementById("qn");
+const scEl = document.getElementById("sc");
+
+let deck = [], idx = 0, score = 0, locked = false;
+const ROUND = 8;
+
+function card(emo, name, sub, onClick){
+  const b = document.createElement("button");
+  b.className = "skill";
+  b.innerHTML = '<span class="emo">'+emo+'</span><b>'+name+'</b><span class="d">'+sub+'</span>';
+  b.addEventListener("click", onClick);
+  return b;
+}
+LESSONS.forEach((L,i) => {
+  grid.appendChild(card(L.emo, (i+1)+". "+L.name, L.sub, () => start(L.qz)));
+});
+const allQ = LESSONS.flatMap(L => L.qz);
+grid.appendChild(card("🎲", "Mélange", "toutes les leçons", () => start(allQ)));
+
+function start(pool){
+  deck = shuffle(pool.slice()).slice(0, ROUND);
+  idx = 0; score = 0;
+  menu.style.display = "none";
+  play.style.display = "block";
+  play.scrollIntoView({behavior:"smooth", block:"start"});
+  show();
+}
+
+function show(){
+  locked = false;
+  const q = deck[idx];
+  qnEl.textContent = idx + 1;
+  scEl.textContent = "✅ " + score;
+  promptEl.innerHTML = '<span class="lvl l'+q.lvl+'">NIVEAU '+q.lvl+'</span><br>' + q.q;
+  fbEl.textContent = ""; fbEl.className = "fb";
+  tipEl.style.display = "none";
+  choicesEl.innerHTML = "";
+  const order = shuffle(q.c.map((t,i) => ({t, right: i === q.a})));
+  order.forEach(o => {
+    const b = document.createElement("button");
+    b.className = "opt";
+    b.textContent = o.t;
+    b.addEventListener("click", () => answer(b, o.right, q));
+    choicesEl.appendChild(b);
+  });
+}
+
+function answer(btn, right, q){
+  if(locked) return;
+  locked = true;
+  if(right){
+    btn.classList.add("right");
+    score++;
+    fbEl.textContent = pick(["Bravo ! 🎉","Exactement ! ⭐","Parfait ! 💪","Bien joué ! 🚀"]);
+    fbEl.className = "fb ok";
+  } else {
+    btn.classList.add("wrong");
+    [...choicesEl.children].forEach(b => { if(b.textContent === q.c[q.a]) b.classList.add("right"); });
+    fbEl.textContent = "Pas encore — regarde l'astuce 👇";
+    fbEl.className = "fb no";
+  }
+  scEl.textContent = "✅ " + score;
+  tipEl.innerHTML = "💡 " + q.tip;
+  tipEl.style.display = "block";
+  setTimeout(() => {
+    idx++;
+    if(idx < deck.length){ show(); } else { finish(); }
+  }, right ? 1400 : 3200);
+}
+
+function finish(){
+  const msg = score === ROUND ? "Sans faute ! Incroyable 🏆"
+    : score >= 6 ? "Très solide ! 🌟"
+    : score >= 4 ? "Bon travail — encore un tour ? 💪"
+    : "On relit la leçon ensemble, puis on recommence. 🙂";
+  promptEl.innerHTML = "Terminé !";
+  choicesEl.innerHTML = "";
+  fbEl.textContent = score + " bonnes réponses sur " + deck.length + " — " + msg;
+  fbEl.className = "fb ok";
+  tipEl.style.display = "none";
+  const again = document.createElement("button");
+  again.className = "big";
+  again.style.margin = "10px auto";
+  again.style.display = "block";
+  again.textContent = "↺ Choisir un autre sujet";
+  again.addEventListener("click", backToMenu);
+  choicesEl.appendChild(again);
+}
+
+function backToMenu(){
+  play.style.display = "none";
+  menu.style.display = "block";
+  menu.scrollIntoView({behavior:"smooth", block:"start"});
+}
+document.getElementById("quit").addEventListener("click", backToMenu);
+
+/* ===================== NOTE AUX PARENTS ===================== */
+document.getElementById("parentnote").innerHTML =
+  "Pour les parents : 18 leçons couvrant le programme de français de 3<sup>e</sup> année (phrase, classes de mots, accords, conjugaison, homophones, orthographe, vocabulaire, compréhension de lecture et écriture), avec " +
+  LESSONS.reduce((n,L) => n + L.dr.length, 0) + " exercices guidés et " +
+  allQ.length + " questions de quiz. Les exercices sont gradués du niveau 1 (fondation) au niveau 5 (défi). " +
+  "Une leçon par séance suffit : il écrit sa réponse, <b>ensuite seulement</b> il vérifie, puis il coche « j'avais bon » ou « à revoir ». " +
+  "Les cases cochées sont conservées dans le navigateur — reprenez la semaine suivante par les exercices marqués « à revoir » et demandez-lui d'expliquer la règle à voix haute.";
+
+</script>
+</body>
+</html>

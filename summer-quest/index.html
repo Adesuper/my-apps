@@ -209,6 +209,13 @@
 
   .note{font-size:.85rem;color:var(--ink-soft)}
   .parentbox{background:var(--paper-2);border:1px dashed var(--line);border-radius:12px;padding:10px 12px;font-size:.85rem;color:var(--ink-soft);margin-top:8px}
+  .schoolbox{display:flex;align-items:center;gap:14px;background:linear-gradient(140deg,#16213A,#2F4FC9);color:#fff;border-radius:var(--r);padding:16px 18px;margin:16px 0 0;text-decoration:none;box-shadow:var(--shadow);transition:transform .14s ease}
+  .schoolbox:hover{transform:translateY(-3px)}
+  .schoolbox .ic{font-size:2rem;flex:0 0 auto}
+  .schoolbox b{display:block;font-family:var(--display);font-size:1.06rem}
+  .schoolbox i{display:block;font-style:normal;font-size:.85rem;opacity:.9;margin-top:3px}
+  .schoolbox .go{margin-left:auto;background:rgba(255,255,255,.2);border-radius:999px;padding:7px 14px;font-weight:700;font-size:.82rem;white-space:nowrap}
+  @media(max-width:560px){.schoolbox{flex-wrap:wrap}.schoolbox .go{margin-left:0}}
   .parentbox b{color:var(--ink)}
 
   footer{border-top:1px solid var(--line);margin-top:40px;padding:24px 0 40px;color:var(--ink-soft);font-size:.85rem}
@@ -244,6 +251,15 @@
       <p class="sub">Pick a land to explore, finish your daily mission, and collect badges all summer. A little bit each day keeps your brain strong and your hands busy!</p>
     </div>
 
+    <a class="schoolbox" href="ecole/cahier-3e.html">
+      <span class="ic">✏️</span>
+      <span>
+        <b>L'école a recommencé — voici le cahier de la semaine</b>
+        <i>Les leçons de 3ᵉ année : les nombres 0–500, la liste de mots, les 5 verbes et la lecture. 10 à 15 minutes par jour.</i>
+      </span>
+      <span class="go">Ouvrir →</span>
+    </a>
+
     <div class="weekribbon" id="weekRibbon" aria-label="Choose the week"></div>
 
     <div class="levelbar" aria-label="Choose difficulty"></div>
@@ -270,8 +286,12 @@
     <div class="panel">
       <p class="eyebrow">Extra helpers</p>
       <h2 style="font-size:1.3rem;margin-top:4px">Special lessons for right now ✨</h2>
-      <p class="note" style="margin-top:2px">Two focused mini-lessons that open in their own page. Use the back button to come back to the map.</p>
+      <p class="note" style="margin-top:2px">Focused lessons that open in their own page. Use the back button to come back to the map.</p>
       <div class="lands" style="margin:16px 0 0">
+        <a class="land" href="ecole/cahier-3e.html" style="background:linear-gradient(140deg,#16213A,#2F4FC9);text-decoration:none">
+          <span class="ic">✏️</span><span class="pill">3ᵉ année</span>
+          <h3>Le cahier de la semaine</h3><p>Les leçons de l'enseignante : nombres 0–500, liste de mots, verbes, liaisons</p>
+        </a>
         <a class="land" href="maths/division-fun.html" style="background:linear-gradient(140deg,#2D7DD2,#5B39B5);text-decoration:none">
           <span class="ic">➗</span><span class="pill">New!</span>
           <h3>Division Made Clear</h3><p>Play the sharing machine & solve your real homework</p>
@@ -298,6 +318,7 @@
   <section id="math" class="view">
     <div class="topback"><button class="back" data-go="home">← Back to map</button></div>
     <div class="vhead"><div class="vic" style="background:var(--sky)">🔢</div><div><h2>Math Mountain</h2><p>Pick a skill, answer the questions, earn XP. Each correct answer = +2 XP.</p></div></div>
+    <div class="parentbox">✏️ <b>Numbers 0–500 this week?</b> Open <a href="ecole/cahier-3e.html">Le cahier d'Israel</a> — read-it, write-it and riddle games for numbers to 500, played the way his teacher asked.</div>
     <div class="parentbox">🧮 <b>Getting ready for Grade 3 math?</b> Open <a href="maths/math-grade3-prep.html">Get Ready for Grade 3 Math</a> — study cards + a 16-topic quiz on place value, times tables, fractions, measurement & more.</div>
     <div class="panel" id="mathMenu">
       <div class="levelbar"></div>
@@ -321,7 +342,10 @@
   <section id="french" class="view">
     <div class="topback"><button class="back" data-go="home">← Back to map</button></div>
     <div class="vhead"><div class="vic" style="background:var(--coral)">🇫🇷</div><div><h2>French Forest — La forêt française</h2><p>Choisis un thème. Look at the picture, pick the right French word. +2 XP each!</p></div></div>
+    <div class="parentbox">✏️ <b>Cette semaine à l'école :</b> <a href="ecole/cahier-3e.html">Le cahier d'Israel</a> — les leçons de la semaine (liaisons, liste de mots « Le fromage », les 5 verbes à l'infinitif) et la routine de 10 à 15 minutes.</div>
     <div class="parentbox">🇫🇷 <b>Getting ready for Grade 3 French?</b> Open <a href="french/french-year3-prep.html">Prêt pour la 3ᵉ année</a> — study cards + a 15-topic quiz on this year's grammar, conjugation & vocabulary.</div>
+    <div class="parentbox">📘 <b>Want the deep version?</b> Open <a href="french/francais-3e-lecons.html">Je comprends, puis je m'entraîne</a> — 18 lessons, each explained with examples, plus 189 guided exercises and 144 quiz questions (levels 1 to 5).</div>
+    <div class="parentbox">🧠 <b>Diagnostic challenge:</b> <a href="diagnostics/diagnostic-01.html">Le grand défi de septembre</a> — 45 questions (maths, logique, français) to map exactly what he's mastered. Printable.</div>
     <div class="panel" id="frMenu">
       <p class="eyebrow">Choisis un thème · Choose a theme</p>
       <div class="skillgrid" id="frThemes" style="margin-top:10px"></div>

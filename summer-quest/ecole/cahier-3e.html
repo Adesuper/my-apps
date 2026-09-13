@@ -1,0 +1,1471 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Le cahier d'Israel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&family=Caveat:wght@500;700&display=swap">
+<style>
+/* ============ tokens ============ */
+:root{
+  --paper:#F4F6FC;
+  --panel:#FFFFFF;
+  --panel-2:#FAFBFF;
+  --ink:#16213A;
+  --ink-soft:#5A6484;
+  --ink-faint:#8B95B4;
+  --rule:#CBD6F2;
+  --grid:rgba(116,148,214,.15);
+  --marge:#D1495B;
+  --marge-soft:rgba(209,73,91,.30);
+  --encre:#2F4FC9;
+  --encre-soft:#E7ECFC;
+  --vert:#2E8B57;
+  --vert-soft:#E4F4EB;
+  --craie:#B57A10;
+  --craie-soft:#FBF0DA;
+  --line:#E2E7F5;
+  --shadow:0 10px 26px rgba(22,33,58,.09);
+  --shadow-sm:0 2px 8px rgba(22,33,58,.06);
+  --display:"Gabarito","Trebuchet MS",system-ui,sans-serif;
+  --body:"Literata",Georgia,"Times New Roman",serif;
+  --hand:"Caveat","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F141F;
+    --panel:#171E2D;
+    --panel-2:#1C2435;
+    --ink:#E8ECF9;
+    --ink-soft:#A2AECB;
+    --ink-faint:#7A86A6;
+    --rule:#2B3752;
+    --grid:rgba(140,170,255,.07);
+    --marge:#E77A89;
+    --marge-soft:rgba(231,122,137,.32);
+    --encre:#8FA8FF;
+    --encre-soft:#1E2946;
+    --vert:#66C795;
+    --vert-soft:#16301F;
+    --craie:#F0BC63;
+    --craie-soft:#2E2513;
+    --line:#27314A;
+    --shadow:0 10px 26px rgba(0,0,0,.34);
+    --shadow-sm:0 2px 8px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F141F;
+  --panel:#171E2D;
+  --panel-2:#1C2435;
+  --ink:#E8ECF9;
+  --ink-soft:#A2AECB;
+  --ink-faint:#7A86A6;
+  --rule:#2B3752;
+  --grid:rgba(140,170,255,.07);
+  --marge:#E77A89;
+  --marge-soft:rgba(231,122,137,.32);
+  --encre:#8FA8FF;
+  --encre-soft:#1E2946;
+  --vert:#66C795;
+  --vert-soft:#16301F;
+  --craie:#F0BC63;
+  --craie-soft:#2E2513;
+  --line:#27314A;
+  --shadow:0 10px 26px rgba(0,0,0,.34);
+  --shadow-sm:0 2px 8px rgba(0,0,0,.25);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--body);
+  color:var(--ink);
+  background-color:var(--paper);
+  background-image:
+    repeating-linear-gradient(to bottom, transparent 0 23px, var(--grid) 23px 24px),
+    repeating-linear-gradient(to right, transparent 0 23px, var(--grid) 23px 24px);
+  line-height:1.6;
+  font-size:16px;
+  -webkit-text-size-adjust:100%;
+}
+h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.15;margin:0;text-wrap:balance}
+p{margin:0}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--encre);outline-offset:2px;border-radius:8px}
+.wrap{max-width:920px;margin:0 auto;padding-inline:16px}
+
+/* ============ entête ============ */
+.top{
+  background:var(--panel);
+  border-bottom:1px solid var(--line);
+  padding-block:22px 0;
+}
+.eyebrow{
+  font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;
+  font-size:.7rem;font-weight:700;color:var(--ink-faint)
+}
+.titleline{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-top:4px}
+.top h1{font-size:clamp(1.6rem,5vw,2.2rem);letter-spacing:-.01em}
+.top h1 .pen{color:var(--marge)}
+.semaine-de{font-family:var(--hand);font-size:1.35rem;color:var(--marge);line-height:1}
+.sub{color:var(--ink-soft);font-size:.97rem;margin-top:6px;max-width:62ch}
+.syncline{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;font-size:.78rem;color:var(--ink-faint);font-family:var(--display)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--ink-faint);display:inline-block;margin-right:6px}
+.dot.on{background:var(--vert)}
+
+/* ============ onglets ============ */
+.tabs{
+  position:sticky;top:0;z-index:20;
+  background:var(--panel);
+  border-bottom:1px solid var(--line);
+  box-shadow:var(--shadow-sm);
+}
+.tabs-in{display:flex;gap:2px;overflow-x:auto;scrollbar-width:thin;padding-top:12px}
+.tab{
+  flex:0 0 auto;
+  border:1px solid var(--line);border-bottom:none;background:var(--panel-2);
+  color:var(--ink-soft);font-family:var(--display);font-weight:600;font-size:.92rem;
+  padding:9px 12px 10px;border-radius:11px 11px 0 0;white-space:nowrap;
+  transition:background .12s,color .12s,transform .12s;
+}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{
+  background:var(--panel);color:var(--encre);
+  box-shadow:inset 0 3px 0 var(--encre);
+  transform:translateY(-2px);
+}
+@media (prefers-reduced-motion:reduce){ .tab{transition:none} }
+
+/* ============ feuille ============ */
+main{padding-block:26px 70px}
+.sheet{position:relative}
+@media (min-width:860px){
+  .sheet{padding-left:26px;border-left:1.5px solid var(--marge-soft)}
+}
+section[hidden]{display:none!important}
+.lede{font-size:1.04rem;color:var(--ink-soft);max-width:64ch}
+h2.sec{font-size:1.45rem;margin-bottom:2px}
+h3{font-family:var(--display);font-size:1.06rem;margin:0}
+.stack{display:flex;flex-direction:column;gap:26px}
+.stack-sm{display:flex;flex-direction:column;gap:12px}
+hr.rule{border:none;border-top:1px solid var(--line);margin:0}
+
+/* notes manuscrites */
+.note{
+  font-family:var(--hand);font-size:1.28rem;line-height:1.35;color:var(--marge);
+  border-left:3px solid var(--marge-soft);padding:4px 0 4px 14px;
+}
+.note b{font-weight:700}
+.note.blue{color:var(--encre);border-left-color:var(--encre)}
+
+/* ============ leçons de la semaine ============ */
+.lecons{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel)}
+.lecon{padding:14px 16px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.lecon:last-child{border-right:none}
+.lecon .k{font-family:var(--display);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
+.lecon .v{font-family:var(--display);font-weight:700;font-size:1.02rem;margin-top:2px}
+.lecon .d{font-size:.9rem;color:var(--ink-soft);margin-top:4px}
+
+/* ============ semaine ============ */
+.week{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:11px;align-items:start}
+.day{
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  padding:13px 14px 14px;display:flex;flex-direction:column;gap:9px;
+  box-shadow:var(--shadow-sm);
+}
+.day.today{border-color:var(--encre);box-shadow:0 0 0 2px var(--encre-soft),var(--shadow-sm)}
+.day-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.day-name{font-family:var(--display);font-weight:700;font-size:1.02rem}
+.day-min{font-family:var(--display);font-size:.72rem;color:var(--ink-faint);letter-spacing:.04em}
+.task{display:flex;gap:9px;align-items:flex-start;font-size:.93rem;line-height:1.4}
+.task input[type="checkbox"]{
+  appearance:none;width:19px;height:19px;flex:0 0 19px;margin-top:2px;
+  border:2px solid var(--rule);border-radius:6px;background:var(--panel);
+  display:grid;place-content:center;cursor:pointer;
+}
+.task input[type="checkbox"]::after{
+  content:"✓";font-family:var(--display);font-weight:800;font-size:.82rem;color:#fff;transform:scale(0)
+}
+.task input[type="checkbox"]:checked{background:var(--vert);border-color:var(--vert)}
+.task input[type="checkbox"]:checked::after{transform:scale(1)}
+.task label{cursor:pointer}
+.task input:checked + label{color:var(--ink-faint);text-decoration:line-through;text-decoration-color:var(--rule)}
+.task .go{
+  display:inline-block;font-family:var(--display);font-size:.76rem;font-weight:600;
+  color:var(--encre);background:none;border:none;padding:0;margin-left:2px;text-decoration:underline;
+  text-underline-offset:2px;
+}
+.task.parent label{color:var(--marge);font-family:var(--display);font-weight:600;font-size:.88rem}
+
+/* progression */
+.progress{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px 16px}
+.bar{flex:1 1 200px;height:10px;border-radius:99px;background:var(--encre-soft);overflow:hidden;min-width:140px}
+.bar span{display:block;height:100%;background:var(--vert);border-radius:99px;transition:width .25s}
+.pcount{font-family:var(--display);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* ============ boutons ============ */
+.btn{
+  font-family:var(--display);font-weight:600;font-size:.92rem;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);
+  padding:9px 15px;border-radius:11px;box-shadow:var(--shadow-sm);
+  transition:transform .1s,border-color .12s;
+}
+.btn:hover{border-color:var(--encre)}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--encre);border-color:var(--encre);color:#fff}
+.btn.good{background:var(--vert);border-color:var(--vert);color:#fff}
+.btn.ghost{background:transparent;box-shadow:none}
+.btn.small{font-size:.8rem;padding:6px 11px;border-radius:9px}
+.btnrow{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+
+/* segmented */
+.seg{display:inline-flex;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:3px;gap:3px;flex-wrap:wrap}
+.seg button{
+  font-family:var(--display);font-weight:600;font-size:.86rem;border:none;background:none;
+  color:var(--ink-soft);padding:7px 13px;border-radius:9px;
+}
+.seg button[aria-pressed="true"]{background:var(--encre);color:#fff}
+
+/* ============ ardoise (surface de jeu) ============ */
+.ardoise{
+  background:var(--panel);border:1px solid var(--line);border-radius:20px;
+  padding:22px 20px 20px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:14px;
+}
+.consigne{font-family:var(--hand);font-size:1.5rem;line-height:1.25;color:var(--encre)}
+.bignum{
+  font-family:var(--display);font-weight:800;font-variant-numeric:tabular-nums;
+  font-size:clamp(3.4rem,16vw,6rem);line-height:1;letter-spacing:.02em;
+  color:var(--ink);text-align:center;padding-block:6px;
+}
+.bigword{
+  font-family:var(--display);font-weight:700;font-size:clamp(1.5rem,7vw,2.4rem);
+  text-align:center;color:var(--encre);line-height:1.2;
+}
+.rep{
+  font-family:var(--display);font-weight:700;font-size:1.4rem;text-align:center;
+  color:var(--vert);min-height:1.6em;
+}
+.rep.bad{color:var(--marge)}
+.saisie{
+  font-family:var(--display);font-weight:700;font-size:1.7rem;text-align:center;
+  width:100%;max-width:320px;margin:0 auto;padding:10px 12px;
+  border:2px solid var(--rule);border-radius:13px;background:var(--panel-2);
+  font-variant-numeric:tabular-nums;
+}
+.saisie:focus{border-color:var(--encre);outline:none}
+.score{font-family:var(--display);font-size:.84rem;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+
+/* ============ vocabulaire ============ */
+.mot{font-family:var(--display);font-weight:800;font-size:clamp(2rem,9vw,3.1rem);text-align:center;line-height:1.1}
+.phrase{text-align:center;color:var(--ink-soft);font-size:1.02rem;max-width:46ch;margin-inline:auto}
+.wordgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:7px}
+.wordchip{
+  background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  padding:7px 11px;font-family:var(--display);font-weight:600;font-size:.93rem;
+  display:flex;justify-content:space-between;gap:6px;align-items:center;
+}
+.wordchip b{font-weight:600}
+.wordchip .snd{border:none;background:none;color:var(--encre);font-size:.9rem;padding:0}
+textarea.liste{
+  width:100%;min-height:210px;border:1px solid var(--line);border-radius:13px;
+  padding:12px 13px;background:var(--panel-2);font-family:var(--display);font-size:.93rem;line-height:1.7;
+}
+.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:9px}
+.choice{
+  font-family:var(--display);font-weight:600;font-size:1rem;padding:12px 10px;
+  border:1.5px solid var(--line);border-radius:12px;background:var(--panel-2);
+}
+.choice:hover{border-color:var(--encre)}
+.choice.ok{background:var(--vert-soft);border-color:var(--vert);color:var(--vert)}
+.choice.no{background:var(--craie-soft);border-color:var(--marge);color:var(--marge)}
+.trou{font-family:var(--display);font-size:1.15rem;text-align:center;line-height:1.6}
+.trou u{color:var(--encre);text-decoration-style:dotted}
+
+/* ============ verbes ============ */
+.verbes{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:11px}
+.verbe{
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;
+  display:flex;flex-direction:column;gap:5px;box-shadow:var(--shadow-sm);
+}
+.verbe .inf{font-family:var(--display);font-weight:800;font-size:1.5rem;color:var(--encre)}
+.verbe .ex{font-size:.92rem;color:var(--ink-soft);font-style:italic}
+.verbe .why{font-size:.82rem;color:var(--ink-faint);font-family:var(--display)}
+.verbe .snd{align-self:flex-start;margin-top:4px}
+.bonus-tag{
+  display:inline-block;font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--craie);background:var(--craie-soft);
+  padding:3px 9px;border-radius:99px;
+}
+
+/* ============ lecture ============ */
+.texte{
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px;
+  font-size:1.12rem;line-height:2.05;box-shadow:var(--shadow-sm);
+}
+.texte .li{color:var(--marge);font-weight:600}
+.texte h4{font-family:var(--display);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:8px}
+table.liaisons{width:100%;border-collapse:collapse;font-size:.95rem}
+table.liaisons th,table.liaisons td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+table.liaisons th{font-family:var(--display);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+table.liaisons td.son{font-family:var(--display);font-weight:700;color:var(--encre);white-space:nowrap}
+table.liaisons td em{color:var(--marge);font-style:normal;font-weight:600}
+.tablewrap{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:4px 14px}
+.etapes-lecture{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:11px;counter-reset:et}
+.et{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:13px 14px;position:relative}
+.et .n{font-family:var(--display);font-weight:800;color:var(--marge);font-size:.8rem;letter-spacing:.1em}
+.et p{font-size:.93rem;color:var(--ink-soft);margin-top:3px}
+
+/* ============ fiche ============ */
+.fiche{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:13px}
+.champ{display:flex;flex-direction:column;gap:5px}
+.champ label{font-family:var(--display);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+.champ input{
+  border:1px solid var(--line);border-radius:11px;padding:10px 12px;background:var(--panel);
+  font-family:var(--display);font-size:1rem;
+}
+.champ input:focus{border-color:var(--encre);outline:none}
+.dit{
+  font-family:var(--display);font-weight:700;font-size:clamp(1.15rem,5vw,1.6rem);
+  color:var(--encre);text-align:center;line-height:1.35;
+}
+
+/* ============ l'année ============ */
+.annee{display:flex;flex-direction:column;gap:14px}
+.etape{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-sm)}
+.etape > .hd{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:13px 17px;background:var(--panel-2);border-bottom:1px solid var(--line)}
+.etape .hd h3{font-size:1.12rem}
+.etape .hd .quand{font-family:var(--display);font-size:.8rem;color:var(--ink-faint)}
+.etape .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.col{padding:14px 17px;border-right:1px solid var(--line)}
+.col:last-child{border-right:none}
+.col h4{font-family:var(--display);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--encre);margin-bottom:7px}
+.col.maison h4{color:var(--marge)}
+.col ul{margin:0;padding-left:17px}
+.col li{font-size:.93rem;margin-bottom:5px;color:var(--ink-soft)}
+.col li b{color:var(--ink);font-weight:600}
+
+.footnote{font-size:.86rem;color:var(--ink-faint);max-width:66ch}
+footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;font-size:.84rem;color:var(--ink-faint)}
+
+/* ============ impression ============ */
+@media print{
+  .tabs,.noprint{display:none!important}
+  body{background:#fff;color:#000;font-size:11.5pt}
+  section[hidden]{display:block!important}
+  .ardoise,.day,.etape,.texte,.progress{box-shadow:none;border-color:#bbb}
+  .sheet{border-left:none;padding-left:0}
+  #tab-semaine{page-break-after:always}
+}
+</style>
+</head>
+<body>
+
+<header class="top noprint">
+  <div class="wrap">
+    <p class="eyebrow">3<sup>e</sup> année &middot; année scolaire 2026–2027</p>
+    <div class="titleline">
+      <h1>Le cahier d'<span class="pen">Israel</span></h1>
+      <p class="semaine-de" id="semaineDe">Semaine du…</p>
+    </div>
+    <p class="sub">Les leçons de la semaine, les exercices pour les pratiquer, et la carte de ce qui s'en vient cette année. 10 à 15 minutes à la fois — souvent, pas longtemps.</p>
+    <p class="syncline"><span id="syncBadge"><span class="dot"></span>Sauvegardé sur cet appareil</span> <button class="btn small ghost" id="printBtn">🖨️ Imprimer la semaine</button></p>
+  </div>
+</header>
+
+<nav class="tabs noprint" aria-label="Sections du cahier">
+  <div class="wrap tabs-in" role="tablist">
+    <button class="tab" role="tab" id="t-semaine" data-tab="semaine" aria-selected="true" aria-controls="tab-semaine">📅 La semaine</button>
+    <button class="tab" role="tab" id="t-nombres" data-tab="nombres" aria-selected="false" aria-controls="tab-nombres">🔢 Nombres 0–500</button>
+    <button class="tab" role="tab" id="t-vocab" data-tab="vocab" aria-selected="false" aria-controls="tab-vocab">🧀 Vocabulaire</button>
+    <button class="tab" role="tab" id="t-verbes" data-tab="verbes" aria-selected="false" aria-controls="tab-verbes">🇫🇷 Les 5 verbes</button>
+    <button class="tab" role="tab" id="t-lecture" data-tab="lecture" aria-selected="false" aria-controls="tab-lecture">📖 Lecture &amp; liaisons</button>
+    <button class="tab" role="tab" id="t-fiche" data-tab="fiche" aria-selected="false" aria-controls="tab-fiche">🎂 Ma fiche</button>
+    <button class="tab" role="tab" id="t-annee" data-tab="annee" aria-selected="false" aria-controls="tab-annee">🗺️ L'année</button>
+  </div>
+</nav>
+
+<main class="wrap">
+<div class="sheet">
+
+<!-- ================= LA SEMAINE ================= -->
+<section id="tab-semaine" role="tabpanel" aria-labelledby="t-semaine">
+  <div class="stack">
+
+    <div class="stack-sm">
+      <h2 class="sec">Les leçons de la semaine</h2>
+      <p class="lede">Ce que l'enseignante a demandé. Tout le reste du cahier ne sert qu'à pratiquer ces cinq choses.</p>
+    </div>
+
+    <div class="lecons">
+      <div class="lecon">
+        <p class="k">📖 Lecture</p>
+        <p class="v">Les liaisons</p>
+        <p class="d">Lire <b>doucement et bien</b>, pas vite. Les liaisons doivent être entendues.</p>
+      </div>
+      <div class="lecon">
+        <p class="k">🧀 Vocabulaire</p>
+        <p class="v">Liste 1 : Le fromage</p>
+        <p class="d">Reconnaître, lire, <b>écrire sans faute</b> et comprendre chaque mot.</p>
+      </div>
+      <div class="lecon">
+        <p class="k">🇫🇷 Conjugaison</p>
+        <p class="v">5 verbes à l'infinitif</p>
+        <p class="d">avoir, être, aimer, aller, finir — <b>seulement le nom</b> du verbe. On ne conjugue pas encore.</p>
+      </div>
+      <div class="lecon">
+        <p class="k">🔢 Mathématiques</p>
+        <p class="v">Lire et écrire 0 à 500</p>
+        <p class="d">Sous forme de <b>jeu</b>, jamais en recopiant tous les nombres.</p>
+      </div>
+      <div class="lecon">
+        <p class="k">🎂 Autre</p>
+        <p class="v">Sa date de naissance</p>
+        <p class="d">Et l'agenda <b>signé chaque lundi matin</b>.</p>
+      </div>
+    </div>
+
+    <div class="progress noprint">
+      <span class="pcount" id="pcount">0 / 13</span>
+      <span class="bar"><span id="pbar" style="width:0%"></span></span>
+      <button class="btn small ghost" id="resetWeek">↺ Nouvelle semaine</button>
+    </div>
+
+    <div class="stack-sm">
+      <h3>Le plan de la semaine</h3>
+      <p class="lede">Cinq petites séances de 10 à 15 minutes. On coche ensemble.</p>
+    </div>
+    <div class="week" id="week"></div>
+
+    <p class="note"><b>Pour maman et papa :</b> la fréquence compte plus que la durée. Mieux vaut 12 minutes cinq fois que 60 minutes le dimanche — et on arrête pendant qu'il en veut encore. C'est comme ça que la concentration se construit.</p>
+
+    <hr class="rule">
+
+    <div class="stack-sm">
+      <h3>Comment mener une séance de 12 minutes</h3>
+    </div>
+    <div class="etapes-lecture">
+      <div class="et"><p class="n">1 · 2 MIN</p><p><b>On commence par ce qu'il sait.</b> Deux nombres faciles, deux mots connus. Il démarre en gagnant.</p></div>
+      <div class="et"><p class="n">2 · 7 MIN</p><p><b>Le vrai travail.</b> Un seul objectif par séance — pas deux. Il tient le crayon ou la souris, pas vous.</p></div>
+      <div class="et"><p class="n">3 · 2 MIN</p><p><b>L'erreur du jour.</b> On reprend UNE erreur, calmement, et il la refait correctement lui-même.</p></div>
+      <div class="et"><p class="n">4 · 1 MIN</p><p><b>On coche et on nomme.</b> « Aujourd'hui tu as réussi ___ ». On arrête net, même s'il veut continuer.</p></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= NOMBRES ================= -->
+<section id="tab-nombres" role="tabpanel" aria-labelledby="t-nombres" hidden>
+  <div class="stack">
+    <div class="stack-sm">
+      <h2 class="sec">Lire et écrire les nombres de 0 à 500</h2>
+      <p class="lede">L'enseignante est claire : <b>on en fait un jeu</b>. On pose une question, il répond à voix haute ou il écrit. Jamais de longues colonnes de nombres à recopier.</p>
+    </div>
+
+    <div class="seg" role="group" aria-label="Mode de jeu">
+      <button data-nm="lire" aria-pressed="true">👁️ Je le lis</button>
+      <button data-nm="ecrire" aria-pressed="false">✍️ Je l'écris</button>
+      <button data-nm="devinette" aria-pressed="false">🕵️ Devinette</button>
+    </div>
+
+    <div class="ardoise">
+      <p class="consigne" id="numConsigne">Quel nombre est-ce ?</p>
+      <p class="bignum" id="numBig">347</p>
+      <p class="bigword" id="numWord" hidden></p>
+      <div id="numSaisieWrap" hidden>
+        <input class="saisie" id="numInput" type="text" inputmode="numeric" autocomplete="off" placeholder="…" aria-label="Écris le nombre en chiffres">
+      </div>
+      <p class="rep" id="numRep"></p>
+      <div class="btnrow" id="numBtns"></div>
+      <p class="score" id="numScore">Défis réussis : 0 / 0</p>
+    </div>
+
+    <p class="note blue">Astuce de l'enseignante : <b>« Je pense à un nombre entre 200 et 300. Il a 4 dizaines et 7 unités. »</b> — c'est ça qui fait travailler la valeur de position, bien plus que l'écriture.</p>
+
+    <hr class="rule">
+    <div class="stack-sm">
+      <h3>Les trois choses à surveiller</h3>
+    </div>
+    <div class="etapes-lecture">
+      <div class="et"><p class="n">LE PIÈGE 1</p><p><b>Les 70 et les 90.</b> 78 se dit <em>soixante-dix-huit</em> et 95 <em>quatre-vingt-quinze</em>. C'est là que ça bloque presque toujours.</p></div>
+      <div class="et"><p class="n">LE PIÈGE 2</p><p><b>Le zéro au milieu.</b> 305 = <em>trois cent cinq</em>, et non « trente-cinq ». Faites-lui montrer les 0 dizaines.</p></div>
+      <div class="et"><p class="n">LE PIÈGE 3</p><p><b>Le s de « cents ».</b> 300 = <em>trois cents</em>, mais 347 = <em>trois cent quarante-sept</em>, sans s.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VOCABULAIRE ================= -->
+<section id="tab-vocab" role="tabpanel" aria-labelledby="t-vocab" hidden>
+  <div class="stack">
+    <div class="stack-sm">
+      <h2 class="sec">Liste 1 : Le fromage</h2>
+      <p class="lede">Quatre choses sont demandées pour chaque mot : le <b>reconnaître</b>, le <b>lire</b>, l'<b>écrire</b> sans faute et le <b>comprendre</b>. Les trois modes ci-dessous couvrent les quatre.</p>
+    </div>
+
+    <p class="note"><b>À vérifier :</b> cette liste est une liste de départ. Remplace-la par les mots exacts du cahier de l'enseignante avec le bouton « ✏️ Modifier la liste » — tous les jeux suivent automatiquement.</p>
+
+    <div class="seg" role="group" aria-label="Mode de vocabulaire">
+      <button data-vm="lire" aria-pressed="true">👁️ Je lis</button>
+      <button data-vm="dictee" aria-pressed="false">✍️ Dictée</button>
+      <button data-vm="sens" aria-pressed="false">💡 Je comprends</button>
+    </div>
+
+    <div class="ardoise">
+      <p class="consigne" id="vocConsigne">Lis le mot à voix haute.</p>
+      <p class="mot" id="vocMot">fromage</p>
+      <p class="phrase" id="vocPhrase">J'aime le fromage sur mes pâtes.</p>
+      <div class="trou" id="vocTrou" hidden></div>
+      <div id="vocSaisieWrap" hidden>
+        <input class="saisie" id="vocInput" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="…" aria-label="Écris le mot">
+      </div>
+      <div class="choices" id="vocChoices" hidden></div>
+      <p class="rep" id="vocRep"></p>
+      <div class="btnrow" id="vocBtns"></div>
+      <p class="score" id="vocScore">Mot 1 sur 15</p>
+    </div>
+
+    <div class="stack-sm">
+      <div class="btnrow">
+        <h3 style="flex:1">Les 15 mots</h3>
+        <button class="btn small" id="editList">✏️ Modifier la liste</button>
+      </div>
+      <div class="wordgrid" id="wordgrid"></div>
+      <div id="editWrap" hidden>
+        <p class="footnote" style="margin-bottom:8px">Un mot par ligne. Après la barre verticale <b>|</b>, écris une petite phrase qui montre le sens du mot.</p>
+        <textarea class="liste" id="listeTxt" aria-label="Liste de mots"></textarea>
+        <div class="btnrow" style="margin-top:9px">
+          <button class="btn primary" id="saveList">Enregistrer la liste</button>
+          <button class="btn ghost" id="cancelList">Annuler</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VERBES ================= -->
+<section id="tab-verbes" role="tabpanel" aria-labelledby="t-verbes" hidden>
+  <div class="stack">
+    <div class="stack-sm">
+      <h2 class="sec">Les 5 verbes, à l'infinitif</h2>
+      <p class="lede">L'enseignante demande <b>seulement le nom du verbe</b>. Israel doit pouvoir les nommer tous les cinq, les lire et les reconnaître — pas les conjuguer. Ça viendra à l'étape 2.</p>
+    </div>
+
+    <div class="verbes" id="verbes"></div>
+
+    <p class="note blue">L'infinitif, c'est <b>le nom du verbe</b> — celui qu'on trouve dans le dictionnaire. Test maison : si on peut dire « il faut ___ », c'est l'infinitif. <i>Il faut finir.</i> ✓ &nbsp; <i>Il faut finis.</i> ✗</p>
+
+    <hr class="rule">
+
+    <div class="stack-sm">
+      <span class="bonus-tag">Bonus — pas obligatoire</span>
+      <h3>Retrouve le nom du verbe</h3>
+      <p class="lede">À faire seulement s'il en redemande. On lui montre un verbe dans une phrase, il dit de quel verbe il s'agit.</p>
+    </div>
+
+    <div class="ardoise">
+      <p class="consigne">De quel verbe vient ce mot ?</p>
+      <p class="bigword" id="vbForme">nous avons</p>
+      <div class="choices" id="vbChoices"></div>
+      <p class="rep" id="vbRep"></p>
+      <div class="btnrow"><button class="btn" id="vbNext">Un autre →</button></div>
+      <p class="score" id="vbScore">Défis réussis : 0 / 0</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LECTURE ================= -->
+<section id="tab-lecture" role="tabpanel" aria-labelledby="t-lecture" hidden>
+  <div class="stack">
+    <div class="stack-sm">
+      <h2 class="sec">Lecture : bien faire les liaisons</h2>
+      <p class="lede">La consigne est <b>lire doucement, pas vite</b>. Un lecteur qui court avale les liaisons. On vise la voix qui coule, pas le chrono.</p>
+    </div>
+
+    <div class="tablewrap">
+      <table class="liaisons">
+        <thead><tr><th>Lettre à la fin du mot</th><th>Son entendu</th><th>Exemples</th></tr></thead>
+        <tbody>
+          <tr><td><b>s</b>, <b>x</b>, <b>z</b></td><td class="son">[z]</td><td>les<em>‿</em>amis &middot; deux<em>‿</em>enfants &middot; chez<em>‿</em>eux &middot; très<em>‿</em>heureux</td></tr>
+          <tr><td><b>t</b>, <b>d</b></td><td class="son">[t]</td><td>un petit<em>‿</em>avion &middot; un grand<em>‿</em>arbre &middot; quand<em>‿</em>il arrive</td></tr>
+          <tr><td><b>n</b></td><td class="son">[n]</td><td>un<em>‿</em>ami &middot; mon<em>‿</em>école &middot; en<em>‿</em>automne</td></tr>
+          <tr><td><b>r</b>, <b>p</b></td><td class="son">[r] [p]</td><td>le premier<em>‿</em>étage &middot; trop<em>‿</em>occupé</td></tr>
+          <tr><td>après <b>et</b></td><td class="son">jamais</td><td>un chat et | un chien — on ne lie <b>jamais</b> après « et »</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note">La liaison se fait seulement devant une <b>voyelle</b> (a, e, i, o, u, y) ou un <b>h muet</b>. Devant une consonne, on ne lie pas : <i>les‿amis</i> ✓ mais <i>les copains</i> — rien à lier.</p>
+
+    <div class="btnrow noprint">
+      <button class="btn" id="toggleLi" aria-pressed="true">👀 Cacher les liaisons</button>
+      <span class="score">Les marques <span style="color:var(--marge);font-weight:700">‿</span> montrent où la voix doit se lier.</span>
+    </div>
+
+    <div class="stack-sm" id="textes"></div>
+
+    <hr class="rule">
+    <div class="stack-sm"><h3>La routine de lecture, en 3 passages</h3></div>
+    <div class="etapes-lecture">
+      <div class="et"><p class="n">PASSAGE 1</p><p><b>Doucement, pour comprendre.</b> Il lit à voix basse. On ne corrige rien encore.</p></div>
+      <div class="et"><p class="n">PASSAGE 2</p><p><b>On chasse les liaisons.</b> Il souligne les ‿ du doigt et relit seulement ces groupes de mots.</p></div>
+      <div class="et"><p class="n">PASSAGE 3</p><p><b>À voix haute, pour vrai.</b> Il lit le texte entier comme un conteur. C'est le seul passage qu'on félicite.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FICHE ================= -->
+<section id="tab-fiche" role="tabpanel" aria-labelledby="t-fiche" hidden>
+  <div class="stack">
+    <div class="stack-sm">
+      <h2 class="sec">Ma fiche</h2>
+      <p class="lede">Ce qu'il doit savoir dire tout seul, sans hésiter, en français.</p>
+    </div>
+
+    <div class="fiche">
+      <div class="champ"><label for="fNom">Nom complet</label><input id="fNom" type="text" autocomplete="off" placeholder="Israel …"></div>
+      <div class="champ"><label for="fDate">Date de naissance</label><input id="fDate" type="date"></div>
+      <div class="champ"><label for="fClasse">Classe</label><input id="fClasse" type="text" autocomplete="off" placeholder="3e année, groupe …"></div>
+      <div class="champ"><label for="fEns">Enseignante</label><input id="fEns" type="text" autocomplete="off" placeholder="Mme …"></div>
+    </div>
+
+    <div class="ardoise">
+      <p class="consigne">« Quelle est ta date de naissance ? »</p>
+      <p class="dit" id="ficheDit">Remplis la date ci-dessus, et la phrase à dire apparaîtra ici.</p>
+      <div class="btnrow" style="justify-content:center">
+        <button class="btn" id="ficheSay">🔊 Écouter la phrase</button>
+        <button class="btn ghost" id="ficheHide" aria-pressed="false">🙈 Cacher pour l'interroger</button>
+      </div>
+      <p class="score" id="ficheAge"></p>
+    </div>
+
+    <p class="note"><b>Le lundi matin :</b> signer l'agenda. C'est la première case du lundi dans le plan de la semaine — si vous cochez là, vous ne l'oubliez pas.</p>
+
+    <hr class="rule">
+    <div class="stack-sm">
+      <h3>Aussi utile à savoir par cœur</h3>
+      <p class="lede">Pas demandé cette semaine, mais c'est le moment de l'installer tranquillement.</p>
+    </div>
+    <div class="etapes-lecture">
+      <div class="et"><p class="n">SON ADRESSE</p><p>Le numéro, la rue, la ville. À dire en français, calmement.</p></div>
+      <div class="et"><p class="n">UN NUMÉRO DE PARENT</p><p>Dix chiffres, appris par groupes de trois. Même méthode que les nombres.</p></div>
+      <div class="et"><p class="n">SON ÂGE ET SON NIVEAU</p><p>« J'ai ___ ans, je suis en 3<sup>e</sup> année. »</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= L'ANNÉE ================= -->
+<section id="tab-annee" role="tabpanel" aria-labelledby="t-annee" hidden>
+  <div class="stack">
+    <div class="stack-sm">
+      <h2 class="sec">Toute la 3<sup>e</sup> année, d'un coup d'œil</h2>
+      <p class="lede">La 3<sup>e</sup> année, c'est la première année du <b>2<sup>e</sup> cycle</b> au Québec : on passe de « j'apprends à lire » à « je lis pour apprendre », et en maths on quitte les petits nombres. Voici la carte des trois étapes, pour savoir ce qui s'en vient avant que ça arrive.</p>
+    </div>
+
+    <div class="annee">
+
+      <div class="etape">
+        <div class="hd"><h3>Étape 1 — On installe les bases</h3><span class="quand">fin août → mi-novembre</span></div>
+        <div class="cols">
+          <div class="col">
+            <h4>Français</h4>
+            <ul>
+              <li><b>Lecture fluide</b> et liaisons — là où on en est aujourd'hui</li>
+              <li>La <b>phrase</b> : majuscule, point, de qui on parle / ce qu'on en dit</li>
+              <li><b>Noms, déterminants, adjectifs</b> : genre et nombre</li>
+              <li><b>Verbes à l'infinitif</b> : reconnaître le nom du verbe</li>
+              <li>Listes de mots hebdomadaires + dictée</li>
+              <li>Écrire un court <b>texte qui raconte</b></li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4>Mathématiques</h4>
+            <ul>
+              <li><b>Nombres 0 à 500</b>, puis jusqu'à 1 000</li>
+              <li><b>Valeur de position</b> : unités, dizaines, centaines</li>
+              <li>Comparer, ordonner, décomposer</li>
+              <li>Additions et soustractions (avec échange)</li>
+              <li>Suites et régularités</li>
+              <li>Solides et figures planes</li>
+            </ul>
+          </div>
+          <div class="col maison">
+            <h4>À la maison</h4>
+            <ul>
+              <li>Le jeu des nombres, <b>5 minutes par jour</b></li>
+              <li>Lire à voix haute tous les jours</li>
+              <li>La liste de mots, en <b>dictée</b> et non en recopiage</li>
+              <li>Nommer les 5 verbes sans hésiter</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="etape">
+        <div class="hd"><h3>Étape 2 — On accorde et on conjugue</h3><span class="quand">mi-novembre → début mars</span></div>
+        <div class="cols">
+          <div class="col">
+            <h4>Français</h4>
+            <ul>
+              <li><b>L'accord dans le groupe du nom</b> (le grand arbre → les grands arbres)</li>
+              <li><b>Le présent</b> des 5 verbes — c'est là qu'on conjugue enfin</li>
+              <li>Les <b>homophones</b> : a/à, est/et, son/sont, on/ont</li>
+              <li>Le <b>passé composé</b> et l'imparfait, en douceur</li>
+              <li><b>Texte descriptif</b> : décrire un lieu, un personnage</li>
+              <li>Lire pour trouver une information précise</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4>Mathématiques</h4>
+            <ul>
+              <li>Nombres jusqu'à <b>10 000</b></li>
+              <li><b>Tables de multiplication</b> : 0 à 5, puis jusqu'à 10</li>
+              <li>La division comme <b>partage</b></li>
+              <li><b>Fractions</b> : demi, tiers, quart</li>
+              <li>Mesures : cm, dm, m &middot; l'heure &middot; l'argent</li>
+              <li>Tableaux et diagrammes à bandes</li>
+            </ul>
+          </div>
+          <div class="col maison">
+            <h4>À la maison</h4>
+            <ul>
+              <li>Les tables, <b>en jeu oral</b>, 3 minutes par jour</li>
+              <li>Une phrase dictée par jour, pas une page</li>
+              <li>Fractions dans la vraie vie : pizza, gâteau, jus</li>
+              <li>Lui faire lire les <b>consignes</b> lui-même</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="etape">
+        <div class="hd"><h3>Étape 3 — On écrit pour de vrai</h3><span class="quand">mars → juin &middot; la plus lourde au bulletin</span></div>
+        <div class="cols">
+          <div class="col">
+            <h4>Français</h4>
+            <ul>
+              <li><b>Futur</b> et <b>imparfait</b> des verbes travaillés</li>
+              <li>Types de phrases : interrogative, exclamative, <b>négative</b></li>
+              <li><b>Texte qui explique</b> et projet d'écriture</li>
+              <li>Lire un <b>roman court</b> en entier</li>
+              <li>Se relire et se corriger seul</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4>Mathématiques</h4>
+            <ul>
+              <li>Les quatre opérations, <b>problèmes à deux étapes</b></li>
+              <li>Multiplication et division maîtrisées</li>
+              <li><b>Périmètre</b>, aire par recouvrement, <b>axe de symétrie</b></li>
+              <li>Fractions équivalentes, nombres décimaux (introduction)</li>
+              <li><b>Probabilité</b> : certain, possible, impossible</li>
+            </ul>
+          </div>
+          <div class="col maison">
+            <h4>À la maison</h4>
+            <ul>
+              <li>Un <b>problème écrit</b> par jour, lu par lui à voix haute</li>
+              <li>Écrire 5 lignes par jour sur n'importe quoi</li>
+              <li>Réviser les listes de mots des étapes 1 et 2</li>
+              <li>Garder les séances courtes jusqu'en juin</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="note blue">Les autres matières continuent en parallèle — <b>culture et citoyenneté québécoise</b>, sciences, anglais. La CCQ se prépare comme le français : en parlant à la maison de ce qui a été vu en classe, pas en révisant la veille.</p>
+
+    <p class="footnote">Les contenus suivent le Programme de formation de l'école québécoise, 2<sup>e</sup> cycle, 1<sup>re</sup> année. Les dates d'étapes varient d'une école à l'autre — ajustez selon le calendrier reçu en septembre.</p>
+  </div>
+</section>
+
+<footer class="wrap noprint">
+  <p>Le cahier d'Israel &middot; 3<sup>e</sup> année &middot; mis à jour quand l'enseignante envoie une nouvelle liste. Les cases cochées et la liste de mots sont conservées automatiquement.</p>
+</footer>
+
+</div>
+</main>
+
+<script>
+(function(){
+"use strict";
+
+/* =============== état + sauvegarde =============== */
+var KEY = "cahier3e-v1";
+var S = { done:{}, vocab:null, profile:{}, stats:{}, weekStart:null, updatedAt:0 };
+var dbDoc = null, applying = false;
+
+function load(){
+  try{ var r = localStorage.getItem(KEY); if(r){ var d = JSON.parse(r); for(var k in d) S[k] = d[k]; } }catch(e){}
+}
+function save(){
+  S.updatedAt = Date.now();
+  try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){}
+  if(dbDoc && !applying){ try{ dbDoc.set(JSON.parse(JSON.stringify(S))); }catch(e){} }
+}
+function connect(){
+  if(!window.claude || !window.claude.use) return;
+  window.claude.use("db").then(function(db){
+    if(!db) return;
+    dbDoc = db.doc("cahier/etat");
+    var badge = document.getElementById("syncBadge");
+    if(badge) badge.innerHTML = '<span class="dot on"></span>Synchronisé sur tous vos appareils';
+    dbDoc.onSnapshot(function(snap){
+      var d = snap.exists ? snap.data() : null;
+      if(!d){ if(S.updatedAt) { try{ dbDoc.set(JSON.parse(JSON.stringify(S))); }catch(e){} } return; }
+      if((d.updatedAt||0) > (S.updatedAt||0)){
+        applying = true;
+        for(var k in d) S[k] = d[k];
+        try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){}
+        renderAll();
+        applying = false;
+      }
+    }, function(){});
+  }).catch(function(){});
+}
+
+/* =============== voix =============== */
+var voice = null;
+function pickVoice(){
+  try{
+    var vs = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+    voice = null;
+    for(var i=0;i<vs.length;i++){ if(/fr[-_]CA/i.test(vs[i].lang)){ voice = vs[i]; break; } }
+    if(!voice){ for(var j=0;j<vs.length;j++){ if(/^fr/i.test(vs[j].lang)){ voice = vs[j]; break; } } }
+  }catch(e){}
+}
+if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+function say(t, rate){
+  if(!window.speechSynthesis) return;
+  try{
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(t);
+    u.lang = "fr-CA"; u.rate = rate || 0.82;
+    if(voice) u.voice = voice;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* =============== nombres en lettres =============== */
+var U = ["zéro","un","deux","trois","quatre","cinq","six","sept","huit","neuf","dix",
+         "onze","douze","treize","quatorze","quinze","seize"];
+var TENS = {2:"vingt",3:"trente",4:"quarante",5:"cinquante",6:"soixante"};
+function sub100(n){
+  if(n < 17) return U[n];
+  if(n < 20) return "dix-" + U[n-10];
+  var t = Math.floor(n/10), u = n % 10;
+  if(t < 7){
+    if(u === 0) return TENS[t];
+    if(u === 1) return TENS[t] + " et un";
+    return TENS[t] + "-" + U[u];
+  }
+  if(t === 7){ if(n === 71) return "soixante et onze"; return "soixante-" + sub100(n-60); }
+  if(t === 8){ if(n === 80) return "quatre-vingts"; return "quatre-vingt-" + sub100(n-80); }
+  if(n === 90) return "quatre-vingt-dix";
+  return "quatre-vingt-" + sub100(n-80);
+}
+function frNum(n){
+  if(n === 0) return "zéro";
+  var h = Math.floor(n/100), r = n % 100;
+  if(h === 0) return sub100(r);
+  if(r === 0) return h === 1 ? "cent" : U[h] + " cents";
+  return (h === 1 ? "cent" : U[h] + " cent") + " " + sub100(r);
+}
+function rnd(a,b){ return a + Math.floor(Math.random()*(b-a+1)); }
+function pickNum(){
+  return Math.random() < 0.72 ? rnd(100,500) : rnd(0,99);
+}
+
+/* =============== onglets =============== */
+var TABS = ["semaine","nombres","vocab","verbes","lecture","fiche","annee"];
+function go(name){
+  TABS.forEach(function(t){
+    var btn = document.getElementById("t-"+t), sec = document.getElementById("tab-"+t);
+    var on = (t === name);
+    if(btn) btn.setAttribute("aria-selected", on ? "true" : "false");
+    if(sec) sec.hidden = !on;
+  });
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+Array.prototype.forEach.call(document.querySelectorAll(".tab"), function(b){
+  b.addEventListener("click", function(){ go(b.getAttribute("data-tab")); });
+});
+
+/* =============== la semaine =============== */
+var WEEK = [
+  { id:"lun", nom:"Lundi", tasks:[
+    { id:"lun0", t:"Signer l'agenda", min:1, parent:true },
+    { id:"lun1", t:"Lecture : un texte, les liaisons", min:8, go:"lecture" },
+    { id:"lun2", t:"Vocabulaire : lire les 15 mots", min:5, go:"vocab" }
+  ]},
+  { id:"mar", nom:"Mardi", tasks:[
+    { id:"mar1", t:"Nombres : « Je le lis »", min:8, go:"nombres" },
+    { id:"mar2", t:"Vocabulaire : dictée de 5 mots", min:6, go:"vocab" }
+  ]},
+  { id:"mer", nom:"Mercredi", tasks:[
+    { id:"mer1", t:"Nommer les 5 verbes", min:4, go:"verbes" },
+    { id:"mer2", t:"Lecture : relire le texte de lundi", min:8, go:"lecture" }
+  ]},
+  { id:"jeu", nom:"Jeudi", tasks:[
+    { id:"jeu1", t:"Nombres : devinettes", min:8, go:"nombres" },
+    { id:"jeu2", t:"Vocabulaire : dictée des 10 autres", min:6, go:"vocab" }
+  ]},
+  { id:"ven", nom:"Vendredi", tasks:[
+    { id:"ven1", t:"Défi mélangé : nombres + mots", min:10, go:"nombres" },
+    { id:"ven2", t:"Dire sa date de naissance", min:2, go:"fiche" },
+    { id:"ven3", t:"Nouveau texte de lecture", min:6, go:"lecture" }
+  ]}
+];
+
+function mondayOf(d){
+  var x = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  if(x.getDay() === 0){ x.setDate(x.getDate() + 1); return x; }
+  var day = (x.getDay() + 6) % 7;
+  x.setDate(x.getDate() - day);
+  return x;
+}
+function frDate(d, withYear){
+  try{
+    return new Intl.DateTimeFormat("fr-CA", withYear
+      ? {day:"numeric", month:"long", year:"numeric"}
+      : {day:"numeric", month:"long"}).format(d);
+  }catch(e){ return d.toLocaleDateString(); }
+}
+function buildWeek(){
+  var host = document.getElementById("week");
+  var todayIdx = (new Date().getDay() + 6) % 7;
+  host.innerHTML = "";
+  WEEK.forEach(function(day, i){
+    var total = day.tasks.reduce(function(s,t){ return s + t.min; }, 0);
+    var card = document.createElement("div");
+    card.className = "day" + (i === todayIdx ? " today" : "");
+    var h = '<div class="day-head"><span class="day-name">' + day.nom + '</span><span class="day-min">' + total + ' min</span></div>';
+    day.tasks.forEach(function(t){
+      h += '<div class="task' + (t.parent ? " parent" : "") + '">' +
+           '<input type="checkbox" id="cb-' + t.id + '" data-task="' + t.id + '">' +
+           '<label for="cb-' + t.id + '">' + t.t +
+           (t.go ? ' <button class="go" data-go="' + t.go + '">ouvrir</button>' : '') +
+           '</label></div>';
+    });
+    card.innerHTML = h;
+    host.appendChild(card);
+  });
+  Array.prototype.forEach.call(host.querySelectorAll('input[type="checkbox"]'), function(cb){
+    cb.addEventListener("change", function(){
+      S.done[cb.getAttribute("data-task")] = cb.checked;
+      save(); paintProgress();
+    });
+  });
+  Array.prototype.forEach.call(host.querySelectorAll(".go"), function(b){
+    b.addEventListener("click", function(ev){ ev.preventDefault(); go(b.getAttribute("data-go")); });
+  });
+  paintChecks();
+}
+function allTasks(){
+  var out = [];
+  WEEK.forEach(function(d){ d.tasks.forEach(function(t){ out.push(t); }); });
+  return out;
+}
+function paintChecks(){
+  allTasks().forEach(function(t){
+    var cb = document.getElementById("cb-" + t.id);
+    if(cb) cb.checked = !!S.done[t.id];
+  });
+  paintProgress();
+}
+function paintProgress(){
+  var tasks = allTasks();
+  var done = tasks.filter(function(t){ return S.done[t.id]; }).length;
+  document.getElementById("pcount").textContent = done + " / " + tasks.length;
+  document.getElementById("pbar").style.width = Math.round(done / tasks.length * 100) + "%";
+}
+document.getElementById("resetWeek").addEventListener("click", function(){
+  S.done = {}; S.weekStart = mondayOf(new Date()).getTime();
+  save(); paintChecks(); paintSemaineDe();
+});
+function paintSemaineDe(){
+  var m = mondayOf(new Date());
+  document.getElementById("semaineDe").textContent = "Semaine du lundi " + frDate(m, false);
+}
+document.getElementById("printBtn").addEventListener("click", function(){ window.print(); });
+
+/* =============== jeu des nombres =============== */
+var numMode = "lire", numN = 0, numAns = 0, numShown = false;
+var numEl = {
+  consigne: document.getElementById("numConsigne"),
+  big: document.getElementById("numBig"),
+  word: document.getElementById("numWord"),
+  wrap: document.getElementById("numSaisieWrap"),
+  input: document.getElementById("numInput"),
+  rep: document.getElementById("numRep"),
+  btns: document.getElementById("numBtns"),
+  score: document.getElementById("numScore")
+};
+function numStats(){
+  if(!S.stats.nombres) S.stats.nombres = {ok:0, total:0};
+  return S.stats.nombres;
+}
+function paintNumScore(){
+  var s = numStats();
+  numEl.score.textContent = "Défis réussis : " + s.ok + " / " + s.total;
+}
+function numCount(ok){
+  var s = numStats(); s.total++; if(ok) s.ok++; save(); paintNumScore();
+}
+function btn(label, cls, fn){
+  var b = document.createElement("button");
+  b.className = "btn " + (cls || "");
+  b.textContent = label;
+  b.addEventListener("click", fn);
+  return b;
+}
+function newNum(){
+  numShown = false;
+  numEl.rep.textContent = ""; numEl.rep.className = "rep";
+  numEl.btns.innerHTML = "";
+  numEl.word.hidden = true;
+  numEl.wrap.hidden = true;
+  numEl.big.hidden = false;
+  numEl.input.value = "";
+
+  if(numMode === "lire"){
+    numN = pickNum();
+    numEl.consigne.textContent = "Quel nombre est-ce ? Dis-le à voix haute.";
+    numEl.big.textContent = String(numN);
+    numEl.btns.appendChild(btn("👂 Voir et entendre la réponse", "", function(){
+      numEl.word.textContent = frNum(numN);
+      numEl.word.hidden = false;
+      say(frNum(numN));
+      if(!numShown){
+        numShown = true;
+        numEl.btns.appendChild(btn("✅ Il a réussi", "good", function(){ numCount(true); newNum(); }));
+        numEl.btns.appendChild(btn("↻ À revoir", "ghost", function(){ numCount(false); newNum(); }));
+      }
+    }));
+    numEl.btns.appendChild(btn("Un autre →", "ghost", newNum));
+  }
+
+  if(numMode === "ecrire"){
+    numN = pickNum();
+    numAns = numN;
+    numEl.consigne.textContent = "Écris ce nombre en chiffres.";
+    numEl.big.hidden = true;
+    numEl.word.textContent = frNum(numN);
+    numEl.word.hidden = false;
+    numEl.wrap.hidden = false;
+    say(frNum(numN));
+    numEl.btns.appendChild(btn("🔊 Réécouter", "ghost", function(){ say(frNum(numN)); }));
+    numEl.btns.appendChild(btn("Vérifier", "primary", checkNum));
+    numEl.btns.appendChild(btn("Un autre →", "ghost", newNum));
+    setTimeout(function(){ try{ numEl.input.focus(); }catch(e){} }, 60);
+  }
+
+  if(numMode === "devinette"){
+    var kind = rnd(1,4);
+    var c, h, d, u;
+    if(kind === 1){
+      c = rnd(1,4); d = rnd(0,9); u = rnd(0,9);
+      numAns = c*100 + d*10 + u;
+      h = "Je pense à un nombre entre " + (c*100) + " et " + (c*100+100) + ". Il a " + d + " dizaine" + (d>1?"s":"") + " et " + u + " unité" + (u>1?"s":"") + ".";
+    } else if(kind === 2){
+      c = rnd(0,5); d = rnd(0,9); u = rnd(0,9);
+      if(c === 5){ d = 0; u = 0; }
+      numAns = c*100 + d*10 + u;
+      h = "J'ai " + c + " centaine" + (c>1?"s":"") + ", " + d + " dizaine" + (d>1?"s":"") + " et " + u + " unité" + (u>1?"s":"") + ". Qui suis-je ?";
+    } else if(kind === 3){
+      var base = rnd(1,499);
+      var after = Math.random() < 0.5;
+      numAns = after ? base + 1 : base - 1;
+      h = "Je suis le nombre qui vient juste " + (after ? "après" : "avant") + " " + base + ".";
+    } else {
+      var b2 = rnd(0,490);
+      var plus = Math.random() < 0.5;
+      numAns = plus ? b2 + 10 : b2 + 100;
+      h = "Prends " + b2 + " et ajoute " + (plus ? "10" : "100") + ". Quel nombre obtiens-tu ?";
+    }
+    numEl.consigne.textContent = h;
+    numEl.big.hidden = true;
+    numEl.wrap.hidden = false;
+    numEl.btns.appendChild(btn("Vérifier", "primary", checkNum));
+    numEl.btns.appendChild(btn("💡 Indice", "ghost", function(){
+      numEl.rep.className = "rep";
+      numEl.rep.style.color = "var(--craie)";
+      numEl.rep.textContent = "Le nombre s'écrit : " + frNum(numAns).replace(/[a-zà-ÿ]/gi, "•");
+      say(numEl.consigne.textContent);
+    }));
+    numEl.btns.appendChild(btn("Un autre →", "ghost", newNum));
+    setTimeout(function(){ try{ numEl.input.focus(); }catch(e){} }, 60);
+  }
+}
+function checkNum(){
+  var v = (numEl.input.value || "").replace(/[^0-9]/g, "");
+  if(v === "") return;
+  numEl.rep.style.color = "";
+  if(parseInt(v, 10) === numAns){
+    numEl.rep.className = "rep";
+    numEl.rep.textContent = "✓ Oui ! " + numAns + " — " + frNum(numAns);
+    say("Bravo ! " + frNum(numAns));
+    numCount(true);
+    setTimeout(newNum, 1900);
+  } else {
+    numEl.rep.className = "rep bad";
+    numEl.rep.textContent = "Pas encore. Relis la question tout doucement.";
+    numCount(false);
+  }
+}
+numEl.input.addEventListener("keydown", function(e){ if(e.key === "Enter") checkNum(); });
+Array.prototype.forEach.call(document.querySelectorAll("[data-nm]"), function(b){
+  b.addEventListener("click", function(){
+    numMode = b.getAttribute("data-nm");
+    Array.prototype.forEach.call(document.querySelectorAll("[data-nm]"), function(x){
+      x.setAttribute("aria-pressed", x === b ? "true" : "false");
+    });
+    newNum();
+  });
+});
+
+/* =============== vocabulaire =============== */
+var DEFAUT = [
+  ["fromage","J'aime le fromage sur mes pâtes."],
+  ["vache","La vache nous donne du lait."],
+  ["chèvre","Le fromage de chèvre a un goût fort."],
+  ["lait","Le lait arrive de la ferme le matin."],
+  ["crème","Maman met de la crème dans la soupe."],
+  ["beurre","Je mets du beurre sur mon pain."],
+  ["croûte","La croûte du fromage est dure."],
+  ["tranche","Je coupe une tranche de fromage."],
+  ["meule","La meule de fromage est énorme."],
+  ["laitier","Le yogourt est un produit laitier."],
+  ["fermier","Le fermier trait ses vaches à six heures."],
+  ["odeur","Ce fromage a une drôle d'odeur."],
+  ["goût","J'aime beaucoup le goût du cheddar."],
+  ["fondre","Le fromage va fondre sur la pizza."],
+  ["délicieux","Mon sandwich au fromage est délicieux."]
+];
+function mots(){
+  if(S.vocab && S.vocab.length) return S.vocab;
+  return DEFAUT;
+}
+var vocMode = "lire", vocIdx = 0, vocRepondu = false;
+var vEl = {
+  consigne: document.getElementById("vocConsigne"),
+  mot: document.getElementById("vocMot"),
+  phrase: document.getElementById("vocPhrase"),
+  trou: document.getElementById("vocTrou"),
+  wrap: document.getElementById("vocSaisieWrap"),
+  input: document.getElementById("vocInput"),
+  choices: document.getElementById("vocChoices"),
+  rep: document.getElementById("vocRep"),
+  btns: document.getElementById("vocBtns"),
+  score: document.getElementById("vocScore")
+};
+function paintGrid(){
+  var host = document.getElementById("wordgrid");
+  host.innerHTML = "";
+  mots().forEach(function(m, i){
+    var el = document.createElement("div");
+    el.className = "wordchip";
+    el.innerHTML = '<b></b><button class="snd" aria-label="Écouter ' + m[0] + '">🔊</button>';
+    el.querySelector("b").textContent = m[0];
+    el.querySelector(".snd").addEventListener("click", function(){ say(m[0], 0.75); });
+    el.addEventListener("click", function(){ vocIdx = i; showVoc(); });
+    host.appendChild(el);
+  });
+}
+function showVoc(){
+  var list = mots();
+  if(vocIdx >= list.length) vocIdx = 0;
+  var m = list[vocIdx];
+  vocRepondu = false;
+  vEl.rep.textContent = ""; vEl.rep.className = "rep";
+  vEl.btns.innerHTML = "";
+  vEl.input.value = "";
+  vEl.mot.hidden = true; vEl.phrase.hidden = true; vEl.trou.hidden = true;
+  vEl.wrap.hidden = true; vEl.choices.hidden = true;
+  vEl.score.textContent = "Mot " + (vocIdx+1) + " sur " + list.length;
+
+  if(vocMode === "lire"){
+    vEl.consigne.textContent = "Lis le mot à voix haute, puis lis la phrase.";
+    vEl.mot.hidden = false; vEl.mot.textContent = m[0];
+    vEl.phrase.hidden = false; vEl.phrase.textContent = m[1] || "";
+    vEl.btns.appendChild(btn("🔊 Écouter le mot", "", function(){ say(m[0], 0.72); }));
+    vEl.btns.appendChild(btn("🔊 Écouter la phrase", "ghost", function(){ say(m[1] || m[0]); }));
+    vEl.btns.appendChild(btn("Mot suivant →", "ghost", nextVoc));
+  }
+
+  if(vocMode === "dictee"){
+    vEl.consigne.textContent = "Écoute, puis écris le mot sans le regarder.";
+    vEl.phrase.hidden = false; vEl.phrase.textContent = "Indice : " + (m[1] || "").replace(new RegExp(m[0], "gi"), "______");
+    vEl.wrap.hidden = false;
+    say(m[0], 0.7);
+    vEl.btns.appendChild(btn("🔊 Réécouter", "", function(){ say(m[0], 0.7); }));
+    vEl.btns.appendChild(btn("Vérifier", "primary", checkVoc));
+    vEl.btns.appendChild(btn("Montrer", "ghost", function(){
+      vEl.mot.hidden = false; vEl.mot.textContent = m[0];
+    }));
+    setTimeout(function(){ try{ vEl.input.focus(); }catch(e){} }, 60);
+  }
+
+  if(vocMode === "sens"){
+    vEl.consigne.textContent = "Quel mot manque dans la phrase ?";
+    var phr = (m[1] || (m[0] + " …")).replace(new RegExp(m[0], "gi"), "<u>&nbsp;&nbsp;?&nbsp;&nbsp;</u>");
+    vEl.trou.hidden = false; vEl.trou.innerHTML = phr;
+    vEl.choices.hidden = false;
+    var opts = [m[0]];
+    var pool = mots().filter(function(x){ return x[0] !== m[0]; });
+    while(opts.length < 4 && pool.length){
+      var p = pool.splice(rnd(0, pool.length-1), 1)[0];
+      opts.push(p[0]);
+    }
+    opts.sort(function(){ return Math.random() - 0.5; });
+    vEl.choices.innerHTML = "";
+    opts.forEach(function(o){
+      var b = document.createElement("button");
+      b.className = "choice"; b.textContent = o;
+      b.addEventListener("click", function(){
+        if(vocRepondu) return;
+        vocRepondu = true;
+        if(o === m[0]){
+          b.className = "choice ok";
+          vEl.rep.className = "rep"; vEl.rep.textContent = "✓ Bien vu !";
+          say(m[1] || m[0]);
+          setTimeout(nextVoc, 1700);
+        } else {
+          b.className = "choice no";
+          vEl.rep.className = "rep bad"; vEl.rep.textContent = "C'était : " + m[0];
+        }
+      });
+      vEl.choices.appendChild(b);
+    });
+    vEl.btns.appendChild(btn("🔊 Écouter la phrase", "ghost", function(){ say(m[1] || m[0]); }));
+    vEl.btns.appendChild(btn("Mot suivant →", "ghost", nextVoc));
+  }
+}
+function nextVoc(){ vocIdx = (vocIdx + 1) % mots().length; showVoc(); }
+function norm(s){ return (s || "").trim().toLowerCase().replace(/\s+/g, " "); }
+function checkVoc(){
+  var m = mots()[vocIdx];
+  var v = norm(vEl.input.value);
+  if(!v) return;
+  if(v === norm(m[0])){
+    vEl.rep.className = "rep";
+    vEl.rep.textContent = "✓ Parfait, sans faute !";
+    vEl.mot.hidden = false; vEl.mot.textContent = m[0];
+    say("Parfait !");
+    setTimeout(nextVoc, 1700);
+  } else {
+    vEl.rep.className = "rep bad";
+    vEl.rep.innerHTML = "Presque : tu as écrit <b>" + v.replace(/[<>&]/g, "") + "</b>. Réécoute et regarde bien les accents.";
+    say(m[0], 0.62);
+  }
+}
+vEl.input.addEventListener("keydown", function(e){ if(e.key === "Enter") checkVoc(); });
+Array.prototype.forEach.call(document.querySelectorAll("[data-vm]"), function(b){
+  b.addEventListener("click", function(){
+    vocMode = b.getAttribute("data-vm");
+    Array.prototype.forEach.call(document.querySelectorAll("[data-vm]"), function(x){
+      x.setAttribute("aria-pressed", x === b ? "true" : "false");
+    });
+    showVoc();
+  });
+});
+document.getElementById("editList").addEventListener("click", function(){
+  var ta = document.getElementById("listeTxt");
+  ta.value = mots().map(function(m){ return m[0] + " | " + (m[1] || ""); }).join("\n");
+  document.getElementById("editWrap").hidden = false;
+  ta.focus();
+});
+document.getElementById("cancelList").addEventListener("click", function(){
+  document.getElementById("editWrap").hidden = true;
+});
+document.getElementById("saveList").addEventListener("click", function(){
+  var lines = document.getElementById("listeTxt").value.split("\n");
+  var out = [];
+  lines.forEach(function(l){
+    var parts = l.split("|");
+    var w = (parts[0] || "").trim();
+    if(w) out.push([w, (parts[1] || "").trim()]);
+  });
+  if(!out.length) return;
+  S.vocab = out; vocIdx = 0; save();
+  document.getElementById("editWrap").hidden = true;
+  paintGrid(); showVoc();
+});
+
+/* =============== verbes =============== */
+var VERBES = [
+  { v:"avoir",  ex:"J'ai un chien.",        why:"Il dit ce qu'on possède." },
+  { v:"être",   ex:"Je suis à l'école.",    why:"Il dit qui on est, comment on est." },
+  { v:"aimer",  ex:"J'aime le fromage.",    why:"Verbe en -er (1er groupe)." },
+  { v:"aller",  ex:"Je vais au parc.",      why:"Il dit où on se déplace." },
+  { v:"finir",  ex:"Je finis mon devoir.",  why:"Verbe en -ir (2e groupe)." }
+];
+var FORMES = [
+  ["j'ai","avoir"],["tu as","avoir"],["il a","avoir"],["nous avons","avoir"],["ils ont","avoir"],
+  ["je suis","être"],["tu es","être"],["elle est","être"],["vous êtes","être"],["ils sont","être"],
+  ["j'aime","aimer"],["nous aimons","aimer"],["elles aiment","aimer"],
+  ["je vais","aller"],["tu vas","aller"],["il va","aller"],["nous allons","aller"],
+  ["je finis","finir"],["nous finissons","finir"],["ils finissent","finir"]
+];
+(function buildVerbes(){
+  var host = document.getElementById("verbes");
+  VERBES.forEach(function(x){
+    var el = document.createElement("div");
+    el.className = "verbe";
+    el.innerHTML = '<span class="inf"></span><span class="ex"></span><span class="why"></span>' +
+                   '<button class="btn small ghost snd">🔊 Écouter</button>';
+    el.querySelector(".inf").textContent = x.v;
+    el.querySelector(".ex").textContent = x.ex;
+    el.querySelector(".why").textContent = x.why;
+    el.querySelector(".snd").addEventListener("click", function(){ say(x.v + ". " + x.ex, 0.75); });
+    host.appendChild(el);
+  });
+})();
+var vbAns = "", vbRepondu = false;
+function vbStats(){ if(!S.stats.verbes) S.stats.verbes = {ok:0, total:0}; return S.stats.verbes; }
+function paintVbScore(){
+  var s = vbStats();
+  document.getElementById("vbScore").textContent = "Défis réussis : " + s.ok + " / " + s.total;
+}
+function newVb(){
+  var f = FORMES[rnd(0, FORMES.length-1)];
+  vbAns = f[1]; vbRepondu = false;
+  document.getElementById("vbForme").textContent = f[0];
+  document.getElementById("vbRep").textContent = "";
+  document.getElementById("vbRep").className = "rep";
+  var host = document.getElementById("vbChoices");
+  host.innerHTML = "";
+  VERBES.forEach(function(x){
+    var b = document.createElement("button");
+    b.className = "choice"; b.textContent = x.v;
+    b.addEventListener("click", function(){
+      if(vbRepondu) return;
+      vbRepondu = true;
+      var s = vbStats(); s.total++;
+      if(x.v === vbAns){
+        s.ok++;
+        b.className = "choice ok";
+        document.getElementById("vbRep").textContent = "✓ Oui, c'est le verbe « " + vbAns + " ».";
+        say("Oui, le verbe " + vbAns);
+        setTimeout(newVb, 1600);
+      } else {
+        b.className = "choice no";
+        document.getElementById("vbRep").className = "rep bad";
+        document.getElementById("vbRep").textContent = "C'était le verbe « " + vbAns + " ».";
+      }
+      save(); paintVbScore();
+    });
+    host.appendChild(b);
+  });
+}
+document.getElementById("vbNext").addEventListener("click", newVb);
+
+/* =============== lecture =============== */
+var TEXTES = [
+  { titre:"Texte 1 — À la fromagerie",
+    t:"C'est‿un grand jour à la fromagerie. Les‿amis de Théo sont‿arrivés en‿autobus. Le fermier ouvre une grande porte et montre deux‿énormes meules de fromage. Théo prend‿une petite tranche. Elle a un goût doux, un peu salé. « Mon‿oncle en fait aussi », dit-il, très‿heureux." },
+  { titre:"Texte 2 — Le matin de l'école",
+    t:"Ce matin, les‿élèves arrivent à l'école. Israel ouvre son‿agenda et cherche les‿exercices du jour. Il‿a trois‿amis dans son‿équipe. Ils‿ont un grand‿ouvrage à finir avant‿onze heures. Quand‿il a fini, il est vraiment fier." },
+  { titre:"Texte 3 — Le grand livre d'images",
+    t:"Dans‿un grand livre, il‿y a trois cent quarante-sept images. Les‿enfants en‿ont compté cent‿onze avant le dîner. Il en reste deux cent trente-six ! Quel‿énorme travail. Nous‿avons encore deux‿heures pour finir." }
+];
+var liaisonsVisibles = true;
+function paintTextes(){
+  var host = document.getElementById("textes");
+  host.innerHTML = "";
+  TEXTES.forEach(function(x){
+    var el = document.createElement("div");
+    el.className = "texte";
+    var corps = liaisonsVisibles
+      ? x.t.replace(/‿/g, '<span class="li">‿</span>')
+      : x.t.replace(/‿/g, " ");
+    el.innerHTML = "<h4></h4><p>" + corps + "</p>";
+    el.querySelector("h4").textContent = x.titre;
+    host.appendChild(el);
+  });
+}
+document.getElementById("toggleLi").addEventListener("click", function(){
+  liaisonsVisibles = !liaisonsVisibles;
+  this.textContent = liaisonsVisibles ? "👀 Cacher les liaisons" : "👀 Montrer les liaisons";
+  this.setAttribute("aria-pressed", liaisonsVisibles ? "true" : "false");
+  paintTextes();
+});
+
+/* =============== fiche =============== */
+var champs = [["fNom","nom"],["fDate","date"],["fClasse","classe"],["fEns","ens"]];
+function paintFiche(){
+  champs.forEach(function(c){
+    var el = document.getElementById(c[0]);
+    if(el && S.profile[c[1]] != null) el.value = S.profile[c[1]];
+  });
+  majPhrase();
+}
+function majPhrase(){
+  var v = document.getElementById("fDate").value;
+  var out = document.getElementById("ficheDit");
+  var age = document.getElementById("ficheAge");
+  if(!v){
+    out.textContent = "Remplis la date ci-dessus, et la phrase à dire apparaîtra ici.";
+    age.textContent = "";
+    return;
+  }
+  var p = v.split("-");
+  var d = new Date(parseInt(p[0],10), parseInt(p[1],10)-1, parseInt(p[2],10));
+  var jour = d.getDate() === 1 ? "1er" : String(d.getDate());
+  var reste = frDate(d, true).replace(/^\d+\s*/, "");
+  var nom = (S.profile.nom || "").trim();
+  var phrase = "Je suis né le " + jour + " " + reste + ".";
+  out.dataset.phrase = phrase;
+  out.textContent = out.dataset.cache === "1" ? "•••••" : phrase;
+  var now = new Date();
+  var a = now.getFullYear() - d.getFullYear();
+  var m = now.getMonth() - d.getMonth();
+  if(m < 0 || (m === 0 && now.getDate() < d.getDate())) a--;
+  age.textContent = (nom ? nom + " a " : "Il a ") + a + " ans" + (S.profile.classe ? " · " + S.profile.classe : "");
+}
+champs.forEach(function(c){
+  var el = document.getElementById(c[0]);
+  if(!el) return;
+  el.addEventListener("input", function(){
+    S.profile[c[1]] = el.value; save(); majPhrase();
+  });
+});
+document.getElementById("ficheSay").addEventListener("click", function(){
+  var out = document.getElementById("ficheDit");
+  if(out.dataset.phrase) say(out.dataset.phrase);
+});
+document.getElementById("ficheHide").addEventListener("click", function(){
+  var out = document.getElementById("ficheDit");
+  var cache = out.dataset.cache === "1";
+  out.dataset.cache = cache ? "0" : "1";
+  this.setAttribute("aria-pressed", cache ? "false" : "true");
+  this.textContent = cache ? "🙈 Cacher pour l'interroger" : "👁️ Montrer la réponse";
+  majPhrase();
+});
+
+/* =============== démarrage =============== */
+function renderAll(){
+  paintChecks(); paintGrid(); showVoc(); paintFiche();
+  paintNumScore(); paintVbScore();
+}
+load();
+paintSemaineDe();
+buildWeek();
+paintGrid();
+showVoc();
+newNum();
+newVb();
+paintTextes();
+paintFiche();
+paintNumScore();
+paintVbScore();
+connect();
+})();
+</script>
+</body>
+</html>

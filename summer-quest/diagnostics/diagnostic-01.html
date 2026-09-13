@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnostic 01 — Le grand défi de septembre</title>
+<style>
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  :root{ --ink:#16203a; --blue:#1d4ed8; --violet:#6d28d9; --rose:#be123c;
+         --green:#15803d; --amber:#b45309; --line:#d9def2; }
+  body{ font-family:'Trebuchet MS',system-ui,sans-serif; color:var(--ink); line-height:1.6;
+        background:#f4f6ff; padding:0 0 60px; }
+  header{ text-align:center; padding:34px 18px 28px; color:#fff;
+    background:linear-gradient(135deg,#1d4ed8,#6d28d9); }
+  header h1{ font-size:2rem; } header p{ margin-top:8px; opacity:.95; }
+  .badge{ display:inline-block; background:rgba(255,255,255,.2); padding:5px 16px; border-radius:999px;
+    font-weight:bold; margin-bottom:10px; letter-spacing:.5px; font-size:.85rem; }
+  .wrap{ max-width:820px; margin:0 auto; padding:0 16px; }
+  .card{ background:#fff; border:2px solid var(--line); border-radius:16px; padding:22px 20px; margin:18px 0;
+    box-shadow:0 6px 18px rgba(30,40,90,.07); }
+  h2{ color:var(--violet); font-size:1.3rem; margin-bottom:4px; }
+  h3{ color:var(--blue); margin:18px 0 4px; font-size:1.05rem; }
+  .sec{ background:linear-gradient(135deg,#1d4ed8,#6d28d9); color:#fff; border-radius:14px;
+    padding:14px 18px; margin:26px 0 10px; }
+  .sec h2{ color:#fff; margin:0; } .sec p{ font-size:.95rem; opacity:.95; margin-top:3px; }
+  .q{ border-bottom:1px solid var(--line); padding:14px 0 12px; }
+  .q:last-child{ border-bottom:none; }
+  .qn{ font-weight:bold; color:var(--violet); }
+  .lvl{ float:right; font-size:.68rem; font-weight:bold; padding:2px 9px; border-radius:999px; margin-left:10px; }
+  .l1{ background:#dcfce7; color:#166534; } .l2{ background:#dbeafe; color:#1e40af; }
+  .l3{ background:#fef3c7; color:#92400e; } .l4{ background:#fae8ff; color:#86198f; }
+  .l5{ background:#ffe4e6; color:#9f1239; }
+  .ans{ border-bottom:1.6px dotted #9aa3c7; height:1.5em; margin:8px 0 2px; }
+  .ans.two{ height:3em; } .ans.big{ height:7em; border:1.6px dotted #9aa3c7; border-radius:10px; }
+  .ans.huge{ height:12em; border:1.6px dotted #9aa3c7; border-radius:10px; }
+  .sub{ margin:6px 0 0 18px; }
+  .note{ background:#fffbeb; border-left:5px solid var(--amber); padding:9px 13px; border-radius:9px; margin:10px 0; font-size:.97rem; }
+  .parent{ background:#f0fdf4; border-left:5px solid var(--green); padding:12px 15px; border-radius:9px; margin:12px 0; font-size:.95rem; }
+  .passage{ background:#f8fafc; border:2px solid var(--line); border-radius:12px; padding:16px 18px; margin:12px 0; }
+  .passage p{ margin:9px 0; } .passage h4{ color:var(--blue); margin-bottom:6px; font-size:1.1rem; }
+  table{ border-collapse:collapse; margin:10px 0; }
+  th,td{ border:1px solid var(--line); padding:6px 14px; text-align:center; }
+  th{ background:#eef2ff; color:var(--blue); }
+  ul,ol{ margin:6px 0 6px 24px; } li{ margin:4px 0; }
+  .mono{ font-family:'Consolas',monospace; font-size:1.15rem; letter-spacing:2px; }
+  .pill{ display:inline-block; background:#ede9fe; color:var(--violet); border-radius:999px;
+    padding:2px 12px; font-size:.8rem; font-weight:bold; }
+  button.print{ background:var(--violet); color:#fff; border:none; font-family:inherit; cursor:pointer;
+    font-size:1rem; padding:11px 22px; border-radius:999px; display:block; margin:14px auto 0; }
+  footer{ text-align:center; color:#6b7280; font-size:.9rem; margin-top:26px; }
+  @media print{
+    body{ background:#fff; } header{ padding:14px; }
+    .card{ box-shadow:none; page-break-inside:avoid; }
+    .sec{ page-break-before:always; } .sec.first{ page-break-before:auto; }
+    button.print, .parent, footer{ display:none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">DÉFI 01 • SEPTEMBRE</div>
+  <h1>Le grand défi de septembre 🧠</h1>
+  <p>Mathématiques · Logique · Français — 45 questions pour voir tout ce que tu sais déjà.</p>
+</header>
+
+<div class="wrap">
+
+  <div class="card">
+    <h2>👋 Salut Israël !</h2>
+    <p>Ce n'est <b>pas un examen</b> et il n'y a <b>aucune note</b>. C'est une <b>carte au trésor</b> : elle me montre ce que tu maîtrises déjà et où on va s'amuser à devenir encore plus fort.</p>
+    <ul>
+      <li>✏️ Écris tes réponses en entier — même quand tu n'es pas sûr, écris ce que tu penses.</li>
+      <li>🧮 <b>Pas de calculatrice</b> pour les maths. Tu peux écrire tes calculs à côté, c'est même une bonne idée.</li>
+      <li>💬 Quand une question dit « <b>explique</b> », raconte comment tu as trouvé. C'est ça le plus important.</li>
+      <li>🤷 Si une question te bloque, écris « je ne sais pas » et passe à la suivante. Ça m'aide aussi !</li>
+      <li>⏱️ Fais-le en <b>3 fois</b> : les maths, puis la logique, puis le français. Pas tout d'un coup.</li>
+    </ul>
+    <div class="note">🎯 Les petites étiquettes <span class="lvl l1">NIVEAU 1</span> <span class="lvl l3">NIVEAU 3</span> <span class="lvl l5">NIVEAU 5</span> indiquent la difficulté. Les niveaux 4 et 5 sont des <b>défis</b> : ils sont faits pour être difficiles, et personne n'est censé tous les réussir.</div>
+    <div class="parent">
+      <b>For the parent (not for Israel):</b> ~45 items in three blocks — Mathematics (15), Reasoning &amp; Logic (10), French (8 reading + 10 grammar/conjugation + 2 writing). Best split across three sittings of 25–35 min each, ideally on different days. No calculator, no help, no hints — a wrong answer is more useful to me than a rescued one. Let him write in French even if his spelling is shaky; spelling in the maths section is never counted. When he's done, type his answers back to me (numbered — <i>M1, M2… R1… L1… G1… E1</i>), including the ones he skipped, and I'll return a full analysis plus his personalised plan.
+    </div>
+    <button class="print" onclick="window.print()">🖨️ Imprimer le défi</button>
+  </div>
+
+  <!-- ================= MATHÉMATIQUES ================= -->
+  <div class="sec first">
+    <h2>🧮 Partie 1 — Mathématiques</h2>
+    <p>15 questions · sans calculatrice · écris tes calculs</p>
+  </div>
+
+  <div class="card">
+
+    <div class="q"><span class="lvl l1">NIVEAU 1</span><span class="qn">M1.</span> Voici un nombre : <b class="mono">3 748</b>
+      <div class="sub">a) Quel chiffre est à la position des <b>centaines</b> ?</div><div class="ans"></div>
+      <div class="sub">b) Écris ce nombre en lettres.</div><div class="ans"></div>
+      <div class="sub">c) Écris le nombre qui vient <b>100 de plus</b> que 3 748.</div><div class="ans"></div>
+    </div>
+
+    <div class="q"><span class="lvl l1">NIVEAU 1</span><span class="qn">M2.</span> Calcule <b>dans ta tête</b> : <b class="mono">400 + 250 + 50</b>
+      <div class="sub">Réponse :</div><div class="ans"></div>
+      <div class="sub">Explique le truc que tu as utilisé pour aller vite :</div><div class="ans two"></div>
+    </div>
+
+    <div class="q"><span class="lvl l2">NIVEAU 2</span><span class="qn">M3.</span> Pose et calcule : <b class="mono">802 − 356</b>
+      <div class="ans big"></div>
+    </div>
+
+    <div class="q"><span class="lvl l1">NIVEAU 1</span><span class="qn">M4.</span> Le plus vite possible :
+      <div class="sub">a) 7 × 8 = _______   b) 9 × 6 = _______   c) 8 × 4 = _______   d) 5 × 12 = _______</div>
+      <div class="ans"></div>
+    </div>
+
+    <div class="q"><span class="lvl l2">NIVEAU 2</span><span class="qn">M5.</span> Israël partage <b>56 autocollants</b> également entre <b>6 amis</b>.
+      <div class="sub">a) Combien d'autocollants reçoit chaque ami ?</div><div class="ans"></div>
+      <div class="sub">b) Combien d'autocollants restent-ils ?</div><div class="ans"></div>
+    </div>
+
+    <div class="q"><span class="lvl l2">NIVEAU 2</span><span class="qn">M6.</span> Une pizza est coupée en <b>8 parts égales</b>. Israël en mange <b>3 parts</b>.
+      <div class="sub">a) Quelle fraction de la pizza a-t-il mangée ?</div><div class="ans"></div>
+      <div class="sub">b) Quelle fraction de la pizza reste-t-il ?</div><div class="ans"></div>
+    </div>
+
+    <div class="q"><span class="lvl l3">NIVEAU 3</span><span class="qn">M7.</span> Qu'est-ce qui est <b>plus grand</b> : <b class="mono">1/2</b> ou <b class="mono">1/3</b> ?
+      <div class="sub">Réponse :</div><div class="ans"></div>
+      <div class="sub"><b>Explique pourquoi</b> (tu peux faire un dessin) :</div><div class="ans big"></div>
+    </div>
+
+    <div class="q"><span class="lvl l2">NIVEAU 2</span><span class="qn">M8.</span> Un rectangle mesure <b>12 cm</b> de long et <b>5 cm</b> de large.
+      <div class="sub">a) Quel est son <b>périmètre</b> ?</div><div class="ans"></div>
+      <div class="sub">b) Combien de <b>carrés de 1 cm</b> faudrait-il pour le recouvrir complètement ?</div><div class="ans"></div>
+    </div>
+
+    <div class="q"><span class="lvl l3">NIVEAU 3</span><span class="qn">M9.</span> Une piste de course mesure <b>2 m 35 cm</b>.
+      <div class="sub">a) Combien cela fait-il en centimètres ?</div><div class="ans"></div>
+      <div class="sub">b) Combien de centimètres manque-t-il pour atteindre <b>3 mètres</b> ?</div><div class="ans"></div>
+    </div>
+
+    <div class="q"><span class="lvl l2">NIVEAU 2</span><span class="qn">M10.</span> Géométrie :
+      <div class="sub">a) Une figure a <b>4 côtés de la même longueur</b> et <b>4 angles droits</b>. Comment s'appelle-t-elle ?</div><div class="ans"></div>
+      <div class="sub">b) Combien de <b>faces</b> un cube possède-t-il ?</div><div class="ans"></div>
+      <div class="sub">c) Nomme une figure qui a <b>3 côtés</b> :</div><div class="ans"></div>
+    </div>
+
+    <div class="q"><span class="lvl l3">NIVEAU 3</span><span class="qn">M11.</span> Trouve les deux nombres qui manquent, puis <b>explique la règle</b> de chaque suite.
+      <div class="sub">a) 5 · 9 · 13 · 17 · _____ · _____ &nbsp;&nbsp; Règle :</div><div class="ans"></div>
+      <div class="sub">b) 3 · 6 · 12 · 24 · _____ · _____ &nbsp;&nbsp; Règle :</div><div class="ans"></div>
+    </div>
+
+    <div class="q"><span class="lvl l2">NIVEAU 2</span><span class="qn">M12.</span> Dans un sac opaque, il y a <b>3 billes rouges</b>, <b>5 billes bleues</b> et <b>2 billes vertes</b>. Tu en tires une sans regarder.
+      <div class="sub">a) Quelle couleur as-tu <b>le plus de chances</b> de tirer ? Pourquoi ?</div><div class="ans two"></div>
+      <div class="sub">b) Est-il <b>possible</b>, <b>impossible</b> ou <b>certain</b> de tirer une bille jaune ?</div><div class="ans"></div>
+    </div>
+
+    <div class="q"><span class="lvl l3">NIVEAU 3</span><span class="qn">M13.</span> Trois élèves ont lancé leur avion en papier. Voici les résultats :
+      <table>
+        <tr><th>Élève</th><th>Distance</th></tr>
+        <tr><td>Israël</td><td>14 m</td></tr>
+        <tr><td>Amina</td><td>9 m</td></tr>
+        <tr><td>Léo</td><td>17 m</td></tr>
+      </table>
+      <div class="sub">a) Qui a lancé le plus loin ?</div><div class="ans"></div>
+      <div class="sub">b) Quelle est la différence entre le meilleur et le moins bon lancer ?</div><div class="ans"></div>
+      <div class="sub">c) Quelle distance ont-ils parcourue <b>en tout</b> ?</div><div class="ans"></div>
+      <div class="sub">d) Si Amina lançait <b>3 fois</b> son avion à la même distance, dépasserait-elle Léo ? Explique.</div><div class="ans two"></div>
+    </div>
+
+    <div class="q"><span class="lvl l3">NIVEAU 3</span><span class="qn">M14.</span> Israël a <b>20 $</b>. Il achète <b>2 maquettes</b> à <b>6 $</b> chacune et <b>un tube de colle</b> à <b>3 $</b>.
+      <div class="sub">a) Combien d'argent lui reste-t-il ?</div><div class="ans"></div>
+      <div class="sub">b) Pourrait-il acheter une <b>troisième maquette</b> ? Explique ta réponse.</div><div class="ans two"></div>
+    </div>
+
+    <div class="q"><span class="lvl l4">NIVEAU 4</span><span class="qn">M15.</span> Deux défis de réflexion :
+      <div class="sub">a) <b>Sans faire le calcul exact</b>, dis si <b class="mono">19 × 21</b> est <b>plus grand</b> ou <b>plus petit</b> que 400. Explique comment tu le sais.</div><div class="ans big"></div>
+      <div class="sub"><span class="lvl l5">NIVEAU 5</span> b) Je cherche <b>deux nombres</b>. Leur <b>somme</b> est 20 et leur <b>produit</b> (quand on les multiplie) est 96. Quels sont ces deux nombres ? Explique comment tu les as cherchés.</div><div class="ans big"></div>
+    </div>
+
+  </div>
+
+  <!-- ================= RAISONNEMENT ================= -->
+  <div class="sec">
+    <h2>🧩 Partie 2 — Raisonnement et logique</h2>
+    <p>10 questions · ici, on ne teste pas ce que tu sais, mais comment tu réfléchis</p>
+  </div>
+
+  <div class="card">
+
+    <div class="q"><span class="lvl l2">NIVEAU 2</span><span class="qn">R1.</span> Continue les suites et explique la règle :
+      <div class="sub">a) 2 · 4 · 8 · 16 · _____ &nbsp;&nbsp; Règle :</div><div class="ans"></div>
+      <div class="sub"><span class="lvl l4">NIVEAU 4</span> b) 1 · 3 · 7 · 15 · 31 · _____ &nbsp;&nbsp; Règle :</div><div class="ans two"></div>
+    </div>
+
+    <div class="q"><span class="lvl l2">NIVEAU 2</span><span class="qn">R2.</span> Complète les analogies :
+      <div class="sub">a) Le pilote est à l'avion ce que le _____________ est à la voiture.</div><div class="ans"></div>
+      <div class="sub">b) La main est au gant ce que le pied est à _____________.</div><div class="ans"></div>
+      <div class="sub"><span class="lvl l3">NIVEAU 3</span> c) Le livre est à la bibliothèque ce que l'avion est à _____________.</div><div class="ans"></div>
+    </div>
+
+    <div class="q"><span class="lvl l2">NIVEAU 2</span><span class="qn">R3.</span> Trouve l'<b>intrus</b> et explique <b>pourquoi</b> c'est lui :
+      <div class="sub">a) marteau · tournevis · scie · farine · pince</div><div class="ans two"></div>
+      <div class="sub"><span class="lvl l3">NIVEAU 3</span> b) carré · triangle · cube · cercle</div><div class="ans two"></div>
+    </div>
+
+    <div class="q"><span class="lvl l3">NIVEAU 3</span><span class="qn">R4.</span> Classe ces six mots en <b>deux groupes</b>, puis donne un <b>titre</b> à chaque groupe :
+      <div class="sub"><i>avion · sous-marin · hélicoptère · voilier · fusée · kayak</i></div>
+      <div class="ans big"></div>
+    </div>
+
+    <div class="q"><span class="lvl l3">NIVEAU 3</span><span class="qn">R5.</span> Trois amis ont chacun un objet différent : un robot, un drone et un télescope.
+      <ul>
+        <li>Sam n'a pas le drone.</li>
+        <li>Amina a un objet qui <b>vole</b>.</li>
+        <li>Léo n'a pas le robot.</li>
+      </ul>
+      <div class="sub">Qui a quoi ? Explique comment tu as trouvé.</div>
+      <div class="ans big"></div>
+    </div>
+
+    <div class="q"><span class="lvl l3">NIVEAU 3</span><span class="qn">R6.</span> Tu prends une feuille de papier carrée. Tu la <b>plies en deux</b>, puis tu la <b>plies encore en deux</b>. Ensuite, tu perces <b>un seul trou</b> avec un crayon à travers toutes les épaisseurs.
+      <div class="sub">Quand tu déplies la feuille, combien de trous vois-tu ? Explique.</div>
+      <div class="ans big"></div>
+    </div>
+
+    <div class="q"><span class="lvl l3">NIVEAU 3</span><span class="qn">R7.</span> Regarde bien cette suite de formes :
+      <div class="sub mono" style="font-size:1.4rem;letter-spacing:4px">🔺 🔵 🔺 🔵 🔵 🔺 🔵 🔵 🔵 ...</div>
+      <div class="sub">a) Dessine (ou écris) les <b>cinq prochaines formes</b> de la suite :</div><div class="ans"></div>
+      <div class="sub">b) Explique la règle de la suite :</div><div class="ans two"></div>
+    </div>
+
+    <div class="q"><span class="lvl l3">NIVEAU 3</span><span class="qn">R8.</span> Je pense à un nombre. Je le <b>multiplie par 4</b>, puis j'<b>ajoute 3</b>. J'obtiens <b>31</b>.
+      <div class="sub">Quel est mon nombre ? Explique comment tu as fait pour revenir en arrière.</div>
+      <div class="ans big"></div>
+    </div>
+
+    <div class="q"><span class="lvl l4">NIVEAU 4</span><span class="qn">R9.</span> Quatre enfants font la course : Léa, Marc, Sam et Nora.
+      <ul>
+        <li>Léa arrive juste <b>avant</b> Marc.</li>
+        <li>Nora arrive <b>première</b>.</li>
+        <li>Sam n'arrive <b>pas</b> dernier.</li>
+      </ul>
+      <div class="sub">Écris l'ordre d'arrivée, de la 1<sup>re</sup> à la 4<sup>e</sup> place, et explique ton raisonnement.</div>
+      <div class="ans big"></div>
+    </div>
+
+    <div class="q"><span class="lvl l4">NIVEAU 4</span><span class="qn">R10.</span> Un petit robot est posé sur le sol. Il <b>regarde vers le nord</b>. On lui donne ce programme :
+      <div class="sub mono" style="font-size:1rem;letter-spacing:0">avance 3 · tourne à droite · avance 2 · tourne à droite · avance 3 · tourne à droite · avance 2</div>
+      <div class="sub">a) Le robot est-il revenu à son point de départ ? Explique.</div><div class="ans two"></div>
+      <div class="sub">b) Dans quelle direction regarde-t-il à la fin ?</div><div class="ans"></div>
+      <div class="sub">c) Quelle <b>forme</b> son trajet a-t-il dessinée sur le sol ?</div><div class="ans"></div>
+    </div>
+
+  </div>
+
+  <!-- ================= FRANÇAIS — LECTURE ================= -->
+  <div class="sec">
+    <h2>📖 Partie 3 — Français : lecture</h2>
+    <p>1 texte · 8 questions · relis le texte autant de fois que tu veux</p>
+  </div>
+
+  <div class="card">
+    <div class="passage">
+      <h4>Le robot qui roule tout seul sur Mars</h4>
+      <p>Sur Mars, il n'y a personne. Aucune route, aucun garage, aucun mécanicien. Pourtant, depuis plusieurs années, un robot de la taille d'une petite voiture roule lentement sur le sol rouge et poussiéreux de la planète. Il s'appelle <i>Perseverance</i>, ce qui veut dire « persévérance » : ne jamais abandonner.</p>
+      <p>Sur Terre, si ta voiture téléguidée fonce vers un mur, tu appuies tout de suite sur le bouton. Sur Mars, c'est impossible. Le signal envoyé par les ingénieurs met plusieurs minutes à traverser l'espace, et la réponse du robot met encore plusieurs minutes à revenir. Le temps que l'ordre arrive, l'accident aurait eu lieu depuis longtemps.</p>
+      <p>C'est pourquoi les ingénieurs ont donné au robot quelque chose de précieux : la capacité de <b>décider seul</b>. Perseverance photographie le terrain devant lui, calcule où sont les rochers et choisit lui-même son chemin. S'il rencontre une pente trop raide, il s'arrête et fait demi-tour, sans demander la permission.</p>
+      <p>Le robot transporte aussi un petit compagnon surprenant : un mini-hélicoptère de moins de deux kilos, baptisé <i>Ingenuity</i>. Beaucoup de scientifiques pensaient qu'il ne décollerait jamais, parce que l'air de Mars est extrêmement mince. Ils se trompaient. En avril 2021, la petite machine s'est élevée de quelques mètres au-dessus du sol martien, et l'humanité a fait voler son premier appareil sur une autre planète.</p>
+    </div>
+
+    <div class="q"><span class="lvl l1">NIVEAU 1</span><span class="qn">L1.</span> Comment s'appelle le robot dont parle le texte, et que signifie son nom ?
+      <div class="ans two"></div>
+    </div>
+
+    <div class="q"><span class="lvl l1">NIVEAU 1</span><span class="qn">L2.</span> Quel est le nom du petit hélicoptère, et en quelle année a-t-il volé pour la première fois ?
+      <div class="ans two"></div>
+    </div>
+
+    <div class="q"><span class="lvl l3">NIVEAU 3</span><span class="qn">L3.</span> Pourquoi les ingénieurs ne peuvent-ils pas piloter le robot en direct, comme une voiture téléguidée ? <b>Recopie la phrase du texte</b> qui te le prouve.
+      <div class="ans big"></div>
+    </div>
+
+    <div class="q"><span class="lvl l3">NIVEAU 3</span><span class="qn">L4.</span> Dans le texte, on lit : « <i>l'air de Mars est extrêmement mince</i> ». D'après toi, qu'est-ce que cela veut dire, et pourquoi cela rend-il le vol difficile ?
+      <div class="ans big"></div>
+    </div>
+
+    <div class="q"><span class="lvl l3">NIVEAU 3</span><span class="qn">L5.</span> Le texte dit que le robot « s'arrête et fait demi-tour, <b>sans demander la permission</b> ». Qu'est-ce que cela nous apprend sur ce robot ?
+      <div class="ans big"></div>
+    </div>
+
+    <div class="q"><span class="lvl l4">NIVEAU 4</span><span class="qn">L6.</span> Au début du texte, l'auteur écrit : « <i>Aucune route, aucun garage, aucun mécanicien.</i> » Pourquoi a-t-il choisi de commencer ainsi ? Qu'est-ce que cela nous fait comprendre ?
+      <div class="ans big"></div>
+    </div>
+
+    <div class="q"><span class="lvl l4">NIVEAU 4</span><span class="qn">L7.</span> Quelle est l'<b>idée principale</b> de tout le texte ? (Attention : ce n'est pas un seul détail, c'est ce dont parle le texte en entier.)
+      <div class="ans big"></div>
+    </div>
+
+    <div class="q"><span class="lvl l4">NIVEAU 4</span><span class="qn">L8.</span> Le texte dit : « <i>Ils se trompaient.</i> » De qui parle-t-on, et sur quoi ces personnes s'étaient-elles trompées ?
+      <div class="ans big"></div>
+    </div>
+  </div>
+
+  <!-- ================= FRANÇAIS — GRAMMAIRE ================= -->
+  <div class="sec">
+    <h2>✏️ Partie 4 — Français : grammaire et conjugaison</h2>
+    <p>10 questions</p>
+  </div>
+
+  <div class="card">
+
+    <div class="q"><span class="lvl l1">NIVEAU 1</span><span class="qn">G1.</span> Dans la phrase « <b>Les jeunes ingénieurs observent la fusée blanche.</b> » :
+      <div class="sub">a) Recopie le <b>groupe du nom</b> qui est sujet :</div><div class="ans"></div>
+      <div class="sub">b) Quel est le <b>nom-noyau</b> de ce groupe ?</div><div class="ans"></div>
+      <div class="sub">c) Relève les <b>deux adjectifs</b> de la phrase :</div><div class="ans"></div>
+    </div>
+
+    <div class="q"><span class="lvl l2">NIVEAU 2</span><span class="qn">G2.</span> Accorde les mots entre parenthèses :
+      <div class="sub">a) Des roues (neuf) __________________</div>
+      <div class="sub">b) Une invention (génial) __________________</div>
+      <div class="sub">c) Les portes sont (ouvert) __________________</div>
+      <div class="sub">d) Israël et Léa sont (content) __________________</div>
+      <div class="ans"></div>
+    </div>
+
+    <div class="q"><span class="lvl l2">NIVEAU 2</span><span class="qn">G3.</span> Écris au <b>pluriel</b> :
+      <div class="sub">a) un cheval → __________________ &nbsp; b) un tuyau → __________________</div>
+      <div class="sub">c) une souris → __________________ &nbsp; d) un genou → __________________</div>
+      <div class="ans"></div>
+    </div>
+
+    <div class="q"><span class="lvl l3">NIVEAU 3</span><span class="qn">G4.</span> Complète avec le verbe bien accordé :
+      <div class="sub">a) Les moteurs de l'avion (ronronner, présent) __________________ .</div>
+      <div class="sub">b) La boîte de vis (être, présent) __________________ sur l'établi.</div>
+      <div class="sub">c) Ma sœur et moi (partir, présent) __________________ demain.</div>
+      <div class="ans"></div>
+    </div>
+
+    <div class="q"><span class="lvl l2">NIVEAU 2</span><span class="qn">G5.</span> Conjugue le verbe <b>finir</b> :
+      <div class="sub">a) présent, avec <i>nous</i> : __________________</div>
+      <div class="sub">b) imparfait, avec <i>ils</i> : __________________</div>
+      <div class="sub">c) futur simple, avec <i>je</i> : __________________</div>
+      <div class="ans"></div>
+    </div>
+
+    <div class="q"><span class="lvl l3">NIVEAU 3</span><span class="qn">G6.</span> Passé composé :
+      <div class="sub">a) « Hier, j' (dessiner) __________________ un avion. »</div>
+      <div class="sub">b) « Elles (partir) __________________ très tôt. »</div>
+      <div class="sub">c) Explique pourquoi les deux phrases ne se construisent pas de la même façon :</div>
+      <div class="ans two"></div>
+    </div>
+
+    <div class="q"><span class="lvl l3">NIVEAU 3</span><span class="qn">G7.</span> Choisis le bon mot :
+      <div class="sub">a) Il ( a / à ) réparé son vélo, puis il est allé ( a / à ) l'école.</div>
+      <div class="sub">b) Mon frère ( et / est ) grand ( et / est ) rapide.</div>
+      <div class="sub">c) Ils ( on / ont ) terminé, alors ( on / ont ) peut partir.</div>
+      <div class="sub">d) Les outils ( son / sont ) dans ( son / sont ) coffre.</div>
+      <div class="ans"></div>
+    </div>
+
+    <div class="q"><span class="lvl l3">NIVEAU 3</span><span class="qn">G8.</span> Analyse cette phrase : « <b>Range tes outils avant le souper !</b> »
+      <div class="sub">a) Quel est son <b>type</b> (déclarative, interrogative, exclamative, impérative) ?</div><div class="ans"></div>
+      <div class="sub">b) Est-elle à la forme <b>positive</b> ou <b>négative</b> ?</div><div class="ans"></div>
+      <div class="sub">c) Récris-la à la <b>forme négative</b> :</div><div class="ans"></div>
+    </div>
+
+    <div class="q"><span class="lvl l4">NIVEAU 4</span><span class="qn">G9.</span> Cette phrase contient <b>4 erreurs</b>. Récris-la correctement :
+      <div class="sub"><i>« les deux petit avion rouge décolle de la piste. »</i></div>
+      <div class="ans big"></div>
+    </div>
+
+    <div class="q"><span class="lvl l3">NIVEAU 3</span><span class="qn">G10.</span> Vocabulaire :
+      <div class="sub">a) Donne un <b>synonyme</b> de « rapide » : __________________</div>
+      <div class="sub">b) Donne le <b>contraire</b> de « monter » : __________________</div>
+      <div class="sub">c) Écris <b>trois mots</b> de la famille de « vol » : __________________</div>
+      <div class="sub"><span class="lvl l4">NIVEAU 4</span> d) Que veut dire « <i>Il a dévoré son livre</i> » ?</div>
+      <div class="ans two"></div>
+    </div>
+
+  </div>
+
+  <!-- ================= FRANÇAIS — ÉCRITURE ================= -->
+  <div class="sec">
+    <h2>🖊️ Partie 5 — Français : écriture</h2>
+    <p>2 tâches · prends ton temps et relis-toi à la fin</p>
+  </div>
+
+  <div class="card">
+
+    <div class="q"><span class="lvl l3">NIVEAU 3</span><span class="qn">E1.</span> <b>Raconte.</b> Écris un petit texte de <b>5 à 6 phrases</b> qui raconte le jour où tu as construit (ou essayé de construire) quelque chose qui n'a pas fonctionné du premier coup.
+      <div class="note" style="margin:8px 0">Dans ton texte, il faut :
+        <ul style="margin-bottom:0">
+          <li>écrire au <b>passé</b> ;</li>
+          <li>utiliser au moins <b>trois</b> de ces mots : <i>d'abord · ensuite · puis · enfin · parce que · mais</i> ;</li>
+          <li>inclure <b>une phrase exclamative</b> (avec un « ! ») ;</li>
+          <li>utiliser au moins <b>deux adjectifs</b>.</li>
+        </ul>
+      </div>
+      <div class="ans huge"></div>
+      <div class="ans huge"></div>
+    </div>
+
+    <div class="q"><span class="lvl l4">NIVEAU 4</span><span class="qn">E2.</span> <b>Explique et convaincs.</b> Un ami te dit : « Apprendre à coder, ça ne sert à rien. »
+      <div class="sub">Écris <b>4 à 5 phrases</b> pour lui répondre. Donne <b>deux bonnes raisons</b> et utilise au moins une fois « <b>parce que</b> » et une fois « <b>par exemple</b> ».</div>
+      <div class="ans huge"></div>
+      <div class="ans huge"></div>
+    </div>
+
+    <div class="note">✅ <b>Avant de rendre ton défi, relis-toi et vérifie 3 choses :</b> ① les majuscules et les points ② les accords (le groupe du nom et le verbe) ③ les homophones (a/à · et/est · on/ont · son/sont).</div>
+  </div>
+
+  <div class="card">
+    <h2>🎉 Bravo, tu as terminé !</h2>
+    <p>Tu viens de réfléchir pendant longtemps sans abandonner — c'est exactement ça, la persévérance, comme le robot sur Mars. Il n'y a rien à réussir « parfaitement » ici : chaque réponse, juste ou fausse, m'aide à construire les prochains défis <b>sur mesure</b> pour toi. 🚀</p>
+  </div>
+
+  <footer>Défi 01 — septembre 2026 · Prochain bilan dans 4 à 6 semaines</footer>
+</div>
+</body>
+</html>
