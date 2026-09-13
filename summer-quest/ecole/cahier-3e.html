@@ -260,6 +260,25 @@ hr.rule{border:none;border-top:1px solid var(--line);margin:0}
 .saisie:focus{border-color:var(--encre);outline:none}
 .score{font-family:var(--display);font-size:.84rem;color:var(--ink-faint);font-variant-numeric:tabular-nums}
 
+/* ============ exemple travaillé ============ */
+.exemple{
+  background:var(--panel);border:1.5px dashed var(--rule);border-radius:18px;
+  padding:18px 18px 16px;display:flex;flex-direction:column;gap:12px;
+}
+.ex-k{font-family:var(--display);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--craie);font-weight:700}
+.pv{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:460px}
+.pvcol{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 8px;text-align:center}
+.pvcol .pvh{display:block;font-family:var(--display);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+.pvcol b{display:block;font-family:var(--display);font-weight:800;font-size:2.1rem;line-height:1.2;color:var(--encre);font-variant-numeric:tabular-nums}
+.pvcol i{display:block;font-style:normal;font-family:var(--display);font-size:.76rem;color:var(--ink-soft)}
+.lecture-modele{font-family:var(--display);font-size:1.05rem;line-height:1.5}
+.lecture-modele b{color:var(--encre)}
+.steps{margin:0;padding-left:19px}
+.steps li{font-size:.95rem;margin-bottom:4px;color:var(--ink-soft)}
+.steps li b{color:var(--ink)}
+.steps.solved li:last-child{color:var(--vert);font-weight:600}
+.citation{font-family:var(--hand);font-size:1.35rem;color:var(--encre);line-height:1.3}
+
 /* ============ vocabulaire ============ */
 .mot{font-family:var(--display);font-weight:800;font-size:clamp(2rem,9vw,3.1rem);text-align:center;line-height:1.1}
 .phrase{text-align:center;color:var(--ink-soft);font-size:1.02rem;max-width:46ch;margin-inline:auto}
@@ -466,6 +485,34 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;font-si
       <p class="lede">L'enseignante est claire : <b>on en fait un jeu</b>. On pose une question, il répond à voix haute ou il écrit. Jamais de longues colonnes de nombres à recopier.</p>
     </div>
 
+    <div class="exemple">
+      <p class="ex-k">D'abord un exemple, ensemble — puis on joue</p>
+      <p class="lecture-modele">Chaque nombre a trois boîtes. On les remplit de gauche à droite, et on les lit dans l'ordre.</p>
+      <div class="pv">
+        <div class="pvcol"><span class="pvh">centaines</span><b>3</b><i>300 · trois cents</i></div>
+        <div class="pvcol"><span class="pvh">dizaines</span><b>4</b><i>40 · quarante</i></div>
+        <div class="pvcol"><span class="pvh">unités</span><b>7</b><i>7 · sept</i></div>
+      </div>
+      <p class="lecture-modele">On lit : <b>trois cent</b> — <b>quarante</b> — <b>sept</b>. Donc <b>347</b> se dit « trois cent quarante-sept », et 300 + 40 + 7 = 347.</p>
+      <div class="btnrow">
+        <button class="btn small" id="exSay1">🔊 Écouter l'exemple</button>
+      </div>
+
+      <hr class="rule">
+
+      <p class="ex-k">Et une devinette, résolue pas à pas</p>
+      <p class="citation">« Je pense à un nombre entre 200 et 300. Il a 4 dizaines et 7 unités. »</p>
+      <ol class="steps solved">
+        <li>Entre <b>200 et 300</b> → il commence par 2, donc <b>2 centaines</b> = 200.</li>
+        <li><b>4 dizaines</b> = 40.</li>
+        <li><b>7 unités</b> = 7.</li>
+        <li>200 + 40 + 7 = <b>247</b> — « deux cent quarante-sept ».</li>
+      </ol>
+      <div class="btnrow">
+        <button class="btn small" id="exSay2">🔊 Écouter la devinette</button>
+      </div>
+    </div>
+
     <div class="seg" role="group" aria-label="Mode de jeu">
       <button data-nm="lire" aria-pressed="true">👁️ Je le lis</button>
       <button data-nm="ecrire" aria-pressed="false">✍️ Je l'écris</button>
@@ -512,6 +559,15 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;font-si
       <button data-vm="lire" aria-pressed="true">👁️ Je lis</button>
       <button data-vm="dictee" aria-pressed="false">✍️ Dictée</button>
       <button data-vm="sens" aria-pressed="false">💡 Je comprends</button>
+    </div>
+
+    <div class="exemple">
+      <p class="ex-k">Ce qu'on te demande, avec un exemple</p>
+      <ol class="steps">
+        <li><b>Je lis</b> — tu vois le mot <b>fromage</b>, tu le lis à voix haute, puis tu lis la phrase entière.</li>
+        <li><b>Dictée</b> — tu entends « fromage », et tu l'écris sans le regarder : <b>f - r - o - m - a - g - e</b>.</li>
+        <li><b>Je comprends</b> — « J'aime le <u>?</u> sur mes pâtes » → tu choisis <b>fromage</b> parmi quatre mots.</li>
+      </ol>
     </div>
 
     <div class="ardoise">
@@ -995,7 +1051,7 @@ function paintSemaineDe(){
 document.getElementById("printBtn").addEventListener("click", function(){ window.print(); });
 
 /* =============== jeu des nombres =============== */
-var numMode = "lire", numN = 0, numAns = 0, numShown = false;
+var numMode = "lire", numN = 0, numAns = 0, numShown = false, numHint = "";
 var numEl = {
   consigne: document.getElementById("numConsigne"),
   big: document.getElementById("numBig"),
@@ -1068,35 +1124,44 @@ function newNum(){
   if(numMode === "devinette"){
     var kind = rnd(1,4);
     var c, h, d, u;
+    numHint = "";
     if(kind === 1){
       c = rnd(1,4); d = rnd(0,9); u = rnd(0,9);
       numAns = c*100 + d*10 + u;
       h = "Je pense à un nombre entre " + (c*100) + " et " + (c*100+100) + ". Il a " + d + " dizaine" + (d>1?"s":"") + " et " + u + " unité" + (u>1?"s":"") + ".";
+      numHint = "Dessine les trois boîtes : centaines | dizaines | unités. Entre " + (c*100) + " et " + (c*100+100) + ", la boîte des centaines contient " + c + ".";
     } else if(kind === 2){
       c = rnd(0,5); d = rnd(0,9); u = rnd(0,9);
       if(c === 5){ d = 0; u = 0; }
       numAns = c*100 + d*10 + u;
       h = "J'ai " + c + " centaine" + (c>1?"s":"") + ", " + d + " dizaine" + (d>1?"s":"") + " et " + u + " unité" + (u>1?"s":"") + ". Qui suis-je ?";
+      numHint = "Place chaque chiffre dans sa boîte, dans l'ordre : centaines, puis dizaines, puis unités.";
     } else if(kind === 3){
       var base = rnd(1,499);
       var after = Math.random() < 0.5;
       numAns = after ? base + 1 : base - 1;
       h = "Je suis le nombre qui vient juste " + (after ? "après" : "avant") + " " + base + ".";
+      numHint = after
+        ? "Juste après, c'est + 1. Attention quand le nombre finit par 9 : la dizaine change aussi."
+        : "Juste avant, c'est − 1. Attention quand le nombre finit par 0 : la dizaine change aussi.";
     } else {
       var b2 = rnd(0,490);
       var plus = Math.random() < 0.5;
       numAns = plus ? b2 + 10 : b2 + 100;
       h = "Prends " + b2 + " et ajoute " + (plus ? "10" : "100") + ". Quel nombre obtiens-tu ?";
+      numHint = plus
+        ? "Ajouter 10 ne change que le chiffre des dizaines. Les unités ne bougent pas."
+        : "Ajouter 100 ne change que le chiffre des centaines. Le reste ne bouge pas.";
     }
     numEl.consigne.textContent = h;
     numEl.big.hidden = true;
     numEl.wrap.hidden = false;
     numEl.btns.appendChild(btn("Vérifier", "primary", checkNum));
-    numEl.btns.appendChild(btn("💡 Indice", "ghost", function(){
+    numEl.btns.appendChild(btn("💡 Comment faire", "ghost", function(){
       numEl.rep.className = "rep";
       numEl.rep.style.color = "var(--craie)";
-      numEl.rep.textContent = "Le nombre s'écrit : " + frNum(numAns).replace(/[a-zà-ÿ]/gi, "•");
-      say(numEl.consigne.textContent);
+      numEl.rep.textContent = numHint;
+      say(numHint);
     }));
     numEl.btns.appendChild(btn("Un autre →", "ghost", newNum));
     setTimeout(function(){ try{ numEl.input.focus(); }catch(e){} }, 60);
@@ -1364,6 +1429,18 @@ function newVb(){
   });
 }
 document.getElementById("vbNext").addEventListener("click", newVb);
+
+/* =============== exemples parlés =============== */
+(function(){
+  var b1 = document.getElementById("exSay1");
+  if(b1) b1.addEventListener("click", function(){
+    say("trois cent quarante-sept. Trois centaines, quatre dizaines, sept unités.");
+  });
+  var b2 = document.getElementById("exSay2");
+  if(b2) b2.addEventListener("click", function(){
+    say("Je pense à un nombre entre deux cents et trois cents. Il a quatre dizaines et sept unités. La réponse est deux cent quarante-sept.");
+  });
+})();
 
 /* =============== lecture =============== */
 var TEXTES = [
