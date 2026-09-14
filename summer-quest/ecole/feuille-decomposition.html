@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>La grande feuille de décomposition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,600&family=Caveat:wght@500;700&display=swap">
+<style>
+:root{
+  --paper:#F4F6FC; --panel:#FFFFFF; --panel-2:#FAFBFF;
+  --ink:#16213A; --ink-soft:#5A6484; --ink-faint:#8B95B4;
+  --rule:#CBD6F2; --grid:rgba(116,148,214,.15);
+  --marge:#D1495B; --marge-soft:rgba(209,73,91,.30);
+  --encre:#2F4FC9; --encre-soft:#E7ECFC;
+  --vert:#2E8B57; --vert-soft:#E4F4EB;
+  --craie:#B57A10; --craie-soft:#FBF0DA;
+  --line:#E2E7F5;
+  --shadow:0 10px 26px rgba(22,33,58,.09);
+  --shadow-sm:0 2px 8px rgba(22,33,58,.06);
+  --display:"Gabarito","Trebuchet MS",system-ui,sans-serif;
+  --body:"Literata",Georgia,"Times New Roman",serif;
+  --hand:"Caveat","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F141F; --panel:#171E2D; --panel-2:#1C2435;
+    --ink:#E8ECF9; --ink-soft:#A2AECB; --ink-faint:#7A86A6;
+    --rule:#2B3752; --grid:rgba(140,170,255,.07);
+    --marge:#E77A89; --marge-soft:rgba(231,122,137,.32);
+    --encre:#8FA8FF; --encre-soft:#1E2946;
+    --vert:#66C795; --vert-soft:#16301F;
+    --craie:#F0BC63; --craie-soft:#2E2513;
+    --line:#27314A;
+    --shadow:0 10px 26px rgba(0,0,0,.34); --shadow-sm:0 2px 8px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F141F; --panel:#171E2D; --panel-2:#1C2435;
+  --ink:#E8ECF9; --ink-soft:#A2AECB; --ink-faint:#7A86A6;
+  --rule:#2B3752; --grid:rgba(140,170,255,.07);
+  --marge:#E77A89; --marge-soft:rgba(231,122,137,.32);
+  --encre:#8FA8FF; --encre-soft:#1E2946;
+  --vert:#66C795; --vert-soft:#16301F;
+  --craie:#F0BC63; --craie-soft:#2E2513;
+  --line:#27314A;
+  --shadow:0 10px 26px rgba(0,0,0,.34); --shadow-sm:0 2px 8px rgba(0,0,0,.25);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--body);color:var(--ink);background-color:var(--paper);
+  background-image:
+    repeating-linear-gradient(to bottom, transparent 0 23px, var(--grid) 23px 24px),
+    repeating-linear-gradient(to right, transparent 0 23px, var(--grid) 23px 24px);
+  line-height:1.6;font-size:16px;-webkit-text-size-adjust:100%;
+}
+h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.15;margin:0;text-wrap:balance}
+p{margin:0}
+button{font-family:var(--display);cursor:pointer;color:inherit}
+:focus-visible{outline:3px solid var(--encre);outline-offset:2px;border-radius:8px}
+.wrap{max-width:900px;margin:0 auto;padding-inline:16px}
+
+header.top{background:var(--panel);border-bottom:1px solid var(--line);padding-block:22px 18px}
+.eyebrow{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;font-weight:700;color:var(--ink-faint)}
+header h1{font-size:clamp(1.55rem,5vw,2.1rem);margin-top:4px}
+header h1 b{color:var(--marge);font-weight:700}
+.sub{color:var(--ink-soft);font-size:.96rem;margin-top:7px;max-width:66ch}
+.ident{display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;font-family:var(--display);font-size:.9rem;color:var(--ink-faint)}
+.ident span b{color:var(--ink);font-weight:600}
+.ident .fill{display:inline-block;min-width:130px;border-bottom:1.5px dotted var(--rule)}
+
+.bar{position:sticky;top:0;z-index:20;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:var(--shadow-sm)}
+.bar-in{display:flex;gap:9px;align-items:center;flex-wrap:wrap;padding-block:11px}
+.bar .lab{font-family:var(--display);font-size:.84rem;color:var(--ink-soft);flex:1 1 200px}
+.btn{font-family:var(--display);font-weight:600;font-size:.88rem;border:1px solid var(--line);background:var(--panel-2);
+  padding:8px 14px;border-radius:11px;transition:border-color .12s,transform .1s}
+.btn:hover{border-color:var(--encre)}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--encre);border-color:var(--encre);color:#fff}
+.btn.ghost{background:transparent}
+
+main{padding-block:24px 70px}
+.sec-hd{margin:26px 0 12px}
+.sec-hd .k{font-family:var(--display);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--marge);font-weight:700}
+.sec-hd h2{font-size:1.32rem;margin-top:2px}
+.sec-hd p{color:var(--ink-soft);font-size:.95rem;margin-top:4px;max-width:64ch}
+
+.bloc{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:15px 16px 13px;margin-bottom:14px;box-shadow:var(--shadow-sm)}
+.bloc-hd{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-bottom:5px}
+.bloc-hd .n{font-family:var(--display);font-weight:800;font-size:.78rem;color:#fff;background:var(--encre);padding:3px 9px;border-radius:8px}
+.bloc-hd h3{font-size:1.02rem}
+.consigne{font-family:var(--hand);font-size:1.26rem;color:var(--marge);line-height:1.3;margin-bottom:3px}
+.rappel{font-size:.88rem;color:var(--ink-soft);border-left:3px solid var(--craie);padding-left:10px;margin-bottom:11px}
+.rappel b{color:var(--ink)}
+
+.items{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:4px 22px}
+.item{display:flex;gap:8px;align-items:baseline;padding:5px 0;border-bottom:1px dotted var(--line)}
+.item .num{font-family:var(--display);font-weight:700;font-size:.82rem;color:var(--ink-faint);flex:0 0 26px;font-variant-numeric:tabular-nums}
+.item .txt{font-family:var(--display);font-size:1rem;flex:1 1 auto}
+.item .lg{display:inline-block;min-width:66px;border-bottom:1.5px dotted var(--rule);margin-left:4px}
+
+.corrige{background:var(--panel);border:2px dashed var(--vert);border-radius:16px;padding:16px;margin-top:26px}
+.corrige h2{font-size:1.16rem;color:var(--vert)}
+.corrige p.int{font-size:.9rem;color:var(--ink-soft);margin-top:3px}
+.keys{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:3px 18px;margin-top:11px}
+.key{display:flex;gap:7px;align-items:baseline;font-family:var(--display);font-size:.92rem;padding:3px 0;border-bottom:1px dotted var(--line)}
+.key .num{font-weight:700;color:var(--ink-faint);flex:0 0 26px;font-variant-numeric:tabular-nums}
+.key .val{color:var(--vert);font-weight:600}
+.note{font-family:var(--hand);font-size:1.26rem;line-height:1.35;color:var(--marge);border-left:3px solid var(--marge-soft);padding:4px 0 4px 13px;margin:18px 0}
+footer{border-top:1px solid var(--line);margin-top:30px;padding-top:14px;font-size:.84rem;color:var(--ink-faint)}
+
+@media print{
+  .noprint{display:none!important}
+  body{background:#fff;background-image:none;color:#000;font-size:10.5pt}
+  .bar{display:none}
+  .bloc{box-shadow:none;border-color:#bbb;page-break-inside:avoid;margin-bottom:9px}
+  .corrige{page-break-before:always;border-color:#666}
+  .items{gap:2px 18px}
+  .item{padding:7px 0}
+  header.top{border-bottom:2px solid #000}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow">3<sup>e</sup> année &middot; cahier Zig Zag &middot; nombres jusqu'à 500</p>
+    <h1>La grande feuille de <b>décomposition</b></h1>
+    <p class="sub">Toutes les sortes de questions du cahier, d'un seul coup : les neuf façons de décomposer un nombre, puis lire et écrire les nombres jusqu'à 500. Le corrigé complet est à la fin — caché tant que vous ne l'affichez pas.</p>
+    <p class="ident">
+      <span>Nom : <span class="fill"></span></span>
+      <span>Date : <span class="fill"></span></span>
+      <span>Série : <b id="serieLab">A</b></span>
+      <span>Questions : <b id="totalLab">—</b></span>
+    </p>
+  </div>
+</header>
+
+<nav class="bar noprint">
+  <div class="wrap bar-in">
+    <span class="lab">Il répond d'abord, sur la feuille. Vous affichez le corrigé ensuite.</span>
+    <button class="btn" id="serie">🔄 Autre série</button>
+    <button class="btn ghost" id="print">🖨️ Imprimer</button>
+    <button class="btn primary" id="key" aria-pressed="false">🔑 Afficher le corrigé</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <div class="sec-hd">
+    <p class="k">Partie A</p>
+    <h2>Décomposer un nombre — les 9 questions</h2>
+    <p>Chaque bloc est une sorte de question du cahier. Le rappel en jaune est la seule chose à lui redire s'il bloque : ne donnez pas la réponse, redonnez la méthode.</p>
+  </div>
+  <div id="partA"></div>
+
+  <div class="sec-hd">
+    <p class="k">Partie B</p>
+    <h2>Lire et écrire les nombres jusqu'à 500</h2>
+    <p>Ce que l'enseignante demande cette semaine. À faire à voix haute d'abord, puis par écrit.</p>
+  </div>
+  <div id="partB"></div>
+
+  <p class="note">S'il fait plus de deux erreurs dans un même bloc, arrêtez ce bloc et reprenez l'exemple du cahier ensemble. Une feuille finie à moitié mais comprise vaut mieux qu'une feuille finie au complet.</p>
+
+  <div class="corrige" id="corrige" hidden>
+    <h2>🔑 Corrigé</h2>
+    <p class="int">Pour le parent. Les réponses suivent la numérotation de la feuille.</p>
+    <div class="keys" id="keys"></div>
+  </div>
+
+  <footer>La grande feuille de décomposition &middot; à refaire avec « Autre série » autant de fois qu'il le faut &middot; complément du <b>cahier d'Israel</b>.</footer>
+</main>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- générateur reproductible : le même lien donne la même feuille ---------- */
+var seed = 20260914;
+function mulberry32(a){
+  return function(){
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    var t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+var rand = mulberry32(seed);
+function rnd(a,b){ return a + Math.floor(rand()*(b-a+1)); }
+
+/* ---------- nombres en lettres ---------- */
+var U = ["zéro","un","deux","trois","quatre","cinq","six","sept","huit","neuf","dix",
+         "onze","douze","treize","quatorze","quinze","seize"];
+var TENS = {2:"vingt",3:"trente",4:"quarante",5:"cinquante",6:"soixante"};
+function sub100(n){
+  if(n < 17) return U[n];
+  if(n < 20) return "dix-" + U[n-10];
+  var t = Math.floor(n/10), u = n % 10;
+  if(t < 7){
+    if(u === 0) return TENS[t];
+    if(u === 1) return TENS[t] + " et un";
+    return TENS[t] + "-" + U[u];
+  }
+  if(t === 7){ if(n === 71) return "soixante et onze"; return "soixante-" + sub100(n-60); }
+  if(t === 8){ if(n === 80) return "quatre-vingts"; return "quatre-vingt-" + sub100(n-80); }
+  if(n === 90) return "quatre-vingt-dix";
+  return "quatre-vingt-" + sub100(n-80);
+}
+function frNum(n){
+  if(n === 0) return "zéro";
+  var h = Math.floor(n/100), r = n % 100;
+  if(h === 0) return sub100(r);
+  if(r === 0) return h === 1 ? "cent" : U[h] + " cents";
+  return (h === 1 ? "cent" : U[h] + " cent") + " " + sub100(r);
+}
+function cdu(n){ return [Math.floor(n/100), Math.floor((n%100)/10), n%10]; }
+function dev(n){
+  var p = cdu(n), out = [];
+  if(p[0]) out.push(p[0]*100);
+  if(p[1]) out.push(p[1]*10);
+  if(p[2]) out.push(p[2]);
+  if(!out.length) out.push(0);
+  return out.join(" + ");
+}
+function pl(n, mot){ return n + " " + mot + (n > 1 ? "s" : ""); }
+function distinct(){
+  var n, p;
+  do { n = rnd(102,498); p = cdu(n); }
+  while(p[0] === p[1] || p[1] === p[2] || p[0] === p[2]);
+  return n;
+}
+
+/* ---------- les 9 types + les 3 types de la partie B ---------- */
+var BLOCS = [
+  { t:"Décomposer en centaines, dizaines et unités", n:8,
+    c:"« Décompose le nombre en centaines, dizaines et unités. »",
+    r:"On lit les chiffres <b>de droite à gauche</b> : unités, dizaines, centaines. On écrit toujours dans l'ordre c + d + u.",
+    gen:function(){ var n = rnd(101,500), p = cdu(n);
+      return { q:"Décompose " + n + " : ___ c + ___ d + ___ u", a:p[0] + " c + " + p[1] + " d + " + p[2] + " u" }; } },
+
+  { t:"Écrire sous la forme d'une addition", n:8,
+    c:"« Écris le nombre sous la forme d'une addition. »",
+    r:"Centaines ×100, dizaines ×10, unités ×1. <b>Un zéro ne s'écrit pas</b> : 305 = 300 + 5.",
+    gen:function(){ var n = rand() < 0.3 ? rnd(1,4)*100 + rnd(1,9) : rnd(101,500);
+      return { q:"Écris " + n + " sous la forme d'une addition.", a:n + " = " + dev(n) }; } },
+
+  { t:"Recomposer : retrouver le nombre", n:8,
+    c:"« Quel nombre est-ce ? »",
+    r:"On replace chaque valeur dans sa boîte. <b>Attention à la boîte vide</b> : 4 c + 0 d + 9 u = 409, pas 49.",
+    gen:function(){ var n = rnd(101,500), p = cdu(n);
+      var q = rand() < 0.5 ? p[0] + " c + " + p[1] + " d + " + p[2] + " u = ___" : dev(n) + " = ___";
+      return { q:q, a:n + " — " + frNum(n) }; } },
+
+  { t:"La valeur d'un chiffre", n:8,
+    c:"« Quelle est la valeur du chiffre ___ dans ce nombre ? »",
+    r:"Le <b>chiffre</b> est le symbole (4). La <b>valeur</b> est ce qu'il vaut à sa place (40).",
+    gen:function(){ var n = distinct(), p = cdu(n), i = rnd(0,2);
+      var noms = ["centaine","dizaine","unité"], val = [p[0]*100, p[1]*10, p[2]];
+      return { q:"Dans " + n + ", quelle est la valeur du chiffre " + p[i] + " ?",
+               a:val[i] + " (" + pl(p[i], noms[i]) + ")" }; } },
+
+  { t:"Décomposer autrement : l'échange", n:8,
+    c:"« Complète : 347 = 2 c + ___ d + 7 u »",
+    r:"<b>1 centaine = 10 dizaines.</b> Si on enlève une centaine, on ajoute 10 dizaines.",
+    gen:function(){
+      var p = cdu(rnd(150,500)); if(p[0] < 2) p[0] = 2;
+      var n = p[0]*100 + p[1]*10 + p[2];
+      if(rand() < 0.55){
+        return { q:"Complète : " + n + " = " + (p[0]-1) + " c + ___ d + " + p[2] + " u", a:(p[1]+10) + " dizaines" };
+      }
+      var vrai = rand() < 0.5, prop = vrai ? (p[1]+10) : (p[1]+10+rnd(1,3));
+      return { q:"Vrai ou faux ? " + n + " = " + (p[0]-1) + " c + " + prop + " d + " + p[2] + " u",
+               a:vrai ? "Vrai" : "Faux — il faut " + (p[1]+10) + " dizaines" }; } },
+
+  { t:"Le terme qui manque", n:8,
+    c:"« Complète : 347 = 300 + ___ + 7 »",
+    r:"On décompose dans sa tête, on regarde ce qui est déjà écrit, on écrit <b>seulement ce qui manque</b>.",
+    gen:function(){
+      var n, p;
+      do { n = rnd(111,500); p = cdu(n); } while(p[1] === 0 || p[2] === 0);
+      var i = rnd(0,2), parts = [p[0]*100, p[1]*10, p[2]];
+      var aff = parts.map(function(v,j){ return j === i ? "___" : v; });
+      return { q:"Complète : " + n + " = " + aff.join(" + "), a:String(parts[i]) }; } },
+
+  { t:"Du nombre écrit en lettres", n:8,
+    c:"« Écris en chiffres, puis décompose. »",
+    r:"D'abord les centaines entendues, puis la fin du mot. On écrit le nombre <b>avant</b> de décomposer.",
+    gen:function(){ var n = rnd(101,500);
+      return { q:"« " + frNum(n) + " » → ___ , puis décompose", a:n + " = " + dev(n) }; } },
+
+  { t:"Avec le matériel base 10", n:8,
+    c:"« Combien de plaques, de barres et de cubes ? »",
+    r:"Une <b>plaque</b> = 100, une <b>barre</b> = 10, un <b>cube</b> = 1.",
+    gen:function(){ var n = rnd(101,500), p = cdu(n);
+      return { q:"Pour " + n + " : ___ plaques, ___ barres, ___ cubes",
+               a:pl(p[0],"plaque") + ", " + pl(p[1],"barre") + ", " + pl(p[2],"cube") }; } },
+
+  { t:"Plusieurs décompositions du même nombre", n:6,
+    c:"« Trouve deux façons différentes de décomposer ce nombre. »",
+    r:"<b>Toute addition qui redonne le nombre est bonne.</b> C'est le but de la question.",
+    gen:function(){ var n = rnd(120,500), p = cdu(n);
+      var a = dev(n) + " · " + (p[0]*100 + p[1]*10) + " + " + p[2] +
+              " · " + (p[0]*100) + " + " + (p[1]*10 + p[2]) +
+              " · " + ((p[0]-1)*100) + " + " + (100 + p[1]*10 + p[2]);
+      return { q:"Deux décompositions différentes de " + n + " :", a:a + " — ou toute autre somme juste" }; } }
+];
+
+var BLOCS_B = [
+  { t:"Écrire le nombre en lettres", n:6,
+    c:"« Écris ce nombre en lettres. »",
+    r:"Attention aux <b>70 et 90</b> (soixante-dix, quatre-vingt-dix) et au <b>s de cents</b> : 300 = trois cents, mais 347 = trois cent quarante-sept.",
+    gen:function(){ var n = rand() < 0.4 ? rnd(60,99) : rnd(101,500);
+      return { q:n + " s'écrit :", a:frNum(n) }; } },
+
+  { t:"Écrire le nombre en chiffres", n:6,
+    c:"« Écris ce nombre en chiffres. »",
+    r:"On écoute les centaines, puis les dizaines, puis les unités. Le <b>zéro du milieu</b> se place quand même : trois cent cinq = 305.",
+    gen:function(){ var n = rand() < 0.25 ? rnd(1,4)*100 + rnd(1,9) : rnd(101,500);
+      return { q:"« " + frNum(n) + " » s'écrit :", a:String(n) }; } },
+
+  { t:"Devinettes de nombres", n:6,
+    c:"« Je pense à un nombre… Quel est-il ? »",
+    r:"On dessine les trois boîtes et on place ce que la devinette donne. <b>+10</b> ne change que les dizaines, <b>+100</b> que les centaines.",
+    gen:function(){
+      var k = rnd(1,3);
+      if(k === 1){
+        var c = rnd(1,4), d = rnd(0,9), u = rnd(0,9);
+        return { q:"Je pense à un nombre entre " + (c*100) + " et " + (c*100+100) + ". Il a " + d +
+                   " dizaine" + (d>1?"s":"") + " et " + u + " unité" + (u>1?"s":"") + ".",
+                 a:String(c*100 + d*10 + u) };
+      }
+      if(k === 2){
+        var b = rnd(1,499), after = rand() < 0.5;
+        return { q:"Je viens juste " + (after ? "après" : "avant") + " " + b + ".", a:String(after ? b+1 : b-1) };
+      }
+      var b2 = rnd(0,390), plus = rand() < 0.5;
+      return { q:"Prends " + b2 + " et ajoute " + (plus ? "10" : "100") + ".", a:String(plus ? b2+10 : b2+100) };
+    } }
+];
+
+/* ---------- rendu ---------- */
+var reponses = [];
+function renderBlocs(host, liste, startAt){
+  var num = startAt;
+  host.innerHTML = "";
+  liste.forEach(function(b, i){
+    var el = document.createElement("div");
+    el.className = "bloc";
+    var items = "";
+    for(var k = 0; k < b.n; k++){
+      var it = b.gen();
+      reponses.push({ n:num, a:it.a });
+      items += '<div class="item"><span class="num">' + num + '</span>' +
+               '<span class="txt">' + it.q + '<span class="lg"></span></span></div>';
+      num++;
+    }
+    el.innerHTML =
+      '<div class="bloc-hd"><span class="n">' + (i+1) + '</span><h3></h3></div>' +
+      '<p class="consigne">' + b.c + '</p>' +
+      '<p class="rappel">' + b.r + '</p>' +
+      '<div class="items">' + items + '</div>';
+    el.querySelector("h3").textContent = b.t;
+    host.appendChild(el);
+  });
+  return num;
+}
+function renderKeys(){
+  var host = document.getElementById("keys");
+  host.innerHTML = reponses.map(function(r){
+    return '<div class="key"><span class="num">' + r.n + '</span><span class="val">' + r.a + '</span></div>';
+  }).join("");
+}
+function build(){
+  reponses = [];
+  var next = renderBlocs(document.getElementById("partA"), BLOCS, 1);
+  renderBlocs(document.getElementById("partB"), BLOCS_B, next);
+  renderKeys();
+  document.getElementById("totalLab").textContent = reponses.length;
+}
+build();
+
+/* ---------- commandes ---------- */
+var series = ["A","B","C","D"], iSerie = 0;
+document.getElementById("serie").addEventListener("click", function(){
+  iSerie = (iSerie + 1) % series.length;
+  rand = mulberry32(seed + iSerie * 7919);
+  build();
+  document.getElementById("serieLab").textContent = series[iSerie];
+  var k = document.getElementById("key");
+  document.getElementById("corrige").hidden = true;
+  k.setAttribute("aria-pressed", "false");
+  k.textContent = "🔑 Afficher le corrigé";
+  window.scrollTo({ top:0, behavior:"smooth" });
+});
+document.getElementById("key").addEventListener("click", function(){
+  var on = this.getAttribute("aria-pressed") === "true";
+  document.getElementById("corrige").hidden = on;
+  this.setAttribute("aria-pressed", on ? "false" : "true");
+  this.textContent = on ? "🔑 Afficher le corrigé" : "🙈 Cacher le corrigé";
+  if(!on) document.getElementById("corrige").scrollIntoView({ behavior:"smooth", block:"start" });
+});
+document.getElementById("print").addEventListener("click", function(){ window.print(); });
+})();
+</script>
+</body>
+</html>
