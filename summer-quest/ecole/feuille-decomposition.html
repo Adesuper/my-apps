@@ -61,6 +61,7 @@ body{
 h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.15;margin:0;text-wrap:balance}
 p{margin:0}
 button{font-family:var(--display);cursor:pointer;color:inherit}
+input{font-family:var(--display);color:inherit}
 :focus-visible{outline:3px solid var(--encre);outline-offset:2px;border-radius:8px}
 .wrap{max-width:900px;margin:0 auto;padding-inline:16px}
 
@@ -70,18 +71,22 @@ header h1{font-size:clamp(1.55rem,5vw,2.1rem);margin-top:4px}
 header h1 b{color:var(--marge);font-weight:700}
 .sub{color:var(--ink-soft);font-size:.96rem;margin-top:7px;max-width:66ch}
 .ident{display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;font-family:var(--display);font-size:.9rem;color:var(--ink-faint)}
-.ident span b{color:var(--ink);font-weight:600}
-.ident .fill{display:inline-block;min-width:130px;border-bottom:1.5px dotted var(--rule)}
+.ident b{color:var(--ink);font-weight:600}
+.ident .fill{display:inline-block;min-width:120px;border-bottom:1.5px dotted var(--rule)}
 
 .bar{position:sticky;top:0;z-index:20;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:var(--shadow-sm)}
-.bar-in{display:flex;gap:9px;align-items:center;flex-wrap:wrap;padding-block:11px}
-.bar .lab{font-family:var(--display);font-size:.84rem;color:var(--ink-soft);flex:1 1 200px}
+.bar-in{display:flex;gap:9px;align-items:center;flex-wrap:wrap;padding-block:10px}
+.bar .lab{font-family:var(--display);font-size:.84rem;color:var(--ink-soft);flex:1 1 170px}
+.bar .lab b{color:var(--ink);font-variant-numeric:tabular-nums}
 .btn{font-family:var(--display);font-weight:600;font-size:.88rem;border:1px solid var(--line);background:var(--panel-2);
   padding:8px 14px;border-radius:11px;transition:border-color .12s,transform .1s}
-.btn:hover{border-color:var(--encre)}
-.btn:active{transform:translateY(1px)}
+.btn:hover:not(:disabled){border-color:var(--encre)}
+.btn:active:not(:disabled){transform:translateY(1px)}
 .btn.primary{background:var(--encre);border-color:var(--encre);color:#fff}
+.btn.good{background:var(--vert);border-color:var(--vert);color:#fff}
 .btn.ghost{background:transparent}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.small{font-size:.8rem;padding:6px 11px;border-radius:9px}
 
 main{padding-block:24px 70px}
 .sec-hd{margin:26px 0 12px}
@@ -89,20 +94,40 @@ main{padding-block:24px 70px}
 .sec-hd h2{font-size:1.32rem;margin-top:2px}
 .sec-hd p{color:var(--ink-soft);font-size:.95rem;margin-top:4px;max-width:64ch}
 
-.bloc{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:15px 16px 13px;margin-bottom:14px;box-shadow:var(--shadow-sm)}
+.bloc{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:15px 16px 12px;margin-bottom:14px;box-shadow:var(--shadow-sm)}
+.bloc.fini{border-color:var(--vert)}
 .bloc-hd{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-bottom:5px}
 .bloc-hd .n{font-family:var(--display);font-weight:800;font-size:.78rem;color:#fff;background:var(--encre);padding:3px 9px;border-radius:8px}
-.bloc-hd h3{font-size:1.02rem}
+.bloc-hd h3{font-size:1.02rem;flex:1 1 auto}
 .consigne{font-family:var(--hand);font-size:1.26rem;color:var(--marge);line-height:1.3;margin-bottom:3px}
 .rappel{font-size:.88rem;color:var(--ink-soft);border-left:3px solid var(--craie);padding-left:10px;margin-bottom:11px}
 .rappel b{color:var(--ink)}
 
-.items{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:4px 22px}
-.item{display:flex;gap:8px;align-items:baseline;padding:5px 0;border-bottom:1px dotted var(--line)}
-.item .num{font-family:var(--display);font-weight:700;font-size:.82rem;color:var(--ink-faint);flex:0 0 26px;font-variant-numeric:tabular-nums}
-.item .txt{font-family:var(--display);font-size:1rem;flex:1 1 auto}
-.item .lg{display:inline-block;min-width:66px;border-bottom:1.5px dotted var(--rule);margin-left:4px}
+.items{display:grid;grid-template-columns:repeat(auto-fit,minmax(288px,1fr));gap:2px 20px}
+.item{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px dotted var(--line)}
+.item .num{font-family:var(--display);font-weight:700;font-size:.82rem;color:var(--ink-faint);flex:0 0 24px;font-variant-numeric:tabular-nums;padding-top:5px}
+.item .body{flex:1 1 auto;min-width:0}
+.item .txt{font-family:var(--display);font-size:.99rem;display:block}
+.rep{
+  width:100%;margin-top:4px;padding:7px 10px;font-size:1rem;font-weight:600;
+  border:1.5px solid var(--rule);border-radius:9px;background:var(--panel-2);
+}
+.rep:focus{border-color:var(--encre);outline:none}
+.rep.ok{border-color:var(--vert);background:var(--vert-soft)}
+.rep.no{border-color:var(--marge);background:var(--craie-soft)}
+.rep:disabled{opacity:1}
+.verdict{display:block;font-family:var(--display);font-size:.86rem;font-weight:600;margin-top:3px}
+.verdict.ok{color:var(--vert)}
+.verdict.no{color:var(--marge)}
+.verdict .vrai{color:var(--vert)}
+.selfbtns{display:flex;gap:6px;margin-top:5px;flex-wrap:wrap}
 
+.bloc-ft{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:11px;padding-top:9px;border-top:1px solid var(--line)}
+.bloc-ft .cnt{font-family:var(--display);font-size:.82rem;color:var(--ink-faint);flex:1 1 130px;font-variant-numeric:tabular-nums}
+.bloc-ft .cnt.ready{color:var(--vert);font-weight:700}
+.bloc-ft .res{font-family:var(--display);font-weight:700;font-size:.88rem;color:var(--vert)}
+
+.note{font-family:var(--hand);font-size:1.26rem;line-height:1.35;color:var(--marge);border-left:3px solid var(--marge-soft);padding:4px 0 4px 13px;margin:18px 0}
 .corrige{background:var(--panel);border:2px dashed var(--vert);border-radius:16px;padding:16px;margin-top:26px}
 .corrige h2{font-size:1.16rem;color:var(--vert)}
 .corrige p.int{font-size:.9rem;color:var(--ink-soft);margin-top:3px}
@@ -110,7 +135,6 @@ main{padding-block:24px 70px}
 .key{display:flex;gap:7px;align-items:baseline;font-family:var(--display);font-size:.92rem;padding:3px 0;border-bottom:1px dotted var(--line)}
 .key .num{font-weight:700;color:var(--ink-faint);flex:0 0 26px;font-variant-numeric:tabular-nums}
 .key .val{color:var(--vert);font-weight:600}
-.note{font-family:var(--hand);font-size:1.26rem;line-height:1.35;color:var(--marge);border-left:3px solid var(--marge-soft);padding:4px 0 4px 13px;margin:18px 0}
 footer{border-top:1px solid var(--line);margin-top:30px;padding-top:14px;font-size:.84rem;color:var(--ink-faint)}
 
 @media print{
@@ -119,8 +143,7 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding-top:14px;font-si
   .bar{display:none}
   .bloc{box-shadow:none;border-color:#bbb;page-break-inside:avoid;margin-bottom:9px}
   .corrige{page-break-before:always;border-color:#666}
-  .items{gap:2px 18px}
-  .item{padding:7px 0}
+  .rep{border:none;border-bottom:1.5px dotted #999;border-radius:0;background:none;min-height:22px}
   header.top{border-bottom:2px solid #000}
 }
 </style>
@@ -131,22 +154,22 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding-top:14px;font-si
   <div class="wrap">
     <p class="eyebrow">3<sup>e</sup> année &middot; cahier Zig Zag &middot; nombres jusqu'à 500</p>
     <h1>La grande feuille de <b>décomposition</b></h1>
-    <p class="sub">Toutes les sortes de questions du cahier, d'un seul coup : les neuf façons de décomposer un nombre, puis lire et écrire les nombres jusqu'à 500. Le corrigé complet est à la fin — caché tant que vous ne l'affichez pas.</p>
+    <p class="sub">Toutes les sortes de questions du cahier, d'un seul coup. Écris tes réponses dans les cases. Quand un bloc est <b>rempli au complet</b>, le bouton « Corriger » s'allume et tu vois tout de suite ce qui est bon.</p>
     <p class="ident">
-      <span>Nom : <span class="fill"></span></span>
-      <span>Date : <span class="fill"></span></span>
       <span>Série : <b id="serieLab">A</b></span>
       <span>Questions : <b id="totalLab">—</b></span>
+      <span>Bonnes réponses : <b id="scoreLab">—</b></span>
     </p>
   </div>
 </header>
 
 <nav class="bar noprint">
   <div class="wrap bar-in">
-    <span class="lab">Il répond d'abord, sur la feuille. Vous affichez le corrigé ensuite.</span>
+    <span class="lab">Remplies : <b id="fillLab">0 / 0</b></span>
+    <button class="btn good" id="checkAll" disabled>✅ Tout corriger</button>
     <button class="btn" id="serie">🔄 Autre série</button>
     <button class="btn ghost" id="print">🖨️ Imprimer</button>
-    <button class="btn primary" id="key" aria-pressed="false">🔑 Afficher le corrigé</button>
+    <button class="btn ghost" id="key" aria-pressed="false">🔑 Corrigé (parent)</button>
   </div>
 </nav>
 
@@ -162,27 +185,27 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding-top:14px;font-si
   <div class="sec-hd">
     <p class="k">Partie B</p>
     <h2>Lire et écrire les nombres jusqu'à 500</h2>
-    <p>Ce que l'enseignante demande cette semaine. À faire à voix haute d'abord, puis par écrit.</p>
+    <p>Ce que l'enseignante demande cette semaine. À dire à voix haute d'abord, puis à écrire.</p>
   </div>
   <div id="partB"></div>
 
-  <p class="note">S'il fait plus de deux erreurs dans un même bloc, arrêtez ce bloc et reprenez l'exemple du cahier ensemble. Une feuille finie à moitié mais comprise vaut mieux qu'une feuille finie au complet.</p>
+  <p class="note">S'il fait plus de deux erreurs dans un même bloc, arrêtez ce bloc et reprenez l'exemple ensemble. Une feuille faite à moitié mais comprise vaut mieux qu'une feuille finie au complet.</p>
 
-  <div class="corrige" id="corrige" hidden>
-    <h2>🔑 Corrigé</h2>
+  <div class="corrige noprint" id="corrige" hidden>
+    <h2>🔑 Corrigé complet</h2>
     <p class="int">Pour le parent. Les réponses suivent la numérotation de la feuille.</p>
     <div class="keys" id="keys"></div>
   </div>
 
-  <footer>La grande feuille de décomposition &middot; à refaire avec « Autre série » autant de fois qu'il le faut &middot; complément du <b>cahier d'Israel</b>.</footer>
+  <footer>La grande feuille de décomposition &middot; ses réponses sont gardées sur cet appareil &middot; complément du <b>cahier d'Israel</b>.</footer>
 </main>
 
 <script>
 (function(){
 "use strict";
 
-/* ---------- générateur reproductible : le même lien donne la même feuille ---------- */
-var seed = 20260914;
+/* ---------- générateur reproductible ---------- */
+var seed = 20260914, iSerie = 0, series = ["A","B","C","D"];
 function mulberry32(a){
   return function(){
     a |= 0; a = a + 0x6D2B79F5 | 0;
@@ -220,14 +243,15 @@ function frNum(n){
   return (h === 1 ? "cent" : U[h] + " cent") + " " + sub100(r);
 }
 function cdu(n){ return [Math.floor(n/100), Math.floor((n%100)/10), n%10]; }
-function dev(n){
+function parts(n){
   var p = cdu(n), out = [];
   if(p[0]) out.push(p[0]*100);
   if(p[1]) out.push(p[1]*10);
   if(p[2]) out.push(p[2]);
   if(!out.length) out.push(0);
-  return out.join(" + ");
+  return out;
 }
+function dev(n){ return parts(n).join(" + "); }
 function pl(n, mot){ return n + " " + mot + (n > 1 ? "s" : ""); }
 function distinct(){
   var n, p;
@@ -236,157 +260,343 @@ function distinct(){
   return n;
 }
 
-/* ---------- les 9 types + les 3 types de la partie B ---------- */
+/* ---------- comparaison des réponses ---------- */
+function nums(str){
+  var m = String(str).match(/\d+/g);
+  return m ? m.map(Number) : [];
+}
+function sameSeq(a,b){
+  if(a.length !== b.length) return false;
+  for(var i = 0; i < a.length; i++){ if(a[i] !== b[i]) return false; }
+  return true;
+}
+function sameSet(a,b){
+  var x = a.slice().sort(function(p,q){ return p-q; });
+  var y = b.slice().sort(function(p,q){ return p-q; });
+  return sameSeq(x,y);
+}
+function norm(s){
+  return String(s).toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/[^a-z0-9]/g,"");
+}
+function juste(item, saisie){
+  if(!saisie || !saisie.trim()) return false;
+  if(item.mode === "vf"){
+    var vv = norm(saisie), att = norm(item.alts[0]);
+    var dit = vv === "v" || vv.indexOf("vrai") === 0 ? "vrai"
+            : (vv === "f" || vv.indexOf("faux") === 0 ? "faux" : "");
+    return dit !== "" && dit === att;
+  }
+  if(item.mode === "txt"){
+    var v = norm(saisie);
+    return item.alts.some(function(a){ return v === norm(a); });
+  }
+  var got = nums(saisie);
+  if(!got.length) return false;
+  return item.alts.some(function(a){
+    return item.ordre === false ? sameSet(got, a) : sameSeq(got, a);
+  });
+}
+
+/* ---------- les blocs ---------- */
 var BLOCS = [
   { t:"Décomposer en centaines, dizaines et unités", n:8,
     c:"« Décompose le nombre en centaines, dizaines et unités. »",
     r:"On lit les chiffres <b>de droite à gauche</b> : unités, dizaines, centaines. On écrit toujours dans l'ordre c + d + u.",
+    ph:"ex. 3 c + 4 d + 7 u",
     gen:function(){ var n = rnd(101,500), p = cdu(n);
-      return { q:"Décompose " + n + " : ___ c + ___ d + ___ u", a:p[0] + " c + " + p[1] + " d + " + p[2] + " u" }; } },
+      return { q:"Décompose " + n + " : ___ c + ___ d + ___ u",
+               a:p[0] + " c + " + p[1] + " d + " + p[2] + " u", alts:[[p[0],p[1],p[2]]] }; } },
 
   { t:"Écrire sous la forme d'une addition", n:8,
     c:"« Écris le nombre sous la forme d'une addition. »",
     r:"Centaines ×100, dizaines ×10, unités ×1. <b>Un zéro ne s'écrit pas</b> : 305 = 300 + 5.",
+    ph:"ex. 300 + 40 + 7",
     gen:function(){ var n = rand() < 0.3 ? rnd(1,4)*100 + rnd(1,9) : rnd(101,500);
-      return { q:"Écris " + n + " sous la forme d'une addition.", a:n + " = " + dev(n) }; } },
+      return { q:"Écris " + n + " sous la forme d'une addition.",
+               a:n + " = " + dev(n), alts:[parts(n), [n].concat(parts(n))], ordre:false }; } },
 
   { t:"Recomposer : retrouver le nombre", n:8,
     c:"« Quel nombre est-ce ? »",
     r:"On replace chaque valeur dans sa boîte. <b>Attention à la boîte vide</b> : 4 c + 0 d + 9 u = 409, pas 49.",
+    ph:"le nombre",
     gen:function(){ var n = rnd(101,500), p = cdu(n);
       var q = rand() < 0.5 ? p[0] + " c + " + p[1] + " d + " + p[2] + " u = ___" : dev(n) + " = ___";
-      return { q:q, a:n + " — " + frNum(n) }; } },
+      return { q:q, a:n + " — " + frNum(n), alts:[[n]] }; } },
 
   { t:"La valeur d'un chiffre", n:8,
     c:"« Quelle est la valeur du chiffre ___ dans ce nombre ? »",
     r:"Le <b>chiffre</b> est le symbole (4). La <b>valeur</b> est ce qu'il vaut à sa place (40).",
+    ph:"ex. 40",
     gen:function(){ var n = distinct(), p = cdu(n), i = rnd(0,2);
       var noms = ["centaine","dizaine","unité"], val = [p[0]*100, p[1]*10, p[2]];
       return { q:"Dans " + n + ", quelle est la valeur du chiffre " + p[i] + " ?",
-               a:val[i] + " (" + pl(p[i], noms[i]) + ")" }; } },
+               a:val[i] + " (" + pl(p[i], noms[i]) + ")", alts:[[val[i]], [val[i], p[i]]] }; } },
 
   { t:"Décomposer autrement : l'échange", n:8,
     c:"« Complète : 347 = 2 c + ___ d + 7 u »",
     r:"<b>1 centaine = 10 dizaines.</b> Si on enlève une centaine, on ajoute 10 dizaines.",
+    ph:"ex. 14",
     gen:function(){
       var p = cdu(rnd(150,500)); if(p[0] < 2) p[0] = 2;
       var n = p[0]*100 + p[1]*10 + p[2];
       if(rand() < 0.55){
-        return { q:"Complète : " + n + " = " + (p[0]-1) + " c + ___ d + " + p[2] + " u", a:(p[1]+10) + " dizaines" };
+        return { q:"Complète : " + n + " = " + (p[0]-1) + " c + ___ d + " + p[2] + " u",
+                 a:(p[1]+10) + " dizaines", alts:[[p[1]+10]] };
       }
       var vrai = rand() < 0.5, prop = vrai ? (p[1]+10) : (p[1]+10+rnd(1,3));
       return { q:"Vrai ou faux ? " + n + " = " + (p[0]-1) + " c + " + prop + " d + " + p[2] + " u",
-               a:vrai ? "Vrai" : "Faux — il faut " + (p[1]+10) + " dizaines" }; } },
+               a:vrai ? "Vrai" : "Faux — il faut " + (p[1]+10) + " dizaines",
+               alts:[vrai ? "vrai" : "faux"], mode:"vf" }; } },
 
   { t:"Le terme qui manque", n:8,
     c:"« Complète : 347 = 300 + ___ + 7 »",
     r:"On décompose dans sa tête, on regarde ce qui est déjà écrit, on écrit <b>seulement ce qui manque</b>.",
+    ph:"ex. 40",
     gen:function(){
       var n, p;
       do { n = rnd(111,500); p = cdu(n); } while(p[1] === 0 || p[2] === 0);
-      var i = rnd(0,2), parts = [p[0]*100, p[1]*10, p[2]];
-      var aff = parts.map(function(v,j){ return j === i ? "___" : v; });
-      return { q:"Complète : " + n + " = " + aff.join(" + "), a:String(parts[i]) }; } },
+      var i = rnd(0,2), pt = [p[0]*100, p[1]*10, p[2]];
+      var aff = pt.map(function(v,j){ return j === i ? "___" : v; });
+      return { q:"Complète : " + n + " = " + aff.join(" + "), a:String(pt[i]), alts:[[pt[i]]] }; } },
 
   { t:"Du nombre écrit en lettres", n:8,
     c:"« Écris en chiffres, puis décompose. »",
     r:"D'abord les centaines entendues, puis la fin du mot. On écrit le nombre <b>avant</b> de décomposer.",
+    ph:"ex. 347 = 300 + 40 + 7",
     gen:function(){ var n = rnd(101,500);
-      return { q:"« " + frNum(n) + " » → ___ , puis décompose", a:n + " = " + dev(n) }; } },
+      return { q:"« " + frNum(n) + " » = ___ , puis décompose",
+               a:n + " = " + dev(n),
+               alts:[[n].concat(parts(n)), [n], parts(n)] }; } },
 
   { t:"Avec le matériel base 10", n:8,
     c:"« Combien de plaques, de barres et de cubes ? »",
     r:"Une <b>plaque</b> = 100, une <b>barre</b> = 10, un <b>cube</b> = 1.",
+    ph:"ex. 3 plaques, 4 barres, 7 cubes",
     gen:function(){ var n = rnd(101,500), p = cdu(n);
       return { q:"Pour " + n + " : ___ plaques, ___ barres, ___ cubes",
-               a:pl(p[0],"plaque") + ", " + pl(p[1],"barre") + ", " + pl(p[2],"cube") }; } },
+               a:pl(p[0],"plaque") + ", " + pl(p[1],"barre") + ", " + pl(p[2],"cube"),
+               alts:[[p[0],p[1],p[2]]] }; } },
 
   { t:"Plusieurs décompositions du même nombre", n:6,
     c:"« Trouve deux façons différentes de décomposer ce nombre. »",
     r:"<b>Toute addition qui redonne le nombre est bonne.</b> C'est le but de la question.",
+    ph:"ex. 300 + 47  et  340 + 7",
     gen:function(){ var n = rnd(120,500), p = cdu(n);
       var a = dev(n) + " · " + (p[0]*100 + p[1]*10) + " + " + p[2] +
               " · " + (p[0]*100) + " + " + (p[1]*10 + p[2]) +
               " · " + ((p[0]-1)*100) + " + " + (100 + p[1]*10 + p[2]);
-      return { q:"Deux décompositions différentes de " + n + " :", a:a + " — ou toute autre somme juste" }; } }
+      return { q:"Deux décompositions différentes de " + n + " :",
+               a:a + " — ou toute autre somme juste", mode:"self", cible:n }; } }
 ];
 
 var BLOCS_B = [
   { t:"Écrire le nombre en lettres", n:6,
     c:"« Écris ce nombre en lettres. »",
     r:"Attention aux <b>70 et 90</b> (soixante-dix, quatre-vingt-dix) et au <b>s de cents</b> : 300 = trois cents, mais 347 = trois cent quarante-sept.",
+    ph:"ex. trois cent quarante-sept",
     gen:function(){ var n = rand() < 0.4 ? rnd(60,99) : rnd(101,500);
-      return { q:n + " s'écrit :", a:frNum(n) }; } },
+      return { q:n + " s'écrit :", a:frNum(n), alts:[frNum(n)], mode:"txt" }; } },
 
   { t:"Écrire le nombre en chiffres", n:6,
     c:"« Écris ce nombre en chiffres. »",
     r:"On écoute les centaines, puis les dizaines, puis les unités. Le <b>zéro du milieu</b> se place quand même : trois cent cinq = 305.",
+    ph:"ex. 305",
     gen:function(){ var n = rand() < 0.25 ? rnd(1,4)*100 + rnd(1,9) : rnd(101,500);
-      return { q:"« " + frNum(n) + " » s'écrit :", a:String(n) }; } },
+      return { q:"« " + frNum(n) + " » s'écrit :", a:String(n), alts:[[n]] }; } },
 
   { t:"Devinettes de nombres", n:6,
     c:"« Je pense à un nombre… Quel est-il ? »",
     r:"On dessine les trois boîtes et on place ce que la devinette donne. <b>+10</b> ne change que les dizaines, <b>+100</b> que les centaines.",
+    ph:"le nombre",
     gen:function(){
       var k = rnd(1,3);
       if(k === 1){
-        var c = rnd(1,4), d = rnd(0,9), u = rnd(0,9);
+        var c = rnd(1,4), d = rnd(0,9), u = rnd(0,9), n1 = c*100 + d*10 + u;
         return { q:"Je pense à un nombre entre " + (c*100) + " et " + (c*100+100) + ". Il a " + d +
                    " dizaine" + (d>1?"s":"") + " et " + u + " unité" + (u>1?"s":"") + ".",
-                 a:String(c*100 + d*10 + u) };
+                 a:String(n1), alts:[[n1]] };
       }
       if(k === 2){
-        var b = rnd(1,499), after = rand() < 0.5;
-        return { q:"Je viens juste " + (after ? "après" : "avant") + " " + b + ".", a:String(after ? b+1 : b-1) };
+        var b = rnd(1,499), after = rand() < 0.5, n2 = after ? b+1 : b-1;
+        return { q:"Je viens juste " + (after ? "après" : "avant") + " " + b + ".", a:String(n2), alts:[[n2]] };
       }
-      var b2 = rnd(0,390), plus = rand() < 0.5;
-      return { q:"Prends " + b2 + " et ajoute " + (plus ? "10" : "100") + ".", a:String(plus ? b2+10 : b2+100) };
+      var b2 = rnd(0,390), plus = rand() < 0.5, n3 = plus ? b2+10 : b2+100;
+      return { q:"Prends " + b2 + " et ajoute " + (plus ? "10" : "100") + ".", a:String(n3), alts:[[n3]] };
     } }
 ];
 
+/* ---------- mémoire des réponses ---------- */
+function lsKey(){ return "feuille3e:" + series[iSerie]; }
+var saisies = {};
+function loadSaisies(){
+  saisies = {};
+  try{ var r = localStorage.getItem(lsKey()); if(r) saisies = JSON.parse(r) || {}; }catch(e){}
+}
+function saveSaisies(){
+  try{ localStorage.setItem(lsKey(), JSON.stringify(saisies)); }catch(e){}
+}
+
 /* ---------- rendu ---------- */
-var reponses = [];
+var ITEMS = [];
 function renderBlocs(host, liste, startAt){
   var num = startAt;
   host.innerHTML = "";
   liste.forEach(function(b, i){
     var el = document.createElement("div");
     el.className = "bloc";
-    var items = "";
+    var mine = [];
+    var html = "";
     for(var k = 0; k < b.n; k++){
       var it = b.gen();
-      reponses.push({ n:num, a:it.a });
-      items += '<div class="item"><span class="num">' + num + '</span>' +
-               '<span class="txt">' + it.q + '<span class="lg"></span></span></div>';
+      it.n = num; it.mode = it.mode || "num"; it.bloc = el;
+      ITEMS.push(it); mine.push(it);
+      html += '<div class="item"><span class="num">' + num + '</span><div class="body">' +
+              '<span class="txt">' + it.q + '</span>' +
+              '<input class="rep" id="r' + num + '" type="text" autocomplete="off" ' +
+              'autocapitalize="off" spellcheck="false" placeholder="' + (b.ph || "") + '" ' +
+              'aria-label="Réponse à la question ' + num + '">' +
+              '<span class="verdict" hidden></span>' +
+              '</div></div>';
       num++;
     }
     el.innerHTML =
       '<div class="bloc-hd"><span class="n">' + (i+1) + '</span><h3></h3></div>' +
       '<p class="consigne">' + b.c + '</p>' +
       '<p class="rappel">' + b.r + '</p>' +
-      '<div class="items">' + items + '</div>';
+      '<div class="items">' + html + '</div>' +
+      '<div class="bloc-ft noprint"><span class="cnt"></span>' +
+      '<span class="res" hidden></span>' +
+      '<button class="btn small good b-check" disabled>✅ Corriger ce bloc</button></div>';
     el.querySelector("h3").textContent = b.t;
+
+    var cnt = el.querySelector(".cnt"), btn = el.querySelector(".b-check");
+    function refresh(){
+      var f = mine.filter(function(it){
+        var v = document.getElementById("r" + it.n);
+        return v && v.value.trim() !== "";
+      }).length;
+      cnt.textContent = f + " / " + mine.length + " remplies";
+      cnt.className = "cnt" + (f === mine.length ? " ready" : "");
+      btn.disabled = f < mine.length;
+      btn.textContent = f < mine.length ? "Remplis tout le bloc" : "✅ Corriger ce bloc";
+      majGlobal();
+    }
+    mine.forEach(function(it){
+      var input = el.querySelector("#r" + it.n);
+      if(saisies[it.n] != null) input.value = saisies[it.n];
+      input.addEventListener("input", function(){
+        saisies[it.n] = input.value; saveSaisies();
+        input.className = "rep";
+        var v = input.parentNode.querySelector(".verdict");
+        v.hidden = true; v.innerHTML = "";
+        refresh();
+      });
+      input.addEventListener("keydown", function(e){
+        if(e.key === "Enter"){
+          var nx = document.getElementById("r" + (it.n + 1));
+          if(nx) nx.focus();
+        }
+      });
+    });
+    btn.addEventListener("click", function(){ corriger(mine, el); });
+    el.__refresh = refresh;
     host.appendChild(el);
+    refresh();
   });
   return num;
 }
+
+function corriger(liste, el){
+  var bons = 0;
+  liste.forEach(function(it){
+    var input = document.getElementById("r" + it.n);
+    var v = input.parentNode.querySelector(".verdict");
+    if(it.mode === "self"){
+      input.className = "rep";
+      v.hidden = false;
+      v.className = "verdict";
+      v.innerHTML = 'Réponses possibles : <span class="vrai">' + it.a + '</span>';
+      if(!v.querySelector(".selfbtns")){
+        var box = document.createElement("span");
+        box.className = "selfbtns";
+        var b1 = document.createElement("button");
+        b1.className = "btn small good"; b1.textContent = "J'avais bon";
+        var b2 = document.createElement("button");
+        b2.className = "btn small ghost"; b2.textContent = "Pas tout à fait";
+        b1.addEventListener("click", function(){
+          it.ok = true; input.className = "rep ok"; box.remove(); majGlobal();
+        });
+        b2.addEventListener("click", function(){
+          it.ok = false; input.className = "rep no"; box.remove(); majGlobal();
+        });
+        box.appendChild(b1); box.appendChild(b2);
+        v.appendChild(box);
+      }
+      return;
+    }
+    var ok = juste(it, input.value);
+    it.ok = ok;
+    if(ok) bons++;
+    input.className = "rep " + (ok ? "ok" : "no");
+    v.hidden = false;
+    v.className = "verdict " + (ok ? "ok" : "no");
+    v.textContent = ok ? "✓ Bravo" : "✗ La réponse : " + it.a;
+  });
+  if(el){
+    var res = el.querySelector(".res");
+    var notes = liste.filter(function(it){ return it.mode !== "self"; }).length;
+    if(notes){
+      res.hidden = false;
+      res.textContent = bons + " / " + notes;
+      res.style.color = bons === notes ? "var(--vert)" : (bons >= notes/2 ? "var(--craie)" : "var(--marge)");
+    }
+    el.className = "bloc fini";
+  }
+  majGlobal();
+}
+
+function majGlobal(){
+  var f = 0, ok = 0, notes = 0;
+  ITEMS.forEach(function(it){
+    var input = document.getElementById("r" + it.n);
+    if(input && input.value.trim() !== "") f++;
+    if(it.ok === true) ok++;
+    if(it.ok != null) notes++;
+  });
+  document.getElementById("fillLab").textContent = f + " / " + ITEMS.length;
+  document.getElementById("checkAll").disabled = f < ITEMS.length;
+  document.getElementById("scoreLab").textContent = notes ? (ok + " / " + notes) : "—";
+}
+
 function renderKeys(){
-  var host = document.getElementById("keys");
-  host.innerHTML = reponses.map(function(r){
-    return '<div class="key"><span class="num">' + r.n + '</span><span class="val">' + r.a + '</span></div>';
+  document.getElementById("keys").innerHTML = ITEMS.map(function(it){
+    return '<div class="key"><span class="num">' + it.n + '</span><span class="val">' + it.a + '</span></div>';
   }).join("");
 }
+
 function build(){
-  reponses = [];
+  ITEMS = [];
+  loadSaisies();
   var next = renderBlocs(document.getElementById("partA"), BLOCS, 1);
   renderBlocs(document.getElementById("partB"), BLOCS_B, next);
   renderKeys();
-  document.getElementById("totalLab").textContent = reponses.length;
+  document.getElementById("totalLab").textContent = ITEMS.length;
+  majGlobal();
 }
 build();
 
 /* ---------- commandes ---------- */
-var series = ["A","B","C","D"], iSerie = 0;
+document.getElementById("checkAll").addEventListener("click", function(){
+  var parBloc = {};
+  ITEMS.forEach(function(it){
+    var id = it.bloc.__id || (it.bloc.__id = Math.random());
+    (parBloc[id] = parBloc[id] || { el:it.bloc, liste:[] }).liste.push(it);
+  });
+  Object.keys(parBloc).forEach(function(k){ corriger(parBloc[k].liste, parBloc[k].el); });
+  window.scrollTo({ top:0, behavior:"smooth" });
+});
 document.getElementById("serie").addEventListener("click", function(){
   iSerie = (iSerie + 1) % series.length;
   rand = mulberry32(seed + iSerie * 7919);
@@ -395,14 +605,14 @@ document.getElementById("serie").addEventListener("click", function(){
   var k = document.getElementById("key");
   document.getElementById("corrige").hidden = true;
   k.setAttribute("aria-pressed", "false");
-  k.textContent = "🔑 Afficher le corrigé";
+  k.textContent = "🔑 Corrigé (parent)";
   window.scrollTo({ top:0, behavior:"smooth" });
 });
 document.getElementById("key").addEventListener("click", function(){
   var on = this.getAttribute("aria-pressed") === "true";
   document.getElementById("corrige").hidden = on;
   this.setAttribute("aria-pressed", on ? "false" : "true");
-  this.textContent = on ? "🔑 Afficher le corrigé" : "🙈 Cacher le corrigé";
+  this.textContent = on ? "🔑 Corrigé (parent)" : "🙈 Cacher le corrigé";
   if(!on) document.getElementById("corrige").scrollIntoView({ behavior:"smooth", block:"start" });
 });
 document.getElementById("print").addEventListener("click", function(){ window.print(); });
