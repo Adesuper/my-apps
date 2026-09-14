@@ -279,6 +279,28 @@ hr.rule{border:none;border-top:1px solid var(--line);margin:0}
 .steps.solved li:last-child{color:var(--vert);font-weight:600}
 .citation{font-family:var(--hand);font-size:1.35rem;color:var(--encre);line-height:1.3}
 
+/* ============ types de questions (Zig Zag) ============ */
+.type{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:17px 17px 15px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:11px}
+.type-hd{display:flex;align-items:center;gap:10px}
+.tnum{font-family:var(--display);font-weight:800;font-size:.82rem;color:#fff;background:var(--encre);width:27px;height:27px;border-radius:9px;display:grid;place-content:center;flex:0 0 27px}
+.type-hd h3{font-size:1.06rem}
+.consigne-std{font-family:var(--hand);font-size:1.34rem;color:var(--marge);line-height:1.3}
+.method h4,.worked h4{font-family:var(--display);font-size:.71rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:5px;font-weight:700}
+.method ol{margin:0;padding-left:18px}
+.method li{font-size:.94rem;color:var(--ink-soft);margin-bottom:3px}
+.method li b{color:var(--ink)}
+.worked{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+.worked .ww{font-family:var(--display);font-size:1.02rem;line-height:1.55}
+.worked .ww b{color:var(--encre)}
+.worked .ww em{font-style:normal;color:var(--vert);font-weight:700}
+.qs{display:flex;flex-direction:column;gap:6px}
+.q{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;border-bottom:1px dotted var(--line);padding-bottom:6px}
+.qn{font-family:var(--display);font-weight:700;color:var(--ink-faint);flex:0 0 24px}
+.qt{font-family:var(--display);font-size:1.05rem;flex:1 1 200px}
+.qa{font-family:var(--display);font-weight:700;color:var(--vert);background:var(--vert-soft);padding:2px 11px;border-radius:99px;font-size:.93rem;margin-left:auto}
+.keybar{display:flex;gap:9px;flex-wrap:wrap;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:11px 14px;position:sticky;top:58px;z-index:10;box-shadow:var(--shadow-sm)}
+.keybar .lab{font-family:var(--display);font-size:.84rem;color:var(--ink-soft);flex:1 1 180px}
+
 /* ============ vocabulaire ============ */
 .mot{font-family:var(--display);font-weight:800;font-size:clamp(2rem,9vw,3.1rem);text-align:center;line-height:1.1}
 .phrase{text-align:center;color:var(--ink-soft);font-size:1.02rem;max-width:46ch;margin-inline:auto}
@@ -374,11 +396,11 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;font-si
 /* ============ impression ============ */
 @media print{
   .tabs,.noprint{display:none!important}
-  body{background:#fff;color:#000;font-size:11.5pt}
-  section[hidden]{display:block!important}
+  body{background:#fff;color:#000;font-size:11.5pt;background-image:none}
+  .keybar{position:static}
   .ardoise,.day,.etape,.texte,.progress{box-shadow:none;border-color:#bbb}
   .sheet{border-left:none;padding-left:0}
-  #tab-semaine{page-break-after:always}
+  .type{page-break-inside:avoid}
 }
 </style>
 </head>
@@ -400,6 +422,7 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;font-si
   <div class="wrap tabs-in" role="tablist">
     <button class="tab" role="tab" id="t-semaine" data-tab="semaine" aria-selected="true" aria-controls="tab-semaine">📅 La semaine</button>
     <button class="tab" role="tab" id="t-nombres" data-tab="nombres" aria-selected="false" aria-controls="tab-nombres">🔢 Nombres 0–500</button>
+    <button class="tab" role="tab" id="t-decomp" data-tab="decomp" aria-selected="false" aria-controls="tab-decomp">🧩 Décomposition</button>
     <button class="tab" role="tab" id="t-vocab" data-tab="vocab" aria-selected="false" aria-controls="tab-vocab">🧀 Vocabulaire</button>
     <button class="tab" role="tab" id="t-verbes" data-tab="verbes" aria-selected="false" aria-controls="tab-verbes">🇫🇷 Les 5 verbes</button>
     <button class="tab" role="tab" id="t-lecture" data-tab="lecture" aria-selected="false" aria-controls="tab-lecture">📖 Lecture &amp; liaisons</button>
@@ -542,6 +565,27 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;font-si
       <div class="et"><p class="n">LE PIÈGE 2</p><p><b>Le zéro au milieu.</b> 305 = <em>trois cent cinq</em>, et non « trente-cinq ». Faites-lui montrer les 0 dizaines.</p></div>
       <div class="et"><p class="n">LE PIÈGE 3</p><p><b>Le s de « cents ».</b> 300 = <em>trois cents</em>, mais 347 = <em>trois cent quarante-sept</em>, sans s.</p></div>
     </div>
+  </div>
+</section>
+
+<!-- ================= DÉCOMPOSITION (ZIG ZAG) ================= -->
+<section id="tab-decomp" role="tabpanel" aria-labelledby="t-decomp" hidden>
+  <div class="stack">
+    <div class="stack-sm">
+      <h2 class="sec">Décomposer les nombres — les 9 questions du Zig Zag</h2>
+      <p class="lede">C'est ce qu'il travaille en ce moment. Le cahier pose toujours les mêmes neuf sortes de questions : ici, chacune est écrite <b>comme elle apparaît dans le cahier</b>, avec la méthode, un exemple fait en entier, puis des questions à faire. Les réponses restent cachées tant que vous ne les affichez pas.</p>
+    </div>
+
+    <div class="keybar noprint">
+      <span class="lab">Il répond d'abord — sur papier ou à voix haute. Vous corrigez ensuite.</span>
+      <button class="btn small" id="allNew">🔄 Toutes nouvelles questions</button>
+      <button class="btn small primary" id="allKey" aria-pressed="false">🔑 Afficher toutes les réponses</button>
+      <button class="btn small ghost" id="printDecomp">🖨️ Imprimer la feuille</button>
+    </div>
+
+    <p class="note"><b>Le vocabulaire à employer avec lui :</b> le <b>chiffre</b>, c'est le symbole (le 4). La <b>valeur</b>, c'est ce qu'il vaut à sa place (40). Une <b>centaine</b> = 10 dizaines = 100 unités. C'est cette phrase-là qui débloque les questions 5 et 6.</p>
+
+    <div class="stack" id="types"></div>
   </div>
 </section>
 
@@ -938,7 +982,7 @@ function pickNum(){
 }
 
 /* =============== onglets =============== */
-var TABS = ["semaine","nombres","vocab","verbes","lecture","fiche","annee"];
+var TABS = ["semaine","nombres","decomp","vocab","verbes","lecture","fiche","annee"];
 function go(name){
   TABS.forEach(function(t){
     var btn = document.getElementById("t-"+t), sec = document.getElementById("tab-"+t);
@@ -1430,6 +1474,221 @@ function newVb(){
 }
 document.getElementById("vbNext").addEventListener("click", newVb);
 
+/* =============== decomposition - les 9 types du Zig Zag =============== */
+function dev(n){
+  var c = Math.floor(n/100), d = Math.floor((n%100)/10), u = n%10, out = [];
+  if(c) out.push(c*100);
+  if(d) out.push(d*10);
+  if(u) out.push(u);
+  if(!out.length) out.push(0);
+  return out.join(" + ");
+}
+function cdu(n){ return [Math.floor(n/100), Math.floor((n%100)/10), n%10]; }
+function pl(n, mot){ return n + " " + mot + (n > 1 ? "s" : ""); }
+function nDistinct(){
+  var n, p;
+  do { n = rnd(102,498); p = cdu(n); }
+  while(p[0] === p[1] || p[1] === p[2] || p[0] === p[2]);
+  return n;
+}
+
+var DEC = [
+  { t:"Décomposer en centaines, dizaines et unités",
+    c:"« Décompose le nombre 347 en centaines, dizaines et unités. »",
+    m:["Je regarde le chiffre le plus à droite : ce sont les <b>unités</b>.",
+       "Le suivant, vers la gauche : les <b>dizaines</b>.",
+       "Le dernier : les <b>centaines</b>.",
+       "J'écris toujours dans le même ordre : ___ c + ___ d + ___ u."],
+    ex:"<b>347</b> &rarr; 3 centaines, 4 dizaines, 7 unités &rarr; <em>3 c + 4 d + 7 u</em>",
+    gen:function(){
+      var n = rnd(101,500), p = cdu(n);
+      return { q:"Décompose " + n + " :&nbsp; ___ c + ___ d + ___ u",
+               r:p[0] + " c + " + p[1] + " d + " + p[2] + " u" };
+    }},
+
+  { t:"Écrire sous la forme d'une addition",
+    c:"« Écris 347 sous la forme d'une addition : 347 = ___ + ___ + ___ »",
+    m:["Chaque chiffre vaut selon sa boîte : les centaines &times;100, les dizaines &times;10, les unités &times;1.",
+       "J'écris chaque valeur, séparée par un +.",
+       "<b>Un zéro ne s'écrit pas</b> dans l'addition : 305 = 300 + 5, et non 300 + 0 + 5."],
+    ex:"<b>347</b> = <em>300 + 40 + 7</em> &nbsp;&middot;&nbsp; <b>305</b> = <em>300 + 5</em>",
+    gen:function(){
+      var n = Math.random() < 0.3 ? rnd(1,4)*100 + rnd(1,9) : rnd(101,500);
+      return { q:"Écris " + n + " sous la forme d'une addition.", r:n + " = " + dev(n) };
+    }},
+
+  { t:"Recomposer : retrouver le nombre",
+    c:"« Quel nombre est-ce ?&nbsp; 300 + 40 + 7 = ___ »&nbsp; ou &nbsp;« 3 c + 4 d + 7 u = ___ »",
+    m:["Je remets chaque valeur dans sa boîte : centaines, dizaines, unités.",
+       "<b>Attention à la boîte vide :</b> 4 c + 0 d + 9 u donne 409, et non 49.",
+       "J'écris le nombre, puis je le lis à voix haute pour vérifier."],
+    ex:"<b>4 c + 0 d + 9 u</b> &rarr; <em>409</em>, « quatre cent neuf »",
+    gen:function(){
+      var n = rnd(101,500), p = cdu(n);
+      var forme = Math.random() < 0.5
+        ? p[0] + " c + " + p[1] + " d + " + p[2] + " u = ___"
+        : dev(n) + " = ___";
+      return { q:forme, r:n + " — « " + frNum(n) + " »" };
+    }},
+
+  { t:"La valeur d'un chiffre",
+    c:"« Dans le nombre 347, quelle est la valeur du chiffre 4 ? »",
+    m:["Je cherche d'abord dans quelle boîte se trouve ce chiffre.",
+       "Puis je dis ce qu'il vaut à cette place : un 4 dans les dizaines vaut 40.",
+       "<b>Le chiffre est 4, mais sa valeur est 40.</b> Ce n'est pas la même question."],
+    ex:"Dans <b>347</b>, le chiffre 4 est dans les dizaines &rarr; il vaut <em>40</em> (4 dizaines)",
+    gen:function(){
+      var n = nDistinct(), p = cdu(n), i = rnd(0,2);
+      var noms = ["centaine","dizaine","unité"], val = [p[0]*100, p[1]*10, p[2]];
+      return { q:"Dans " + n + ", quelle est la valeur du chiffre " + p[i] + " ?",
+               r:val[i] + " (" + pl(p[i], noms[i]) + ")" };
+    }},
+
+  { t:"Décomposer autrement : l'échange",
+    c:"« Complète :&nbsp; 347 = 2 c + ___ d + 7 u »",
+    m:["Je décompose d'abord normalement : 347 = 3 c + 4 d + 7 u.",
+       "Ici on m'a enlevé <b>1 centaine</b>. Or une centaine vaut <b>10 dizaines</b>.",
+       "J'ajoute ces 10 dizaines à celles que j'avais : 4 + 10 = 14 dizaines.",
+       "Je vérifie : 200 + 140 + 7 = 347. C'est bien le même nombre."],
+    ex:"<b>347 = 2 c + <em>14</em> d + 7 u</b> — la même quantité, rangée autrement",
+    gen:function(){
+      var p = cdu(rnd(150,500));
+      if(p[0] < 2) p[0] = 2;
+      var n = p[0]*100 + p[1]*10 + p[2];
+      if(Math.random() < 0.5){
+        return { q:"Complète : " + n + " = " + (p[0]-1) + " c + ___ d + " + p[2] + " u",
+                 r:(p[1]+10) + " dizaines" };
+      }
+      var vrai = Math.random() < 0.5;
+      var prop = vrai ? (p[1]+10) : (p[1]+10+rnd(1,3));
+      return { q:"Vrai ou faux ? " + n + " = " + (p[0]-1) + " c + " + prop + " d + " + p[2] + " u",
+               r:(vrai ? "Vrai" : "Faux — il faut " + (p[1]+10) + " dizaines") };
+    }},
+
+  { t:"Le terme qui manque",
+    c:"« Complète :&nbsp; 347 = 300 + ___ + 7 »",
+    m:["Je décompose le nombre dans ma tête : 300 + 40 + 7.",
+       "Je regarde ce qui est <b>déjà écrit</b> dans l'addition.",
+       "J'écris seulement la partie qui manque — pas tout le nombre."],
+    ex:"347 = 300 + <em>40</em> + 7",
+    gen:function(){
+      var n = rnd(111,500), p = cdu(n);
+      while(p[1] === 0 || p[2] === 0){ n = rnd(111,500); p = cdu(n); }
+      var i = rnd(0,2), parts = [p[0]*100, p[1]*10, p[2]];
+      var aff = parts.map(function(v, j){ return j === i ? "___" : v; });
+      return { q:"Complète : " + n + " = " + aff.join(" + "), r:String(parts[i]) };
+    }},
+
+  { t:"Du nombre écrit en lettres",
+    c:"« Écris en chiffres, puis décompose : trois cent quarante-sept. »",
+    m:["J'écoute d'abord les centaines : « trois cent » &rarr; 3 dans la boîte des centaines.",
+       "Puis la fin : « quarante-sept » &rarr; 4 dizaines et 7 unités.",
+       "J'écris le nombre en chiffres, <b>ensuite seulement</b> je le décompose."],
+    ex:"« trois cent quarante-sept » &rarr; <b>347</b> &rarr; <em>300 + 40 + 7</em>",
+    gen:function(){
+      var n = rnd(101,500);
+      return { q:"Écris en chiffres, puis décompose : « " + frNum(n) + " »", r:n + " = " + dev(n) };
+    }},
+
+  { t:"Avec le matériel base 10",
+    c:"« Combien de plaques, de barres et de cubes faut-il pour représenter 347 ? »",
+    m:["Une <b>plaque</b> vaut 100, une <b>barre</b> vaut 10, un <b>cube</b> vaut 1.",
+       "Je prends autant de plaques que de centaines, autant de barres que de dizaines, autant de cubes que d'unités.",
+       "Je vérifie en recomptant : 3 &times; 100 + 4 &times; 10 + 7 = 347."],
+    ex:"<b>347</b> &rarr; <em>3 plaques, 4 barres, 7 cubes</em>",
+    gen:function(){
+      var n = rnd(101,500), p = cdu(n);
+      return { q:"Combien de plaques, de barres et de cubes pour " + n + " ?",
+               r:pl(p[0],"plaque") + ", " + pl(p[1],"barre") + ", " + pl(p[2],"cube") };
+    }},
+
+  { t:"Plusieurs décompositions du même nombre",
+    c:"« Trouve deux façons différentes de décomposer 347. »",
+    m:["La première est toujours la facile : 300 + 40 + 7.",
+       "Pour la deuxième, je regroupe autrement : 340 + 7, ou 300 + 47, ou 200 + 147.",
+       "<b>Toute addition qui redonne le nombre est acceptée.</b> C'est justement le but de la question."],
+    ex:"<b>347</b> = <em>300 + 40 + 7</em> = <em>340 + 7</em> = <em>300 + 47</em> = <em>200 + 147</em>",
+    gen:function(){
+      var n = rnd(120,500), p = cdu(n);
+      var r = dev(n) + " &nbsp;&middot;&nbsp; " + (p[0]*100 + p[1]*10) + " + " + p[2] +
+              " &nbsp;&middot;&nbsp; " + (p[0]*100) + " + " + (p[1]*10 + p[2]) +
+              " &nbsp;&middot;&nbsp; " + ((p[0]-1)*100) + " + " + (100 + p[1]*10 + p[2]);
+      return { q:"Trouve deux décompositions différentes de " + n + ".",
+               r:r + " — ou toute autre somme juste" };
+    }}
+];
+
+var LETTRES = ["a)","b)","c)","d)"];
+function fillQs(host, type){
+  host.innerHTML = "";
+  for(var i = 0; i < 4; i++){
+    var item = type.gen();
+    var row = document.createElement("div");
+    row.className = "q";
+    row.innerHTML = '<span class="qn">' + LETTRES[i] + '</span>' +
+                    '<span class="qt">' + item.q + '</span>' +
+                    '<span class="qa" hidden>' + item.r + '</span>';
+    host.appendChild(row);
+  }
+}
+function buildDec(){
+  var host = document.getElementById("types");
+  if(!host) return;
+  host.innerHTML = "";
+  DEC.forEach(function(type, i){
+    var card = document.createElement("div");
+    card.className = "type";
+    card.innerHTML =
+      '<div class="type-hd"><span class="tnum">' + (i+1) + '</span><h3></h3></div>' +
+      '<p class="consigne-std">' + type.c + '</p>' +
+      '<div class="method"><h4>La méthode, étape par étape</h4><ol>' +
+        type.m.map(function(x){ return "<li>" + x + "</li>"; }).join("") +
+      '</ol></div>' +
+      '<div class="worked"><h4>Fait en entier, avec lui</h4><p class="ww">' + type.ex + '</p></div>' +
+      '<div class="method"><h4>À toi de jouer</h4><div class="qs"></div></div>' +
+      '<div class="btnrow noprint"><button class="btn small ghost b-new">🔄 Nouvelles questions</button>' +
+      '<button class="btn small b-key" aria-pressed="false">🔑 Réponses</button></div>';
+    card.querySelector("h3").textContent = type.t;
+    var qs = card.querySelector(".qs");
+    fillQs(qs, type);
+    card.querySelector(".b-new").addEventListener("click", function(){
+      fillQs(qs, type);
+      var kb = card.querySelector(".b-key");
+      kb.setAttribute("aria-pressed", "false");
+      kb.textContent = "🔑 Réponses";
+    });
+    card.querySelector(".b-key").addEventListener("click", function(){
+      var on = this.getAttribute("aria-pressed") === "true";
+      Array.prototype.forEach.call(qs.querySelectorAll(".qa"), function(a){ a.hidden = on; });
+      this.setAttribute("aria-pressed", on ? "false" : "true");
+      this.textContent = on ? "🔑 Réponses" : "🙈 Cacher";
+    });
+    host.appendChild(card);
+  });
+}
+(function decControls(){
+  var bNew = document.getElementById("allNew");
+  if(bNew) bNew.addEventListener("click", function(){
+    buildDec();
+    var k = document.getElementById("allKey");
+    k.setAttribute("aria-pressed", "false");
+    k.textContent = "🔑 Afficher toutes les réponses";
+  });
+  var bKey = document.getElementById("allKey");
+  if(bKey) bKey.addEventListener("click", function(){
+    var on = this.getAttribute("aria-pressed") === "true";
+    Array.prototype.forEach.call(document.querySelectorAll("#types .qa"), function(a){ a.hidden = on; });
+    Array.prototype.forEach.call(document.querySelectorAll("#types .b-key"), function(b){
+      b.setAttribute("aria-pressed", on ? "false" : "true");
+      b.textContent = on ? "🔑 Réponses" : "🙈 Cacher";
+    });
+    this.setAttribute("aria-pressed", on ? "false" : "true");
+    this.textContent = on ? "🔑 Afficher toutes les réponses" : "🙈 Cacher toutes les réponses";
+  });
+  var bPr = document.getElementById("printDecomp");
+  if(bPr) bPr.addEventListener("click", function(){ window.print(); });
+})();
+
 /* =============== exemples parlés =============== */
 (function(){
   var b1 = document.getElementById("exSay1");
@@ -1538,6 +1797,7 @@ showVoc();
 newNum();
 newVb();
 paintTextes();
+buildDec();
 paintFiche();
 paintNumScore();
 paintVbScore();
