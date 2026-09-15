@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Dix textes à comprendre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,600&family=Caveat:wght@500;700&display=swap">
+<style>
+:root{
+  --paper:#F4F6FC; --panel:#FFFFFF; --panel-2:#FAFBFF;
+  --ink:#16213A; --ink-soft:#5A6484; --ink-faint:#8B95B4;
+  --rule:#CBD6F2; --grid:rgba(116,148,214,.15);
+  --marge:#D1495B; --marge-soft:rgba(209,73,91,.30);
+  --encre:#2F4FC9; --encre-soft:#E7ECFC;
+  --vert:#2E8B57; --vert-soft:#E4F4EB;
+  --craie:#B57A10; --craie-soft:#FBF0DA;
+  --line:#E2E7F5;
+  --shadow:0 10px 26px rgba(22,33,58,.09);
+  --shadow-sm:0 2px 8px rgba(22,33,58,.06);
+  --display:"Gabarito","Trebuchet MS",system-ui,sans-serif;
+  --body:"Literata",Georgia,"Times New Roman",serif;
+  --hand:"Caveat","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F141F; --panel:#171E2D; --panel-2:#1C2435;
+    --ink:#E8ECF9; --ink-soft:#A2AECB; --ink-faint:#7A86A6;
+    --rule:#2B3752; --grid:rgba(140,170,255,.07);
+    --marge:#E77A89; --marge-soft:rgba(231,122,137,.32);
+    --encre:#8FA8FF; --encre-soft:#1E2946;
+    --vert:#66C795; --vert-soft:#16301F;
+    --craie:#F0BC63; --craie-soft:#2E2513;
+    --line:#27314A;
+    --shadow:0 10px 26px rgba(0,0,0,.34); --shadow-sm:0 2px 8px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F141F; --panel:#171E2D; --panel-2:#1C2435;
+  --ink:#E8ECF9; --ink-soft:#A2AECB; --ink-faint:#7A86A6;
+  --rule:#2B3752; --grid:rgba(140,170,255,.07);
+  --marge:#E77A89; --marge-soft:rgba(231,122,137,.32);
+  --encre:#8FA8FF; --encre-soft:#1E2946;
+  --vert:#66C795; --vert-soft:#16301F;
+  --craie:#F0BC63; --craie-soft:#2E2513;
+  --line:#27314A;
+  --shadow:0 10px 26px rgba(0,0,0,.34); --shadow-sm:0 2px 8px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--body);color:var(--ink);background-color:var(--paper);
+  background-image:
+    repeating-linear-gradient(to bottom, transparent 0 23px, var(--grid) 23px 24px),
+    repeating-linear-gradient(to right, transparent 0 23px, var(--grid) 23px 24px);
+  line-height:1.6;font-size:16px;-webkit-text-size-adjust:100%;
+}
+h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.15;margin:0;text-wrap:balance}
+p{margin:0}
+button,input{font-family:var(--display);color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--encre);outline-offset:2px;border-radius:8px}
+.wrap{max-width:900px;margin:0 auto;padding-inline:16px}
+
+header.top{background:var(--panel);border-bottom:1px solid var(--line);padding-block:22px 18px}
+.eyebrow{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;font-weight:700;color:var(--ink-faint)}
+header h1{font-size:clamp(1.55rem,5vw,2.1rem);margin-top:4px}
+header h1 b{color:var(--marge);font-weight:700}
+.sub{color:var(--ink-soft);font-size:.96rem;margin-top:7px;max-width:66ch}
+
+.bar{position:sticky;top:0;z-index:20;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:var(--shadow-sm)}
+.bar-in{display:flex;gap:9px;align-items:center;flex-wrap:wrap;padding-block:10px}
+.bar .lab{font-family:var(--display);font-size:.84rem;color:var(--ink-soft);flex:1 1 150px}
+.btn{font-family:var(--display);font-weight:600;font-size:.88rem;border:1px solid var(--line);background:var(--panel-2);
+  padding:8px 14px;border-radius:11px;transition:border-color .12s,transform .1s}
+.btn:hover:not(:disabled){border-color:var(--encre)}
+.btn:active:not(:disabled){transform:translateY(1px)}
+.btn.primary{background:var(--encre);border-color:var(--encre);color:#fff}
+.btn.good{background:var(--vert);border-color:var(--vert);color:#fff}
+.btn.ghost{background:transparent}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.small{font-size:.8rem;padding:6px 11px;border-radius:9px}
+
+main{padding-block:22px 70px}
+.cartes{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:10px;margin-top:6px}
+.carte{text-align:left;border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:12px 13px;
+  display:flex;flex-direction:column;gap:6px;box-shadow:var(--shadow-sm)}
+.carte:hover{border-color:var(--encre)}
+.carte[aria-current="true"]{border-color:var(--encre);box-shadow:0 0 0 2px var(--encre-soft),var(--shadow-sm)}
+.carte .g{font-family:var(--display);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--marge)}
+.carte .t{font-family:var(--display);font-weight:700;font-size:1.02rem;line-height:1.2}
+.carte .d{font-size:.84rem;color:var(--ink-soft)}
+.carte .sc{font-family:var(--display);font-size:.74rem;color:var(--ink-faint);margin-top:2px}
+.carte .sc.ok{color:var(--vert);font-weight:700}
+
+.panneau{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px 20px 18px;margin-top:22px;box-shadow:var(--shadow);scroll-margin-top:70px}
+.tag{display:inline-block;font-family:var(--display);font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--marge);background:var(--craie-soft);padding:3px 9px;border-radius:99px}
+.panneau h2{font-size:1.4rem;margin-top:7px}
+.avant{font-family:var(--hand);font-size:1.3rem;color:var(--encre);line-height:1.3;margin:10px 0 4px}
+.texte{font-size:1.1rem;line-height:1.95;margin-top:12px}
+.texte p{margin-bottom:11px;text-indent:1.2em}
+.texte p:first-child{text-indent:0}
+.glossaire{background:var(--panel-2);border:1px solid var(--line);border-left:4px solid var(--craie);border-radius:12px;padding:11px 14px;margin:14px 0}
+.glossaire h4{font-family:var(--display);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--craie);margin-bottom:5px}
+.glossaire li{font-size:.92rem;color:var(--ink-soft);margin-bottom:3px}
+.glossaire b{color:var(--ink)}
+.glossaire ul{margin:0;padding-left:18px}
+
+.qbloc{border-top:1px solid var(--line);padding-top:13px;margin-top:14px}
+.q{padding:11px 0;border-bottom:1px dotted var(--line)}
+.q .qt{font-family:var(--display);font-size:1.02rem;display:block;margin-bottom:7px}
+.q .qt .no{color:var(--ink-faint);font-weight:700;margin-right:5px}
+.q .kind{display:inline-block;font-family:var(--display);font-size:.64rem;letter-spacing:.09em;text-transform:uppercase;
+  font-weight:700;color:var(--encre);background:var(--encre-soft);padding:2px 8px;border-radius:99px;margin-bottom:6px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:7px}
+.opt{text-align:left;font-family:var(--display);font-size:.96rem;border:1.5px solid var(--line);background:var(--panel-2);
+  border-radius:11px;padding:9px 12px;line-height:1.35}
+.opt:hover{border-color:var(--encre)}
+.opt[aria-pressed="true"]{border-color:var(--encre);background:var(--encre-soft)}
+.opt.ok{border-color:var(--vert);background:var(--vert-soft);color:var(--vert)}
+.opt.no{border-color:var(--marge);background:var(--craie-soft);color:var(--marge)}
+.rep{width:100%;max-width:340px;padding:8px 11px;font-size:1rem;font-weight:600;border:1.5px solid var(--rule);border-radius:10px;background:var(--panel-2)}
+.rep:focus{border-color:var(--encre);outline:none}
+.rep.ok{border-color:var(--vert);background:var(--vert-soft)}
+.rep.no{border-color:var(--marge);background:var(--craie-soft)}
+.verdict{display:block;font-family:var(--display);font-size:.87rem;font-weight:600;margin-top:6px}
+.verdict.ok{color:var(--vert)} .verdict.no{color:var(--marge)} .verdict.mod{color:var(--encre)}
+.ft{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:15px}
+.ft .cnt{font-family:var(--display);font-size:.83rem;color:var(--ink-faint);flex:1 1 140px}
+.ft .cnt.ready{color:var(--vert);font-weight:700}
+.ft .res{font-family:var(--display);font-weight:700;font-size:1rem}
+.note{font-family:var(--hand);font-size:1.26rem;line-height:1.35;color:var(--marge);border-left:3px solid var(--marge-soft);padding:4px 0 4px 13px;margin:20px 0}
+.note.blue{color:var(--encre);border-left-color:var(--encre)}
+footer{border-top:1px solid var(--line);margin-top:30px;padding-top:14px;font-size:.84rem;color:var(--ink-faint)}
+@media print{
+  .noprint,.bar,.cartes{display:none!important}
+  body{background:#fff;background-image:none;color:#000;font-size:11pt}
+  .panneau{box-shadow:none;border-color:#999}
+  .opt{border-color:#999}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow">3<sup>e</sup> année &middot; français Zig Zag &middot; lire et comprendre</p>
+    <h1>Dix textes à <b>comprendre</b></h1>
+    <p class="sub">Dix lectures courtes — des récits, des textes qui décrivent et des textes qui expliquent — avec les questions telles qu'on les pose en classe : repérer, déduire, comprendre un mot, remettre en ordre, trouver l'idée principale. Il répond, la page corrige.</p>
+  </div>
+</header>
+
+<nav class="bar noprint">
+  <div class="wrap bar-in">
+    <span class="lab">Textes terminés : <b id="statLab">0 / 10</b></span>
+    <button class="btn ghost" id="reset">↺ Effacer les résultats</button>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="cartes" id="cartes"></div>
+
+  <div class="panneau" id="panneau" hidden>
+    <span class="tag" id="pGenre">—</span>
+    <h2 id="pTitre">—</h2>
+    <p class="avant" id="pAvant"></p>
+    <div class="ft noprint" style="margin-top:8px">
+      <button class="btn small" id="pLire">🔊 Écouter le texte</button>
+      <button class="btn small ghost" id="pStop">⏹ Arrêter</button>
+      <button class="btn small ghost" id="pPrint">🖨️ Imprimer</button>
+    </div>
+    <div class="texte" id="pTexte"></div>
+    <div class="glossaire" id="pMots"></div>
+    <div class="qbloc" id="pQuestions"></div>
+    <div class="ft noprint">
+      <span class="cnt" id="pCnt"></span>
+      <span class="res" id="pRes" hidden></span>
+      <button class="btn good" id="pCheck" disabled>✅ Corriger</button>
+    </div>
+  </div>
+
+  <p class="note blue">Comment lire avec lui : il lit <b>à voix haute</b> une première fois, sans être corrigé. Ensuite il relit en silence, en cherchant les réponses. <b>Les réponses se trouvent dans le texte</b> — il a le droit d'y retourner autant de fois qu'il veut. Ce n'est pas un examen de mémoire.</p>
+  <p class="note">Les questions marquées <b>DÉDUIRE</b> sont les plus difficiles : la réponse n'est pas écrite, il faut la comprendre entre les lignes. S'il bloque, demandez-lui : « Qu'est-ce qui te fait penser ça ? » — c'est la question qui apprend à lire.</p>
+
+  <footer>Dix textes à comprendre &middot; les types de questions suivent le français de 3<sup>e</sup> année (Zig Zag) &middot; ses résultats restent sur cet appareil.</footer>
+</main>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return String(s).toLowerCase().normalize("NFD")
+    .replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]/g,"");
+}
+
+/* ===================== les textes ===================== */
+var TEXTES = [
+{ id:"cabane", genre:"Texte qui raconte", titre:"La cabane à sucre", theme:"Le printemps québécois",
+  avant:"Avant de lire : regarde le titre. À ton avis, qu'est-ce qu'on fait dans une cabane à sucre ?",
+  p:["Chaque printemps, la famille de Malik se rend à la cabane à sucre de monsieur Tremblay. Cette année, il neige encore un peu et le chemin est tout boueux.",
+     "Dès l'arrivée, Malik entend un bruit doux : ploc, ploc, ploc. C'est l'eau d'érable qui tombe dans les chaudières. « Il en faut quarante litres pour faire un seul litre de sirop », explique monsieur Tremblay. Malik n'en revient pas.",
+     "Dans la grande salle, on sert des crêpes, des fèves au lard et du jambon. Mais ce que Malik préfère, c'est la tire sur la neige. Il roule le sirop chaud avec un bâton de bois, puis il croque dedans. C'est collant, sucré et froid en même temps.",
+     "Sur le chemin du retour, Malik dort dans l'auto, le bâton encore serré dans la main."],
+  mots:[["une chaudière","le seau accroché à l'arbre pour recueillir l'eau d'érable"],
+        ["la tire","du sirop chaud versé sur la neige, qui durcit et devient mou comme un bonbon"],
+        ["boueux","plein de boue, de terre mouillée"]],
+  q:[
+    {k:"Repérer", q:"Où se passe cette histoire ?", o:["Dans une épicerie","À la cabane à sucre","Dans la cour de l'école","Au marché de la ville"], r:1},
+    {k:"Repérer", q:"Combien de litres d'eau d'érable faut-il pour faire un litre de sirop ?", o:["4 litres","14 litres","40 litres","100 litres"], r:2},
+    {k:"Déduire", q:"Pourquoi Malik s'endort-il dans l'auto ?", o:["Parce qu'il est fâché","Parce qu'il fait nuit noire","Parce qu'il s'est ennuyé toute la journée","Parce qu'il est fatigué après une grosse journée"], r:3},
+    {k:"Vocabulaire", q:"Dans le texte, « Malik n'en revient pas » veut dire :", o:["Il est très étonné","Il ne retrouve plus son chemin","Il refuse de partir","Il a mal au cœur"], r:0},
+    {k:"Ordre", q:"Qu'est-ce qui se passe en premier dans le texte ?", o:["Malik mange de la tire","Malik entend l'eau d'érable tomber","Malik s'endort","On sert les crêpes"], r:1},
+    {k:"Idée principale", q:"Quel autre titre irait bien à ce texte ?", o:["Comment fabriquer une auto","Une journée de Malik à la cabane à sucre","La recette des fèves au lard","L'hiver de monsieur Tremblay"], r:1},
+    {k:"Grammaire", q:"Dans la phrase « Malik entend un bruit doux », écris le verbe.", court:["entend"]},
+    {k:"Ton opinion", q:"Qu'est-ce que tu aurais le plus aimé faire à la cabane à sucre ? Explique pourquoi.",
+     ouvert:"Toute réponse est bonne si elle donne une raison. Exemple : « La tire sur la neige, parce que j'aime les choses sucrées et je n'ai jamais mangé quelque chose de chaud et de froid en même temps. »"}
+  ]},
+
+{ id:"castor", genre:"Texte qui explique", titre:"Le castor", theme:"Les animaux du Canada",
+  avant:"Avant de lire : nomme deux choses que tu sais déjà au sujet du castor.",
+  p:["Le castor est le plus gros rongeur d'Amérique du Nord. Il peut peser aussi lourd qu'un enfant de sept ans.",
+     "Ses dents ne cessent jamais de pousser. C'est pour cela qu'il ronge sans arrêt : s'il arrêtait, ses dents deviendraient beaucoup trop longues. Avec ses dents orange, il coupe des arbres entiers.",
+     "Le castor construit un barrage en travers du ruisseau. L'eau s'accumule et forme un étang. Au milieu, il bâtit sa hutte avec des branches et de la boue. L'entrée se trouve sous l'eau : ainsi, le renard et le loup ne peuvent pas entrer.",
+     "Sa queue plate lui sert de gouvernail quand il nage. Quand un danger approche, il la frappe sur l'eau : clac ! Tous les castors plongent aussitôt.",
+     "Le castor est un emblème du Canada. On peut le voir sur la pièce de cinq cents."],
+  mots:[["un rongeur","un animal qui ronge, qui use ses dents sur des choses dures"],
+        ["un gouvernail","la pièce qui sert à diriger un bateau"],
+        ["un emblème","un symbole qui représente un pays"]],
+  q:[
+    {k:"Repérer", q:"Pourquoi le castor ronge-t-il sans arrêt ?", o:["Parce qu'il a toujours faim","Parce que ses dents poussent toujours","Parce qu'il s'ennuie","Parce qu'il cherche de l'eau"], r:1},
+    {k:"Déduire", q:"Pourquoi l'entrée de la hutte est-elle sous l'eau ?", o:["Pour que la hutte soit plus jolie","Pour que le castor puisse boire","Pour empêcher les prédateurs d'entrer","Parce que le castor ne sait pas construire de porte"], r:2},
+    {k:"Repérer", q:"À quoi sert la queue plate du castor quand il nage ?", o:["De gouvernail, pour se diriger","D'oreiller, pour dormir","De pelle, pour creuser","De couverture, pour se réchauffer"], r:0},
+    {k:"Déduire", q:"Quand le castor frappe l'eau avec sa queue, c'est pour :", o:["Attraper un poisson","Avertir les autres castors d'un danger","Nettoyer sa queue","Appeler ses bébés pour manger"], r:1},
+    {k:"Vocabulaire", q:"Dans le texte, un « barrage » est :", o:["Un mur qui retient l'eau","Un nid dans un arbre","Un trou dans la terre","Un chemin de forêt"], r:0},
+    {k:"Idée principale", q:"De quoi parle surtout ce texte ?", o:["De la nourriture des poissons","De la façon de vivre du castor","Des pièces de monnaie du Canada","Des dangers de la forêt"], r:1},
+    {k:"Grammaire", q:"Dans « le plus gros rongeur d'Amérique du Nord », écris l'adjectif qui décrit le rongeur.", court:["gros"]},
+    {k:"Ton opinion", q:"Trouves-tu que le castor est un bon constructeur ? Donne deux preuves prises dans le texte.",
+     ouvert:"Exemple : « Oui, parce qu'il construit un barrage qui retient l'eau, et une hutte avec une entrée cachée sous l'eau pour se protéger. »"}
+  ]},
+
+{ id:"tempete", genre:"Texte qui raconte", titre:"La tempête de mardi", theme:"L'hiver",
+  avant:"Avant de lire : qu'est-ce que tu ressens quand il tombe beaucoup de neige ?",
+  p:["Mardi matin, Léa colle son nez à la fenêtre. Dehors, tout est blanc. On ne voit même plus la clôture du voisin.",
+     "À la radio, une dame annonce la liste des écoles fermées. Léa attend, le cœur qui bat très fort. Enfin, elle entend le nom de son école. Elle saute sur place et réveille toute la maison.",
+     "Après le déjeuner, elle sort pelleter avec son père. La neige lui arrive aux genoux. Ensemble, ils creusent un tunnel jusqu'au trottoir, puis une petite grotte. Léa y installe une chaise de plastique et deux biscuits.",
+     "À midi, le soleil revient et le tunnel commence à fondre. « Ce n'est pas grave, dit son père. Il en tombera d'autre. » Au Québec, il en tombe toujours d'autre."],
+  mots:[["pelleter","enlever la neige avec une pelle"],
+        ["une clôture","la barrière qui entoure un terrain"],
+        ["fondre","se transformer en eau à cause de la chaleur"]],
+  q:[
+    {k:"Repérer", q:"Quel jour se passe cette histoire ?", o:["Lundi","Mardi","Samedi","Dimanche"], r:1},
+    {k:"Déduire", q:"Pourquoi le cœur de Léa bat-il très fort pendant l'annonce à la radio ?", o:["Elle a peur de la dame de la radio","Elle vient de courir dehors","Elle espère que son école soit fermée","Elle a trop mangé au déjeuner"], r:2},
+    {k:"Déduire", q:"Qu'est-ce que Léa pense de cette journée ?", o:["Elle la trouve ennuyante","Elle la trouve effrayante","Elle la trouve fatigante","Elle la trouve amusante"], r:3},
+    {k:"Vocabulaire", q:"« La neige lui arrive aux genoux » veut dire :", o:["Il y a très peu de neige","Il y a beaucoup de neige, elle est haute","La neige est très froide","La neige tombe encore"], r:1},
+    {k:"Ordre", q:"Qu'est-ce qui se passe en dernier ?", o:["Léa regarde par la fenêtre","Le tunnel commence à fondre","Ils creusent une petite grotte","Léa entend le nom de son école"], r:1},
+    {k:"Idée principale", q:"Ce texte raconte surtout :", o:["Une journée de tempête que Léa a beaucoup aimée","La façon de construire une maison","Un voyage en autobus","Une visite chez le voisin"], r:0},
+    {k:"Grammaire", q:"Dans « Léa colle son nez à la fenêtre », écris le verbe.", court:["colle"]},
+    {k:"Ton opinion", q:"Si ton école fermait demain, qu'est-ce que tu ferais de ta journée ?",
+     ouvert:"Toute réponse est bonne si elle est expliquée. On cherche une phrase complète, avec une raison."}
+  ]},
+
+{ id:"fromagerie", genre:"Texte qui explique", titre:"Comment on fait le fromage", theme:"La liste de mots de la semaine",
+  avant:"Avant de lire : d'après toi, avec quoi commence-t-on quand on fabrique du fromage ?",
+  p:["Comment fait-on du fromage ? Tout commence par du lait.",
+     "À la fromagerie, on chauffe d'abord le lait dans une grande cuve. On y ajoute ensuite un ingrédient spécial : la présure. En quelques minutes, le lait épaissit et devient une masse blanche, un peu comme du yogourt ferme. C'est le caillé.",
+     "Le fromager coupe le caillé en petits cubes avec une sorte de peigne. Le liquide qui sort s'appelle le petit-lait. On le récupère souvent pour nourrir les animaux de la ferme.",
+     "Ensuite, on presse la matière dans des moules ronds, puis on la sale. Le sel donne du goût et protège le fromage.",
+     "Enfin, les meules sont rangées dans une cave fraîche. Elles y dorment des semaines, parfois des années. Plus le fromage vieillit, plus son goût devient fort."],
+  mots:[["une cuve","un très grand contenant"],
+        ["le caillé","le lait devenu épais et solide"],
+        ["une meule","une grosse roue de fromage"]],
+  q:[
+    {k:"Repérer", q:"Par quoi commence la fabrication du fromage ?", o:["Par le sel","Par le lait","Par la cave","Par les moules"], r:1},
+    {k:"Ordre", q:"Que fait-on juste après avoir coupé le caillé en cubes ?", o:["On chauffe le lait","On presse la matière dans des moules","On range les meules dans la cave","On ajoute la présure"], r:1},
+    {k:"Repérer", q:"À quoi sert le sel, d'après le texte ?", o:["À faire épaissir le lait","À couper le caillé","À donner du goût et à protéger le fromage","À faire des trous dans le fromage"], r:2},
+    {k:"Déduire", q:"Pourquoi range-t-on les meules dans une cave fraîche ?", o:["Parce que le fromage a besoin de temps et de fraîcheur pour vieillir","Parce que la cave est jolie","Pour que les animaux les mangent","Pour les faire fondre plus vite"], r:0},
+    {k:"Vocabulaire", q:"Dans le texte, « le petit-lait » est :", o:["Le lait des bébés vaches","Le liquide qui sort du caillé","Un tout petit fromage","Le lait le moins cher"], r:1},
+    {k:"Déduire", q:"D'après le texte, un fromage au goût très fort est probablement :", o:["Un fromage très jeune","Un fromage resté longtemps dans la cave","Un fromage sans sel","Un fromage fait sans lait"], r:1},
+    {k:"Grammaire", q:"Dans « les meules sont rangées dans une cave fraîche », écris l'adjectif.", court:["fraiche","fraîche"]},
+    {k:"Ton opinion", q:"Aimerais-tu travailler dans une fromagerie ? Explique ta réponse avec une raison.",
+     ouvert:"Toute réponse est bonne si elle contient une vraie raison prise dans le texte ou dans sa vie."}
+  ]},
+
+{ id:"match", genre:"Texte qui raconte", titre:"Le but de Samuel", theme:"Le sport",
+  avant:"Avant de lire : as-tu déjà réussi quelque chose pour la première fois ? Comment t'es-tu senti ?",
+  p:["Samuel n'a jamais compté de but. Pas un seul de toute la saison.",
+     "Ce samedi, il reste deux minutes au chronomètre. L'entraîneur lui fait signe : « À toi, Sam. » Les jambes de Samuel sont lourdes comme du ciment.",
+     "La rondelle glisse vers lui. Il patine, tombe presque, se redresse. Devant le filet, il ne réfléchit plus. Il lance.",
+     "Le bruit du poteau résonne dans l'aréna. Puis la rondelle roule doucement derrière le gardien, et la lumière rouge s'allume.",
+     "Samuel reste immobile deux secondes. Ses coéquipiers lui sautent dessus. Dans les gradins, sa mère crie si fort qu'elle en perd sa tuque.",
+     "Dans l'auto, Samuel ne dit rien. Mais il sourit pendant tout le trajet."],
+  mots:[["un aréna","le bâtiment où se trouve la patinoire"],
+        ["les gradins","les bancs où s'assoient les spectateurs"],
+        ["un coéquipier","un joueur de la même équipe que soi"]],
+  q:[
+    {k:"Déduire", q:"« Les jambes de Samuel sont lourdes comme du ciment. » Cela montre qu'il est :", o:["Très nerveux","Très reposé","Très fâché","Très malade"], r:0},
+    {k:"Repérer", q:"Qu'est-ce qui s'allume quand la rondelle entre dans le filet ?", o:["Le chronomètre","La lumière rouge","Les lumières de l'aréna","Le téléphone de sa mère"], r:1},
+    {k:"Déduire", q:"Pourquoi Samuel reste-t-il immobile deux secondes ?", o:["Il s'est fait mal","Il n'arrive pas encore à croire ce qu'il a fait","Il cherche son entraîneur","Il a perdu son bâton"], r:1},
+    {k:"Déduire", q:"Pourquoi sourit-il pendant tout le trajet, sans parler ?", o:["Parce qu'il a gagné un prix en argent","Parce qu'il est content de son premier but","Parce qu'il pense à son souper","Parce qu'il a hâte de dormir"], r:1},
+    {k:"Vocabulaire", q:"Dans le texte, « la rondelle » est :", o:["Le disque noir avec lequel on joue au hockey","Un morceau de fromage","Le nom du gardien","Une sorte de patin"], r:0},
+    {k:"Idée principale", q:"Quel titre dirait le mieux l'idée de ce texte ?", o:["La tuque perdue","Le premier but de Samuel","Les règles du hockey","Le voyage en auto"], r:1},
+    {k:"Grammaire", q:"Dans « Ses coéquipiers lui sautent dessus », écris le verbe.", court:["sautent"]},
+    {k:"Ton opinion", q:"Pourquoi ce but est-il si important pour Samuel, à ton avis ?",
+     ouvert:"Exemple : « Parce que c'est son premier de toute la saison. Il a essayé longtemps sans réussir, alors c'est plus gros pour lui que pour un autre joueur. »"}
+  ]},
+
+{ id:"graine", genre:"Texte qui explique", titre:"Comment pousse une graine", theme:"Les sciences",
+  avant:"Avant de lire : de quoi une graine a-t-elle besoin pour pousser, à ton avis ?",
+  p:["Une graine est une petite boîte. Dedans, il y a une plante endormie et sa réserve de nourriture.",
+     "Pour se réveiller, la graine a besoin de trois choses : de l'eau, de la chaleur et de l'air. Elle n'a pas encore besoin de lumière, car elle est sous la terre.",
+     "D'abord, la graine gonfle et son enveloppe se fend. Une petite racine sort et pousse vers le bas : elle cherche l'eau. Ensuite, une tige monte vers le haut.",
+     "Quand la tige perce la surface, les premières feuilles s'ouvrent. À partir de ce moment, la plante fabrique elle-même sa nourriture grâce au soleil. Elle n'a plus besoin de la réserve de la graine.",
+     "C'est pour cela qu'il ne faut pas planter une graine trop creux : la tige doit atteindre la lumière avant que la réserve soit vide."],
+  mots:[["une réserve","de la nourriture gardée pour plus tard"],
+        ["se fendre","s'ouvrir, se casser en deux"],
+        ["trop creux","trop profond dans la terre"]],
+  q:[
+    {k:"Repérer", q:"De quelles trois choses la graine a-t-elle besoin pour se réveiller ?", o:["De l'eau, de la chaleur et de l'air","De l'eau, de la lumière et du sel","De la neige, du vent et de la pluie","De la terre, du sable et du sucre"], r:0},
+    {k:"Ordre", q:"Qu'est-ce qui sort de la graine en premier ?", o:["Les feuilles","La tige","La racine","La fleur"], r:2},
+    {k:"Déduire", q:"Pourquoi la graine n'a-t-elle pas besoin de lumière au début ?", o:["Parce qu'elle est sous la terre et vit encore de sa réserve","Parce que la lumière la brûlerait","Parce qu'elle pousse seulement la nuit","Parce qu'elle n'aime pas le soleil"], r:0},
+    {k:"Déduire", q:"Que se passerait-il si on plantait une graine beaucoup trop creux ?", o:["Elle pousserait deux fois plus vite","Sa réserve serait vide avant que la tige atteigne la lumière","Elle deviendrait un arbre","Elle donnerait plus de fleurs"], r:1},
+    {k:"Vocabulaire", q:"Dans le texte, « l'enveloppe » de la graine est :", o:["Une lettre qu'on poste","La peau qui entoure la graine","La racine","Le pot de fleurs"], r:1},
+    {k:"Idée principale", q:"Ce texte sert surtout à :", o:["Raconter une histoire drôle","Expliquer comment une graine devient une plante","Décrire un jardin","Donner une recette"], r:1},
+    {k:"Grammaire", q:"Dans « une petite racine sort », écris l'adjectif.", court:["petite"]},
+    {k:"Ton opinion", q:"Quelle plante aimerais-tu faire pousser ? Explique pourquoi.",
+     ouvert:"Toute réponse est bonne si elle donne une raison claire."}
+  ]},
+
+{ id:"livre", genre:"Texte qui raconte", titre:"Le livre perdu", theme:"L'école et la bibliothèque",
+  avant:"Avant de lire : as-tu déjà perdu quelque chose d'important ? Qu'as-tu fait ?",
+  p:["Zoé a perdu un livre de la bibliothèque. Un livre sur les dinosaures, avec une couverture rouge.",
+     "Elle regarde sous son lit : rien. Dans son sac d'école : rien. Derrière le divan : seulement des miettes et une vieille chaussette.",
+     "Le jeudi, elle avoue tout à madame Dufour, la bibliothécaire. Zoé s'attend à se faire chicaner. Mais madame Dufour sourit. « Merci de me le dire. Ça arrive souvent, tu sais. »",
+     "Le samedi, la mère de Zoé vide le bac de recyclage. Au fond, entre deux boîtes de céréales, une couverture rouge dépasse. Le petit frère de Zoé l'avait « rangé » là.",
+     "Le lundi, Zoé rapporte le livre. Madame Dufour ne dit rien, mais elle glisse un signet neuf entre les pages."],
+  mots:[["avouer","dire la vérité sur quelque chose qu'on a fait"],
+        ["se faire chicaner","se faire disputer, se faire gronder"],
+        ["un signet","un petit carton qu'on glisse dans un livre pour marquer la page"]],
+  q:[
+    {k:"Repérer", q:"Où le livre est-il finalement retrouvé ?", o:["Sous le lit","Dans le bac de recyclage","Dans le sac d'école","Derrière le divan"], r:1},
+    {k:"Déduire", q:"Qui a mis le livre à cet endroit ?", o:["Madame Dufour","La mère de Zoé","Le petit frère de Zoé","Zoé elle-même"], r:2},
+    {k:"Déduire", q:"Pourquoi Zoé s'attendait-elle à se faire chicaner ?", o:["Parce qu'elle était en retard à l'école","Parce qu'elle pensait avoir fait quelque chose de grave","Parce qu'elle avait déchiré le livre","Parce qu'elle n'aimait pas les dinosaures"], r:1},
+    {k:"Déduire", q:"Pourquoi madame Dufour glisse-t-elle un signet neuf dans le livre ?", o:["Pour punir Zoé","Pour marquer la page qu'elle veut lire","Pour la féliciter d'avoir dit la vérité","Parce que le livre était abîmé"], r:2},
+    {k:"Ordre", q:"Quel jour Zoé rapporte-t-elle le livre ?", o:["Le jeudi","Le samedi","Le dimanche","Le lundi"], r:3},
+    {k:"Idée principale", q:"Ce texte montre surtout que :", o:["Il ne faut jamais emprunter de livres","Dire la vérité, ça se passe souvent mieux qu'on pense","Les petits frères sont méchants","Les bibliothèques sont ennuyantes"], r:1},
+    {k:"Grammaire", q:"Dans « Zoé rapporte le livre », écris le verbe.", court:["rapporte"]},
+    {k:"Ton opinion", q:"Aurais-tu avoué comme Zoé ? Explique pourquoi.",
+     ouvert:"Les deux réponses sont acceptables. On cherche une raison honnête et une phrase complète."}
+  ]},
+
+{ id:"abeilles", genre:"Texte qui explique", titre:"La ruche au travail", theme:"Les insectes",
+  avant:"Avant de lire : à ton avis, combien d'abeilles peuvent vivre dans une seule ruche ?",
+  p:["Dans une ruche vivent des milliers d'abeilles, et chacune a son travail.",
+     "La reine est la seule à pondre des œufs. Elle peut en pondre jusqu'à deux mille par jour. Les ouvrières, elles, nettoient, nourrissent les bébés, gardent l'entrée et vont chercher le nectar des fleurs.",
+     "Quand une abeille trouve un bon champ de fleurs, elle revient à la ruche et danse. Sa danse indique aux autres la direction et la distance. C'est un vrai message.",
+     "Avec le nectar, les abeilles fabriquent le miel. Elles le rangent dans des cases de cire à six côtés : les alvéoles. Cette forme ne laisse aucun espace perdu.",
+     "Sans les abeilles, beaucoup de fruits et de légumes ne pousseraient pas. En butinant, elles transportent le pollen d'une fleur à l'autre."],
+  mots:[["le nectar","le liquide sucré que l'abeille prend dans les fleurs"],
+        ["une alvéole","une petite case de cire à six côtés"],
+        ["butiner","aller de fleur en fleur pour ramasser le nectar"]],
+  q:[
+    {k:"Repérer", q:"Qui est la seule abeille à pondre des œufs ?", o:["L'ouvrière","La gardienne","La reine","La danseuse"], r:2},
+    {k:"Repérer", q:"Pourquoi une abeille danse-t-elle en revenant à la ruche ?", o:["Pour s'amuser","Pour dire aux autres où sont les fleurs","Pour se réchauffer","Pour appeler la reine"], r:1},
+    {k:"Repérer", q:"Combien de côtés a une alvéole ?", o:["Quatre","Cinq","Six","Huit"], r:2},
+    {k:"Déduire", q:"Pourquoi la forme de l'alvéole est-elle pratique ?", o:["Parce qu'elle est jolie","Parce qu'elle ne laisse aucun espace perdu","Parce qu'elle est facile à casser","Parce qu'elle laisse passer la lumière"], r:1},
+    {k:"Déduire", q:"D'après le texte, que se passerait-il s'il n'y avait plus d'abeilles ?", o:["Il y aurait plus de fleurs","Beaucoup de fruits et de légumes ne pousseraient plus","Le miel coûterait moins cher","Les ruches seraient plus grandes"], r:1},
+    {k:"Idée principale", q:"De quoi parle surtout ce texte ?", o:["Du travail des abeilles dans la ruche","De la peur des piqûres","Des recettes au miel","Du jardin de l'école"], r:0},
+    {k:"Grammaire", q:"Dans « les abeilles fabriquent le miel », écris le verbe.", court:["fabriquent"]},
+    {k:"Ton opinion", q:"Quel travail de la ruche aimerais-tu faire ? Pourquoi ?",
+     ouvert:"Toute réponse est bonne si le travail choisi existe dans le texte et si la raison est donnée."}
+  ]},
+
+{ id:"amina", genre:"Texte qui raconte", titre:"Les deux carnets", theme:"Les émotions et l'amitié",
+  avant:"Avant de lire : comment se sent-on quand un ami déménage loin ?",
+  p:["Amina compte les boîtes dans le corridor : quatorze. Dans deux jours, elle habitera à trois heures d'ici.",
+     "Sa meilleure amie, Rosalie, vient l'aider à emballer. Elles ne parlent pas beaucoup. Rosalie enroule chaque bibelot dans du papier journal, très lentement, comme si cela pouvait ralentir le temps.",
+     "Le soir, Rosalie sort de son sac deux carnets identiques. « Un pour toi, un pour moi. On écrit dedans chaque semaine, et on s'envoie les pages. »",
+     "Amina serre le carnet contre elle. Elle a encore la gorge serrée, mais un peu moins qu'avant.",
+     "Dans la nouvelle maison, la première chose qu'elle déballe, ce n'est pas ses vêtements. C'est le carnet."],
+  mots:[["un bibelot","un petit objet de décoration"],
+        ["avoir la gorge serrée","avoir de la peine, être sur le point de pleurer"],
+        ["identiques","exactement pareils"]],
+  q:[
+    {k:"Repérer", q:"Combien de boîtes Amina compte-t-elle dans le corridor ?", o:["Quatre","Quatorze","Quarante","Deux"], r:1},
+    {k:"Déduire", q:"Pourquoi Rosalie emballe-t-elle les bibelots très lentement ?", o:["Parce qu'elle est fatiguée","Parce qu'elle ne veut pas que le moment finisse","Parce que les bibelots sont très lourds","Parce qu'elle n'a jamais fait ça"], r:1},
+    {k:"Déduire", q:"Pourquoi les deux amies ne parlent-elles pas beaucoup ?", o:["Parce qu'elles sont fâchées","Parce qu'elles sont tristes de se séparer","Parce qu'elles écoutent la radio","Parce qu'elles ne se connaissent pas bien"], r:1},
+    {k:"Déduire", q:"« Elle a la gorge serrée, mais un peu moins qu'avant. » Cela veut dire :", o:["Le cadeau de Rosalie lui fait du bien","Elle est malade de la gorge","Elle a soif","Elle veut crier"], r:0},
+    {k:"Déduire", q:"Pourquoi déballe-t-elle le carnet avant ses vêtements ?", o:["Parce que le carnet est tout petit","Parce que c'est ce qui compte le plus pour elle","Parce que ses vêtements sont perdus","Parce qu'elle veut dessiner"], r:1},
+    {k:"Idée principale", q:"Ce texte parle surtout :", o:["D'un déménagement et d'une amitié qui continue","D'une chicane entre deux amies","De la façon d'emballer des boîtes","D'un voyage de trois heures en auto"], r:0},
+    {k:"Grammaire", q:"Dans « Amina serre le carnet contre elle », écris le verbe.", court:["serre"]},
+    {k:"Ton opinion", q:"Trouves-tu que l'idée des deux carnets est une bonne idée ? Pourquoi ?",
+     ouvert:"Exemple : « Oui, parce qu'elles vont continuer à se parler même de loin, et elles garderont les pages pour se souvenir. »"}
+  ]},
+
+{ id:"hiver", genre:"Texte qui explique", titre:"L'hiver des animaux", theme:"Les animaux en hiver",
+  avant:"Avant de lire : nomme un animal qui dort tout l'hiver.",
+  p:["Comment les animaux passent-ils l'hiver québécois ? Ils ont trois solutions.",
+     "Certains partent. Les bernaches s'envolent vers le sud en formant un V dans le ciel. Ce V leur permet d'économiser leurs forces : celle qui est devant coupe le vent pour les autres.",
+     "D'autres dorment. La marmotte hiberne : son cœur ralentit et son corps se refroidit. Elle vit sur sa graisse jusqu'au printemps. L'ours, lui, somnole plutôt qu'il n'hiberne vraiment : il peut se réveiller.",
+     "Les derniers restent éveillés. Le lièvre change de couleur : son pelage brun devient blanc, et il disparaît dans la neige. L'écureuil, lui, a caché des graines un peu partout à l'automne. Il en oublie une partie, et ces graines deviennent des arbres."],
+  mots:[["hiberner","dormir tout l'hiver, avec un corps qui ralentit beaucoup"],
+        ["le pelage","les poils qui couvrent un animal"],
+        ["économiser ses forces","se fatiguer moins"]],
+  q:[
+    {k:"Repérer", q:"Combien de solutions les animaux ont-ils pour passer l'hiver ?", o:["Deux","Trois","Quatre","Cinq"], r:1},
+    {k:"Repérer", q:"Pourquoi les bernaches volent-elles en V ?", o:["Pour être plus jolies","Pour économiser leurs forces","Pour voir la neige","Pour rester au chaud"], r:1},
+    {k:"Déduire", q:"Pourquoi le pelage du lièvre devient-il blanc ?", o:["Pour se cacher dans la neige","Parce qu'il a froid","Parce qu'il vieillit","Pour faire peur au renard"], r:0},
+    {k:"Repérer", q:"Quelle est la différence entre l'ours et la marmotte ?", o:["L'ours part vers le sud","L'ours peut se réveiller, la marmotte hiberne vraiment","L'ours change de couleur","L'ours cache des graines"], r:1},
+    {k:"Déduire", q:"Pourquoi des arbres poussent-ils grâce à l'écureuil ?", o:["Parce qu'il plante des arbres exprès","Parce qu'il oublie une partie des graines qu'il a cachées","Parce qu'il mange les feuilles","Parce qu'il creuse des trous"], r:1},
+    {k:"Idée principale", q:"Ce texte explique surtout :", o:["Les trois façons de passer l'hiver chez les animaux","La vie de l'ours seulement","Comment faire un nid","Le climat du Québec en été"], r:0},
+    {k:"Grammaire", q:"Dans « son pelage brun devient blanc », écris les deux adjectifs de couleur (sépare-les par une virgule).", court:["brun blanc","blanc brun"]},
+    {k:"Ton opinion", q:"Quelle solution choisirais-tu si tu étais un animal : partir, dormir ou rester éveillé ? Pourquoi ?",
+     ouvert:"Toute réponse est bonne si elle explique le choix avec une raison prise dans le texte."}
+  ]}
+];
+
+/* ===================== mémoire ===================== */
+var LS = "lecture3e";
+var SCORE = {};
+try{ var raw = localStorage.getItem(LS); if(raw) SCORE = JSON.parse(raw) || {}; }catch(e){}
+function save(){ try{ localStorage.setItem(LS, JSON.stringify(SCORE)); }catch(e){} }
+
+/* ===================== voix ===================== */
+var voice = null;
+function pickVoice(){
+  try{
+    var vs = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+    voice = null;
+    for(var i=0;i<vs.length;i++){ if(/fr[-_]CA/i.test(vs[i].lang)){ voice = vs[i]; break; } }
+    if(!voice){ for(var j=0;j<vs.length;j++){ if(/^fr/i.test(vs[j].lang)){ voice = vs[j]; break; } } }
+  }catch(e){}
+}
+if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+function lire(t){
+  if(!window.speechSynthesis) return;
+  try{
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(t);
+    u.lang = "fr-CA"; u.rate = 0.85;
+    if(voice) u.voice = voice;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* ===================== cartes ===================== */
+function buildCartes(){
+  var host = document.getElementById("cartes");
+  host.innerHTML = "";
+  TEXTES.forEach(function(t){
+    var s = SCORE[t.id];
+    var b = document.createElement("button");
+    b.className = "carte";
+    b.dataset.id = t.id;
+    b.setAttribute("aria-current", "false");
+    b.innerHTML = '<span class="g"></span><span class="t"></span><span class="d"></span>' +
+                  '<span class="sc' + (s ? " ok" : "") + '"></span>';
+    b.querySelector(".g").textContent = t.genre;
+    b.querySelector(".t").textContent = t.titre;
+    b.querySelector(".d").textContent = t.theme;
+    b.querySelector(".sc").textContent = s ? "✓ " + s.bons + " / " + s.total : "jamais lu";
+    b.addEventListener("click", function(){ ouvrir(t.id); });
+    host.appendChild(b);
+  });
+  var faits = TEXTES.filter(function(t){ return SCORE[t.id]; }).length;
+  document.getElementById("statLab").textContent = faits + " / " + TEXTES.length;
+}
+
+/* ===================== panneau ===================== */
+var cur = null, reps = [];
+function ouvrir(id){
+  cur = TEXTES.filter(function(t){ return t.id === id; })[0];
+  if(!cur) return;
+  reps = [];
+  document.getElementById("pGenre").textContent = cur.genre;
+  document.getElementById("pTitre").textContent = cur.titre;
+  document.getElementById("pAvant").textContent = cur.avant;
+  document.getElementById("pTexte").innerHTML = cur.p.map(function(x){ return "<p>" + x + "</p>"; }).join("");
+  document.getElementById("pMots").innerHTML = "<h4>Mots à comprendre</h4><ul>" +
+    cur.mots.map(function(m){ return "<li><b>" + m[0] + "</b> — " + m[1] + "</li>"; }).join("") + "</ul>";
+
+  var host = document.getElementById("pQuestions");
+  host.innerHTML = "";
+  cur.q.forEach(function(q, i){
+    var el = document.createElement("div");
+    el.className = "q";
+    var head = '<span class="kind">' + q.k + '</span>' +
+               '<span class="qt"><span class="no">' + (i+1) + '.</span>' + q.q + '</span>';
+    if(q.o){
+      el.innerHTML = head + '<div class="opts"></div><span class="verdict" hidden></span>';
+      var box = el.querySelector(".opts");
+      q.o.forEach(function(txt, j){
+        var b = document.createElement("button");
+        b.className = "opt"; b.textContent = txt;
+        b.setAttribute("aria-pressed", "false");
+        b.addEventListener("click", function(){
+          Array.prototype.forEach.call(box.children, function(c){ c.setAttribute("aria-pressed","false"); c.className = "opt"; });
+          b.setAttribute("aria-pressed", "true");
+          reps[i] = j;
+          el.querySelector(".verdict").hidden = true;
+          majCnt();
+        });
+        box.appendChild(b);
+      });
+    } else if(q.court){
+      el.innerHTML = head + '<input class="rep" id="c' + i + '" type="text" autocomplete="off" ' +
+                     'autocapitalize="off" spellcheck="false" placeholder="un seul mot" aria-label="Réponse ' + (i+1) + '">' +
+                     '<span class="verdict" hidden></span>';
+      el.querySelector("input").addEventListener("input", function(){
+        reps[i] = this.value;
+        this.className = "rep";
+        el.querySelector(".verdict").hidden = true;
+        majCnt();
+      });
+    } else {
+      el.innerHTML = head + '<input class="rep" id="c' + i + '" type="text" autocomplete="off" ' +
+                     'placeholder="écris ta réponse, ou réponds à voix haute" aria-label="Réponse ' + (i+1) + '">' +
+                     '<span class="verdict" hidden></span>';
+      el.querySelector("input").addEventListener("input", function(){ reps[i] = this.value; majCnt(); });
+    }
+    host.appendChild(el);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll(".carte"), function(c){
+    c.setAttribute("aria-current", c.dataset.id === id ? "true" : "false");
+  });
+  document.getElementById("pRes").hidden = true;
+  var p = document.getElementById("panneau");
+  p.hidden = false;
+  majCnt();
+  p.scrollIntoView({ behavior:"smooth", block:"start" });
+}
+
+function notables(){ return cur.q.filter(function(q){ return q.o || q.court; }).length; }
+function majCnt(){
+  var f = 0;
+  cur.q.forEach(function(q, i){
+    if(!q.o && !q.court) return;
+    var v = reps[i];
+    if(q.o ? (v != null) : (v && String(v).trim() !== "")) f++;
+  });
+  var n = notables();
+  document.getElementById("pCnt").textContent = f + " / " + n + " questions répondues";
+  document.getElementById("pCnt").className = "cnt" + (f === n ? " ready" : "");
+  var b = document.getElementById("pCheck");
+  b.disabled = f < n;
+  b.textContent = f < n ? "Réponds à toutes les questions" : "✅ Corriger";
+}
+
+function corriger(){
+  var bons = 0, n = notables();
+  var blocs = document.getElementById("pQuestions").children;
+  cur.q.forEach(function(q, i){
+    var el = blocs[i], v = el.querySelector(".verdict");
+    if(q.o){
+      var box = el.querySelector(".opts");
+      Array.prototype.forEach.call(box.children, function(c, j){
+        if(j === q.r) c.className = "opt ok";
+        else if(j === reps[i]) c.className = "opt no";
+        else c.className = "opt";
+      });
+      var ok = reps[i] === q.r;
+      if(ok) bons++;
+      v.hidden = false;
+      v.className = "verdict " + (ok ? "ok" : "no");
+      v.textContent = ok ? "✓ Bravo" : "✗ La bonne réponse est en vert. Retourne dans le texte pour voir pourquoi.";
+    } else if(q.court){
+      var input = el.querySelector("input");
+      var ok2 = q.court.some(function(a){ return norm(a) === norm(input.value); });
+      if(ok2) bons++;
+      input.className = "rep " + (ok2 ? "ok" : "no");
+      v.hidden = false;
+      v.className = "verdict " + (ok2 ? "ok" : "no");
+      v.textContent = ok2 ? "✓ Bravo" : "✗ La réponse : " + q.court[0];
+    } else {
+      v.hidden = false;
+      v.className = "verdict mod";
+      v.textContent = "Réponse possible — " + q.ouvert;
+    }
+  });
+  SCORE[cur.id] = { bons:bons, total:n };
+  save();
+  var res = document.getElementById("pRes");
+  res.hidden = false;
+  res.textContent = bons + " / " + n;
+  res.style.color = bons >= n - 1 ? "var(--vert)" : (bons >= n/2 ? "var(--craie)" : "var(--marge)");
+  buildCartes();
+  Array.prototype.forEach.call(document.querySelectorAll(".carte"), function(c){
+    c.setAttribute("aria-current", c.dataset.id === cur.id ? "true" : "false");
+  });
+}
+
+document.getElementById("pCheck").addEventListener("click", corriger);
+document.getElementById("pLire").addEventListener("click", function(){ if(cur) lire(cur.p.join(" ")); });
+document.getElementById("pStop").addEventListener("click", function(){ try{ speechSynthesis.cancel(); }catch(e){} });
+document.getElementById("pPrint").addEventListener("click", function(){ window.print(); });
+document.getElementById("reset").addEventListener("click", function(){
+  if(!confirm("Effacer les résultats des dix textes ?")) return;
+  SCORE = {}; save(); buildCartes();
+  document.getElementById("panneau").hidden = true;
+});
+
+buildCartes();
+})();
+</script>
+</body>
+</html>
