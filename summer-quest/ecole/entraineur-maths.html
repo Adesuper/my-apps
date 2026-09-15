@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>L'entraîneur de maths</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,600&family=Caveat:wght@500;700&display=swap">
+<style>
+:root{
+  --paper:#F4F6FC; --panel:#FFFFFF; --panel-2:#FAFBFF;
+  --ink:#16213A; --ink-soft:#5A6484; --ink-faint:#8B95B4;
+  --rule:#CBD6F2; --grid:rgba(116,148,214,.15);
+  --marge:#D1495B; --marge-soft:rgba(209,73,91,.30);
+  --encre:#2F4FC9; --encre-soft:#E7ECFC;
+  --vert:#2E8B57; --vert-soft:#E4F4EB;
+  --craie:#B57A10; --craie-soft:#FBF0DA;
+  --line:#E2E7F5;
+  --shadow:0 10px 26px rgba(22,33,58,.09);
+  --shadow-sm:0 2px 8px rgba(22,33,58,.06);
+  --display:"Gabarito","Trebuchet MS",system-ui,sans-serif;
+  --body:"Literata",Georgia,"Times New Roman",serif;
+  --hand:"Caveat","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F141F; --panel:#171E2D; --panel-2:#1C2435;
+    --ink:#E8ECF9; --ink-soft:#A2AECB; --ink-faint:#7A86A6;
+    --rule:#2B3752; --grid:rgba(140,170,255,.07);
+    --marge:#E77A89; --marge-soft:rgba(231,122,137,.32);
+    --encre:#8FA8FF; --encre-soft:#1E2946;
+    --vert:#66C795; --vert-soft:#16301F;
+    --craie:#F0BC63; --craie-soft:#2E2513;
+    --line:#27314A;
+    --shadow:0 10px 26px rgba(0,0,0,.34); --shadow-sm:0 2px 8px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F141F; --panel:#171E2D; --panel-2:#1C2435;
+  --ink:#E8ECF9; --ink-soft:#A2AECB; --ink-faint:#7A86A6;
+  --rule:#2B3752; --grid:rgba(140,170,255,.07);
+  --marge:#E77A89; --marge-soft:rgba(231,122,137,.32);
+  --encre:#8FA8FF; --encre-soft:#1E2946;
+  --vert:#66C795; --vert-soft:#16301F;
+  --craie:#F0BC63; --craie-soft:#2E2513;
+  --line:#27314A;
+  --shadow:0 10px 26px rgba(0,0,0,.34); --shadow-sm:0 2px 8px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--body);color:var(--ink);background-color:var(--paper);
+  background-image:
+    repeating-linear-gradient(to bottom, transparent 0 23px, var(--grid) 23px 24px),
+    repeating-linear-gradient(to right, transparent 0 23px, var(--grid) 23px 24px);
+  line-height:1.6;font-size:16px;-webkit-text-size-adjust:100%;
+}
+h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.15;margin:0;text-wrap:balance}
+p{margin:0}
+button,input,select{font-family:var(--display);color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--encre);outline-offset:2px;border-radius:8px}
+.wrap{max-width:920px;margin:0 auto;padding-inline:16px}
+
+header.top{background:var(--panel);border-bottom:1px solid var(--line);padding-block:22px 18px}
+.eyebrow{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;font-weight:700;color:var(--ink-faint)}
+header h1{font-size:clamp(1.55rem,5vw,2.1rem);margin-top:4px}
+header h1 b{color:var(--marge);font-weight:700}
+.sub{color:var(--ink-soft);font-size:.96rem;margin-top:7px;max-width:66ch}
+
+.bar{position:sticky;top:0;z-index:20;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:var(--shadow-sm)}
+.bar-in{display:flex;gap:9px;align-items:center;flex-wrap:wrap;padding-block:10px}
+.bar .lab{font-family:var(--display);font-size:.84rem;color:var(--ink-soft);flex:1 1 150px}
+.btn{font-family:var(--display);font-weight:600;font-size:.88rem;border:1px solid var(--line);background:var(--panel-2);
+  padding:8px 14px;border-radius:11px;transition:border-color .12s,transform .1s}
+.btn:hover:not(:disabled){border-color:var(--encre)}
+.btn:active:not(:disabled){transform:translateY(1px)}
+.btn.primary{background:var(--encre);border-color:var(--encre);color:#fff}
+.btn.good{background:var(--vert);border-color:var(--vert);color:#fff}
+.btn.ghost{background:transparent}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.small{font-size:.8rem;padding:6px 11px;border-radius:9px}
+select{border:1px solid var(--line);border-radius:10px;padding:7px 10px;background:var(--panel-2);font-size:.86rem;font-weight:600}
+
+main{padding-block:22px 70px}
+.strand{margin:22px 0 9px}
+.strand .k{font-family:var(--display);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--marge);font-weight:700}
+.strand h2{font-size:1.2rem;margin-top:1px}
+.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:8px}
+.chip{
+  text-align:left;border:1px solid var(--line);background:var(--panel);border-radius:13px;
+  padding:10px 12px;display:flex;flex-direction:column;gap:5px;box-shadow:var(--shadow-sm);
+}
+.chip:hover{border-color:var(--encre)}
+.chip[aria-current="true"]{border-color:var(--encre);box-shadow:0 0 0 2px var(--encre-soft),var(--shadow-sm)}
+.chip .nm{font-family:var(--display);font-weight:600;font-size:.93rem;line-height:1.25}
+.chip .mt{display:flex;align-items:center;gap:6px}
+.chip .track{flex:1 1 auto;height:6px;border-radius:99px;background:var(--encre-soft);overflow:hidden}
+.chip .track i{display:block;height:100%;background:var(--vert);border-radius:99px}
+.chip .pc{font-family:var(--display);font-size:.72rem;color:var(--ink-faint);font-variant-numeric:tabular-nums;white-space:nowrap}
+.chip.neuf .pc{color:var(--encre)}
+
+.panneau{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:20px;box-shadow:var(--shadow);scroll-margin-top:70px}
+.panneau h3{font-size:1.16rem}
+.tag{display:inline-block;font-family:var(--display);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--encre);background:var(--encre-soft);padding:3px 9px;border-radius:99px;margin-bottom:6px}
+.idee{background:var(--panel-2);border:1px solid var(--line);border-left:4px solid var(--craie);border-radius:12px;padding:12px 14px;margin:11px 0}
+.idee h4{font-family:var(--display);font-size:.71rem;letter-spacing:.12em;text-transform:uppercase;color:var(--craie);margin-bottom:5px}
+.idee ul{margin:0;padding-left:18px}
+.idee li{font-size:.95rem;color:var(--ink-soft);margin-bottom:3px}
+.idee li b{color:var(--ink)}
+.worked{background:var(--encre-soft);border-radius:12px;padding:11px 14px;margin-bottom:12px}
+.worked h4{font-family:var(--display);font-size:.71rem;letter-spacing:.12em;text-transform:uppercase;color:var(--encre);margin-bottom:4px}
+.worked p{font-family:var(--display);font-size:1rem;line-height:1.55}
+.worked b{color:var(--encre)} .worked em{font-style:normal;color:var(--vert);font-weight:700}
+
+.items{display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:2px 20px}
+.item{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px dotted var(--line)}
+.item .num{font-family:var(--display);font-weight:700;font-size:.82rem;color:var(--ink-faint);flex:0 0 22px;padding-top:5px;font-variant-numeric:tabular-nums}
+.item .body{flex:1 1 auto;min-width:0}
+.item .txt{font-family:var(--display);font-size:.99rem;display:block}
+.item .src{font-family:var(--display);font-size:.7rem;color:var(--ink-faint);letter-spacing:.04em;text-transform:uppercase}
+.rep{width:100%;margin-top:4px;padding:7px 10px;font-size:1rem;font-weight:600;border:1.5px solid var(--rule);border-radius:9px;background:var(--panel-2)}
+.rep:focus{border-color:var(--encre);outline:none}
+.rep.ok{border-color:var(--vert);background:var(--vert-soft)}
+.rep.no{border-color:var(--marge);background:var(--craie-soft)}
+.verdict{display:block;font-family:var(--display);font-size:.86rem;font-weight:600;margin-top:3px}
+.verdict.ok{color:var(--vert)} .verdict.no{color:var(--marge)}
+.ft{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:13px;padding-top:10px;border-top:1px solid var(--line)}
+.ft .cnt{font-family:var(--display);font-size:.82rem;color:var(--ink-faint);flex:1 1 130px;font-variant-numeric:tabular-nums}
+.ft .cnt.ready{color:var(--vert);font-weight:700}
+.ft .res{font-family:var(--display);font-weight:700;font-size:.9rem}
+.note{font-family:var(--hand);font-size:1.26rem;line-height:1.35;color:var(--marge);border-left:3px solid var(--marge-soft);padding:4px 0 4px 13px;margin:20px 0}
+.note.blue{color:var(--encre);border-left-color:var(--encre)}
+footer{border-top:1px solid var(--line);margin-top:30px;padding-top:14px;font-size:.84rem;color:var(--ink-faint)}
+@media print{
+  .noprint,.bar,.chips{display:none!important}
+  body{background:#fff;background-image:none;color:#000;font-size:10.5pt}
+  .panneau{box-shadow:none;border-color:#999}
+  .rep{border:none;border-bottom:1.5px dotted #999;border-radius:0;background:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow">3<sup>e</sup> année &middot; les 6 domaines du cahier &middot; 20 thèmes</p>
+    <h1>L'entraîneur de <b>maths</b></h1>
+    <p class="sub">Un thème à la fois : d'abord <b>l'idée</b>, pour comprendre avant même que ce soit vu en classe, puis un exemple fait en entier, puis des questions qui se corrigent toutes seules. La <b>révision mêlée</b> ramène les thèmes déjà travaillés — surtout ceux où ça a coincé.</p>
+  </div>
+</header>
+
+<nav class="bar noprint">
+  <div class="wrap bar-in">
+    <span class="lab">Thèmes essayés : <b id="statLab">0 / 20</b></span>
+    <label class="lab" style="flex:0 0 auto">Niveau&nbsp;
+      <select id="niveau">
+        <option value="1">jusqu'à 500 (maintenant)</option>
+        <option value="2">jusqu'à 10 000 (plus tard)</option>
+      </select>
+    </label>
+    <button class="btn primary" id="melee">🔀 Révision mêlée</button>
+    <button class="btn ghost" id="reset">↺ Effacer les résultats</button>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div id="domaines"></div>
+
+  <div class="panneau" id="panneau" hidden>
+    <span class="tag" id="pTag">Thème</span>
+    <h3 id="pTitre">—</h3>
+    <div class="idee" id="pIdee"></div>
+    <div class="worked" id="pEx"></div>
+    <div class="items" id="pItems"></div>
+    <div class="ft noprint">
+      <span class="cnt" id="pCnt"></span>
+      <span class="res" id="pRes" hidden></span>
+      <button class="btn good" id="pCheck" disabled>✅ Corriger</button>
+      <button class="btn" id="pNew">🔄 D'autres questions</button>
+      <button class="btn ghost" id="pPrint">🖨️ Imprimer</button>
+    </div>
+  </div>
+
+  <p class="note blue">Comment s'en servir pour <b>prendre de l'avance</b> : le dimanche, ouvrez le thème que l'enseignante annonce pour la semaine et lisez seulement « L'idée » et l'exemple — cinq minutes, sans exercices. Quand la leçon arrive en classe, ce n'est plus la première fois qu'il l'entend.</p>
+
+  <p class="note">Et pour ne pas oublier : une <b>révision mêlée</b> par semaine, le vendredi. Elle tire des questions des thèmes déjà faits, en donnant plus de place à ceux où son score est faible. C'est ce qui empêche septembre de s'effacer en décembre.</p>
+
+  <footer>L'entraîneur de maths &middot; les thèmes suivent les 28 sections de son cahier, regroupées en 6 domaines &middot; ses résultats restent sur cet appareil.</footer>
+</main>
+
+<script>
+(function(){
+"use strict";
+
+/* ===================== outils ===================== */
+function rnd(a,b){ return a + Math.floor(Math.random()*(b-a+1)); }
+function pick(arr){ return arr[rnd(0,arr.length-1)]; }
+function nums(str){ var m = String(str).match(/\d+/g); return m ? m.map(Number) : []; }
+function sameSeq(a,b){ if(a.length!==b.length) return false; for(var i=0;i<a.length;i++){ if(a[i]!==b[i]) return false; } return true; }
+function sameSet(a,b){
+  var f=function(p,q){return p-q;};
+  return sameSeq(a.slice().sort(f), b.slice().sort(f));
+}
+function norm(s){
+  return String(s).toLowerCase().normalize("NFD")
+    .replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]/g,"");
+}
+function dec(s){
+  var m = String(s).replace(/\s/g,"").match(/-?\d+(?:[.,]\d+)?/);
+  return m ? parseFloat(m[0].replace(",",".")) : null;
+}
+function juste(it, saisie){
+  if(!saisie || !saisie.trim()) return false;
+  if(it.mode === "vf"){
+    var v = norm(saisie), att = norm(it.alts[0]);
+    var dit = (v === "v" || v.indexOf("vrai") === 0) ? "vrai"
+            : ((v === "f" || v.indexOf("faux") === 0) ? "faux" : "");
+    return dit !== "" && dit === att;
+  }
+  if(it.mode === "cmp"){
+    var b = String(saisie), w = norm(saisie), dit = "";
+    if(b.indexOf("<") >= 0 || w === "pluspetit" || w === "pluspetitque") dit = "<";
+    else if(b.indexOf(">") >= 0 || w === "plusgrand" || w === "plusgrandque") dit = ">";
+    else if(b.indexOf("=") >= 0 || w === "egal" || w === "egale" || w === "pareil") dit = "=";
+    return dit !== "" && dit === it.alts[0];
+  }
+  if(it.mode === "txt"){
+    var n = norm(saisie);
+    return it.alts.some(function(a){ return n === norm(a); });
+  }
+  if(it.mode === "dec"){
+    var d = dec(saisie);
+    return d !== null && it.alts.some(function(a){ return Math.abs(d - a) < 0.005; });
+  }
+  var got = nums(saisie);
+  if(!got.length) return false;
+  return it.alts.some(function(a){ return it.ordre === false ? sameSet(got,a) : sameSeq(got,a); });
+}
+var NIV = 1;
+function bigN(){ return NIV === 1 ? rnd(101,500) : rnd(1001,9999); }
+
+/* ===================== les thèmes ===================== */
+/* chaque thème : idée (avant la classe), exemple travaillé, générateur auto-corrigé */
+var THEMES = [
+/* ---------- ① NOMBRES ---------- */
+{ id:"position", dom:0, nom:"Valeur de position",
+  idee:["Chaque chiffre a une <b>place</b>, et sa place lui donne sa <b>valeur</b>.",
+        "De droite à gauche : unités, dizaines, centaines, unités de mille.",
+        "Le <b>chiffre</b> est le symbole ; la <b>valeur</b> est ce qu'il vaut à sa place."],
+  ex:"Dans <b>4 738</b> : le 7 est aux centaines, il vaut <em>700</em>. Le 3 est aux dizaines, il vaut <em>30</em>.",
+  ph:"ex. 700",
+  gen:function(){
+    var n = bigN(), s = String(n), i = rnd(0, s.length-1);
+    var val = Number(s[i]) * Math.pow(10, s.length-1-i);
+    var noms = ["unités","dizaines","centaines","unités de mille"];
+    if(rnd(0,1)){
+      return { q:"Dans " + n + ", quelle est la valeur du chiffre " + s[i] + " ?", a:String(val), alts:[[val]] };
+    }
+    var pos = noms[s.length-1-i];
+    return { q:"Dans " + n + ", quel chiffre occupe la position des " + pos + " ?", a:s[i], alts:[[Number(s[i])]] };
+  }},
+
+{ id:"comparaison", dom:0, nom:"Comparaison et ordre",
+  idee:["On compare d'abord le nombre de <b>chiffres</b> : plus de chiffres, plus grand.",
+        "À égalité, on compare <b>de gauche à droite</b>, au premier chiffre différent.",
+        "Le signe ouvre sa bouche vers le <b>plus grand</b> : 347 &lt; 374."],
+  ex:"<b>347 et 374</b> : même nombre de chiffres, même 3. On regarde ensuite 4 et 7 → 4 &lt; 7, donc <em>347 &lt; 374</em>.",
+  ph:"ex. <  ou  >  ou  =",
+  gen:function(){
+    var a = bigN(), b = rnd(0,3) ? a + rnd(-60,60) : a;
+    if(b < 0) b = a + 10;
+    var sg = a < b ? "<" : (a > b ? ">" : "=");
+    return { q:"Compare : " + a + " ___ " + b, a:sg, alts:[sg], mode:"cmp" };
+  }},
+
+{ id:"arrondir", dom:0, nom:"Approximation, arrondir",
+  idee:["Arrondir, c'est trouver le nombre rond <b>le plus proche</b>.",
+        "À la dizaine près : on regarde les <b>unités</b>. 0 à 4 → on descend ; 5 à 9 → on monte.",
+        "À la centaine près : on regarde les <b>dizaines</b>, même règle."],
+  ex:"<b>347</b> à la dizaine près : les unités valent 7, donc on monte → <em>350</em>. À la centaine près : 4 dizaines, donc on descend → <em>300</em>.",
+  ph:"le nombre arrondi",
+  gen:function(){
+    var n = bigN(), d = rnd(0,1) ? 10 : 100;
+    var r = Math.round(n/d)*d;
+    return { q:"Arrondis " + n + " à la " + (d === 10 ? "dizaine" : "centaine") + " près.", a:String(r), alts:[[r]] };
+  }},
+
+{ id:"pairimpair", dom:0, nom:"Nombres pairs et impairs",
+  idee:["Un nombre est <b>pair</b> si on peut le partager en deux parts égales.",
+        "Il suffit de regarder le <b>chiffre des unités</b> : 0, 2, 4, 6, 8 → pair.",
+        "1, 3, 5, 7, 9 → <b>impair</b>. Les autres chiffres ne changent rien."],
+  ex:"<b>4 738</b> se termine par 8 → <em>pair</em>. <b>347</b> se termine par 7 → <em>impair</em>.",
+  ph:"pair ou impair",
+  gen:function(){
+    var n = bigN();
+    var r = n % 2 === 0 ? "pair" : "impair";
+    return { q:n + " est-il pair ou impair ?", a:r, alts:[r], mode:"txt" };
+  }},
+
+{ id:"suites", dom:0, nom:"Suites numériques",
+  idee:["Dans une suite, on passe d'un nombre au suivant <b>toujours de la même façon</b>.",
+        "On cherche le <b>bond</b> : on soustrait deux nombres voisins.",
+        "Ensuite on applique le même bond pour continuer."],
+  ex:"<b>120, 130, 140, ___</b> : de 120 à 130, le bond est +10. Donc la suite continue à <em>150</em>.",
+  ph:"le nombre suivant",
+  gen:function(){
+    var pas = pick([2,5,10,25,50,100,-10,-100]);
+    var d = rnd(1,4) * 100 + rnd(0,9) * 10;
+    if(pas < 0) d = Math.abs(pas) * 6 + rnd(0,80);
+    var s = [d, d+pas, d+2*pas, d+3*pas];
+    return { q:"Complète : " + s[0] + ", " + s[1] + ", " + s[2] + ", ___", a:String(s[3]), alts:[[s[3]]] };
+  }},
+
+/* ---------- ② OPÉRATIONS ---------- */
+{ id:"calculmental", dom:1, nom:"Calcul mental",
+  idee:["Ajouter 9, c'est ajouter 10 <b>puis enlever 1</b>.",
+        "Ajouter 11, c'est ajouter 10 <b>puis ajouter 1</b>.",
+        "Pour compléter à 100, on cherche ce qui manque aux dizaines, puis aux unités."],
+  ex:"<b>47 + 9</b> : 47 + 10 = 57, puis −1 → <em>56</em>. &nbsp; <b>63 + ? = 100</b> → <em>37</em>.",
+  ph:"le résultat",
+  gen:function(){
+    var k = rnd(1,3);
+    if(k === 1){ var a = rnd(15,89), b = pick([9,11,19,21]); return { q:a + " + " + b + " = ___", a:String(a+b), alts:[[a+b]] }; }
+    if(k === 2){ var c = rnd(11,89); return { q:c + " + ___ = 100", a:String(100-c), alts:[[100-c]] }; }
+    var d = rnd(12,49); return { q:"Le double de " + d + " = ___", a:String(d*2), alts:[[d*2]] };
+  }},
+
+{ id:"addsoustr", dom:1, nom:"Addition et soustraction",
+  idee:["On aligne les <b>unités sous les unités</b>, les dizaines sous les dizaines.",
+        "On commence toujours par la <b>droite</b>.",
+        "Si le résultat dépasse 9, on <b>échange</b> : 10 unités deviennent 1 dizaine."],
+  ex:"<b>238 + 145</b> : 8+5 = 13 → j'écris 3, je retiens 1. Puis 3+4+1 = 8. Puis 2+1 = 3 → <em>383</em>.",
+  ph:"le résultat",
+  gen:function(){
+    var lim = NIV === 1 ? 500 : 9999;
+    if(rnd(0,1)){
+      var a = rnd(105, Math.floor(lim*0.6)), b = rnd(105, Math.floor(lim*0.4));
+      return { q:a + " + " + b + " = ___", a:String(a+b), alts:[[a+b]] };
+    }
+    var c = rnd(Math.floor(lim*0.5), lim), d = rnd(105, Math.floor(lim*0.45));
+    return { q:c + " − " + d + " = ___", a:String(c-d), alts:[[c-d]] };
+  }},
+
+{ id:"termesmanquants", dom:1, nom:"Termes manquants et expressions égales",
+  idee:["Pour trouver un terme qui manque dans une <b>addition</b>, on fait une <b>soustraction</b>.",
+        "Pour un terme qui manque dans une soustraction, on regarde ce qui reste.",
+        "Deux expressions sont <b>égales</b> si elles donnent le même résultat, même si elles ne se ressemblent pas."],
+  ex:"<b>45 + ___ = 72</b> → 72 − 45 = <em>27</em>. &nbsp; <b>5 × 4</b> et <b>10 + 10</b> valent tous deux 20 : ils sont <em>égaux</em>.",
+  ph:"le nombre qui manque",
+  gen:function(){
+    var k = rnd(1,3);
+    if(k === 1){ var a = rnd(20,180), b = rnd(20,180); return { q:a + " + ___ = " + (a+b), a:String(b), alts:[[b]] }; }
+    if(k === 2){ var c = rnd(120,480), d = rnd(20,110); return { q:c + " − ___ = " + (c-d), a:String(d), alts:[[d]] }; }
+    var e = rnd(2,9), f = rnd(2,9), vrai = rnd(0,1);
+    var g = vrai ? e*f : e*f + rnd(1,5);
+    return { q:"Vrai ou faux ? " + e + " × " + f + " = " + g, a:vrai ? "Vrai" : "Faux — " + e + " × " + f + " = " + (e*f),
+             alts:[vrai ? "vrai" : "faux"], mode:"vf" };
+  }},
+
+{ id:"multiplication", dom:1, nom:"Sens de la multiplication et tables",
+  idee:["Multiplier, c'est ajouter <b>plusieurs fois le même nombre</b>.",
+        "4 × 3 se lit « 4 groupes de 3 » : 3 + 3 + 3 + 3 = 12.",
+        "L'ordre ne change rien : 4 × 3 = 3 × 4. Ça divise les tables à apprendre par deux."],
+  ex:"<b>3 + 3 + 3 + 3 = 4 × 3 = <em>12</em></b>. &nbsp; 6 groupes de 5 jetons → <b>6 × 5 = <em>30</em></b>.",
+  ph:"le résultat",
+  gen:function(){
+    var k = rnd(1,3), a = rnd(2,10), b = rnd(2,10);
+    if(k === 1) return { q:a + " × " + b + " = ___", a:String(a*b), alts:[[a*b]] };
+    if(k === 2) return { q:a + " groupes de " + b + " = ___", a:String(a*b), alts:[[a*b]] };
+    var rep = new Array(a).fill(b).join(" + ");
+    return { q:rep + " = ___", a:String(a*b), alts:[[a*b]] };
+  }},
+
+{ id:"division", dom:1, nom:"Sens de la division",
+  idee:["Diviser, c'est <b>partager en parts égales</b>, ou voir combien de fois un nombre entre dans un autre.",
+        "12 ÷ 3 : « je partage 12 en 3 parts égales » → 4 dans chaque part.",
+        "La division est l'<b>inverse</b> de la multiplication : si 3 × 4 = 12, alors 12 ÷ 3 = 4."],
+  ex:"<b>20 biscuits pour 5 amis</b> : 20 ÷ 5 = <em>4</em> biscuits chacun, parce que 5 × 4 = 20.",
+  ph:"le résultat",
+  gen:function(){
+    var b = rnd(2,10), r = rnd(2,10), a = b*r;
+    if(rnd(0,1)) return { q:a + " ÷ " + b + " = ___", a:String(r), alts:[[r]] };
+    return { q:a + " bonbons partagés également entre " + b + " enfants : chacun en reçoit ___", a:String(r), alts:[[r]] };
+  }},
+
+{ id:"multigrands", dom:1, nom:"Multiplier un grand nombre",
+  idee:["On décompose le grand nombre, puis on multiplie <b>chaque morceau</b>.",
+        "23 × 4 = (20 × 4) + (3 × 4).",
+        "On additionne les deux résultats à la fin."],
+  ex:"<b>23 × 4</b> : 20 × 4 = 80, puis 3 × 4 = 12, puis 80 + 12 = <em>92</em>.",
+  ph:"le résultat",
+  gen:function(){
+    var a = rnd(11,49), b = rnd(2,9);
+    return { q:a + " × " + b + " = ___", a:String(a*b), alts:[[a*b]] };
+  }},
+
+/* ---------- ③ FRACTIONS ET DÉCIMAUX ---------- */
+{ id:"fractions", dom:2, nom:"Les fractions",
+  idee:["Le nombre <b>du bas</b> (dénominateur) dit en combien de parts égales le tout est coupé.",
+        "Le nombre <b>du haut</b> (numérateur) dit combien de parts on prend.",
+        "Plus le nombre du bas est grand, plus les parts sont <b>petites</b>."],
+  ex:"Une tarte coupée en 4, on en prend 3 → <b><em>3/4</em></b>. La moitié de 10 → <b><em>5</em></b>.",
+  ph:"ex. 3/4  ou  un nombre",
+  gen:function(){
+    var k = rnd(1,3);
+    if(k === 1){ var d = pick([2,3,4,5,6,8]), n = rnd(1,d-1);
+      return { q:"Une figure est coupée en " + d + " parts égales, " + n + " sont coloriées. Quelle fraction ?", a:n + "/" + d, alts:[[n,d]] }; }
+    if(k === 2){ var p = pick([2,4,6,8,10,12,14,16,20]); return { q:"La moitié de " + p + " = ___", a:String(p/2), alts:[[p/2]] }; }
+    var q4 = pick([4,8,12,16,20,24]); return { q:"Le quart de " + q4 + " = ___", a:String(q4/4), alts:[[q4/4]] };
+  }},
+
+{ id:"fracequiv", dom:2, nom:"Fractions équivalentes",
+  idee:["Deux fractions sont <b>équivalentes</b> si elles représentent la même quantité.",
+        "On multiplie le haut <b>et</b> le bas par le même nombre : 1/2 = 2/4 = 4/8.",
+        "Le dessin ne change pas : c'est la même part de tarte, coupée plus finement."],
+  ex:"<b>1/2 = ___/4</b> : le bas passe de 2 à 4, donc ×2 ; le haut fait pareil : 1 × 2 = <em>2</em>.",
+  ph:"le nombre qui manque",
+  gen:function(){
+    var d = pick([2,3,4,5]), n = rnd(1,d-1), f = rnd(2,4);
+    if(rnd(0,1)) return { q:"Complète : " + n + "/" + d + " = ___/" + (d*f), a:String(n*f), alts:[[n*f]] };
+    return { q:"Complète : " + n + "/" + d + " = " + (n*f) + "/___", a:String(d*f), alts:[[d*f]] };
+  }},
+
+{ id:"decimaux", dom:2, nom:"Nombres décimaux et monnaie",
+  idee:["Après la virgule viennent les <b>dixièmes</b>, puis les <b>centièmes</b>.",
+        "0,1 c'est un dixième — comme 10 ¢ dans une piastre.",
+        "En argent : 2,50 $ se lit « deux et cinquante », soit 2 $ et 50 ¢."],
+  ex:"<b>3 dixièmes</b> s'écrit <em>0,3</em>. &nbsp; <b>2,50 $ + 1,25 $</b> = <em>3,75 $</em>.",
+  ph:"ex. 3,75",
+  gen:function(){
+    var k = rnd(1,3);
+    if(k === 1){ var d = rnd(1,9), cent = rnd(0,1);
+      return cent ? { q:d + " centièmes s'écrivent ___", a:"0,0" + d, alts:[d/100], mode:"dec" }
+                  : { q:d + " dixièmes s'écrivent ___", a:"0," + d, alts:[d/10], mode:"dec" }; }
+    if(k === 2){
+      var a = rnd(1,8) + rnd(0,3)*0.25, b = rnd(1,5) + rnd(0,3)*0.25;
+      var s = Math.round((a+b)*100)/100;
+      return { q:a.toFixed(2).replace(".",",") + " $ + " + b.toFixed(2).replace(".",",") + " $ = ___", a:s.toFixed(2).replace(".",",") + " $", alts:[s], mode:"dec" };
+    }
+    var paye = pick([5,10,20]), prix = rnd(1,paye-1) + pick([0,0.25,0.5,0.75]);
+    var monnaie = Math.round((paye - prix)*100)/100;
+    return { q:"Tu paies " + paye + " $ pour un article de " + prix.toFixed(2).replace(".",",") + " $. Combien de monnaie ?",
+             a:monnaie.toFixed(2).replace(".",",") + " $", alts:[monnaie], mode:"dec" };
+  }},
+
+/* ---------- ④ GÉOMÉTRIE ---------- */
+{ id:"symetrie", dom:3, nom:"Symétrie et plan cartésien",
+  idee:["Un <b>axe de symétrie</b> coupe une figure en deux moitiés qui se superposent exactement.",
+        "Une réflexion, c'est l'image dans un miroir : même taille, sens inversé.",
+        "Sur un plan, on lit toujours <b>d'abord à droite, ensuite en haut</b> : (3, 2)."],
+  ex:"Le <b>carré</b> a <em>4</em> axes de symétrie. Le point <b>(3, 2)</b> : 3 pas à droite, puis 2 pas en haut.",
+  ph:"un nombre",
+  gen:function(){
+    var k = rnd(1,3);
+    if(k === 1){
+      var f = pick([["carré",4],["rectangle",2],["triangle équilatéral",3],["cercle","une infinité"],["losange",2]]);
+      if(typeof f[1] === "string") return { q:"Combien d'axes de symétrie a le cercle ?", a:"une infinité", alts:["une infinité","infinite","infini"], mode:"txt" };
+      return { q:"Combien d'axes de symétrie a un " + f[0] + " ?", a:String(f[1]), alts:[[f[1]]] };
+    }
+    var x = rnd(1,9), y = rnd(1,9);
+    if(k === 2) return { q:"Pour aller au point (" + x + ", " + y + "), combien de pas vers la droite ?", a:String(x), alts:[[x]] };
+    return { q:"Pour aller au point (" + x + ", " + y + "), combien de pas vers le haut ?", a:String(y), alts:[[y]] };
+  }},
+
+{ id:"polygones", dom:3, nom:"Angles, droites et polygones",
+  idee:["Un <b>polygone</b> est une figure fermée faite de segments droits.",
+        "On le nomme par son nombre de <b>côtés</b> : 3 triangle, 4 quadrilatère, 5 pentagone, 6 hexagone.",
+        "Deux droites <b>parallèles</b> ne se croisent jamais ; <b>perpendiculaires</b>, elles forment un angle droit."],
+  ex:"Un <b>hexagone</b> a <em>6</em> côtés. Un <b>angle droit</b> mesure <em>90</em> degrés — le coin d'une feuille.",
+  ph:"ta réponse",
+  gen:function(){
+    var k = rnd(1,3);
+    var poly = [["triangle",3],["quadrilatère",4],["pentagone",5],["hexagone",6],["octogone",8]];
+    if(k === 1){ var p = pick(poly); return { q:"Combien de côtés a un " + p[0] + " ?", a:String(p[1]), alts:[[p[1]]] }; }
+    if(k === 2){ var p2 = pick(poly); return { q:"Comment s'appelle un polygone à " + p2[1] + " côtés ?", a:p2[0], alts:[p2[0]], mode:"txt" }; }
+    var d = pick([["ne se croisent jamais","parallèles"],["forment un angle droit","perpendiculaires"]]);
+    return { q:"Deux droites qui " + d[0] + " sont des droites ___", a:d[1], alts:[d[1]], mode:"txt" };
+  }},
+
+{ id:"solides", dom:3, nom:"Prismes, pyramides et développements",
+  idee:["Un <b>prisme</b> a deux bases identiques ; une <b>pyramide</b> a une base et une pointe.",
+        "On les nomme d'après leur <b>base</b> : prisme à base triangulaire, pyramide à base carrée.",
+        "Le <b>développement</b>, c'est le solide déplié à plat, comme une boîte ouverte."],
+  ex:"Le <b>cube</b> a <em>6</em> faces, <em>12</em> arêtes et <em>8</em> sommets.",
+  ph:"un nombre",
+  gen:function(){
+    var S = [
+      { n:"cube", f:6, a:12, s:8 },
+      { n:"prisme à base triangulaire", f:5, a:9, s:6 },
+      { n:"prisme à base rectangulaire", f:6, a:12, s:8 },
+      { n:"pyramide à base carrée", f:5, a:8, s:5 },
+      { n:"pyramide à base triangulaire", f:4, a:6, s:4 }
+    ];
+    var x = pick(S), k = rnd(1,3);
+    if(k === 1) return { q:"Combien de faces a un " + x.n + " ?", a:String(x.f), alts:[[x.f]] };
+    if(k === 2) return { q:"Combien d'arêtes a un " + x.n + " ?", a:String(x.a), alts:[[x.a]] };
+    return { q:"Combien de sommets a un " + x.n + " ?", a:String(x.s), alts:[[x.s]] };
+  }},
+
+/* ---------- ⑤ MESURE ---------- */
+{ id:"longueur", dom:4, nom:"Longueur, périmètre et aire",
+  idee:["1 m = 100 cm, 1 dm = 10 cm, 1 m = 10 dm.",
+        "Le <b>périmètre</b> est le tour de la figure : on additionne tous les côtés.",
+        "L'<b>aire</b> est la surface à l'intérieur : pour un rectangle, longueur × largeur."],
+  ex:"Rectangle de <b>5 cm sur 3 cm</b> : périmètre = 5+3+5+3 = <em>16 cm</em> ; aire = 5 × 3 = <em>15 carrés</em>.",
+  ph:"un nombre",
+  gen:function(){
+    var k = rnd(1,4);
+    if(k === 1){ var m = rnd(1,9); return { q:m + " m = ___ cm", a:String(m*100), alts:[[m*100]] }; }
+    if(k === 2){ var d = rnd(2,9); return { q:d + " dm = ___ cm", a:String(d*10), alts:[[d*10]] }; }
+    var L = rnd(3,12), l = rnd(2,9);
+    if(k === 3) return { q:"Périmètre d'un rectangle de " + L + " cm sur " + l + " cm = ___ cm", a:String(2*(L+l)), alts:[[2*(L+l)]] };
+    return { q:"Aire d'un rectangle de " + L + " carrés sur " + l + " carrés = ___ carrés", a:String(L*l), alts:[[L*l]] };
+  }},
+
+{ id:"temps", dom:4, nom:"Le temps, la capacité et la masse",
+  idee:["1 heure = 60 minutes, 1 minute = 60 secondes, 1 jour = 24 heures.",
+        "1 L = 1 000 mL, 1 kg = 1 000 g.",
+        "Pour ajouter des minutes : si on dépasse 60, on avance d'une heure et on enlève 60."],
+  ex:"Il est <b>3 h 45</b>, dans 20 minutes : 45 + 20 = 65 → une heure de plus et 5 minutes → <em>4 h 05</em>.",
+  ph:"ta réponse",
+  gen:function(){
+    var k = rnd(1,4);
+    if(k === 1){ var h = rnd(1,11), m = pick([0,10,15,20,30,40,45,50]), add = pick([10,15,20,25,30]);
+      var t = h*60 + m + add, nh = Math.floor(t/60), nm = t%60;
+      return { q:"Il est " + h + " h " + (m<10?"0":"") + m + ". Dans " + add + " minutes, il sera ___", a:nh + " h " + (nm<10?"0":"") + nm, alts:[[nh,nm]] }; }
+    if(k === 2){ var hh = rnd(2,9); return { q:hh + " heures = ___ minutes", a:String(hh*60), alts:[[hh*60]] }; }
+    if(k === 3){ var l = rnd(2,9); return { q:l + " L = ___ mL", a:String(l*1000), alts:[[l*1000]] }; }
+    var kg = rnd(2,9); return { q:kg + " kg = ___ g", a:String(kg*1000), alts:[[kg*1000]] };
+  }},
+
+/* ---------- ⑥ DONNÉES ---------- */
+{ id:"donnees", dom:5, nom:"Tableaux, diagrammes et probabilité",
+  idee:["Dans un <b>diagramme à bandes</b>, la hauteur de la bande donne la quantité.",
+        "Pour comparer deux bandes, on <b>soustrait</b>.",
+        "Un événement est <b>certain</b>, <b>possible</b> ou <b>impossible</b> — jamais « peut-être un peu »."],
+  ex:"Chiens <b>7</b>, chats <b>4</b> → il y a <em>3</em> chiens de plus, et <em>11</em> animaux en tout.",
+  ph:"ta réponse",
+  gen:function(){
+    var k = rnd(1,3);
+    var a = rnd(3,12), b = rnd(3,12), c = rnd(3,12);
+    if(k === 1) return { q:"Sondage — bleu : " + a + ", rouge : " + b + ", vert : " + c + ". Combien d'élèves en tout ?",
+                         a:String(a+b+c), alts:[[a+b+c]] };
+    if(k === 2) return { q:"Sondage — bleu : " + a + ", rouge : " + b + ". Combien de plus pour la plus grande bande ?",
+                         a:String(Math.abs(a-b)), alts:[[Math.abs(a-b)]] };
+    var ev = pick([
+      ["Le soleil se lèvera demain","certain"],
+      ["Il neigera en juillet à Montréal","impossible"],
+      ["Un chien parlera français","impossible"],
+      ["Tu tireras une bille rouge dans un sac de billes rouges","certain"],
+      ["Il pleuvra demain","possible"],
+      ["Tu obtiendras un 6 avec un dé","possible"],
+      ["Tu obtiendras un 8 avec un dé à 6 faces","impossible"]
+    ]);
+    return { q:"Certain, possible ou impossible ? « " + ev[0] + " »", a:ev[1], alts:[ev[1]], mode:"txt" };
+  }}
+];
+
+var DOMAINES = [
+  { k:"Domaine ①", t:"Nombres et valeur de position" },
+  { k:"Domaine ②", t:"Opérations" },
+  { k:"Domaine ③", t:"Fractions et nombres décimaux" },
+  { k:"Domaine ④", t:"Géométrie et espace" },
+  { k:"Domaine ⑤", t:"Mesure" },
+  { k:"Domaine ⑥", t:"Données et probabilité" }
+];
+
+/* ===================== mémoire ===================== */
+var LS = "entraineur3e";
+var SCORE = {};
+try{ var raw = localStorage.getItem(LS); if(raw) SCORE = JSON.parse(raw) || {}; }catch(e){}
+function save(){ try{ localStorage.setItem(LS, JSON.stringify(SCORE)); }catch(e){} }
+function stat(id){ return SCORE[id] || { vus:0, bons:0 }; }
+function taux(id){ var s = stat(id); return s.vus ? s.bons / s.vus : null; }
+
+/* ===================== grille des thèmes ===================== */
+function buildGrille(){
+  var host = document.getElementById("domaines");
+  host.innerHTML = "";
+  DOMAINES.forEach(function(d, di){
+    var wrap = document.createElement("div");
+    var lot = THEMES.filter(function(t){ return t.dom === di; });
+    wrap.innerHTML = '<div class="strand"><p class="k">' + d.k + '</p><h2>' + d.t + '</h2></div><div class="chips"></div>';
+    var chips = wrap.querySelector(".chips");
+    lot.forEach(function(t){
+      var s = stat(t.id), tx = taux(t.id);
+      var b = document.createElement("button");
+      b.className = "chip" + (s.vus ? "" : " neuf");
+      b.setAttribute("aria-current", "false");
+      b.dataset.id = t.id;
+      b.innerHTML = '<span class="nm"></span><span class="mt"><span class="track"><i style="width:' +
+        (tx === null ? 0 : Math.round(tx*100)) + '%"></i></span><span class="pc">' +
+        (tx === null ? "jamais fait" : Math.round(tx*100) + " %") + '</span></span>';
+      b.querySelector(".nm").textContent = t.nom;
+      b.addEventListener("click", function(){ ouvrir(t.id); });
+      chips.appendChild(b);
+    });
+    host.appendChild(wrap);
+  });
+  var faits = THEMES.filter(function(t){ return stat(t.id).vus > 0; }).length;
+  document.getElementById("statLab").textContent = faits + " / " + THEMES.length;
+}
+
+/* ===================== panneau d'exercices ===================== */
+var courant = null, items = [], melange = false;
+function ouvrir(id){
+  courant = THEMES.filter(function(t){ return t.id === id; })[0];
+  melange = false;
+  if(!courant) return;
+  document.getElementById("pTag").textContent = DOMAINES[courant.dom].t;
+  document.getElementById("pTitre").textContent = courant.nom;
+  document.getElementById("pIdee").innerHTML =
+    "<h4>L'idée — à lire avant la classe</h4><ul>" +
+    courant.idee.map(function(l){ return "<li>" + l + "</li>"; }).join("") + "</ul>";
+  document.getElementById("pEx").innerHTML = "<h4>Un exemple fait en entier</h4><p>" + courant.ex + "</p>";
+  document.getElementById("pEx").hidden = false;
+  document.getElementById("pIdee").hidden = false;
+  poser(6, [courant]);
+  Array.prototype.forEach.call(document.querySelectorAll(".chip"), function(c){
+    c.setAttribute("aria-current", c.dataset.id === id ? "true" : "false");
+  });
+  var p = document.getElementById("panneau");
+  p.hidden = false;
+  p.scrollIntoView({ behavior:"smooth", block:"start" });
+}
+
+function ouvrirMelee(){
+  var faits = THEMES.filter(function(t){ return stat(t.id).vus > 0; });
+  if(faits.length < 2){
+    alert("Fais d'abord deux thèmes ou plus — la révision mêlée pioche dedans.");
+    return;
+  }
+  courant = null; melange = true;
+  document.getElementById("pTag").textContent = "Révision";
+  document.getElementById("pTitre").textContent = "Révision mêlée";
+  document.getElementById("pIdee").hidden = true;
+  document.getElementById("pEx").hidden = true;
+  // deux fois plus de chances pour un thème faible
+  var sac = [];
+  faits.forEach(function(t){
+    var tx = taux(t.id);
+    var poids = tx === null ? 2 : (tx < 0.5 ? 4 : (tx < 0.8 ? 2 : 1));
+    for(var i = 0; i < poids; i++) sac.push(t);
+  });
+  poser(10, sac);
+  Array.prototype.forEach.call(document.querySelectorAll(".chip"), function(c){ c.setAttribute("aria-current", "false"); });
+  var p = document.getElementById("panneau");
+  p.hidden = false;
+  p.scrollIntoView({ behavior:"smooth", block:"start" });
+}
+
+function poser(n, sac){
+  items = [];
+  var host = document.getElementById("pItems");
+  host.innerHTML = "";
+  for(var i = 0; i < n; i++){
+    var th = sac.length === 1 ? sac[0] : pick(sac);
+    var it = th.gen();
+    it.mode = it.mode || "num";
+    it.theme = th.id;
+    it.n = i + 1;
+    items.push(it);
+    var row = document.createElement("div");
+    row.className = "item";
+    row.innerHTML = '<span class="num">' + it.n + '</span><div class="body">' +
+      (melange ? '<span class="src">' + th.nom + '</span>' : '') +
+      '<span class="txt">' + it.q + '</span>' +
+      '<input class="rep" id="q' + it.n + '" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" ' +
+      'placeholder="' + (th.ph || "") + '" aria-label="Réponse ' + it.n + '">' +
+      '<span class="verdict" hidden></span></div>';
+    host.appendChild(row);
+  }
+  items.forEach(function(it){
+    var input = document.getElementById("q" + it.n);
+    input.addEventListener("input", function(){
+      input.className = "rep";
+      var v = input.parentNode.querySelector(".verdict");
+      v.hidden = true; v.textContent = "";
+      it.ok = null;
+      majCnt();
+    });
+    input.addEventListener("keydown", function(e){
+      if(e.key === "Enter"){
+        var nx = document.getElementById("q" + (it.n + 1));
+        if(nx) nx.focus(); else corriger();
+      }
+    });
+  });
+  document.getElementById("pRes").hidden = true;
+  majCnt();
+}
+
+function majCnt(){
+  var f = items.filter(function(it){
+    var el = document.getElementById("q" + it.n);
+    return el && el.value.trim() !== "";
+  }).length;
+  document.getElementById("pCnt").textContent = f + " / " + items.length + " remplies";
+  document.getElementById("pCnt").className = "cnt" + (f === items.length ? " ready" : "");
+  var b = document.getElementById("pCheck");
+  b.disabled = f < items.length;
+  b.textContent = f < items.length ? "Réponds à tout" : "✅ Corriger";
+}
+
+function corriger(){
+  var bons = 0;
+  items.forEach(function(it){
+    var input = document.getElementById("q" + it.n);
+    var v = input.parentNode.querySelector(".verdict");
+    var ok = juste(it, input.value);
+    it.ok = ok;
+    if(ok) bons++;
+    input.className = "rep " + (ok ? "ok" : "no");
+    v.hidden = false;
+    v.className = "verdict " + (ok ? "ok" : "no");
+    v.textContent = ok ? "✓ Bravo" : "✗ La réponse : " + it.a;
+    var s = SCORE[it.theme] || { vus:0, bons:0 };
+    s.vus++; if(ok) s.bons++;
+    SCORE[it.theme] = s;
+  });
+  save();
+  var res = document.getElementById("pRes");
+  res.hidden = false;
+  res.textContent = bons + " / " + items.length;
+  res.style.color = bons === items.length ? "var(--vert)" : (bons >= items.length/2 ? "var(--craie)" : "var(--marge)");
+  buildGrille();
+}
+
+document.getElementById("pCheck").addEventListener("click", corriger);
+document.getElementById("pNew").addEventListener("click", function(){
+  if(melange) ouvrirMelee(); else if(courant) poser(6, [courant]);
+});
+document.getElementById("pPrint").addEventListener("click", function(){ window.print(); });
+document.getElementById("melee").addEventListener("click", ouvrirMelee);
+document.getElementById("niveau").addEventListener("change", function(){
+  NIV = Number(this.value);
+  if(melange) ouvrirMelee(); else if(courant) poser(6, [courant]);
+});
+document.getElementById("reset").addEventListener("click", function(){
+  if(!confirm("Effacer tous les résultats ? Les thèmes redeviennent « jamais fait ».")) return;
+  SCORE = {}; save(); buildGrille();
+  document.getElementById("panneau").hidden = true;
+});
+
+buildGrille();
+})();
+</script>
+</body>
+</html>
