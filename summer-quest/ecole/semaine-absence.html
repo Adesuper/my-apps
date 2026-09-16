@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Cinq jours loin de l'école</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,600&family=Caveat:wght@500;700&display=swap">
+<style>
+:root{
+  --paper:#F4F6FC; --panel:#FFFFFF; --panel-2:#FAFBFF;
+  --ink:#16213A; --ink-soft:#5A6484; --ink-faint:#8B95B4;
+  --rule:#CBD6F2; --grid:rgba(116,148,214,.15);
+  --marge:#D1495B; --marge-soft:rgba(209,73,91,.30);
+  --encre:#2F4FC9; --encre-soft:#E7ECFC;
+  --vert:#2E8B57; --vert-soft:#E4F4EB;
+  --craie:#B57A10; --craie-soft:#FBF0DA;
+  --line:#E2E7F5;
+  --shadow:0 10px 26px rgba(22,33,58,.09);
+  --shadow-sm:0 2px 8px rgba(22,33,58,.06);
+  --display:"Gabarito","Trebuchet MS",system-ui,sans-serif;
+  --body:"Literata",Georgia,"Times New Roman",serif;
+  --hand:"Caveat","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F141F; --panel:#171E2D; --panel-2:#1C2435;
+    --ink:#E8ECF9; --ink-soft:#A2AECB; --ink-faint:#7A86A6;
+    --rule:#2B3752; --grid:rgba(140,170,255,.07);
+    --marge:#E77A89; --marge-soft:rgba(231,122,137,.32);
+    --encre:#8FA8FF; --encre-soft:#1E2946;
+    --vert:#66C795; --vert-soft:#16301F;
+    --craie:#F0BC63; --craie-soft:#2E2513;
+    --line:#27314A;
+    --shadow:0 10px 26px rgba(0,0,0,.34); --shadow-sm:0 2px 8px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F141F; --panel:#171E2D; --panel-2:#1C2435;
+  --ink:#E8ECF9; --ink-soft:#A2AECB; --ink-faint:#7A86A6;
+  --rule:#2B3752; --grid:rgba(140,170,255,.07);
+  --marge:#E77A89; --marge-soft:rgba(231,122,137,.32);
+  --encre:#8FA8FF; --encre-soft:#1E2946;
+  --vert:#66C795; --vert-soft:#16301F;
+  --craie:#F0BC63; --craie-soft:#2E2513;
+  --line:#27314A;
+  --shadow:0 10px 26px rgba(0,0,0,.34); --shadow-sm:0 2px 8px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--body);color:var(--ink);background-color:var(--paper);
+  background-image:
+    repeating-linear-gradient(to bottom, transparent 0 23px, var(--grid) 23px 24px),
+    repeating-linear-gradient(to right, transparent 0 23px, var(--grid) 23px 24px);
+  line-height:1.6;font-size:16px;-webkit-text-size-adjust:100%;
+}
+h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.15;margin:0;text-wrap:balance}
+p{margin:0}
+button,input,textarea{font-family:var(--display);color:inherit}
+button{cursor:pointer}
+a{color:var(--encre)}
+:focus-visible{outline:3px solid var(--encre);outline-offset:2px;border-radius:8px}
+.wrap{max-width:900px;margin:0 auto;padding-inline:16px}
+
+header.top{background:var(--panel);border-bottom:1px solid var(--line);padding-block:22px 18px}
+.eyebrow{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;font-weight:700;color:var(--ink-faint)}
+header h1{font-size:clamp(1.5rem,5vw,2.05rem);margin-top:4px}
+header h1 b{color:var(--marge);font-weight:700}
+.sub{color:var(--ink-soft);font-size:.95rem;margin-top:7px;max-width:66ch}
+.champs{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
+.champ{display:flex;flex-direction:column;gap:3px}
+.champ label{font-family:var(--display);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+.champ input{border:1px solid var(--line);border-radius:9px;padding:7px 10px;background:var(--panel-2);font-size:.92rem;font-weight:600}
+
+.bar{position:sticky;top:0;z-index:20;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:var(--shadow-sm)}
+.bar-in{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding-block:10px}
+.jours{display:flex;gap:5px;flex-wrap:wrap;flex:1 1 auto}
+.jbtn{font-family:var(--display);font-weight:700;font-size:.86rem;border:1px solid var(--line);background:var(--panel-2);
+  padding:8px 13px;border-radius:11px}
+.jbtn[aria-pressed="true"]{background:var(--encre);border-color:var(--encre);color:#fff}
+.jbtn.fini{border-color:var(--vert);color:var(--vert)}
+.jbtn.fini[aria-pressed="true"]{color:#fff}
+.btn{font-family:var(--display);font-weight:600;font-size:.86rem;border:1px solid var(--line);background:var(--panel-2);
+  padding:8px 13px;border-radius:11px}
+.btn:hover:not(:disabled){border-color:var(--encre)}
+.btn.primary{background:var(--encre);border-color:var(--encre);color:#fff}
+.btn.good{background:var(--vert);border-color:var(--vert);color:#fff}
+.btn.ghost{background:transparent}
+.btn.small{font-size:.79rem;padding:6px 10px;border-radius:9px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+
+main{padding-block:22px 70px}
+.bloc{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:17px;margin-bottom:14px;box-shadow:var(--shadow-sm)}
+.bloc-hd{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:9px}
+.bloc-hd .ic{font-size:1.4rem}
+.bloc-hd h3{font-size:1.1rem;flex:1 1 auto}
+.minutes{font-family:var(--display);font-size:.72rem;font-weight:700;letter-spacing:.06em;color:var(--encre);
+  background:var(--encre-soft);padding:3px 10px;border-radius:99px;white-space:nowrap}
+.consigne{font-family:var(--hand);font-size:1.3rem;color:var(--marge);line-height:1.3;margin-bottom:8px}
+.aide{background:var(--panel-2);border:1px solid var(--line);border-left:4px solid var(--craie);border-radius:11px;padding:11px 13px;margin:10px 0}
+.aide h4{font-family:var(--display);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--craie);margin-bottom:5px}
+.aide ul,.aide ol{margin:0;padding-left:18px}
+.aide li{font-size:.93rem;color:var(--ink-soft);margin-bottom:3px}
+.aide li b{color:var(--ink)}
+.exemple{background:var(--encre-soft);border-radius:11px;padding:10px 13px;margin:10px 0;font-family:var(--display);font-size:.97rem;line-height:1.55}
+.exemple b{color:var(--encre)}
+
+.mots{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:6px;margin:8px 0}
+.mot{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:7px 11px;
+  font-family:var(--display);font-weight:600;font-size:.96rem;display:flex;justify-content:space-between;gap:6px;align-items:center}
+.mot .snd{border:none;background:none;color:var(--encre);padding:0;font-size:.88rem}
+textarea.ecrit{width:100%;min-height:150px;border:1.5px solid var(--rule);border-radius:12px;padding:11px 13px;
+  background:var(--panel-2);font-size:1.02rem;line-height:1.9;font-family:var(--display)}
+textarea.ecrit:focus{border-color:var(--encre);outline:none}
+.compteur{font-family:var(--display);font-size:.8rem;color:var(--ink-faint);margin-top:5px}
+.grille{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:6px;margin-top:10px}
+.gitem{display:flex;gap:8px;align-items:flex-start;font-size:.92rem;background:var(--panel-2);border:1px solid var(--line);
+  border-radius:10px;padding:8px 10px}
+.gitem input{appearance:none;width:18px;height:18px;flex:0 0 18px;margin-top:1px;border:2px solid var(--rule);
+  border-radius:5px;background:var(--panel);display:grid;place-content:center;cursor:pointer}
+.gitem input::after{content:"✓";font-family:var(--display);font-weight:800;font-size:.76rem;color:#fff;transform:scale(0)}
+.gitem input:checked{background:var(--vert);border-color:var(--vert)}
+.gitem input:checked::after{transform:scale(1)}
+.gitem label{cursor:pointer;color:var(--ink-soft)}
+
+.items{display:grid;grid-template-columns:repeat(auto-fit,minmax(262px,1fr));gap:2px 18px}
+.item{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px dotted var(--line)}
+.item .num{font-family:var(--display);font-weight:700;font-size:.8rem;color:var(--ink-faint);flex:0 0 20px;padding-top:5px}
+.item .body{flex:1 1 auto;min-width:0}
+.item .txt{font-family:var(--display);font-size:.97rem;display:block}
+.rep{width:100%;margin-top:4px;padding:7px 10px;font-size:.99rem;font-weight:600;border:1.5px solid var(--rule);border-radius:9px;background:var(--panel-2)}
+.rep:focus{border-color:var(--encre);outline:none}
+.rep.ok{border-color:var(--vert);background:var(--vert-soft)}
+.rep.no{border-color:var(--marge);background:var(--craie-soft)}
+.verdict{display:block;font-family:var(--display);font-size:.84rem;font-weight:600;margin-top:3px}
+.verdict.ok{color:var(--vert)} .verdict.no{color:var(--marge)}
+.ft{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+.ft .cnt{font-family:var(--display);font-size:.81rem;color:var(--ink-faint);flex:1 1 130px}
+.ft .cnt.ready{color:var(--vert);font-weight:700}
+.ft .res{font-family:var(--display);font-weight:700;font-size:.9rem}
+
+.parent{background:var(--panel);border:2px dashed var(--marge-soft);border-radius:17px;padding:17px;margin-bottom:16px}
+.parent h2{font-size:1.14rem;color:var(--marge)}
+.parent p.int{font-size:.92rem;color:var(--ink-soft);margin-top:4px}
+.journal{width:100%;border-collapse:collapse;margin-top:10px;font-size:.9rem}
+.journal th,.journal td{border:1px solid var(--line);padding:7px 9px;text-align:left}
+.journal th{font-family:var(--display);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);background:var(--panel-2)}
+.journal td input{width:100%;border:none;background:none;font-size:.92rem;padding:2px}
+.journal td input:focus{outline:none;border-bottom:1.5px solid var(--encre)}
+.tablewrap{overflow-x:auto}
+
+.note{font-family:var(--hand);font-size:1.26rem;line-height:1.35;color:var(--marge);border-left:3px solid var(--marge-soft);padding:4px 0 4px 13px;margin:18px 0}
+.note.blue{color:var(--encre);border-left-color:var(--encre)}
+footer{border-top:1px solid var(--line);margin-top:28px;padding-top:14px;font-size:.84rem;color:var(--ink-faint)}
+@media print{
+  .noprint,.bar{display:none!important}
+  body{background:#fff;background-image:none;color:#000;font-size:10.5pt}
+  .bloc,.parent{box-shadow:none;border-color:#999;page-break-inside:avoid}
+  .rep,textarea.ecrit{border:none;border-bottom:1.5px dotted #999;border-radius:0;background:none}
+  textarea.ecrit{min-height:170px;border:1px solid #999}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow">3<sup>e</sup> année &middot; absence de la deuxième semaine d'octobre</p>
+    <h1>Cinq jours <b>loin de l'école</b></h1>
+    <p class="sub">Tout ce que l'enseignante a demandé, préparé jour par jour : les <b>leçons</b> (mots, verbes, mathématiques), la <b>lecture</b> de 15 minutes à voix haute avec des questions, et l'<b>écriture</b> de phrases et de courts textes. Israel peut faire presque tout seul ; le parent écoute la lecture et lit les textes écrits.</p>
+    <div class="champs noprint">
+      <div class="champ"><label for="fNom">Nom</label><input id="fNom" type="text" placeholder="Israel"></div>
+      <div class="champ"><label for="fDeb">Premier jour</label><input id="fDeb" type="date"></div>
+      <div class="champ"><label for="fRet">Retour en classe</label><input id="fRet" type="date"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="bar noprint">
+  <div class="wrap bar-in">
+    <div class="jours" id="jours"></div>
+    <button class="btn ghost" id="tout">🖨️ Tout imprimer</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <div class="parent noprint" id="admin">
+    <h2>Pour les parents — à faire avant le départ</h2>
+    <p class="int">Ce que l'enseignante a demandé dans son message, en plus des exercices.</p>
+    <div class="grille" style="margin-top:11px">
+      <div class="gitem"><input type="checkbox" id="a1"><label for="a1">Inscrire toutes les journées d'absence sur le <b>portail Mozaïk</b>.</label></div>
+      <div class="gitem"><input type="checkbox" id="a2"><label for="a2">Remplir le <b>formulaire d'absence prolongée</b> — il est dans le cartable d'école d'Israel. Il sera versé à son dossier.</label></div>
+      <div class="gitem"><input type="checkbox" id="a3"><label for="a3">Demander à Israel de <b>montrer le formulaire ce soir</b>, comme l'enseignante l'a demandé.</label></div>
+      <div class="gitem"><input type="checkbox" id="a4"><label for="a4">Mettre dans la valise : le cartable, un cahier ligné, des crayons, et un livre à lire.</label></div>
+      <div class="gitem"><input type="checkbox" id="a5"><label for="a5">Noter que l'enseignante pourra le <b>garder en classe à la récréation</b> au retour, pour la reprise. En parler à Israel d'avance, calmement.</label></div>
+      <div class="gitem"><input type="checkbox" id="a6"><label for="a6">Coller la <b>liste de mots</b> de la semaine dans le bloc « Mes mots » ci-dessous avant de partir.</label></div>
+    </div>
+  </div>
+
+  <div id="jour"></div>
+
+  <div class="parent" id="journalBox">
+    <h2>Journal de bord</h2>
+    <p class="int">À remplir chaque soir, en une ligne. Au retour, l'enseignante voit d'un coup d'œil ce qui a été fait — et c'est aussi la preuve du travail accompli.</p>
+    <div class="tablewrap">
+      <table class="journal">
+        <thead><tr><th>Jour</th><th>Date</th><th>Leçons</th><th>Lecture</th><th>Écriture</th><th>Notes du parent</th></tr></thead>
+        <tbody id="journalBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="parent">
+    <h2>Au retour en classe</h2>
+    <p class="int">L'enseignante a prévenu qu'il devra reprendre la matière importante. Trois gestes simples pour que ce ne soit pas lourd.</p>
+    <div class="grille" style="margin-top:11px">
+      <div class="gitem"><input type="checkbox" id="r1"><label for="r1"><b>Le premier soir :</b> regarder ensemble ce qui a été vu en classe pendant l'absence, page par page, sans rien faire d'autre.</label></div>
+      <div class="gitem"><input type="checkbox" id="r2"><label for="r2"><b>Les trois soirs suivants :</b> 15 minutes de reprise, une matière à la fois. On ne rattrape pas une semaine en une soirée.</label></div>
+      <div class="gitem"><input type="checkbox" id="r3"><label for="r3"><b>Remettre le journal de bord</b> à l'enseignante, avec un mot de remerciement d'Israel.</label></div>
+    </div>
+  </div>
+
+  <p class="note blue">L'enseignante n'est pas obligée d'envoyer du travail — elle a quand même indiqué exactement quoi faire. Ce plan suit sa liste à la lettre : leçons, lecture à voix haute avec questions, écriture. Rien de plus, rien de moins.</p>
+  <p class="note">Une journée complète tient en <b>45 à 55 minutes</b>, en trois moments séparés. Le matin les leçons, l'après-midi la lecture, le soir l'écriture. Jamais tout d'un coup.</p>
+
+  <footer>Cinq jours loin de l'école &middot; tout se garde sur cet appareil &middot; complément du <b>cahier d'Israel</b>.</footer>
+</main>
+
+<script>
+(function(){
+"use strict";
+
+/* ============ outils ============ */
+function rnd(a,b){ return a + Math.floor(Math.random()*(b-a+1)); }
+function pick(a){ return a[rnd(0,a.length-1)]; }
+function nums(s){ var m = String(s).match(/\d+/g); return m ? m.map(Number) : []; }
+function sameSeq(a,b){ if(a.length!==b.length) return false; for(var i=0;i<a.length;i++){ if(a[i]!==b[i]) return false; } return true; }
+function sameSet(a,b){ var f=function(p,q){return p-q;}; return sameSeq(a.slice().sort(f), b.slice().sort(f)); }
+function norm(s){ return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]/g,""); }
+function juste(it, v){
+  if(!v || !v.trim()) return false;
+  if(it.mode === "cmp"){
+    var b = String(v), w = norm(v), d = "";
+    if(b.indexOf("<") >= 0 || w === "pluspetit") d = "<";
+    else if(b.indexOf(">") >= 0 || w === "plusgrand") d = ">";
+    else if(b.indexOf("=") >= 0 || w === "egal") d = "=";
+    return d !== "" && d === it.alts[0];
+  }
+  if(it.mode === "txt"){ var n = norm(v); return it.alts.some(function(a){ return n === norm(a); }); }
+  var got = nums(v);
+  if(!got.length) return false;
+  return it.alts.some(function(a){ return it.ordre === false ? sameSet(got,a) : sameSeq(got,a); });
+}
+function cdu(n){ return [Math.floor(n/100), Math.floor((n%100)/10), n%10]; }
+function parts(n){ var p = cdu(n), o = []; if(p[0]) o.push(p[0]*100); if(p[1]) o.push(p[1]*10); if(p[2]) o.push(p[2]); return o.length?o:[0]; }
+
+/* ============ générateurs de maths ============ */
+var GEN = {
+  decomposition:function(){ var n = rnd(101,500), p = cdu(n);
+    return { q:"Décompose " + n + " : ___ c + ___ d + ___ u", a:p[0]+" c + "+p[1]+" d + "+p[2]+" u", alts:[[p[0],p[1],p[2]]] }; },
+  addition:function(){ var n = rnd(120,480), p = parts(n);
+    return { q:"Écris " + n + " sous la forme d'une addition.", a:n + " = " + p.join(" + "), alts:[p, [n].concat(p)], ordre:false }; },
+  comparer:function(){ var a = rnd(101,500), b = a + pick([-40,-20,-9,0,9,20,40]);
+    if(b < 0) b = a + 12;
+    var s = a < b ? "<" : (a > b ? ">" : "=");
+    return { q:"Compare : " + a + " ___ " + b, a:s, alts:[s], mode:"cmp" }; },
+  calcul:function(){ if(rnd(0,1)){ var a = rnd(110,280), b = rnd(105,210);
+      return { q:a + " + " + b + " = ___", a:String(a+b), alts:[[a+b]] }; }
+    var c = rnd(250,500), d = rnd(105,240);
+    return { q:c + " − " + d + " = ___", a:String(c-d), alts:[[c-d]] }; },
+  suites:function(){ var pas = pick([2,5,10,25,50,100]), d = rnd(1,4)*100;
+    return { q:"Complète : " + d + ", " + (d+pas) + ", " + (d+2*pas) + ", ___", a:String(d+3*pas), alts:[[d+3*pas]] }; },
+  tables:function(){ var a = rnd(2,10), b = rnd(2,10);
+    return { q:a + " × " + b + " = ___", a:String(a*b), alts:[[a*b]] }; },
+  lettres:function(){ var n = rnd(101,500);
+    return { q:"Écris " + n + " en chiffres… puis relis-le à voix haute. Combien de centaines ?", a:String(cdu(n)[0]), alts:[[cdu(n)[0]]] }; },
+  mesure:function(){ var k = rnd(1,3);
+    if(k === 1){ var m = rnd(2,9); return { q:m + " m = ___ cm", a:String(m*100), alts:[[m*100]] }; }
+    if(k === 2){ var L = rnd(4,12), l = rnd(2,8); return { q:"Périmètre d'un rectangle de " + L + " cm sur " + l + " cm = ___ cm", a:String(2*(L+l)), alts:[[2*(L+l)]] }; }
+    var h = rnd(1,10), mi = pick([10,15,20,30]);
+    var t = h*60 + mi, nh = Math.floor(t/60), nm = t%60;
+    return { q:"Il est " + h + " h 00. Dans " + mi + " minutes il sera ___", a:nh + " h " + (nm<10?"0":"") + nm, alts:[[nh,nm]] }; }
+};
+
+/* ============ les cinq jours ============ */
+var MOTS_DEFAUT = ["fromage","vache","chèvre","lait","crème","beurre","croûte","tranche","meule","laitier","fermier","odeur","goût","fondre","délicieux"];
+
+var JOURS = [
+{ n:1, titre:"Jour 1",
+  maths:{ nom:"Décomposer et comparer", gens:["decomposition","decomposition","comparer","comparer","calcul","calcul"] },
+  verbes:{ consigne:"Nomme les cinq verbes à l'infinitif, sans regarder : avoir, être, aimer, aller, finir.",
+           aide:["Dis-les à voix haute, dans l'ordre, trois fois.",
+                 "Ensuite, fais une phrase avec chacun : « J'<b>ai</b> un chien. »",
+                 "Truc : si on peut dire « il faut ___ », c'est l'infinitif."] },
+  lecture:{ id:"cabane", titre:"La cabane à sucre",
+            orales:["Où se passe l'histoire ?","Qu'est-ce que Malik préfère, et pourquoi ?","Raconte-moi la fin dans tes mots."] },
+  ecriture:{ titre:"Cinq phrases de base",
+    consigne:"Écris cinq phrases sur ta journée d'aujourd'hui. Une phrase = une idée.",
+    aide:["Chaque phrase commence par une <b>majuscule</b> et finit par un <b>point</b>.",
+          "Chaque phrase a un <b>qui</b> (le sujet) et un <b>quoi</b> (le verbe).",
+          "Cinq phrases, pas plus. On vise juste, pas long."],
+    exemple:"<b>Exemple :</b> Ce matin, je me suis levé à sept heures. J'ai mangé des rôties. Ensuite, j'ai fait mes mathématiques.",
+    grille:["Chaque phrase a une majuscule","Chaque phrase a un point","J'ai relu à voix haute","J'ai écrit cinq phrases"] },
+  defi:"Écris ta date de naissance en toutes lettres." },
+
+{ n:2, titre:"Jour 2",
+  maths:{ nom:"Addition, soustraction et suites", gens:["calcul","calcul","suites","suites","addition","decomposition"] },
+  verbes:{ consigne:"Trouve le verbe caché dans chaque phrase, puis dis son nom (l'infinitif).",
+           aide:["« Nous allons au parc. » → le verbe est <b>allons</b>, son nom est <b>aller</b>.",
+                 "« Tu finis ton assiette. » → <b>finis</b>, son nom est <b>finir</b>.",
+                 "Le verbe est le mot qui change quand on change de personne."] },
+  lecture:{ id:"castor", titre:"Le castor",
+            orales:["Pourquoi le castor ronge-t-il tout le temps ?","Pourquoi l'entrée de sa hutte est-elle sous l'eau ?","Nomme deux choses que tu as apprises."] },
+  ecriture:{ titre:"Des phrases plus riches",
+    consigne:"Reprends trois phrases d'hier et ajoute un adjectif à chacune. Écris-les en entier.",
+    aide:["Un <b>adjectif</b> décrit : grand, petit, froid, joyeux, bruyant…",
+          "L'adjectif s'accorde : une <b>grande</b> maison, un <b>grand</b> chien.",
+          "Ajoute aussi <b>où</b> ou <b>quand</b> si tu peux : « dans la cuisine », « après le dîner »."],
+    exemple:"<b>Avant :</b> J'ai mangé des rôties. &nbsp; <b>Après :</b> Ce matin, j'ai mangé deux rôties <b>chaudes</b> dans la cuisine.",
+    grille:["Chaque phrase a un adjectif","Mes adjectifs sont bien accordés","Majuscules et points vérifiés","J'ai relu à voix haute"] },
+  defi:"Trouve cinq adjectifs qui décrivent le temps qu'il fait aujourd'hui." },
+
+{ n:3, titre:"Jour 3",
+  maths:{ nom:"Tables et mesure", gens:["tables","tables","tables","mesure","mesure","calcul"] },
+  verbes:{ consigne:"Classe les cinq verbes : lesquels finissent par -er, lesquels par -ir, lesquels sont différents ?",
+           aide:["<b>-er</b> : aimer. &nbsp; <b>-ir</b> : finir.",
+                 "<b>Différents</b> (irréguliers) : avoir, être, aller. Ce sont les plus utilisés, et les plus capricieux.",
+                 "Bonus, seulement si l'enseignante l'a déjà vu : écris « j'ai, tu as, il a »."] },
+  lecture:{ id:"graine", titre:"Comment pousse une graine",
+            orales:["De quoi la graine a-t-elle besoin pour se réveiller ?","Qu'est-ce qui sort en premier : la racine ou la tige ?","Pourquoi ne faut-il pas planter trop creux ?"] },
+  ecriture:{ titre:"Un paragraphe qui décrit",
+    consigne:"Décris en cinq phrases l'endroit où tu es aujourd'hui. Fais voir l'endroit à quelqu'un qui n'y est jamais allé.",
+    aide:["Commence par une phrase qui présente l'endroit.",
+          "Ensuite : ce qu'on <b>voit</b>, ce qu'on <b>entend</b>, ce qu'on <b>sent</b>.",
+          "Termine par ce que <b>toi</b> tu en penses."],
+    exemple:"<b>Exemple de début :</b> La cuisine de ma grand-mère est petite et jaune. Sur la table, il y a toujours un panier de fruits…",
+    grille:["J'ai écrit cinq phrases","J'ai nommé au moins deux choses qu'on voit","J'ai dit ce que j'en pense","Majuscules, points, relecture"] },
+  defi:"Compte les objets d'une même sorte autour de toi, puis écris le nombre en lettres." },
+
+{ n:4, titre:"Jour 4",
+  maths:{ nom:"Tout mélangé", gens:["decomposition","comparer","calcul","tables","suites","mesure"] },
+  verbes:{ consigne:"Dictée de verbes : le parent dit une phrase, Israel écrit seulement le nom du verbe.",
+           aide:["« Je vais à l'épicerie. » → il écrit <b>aller</b>.",
+                 "« Elles ont trois chats. » → il écrit <b>avoir</b>.",
+                 "Cinq phrases suffisent. Le parent choisit les siennes."] },
+  lecture:{ id:"livre", titre:"Le livre perdu",
+            orales:["Où le livre est-il retrouvé, et par qui ?","Pourquoi Zoé pensait-elle se faire chicaner ?","Qu'aurais-tu fait à sa place ?"] },
+  ecriture:{ titre:"Un texte qui raconte",
+    consigne:"Raconte en huit phrases quelque chose qui t'est arrivé cette semaine. Il faut un début, un milieu et une fin.",
+    aide:["<b>Début :</b> où, quand, avec qui.",
+          "<b>Milieu :</b> ce qui arrive — le moment le plus important.",
+          "<b>Fin :</b> comment ça se termine et comment tu t'es senti.",
+          "Mots utiles : d'abord, ensuite, soudain, enfin."],
+    exemple:"<b>Exemple de milieu :</b> Soudain, le ballon est tombé dans la piscine du voisin. Personne n'osait aller le chercher…",
+    grille:["Mon texte a un début, un milieu et une fin","J'ai utilisé d'abord, ensuite, enfin","J'ai écrit au moins huit phrases","J'ai relu à voix haute et corrigé"] },
+  defi:"Relis ton texte d'hier et trouve une seule chose à améliorer." },
+
+{ n:5, titre:"Jour 5",
+  maths:{ nom:"Révision de la semaine", gens:["decomposition","addition","comparer","calcul","tables","lettres"] },
+  verbes:{ consigne:"Révision : nomme les cinq verbes, puis écris-les sans faute.",
+           aide:["avoir, être, aimer, aller, finir.",
+                 "Attention à l'accent de <b>être</b>.",
+                 "Si les cinq sont écrits sans faute : c'est réussi pour la semaine."] },
+  lecture:{ id:"amina", titre:"Les deux carnets",
+            orales:["Pourquoi Rosalie emballe-t-elle si lentement ?","Pourquoi Amina déballe-t-elle le carnet en premier ?","Comment te sentirais-tu à sa place ?"] },
+  ecriture:{ titre:"Une lettre à mon enseignante",
+    consigne:"Écris une vraie lettre à ton enseignante : raconte-lui ce que tu as fait pendant ton absence. Tu la lui remettras à ton retour.",
+    aide:["Commence par : <b>Bonjour madame,</b>",
+          "Premier paragraphe : où tu étais et ce que tu as fait.",
+          "Deuxième paragraphe : ce que tu as travaillé (lecture, mots, mathématiques).",
+          "Termine par : <b>À bientôt,</b> puis ton prénom."],
+    exemple:"<b>Exemple :</b> Bonjour madame, <br>Pendant mon absence, j'étais chez ma tante. Chaque matin, j'ai fait mes mathématiques…",
+    grille:["J'ai mis une formule de début et de fin","J'ai écrit deux paragraphes","J'ai vérifié mes majuscules et mes points","Ma lettre est propre et lisible"] },
+  defi:"Range ton cartable et relis la liste de mots une dernière fois." }
+];
+
+/* ============ mémoire ============ */
+var LS = "absence3e";
+var ST = { jour:1, mots:null, profil:{}, coches:{}, ecrits:{}, journal:{}, scores:{} };
+try{ var raw = localStorage.getItem(LS); if(raw){ var d = JSON.parse(raw); for(var k in d) ST[k] = d[k]; } }catch(e){}
+function save(){ try{ localStorage.setItem(LS, JSON.stringify(ST)); }catch(e){} }
+function mots(){ return (ST.mots && ST.mots.length) ? ST.mots : MOTS_DEFAUT; }
+
+/* ============ voix ============ */
+var voice = null;
+function pickVoice(){
+  try{
+    var vs = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+    voice = null;
+    for(var i=0;i<vs.length;i++){ if(/fr[-_]CA/i.test(vs[i].lang)){ voice = vs[i]; break; } }
+    if(!voice){ for(var j=0;j<vs.length;j++){ if(/^fr/i.test(vs[j].lang)){ voice = vs[j]; break; } } }
+  }catch(e){}
+}
+if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+function dire(t){
+  if(!window.speechSynthesis) return;
+  try{ speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(t); u.lang = "fr-CA"; u.rate = 0.78;
+    if(voice) u.voice = voice; speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* ============ rendu d'un jour ============ */
+var qItems = [];
+function motsDuJour(n){
+  var M = mots(), t = Math.ceil(M.length/5);
+  return M.slice((n-1)*t, n*t);
+}
+function coche(id, label){
+  var on = ST.coches[id] ? " checked" : "";
+  return '<div class="gitem"><input type="checkbox" id="' + id + '"' + on + '><label for="' + id + '">' + label + '</label></div>';
+}
+function rendreJour(n){
+  var J = JOURS[n-1];
+  ST.jour = n; save();
+  qItems = [];
+  var host = document.getElementById("jour");
+  var mj = motsDuJour(n);
+
+  var h = '';
+  /* --- leçons : mots --- */
+  h += '<div class="bloc"><div class="bloc-hd"><span class="ic">🔤</span><h3>Mes mots</h3><span class="minutes">8 min</span></div>' +
+       '<p class="consigne">Je lis mes mots, puis je les écris sans les regarder.</p>' +
+       '<div class="mots" id="motsBox"></div>' +
+       '<div class="aide"><h4>Comment faire</h4><ol>' +
+       '<li>Je lis chaque mot à voix haute, en le montrant du doigt.</li>' +
+       '<li>Je le cache, je l\'écris, puis je vérifie <b>lettre par lettre</b>.</li>' +
+       '<li>Les mots ratés : je les réécris trois fois, et je les reprends demain.</li>' +
+       '</ol></div>' +
+       '<div class="noprint"><button class="btn small ghost" id="editMots">✏️ Coller la liste de l\'enseignante</button>' +
+       '<div id="editBox" hidden style="margin-top:9px"><textarea class="ecrit" id="motsTxt" style="min-height:90px" ' +
+       'placeholder="Un mot par ligne, ou séparés par des virgules"></textarea>' +
+       '<div style="margin-top:7px;display:flex;gap:8px"><button class="btn small primary" id="saveMots">Enregistrer</button>' +
+       '<button class="btn small ghost" id="cancelMots">Annuler</button></div></div></div>' +
+       '</div>';
+
+  /* --- leçons : verbes --- */
+  h += '<div class="bloc"><div class="bloc-hd"><span class="ic">🇫🇷</span><h3>Mes verbes</h3><span class="minutes">5 min</span></div>' +
+       '<p class="consigne">' + J.verbes.consigne + '</p>' +
+       '<div class="aide"><h4>Pour t\'aider</h4><ul>' +
+       J.verbes.aide.map(function(x){ return "<li>" + x + "</li>"; }).join("") + '</ul></div></div>';
+
+  /* --- leçons : maths --- */
+  h += '<div class="bloc"><div class="bloc-hd"><span class="ic">🔢</span><h3>Mathématiques — ' + J.maths.nom + '</h3><span class="minutes">12 min</span></div>' +
+       '<p class="consigne">Je réponds à tout, puis je corrige.</p><div class="items" id="mathItems"></div>' +
+       '<div class="ft noprint"><span class="cnt" id="mCnt"></span><span class="res" id="mRes" hidden></span>' +
+       '<button class="btn good" id="mCheck" disabled>✅ Corriger</button>' +
+       '<button class="btn small ghost" id="mNew">🔄 D\'autres</button></div></div>';
+
+  /* --- lecture --- */
+  h += '<div class="bloc"><div class="bloc-hd"><span class="ic">📖</span><h3>Lecture à voix haute</h3><span class="minutes">15 min</span></div>' +
+       '<p class="consigne">Texte du jour : « ' + J.lecture.titre + ' »</p>' +
+       '<div class="aide"><h4>Les trois passages</h4><ol>' +
+       '<li>Je lis <b>doucement</b>, pour comprendre. On ne me corrige pas encore.</li>' +
+       '<li>Je relis en cherchant les mots difficiles et les <b>liaisons</b>.</li>' +
+       '<li>Je lis <b>à voix haute</b> à un adulte, comme un conteur.</li>' +
+       '</ol></div>' +
+       '<div class="aide" style="border-left-color:var(--encre)"><h4>Questions à poser par le parent, à l\'oral</h4><ol>' +
+       J.lecture.orales.map(function(x){ return "<li>" + x + "</li>"; }).join("") +
+       '<li><b>Et toujours :</b> « Qu\'est-ce qui te fait dire ça ? »</li></ol></div>' +
+       '<p class="noprint" style="font-size:.92rem;color:var(--ink-soft)">Le texte et ses questions écrites sont ici : ' +
+       '<a href="lecture-comprehension.html">Dix textes à comprendre</a>. Si vous n\'avez pas Internet, faites lire n\'importe quel livre 15 minutes — ' +
+       'c\'est la lecture à voix haute qui compte, pas le texte.</p></div>';
+
+  /* --- écriture --- */
+  var E = J.ecriture;
+  h += '<div class="bloc"><div class="bloc-hd"><span class="ic">✍️</span><h3>Écriture — ' + E.titre + '</h3><span class="minutes">15 min</span></div>' +
+       '<p class="consigne">' + E.consigne + '</p>' +
+       '<div class="aide"><h4>Pour t\'aider</h4><ul>' + E.aide.map(function(x){ return "<li>" + x + "</li>"; }).join("") + '</ul></div>' +
+       '<div class="exemple">' + E.exemple + '</div>' +
+       '<textarea class="ecrit" id="ecritBox" placeholder="Écris ici… ou sur du papier, comme tu préfères."></textarea>' +
+       '<p class="compteur" id="compteur">0 mot</p>' +
+       '<div class="aide" style="border-left-color:var(--vert)"><h4>Je me relis avant de montrer</h4></div>' +
+       '<div class="grille">' + E.grille.map(function(x,i){ return coche("g" + n + "-" + i, x); }).join("") + '</div></div>';
+
+  /* --- défi --- */
+  h += '<div class="bloc"><div class="bloc-hd"><span class="ic">🎯</span><h3>Le petit défi du jour</h3><span class="minutes">2 min</span></div>' +
+       '<p class="consigne">' + J.defi + '</p></div>';
+
+  host.innerHTML = h;
+
+  /* mots */
+  var box = document.getElementById("motsBox");
+  mj.forEach(function(m){
+    var el = document.createElement("div");
+    el.className = "mot";
+    el.innerHTML = '<span></span><button class="snd noprint" aria-label="Écouter">🔊</button>';
+    el.querySelector("span").textContent = m;
+    el.querySelector(".snd").addEventListener("click", function(){ dire(m); });
+    box.appendChild(el);
+  });
+  document.getElementById("editMots").addEventListener("click", function(){
+    var b = document.getElementById("editBox");
+    document.getElementById("motsTxt").value = mots().join("\n");
+    b.hidden = !b.hidden;
+  });
+  document.getElementById("saveMots").addEventListener("click", function(){
+    var v = document.getElementById("motsTxt").value.split(/[\n,;]+/)
+      .map(function(x){ return x.trim(); }).filter(Boolean);
+    if(v.length){ ST.mots = v; save(); rendreJour(n); }
+  });
+  document.getElementById("cancelMots").addEventListener("click", function(){ document.getElementById("editBox").hidden = true; });
+
+  /* maths */
+  poserMaths(J);
+  document.getElementById("mNew").addEventListener("click", function(){ poserMaths(J); });
+  document.getElementById("mCheck").addEventListener("click", corrigerMaths);
+
+  /* écriture */
+  var ta = document.getElementById("ecritBox");
+  ta.value = ST.ecrits["j" + n] || "";
+  function compte(){
+    var w = ta.value.trim() ? ta.value.trim().split(/\s+/).length : 0;
+    document.getElementById("compteur").textContent = w + (w > 1 ? " mots" : " mot");
+  }
+  compte();
+  ta.addEventListener("input", function(){ ST.ecrits["j" + n] = ta.value; save(); compte(); });
+
+  /* cases à cocher */
+  Array.prototype.forEach.call(document.querySelectorAll('#jour input[type="checkbox"]'), function(cb){
+    cb.addEventListener("change", function(){ ST.coches[cb.id] = cb.checked; save(); majBoutons(); });
+  });
+
+  majBoutons();
+  window.scrollTo({ top:0, behavior:"smooth" });
+}
+
+function poserMaths(J){
+  qItems = [];
+  var host = document.getElementById("mathItems");
+  host.innerHTML = "";
+  J.maths.gens.forEach(function(g, i){
+    var it = GEN[g]();
+    it.n = i + 1;
+    qItems.push(it);
+    var row = document.createElement("div");
+    row.className = "item";
+    row.innerHTML = '<span class="num">' + it.n + '</span><div class="body"><span class="txt">' + it.q + '</span>' +
+      '<input class="rep" id="m' + it.n + '" type="text" autocomplete="off" aria-label="Réponse ' + it.n + '">' +
+      '<span class="verdict" hidden></span></div>';
+    host.appendChild(row);
+  });
+  qItems.forEach(function(it){
+    var el = document.getElementById("m" + it.n);
+    el.addEventListener("input", function(){
+      el.className = "rep";
+      var v = el.parentNode.querySelector(".verdict");
+      v.hidden = true; majMaths();
+    });
+    el.addEventListener("keydown", function(e){
+      if(e.key === "Enter"){ var nx = document.getElementById("m" + (it.n+1)); if(nx) nx.focus(); }
+    });
+  });
+  document.getElementById("mRes").hidden = true;
+  majMaths();
+}
+function majMaths(){
+  var f = qItems.filter(function(it){ var e = document.getElementById("m" + it.n); return e && e.value.trim() !== ""; }).length;
+  var c = document.getElementById("mCnt");
+  c.textContent = f + " / " + qItems.length + " remplies";
+  c.className = "cnt" + (f === qItems.length ? " ready" : "");
+  var b = document.getElementById("mCheck");
+  b.disabled = f < qItems.length;
+  b.textContent = f < qItems.length ? "Réponds à tout" : "✅ Corriger";
+}
+function corrigerMaths(){
+  var bons = 0;
+  qItems.forEach(function(it){
+    var el = document.getElementById("m" + it.n);
+    var v = el.parentNode.querySelector(".verdict");
+    var ok = juste(it, el.value);
+    if(ok) bons++;
+    el.className = "rep " + (ok ? "ok" : "no");
+    v.hidden = false;
+    v.className = "verdict " + (ok ? "ok" : "no");
+    v.textContent = ok ? "✓ Bravo" : "✗ La réponse : " + it.a;
+  });
+  var r = document.getElementById("mRes");
+  r.hidden = false;
+  r.textContent = bons + " / " + qItems.length;
+  r.style.color = bons === qItems.length ? "var(--vert)" : (bons >= qItems.length/2 ? "var(--craie)" : "var(--marge)");
+  ST.scores["j" + ST.jour] = bons + "/" + qItems.length;
+  save(); majBoutons();
+}
+
+/* ============ barre des jours + journal ============ */
+function jourFini(n){
+  var J = JOURS[n-1];
+  var toutes = J.ecriture.grille.every(function(_, i){ return ST.coches["g" + n + "-" + i]; });
+  return toutes && !!ST.scores["j" + n];
+}
+function majBoutons(){
+  Array.prototype.forEach.call(document.querySelectorAll(".jbtn"), function(b){
+    var n = Number(b.dataset.j);
+    b.setAttribute("aria-pressed", n === ST.jour ? "true" : "false");
+    b.className = "jbtn" + (jourFini(n) ? " fini" : "");
+  });
+}
+(function barre(){
+  var host = document.getElementById("jours");
+  JOURS.forEach(function(J){
+    var b = document.createElement("button");
+    b.className = "jbtn"; b.dataset.j = J.n; b.textContent = J.titre;
+    b.addEventListener("click", function(){ rendreJour(J.n); });
+    host.appendChild(b);
+  });
+})();
+(function journal(){
+  var body = document.getElementById("journalBody");
+  JOURS.forEach(function(J){
+    var tr = document.createElement("tr");
+    tr.innerHTML = "<td><b>" + J.titre + "</b></td>" +
+      ["date","lecons","lecture","ecriture","notes"].map(function(c){
+        return '<td><input type="text" data-jk="' + J.n + "-" + c + '"></td>';
+      }).join("");
+    body.appendChild(tr);
+  });
+  Array.prototype.forEach.call(body.querySelectorAll("input"), function(i){
+    var k = i.dataset.jk;
+    if(ST.journal[k]) i.value = ST.journal[k];
+    i.addEventListener("input", function(){ ST.journal[k] = i.value; save(); });
+  });
+})();
+["fNom","fDeb","fRet"].forEach(function(id){
+  var el = document.getElementById(id);
+  if(ST.profil[id]) el.value = ST.profil[id];
+  el.addEventListener("input", function(){ ST.profil[id] = el.value; save(); });
+});
+Array.prototype.forEach.call(document.querySelectorAll("#admin input, .parent input[type=checkbox]"), function(cb){
+  if(cb.type !== "checkbox") return;
+  if(ST.coches[cb.id]) cb.checked = true;
+  cb.addEventListener("change", function(){ ST.coches[cb.id] = cb.checked; save(); });
+});
+document.getElementById("tout").addEventListener("click", function(){ window.print(); });
+
+rendreJour(ST.jour || 1);
+})();
+</script>
+</body>
+</html>
