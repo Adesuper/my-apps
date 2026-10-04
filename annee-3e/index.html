@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Ma 3e année</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,600&family=Caveat:wght@500;700&display=swap">
+<style>
+/* Layout: a school binder on grid paper — "En ce moment" up top (dated), then one shelf per subject, summer archive at the bottom. */
+:root{
+  --paper:#F4F6FC; --panel:#FFFFFF; --panel-2:#FAFBFF;
+  --ink:#16213A; --ink-soft:#5A6484; --ink-faint:#8B95B4;
+  --grid:rgba(116,148,214,.15); --line:#E2E7F5;
+  --marge:#D1495B; --marge-soft:#FBE5E8;
+  --encre:#2F4FC9; --encre-soft:#E7ECFC;
+  --sapin:#13795B; --sapin-soft:#DFF2EA;
+  --prune:#8A4FB0; --prune-soft:#F1E7F7;
+  --craie:#B57A10; --craie-soft:#FBF0DA;
+  --shadow:0 10px 26px rgba(22,33,58,.09); --shadow-sm:0 2px 8px rgba(22,33,58,.06);
+  --display:"Gabarito","Trebuchet MS",system-ui,sans-serif;
+  --body:"Literata",Georgia,"Times New Roman",serif;
+  --hand:"Caveat","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F141F; --panel:#171E2D; --panel-2:#1C2435;
+    --ink:#E8ECF9; --ink-soft:#A2AECB; --ink-faint:#7A86A6;
+    --grid:rgba(140,170,255,.07); --line:#27314A;
+    --marge:#E77A89; --marge-soft:#3A1E26;
+    --encre:#8FA8FF; --encre-soft:#1E2946;
+    --sapin:#4FC79F; --sapin-soft:#132E26;
+    --prune:#C79AE6; --prune-soft:#2A1E36;
+    --craie:#F0BC63; --craie-soft:#2E2513;
+    --shadow:0 10px 26px rgba(0,0,0,.34); --shadow-sm:0 2px 8px rgba(0,0,0,.25);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F141F; --panel:#171E2D; --panel-2:#1C2435;
+  --ink:#E8ECF9; --ink-soft:#A2AECB; --ink-faint:#7A86A6;
+  --grid:rgba(140,170,255,.07); --line:#27314A;
+  --marge:#E77A89; --marge-soft:#3A1E26;
+  --encre:#8FA8FF; --encre-soft:#1E2946;
+  --sapin:#4FC79F; --sapin-soft:#132E26;
+  --prune:#C79AE6; --prune-soft:#2A1E36;
+  --craie:#F0BC63; --craie-soft:#2E2513;
+  --shadow:0 10px 26px rgba(0,0,0,.34); --shadow-sm:0 2px 8px rgba(0,0,0,.25);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--body);color:var(--ink);background-color:var(--paper);
+  background-image:repeating-linear-gradient(to bottom,transparent 0 23px,var(--grid) 23px 24px),repeating-linear-gradient(to right,transparent 0 23px,var(--grid) 23px 24px);
+  line-height:1.6;font-size:16px;-webkit-text-size-adjust:100%}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.15;margin:0;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--encre);outline-offset:2px;border-radius:8px}
+.wrap{max-width:960px;margin:0 auto;padding-inline:16px}
+header{background:var(--panel);border-bottom:1px solid var(--line);padding-block:22px 18px}
+.eyebrow{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;font-weight:700;color:var(--ink-faint)}
+header h1{font-size:clamp(1.8rem,6vw,2.5rem);margin-top:4px}
+header h1 b{color:var(--marge)}
+.hi{font-family:var(--hand);font-size:1.45rem;color:var(--encre);margin-top:4px;line-height:1.25}
+main{padding-block:12px 60px}
+.k{font-family:var(--display);font-size:.74rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--marge);margin:30px 0 10px;display:flex;align-items:center;gap:10px}
+.k::after{content:"";flex:1;height:1px;background:var(--line)}
+
+.now{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.feat{position:relative;display:flex;flex-direction:column;gap:8px;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px 18px 16px 22px;box-shadow:var(--shadow);overflow:hidden;transition:transform .14s,border-color .14s}
+.feat::before{content:"";position:absolute;inset:0 auto 0 0;width:7px;background:var(--c)}
+.feat:hover{transform:translateY(-2px);border-color:var(--c)}
+.feat .when{font-family:var(--display);font-size:.74rem;letter-spacing:.11em;text-transform:uppercase;font-weight:700;color:var(--c)}
+.feat h2{font-size:1.3rem}
+.feat p{font-size:.93rem;color:var(--ink-soft)}
+.feat .big{font-family:var(--display);font-weight:800;font-size:2.2rem;line-height:1;color:var(--c);font-variant-numeric:tabular-nums}
+.feat .big small{font-size:.95rem;font-weight:600;color:var(--ink-soft);margin-left:6px}
+.feat .go{font-family:var(--display);font-weight:700;font-size:.9rem;color:var(--c);margin-top:auto}
+.stars{font-family:var(--display);font-size:.85rem;font-weight:700;color:var(--craie);background:var(--craie-soft);border-radius:99px;padding:2px 10px;align-self:flex-start}
+
+.shelves{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.shelf{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow-sm)}
+.shelf h3{font-size:1.1rem;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.shelf h3 .tag{font-family:var(--display);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--c);background:var(--cs);border-radius:99px;padding:2px 9px}
+.item{display:flex;flex-direction:column;gap:1px;text-decoration:none;border-radius:12px;padding:9px 11px;background:var(--panel-2);border:1px solid var(--line);transition:border-color .12s}
+.item:hover{border-color:var(--c)}
+.item b{font-family:var(--display);font-size:.98rem}
+.item span{font-size:.86rem;color:var(--ink-soft)}
+.empty{font-size:.88rem;color:var(--ink-faint);font-style:italic;padding:4px 2px}
+.c-ma{--c:var(--encre);--cs:var(--encre-soft)} .c-fr{--c:var(--marge);--cs:var(--marge-soft)}
+.c-us{--c:var(--sapin);--cs:var(--sapin-soft)} .c-su{--c:var(--prune);--cs:var(--prune-soft)} .c-ev{--c:var(--craie);--cs:var(--craie-soft)}
+
+.archive{display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:space-between;background:var(--panel-2);border:1px dashed var(--ink-faint);border-radius:18px;padding:16px 18px}
+.archive h3{font-size:1.1rem}
+.archive p{font-size:.92rem;color:var(--ink-soft);max-width:60ch}
+.btn{font-family:var(--display);font-weight:600;font-size:.92rem;border:1px solid var(--line);background:var(--panel);padding:9px 15px;border-radius:12px;text-decoration:none;white-space:nowrap}
+.btn:hover{border-color:var(--encre)}
+.note{font-family:var(--hand);font-size:1.3rem;line-height:1.3;color:var(--ink-soft);margin-top:26px}
+footer{border-top:1px solid var(--line);margin-top:30px;padding-top:14px;font-size:.84rem;color:var(--ink-faint)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p class="eyebrow">École primaire · 3<sup>e</sup> année · 2026–2027</p>
+    <h1>Ma <b>3<sup>e</sup> année</b></h1>
+    <p class="hi" id="hi">Salut Israël ! Voici tout ce qu’il te faut pour l’école, au même endroit.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="k">En ce moment</p>
+  <div class="now" id="now"></div>
+
+  <p class="k">Par matière</p>
+  <div class="shelves">
+    <section class="shelf c-ma">
+      <h3>Mathématiques <span class="tag">Tam Tam</span></h3>
+      <a class="item" href="evaluations/mission-evaluations.html#ma"><b>Mission évaluations : maths</b><span>Nombres jusqu’à 9 999, l’heure, petits problèmes. Jeux et examen blanc.</span></a>
+      <a class="item" href="../summer-quest/ecole/entraineur-maths.html"><b>L’entraîneur de maths</b><span>20 thèmes du cahier, qui se corrigent tout seuls.</span></a>
+      <a class="item" href="../summer-quest/ecole/feuille-decomposition.html"><b>La grande feuille de décomposition</b><span>Toutes les sortes de questions du cahier, d’un seul coup.</span></a>
+    </section>
+    <section class="shelf c-fr">
+      <h3>Français <span class="tag">Zig Zag</span></h3>
+      <a class="item" href="../summer-quest/ecole/cahier-3e.html"><b>Le cahier d’Israël</b><span>Les leçons de la semaine : mots, verbes, lecture et liaisons.</span></a>
+      <a class="item" href="../summer-quest/ecole/lecture-comprehension.html"><b>Dix textes à comprendre</b><span>Lectures courtes avec les questions comme en classe.</span></a>
+      <a class="item" href="../summer-quest/french/francais-3e-lecons.html"><b>Français 3<sup>e</sup> : je comprends, puis je m’entraîne</b><span>18 leçons de grammaire, conjugaison et orthographe.</span></a>
+    </section>
+    <section class="shelf c-us">
+      <h3>Univers social</h3>
+      <a class="item" href="evaluations/mission-evaluations.html#us"><b>Mission évaluations : univers social</b><span>Unités de temps, de ma planète à ma rue, saisons et fêtes, cartes, lignes du temps.</span></a>
+    </section>
+    <section class="shelf c-su">
+      <h3>Suivi <span class="tag">Parents</span></h3>
+      <a class="item" href="../summer-quest/diagnostics/diagnostic-01.html"><b>Diagnostic 01 : le grand défi de septembre</b><span>45 questions pour voir où il en est. À refaire toutes les 4 à 6 semaines.</span></a>
+      <a class="item" href="evaluations/mission-evaluations.html#parents"><b>Résultats des examens blancs</b><span>Scores et étoiles par thème, sur cet appareil.</span></a>
+      <a class="item" href="../summer-quest/ecole/semaine-absence.html"><b>Cinq jours loin de l’école</b><span>Le travail demandé par l’enseignante pour la semaine d’absence.</span></a>
+    </section>
+  </div>
+
+  <p class="k">Archives</p>
+  <div class="archive">
+    <div><h3>Summer Quest · été 2026</h3><p>L’aventure de l’été : maths et logique, lecture, sciences, échecs, Raspberry Pi, Python et le cours de code. Tout est encore là pour jouer.</p></div>
+    <a class="btn" href="../summer-quest/">Ouvrir Summer Quest</a>
+  </div>
+
+  <p class="note">Un peu chaque jour, 10 à 15 minutes : souvent, pas longtemps.</p>
+  <footer>Ma 3<sup>e</sup> année · les étoiles et les réponses restent sur l’appareil utilisé.</footer>
+</main>
+
+<script>
+(function(){
+"use strict";
+/* Dated items: each shows on the home row only between "from" and "to". Add the next tests here. */
+const D=(m,d)=>new Date(2026,m-1,d);
+const NOW=[
+  {from:D(9,1),to:D(10,5),cls:"c-us",when:"Évaluation · lundi 5 octobre",title:"Univers social",date:D(10,5),txt:"Sans cahier de notes. Temps, planète à rue, saisons, cartes, lignes du temps.",href:"evaluations/mission-evaluations.html#us",go:"Je me prépare →",subj:"us"},
+  {from:D(9,1),to:D(10,8),cls:"c-ma",when:"Évaluation · jeudi 8 octobre",title:"Mathématiques",date:D(10,8),txt:"Les nombres de 0 à 9 999, pair et impair, l’heure, petits problèmes.",href:"evaluations/mission-evaluations.html#ma",go:"Je me prépare →",subj:"ma"},
+  {from:D(10,9),to:D(10,18),cls:"c-su",when:"Deuxième semaine d’octobre",title:"Cinq jours loin de l’école",txt:"Leçons, lecture à voix haute et petits textes, un jour à la fois.",href:"../summer-quest/ecole/semaine-absence.html",go:"Ouvrir →"},
+  {from:D(9,1),to:D(6,30),cls:"c-fr",when:"Chaque semaine",title:"Le cahier d’Israël",txt:"Les leçons de l’enseignante pour la semaine. 10 à 15 minutes par jour.",href:"../summer-quest/ecole/cahier-3e.html",go:"Ouvrir le cahier →"},
+];
+NOW.forEach(n=>{if(n.to<n.from)n.to=new Date(2027,5,30)});
+const t=new Date(),today=new Date(t.getFullYear(),t.getMonth(),t.getDate());
+let ms={};try{ms=JSON.parse(localStorage.getItem("mission-eval-v1")||"{}").stars||{}}catch(e){}
+const US=["temps","planete","annee","carte","ligne"],MA=["ecrire","representer","valeur","combien","decomposer","comparer","pair","heure","problemes"];
+const starTxt=s=>{const ids=s==="us"?US:MA,n=ids.reduce((a,k)=>a+(ms[k]||0),0);return `★ ${n} / ${ids.length*3}`};
+const esc=s=>String(s);
+const items=NOW.filter(n=>today>=n.from&&today<=n.to);
+document.getElementById("now").innerHTML=items.map(n=>{
+  let big="";if(n.date){const d=Math.round((n.date-today)/864e5);big=`<div class="big">${d>1?d+"<small>jours</small>":d===1?"Demain":"Aujourd’hui"}</div>`}
+  return `<a class="feat ${n.cls}" href="${esc(n.href)}"><span class="when">${n.when}</span><h2>${n.title}</h2>${big}<p>${n.txt}</p>${n.subj?`<span class="stars">${starTxt(n.subj)}</span>`:""}<span class="go">${n.go}</span></a>`}).join("");
+})();
+</script>
+</body>
+</html>
