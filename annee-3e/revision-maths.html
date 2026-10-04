@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Maths Revision with Wunmi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,600&family=Caveat:wght@500;700&display=swap">
+<style>
+/* Layout: grid-paper revision binder — three shelves of topics (Wunmi's worksheets first), a fixed sample test, and a play screen. */
+:root{
+  --paper:#F4F6FC; --panel:#FFFFFF; --panel-2:#FAFBFF;
+  --ink:#16213A; --ink-soft:#5A6484; --ink-faint:#8B95B4;
+  --rule:#CBD6F2; --grid:rgba(116,148,214,.15); --line:#E2E7F5;
+  --marge:#D1495B; --marge-soft:#FBE5E8;
+  --encre:#2F4FC9; --encre-soft:#E7ECFC;
+  --vert:#2E8B57; --vert-soft:#E4F4EB;
+  --craie:#B57A10; --craie-soft:#FBF0DA;
+  --prune:#8A4FB0; --prune-soft:#F1E7F7;
+  --c:var(--encre); --cs:var(--encre-soft);
+  --shadow:0 10px 26px rgba(22,33,58,.09); --shadow-sm:0 2px 8px rgba(22,33,58,.06);
+  --display:"Gabarito","Trebuchet MS",system-ui,sans-serif;
+  --body:"Literata",Georgia,"Times New Roman",serif;
+  --hand:"Caveat","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F141F; --panel:#171E2D; --panel-2:#1C2435;
+    --ink:#E8ECF9; --ink-soft:#A2AECB; --ink-faint:#7A86A6;
+    --rule:#2B3752; --grid:rgba(140,170,255,.07); --line:#27314A;
+    --marge:#E77A89; --marge-soft:#3A1E26; --encre:#8FA8FF; --encre-soft:#1E2946;
+    --vert:#66C795; --vert-soft:#16301F; --craie:#F0BC63; --craie-soft:#2E2513;
+    --prune:#C79AE6; --prune-soft:#2A1E36;
+    --shadow:0 10px 26px rgba(0,0,0,.34); --shadow-sm:0 2px 8px rgba(0,0,0,.25);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F141F; --panel:#171E2D; --panel-2:#1C2435;
+  --ink:#E8ECF9; --ink-soft:#A2AECB; --ink-faint:#7A86A6;
+  --rule:#2B3752; --grid:rgba(140,170,255,.07); --line:#27314A;
+  --marge:#E77A89; --marge-soft:#3A1E26; --encre:#8FA8FF; --encre-soft:#1E2946;
+  --vert:#66C795; --vert-soft:#16301F; --craie:#F0BC63; --craie-soft:#2E2513;
+  --prune:#C79AE6; --prune-soft:#2A1E36;
+  --shadow:0 10px 26px rgba(0,0,0,.34); --shadow-sm:0 2px 8px rgba(0,0,0,.25);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--body);color:var(--ink);background-color:var(--paper);
+  background-image:repeating-linear-gradient(to bottom,transparent 0 23px,var(--grid) 23px 24px),repeating-linear-gradient(to right,transparent 0 23px,var(--grid) 23px 24px);
+  line-height:1.6;font-size:16px;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.15;margin:0;text-wrap:balance}
+p{margin:0}
+button,input{font-family:var(--display);color:inherit;font-size:inherit}
+button{cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--encre);outline-offset:2px;border-radius:8px}
+.wrap{max-width:900px;margin:0 auto;padding-inline:16px}
+header{background:var(--panel);border-bottom:1px solid var(--line);padding-block:18px 14px}
+.top-in{display:flex;gap:12px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap}
+.eyebrow{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;font-weight:700;color:var(--ink-faint)}
+header h1{font-size:clamp(1.5rem,5vw,2.1rem);margin-top:3px}
+header h1 b{color:var(--marge)}
+.pill{font-family:var(--display);font-weight:700;font-size:.84rem;background:var(--craie-soft);color:var(--craie);border-radius:99px;padding:5px 12px;font-variant-numeric:tabular-nums;white-space:nowrap}
+main{padding-block:20px 80px}
+.btn{font-family:var(--display);font-weight:600;font-size:.92rem;border:1px solid var(--line);background:var(--panel-2);padding:9px 15px;border-radius:12px;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn:hover:not(:disabled){border-color:var(--encre)}
+.btn.primary{background:var(--c);border-color:var(--c);color:var(--panel)}
+.btn.ghost{background:transparent}
+.btn.small{font-size:.82rem;padding:6px 11px;border-radius:9px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.k{font-family:var(--display);font-size:.74rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--c);margin:28px 0 10px;display:flex;align-items:center;gap:10px}
+.k::after{content:"";flex:1;height:1px;background:var(--line)}
+.lead{font-size:1.02rem;color:var(--ink-soft);max-width:64ch}
+.hand{font-family:var(--hand);font-size:1.35rem;line-height:1.3}
+.muted{color:var(--ink-faint);font-size:.9rem}
+.s-w{--c:var(--marge);--cs:var(--marge-soft)} .s-n{--c:var(--encre);--cs:var(--encre-soft)} .s-m{--c:var(--prune);--cs:var(--prune-soft)}
+
+.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:14px}
+.hcard{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px 18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px}
+.hcard h2{font-size:1.25rem}
+.hcard p{font-size:.93rem;color:var(--ink-soft)}
+.topics{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.topic{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:12px 14px;display:flex;flex-direction:column;gap:7px;box-shadow:var(--shadow-sm)}
+.topic .src{font-family:var(--display);font-size:.7rem;font-weight:700;color:var(--c);letter-spacing:.1em;text-transform:uppercase}
+.topic h3{font-size:1.04rem}
+.topic p{font-size:.87rem;color:var(--ink-soft);flex:1}
+.stars{font-size:1.1rem;letter-spacing:2px;color:var(--line);line-height:1}
+.stars .on{color:var(--craie)}
+
+.learn{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
+.learn h2{font-size:1.4rem}
+.idea{background:var(--cs);border-radius:12px;padding:12px 14px}
+.idea h4{font-family:var(--display);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--c);margin-bottom:6px}
+.idea ul{margin:0;padding-left:18px}
+.idea li{margin-bottom:3px}
+.board{font-family:var(--display);background:var(--panel-2);border:1px dashed var(--rule);border-radius:12px;padding:12px 14px;font-variant-numeric:tabular-nums;line-height:1.7}
+.board b{color:var(--c)}
+.trap{border-left:4px solid var(--marge);background:var(--marge-soft);border-radius:0 12px 12px 0;padding:10px 14px;font-size:.95rem}
+.trap b:first-child{font-family:var(--display);color:var(--marge)}
+
+.qhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.qtitle{font-family:var(--display);font-weight:700;flex:1 1 160px}
+.qcount{font-family:var(--display);font-weight:700;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.progress{height:10px;border-radius:99px;background:var(--cs);overflow:hidden;margin:10px 0 14px}
+.progress i{display:block;height:100%;background:var(--c);border-radius:99px;transition:width .3s}
+.qcard{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px}
+.qvis{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.qvis > *{max-width:100%}
+.prompt{font-family:var(--display);font-size:clamp(1.15rem,3.6vw,1.4rem);font-weight:600;line-height:1.35}
+.prompt b{color:var(--c)}
+.big{font-family:var(--display);font-size:clamp(1.9rem,8vw,2.6rem);font-weight:800;font-variant-numeric:tabular-nums}
+.big u{text-decoration-thickness:4px;text-underline-offset:6px;text-decoration-color:var(--marge)}
+.retry{align-self:flex-start;font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--craie-soft);color:var(--craie);border-radius:99px;padding:3px 10px}
+.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:9px}
+.choice{border:2px solid var(--line);background:var(--panel-2);border-radius:14px;padding:12px 14px;font-size:1.08rem;font-weight:600;text-align:left;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--c)}
+.choice:disabled{cursor:default}
+.choice.ok{border-color:var(--vert);background:var(--vert-soft);color:var(--vert)}
+.choice.no{border-color:var(--marge);background:var(--marge-soft);color:var(--marge)}
+.ansform{display:flex;gap:9px;flex-wrap:wrap;align-items:flex-end}
+.ansform label{display:flex;flex-direction:column;gap:3px;font-family:var(--display);font-size:.8rem;font-weight:600;color:var(--ink-soft)}
+.ansform input{width:150px;max-width:100%;font-size:1.45rem;font-weight:700;padding:8px 12px;border:2px solid var(--rule);border-radius:13px;background:var(--panel-2);font-variant-numeric:tabular-nums}
+.ansform input.sm{width:96px}
+.ansform input:focus{border-color:var(--c);outline:none}
+.ansform .unit{font-family:var(--display);font-weight:600;color:var(--ink-soft);padding-bottom:12px}
+.fb{border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:6px}
+.fb.ok{background:var(--vert-soft)} .fb.no{background:var(--marge-soft)}
+.fb .h{font-family:var(--display);font-weight:800;font-size:1.2rem}
+.fb.ok .h{color:var(--vert)} .fb.no .h{color:var(--marge)}
+.steps{font-family:var(--display);font-variant-numeric:tabular-nums;line-height:1.7}
+.result{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.result .score{font-family:var(--display);font-size:3rem;font-weight:800;line-height:1;color:var(--c);font-variant-numeric:tabular-nums}
+.bigstars{font-size:2.5rem;letter-spacing:6px;color:var(--line);line-height:1}
+.bigstars .on{color:var(--craie)}
+.rev{border:1px solid var(--line);border-radius:14px;padding:12px;background:var(--panel-2);display:flex;flex-direction:column;gap:6px;width:100%}
+.rev .bad{color:var(--marge);text-decoration:line-through} .rev .good{color:var(--vert);font-weight:700}
+
+/* visuals */
+.clock{width:190px;max-width:100%;height:auto;display:block}
+.ck-face{fill:var(--panel);stroke:var(--ink);stroke-width:4}
+.ck-tick{stroke:var(--ink-faint);stroke-width:1.4} .ck-tick.big{stroke:var(--ink);stroke-width:3}
+.ck-num{fill:var(--ink);font-family:var(--display);font-size:17px;font-weight:700;text-anchor:middle;dominant-baseline:central}
+.ck-h{stroke:var(--marge);stroke-width:7;stroke-linecap:round} .ck-m{stroke:var(--encre);stroke-width:4.5;stroke-linecap:round} .ck-c{fill:var(--ink)}
+.fbar{display:block;width:100%;max-width:360px;height:auto}
+.fb-on{fill:var(--c)} .fb-off{fill:var(--panel-2)} .fb-line{stroke:var(--ink);stroke-width:2;fill:none}
+.rect-l{fill:var(--cs);stroke:var(--c);stroke-width:3} .rect-t{fill:var(--ink);font-family:var(--display);font-size:15px;font-weight:700;text-anchor:middle}
+.pvt{border-collapse:collapse;font-family:var(--display);font-variant-numeric:tabular-nums}
+.pvt th,.pvt td{border:1.5px solid var(--rule);padding:4px 10px;text-align:center}
+.pvt th{font-size:.74rem;color:var(--ink-soft);background:var(--panel-2)}
+.pvt td{font-size:1.25rem;font-weight:700}
+.pvt td.hi{background:var(--craie-soft);color:var(--craie)}
+.tblwrap{overflow-x:auto;max-width:100%}
+
+/* sample test */
+.paper{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px}
+.paper h3{font-size:1.08rem;margin-top:14px;color:var(--c)}
+.pq{display:grid;grid-template-columns:30px 1fr;gap:4px 8px;padding:9px 0;border-bottom:1px dotted var(--line);align-items:start}
+.pq .n{font-family:var(--display);font-weight:700;color:var(--ink-faint);padding-top:6px;font-variant-numeric:tabular-nums}
+.pq .t{font-family:var(--display);font-size:1.02rem;min-width:0}
+.pq .boxes{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:5px;font-family:var(--display);font-size:.88rem;color:var(--ink-soft)}
+.pq input{width:92px;padding:6px 9px;font-size:1.05rem;font-weight:700;border:1.5px solid var(--rule);border-radius:9px;background:var(--panel-2)}
+.pq input.ok{border-color:var(--vert);background:var(--vert-soft)} .pq input.no{border-color:var(--marge);background:var(--marge-soft)}
+.pq .key{grid-column:2;font-family:var(--display);font-size:.9rem;color:var(--vert);font-weight:700}
+.paper-bar{position:sticky;bottom:calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:9px;flex-wrap:wrap;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px 12px;box-shadow:var(--shadow);margin-top:14px}
+.paper-bar .sc{font-family:var(--display);font-weight:800;flex:1 1 120px;font-variant-numeric:tabular-nums}
+#toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--panel);font-family:var(--display);font-weight:700;padding:10px 18px;border-radius:99px;box-shadow:var(--shadow);z-index:50}
+footer{border-top:1px solid var(--line);margin-top:34px;padding-top:14px;font-size:.84rem;color:var(--ink-faint)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap top-in">
+    <div>
+      <p class="eyebrow"><a href="./" style="color:inherit">Ma 3<sup>e</sup> année</a> · maths with Wunmi</p>
+      <h1>Maths <b>revision</b></h1>
+    </div>
+    <span class="pill" id="pill">★ 0 · 0 pts</span>
+  </div>
+</header>
+<main class="wrap" id="app"></main>
+<div id="toast" hidden></div>
+<script>
+(function(){
+"use strict";
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const R=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const fmt=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g," ");
+const norm=s=>String(s).toLowerCase().replace(/[\s .,'’\-]/g,"");
+function choicesFrom(ans,pool,n=4){const out=[ans];for(const p of shuffle(pool)){if(out.length>=n)break;if(!out.some(o=>norm(o)===norm(p)))out.push(p)}return shuffle(out)}
+const ORD=n=>n+(n%100>=11&&n%100<=13?"th":["th","st","nd","rd"][n%10]||"th");
+const gcd=(a,b)=>b?gcd(b,a%b):a, lcm=(a,b)=>a*b/gcd(a,b);
+const KEY="wunmi-revision-v1";
+const S={stars:{},xp:0,paper:{}};
+try{const d=JSON.parse(localStorage.getItem(KEY));if(d)Object.assign(S,d)}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+let AC=null;
+function tone(seq){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();let t=AC.currentTime;for(const [f,d] of seq){const o=AC.createOscillator(),g=AC.createGain();o.type="triangle";o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.16,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+d+.02);t+=d*.8}}catch(e){}}
+function toast(m){const t=$("#toast");t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,2200)}
+
+/* ---------- visuals ---------- */
+function clockSVG(h,m){
+  let s=`<svg class="clock" viewBox="0 0 200 200" role="img" aria-label="Clock"><circle cx="100" cy="100" r="94" class="ck-face"/>`;
+  for(let i=0;i<60;i++){const a=i*6*Math.PI/180,big=i%5===0,r1=big?80:85;s+=`<line x1="${100+r1*Math.sin(a)}" y1="${100-r1*Math.cos(a)}" x2="${100+90*Math.sin(a)}" y2="${100-90*Math.cos(a)}" class="ck-tick${big?" big":""}"/>`}
+  for(let i=1;i<=12;i++){const a=i*30*Math.PI/180;s+=`<text x="${100+66*Math.sin(a)}" y="${100-66*Math.cos(a)}" class="ck-num">${i}</text>`}
+  return s+`<line x1="100" y1="100" x2="100" y2="56" class="ck-h" transform="rotate(${((h%12)+m/60)*30} 100 100)"/><line x1="100" y1="100" x2="100" y2="26" class="ck-m" transform="rotate(${m*6} 100 100)"/><circle cx="100" cy="100" r="6" class="ck-c"/></svg>`;
+}
+const dig=(h,m)=>`${h}:${String(m).padStart(2,"0")}`;
+function tw(h,m){const nx=h%12+1;if(m===0)return `${h} o’clock`;if(m===15)return `quarter past ${h}`;if(m===30)return `half past ${h}`;if(m===45)return `quarter to ${nx}`;return m<30?`${m} past ${h}`:`${60-m} to ${nx}`}
+function barSVG(n,d){const w=340/d;let s=`<svg class="fbar" viewBox="0 0 350 60" role="img" aria-label="Fraction bar">`;for(let i=0;i<d;i++)s+=`<rect x="${5+i*w}" y="8" width="${w}" height="44" class="${i<n?"fb-on":"fb-off"}"/>`;s+=`<rect x="5" y="8" width="340" height="44" class="fb-line"/>`;for(let i=1;i<d;i++)s+=`<line x1="${5+i*w}" y1="8" x2="${5+i*w}" y2="52" class="fb-line"/>`;return s+`</svg>`}
+function rectSVG(l,w,unit){const sc=Math.min(26,220/l,110/w),W=l*sc,Hh=w*sc;return `<svg viewBox="0 0 ${W+80} ${Hh+60}" style="width:100%;max-width:${Math.round(W+80)}px;height:auto" role="img" aria-label="Rectangle"><rect x="40" y="18" width="${W}" height="${Hh}" class="rect-l"/><text x="${40+W/2}" y="13" class="rect-t">${l} ${unit}</text><text x="${W+62}" y="${18+Hh/2+5}" class="rect-t">${w} ${unit}</text></svg>`}
+function decTable(intPart,decs,hiIdx){ // hiIdx: index in [tens?,ones,tenths,hund,thou]
+  const ip=String(intPart).split(""),cols=(ip.length>1?["Tens"]:[]).concat(["Ones","Tenths","Hundredths","Thousandths"]),vals=ip.concat(decs.split(""));
+  return `<div class="tblwrap"><table class="pvt"><tr>${cols.map((c,i)=>`<th>${c}</th>${i===ip.length-1?"<th>,</th>":""}`).join("")}</tr><tr>${vals.map((v,i)=>`<td class="${i===hiIdx?"hi":""}">${v}</td>${i===ip.length-1?"<td>,</td>":""}`).join("")}</tr></table></div>`;
+}
+
+/* ---------- generators: Wunmi's worksheets ---------- */
+function chunkSteps(n,d,q,r){
+  const t=Math.floor(q/10)*10,o=q-t;let s=`<div class="steps">Share ${n} into groups of ${d} (the chunk method):<br>`;
+  if(t)s+=`${d} × ${t} = ${d*t} → ${n} − ${d*t} = <b>${n-d*t}</b> left<br>`;
+  if(o)s+=`${d} × ${o} = ${d*o} → ${n-d*t} − ${d*o} = <b>${r}</b> left<br>`;
+  return s+`So ${n} ÷ ${d} = <b>${q}</b>${r?` remainder <b>${r}</b>`:""}. Check: ${d} × ${q}${r?` + ${r}`:""} = ${n}.</div>`;
+}
+function genDivide(){
+  let d,q,r,n;do{d=R(11,29);q=R(12,39);r=Math.random()<.5?0:R(1,d-1);n=d*q+r}while(n<100||n>999);
+  return {p:`<span class="big">${n} ÷ ${d} = ?</span>`,type:"qr",answer:[q,r],explain:chunkSteps(n,d,q,r),key:n+"/"+d};
+}
+const TENS_W={20:"twenties",30:"thirties",40:"forties",50:"fifties",60:"sixties",70:"seventies",80:"eighties",90:"nineties"};
+function genWord(){
+  const t=R(1,8),name=pick(["Ade","Tolu","Noah","Zoé","Israël","Mia","Samuel","Chloé"]);
+  if(t===1){const k=pick([20,30,40,50,60,70,80,90]),m=R(2,9);return {p:`How many <b>${TENS_W[k]}</b> make ${k*m}?`,type:"input",answer:m,explain:`${k*m} ÷ ${k} = ${m}, because ${k} × ${m} = ${k*m}.`}}
+  if(t===2){const s=pick([40,50,60,70,80,90]),b=R(3,9);return {p:`${s} people can sit on a bus. How many buses are needed for <b>${s*b} people</b>?`,type:"input",answer:b,unit:"buses",explain:`${s*b} ÷ ${s} = ${b} buses.`}}
+  if(t===3){const c=pick([15,25,35,45,75,12,24]),k=R(4,12);return {p:`A book costs $${c}. ${name} spent <b>$${c*k}</b> buying some of these books. How many books?`,type:"input",answer:k,unit:"books",explain:`$${c*k} ÷ $${c} = ${k} books. Check: ${c} × ${k} = ${c*k}.`}}
+  if(t===4){const g=R(2,5),b=R(2,5),e=R(20,60);return {p:`${g} girls and ${b} boys share <b>${(g+b)*e} sweets</b> equally. How many sweets does each child get?`,type:"input",answer:e,unit:"sweets",explain:`First count the children: ${g} + ${b} = ${g+b}. Then ${(g+b)*e} ÷ ${g+b} = ${e}.`}}
+  if(t===5){const m=R(3,9),p=R(12,45)*10;return {p:`A tailor bought ${m} metres of cloth for <b>$${fmt(m*p)}</b>. How much did one metre cost?`,type:"input",answer:p,unit:"$",explain:`$${fmt(m*p)} ÷ ${m} = $${p}.`}}
+  if(t===6){const big=Math.random()<.5,k=big?R(12,60):R(11,99);return big?{p:`How many <b>hundreds</b> are there in ${fmt(k*100)}?`,type:"input",answer:k,explain:`${fmt(k*100)} ÷ 100 = ${k}. Cover the last two zeros!`}:{p:`How many <b>tens</b> are there in ${fmt(k*10)}?`,type:"input",answer:k,explain:`${fmt(k*10)} ÷ 10 = ${k}. Cover the last zero!`}}
+  if(t===7){const s=pick([30,40,50,60]),b=R(3,8),extra=R(1,s-1),n=s*b+extra;return {p:`${s} children fit on one bus. <b>${n} children</b> are going on a trip. How many buses are needed so everyone gets a seat?`,type:"input",answer:b+1,unit:"buses",explain:`${n} ÷ ${s} = ${b} remainder ${extra}. The ${extra} children left over still need a bus, so we need <b>${b+1}</b> buses.`}}
+  const p=pick([10,12,15]),q=R(8,30),r=R(1,p-1),n=p*q+r;
+  return {p:`${name} puts ${n} pencils into packs of ${p}. How many <b>full packs</b>, and how many pencils are <b>left over</b>?`,type:"qr",labels:["Full packs","Left over"],answer:[q,r],explain:chunkSteps(n,p,q,r)};
+}
+function genMultiples(){
+  const t=R(1,5),k=R(2,12);
+  if(t===1){const n=R(3,12);return {p:`What is the <b>${ORD(n)} multiple</b> of ${k}?`,type:"input",answer:n*k,explain:`Count by ${k}s ${n} times, or multiply: ${k} × ${n} = ${n*k}.`}}
+  if(t===2){const yes=Math.random()<.5,x=yes?k*R(3,12):k*R(3,11)+R(1,k-1);return {p:`Is <b>${x}</b> a multiple of ${k}?`,type:"choice",choices:["Yes","No"],answer:yes?"Yes":"No",explain:yes?`Yes: ${k} × ${x/k} = ${x}.`:`No: ${x} ÷ ${k} has a remainder (${x} = ${k} × ${Math.floor(x/k)} + ${x%k}).`}}
+  if(t===3){const ms=shuffle([...Array(12).keys()].map(i=>(i+1)*k)).slice(0,3);let odd;do{odd=R(k+1,k*12)}while(odd%k===0);return {p:`Which number is <b>NOT</b> a multiple of ${k}?`,type:"choice",choices:shuffle([...ms,odd].map(String)),answer:String(odd),explain:`${odd} ÷ ${k} leaves a remainder. The others are in the ${k} times table.`}}
+  if(t===4){const st=R(1,6),hole=R(1,4),seq=[0,1,2,3,4].map(i=>(st+i)*k);const ans=seq[hole];return {p:`Fill the gap: <b>${seq.map((v,i)=>i===hole?"___":v).join(", ")}</b>`,type:"input",answer:ans,explain:`These are multiples of ${k}: each number is ${k} more than the one before.`}}
+  const kk=R(2,9);return {p:`Write the <b>first 5 multiples</b> of ${kk}.`,type:"list",answer:[1,2,3,4,5].map(i=>i*kk),explain:`${[1,2,3,4,5].map(i=>i*kk).join(", ")} — the ${kk} times table.`,key:"l"+kk};
+}
+const PAIRS=[[4,12],[3,5],[10,15],[6,9],[2,3],[4,6],[3,4],[5,10],[6,8],[2,5],[4,10],[3,9],[2,7],[6,10],[8,12],[5,6]];
+function listUpTo(k,max){const o=[];for(let x=k;x<=max;x+=k)o.push(x);return o}
+function genCommon(){
+  const [a,b]=pick(PAIRS),L=lcm(a,b),t=R(1,3);
+  const ex=`Multiples of ${a}: ${listUpTo(a,2*L).map(x=>x%L===0?`<b>${x}</b>`:x).join(", ")}<br>Multiples of ${b}: ${listUpTo(b,2*L).map(x=>x%L===0?`<b>${x}</b>`:x).join(", ")}<br>The numbers in <b>both</b> lists are the common multiples.`;
+  if(t===1)return {p:`List the <b>first two common multiples</b> of ${a} and ${b}.`,type:"list",answer:[L,2*L],explain:ex,key:a+"-"+b+"l"};
+  if(t===2)return {p:`What is the <b>smallest</b> common multiple of ${a} and ${b}? (not 0)`,type:"input",answer:L,explain:ex,key:a+"-"+b+"s"};
+  const wrong=[a*R(1,4),b*R(1,4),L+a,L+b].filter(x=>x%L!==0),good=String(L*pick([1,2]));return {p:`Which number is a multiple of <b>both</b> ${a} and ${b}?`,type:"choice",choices:choicesFrom(good,wrong.map(String)),answer:good,show:good,check:v=>+v%a===0&&+v%b===0,explain:ex,key:a+"-"+b+"c"};
+}
+function genTables(){
+  const a=R(2,12),b=R(2,12),t=R(1,3);
+  if(t===1)return {p:`<span class="big">${a} × ${b} = ?</span>`,type:"input",answer:a*b,explain:`${a} × ${b} = ${a*b}. Tip: ${b} × ${a} is the same.`};
+  if(t===2)return {p:`<span class="big">${a} × ? = ${a*b}</span>`,type:"input",answer:b,explain:`Which number times ${a} gives ${a*b}? ${a} × ${b} = ${a*b}.`};
+  return {p:`<span class="big">${a*b} ÷ ${a} = ?</span>`,type:"input",answer:b,explain:`Division is backwards multiplication: ${a} × ${b} = ${a*b}, so ${a*b} ÷ ${a} = ${b}.`};
+}
+const PLACE=["ones","tenths","hundredths","thousandths"];
+function decNum(){const ip=Math.random()<.25?R(10,99):R(1,9);const ds=shuffle([1,2,3,4,5,6,7,8,9]).slice(0,3).join("");return {ip,ds}}
+function genDecPlace(){
+  const {ip,ds}=decNum(),sep=Math.random()<.6?",":".",t=R(1,3),ipS=String(ip),cols=(ipS.length>1?["tens"]:[]).concat(PLACE);
+  const all=ipS+ds,off=ipS.length>1?1:0;
+  const idx=R(off,all.length-1),name=cols[idx];
+  const show=i=>ipS.split("").map((c,j)=>j===i?`<u>${c}</u>`:c).join("")+sep+ds.split("").map((c,j)=>j+ipS.length===i?`<u>${c}</u>`:c).join("");
+  const why=`${decTable(ip,ds,idx)} After the decimal ${sep==","?"comma":"point"}: 1st place = tenths, 2nd = hundredths, 3rd = thousandths.`;
+  if(t<=2)return {vis:`<p class="big">${show(idx)}</p>`,p:"What is the place value of the <b>underlined</b> digit?",type:"choice",choices:["tenths","hundredths","thousandths","ones"],answer:name==="tens"?"ones":name,explain:why,skip:name==="tens"};
+  const j=R(ipS.length,all.length-1);return {vis:`<p class="big">${ipS+sep+ds}</p>`,p:`Which digit is in the <b>${cols[j]}</b> place?`,type:"input",answer:+all[j],explain:decTable(ip,ds,j)};
+}
+function clue(place,d,isOnes){
+  if(isOnes&&d===9&&Math.random()<.5)return "my ones digit is the largest single-digit number";
+  const opts=[`my ${place} digit is ${d}`],k=R(1,3);
+  if(d>0&&d%2===0)opts.push(`my ${place} digit is double ${d/2}`);
+  if(d>0&&d<=4)opts.push(`my ${place} digit is half of ${d*2}`);
+  opts.push(`my ${place} digit is ${k} less than ${d+k}`);
+  if(d>=k)opts.push(`my ${place} digit is ${k} more than ${d-k}`);
+  return pick(opts);
+}
+function genWhatNum(){
+  const o=R(1,9),ds=[R(0,9),R(1,9),R(0,9)],ans=`${o}.${ds.join("")}`,t=R(1,2);
+  const show=`${o},${ds.join("")} (or ${ans})`;
+  if(t===1){const parts=shuffle([`${o} ones`,`${ds[0]} tenths`,`${ds[1]} hundredths`,`${ds[2]} thousandths`]);return {p:`I have ${parts.slice(0,3).join(", ")} and ${parts[3]}. <b>What number am I?</b>`,type:"dec",answer:ans,show,explain:`${decTable(o,ds.join(""),-1)} Put each digit in its place: ${show}.`}}
+  const cl=[clue("ones",o,true),clue("tenths",ds[0]),clue("hundredths",ds[1]),clue("thousandths",ds[2])].map(c=>c.charAt(0).toUpperCase()+c.slice(1)+".");
+  return {p:`I am a decimal number. ${cl.join(" ")} <b>What number am I?</b>`,type:"dec",answer:ans,show,explain:`${decTable(o,ds.join(""),-1)} Work out each clue, then put the digits in order: ${show}.`};
+}
+
+/* ---------- generators: summer lessons ---------- */
+function genPlace(){
+  const n=R(1000,99999),s=String(n),t=R(1,3),names=["ones","tens","hundreds","thousands","ten thousands"];
+  if(t===1){let i;do{i=R(0,s.length-1)}while(s[s.length-1-i]==="0");const d=+s[s.length-1-i];return {vis:`<p class="big">${fmt(n)}</p>`,p:`What is the <b>value</b> of the digit ${d} in the ${names[i]} place?`,type:"input",answer:d*10**i,explain:`${d} × ${fmt(10**i)} = ${fmt(d*10**i)}.`}}
+  const parts=s.split("").map((c,i)=>+c*10**(s.length-1-i)).filter(x=>x);
+  if(t===2)return {p:`<span class="big">${parts.map(fmt).join(" + ")} = ?</span>`,type:"input",answer:n,explain:`Put each part in its place: ${fmt(n)}.`};
+  const m=n+pick([-1,1])*pick([10,100,1000]);return {p:`Which is <b>greater</b>?`,type:"choice",choices:[fmt(n),fmt(m)],answer:fmt(Math.max(n,m)),explain:`Compare from the left, digit by digit.`};
+}
+function genRound(){
+  const to=pick([10,100,1000]),n=to===1000?R(1001,9998):R(101,9998);const r=Math.round(n/to)*to;
+  return {p:`Round <b>${fmt(n)}</b> to the nearest <b>${to===10?"ten":to===100?"hundred":"thousand"}</b>.`,type:"input",answer:r,explain:`Look at the digit to the right of the ${to===10?"tens":to===100?"hundreds":"thousands"}. 5 or more → round up; 4 or less → round down. ${fmt(n)} → ${fmt(r)}.`};
+}
+const isPrime=n=>{if(n<2)return false;for(let i=2;i*i<=n;i++)if(n%i===0)return false;return true};
+function genPrime(){
+  if(Math.random()<.35){const n=R(10,999);return {vis:`<p class="big">${n}</p>`,p:"Even or odd?",type:"choice",choices:["even","odd"],answer:n%2?"odd":"even",explain:`Look at the last digit: ${n%10}. ${n%2?"1, 3, 5, 7, 9 → odd":"0, 2, 4, 6, 8 → even"}.`}}
+  const n=R(4,50),p=isPrime(n);let f=[];for(let i=2;i<n;i++)if(n%i===0)f.push(i);
+  return {vis:`<p class="big">${n}</p>`,p:"Prime or composite?",type:"choice",choices:["prime","composite"],answer:p?"prime":"composite",explain:p?`${n} can only be divided by 1 and ${n}: it is prime.`:`${n} can be divided by ${f.slice(0,3).join(", ")}…: it is composite.`};
+}
+function genPattern(){
+  const t=R(1,3);let seq,ans,rule;
+  if(t===1){const a=R(2,60),s=R(3,25);seq=[0,1,2,3].map(i=>a+i*s);ans=a+4*s;rule=`add ${s} each time`}
+  else if(t===2){const s=R(3,25),a=R(5*s,200);seq=[0,1,2,3].map(i=>a-i*s);ans=a-4*s;rule=`subtract ${s} each time`}
+  else{const a=R(1,6);seq=[0,1,2,3].map(i=>a*2**i);ans=a*16;rule="double each time"}
+  return {p:`What comes next? <b>${seq.join(", ")}, ___</b>`,type:"input",answer:ans,explain:`The rule is: ${rule}. Next: ${ans}.`};
+}
+function genAddSub(){
+  if(Math.random()<.5){const a=R(1200,6800),b=R(1100,3100);return {p:`<span class="big">${fmt(a)} + ${fmt(b)} = ?</span>`,type:"input",answer:a+b,explain:`Add column by column from the ones, carrying when a column makes 10 or more: ${fmt(a+b)}.`}}
+  const a=R(3000,9800),b=R(1100,a-500);return {p:`<span class="big">${fmt(a)} − ${fmt(b)} = ?</span>`,type:"input",answer:a-b,explain:`Subtract from the ones, borrowing when the top digit is smaller. Check: ${fmt(a-b)} + ${fmt(b)} = ${fmt(a)}.`};
+}
+function genMissing(){
+  const t=R(1,4);
+  if(t===1){const a=R(15,85),x=R(10,90);return {p:`<span class="big">${a} + ? = ${a+x}</span>`,type:"input",answer:x,explain:`${a+x} − ${a} = ${x}.`}}
+  if(t===2){const b=R(10,60),c=R(10,80);return {p:`<span class="big">? − ${b} = ${c}</span>`,type:"input",answer:b+c,explain:`${c} + ${b} = ${b+c}.`}}
+  if(t===3){const a=R(2,9),x=R(2,12);return {p:`<span class="big">${a} × ? = ${a*x}</span>`,type:"input",answer:x,explain:`${a*x} ÷ ${a} = ${x}.`}}
+  const b=R(2,9),c=R(2,12);return {p:`<span class="big">? ÷ ${b} = ${c}</span>`,type:"input",answer:b*c,explain:`${c} × ${b} = ${b*c}.`};
+}
+function genMult(){
+  const a=Math.random()<.5?R(12,99):R(102,499),b=R(3,9),h=Math.floor(a/100)*100,t=Math.floor(a%100/10)*10,o=a%10;
+  return {p:`<span class="big">${a} × ${b} = ?</span>`,type:"input",answer:a*b,explain:`<div class="steps">Split ${a}: ${[h,t,o].filter(x=>x).join(" + ")}<br>${[h,t,o].filter(x=>x).map(x=>`${x} × ${b} = ${x*b}`).join("<br>")}<br>Add: <b>${fmt(a*b)}</b></div>`};
+}
+function genFractions(){
+  const t=R(1,4);
+  if(t===1){const d=R(2,8),n=R(1,d-1);return {vis:barSVG(n,d),p:"What fraction of the bar is coloured?",type:"choice",choices:choicesFrom(`${n}/${d}`,[`${d-n}/${d}`,`${n}/${d+1}`,`${d}/${n}`,`${n+1}/${d}`].filter(x=>!/\/0|^0/.test(x))),answer:`${n}/${d}`,explain:`${n} parts coloured out of ${d} equal parts: ${n}/${d}.`}}
+  if(t===2){const [a,b]=shuffle([2,3,4,5,6,8,10]).slice(0,2);return {p:`Which is <b>bigger</b>: 1/${a} or 1/${b}?`,type:"choice",choices:[`1/${a}`,`1/${b}`],answer:`1/${Math.min(a,b)}`,explain:`Cutting into fewer pieces makes bigger pieces: 1/${Math.min(a,b)} is bigger.`}}
+  if(t===3){const [n,d]=pick([[1,2],[1,3],[2,3],[1,4],[3,4],[1,5]]),k=R(2,4);return {p:`<span class="big">${n}/${d} = ?/${d*k}</span>`,type:"input",answer:n*k,explain:`The bottom was multiplied by ${k}, so multiply the top by ${k} too: ${n} × ${k} = ${n*k}.`}}
+  const d=pick([2,3,4,5]),k=R(2,8);return {p:`What is <b>1/${d}</b> of ${d*k} apples?`,type:"input",answer:k,unit:"apples",explain:`Share ${d*k} into ${d} equal groups: ${d*k} ÷ ${d} = ${k}.`};
+}
+function genMoney(){
+  const t=R(1,3);
+  if(t===1){const a=R(105,895),b=R(105,495),s=((a+b)/100).toFixed(2);return {p:`<span class="big">$${(a/100).toFixed(2)} + $${(b/100).toFixed(2)} = ?</span>`,type:"dec",answer:s,show:`$${s}`,explain:`Line up the decimal points and add: $${s}.`}}
+  if(t===2){const c=R(105,995);return {p:`How many <b>cents</b> are in $${(c/100).toFixed(2)}?`,type:"input",answer:c,unit:"¢",explain:`$1 = 100¢, so $${(c/100).toFixed(2)} = ${c}¢.`}}
+  const p=R(115,895),ch=((1000-p)/100).toFixed(2);return {p:`You pay for a $${(p/100).toFixed(2)} snack with a <b>$10</b> bill. How much change?`,type:"dec",answer:ch,show:`$${ch}`,explain:`$10.00 − $${(p/100).toFixed(2)} = $${ch}.`};
+}
+function genTime(){
+  const h=R(1,12),m=pick([0,15,30,45,5,10,20,25,35,40,50,55]),t=R(1,3);
+  if(t===1){const opts=[[h,m],[h%12+1,m],[m===0?12:m/5,(h*5)%60],[h,(m+30)%60]].filter((x,i,a)=>a.findIndex(y=>y[0]===x[0]&&y[1]===x[1])===i);return {vis:clockSVG(h,m),p:"What time is it?",type:"choice",choices:shuffle(opts.slice(0,4).map(([a,b])=>`${dig(a,b)} (${tw(a,b)})`)),answer:`${dig(h,m)} (${tw(h,m)})`,explain:`Short hand = hours, long hand = minutes. The long hand is on the ${m===0?12:m/5}: ${m} minutes. It is ${dig(h,m)}.`}}
+  if(t===2){const d=pick([15,30,45,20,40]),tot=h*60+m+d,eh=Math.floor(tot/60)%12||12,em=tot%60;return {p:`A lesson starts at <b>${dig(h,m)}</b> and lasts <b>${d} minutes</b>. What time does it end?`,type:"choice",choices:choicesFrom(dig(eh,em),[dig(eh%12+1,em),dig(h,(m+d)%60),dig(eh,(em+15)%60)]),answer:dig(eh,em),explain:`${dig(h,m)} + ${d} minutes = ${dig(eh,em)}.`}}
+  const q=pick([["How many minutes are in 1 hour?",60],["How many minutes are in half an hour?",30],["How many minutes are in a quarter of an hour?",15],["How many hours are in 1 day?",24],["How many seconds are in 1 minute?",60],["How many days are in 2 weeks?",14]]);
+  return {p:q[0],type:"input",answer:q[1],explain:`The answer is ${q[1]}.`,key:q[0]};
+}
+function genMeasure(){
+  const t=R(1,3);
+  if(t===1){const l=R(4,12),w=R(2,8);return {vis:rectSVG(l,w,"cm"),p:"What is the <b>perimeter</b> of this rectangle?",type:"input",answer:2*(l+w),unit:"cm",explain:`Perimeter = all the way around: ${l} + ${w} + ${l} + ${w} = ${2*(l+w)} cm.`}}
+  if(t===2){const l=R(3,10),w=R(2,7);return {vis:rectSVG(l,w,"cm"),p:"What is the <b>area</b> of this rectangle?",type:"input",answer:l*w,unit:"cm²",explain:`Area = rows × columns of squares: ${l} × ${w} = ${l*w} cm².`}}
+  const q=pick([["1 m = ? cm",100],["2 m = ? cm",200],["1 kg = ? g",1000],["3 kg = ? g",3000],["1 L = ? mL",1000],["1 cm = ? mm",10],["5 cm = ? mm",50],["2 L = ? mL",2000]]);
+  return {p:`<span class="big">${q[0]}</span>`,type:"input",answer:q[1],explain:`Remember: 1 m = 100 cm · 1 cm = 10 mm · 1 kg = 1 000 g · 1 L = 1 000 mL.`,key:q[0]};
+}
+
+/* ---------- topics ---------- */
+const SHELVES=[
+  {id:"w",cls:"s-w",name:"From Wunmi’s worksheets",note:"The sheets she sent on WhatsApp: division, word problems, multiples, decimals."},
+  {id:"n",cls:"s-n",name:"Numbers & operations",note:"From the summer lessons (Tam Tam, sections 1–12)."},
+  {id:"m",cls:"s-m",name:"Fractions, money, time & measurement",note:"From the summer lessons (sections 13–26)."},
+];
+const T={
+  divide:{sh:"w",src:"Division sheet",n:"Long division",b:"336 ÷ 12, 463 ÷ 17 … with remainders",gen:genDivide,
+    learn:`<div class="idea"><h4>The idea</h4><ul><li>Division shares a number into equal groups.</li><li>Big numbers? Take away <b>chunks</b> of the divisor, tens of them at a time.</li><li>What can’t be shared is the <b>remainder</b>. It is always smaller than the divisor.</li></ul></div><div class="board">336 ÷ 12<br>12 × <b>20</b> = 240 → 336 − 240 = 96 left<br>12 × <b>8</b> = 96 → 0 left<br>20 + 8 = <b>28</b></div><div class="trap"><b>Check every time:</b> divisor × answer + remainder = the starting number.</div>`},
+  word:{sh:"w",src:"Exercise 16.7",n:"Division word problems",b:"Buses, books, sweets, cloth…",gen:genWord,
+    learn:`<div class="idea"><h4>The idea</h4><ul><li>Find the hidden ÷ : “how many groups?”, “how much each?”, “share equally”.</li><li>Sharing between girls <b>and</b> boys? Add the children first.</li><li>Buses with a remainder? The leftover people still need <b>one more</b> bus.</li></ul></div><div class="board">3 girls and 4 boys share 483 sweets.<br>Children: 3 + 4 = 7 → 483 ÷ 7 = <b>69</b> each</div>`},
+  multiples:{sh:"w",src:"Multiples sheet",n:"Multiples",b:"The first 12 multiples of 2, 3, 4, 5…",gen:genMultiples,
+    learn:`<div class="idea"><h4>The idea</h4><ul><li>The multiples of a number are its times table: multiples of 4 → 4, 8, 12, 16, 20…</li><li>A number is a multiple of 4 if it divides by 4 with no remainder.</li></ul></div><div class="board">The 7th multiple of 3 = 3 × 7 = <b>21</b></div>`},
+  common:{sh:"w",src:"Common multiples sheet",n:"Common multiples",b:"First two common multiples of 4 and 12…",gen:genCommon,
+    learn:`<div class="idea"><h4>The idea</h4><ul><li>Write the multiples of each number in a row.</li><li>The numbers in <b>both</b> rows are the common multiples.</li></ul></div><div class="board">Multiples of 3: 3, 6, 9, 12, <b>15</b>, 18, 21, 24, 27, <b>30</b><br>Multiples of 5: 5, 10, <b>15</b>, 20, 25, <b>30</b><br>First two common multiples: <b>15 and 30</b></div><div class="trap"><b>Trick:</b> the second common multiple is always double the first.</div>`},
+  tables:{sh:"w",src:"Behind every sheet",n:"Times tables",b:"× and ÷ facts up to 12 × 12",gen:genTables,
+    learn:`<div class="idea"><h4>The idea</h4><ul><li>Every division and multiples question needs fast tables.</li><li>Learn them in a smart order: 2, 5, 10, then 4 (double 2), 3, 9, 6, 7, 8, 11, 12.</li><li>Division is backwards multiplication: 7 × 8 = 56, so 56 ÷ 7 = 8.</li></ul></div>`},
+  decplace:{sh:"w",src:"Decimal place value sheets",n:"Decimal place value",b:"Tenths, hundredths, thousandths",gen:genDecPlace,
+    learn:`<div class="idea"><h4>The idea</h4><ul><li>Count the places <b>after</b> the decimal mark: 1st = tenths, 2nd = hundredths, 3rd = thousandths.</li><li>At school in Québec the decimal mark is a <b>comma</b> (56,732). In English books it is a <b>point</b> (56.732). Same number!</li></ul></div>${decTable(56,"732",-1)}`},
+  whatnum:{sh:"w",src:"“What number am I?” sheets",n:"What number am I?",b:"Decimal riddles with clues",gen:genWhatNum,
+    learn:`<div class="idea"><h4>The idea</h4><ul><li>Solve each clue on its own: “half of 6” = 3, “double 4” = 8, “1 less than 5” = 4.</li><li>Then put the digits in order: ones , tenths hundredths thousandths.</li><li>A place with 0 still needs its 0: 7 ones, 0 tenths, 6 hundredths, 3 thousandths = <b>7,063</b>.</li></ul></div><div class="board">My ones digit is 8. Tenths = half of 6 = 3. Hundredths = 1 less than 5 = 4. Thousandths = 2 more than 5 = 7.<br>→ <b>8,347</b></div>`},
+  place:{sh:"n",src:"Lessons 1–2",n:"Place value & comparing",b:"Big numbers, value of a digit",gen:genPlace,learn:`<div class="idea"><h4>The idea</h4><ul><li>Each place is worth 10 times the place to its right: ones, tens, hundreds, thousands, ten thousands.</li><li>In 47 582 the 7 is worth 7 000.</li><li>To compare, start from the left.</li></ul></div>`},
+  round:{sh:"n",src:"Lesson 3",n:"Rounding",b:"Nearest 10, 100, 1 000",gen:genRound,learn:`<div class="idea"><h4>The idea</h4><ul><li>Look at the digit just to the right of the place you round to.</li><li>0–4 → round down. 5–9 → round up.</li></ul></div><div class="board">4 768 to the nearest hundred: look at 6 → round up → <b>4 800</b></div>`},
+  prime:{sh:"n",src:"Lesson 4",n:"Even/odd, prime/composite",b:"Is 21 prime?",gen:genPrime,learn:`<div class="idea"><h4>The idea</h4><ul><li>Even numbers end in 0, 2, 4, 6, 8.</li><li>A <b>prime</b> number divides only by 1 and itself (2, 3, 5, 7, 11, 13…).</li><li>A <b>composite</b> number has other divisors (4, 6, 8, 9, 10, 12…).</li></ul></div>`},
+  pattern:{sh:"n",src:"Lesson 5",n:"Number patterns",b:"Find the rule, find the next",gen:genPattern,learn:`<div class="idea"><h4>The idea</h4><ul><li>Look at how each number changes: + ? , − ? , or × 2?</li><li>Check the rule on every step before you answer.</li></ul></div>`},
+  addsub:{sh:"n",src:"Lessons 6–7",n:"Big + and −",b:"Carrying and borrowing",gen:genAddSub,learn:`<div class="idea"><h4>The idea</h4><ul><li>Line up the places. Start with the ones.</li><li>Adding: 10 or more in a column → carry 1.</li><li>Subtracting: top digit too small → borrow 1 from the next place.</li><li>Check a subtraction by adding back.</li></ul></div>`},
+  missing:{sh:"n",src:"Lesson 8",n:"Missing numbers",b:"35 + ? = 82",gen:genMissing,learn:`<div class="idea"><h4>The idea</h4><ul><li>Use the opposite operation: + ↔ −, × ↔ ÷.</li><li>35 + ? = 82 → 82 − 35 = 47.</li></ul></div>`},
+  mult:{sh:"n",src:"Lessons 9 & 11",n:"Multiplying bigger numbers",b:"43 × 6, 215 × 4",gen:genMult,learn:`<div class="idea"><h4>The idea</h4><ul><li>Split the big number into hundreds, tens and ones.</li><li>Multiply each part, then add.</li></ul></div><div class="board">43 × 6 = 40 × 6 + 3 × 6 = 240 + 18 = <b>258</b></div>`},
+  fractions:{sh:"m",src:"Lesson 12",n:"Fractions",b:"Parts of a whole, equivalent fractions",gen:genFractions,learn:`<div class="idea"><h4>The idea</h4><ul><li>The bottom number = how many equal parts. The top = how many we take.</li><li>More parts → smaller parts: 1/2 is bigger than 1/4.</li><li>Equivalent: multiply top and bottom by the same number. 1/2 = 2/4 = 4/8.</li></ul></div>${barSVG(3,4)}`},
+  money:{sh:"m",src:"Lesson 13",n:"Decimals & money",b:"Dollars, cents, change",gen:genMoney,learn:`<div class="idea"><h4>The idea</h4><ul><li>$1 = 100 cents. $2.35 = 2 dollars and 35 cents = 235¢.</li><li>Line up the decimal points to add or subtract money.</li></ul></div>`},
+  time:{sh:"m",src:"Lesson 20",n:"Time",b:"Read the clock, how long?",gen:genTime,learn:`<div class="idea"><h4>The idea</h4><ul><li>Short hand = hours. Long hand = minutes. Each number = 5 minutes.</li><li>Quarter past = :15 · half past = :30 · quarter to = :45 (before the next hour).</li></ul></div>${clockSVG(3,45)}<p class="muted">3:45 = quarter to 4</p>`},
+  measure:{sh:"m",src:"Lessons 19 & 21",n:"Perimeter, area & units",b:"Around, inside, cm, kg, L",gen:genMeasure,learn:`<div class="idea"><h4>The idea</h4><ul><li><b>Perimeter</b> = the distance all the way around (add the sides).</li><li><b>Area</b> = how many squares inside (length × width).</li><li>1 m = 100 cm · 1 cm = 10 mm · 1 kg = 1 000 g · 1 L = 1 000 mL.</li></ul></div>`},
+};
+
+/* ---------- sample test (fixed, with answer key) ---------- */
+const PAPER=[
+  {h:"A · Division (like Wunmi’s sheet)",items:[["252 ÷ 12 =",[21]],["390 ÷ 15 =",[26]],["448 ÷ 16 =",[28]],["357 ÷ 17 =",[21]],["624 ÷ 24 =",[26]],["365 ÷ 12 =",[30,5],["answer","remainder"]],["500 ÷ 14 =",[35,10],["answer","remainder"]],["619 ÷ 23 =",[26,21],["answer","remainder"]]]},
+  {h:"B · Word problems",items:[["How many sixties make 180?",[3]],["90 people can sit in one train car. How many cars are needed for 720 people?",[8]],["A game costs $45. Tolu spent $360 on games. How many games did he buy?",[8]],["4 girls and 5 boys share 378 stickers equally. How many does each child get?",[42]],["A baker uses 6 eggs for one cake. How many cakes can she make with 210 eggs?",[35]],["How many hundreds are there in 3 400?",[34]],["50 children fit on one bus. How many buses are needed for 430 children?",[9]]]},
+  {h:"C · Multiples",items:[["Write the first 5 multiples of 6.",[6,12,18,24,30],null],["What is the 9th multiple of 7?",[63]],["First two common multiples of 4 and 10:",[20,40],null],["First two common multiples of 6 and 8:",[24,48],null],["Is 54 a multiple of 9? (write yes or no)",["yes"]]]},
+  {h:"D · Decimal place value",items:[["In 3,4<u>8</u>6, the underlined digit is in the … place (tenths / hundredths / thousandths)",["hundredths"]],["In 7.21<u>5</u>, the underlined digit is in the … place",["thousandths"]],["In 9,<u>6</u>04, the underlined digit is in the … place",["tenths"]]]},
+  {h:"E · What number am I?",items:[["I have 6 ones, 3 tenths, 0 hundredths and 8 thousandths.",["6.308"]],["My ones digit is double 4. My tenths digit is half of 10. My hundredths digit is 1 less than 3. My thousandths digit is 3 more than 6.",["8.529"]]]},
+  {h:"F · Summer lessons mix",items:[["Round 4 768 to the nearest hundred.",[4800]],["2 345 + 1 678 =",[4023]],["5 002 − 1 467 =",[3535]],["43 × 6 =",[258]],["1/2 = ?/8",[4]]]},
+];
+const PAPER_N=PAPER.reduce((a,s)=>a+s.items.length,0);
+
+/* ---------- checking ---------- */
+const intOf=v=>{const s=String(v).replace(/[\s ,]/g,"");return /^-?\d+$/.test(s)?+s:NaN};
+const decOf=v=>{const s=String(v).replace(/[\s $]/g,"").replace(",",".");return /^\d+(\.\d+)?$/.test(s)?+s:NaN};
+function same(v,ans){
+  if(typeof ans==="number")return intOf(v)===ans;
+  if(/^\d+\.\d+$/.test(ans))return Math.abs(decOf(v)-+ans)<1e-9;
+  return norm(v)===norm(ans);
+}
+
+/* ---------- views ---------- */
+const app=$("#app");let VIEW="home",Q=null;
+const starCount=()=>Object.values(S.stars).reduce((a,b)=>a+b,0);
+const starsHTML=(n,c="stars")=>`<span class="${c}" aria-label="${n} of 3 stars">${[1,2,3].map(i=>`<span class="${i<=n?"on":""}">★</span>`).join("")}</span>`;
+function head(){$("#pill").textContent=`★ ${starCount()} / ${Object.keys(T).length*3} · ${S.xp} pts`}
+function go(v){VIEW=v;try{history.replaceState(null,"","#"+v)}catch(e){}render();window.scrollTo({top:0})}
+function render(){head();if(VIEW==="paper")return viewPaper();if(VIEW.startsWith("t-")&&T[VIEW.slice(2)])return viewTopic(VIEW.slice(2));if(VIEW==="quiz"&&Q)return viewQuiz();if(VIEW==="result"&&Q)return viewResult();VIEW="home";viewHome()}
+function viewHome(){
+  const pd=S.paperScore;
+  app.innerHTML=`<p class="hand" style="color:var(--encre)">Hi Israël! Let’s revise everything you learned with Wunmi.</p>
+  <div class="hero">
+    <div class="hcard s-w"><h2>Sample revision test</h2><p>30 questions in 6 parts, just like Wunmi’s sheets. Type your answers, then mark your paper. The answer key is at the bottom for a grown-up.</p>${pd!=null?`<p><b>Last score: ${pd} / ${PAPER_N}</b></p>`:""}<div class="row"><button class="btn primary" data-go="paper">Open the test</button></div></div>
+    <div class="hcard s-n"><h2>Mixed practice</h2><p>10 questions picked from all the topics, mixed up. Mistakes come back at the end for a second try.</p><div class="row"><button class="btn primary" data-quiz="mix">Start mixed practice</button></div></div>
+  </div>
+  ${SHELVES.map(sh=>`<p class="k ${sh.cls}">${sh.name}</p><p class="muted" style="margin:-4px 0 10px">${sh.note}</p><div class="topics">${Object.keys(T).filter(k=>T[k].sh===sh.id).map(k=>`<div class="topic ${sh.cls}"><span class="src">${T[k].src}</span><h3>${T[k].n}</h3><p>${T[k].b}</p><div class="row" style="justify-content:space-between">${starsHTML(S.stars[k]||0)}<span class="row"><button class="btn small" data-go="t-${k}">Learn</button><button class="btn small primary" data-quiz="${k}">Play</button></span></div></div>`).join("")}</div>`).join("")}
+  <footer>Maths revision · built from the worksheets Wunmi sent on WhatsApp and the 22 summer lessons · progress stays on this device.</footer>`;
+}
+function viewTopic(id){
+  const t=T[id],sh=SHELVES.find(s=>s.id===t.sh);
+  app.innerHTML=`<div class="${sh.cls}"><div class="row" style="margin-bottom:12px"><button class="btn small ghost" data-go="home">← All topics</button></div>
+  <div class="learn"><p class="eyebrow">${t.src}</p><h2>${t.n}</h2>${t.learn}
+  <div class="row" style="justify-content:space-between;border-top:1px solid var(--line);padding-top:12px"><span>${starsHTML(S.stars[id]||0)}</span><button class="btn primary" data-quiz="${id}">Play 8 questions</button></div></div></div>`;
+}
+function genOne(id){let q,tries=0;do{q=T[id].gen();tries++}while(q.skip&&tries<20);q.topic=id;return q}
+function genN(id,n){const out=[],seen=new Set();let tries=0;while(out.length<n&&tries<300){tries++;const q=genOne(id),k=q.key||(q.vis||"")+q.p;if(seen.has(k))continue;seen.add(k);out.push(q)}return out}
+function startQuiz(kind){
+  let list,title,cls;
+  if(kind==="mix"){list=shuffle(Object.keys(T)).slice(0,10).map(id=>genOne(id));title="Mixed practice";cls="s-n"}
+  else{list=genN(kind,8);title=T[kind].n;cls=SHELVES.find(s=>s.id===T[kind].sh).cls}
+  Q={kind,title,cls,list,i:0,first:0,base:list.length,log:[],done:false};go("quiz");
+}
+function viewQuiz(){
+  const q=Q.list[Q.i];
+  app.innerHTML=`<div class="${Q.cls}"><div class="qhead"><button class="btn small ghost" data-go="${T[Q.kind]?"t-"+Q.kind:"home"}">← Stop</button><span class="qtitle">${Q.title}</span><span class="qcount">${Q.i+1} / ${Q.list.length}</span></div>
+  <div class="progress"><i style="width:${Q.i/Q.list.length*100}%"></i></div>
+  <div class="qcard">${q.retry?`<span class="retry">Second try</span>`:""}${q.vis?`<div class="qvis">${q.vis}</div>`:""}<p class="prompt">${q.p}</p><div id="qa"></div><div id="fb" class="fb" hidden></div></div></div>`;
+  const box=$("#qa");
+  if(q.type==="choice"){box.innerHTML=`<div class="choices">${q.choices.map((c,i)=>`<button class="choice" data-c="${i}">${c}</button>`).join("")}</div>`;$$(".choice",box).forEach(b=>b.onclick=()=>submit(q.choices[+b.dataset.c],b))}
+  else{
+    const n=q.type==="qr"?2:q.type==="list"?q.answer.length:1,labels=q.labels||(q.type==="qr"?["Answer","Remainder"]:null);
+    box.innerHTML=`<form class="ansform" id="af">${[...Array(n)].map((_,i)=>`<label>${labels?labels[i]:q.type==="list"?ORD(i+1):""}<input class="${n>2?"sm":""}" id="a${i}" autocomplete="off" inputmode="${q.type==="dec"?"decimal":"numeric"}" aria-label="${labels?labels[i]:"Your answer"}"></label>`).join("")}${q.unit?`<span class="unit">${q.unit}</span>`:""}<button class="btn primary">Check</button></form>${q.type==="qr"?`<p class="muted" style="margin-top:6px">No remainder? Leave it empty or type 0.</p>`:""}`;
+    $("#af").onsubmit=e=>{e.preventDefault();const vals=[...Array(n)].map((_,i)=>$("#a"+i).value.trim());if(q.type!=="qr"&&vals.some(v=>!v)){$("#a"+vals.findIndex(v=>!v)).focus();return}if(q.type==="qr"&&!vals[0]){$("#a0").focus();return}submit(n===1?vals[0]:vals)};
+    setTimeout(()=>{try{$("#a0").focus({preventScroll:true})}catch(e){}},50);
+  }
+}
+function isRight(q,v){
+  if(q.check)return q.check(v);
+  if(q.type==="qr")return intOf(v[0])===q.answer[0]&&(intOf(v[1]||"0")===q.answer[1]);
+  if(q.type==="list")return v.map(intOf).sort((a,b)=>a-b).join()===q.answer.slice().sort((a,b)=>a-b).join();
+  if(q.type==="dec")return Math.abs(decOf(v)-+q.answer)<1e-9;
+  return same(v,q.answer);
+}
+const showAns=q=>q.check?q.show:q.type==="qr"?`${q.answer[0]}${q.answer[1]?` remainder ${q.answer[1]}`:""}`:q.type==="list"?q.answer.join(", "):q.show||(typeof q.answer==="number"?fmt(q.answer):q.answer)+(q.unit&&q.unit!=="$"?" "+q.unit:"");
+const showVal=(q,v)=>Array.isArray(v)?(q.type==="qr"?`${v[0]}${v[1]&&v[1]!=="0"?` remainder ${v[1]}`:""}`:v.join(", ")):v;
+function submit(v,btn){
+  if(Q.done)return;Q.done=true;const q=Q.list[Q.i],ok=isRight(q,v);
+  if(!q.retry){Q.log.push({q,v,ok});if(ok){Q.first++;S.xp+=10}}else if(ok)S.xp+=5;save();head();
+  if(!ok&&!q.retry)Q.list.push(Object.assign({},q,{retry:true}));
+  $$("#qa button, #qa input").forEach(b=>b.disabled=true);
+  if(q.type==="choice")$$(".choice").forEach(b=>{const c=q.choices[+b.dataset.c];if(q.check?q.check(c):norm(c)===norm(q.answer))b.classList.add("ok");else if(b===btn)b.classList.add("no")});
+  const fb=$("#fb"),last=Q.i+1>=Q.list.length;fb.hidden=false;fb.className="fb "+(ok?"ok":"no");
+  fb.innerHTML=(ok?`<span class="h">${pick(["Well done!","Excellent!","Super, Israël!","Spot on!","Brilliant!"])}</span>`:`<span class="h">Nearly!</span><div>The answer is <b>${showAns(q)}</b>${q.type!=="choice"?` (you wrote ${showVal(q,v)})`:""}.</div><div>${q.explain||""}</div>${q.retry?"":`<div class="muted">This one comes back at the end for a second try.</div>`}`)+`<div><button class="btn primary" id="nx">${last?"See my result":"Next question →"}</button></div>`;
+  ok?tone([[660,.12],[880,.18]]):tone([[300,.2]]);
+  $("#nx").onclick=()=>{Q.done=false;Q.i++;if(Q.i>=Q.list.length){const p=Q.first/Q.base;if(T[Q.kind]){const st=p>=.875?3:p>=.7?2:p>=.5?1:0;Q.stars=st;if(st>(S.stars[Q.kind]||0))S.stars[Q.kind]=st;save()}if(p>=.85)tone([[523,.12],[659,.12],[784,.12],[1046,.3]]);go("result")}else viewQuiz()};
+  setTimeout(()=>{try{$("#nx").focus({preventScroll:true});fb.scrollIntoView({block:"nearest",behavior:"smooth"})}catch(e){}},30);
+}
+function viewResult(){
+  const p=Q.first/Q.base,miss=Q.log.filter(l=>!l.ok);
+  app.innerHTML=`<div class="${Q.cls}"><div class="result"><p class="eyebrow">${Q.title}</p><div class="score">${Q.first} / ${Q.base}</div>${T[Q.kind]?starsHTML(Q.stars||0,"bigstars"):""}
+  <p class="lead">${p>=.875?"Mastered! Move on to the next topic.":p>=.5?"Good work! Play once more for 3 stars.":"Read the Learn page again, then play. You can do it!"}</p>
+  <div class="row"><button class="btn primary" data-quiz="${Q.kind}">Play again</button><button class="btn ghost" data-go="home">All topics</button></div>
+  ${miss.length?`<p class="k" style="margin-top:4px">My mistakes</p>${miss.map(l=>`<div class="rev">${l.q.vis?`<div class="qvis">${l.q.vis}</div>`:""}<p class="prompt" style="font-size:1.05rem">${l.q.p}</p><p>You wrote <span class="bad">${showVal(l.q,l.v)}</span> · Answer <span class="good">${showAns(l.q)}</span></p><div class="muted">${l.q.explain||""}</div></div>`).join("")}`:`<p class="hand" style="color:var(--vert)">No mistakes at all!</p>`}</div></div>`;
+}
+function viewPaper(){
+  let n=0;
+  app.innerHTML=`<div class="s-w"><div class="row" style="margin-bottom:12px"><button class="btn small ghost" data-go="home">← All topics</button></div>
+  <div class="paper"><p class="eyebrow">Maths revision · sample test</p><h2 style="font-size:1.4rem">Show what you learned with Wunmi</h2><p class="muted">Work on paper if you like, then type the answers. Decimals can use a comma or a point.</p>
+  ${PAPER.map((sec,si)=>`<h3>${sec.h}</h3>${sec.items.map((it,ii)=>{n++;const id=`p${si}-${ii}`,labels=it[2]===undefined?null:it[2];const boxes=it[1].map((_,bi)=>`${labels?`<span>${labels[bi]}</span>`:""}<input id="${id}-${bi}" data-p="${si}-${ii}-${bi}" autocomplete="off" value="${(S.paper[`${si}-${ii}-${bi}`]||"").replace(/"/g,"&quot;")}" aria-label="Question ${n} answer ${bi+1}">`).join("");
+    return `<div class="pq"><span class="n">${n}.</span><div class="t">${it[0]}<div class="boxes">${boxes}</div></div><span class="key" hidden>Answer: ${it[1].map(a=>typeof a==="number"?fmt(a):a).join(it[2]&&it[2][1]==="remainder"?" remainder ":", ")}</span></div>`}).join("")}`).join("")}
+  <div class="paper-bar"><span class="sc" id="psc">Not marked yet</span><button class="btn primary" id="mark">Mark my paper</button><button class="btn small ghost" id="keyb">Show answer key</button><button class="btn small ghost" id="clr">Clear</button></div></div></div>`;
+  $$("[data-p]").forEach(i=>i.oninput=()=>{S.paper[i.dataset.p]=i.value;save()});
+  $("#mark").onclick=()=>{let score=0;PAPER.forEach((sec,si)=>sec.items.forEach((it,ii)=>{const ins=it[1].map((_,bi)=>$(`#p${si}-${ii}-${bi}`));const vals=ins.map(x=>x.value.trim());let ok;
+      if(it[2]===null){ok=vals.map(intOf).slice().sort((a,b)=>a-b).join()===it[1].slice().sort((a,b)=>a-b).join()}
+      else ok=it[1].every((a,bi)=>same(vals[bi]||(it[2]&&bi===1?"0":""),a));
+      ins.forEach(x=>{x.classList.toggle("ok",ok);x.classList.toggle("no",!ok)});if(ok)score++}));
+    S.paperScore=score;save();$("#psc").textContent=`Score: ${score} / ${PAPER_N}`;tone(score>=PAPER_N*.85?[[523,.12],[659,.12],[784,.12],[1046,.3]]:[[660,.12],[880,.18]]);toast(`${score} / ${PAPER_N}${score>=27?" — superb!":score>=21?" — well done!":" — check the red boxes"}`)};
+  $("#keyb").onclick=e=>{const ks=$$(".key"),show=ks[0].hidden;ks.forEach(k=>k.hidden=!show);e.target.textContent=show?"Hide answer key":"Show answer key"};
+  $("#clr").onclick=()=>{S.paper={};save();viewPaper()};
+}
+document.addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g){go(g.dataset.go);return}const q=e.target.closest("[data-quiz]");if(q)startQuiz(q.dataset.quiz)});
+const h=(location.hash||"").slice(1);VIEW=h==="paper"||(h.startsWith("t-")&&T[h.slice(2)])?h:"home";
+window.__T={T,isRight,PAPER};
+render();
+})();
+</script>
+</body>
+</html>
