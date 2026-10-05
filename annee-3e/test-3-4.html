@@ -402,7 +402,7 @@ function badge(){const b=$("#save");if(READONLY){b.className="save";b.textConten
   if(saving||dirty){b.className="save";b.textContent="Saving…";return}
   if(online){b.className="save ok";b.textContent=META.status==="submitted"?"Submitted ✓":"Saved ✓";return}
   b.className="save ok";b.textContent=META.status==="submitted"?"Handed in ✓":"Saved on this device ✓"}
-function localSave(){try{localStorage.setItem(LKEY,JSON.stringify({answers:ANS,meta:META}))}catch(e){}}
+function localSave(){if(MODE==="fixreview"||MODE==="review")return;try{if(MODE==="fix")localStorage.setItem(FKEY,JSON.stringify({sig:fixSig(),answers:ANS}));else localStorage.setItem(LKEY,JSON.stringify({answers:ANS,meta:META}))}catch(e){}}
 function changed(){META.savedAt=Date.now();localSave();if(!db){badge();return}dirty=true;badge();clearTimeout(timer);timer=setTimeout(flush,1200)}
 async function flush(){if(!ref)return;if(saving){again=true;return}saving=true;badge();
   try{await ref.set({answers:Object.assign({},ANS),status:META.status,savedAt:META.savedAt,submittedAt:META.submittedAt});dirty=false;online=true}
@@ -427,16 +427,45 @@ async function connect(){
 let SHARED=false;
 const b64u=u8=>{let x="";for(let i=0;i<u8.length;i++)x+=String.fromCharCode(u8[i]);return btoa(x).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"")};
 const ub64=x=>{x=x.replace(/-/g,"+").replace(/_/g,"/");while(x.length%4)x+="=";const b=atob(x);return Uint8Array.from(b,c=>c.charCodeAt(0))};
-async function pack(){const json=JSON.stringify({a:ANS,s:META.status,t:META.submittedAt});
+async function pack(obj){const json=JSON.stringify(obj||{a:ANS,s:META.status,t:META.submittedAt});
   try{const buf=await new Response(new Blob([json]).stream().pipeThrough(new CompressionStream("deflate-raw"))).arrayBuffer();return "z"+b64u(new Uint8Array(buf))}
   catch(e){return "j"+b64u(new TextEncoder().encode(json))}}
 async function unpack(p){const u8=ub64(p.slice(1));const json=p[0]==="z"?await new Response(new Blob([u8]).stream().pipeThrough(new DecompressionStream("deflate-raw"))).text():new TextDecoder().decode(u8);return JSON.parse(json)}
-async function sendBox(el){
+async function sendBox(el,tag="r",obj=null,msgFn=null){
   el.innerHTML=`<p class="muted">Making the link…</p>`;
-  const link=location.origin+location.pathname+"#r="+await pack();
-  const msg=`Hi Wunmi, here are Israël’s answers to Test 3 and 4. Open this link to see and mark them: ${link}`;
-  el.innerHTML=`<div class="row"><a class="btn primary" href="https://wa.me/?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">Send on WhatsApp</a><button class="btn" id="cplink">Copy the link</button></div><p class="muted" style="margin-top:6px">The link holds all his answers. Send it again if he changes anything.</p>`;
+  const link=location.origin+location.pathname+"#"+tag+"="+await pack(obj);
+  const msg=msgFn?msgFn(link):`Hi Wunmi, here are Israël’s answers to Test 3 and 4. Open this link to see and mark them: ${link}`;
+  el.innerHTML=`<div class="row"><a class="btn primary" href="https://wa.me/?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">Send on WhatsApp</a><button class="btn" id="cplink">Copy the link</button></div><p class="muted" style="margin-top:6px">${tag==="c"?"The link holds only the questions you ticked.":tag==="k"?"The link holds only these corrections.":"The link holds all his answers. Send it again if he changes anything."}</p>`;
   $("#cplink").onclick=async()=>{try{await navigator.clipboard.writeText(link);toast("Link copied")}catch(e){el.insertAdjacentHTML("beforeend",`<textarea class="copybox" readonly style="min-height:70px">${esc(link)}</textarea>`);const t=el.querySelector("textarea");t.focus();t.select()}};
+}
+
+/* ================= correction rounds ================= */
+let MODE="normal",FIX=null,PREV={};const SB=new Set();
+const keysOf=(map,id)=>Object.keys(map).filter(k=>k===id||k.startsWith(id+"."));
+const subset=(map,ids)=>{const o={};ids.forEach(id=>keysOf(map,id).forEach(k=>{if(map[k]!=="")o[k]=map[k]}));return o};
+function withAns(map,fn){const s=ANS;ANS=map;try{return fn()}finally{ANS=s}}
+const FKEY="test34-fix";
+const fixSig=()=>FIX.round+":"+FIX.ids.join(",");
+const stLabel=st=>st==="ok"?"correct":st==="no"?"wrong":st==="review"?"check":"empty";
+function sbNote(){return `<p class="muted">Ticked questions go back to Israël to correct. Wrong and empty answers are ticked for you. Tick or untick any of them.</p>`}
+function sendFix(el,src){const ids=ALL.filter(it=>SB.has(it.id)).map(it=>it.id);if(!ids.length){toast("Tick at least one question first");return}
+  const round=(FIX?FIX.round:0)+1;
+  sendBox(el,"c",{ids,prev:subset(src,ids),round},link=>`Hi Israël, please correct these ${ids.length} question${ids.length>1?"s":""} from Test 3 and 4 (round ${round}): ${link}`)}
+function viewFix(){
+  const groups=PARTS.map((p,i)=>({p,i,items:p.items.filter(it=>FIX.ids.includes(it.id))})).filter(g=>g.items.length);
+  const done=FIX.ids.filter(id=>stateOf(ITEM[id])!=="blank").length,n=FIX.ids.length;
+  $("#app").innerHTML=`<div class="card" style="display:flex;flex-direction:column;gap:8px"><p class="eyebrow">Corrections · round ${FIX.round}</p><h2 style="font-size:1.35rem">Wunmi marked your test. Correct these ${n} question${n>1?"s":""}.</h2><p class="muted">Your first answer is shown crossed out above each question. Have another go, then send your corrections to Wunmi. Your work saves by itself.</p><p style="font-family:var(--display);font-weight:700">${done} of ${n} done</p><div class="track"><i style="width:${done/n*100}%"></i></div></div>
+  ${groups.map(g=>`<p class="k">Part ${g.i+1} · ${g.p.title}</p>${g.p.intro?`<div class="q" style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px">${g.p.intro}</div>`:""}<div class="items">${g.items.map(it=>`<div class="it"><span class="no">${it.no}.</span><div class="body"><p class="muted">Your first answer: <s>${esc(withAns(FIX.prev,()=>it.show(it)))||"(empty)"}</s></p><div id="c-${it.id}" style="display:flex;flex-direction:column;gap:8px">${it.render(it)}</div></div></div>`).join("")}</div>`).join("")}
+  <p class="k">When you have finished</p><div class="card" id="fixsend"><div class="row"><button class="btn primary" id="fixbtn">Send my corrections to Wunmi</button><span class="muted">${n-done?`${n-done} still empty.`:"All done!"}</span></div></div>`;
+  $("#fixbtn").onclick=()=>sendBox($("#fixsend"),"k",{ids:FIX.ids,a:subset(ANS,FIX.ids),prev:FIX.prev,round:FIX.round},link=>`Hi Wunmi, here are Israël’s corrections for Test 3 and 4 (round ${FIX.round}): ${link}`);
+}
+function viewFixReview(){
+  const items=ALL.filter(it=>FIX.ids.includes(it.id)),ok=items.filter(it=>stateOf(it)==="ok").length;
+  $("#app").innerHTML=`<div class="card" style="display:flex;flex-direction:column;gap:10px"><p class="eyebrow">For Wunmi · corrections round ${FIX.round}</p><h2 style="font-size:1.35rem">Israël’s corrections</h2>
+    <div class="score"><b>${ok} / ${items.length}</b><span>now correct by the automatic check</span></div>${sbNote()}
+    <div class="row"><button class="btn primary" id="sendfix">Send another round to Israël (<span id="sbn">${SB.size}</span>)</button></div><div id="copyout"></div></div>
+  <div class="tblwrap" style="margin-top:14px"><table class="tbl"><tr><th>Part</th><th>#</th><th>Question</th><th>First answer</th><th>Corrected</th><th>Key</th><th></th><th>Send back</th></tr>${items.map(it=>{const st=stateOf(it);return `<tr><td>${PARTS.indexOf(it.part)+1}</td><td>${it.no}</td><td>${esc(String(it.label).replace(/<[^>]+>/g,""))}</td><td><s>${esc(withAns(PREV,()=>it.show(it)))||"—"}</s></td><td><b>${esc(it.show(it))||"—"}</b></td><td>${esc(it.key)}</td><td><span class="st ${st}">${stLabel(st)}</span></td><td><input type="checkbox" data-sb="${it.id}" ${SB.has(it.id)?"checked":""} aria-label="Send back"></td></tr>`}).join("")}</table></div>`;
+  $("#sendfix").onclick=()=>sendFix($("#copyout"),ANS);
 }
 
 /* ================= views ================= */
@@ -445,7 +474,7 @@ const stateOf=it=>it.mark(it);
 function progress(p){const n=p.items.filter(it=>stateOf(it)!=="blank").length;return [n,p.items.length]}
 function go(vw){VIEW=vw;render();window.scrollTo({top:0})}
 function tabs(){$("#tabs").innerHTML=[["cover","Booklet"],...(CUR?[[CUR,"Part "+CUR.slice(1)]]:[]),["teacher","Marking (Wunmi)"]].map(([k,l])=>`<button class="tab" data-go="${k}" aria-current="${VIEW===k}">${l}</button>`).join("")}
-function render(){badge();if(VIEW.startsWith("p")&&PARTS.find(p=>p.id===VIEW)){CUR=VIEW;tabs();return viewPart(PARTS.find(p=>p.id===VIEW))}tabs();if(VIEW==="teacher")return viewTeacher();viewCover()}
+function render(){badge();if(MODE==="fix"||MODE==="fixreview"){$("#tabs").innerHTML="";return MODE==="fix"?viewFix():viewFixReview()}if(VIEW.startsWith("p")&&PARTS.find(p=>p.id===VIEW)){CUR=VIEW;tabs();return viewPart(PARTS.find(p=>p.id===VIEW))}tabs();if(VIEW==="teacher")return viewTeacher();viewCover()}
 function viewCover(){
   const done=ALL.filter(it=>stateOf(it)!=="blank").length,sub=META.status==="submitted";
   $("#app").innerHTML=`<div class="card" style="display:flex;flex-direction:column;gap:10px">
@@ -486,12 +515,13 @@ function viewTeacher(){
     ${SHARED?`<div class="notice">These are the answers Israël sent you. You can also open each part (tabs above) to see his work as he did it.</div>`:""}
     ${sub?`<div class="notice ok">Handed in ${META.submittedAt?new Date(META.submittedAt).toLocaleString():""}.</div>`:`<div class="notice warn">Not handed in yet. This shows his answers so far. Marks and the answer key appear once he hands it in.</div>`}
     ${sub?`<div class="score"><b>${s.ok} / ${s.gradable}</b><span>correct by the automatic check · ${s.review} to check by hand · ${s.blank} left empty</span></div>`:""}
-    <div class="row">${!SHARED?`<button class="btn primary" id="sendt">Send to Wunmi (link)</button>`:""}<button class="btn" id="copy">Copy as text</button>${sub&&!READONLY?`<button class="btn small danger" id="reopen">Reopen for changes</button>`:""}</div>
+    ${SHARED?sbNote():""}<div class="row">${!SHARED?`<button class="btn primary" id="sendt">Send to Wunmi (link)</button>`:`<button class="btn primary" id="sendfix">Send corrections to Israël (<span id="sbn">${SB.size}</span>)</button>`}<button class="btn" id="copy">Copy as text</button>${sub&&!READONLY?`<button class="btn small danger" id="reopen">Reopen for changes</button>`:""}</div>
     <div id="copyout"></div>
   </div>
-  ${PARTS.map((p,i)=>{const [a,b]=progress(p);const okc=p.items.filter(it=>stateOf(it)==="ok").length;return `<div class="tp"><h3>Part ${i+1} · ${p.title} <span class="muted">(PDF p.${p.page}) · ${sub?`${okc}/${b} correct`:`${a}/${b} answered`}</span></h3><div class="tblwrap"><table class="tbl"><tr><th>#</th><th>Question</th><th>His answer</th>${sub?"<th>Key</th><th></th>":""}</tr>${p.items.map(it=>{const st=stateOf(it);return `<tr><td>${it.no}</td><td>${esc(String(it.label).replace(/<[^>]+>/g,""))}</td><td><b>${esc(it.show(it))||"—"}</b></td>${sub?`<td>${esc(it.key)}</td><td><span class="st ${st}">${st==="ok"?"correct":st==="no"?"wrong":st==="review"?"check":"empty"}</span></td>`:""}</tr>`}).join("")}</table></div></div>`}).join("")}
+  ${PARTS.map((p,i)=>{const [a,b]=progress(p);const okc=p.items.filter(it=>stateOf(it)==="ok").length;return `<div class="tp"><h3>Part ${i+1} · ${p.title} <span class="muted">(PDF p.${p.page}) · ${sub?`${okc}/${b} correct`:`${a}/${b} answered`}</span></h3><div class="tblwrap"><table class="tbl"><tr><th>#</th><th>Question</th><th>His answer</th>${sub?"<th>Key</th><th></th>":""}${SHARED?"<th>Send back</th>":""}</tr>${p.items.map(it=>{const st=stateOf(it);return `<tr><td>${it.no}</td><td>${esc(String(it.label).replace(/<[^>]+>/g,""))}</td><td><b>${esc(it.show(it))||"—"}</b></td>${sub?`<td>${esc(it.key)}</td><td><span class="st ${st}">${stLabel(st)}</span></td>`:""}${SHARED?`<td><input type="checkbox" data-sb="${it.id}" ${SB.has(it.id)?"checked":""} aria-label="Send back"></td>`:""}</tr>`}).join("")}</table></div></div>`}).join("")}
   <footer>The automatic check is a helper. Words, drawings and the “which reflection is correct” question are left for you to judge. Fractions-to-decimals answers are accepted when rounded to 2 decimal places.</footer>`;
   const st=$("#sendt");if(st)st.onclick=()=>sendBox($("#copyout"));
+  const sf=$("#sendfix");if(sf)sf.onclick=()=>sendFix($("#copyout"),ANS);
   $("#copy").onclick=async()=>{const t=waText();try{await navigator.clipboard.writeText(t);toast("Copied. Paste it into WhatsApp.")}catch(e){$("#copyout").innerHTML=`<p class="muted">Select all and copy:</p><textarea class="copybox" readonly>${esc(t)}</textarea>`;const ta=$("#copyout textarea");ta.focus();ta.select()}};
   const r=$("#reopen");if(r)r.onclick=()=>{r.outerHTML=`<span class="confirm"><span>Reopen so Israël can change answers?</span><button class="btn small" id="ry">Reopen</button><button class="btn small" id="rn">Cancel</button></span>`;$("#rn").onclick=()=>render();$("#ry").onclick=()=>{META.status="draft";META.submittedAt=null;changed();render()}};
 }
@@ -510,9 +540,17 @@ document.addEventListener("click",e=>{
   const pl=e.target.closest("[data-pl]");if(pl){SEL[pl.dataset.pl]=pl.dataset.v;rerender(pl.dataset.pl);return}
   const pp=e.target.closest("[data-pp]");if(pp){const k=pp.dataset.pp,it=ITEM[k],cur=v(k)?JSON.parse(v(k)):{},lab=SEL[k]||it.labs[0];cur[lab]=[+pp.dataset.x,+pp.dataset.y];ANS[k]=JSON.stringify(cur);const nx=it.labs.find(l=>!cur[l]);if(nx)SEL[k]=nx;rerender(k);changed();return}
 });
+document.addEventListener("change",e=>{const c=e.target.closest("[data-sb]");if(c){c.checked?SB.add(c.dataset.sb):SB.delete(c.dataset.sb);const n=$("#sbn");if(n)n.textContent=SB.size}});
 document.addEventListener("input",e=>{const t=e.target;if(t.matches("input[data-k]")&&!locked()){ANS[t.dataset.k]=t.value;changed()}});
 (async()=>{const h=location.hash||"";
-  if(h.startsWith("#r=")){try{const d=await unpack(h.slice(3));ANS=d.a||{};META={status:d.s||"draft",savedAt:0,submittedAt:d.t||null};READONLY=true;SHARED=true;VIEW="teacher";render();return}catch(e){toast("This link looks incomplete. Ask for it to be sent again.")}}
+  try{
+    if(h.startsWith("#r=")){const d=await unpack(h.slice(3));MODE="review";ANS=d.a||{};META={status:d.s||"draft",savedAt:0,submittedAt:d.t||null};READONLY=true;SHARED=true;VIEW="teacher";
+      ALL.forEach(it=>{const st=stateOf(it);if(st==="no"||st==="blank")SB.add(it.id)});render();return}
+    if(h.startsWith("#c=")){const d=await unpack(h.slice(3));MODE="fix";FIX={ids:(d.ids||[]).filter(id=>ITEM[id]),prev:d.prev||{},round:d.round||1};META={status:"draft",savedAt:0,submittedAt:null};ANS={};
+      try{const f=JSON.parse(localStorage.getItem(FKEY));if(f&&f.sig===fixSig())ANS=f.answers||{}}catch(e){}render();return}
+    if(h.startsWith("#k=")){const d=await unpack(h.slice(3));MODE="fixreview";FIX={ids:(d.ids||[]).filter(id=>ITEM[id]),round:d.round||1};ANS=d.a||{};PREV=d.prev||{};META={status:"submitted",savedAt:0,submittedAt:null};READONLY=true;SHARED=true;
+      ALL.forEach(it=>{if(FIX.ids.includes(it.id)){const st=stateOf(it);if(st==="no"||st==="blank")SB.add(it.id)}});render();return}
+  }catch(e){toast("This link looks incomplete. Ask for it to be sent again.")}
   render();connect();})();
 window.__T={ALL,ANS,ITEM,PARTS};
 })();
