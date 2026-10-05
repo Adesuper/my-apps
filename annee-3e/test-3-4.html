@@ -401,7 +401,7 @@ let db=null,ref=null,saving=false,again=false,timer=null,dirty=false,online=fals
 function badge(){const b=$("#save");if(READONLY){b.className="save";b.textContent="Viewing Israël’s answers";return}
   if(saving||dirty){b.className="save";b.textContent="Saving…";return}
   if(online){b.className="save ok";b.textContent=META.status==="submitted"?"Submitted ✓":"Saved ✓";return}
-  b.className="save warn";b.textContent="Saved on this device only"}
+  b.className="save ok";b.textContent=META.status==="submitted"?"Handed in ✓":"Saved on this device ✓"}
 function localSave(){try{localStorage.setItem(LKEY,JSON.stringify({answers:ANS,meta:META}))}catch(e){}}
 function changed(){META.savedAt=Date.now();localSave();if(!db){badge();return}dirty=true;badge();clearTimeout(timer);timer=setTimeout(flush,1200)}
 async function flush(){if(!ref)return;if(saving){again=true;return}saving=true;badge();
