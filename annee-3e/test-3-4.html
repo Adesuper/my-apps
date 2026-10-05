@@ -435,7 +435,8 @@ async function sendBox(el,tag="r",obj=null,msgFn=null){
   el.innerHTML=`<p class="muted">Making the link…</p>`;
   const link=location.origin+location.pathname+"#"+tag+"="+await pack(obj);
   const msg=msgFn?msgFn(link):`Hi Wunmi, here are Israël’s answers to Test 3 and 4. Open this link to see and mark them: ${link}`;
-  el.innerHTML=`<div class="row"><a class="btn primary" href="https://wa.me/?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">Send on WhatsApp</a><button class="btn" id="cplink">Copy the link</button></div><p class="muted" style="margin-top:6px">${tag==="c"?"The link holds only the questions you ticked.":tag==="k"?"The link holds only these corrections.":"The link holds all his answers. Send it again if he changes anything."}</p>`;
+  const subj=tag==="c"?"Test 3 and 4: corrections to do":tag==="k"?"Test 3 and 4: Israël’s corrections":tag==="s"?"Test 3 and 4: continue on another computer":"Test 3 and 4: Israël’s answers";
+  el.innerHTML=`<div class="row"><a class="btn primary" href="https://wa.me/?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">Send by WhatsApp</a><a class="btn" href="mailto:?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(msg)}">Send by email</a><button class="btn" id="cplink">Copy the link</button></div><p class="muted" style="margin-top:6px">${tag==="s"?"Open this link on the other computer (email it to yourself, or copy it). It brings all the answers so far.":tag==="c"?"The link holds only the questions you ticked.":tag==="k"?"The link holds only these corrections.":"The link holds all his answers. Send it again if he changes anything."} Copy the link to use it anywhere else.</p>`;
   $("#cplink").onclick=async()=>{try{await navigator.clipboard.writeText(link);toast("Link copied")}catch(e){el.insertAdjacentHTML("beforeend",`<textarea class="copybox" readonly style="min-height:70px">${esc(link)}</textarea>`);const t=el.querySelector("textarea");t.focus();t.select()}};
 }
 
@@ -456,7 +457,9 @@ function viewFix(){
   const done=FIX.ids.filter(id=>stateOf(ITEM[id])!=="blank").length,n=FIX.ids.length;
   $("#app").innerHTML=`<div class="card" style="display:flex;flex-direction:column;gap:8px"><p class="eyebrow">Corrections · round ${FIX.round}</p><h2 style="font-size:1.35rem">Wunmi marked your test. Correct these ${n} question${n>1?"s":""}.</h2><p class="muted">Your first answer is shown crossed out above each question. Have another go, then send your corrections to Wunmi. Your work saves by itself.</p><p style="font-family:var(--display);font-weight:700">${done} of ${n} done</p><div class="track"><i style="width:${done/n*100}%"></i></div></div>
   ${groups.map(g=>`<p class="k">Part ${g.i+1} · ${g.p.title}</p>${g.p.intro?`<div class="q" style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px">${g.p.intro}</div>`:""}<div class="items">${g.items.map(it=>`<div class="it"><span class="no">${it.no}.</span><div class="body"><p class="muted">Your first answer: <s>${esc(withAns(FIX.prev,()=>it.show(it)))||"(empty)"}</s></p><div id="c-${it.id}" style="display:flex;flex-direction:column;gap:8px">${it.render(it)}</div></div></div>`).join("")}</div>`).join("")}
-  <p class="k">When you have finished</p><div class="card" id="fixsend"><div class="row"><button class="btn primary" id="fixbtn">Send my corrections to Wunmi</button><span class="muted">${n-done?`${n-done} still empty.`:"All done!"}</span></div></div>`;
+  <p class="k">When you have finished</p><div class="card" id="fixsend"><div class="row"><button class="btn primary" id="fixbtn">Send my corrections to Wunmi</button><span class="muted">${n-done?`${n-done} still empty.`:"All done!"}</span></div></div>
+  ${done&&done<n?`<div id="fixmove" style="margin-top:10px"><button class="btn small" id="fixmovebtn">Continue on another computer</button></div>`:""}`;
+  const fm=$("#fixmovebtn");if(fm)fm.onclick=()=>sendBox($("#fixmove"),"c",{ids:FIX.ids,prev:FIX.prev,round:FIX.round,a:subset(ANS,FIX.ids)},link=>`Israël’s corrections so far. Open this link to carry on: ${link}`);
   $("#fixbtn").onclick=()=>sendBox($("#fixsend"),"k",{ids:FIX.ids,a:subset(ANS,FIX.ids),prev:FIX.prev,round:FIX.round},link=>`Hi Wunmi, here are Israël’s corrections for Test 3 and 4 (round ${FIX.round}): ${link}`);
 }
 function viewFixReview(){
@@ -481,9 +484,10 @@ function viewCover(){
     <p style="font-family:var(--display);font-size:1.15rem">Hi Israël! This is Wunmi’s Test 3 and 4, ready to answer on screen. No printing, no photos.</p>
     <p class="muted">Your answers save by themselves as you go, so you can stop and come back later. When everything is done, press <b>Hand it in</b> so Wunmi can mark it.</p>
     ${sub?`<div class="notice ok"><b>Handed in</b> ${META.submittedAt?new Date(META.submittedAt).toLocaleString():""}. Wunmi can now see your answers.</div>`:""}
-    ${!db&&!READONLY?`<div class="notice">Your answers are saved on this device. Use the same tablet or computer each time. When you have finished, press <b>Hand it in</b>, then <b>Send to Wunmi</b>.</div>`:""}
+    ${!db&&!READONLY?`<div class="notice">Your answers save on this computer as you go. Switching to another laptop? Press <b>Continue on another computer</b> and open that link there. When you have finished, press <b>Hand it in</b>, then <b>Send to Wunmi</b>.</div>`:""}
     <p style="font-family:var(--display);font-weight:700">${done} of ${ALL.length} answers done</p>
     <div class="track"><i style="width:${done/ALL.length*100}%"></i></div>
+    ${!READONLY&&done?`<div id="moveb"><button class="btn small" id="movebtn">Continue on another computer</button></div>`:""}
   </div>
   <p class="k">The ${PARTS.length} parts · same order as the PDF</p>
   <div class="parts">${PARTS.map((p,i)=>{const [a,b]=progress(p);return `<button class="pbtn${a===b?" done":""}" data-go="${p.id}"><span class="n">${i+1}</span><b>${p.title}</b><span class="m"><span class="track"><i style="width:${a/b*100}%"></i></span>${a}/${b}</span></button>`}).join("")}</div>
@@ -491,6 +495,7 @@ function viewCover(){
   <div class="card" id="handin">${sub?`<p>Handed in! Now send it to Wunmi.</p><div id="send" style="margin-top:10px"><button class="btn primary" id="sendbtn">Send to Wunmi</button></div><p class="muted" style="margin-top:8px">If Wunmi asks for changes, a grown-up can reopen it from the Marking tab.</p>`:READONLY?`<p class="muted">Only Israël’s account can hand the test in.</p>`:`<div class="row"><button class="btn primary" id="hand">Hand it in</button><span class="muted">${ALL.length-done?`${ALL.length-done} answers are still empty.`:"Everything is answered!"}</span></div>`}</div>
   <footer>Test 3 and 4 · typed from Wunmi’s PDF (24 pages) · question 5 on PDF page 20 is cut off in the PDF, so it is not included.</footer>`;
   const sb=$("#sendbtn");if(sb)sb.onclick=()=>sendBox($("#send"));
+  const mb=$("#movebtn");if(mb)mb.onclick=()=>sendBox($("#moveb"),"s",{a:ANS,s:META.status,t:META.submittedAt,v:META.savedAt},link=>`Israël’s Test 3 and 4, answers so far. Open this link to carry on: ${link}`);
   const h=$("#hand");if(h)h.onclick=()=>{$("#handin").innerHTML=`<div class="confirm"><span>Hand in now? You won’t be able to change your answers after.</span><button class="btn primary" id="hy">Yes, hand it in</button><button class="btn small" id="hn">Not yet</button></div>`;$("#hn").onclick=()=>render();$("#hy").onclick=()=>{META.status="submitted";META.submittedAt=Date.now();changed();flush();toast("Handed in. Well done, Israël!");render()}};
 }
 function viewPart(p){
@@ -547,7 +552,14 @@ document.addEventListener("input",e=>{const t=e.target;if(t.matches("input[data-
     if(h.startsWith("#r=")){const d=await unpack(h.slice(3));MODE="review";ANS=d.a||{};META={status:d.s||"draft",savedAt:0,submittedAt:d.t||null};READONLY=true;SHARED=true;VIEW="teacher";
       ALL.forEach(it=>{const st=stateOf(it);if(st==="no"||st==="blank")SB.add(it.id)});render();return}
     if(h.startsWith("#c=")){const d=await unpack(h.slice(3));MODE="fix";FIX={ids:(d.ids||[]).filter(id=>ITEM[id]),prev:d.prev||{},round:d.round||1};META={status:"draft",savedAt:0,submittedAt:null};ANS={};
-      try{const f=JSON.parse(localStorage.getItem(FKEY));if(f&&f.sig===fixSig())ANS=f.answers||{}}catch(e){}render();return}
+      try{const f=JSON.parse(localStorage.getItem(FKEY));if(f&&f.sig===fixSig()&&Object.keys(f.answers||{}).length)ANS=f.answers}catch(e){}
+      if(!Object.keys(ANS).length&&d.a){ANS=Object.assign({},d.a);localSave()}
+      render();return}
+    if(h.startsWith("#s=")){const d=await unpack(h.slice(3));const here=Object.keys(ANS).length;
+      const load=()=>{ANS=Object.assign({},d.a||{});META={status:d.s||"draft",savedAt:Date.now(),submittedAt:d.t||null};localSave();try{history.replaceState(null,"",location.pathname)}catch(e){}toast("Answers loaded on this computer");render()};
+      if(!here){load();return}
+      $("#app").innerHTML=`<div class="card" style="display:flex;flex-direction:column;gap:10px"><h2 style="font-size:1.3rem">Bring the answers onto this computer?</h2><p>This computer already has ${here} saved answer box${here>1?"es":""}. The link has ${Object.keys(d.a||{}).length}. Loading the link replaces what is here.</p><div class="row"><button class="btn primary" id="ly">Use the answers from the link</button><button class="btn" id="ln">Keep what is on this computer</button></div></div>`;
+      $("#ly").onclick=load;$("#ln").onclick=()=>{try{history.replaceState(null,"",location.pathname)}catch(e){}render()};return}
     if(h.startsWith("#k=")){const d=await unpack(h.slice(3));MODE="fixreview";FIX={ids:(d.ids||[]).filter(id=>ITEM[id]),round:d.round||1};ANS=d.a||{};PREV=d.prev||{};META={status:"submitted",savedAt:0,submittedAt:null};READONLY=true;SHARED=true;
       ALL.forEach(it=>{if(FIX.ids.includes(it.id)){const st=stateOf(it);if(st==="no"||st==="blank")SB.add(it.id)}});render();return}
   }catch(e){toast("This link looks incomplete. Ask for it to be sent again.")}
