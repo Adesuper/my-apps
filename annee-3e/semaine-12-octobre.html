@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Semaine du 12 octobre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,600&family=Caveat:wght@500;700&display=swap">
+<style>
+:root{
+  --paper:#F4F6FC; --panel:#FFFFFF; --panel-2:#FAFBFF;
+  --ink:#16213A; --ink-soft:#5A6484; --ink-faint:#8B95B4;
+  --rule:#CBD6F2; --grid:rgba(116,148,214,.15);
+  --marge:#D1495B; --marge-soft:rgba(209,73,91,.30);
+  --encre:#2F4FC9; --encre-soft:#E7ECFC;
+  --vert:#2E8B57; --vert-soft:#E4F4EB;
+  --craie:#B57A10; --craie-soft:#FBF0DA;
+  --line:#E2E7F5;
+  --shadow-sm:0 2px 8px rgba(22,33,58,.06);
+  --display:"Gabarito","Trebuchet MS",system-ui,sans-serif;
+  --body:"Literata",Georgia,"Times New Roman",serif;
+  --hand:"Caveat","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F141F; --panel:#171E2D; --panel-2:#1C2435;
+    --ink:#E8ECF9; --ink-soft:#A2AECB; --ink-faint:#7A86A6;
+    --rule:#2B3752; --grid:rgba(140,170,255,.07);
+    --marge:#E77A89; --marge-soft:rgba(231,122,137,.32);
+    --encre:#8FA8FF; --encre-soft:#1E2946;
+    --vert:#66C795; --vert-soft:#16301F;
+    --craie:#F0BC63; --craie-soft:#2E2513;
+    --line:#27314A; --shadow-sm:0 2px 8px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F141F; --panel:#171E2D; --panel-2:#1C2435;
+  --ink:#E8ECF9; --ink-soft:#A2AECB; --ink-faint:#7A86A6;
+  --rule:#2B3752; --grid:rgba(140,170,255,.07);
+  --marge:#E77A89; --marge-soft:rgba(231,122,137,.32);
+  --encre:#8FA8FF; --encre-soft:#1E2946;
+  --vert:#66C795; --vert-soft:#16301F;
+  --craie:#F0BC63; --craie-soft:#2E2513;
+  --line:#27314A; --shadow-sm:0 2px 8px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:var(--body);color:var(--ink);background-color:var(--paper);
+  background-image:repeating-linear-gradient(to bottom,transparent 0 23px,var(--grid) 23px 24px),repeating-linear-gradient(to right,transparent 0 23px,var(--grid) 23px 24px);
+  line-height:1.6;font-size:16px;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.15;margin:0;text-wrap:balance}
+p{margin:0}
+button,input,textarea,select{font-family:var(--display);color:inherit}
+button{cursor:pointer}
+a{color:var(--encre)}
+:focus-visible{outline:3px solid var(--encre);outline-offset:2px;border-radius:8px}
+.wrap{max-width:900px;margin:0 auto;padding-inline:16px}
+header.top{background:var(--panel);border-bottom:1px solid var(--line);padding-block:20px 16px}
+.eyebrow{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;font-weight:700;color:var(--ink-faint)}
+.eyebrow a{color:inherit}
+header h1{font-size:clamp(1.5rem,5vw,2.05rem);margin-top:4px}
+header h1 b{color:var(--marge)}
+.sub{color:var(--ink-soft);font-size:.95rem;margin-top:7px;max-width:66ch}
+.bar{position:sticky;top:0;z-index:20;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:var(--shadow-sm)}
+.tabs{display:flex;gap:5px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+.tab{font-family:var(--display);font-weight:700;font-size:.86rem;border:1px solid var(--line);background:var(--panel-2);padding:8px 12px;border-radius:11px;white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--encre);border-color:var(--encre);color:#fff}
+.btn{font-family:var(--display);font-weight:600;font-size:.9rem;border:1px solid var(--line);background:var(--panel-2);padding:8px 14px;border-radius:11px}
+.btn:hover:not(:disabled){border-color:var(--encre)}
+.btn.primary{background:var(--encre);border-color:var(--encre);color:#fff}
+.btn.good{background:var(--vert);border-color:var(--vert);color:#fff}
+.btn.small{font-size:.8rem;padding:6px 10px;border-radius:9px}
+.btn[aria-pressed="true"]{background:var(--encre-soft);border-color:var(--encre);color:var(--encre)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+main{padding-block:20px 70px}
+section[hidden]{display:none}
+.bloc{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:17px;margin-bottom:14px;box-shadow:var(--shadow-sm)}
+.bloc-hd{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:9px}
+.bloc-hd .ic{font-size:1.4rem}
+.bloc-hd h3{font-size:1.1rem;flex:1 1 auto}
+.pill{font-family:var(--display);font-size:.72rem;font-weight:700;letter-spacing:.05em;color:var(--encre);background:var(--encre-soft);padding:3px 10px;border-radius:99px;white-space:nowrap}
+.consigne{font-family:var(--hand);font-size:1.32rem;color:var(--marge);line-height:1.3;margin-bottom:8px}
+.muted{color:var(--ink-soft);font-size:.93rem}
+.aide{background:var(--panel-2);border:1px solid var(--line);border-left:4px solid var(--craie);border-radius:11px;padding:11px 13px;margin:10px 0}
+.aide h4{font-family:var(--display);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--craie);margin-bottom:5px}
+.aide ul{margin:0;padding-left:18px}
+.aide li{font-size:.93rem;color:var(--ink-soft);margin-bottom:3px}
+.aide li b{color:var(--ink)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+
+/* jours */
+.days{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:10px}
+.day{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:13px 14px;box-shadow:var(--shadow-sm)}
+.day h3{font-size:1rem}
+.day .d{font-family:var(--display);font-size:.75rem;color:var(--ink-faint);font-weight:600}
+.day.off{background:var(--craie-soft);border-color:transparent}
+.day.done{border-color:var(--vert)}
+.chk{display:flex;gap:8px;align-items:flex-start;font-size:.9rem;padding:5px 0;border-bottom:1px dotted var(--line)}
+.chk:last-child{border-bottom:none}
+.chk input{appearance:none;width:18px;height:18px;flex:0 0 18px;margin-top:2px;border:2px solid var(--rule);border-radius:5px;background:var(--panel);display:grid;place-content:center;cursor:pointer}
+.chk input::after{content:"✓";font-family:var(--display);font-weight:800;font-size:.76rem;color:#fff;transform:scale(0)}
+.chk input:checked{background:var(--vert);border-color:var(--vert)}
+.chk input:checked::after{transform:scale(1)}
+.chk label{cursor:pointer;color:var(--ink-soft)}
+.chk label b{color:var(--ink)}
+.chk a{font-weight:600}
+
+/* agenda */
+.agenda{background:var(--panel-2);border:1px solid var(--rule);border-left:4px solid var(--marge);border-radius:12px;padding:14px 16px;font-family:var(--hand);font-size:1.4rem;line-height:1.45}
+.agenda .h{color:var(--encre);font-weight:700}
+.agenda div{margin-bottom:4px}
+
+/* lecture */
+.texte{font-family:var(--body);font-size:1.08rem;line-height:1.9;background:var(--panel-2);border-radius:12px;padding:14px 16px;border:1px solid var(--line)}
+.texte p+p{margin-top:9px}
+.q{padding:9px 0;border-bottom:1px dotted var(--line)}
+.q .qt{font-family:var(--display);font-weight:600;font-size:.98rem}
+.opts{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.opt{font-family:var(--display);font-size:.9rem;border:1.5px solid var(--rule);background:var(--panel);border-radius:10px;padding:6px 11px}
+.opt.ok{border-color:var(--vert);background:var(--vert-soft);color:var(--vert);font-weight:700}
+.opt.no{border-color:var(--marge);background:var(--craie-soft);text-decoration:line-through}
+.oral{font-family:var(--display);font-size:.84rem;color:var(--craie);margin-top:4px}
+
+/* mots */
+textarea.liste{width:100%;min-height:120px;border:1.5px solid var(--rule);border-radius:12px;padding:10px 12px;background:var(--panel-2);font-size:1rem;line-height:1.7}
+.mots{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:6px;margin:10px 0}
+.mot{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:7px 11px;font-family:var(--display);font-weight:600;display:flex;justify-content:space-between;gap:6px;align-items:center}
+.mot button{border:none;background:none;color:var(--encre);padding:0}
+.big{font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,7vw,2.6rem);text-align:center;padding:18px 8px;letter-spacing:.02em}
+.ans{width:100%;max-width:420px;padding:10px 12px;font-size:1.15rem;font-weight:600;border:1.5px solid var(--rule);border-radius:10px;background:var(--panel-2)}
+.ans:focus{outline:none;border-color:var(--encre)}
+.ans.ok{border-color:var(--vert);background:var(--vert-soft)}
+.ans.no{border-color:var(--marge);background:var(--craie-soft)}
+.fb{font-family:var(--display);font-weight:600;margin-top:6px;min-height:1.4em}
+.fb.ok{color:var(--vert)} .fb.no{color:var(--marge)}
+.empty{font-family:var(--hand);font-size:1.3rem;color:var(--craie);padding:6px 0}
+
+/* finir */
+.conj{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;font-family:var(--display);font-size:1.15rem;max-width:340px}
+.conj .p{color:var(--ink-faint);text-align:right}
+.conj .v b{color:var(--marge)}
+.fill{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:7px 0;border-bottom:1px dotted var(--line);font-family:var(--display);font-size:1rem}
+.fill input{width:140px;padding:6px 9px;font-size:1rem;font-weight:600;border:1.5px solid var(--rule);border-radius:9px;background:var(--panel-2)}
+.fill input.ok{border-color:var(--vert);background:var(--vert-soft)}
+.fill input.no{border-color:var(--marge);background:var(--craie-soft)}
+.fill .corr{font-size:.85rem;color:var(--marge)}
+
+/* tables */
+.sprint{text-align:center}
+.sprint .clock{font-family:var(--display);font-weight:800;font-size:1.1rem;color:var(--ink-soft)}
+.sprint .fact{font-family:var(--display);font-weight:800;font-size:clamp(2.6rem,12vw,4rem);margin:8px 0}
+.sprint .typed{font-family:var(--display);font-weight:800;font-size:2rem;min-height:2.6rem;color:var(--encre)}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;max-width:290px;margin:10px auto 0}
+.pad button{font-family:var(--display);font-weight:800;font-size:1.4rem;padding:12px 0;border-radius:12px;border:1px solid var(--line);background:var(--panel-2)}
+.pad button:active{background:var(--encre-soft)}
+.score{font-family:var(--display);font-size:1rem;margin-top:8px}
+.flash-ok{animation:ok .35s}
+.flash-no{animation:no .35s}
+@keyframes ok{0%{color:var(--vert)}100%{}}
+@keyframes no{0%{color:var(--marge);transform:translateX(-4px)}50%{transform:translateX(4px)}100%{transform:none}}
+.chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+table.hist{width:100%;border-collapse:collapse;margin-top:10px;font-size:.9rem;font-family:var(--display)}
+table.hist th,table.hist td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}
+table.hist th{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+.tabgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:8px;margin-top:8px;font-family:var(--display)}
+.tabgrid div{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:8px 11px;font-size:.92rem;line-height:1.55}
+.tabgrid h4{font-size:.8rem;color:var(--encre);margin-bottom:3px}
+
+.note{font-family:var(--hand);font-size:1.26rem;line-height:1.35;color:var(--marge);border-left:3px solid var(--marge-soft);padding:4px 0 4px 13px;margin:14px 0}
+footer{border-top:1px solid var(--line);margin-top:28px;padding-top:14px;font-size:.84rem;color:var(--ink-faint)}
+@media print{
+  .bar,.noprint{display:none!important}
+  section[hidden]{display:block!important}
+  body{background:#fff;background-image:none;color:#000}
+  .bloc{box-shadow:none;page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow"><a href="index.html">Ma 3<sup>e</sup> année</a> &middot; agenda envoyé par l'enseignante</p>
+    <h1>La semaine du <b>12 octobre</b></h1>
+    <p class="sub">Israël est en vacances, mais la classe avance. Voici tout l'agenda de la semaine en petits morceaux : lecture, liste de mots 5, le verbe <b>finir</b> et les tables d'addition et de soustraction 1 et 2, à faire <b>vite</b>. Environ 20 minutes par jour.</p>
+  </div>
+</header>
+
+<nav class="bar noprint">
+  <div class="wrap tabs" role="tablist" id="tabs">
+    <button class="tab" role="tab" data-t="plan">📅 Ma semaine</button>
+    <button class="tab" role="tab" data-t="agenda">✏️ Mon agenda</button>
+    <button class="tab" role="tab" data-t="lecture">📖 Lecture</button>
+    <button class="tab" role="tab" data-t="mots">🔑 Liste 5</button>
+    <button class="tab" role="tab" data-t="finir">🏁 Finir</button>
+    <button class="tab" role="tab" data-t="tables">⚡ Tables 1 et 2</button>
+    <button class="tab" role="tab" data-t="parents">👪 Parents</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ============ PLAN ============ -->
+<section id="plan">
+  <p class="consigne">Un jour à la fois. Coche quand c'est fait !</p>
+  <div class="days" id="days"></div>
+  <p class="note">Les tables, c'est chaque jour : une minute de sprint suffit. On veut aller plus vite que la veille.</p>
+</section>
+
+<!-- ============ AGENDA ============ -->
+<section id="agenda" hidden>
+  <div class="bloc">
+    <div class="bloc-hd"><span class="ic">✏️</span><h3>Copie ceci dans ton agenda</h3><span class="pill">10 min</span></div>
+    <p class="muted">L'enseignante t'invite à transcrire les leçons dans ton agenda, à la page de la semaine du 12 octobre. Écris lentement, en lettres attachées si tu peux.</p>
+    <div class="agenda" style="margin-top:12px">
+      <div><span class="h">Lecture :</span> Sans nuage et Mon anniversaire</div>
+      <div><span class="h">Vocabulaire :</span> Liste 5, La bonne clé</div>
+      <div><span class="h">Conjugaison :</span> Verbe finir au présent</div>
+      <div><span class="h">Math :</span> Tables d'additions et soustractions 1 et 2 (rapidité)</div>
+      <div><span class="h">Autres :</span> Signature de l'agenda et de la dictée</div>
+      <div><span class="h">12 octobre :</span> Congé</div>
+      <div><span class="h">15 octobre :</span> Bibliothèque</div>
+      <div>Première communication sur le portail Mozaïk</div>
+    </div>
+    <div class="row"><label class="chk" style="border:none"><input type="checkbox" data-k="agenda-copie"><span>J'ai tout copié dans mon agenda.</span></label></div>
+    <div class="row"><label class="chk" style="border:none"><input type="checkbox" data-k="agenda-signe"><span>Un parent a <b>signé l'agenda</b>.</span></label></div>
+  </div>
+</section>
+
+<!-- ============ LECTURE ============ -->
+<section id="lecture" hidden>
+  <div class="aide">
+    <h4>Pour le parent</h4>
+    <ul>
+      <li>Les vrais textes <b>« Sans nuage »</b> et <b>« Mon anniversaire »</b> sont dans son livre ou ses feuilles de lecture. S'il les a avec lui, lisez-les d'abord, avec les <b>questions de la boîte ci-dessous</b>.</li>
+      <li>Les deux textes de cette page sont des <b>textes d'entraînement</b> sur les mêmes thèmes. Ils servent si le livre est resté à l'école, ou pour une deuxième lecture.</li>
+      <li>Lecture <b>à voix haute</b>, deux fois : une fois pour comprendre, une fois pour lire avec le ton.</li>
+    </ul>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-hd"><span class="ic">🗣️</span><h3>Questions pour n'importe quel texte</h3><span class="pill">à l'oral</span></div>
+    <div class="tabgrid">
+      <div><h4>Qui ?</h4>Qui sont les personnages ? Lequel est le plus important ?</div>
+      <div><h4>Où et quand ?</h4>Où se passe l'histoire ? À quel moment ?</div>
+      <div><h4>Quoi ?</h4>Quel est le problème ? Comment se termine l'histoire ?</div>
+      <div><h4>Le titre</h4>Pourquoi le texte s'appelle-t-il comme ça ?</div>
+      <div><h4>Un mot nouveau</h4>Trouve un mot que tu ne connais pas. Que veut-il dire ?</div>
+      <div><h4>Et toi ?</h4>As-tu aimé ? Qu'aurais-tu fait à la place du personnage ?</div>
+    </div>
+  </div>
+
+  <div id="textes"></div>
+</section>
+
+<!-- ============ MOTS ============ -->
+<section id="mots" hidden>
+  <div class="bloc">
+    <div class="bloc-hd"><span class="ic">🔑</span><h3>Liste 5 : La bonne clé</h3></div>
+    <p class="muted">Écris ici les mots de la liste 5 (un mot par ligne). Ils restent enregistrés sur cet ordinateur. Tu peux les trouver dans ton cahier de mots ou le demander à un ami de la classe.</p>
+    <textarea class="liste" id="liste" placeholder="une clé&#10;la serrure&#10;…"></textarea>
+    <div class="row"><button class="btn primary" id="saveListe">Enregistrer la liste</button><span class="muted" id="nbMots"></span></div>
+    <div class="mots" id="motsVue"></div>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-hd"><span class="ic">🎧</span><h3>Dictée à l'oreille</h3><span class="pill">pour la signature de la dictée</span></div>
+    <p class="muted">L'ordinateur dit le mot. Tu l'écris, puis tu appuies sur Entrée. Un parent peut aussi lire les mots à voix haute.</p>
+    <div id="dicteeZone"></div>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-hd"><span class="ic">👀</span><h3>Regarde, cache, écris, vérifie</h3></div>
+    <p class="muted">Regarde le mot 5 secondes. Il disparaît. Écris-le de mémoire.</p>
+    <div id="cacheZone"></div>
+  </div>
+</section>
+
+<!-- ============ FINIR ============ -->
+<section id="finir" hidden>
+  <div class="bloc">
+    <div class="bloc-hd"><span class="ic">🏁</span><h3>Le verbe finir au présent</h3></div>
+    <div class="conj">
+      <span class="p">je</span><span class="v">fin<b>is</b></span>
+      <span class="p">tu</span><span class="v">fin<b>is</b></span>
+      <span class="p">il / elle / on</span><span class="v">fin<b>it</b></span>
+      <span class="p">nous</span><span class="v">fin<b>issons</b></span>
+      <span class="p">vous</span><span class="v">fin<b>issez</b></span>
+      <span class="p">ils / elles</span><span class="v">fin<b>issent</b></span>
+    </div>
+    <div class="aide">
+      <h4>Le truc</h4>
+      <ul>
+        <li>On garde <b>fin-</b> et on ajoute la terminaison : <b>-is, -is, -it, -issons, -issez, -issent</b>.</li>
+        <li>Avec <b>nous, vous, ils</b>, on entend <b>« iss »</b> : nous fin<b>iss</b>ons.</li>
+        <li><b>je</b> et <b>tu</b> s'écrivent pareil (finis), mais <b>tu</b> finit toujours par un <b>s</b>.</li>
+      </ul>
+    </div>
+    <div class="row noprint"><button class="btn" id="cacherConj" aria-pressed="false">🙈 Cacher le tableau</button></div>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-hd"><span class="ic">🧩</span><h3>Complète avec finir</h3><span class="pill" id="finScore"></span></div>
+    <div id="finEx"></div>
+    <div class="row"><button class="btn primary" id="finCheck">Vérifier</button><button class="btn" id="finNew">🔄 Nouvelles phrases</button></div>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-hd"><span class="ic">⭐</span><h3>Défi : les verbes qui font comme finir</h3></div>
+    <p class="muted">Choisir, grandir, remplir, rougir et réfléchir se conjuguent exactement comme finir. Essaie !</p>
+    <div id="defiEx"></div>
+    <div class="row"><button class="btn primary" id="defiCheck">Vérifier</button><button class="btn" id="defiNew">🔄 Autres</button></div>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-hd"><span class="ic">✍️</span><h3>À l'écrit</h3></div>
+    <p class="consigne">Dans ton cahier, écris 3 phrases avec finir : une avec « je », une avec « nous », une avec « ils ».</p>
+    <p class="muted">Exemple : Nous finissons le casse-tête avant le souper.</p>
+  </div>
+</section>
+
+<!-- ============ TABLES ============ -->
+<section id="tables" hidden>
+  <div class="bloc sprint">
+    <div class="bloc-hd" style="justify-content:center"><span class="ic">⚡</span><h3 style="flex:none">Sprint d'une minute</h3></div>
+    <div class="chips noprint" id="modes"></div>
+    <div id="sprintIdle">
+      <p class="muted" style="margin-top:12px">Réponds le plus vite possible. Clavier ou boutons, puis Entrée (✓).</p>
+      <div class="row" style="justify-content:center"><button class="btn primary" id="go" style="font-size:1.1rem;padding:12px 26px">C'est parti !</button></div>
+      <p class="score" id="best"></p>
+    </div>
+    <div id="sprintRun" hidden>
+      <div class="clock" id="clock">60 s</div>
+      <div class="fact" id="fact"></div>
+      <div class="typed" id="typed"></div>
+      <div class="pad" id="pad"></div>
+      <p class="score" id="live"></p>
+    </div>
+    <div id="sprintEnd" hidden>
+      <div class="big" id="endScore"></div>
+      <p class="muted" id="endMsg"></p>
+      <div id="endErr" style="margin-top:8px"></div>
+      <div class="row" style="justify-content:center"><button class="btn primary" id="again">Encore une fois</button></div>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-hd"><span class="ic">📈</span><h3>Mes sprints</h3></div>
+    <table class="hist"><thead><tr><th>Jour</th><th>Table</th><th>Bonnes réponses</th><th>Erreurs</th></tr></thead><tbody id="hist"></tbody></table>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-hd"><span class="ic">📋</span><h3>Les tables à revoir</h3></div>
+    <div class="tabgrid" id="tabgrid"></div>
+  </div>
+</section>
+
+<!-- ============ PARENTS ============ -->
+<section id="parents" hidden>
+  <div class="bloc">
+    <div class="bloc-hd"><span class="ic">👪</span><h3>À faire pour les parents</h3></div>
+    <div id="parentChk"></div>
+  </div>
+  <div class="bloc">
+    <div class="bloc-hd"><span class="ic">📊</span><h3>Où en est Israël ?</h3></div>
+    <div id="bilan" class="muted"></div>
+  </div>
+</section>
+
+<footer>Agenda de la semaine du 12 octobre 2026 · progrès gardés sur cet appareil · <a href="index.html">retour à Ma 3<sup>e</sup> année</a></footer>
+</main>
+
+<script>
+(function(){
+const KEY="semaine-12oct-v1";
+let S={};try{S=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
+S.chk=S.chk||{};S.hist=S.hist||[];S.best=S.best||{};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm=s=>s.trim().toLowerCase().replace(/[’']/g,"'").replace(/\s+/g," ");
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+
+/* ---------- tabs ---------- */
+const tabs=[...document.querySelectorAll(".tab")];
+function show(t){tabs.forEach(b=>b.setAttribute("aria-selected",b.dataset.t===t));
+  document.querySelectorAll("main>section").forEach(s=>s.hidden=s.id!==t);
+  try{history.replaceState(null,"","#"+t)}catch(e){}
+  if(t==="parents")bilan(); if(t==="plan")renderDays();}
+tabs.forEach(b=>b.onclick=()=>show(b.dataset.t));
+document.addEventListener("click",e=>{const a=e.target.closest("a[data-go]");if(a){e.preventDefault();show(a.dataset.go);scrollTo(0,0)}});
+
+/* ---------- checkboxes (generic) ---------- */
+function bindChecks(root){root.querySelectorAll("input[data-k]").forEach(i=>{i.checked=!!S.chk[i.dataset.k];
+  i.onchange=()=>{S.chk[i.dataset.k]=i.checked;save();if(root.id==="days")renderDays()}})}
+
+/* ---------- plan ---------- */
+const DAYS=[
+ {k:"lun",n:"Lundi",d:"12 octobre",off:"Congé à l'école ! Profite des vacances."},
+ {k:"mar",n:"Mardi",d:"13 octobre",t:[
+   ["Copier les leçons dans <b>mon agenda</b>","agenda"],
+   ["Écrire et lire la <b>liste 5</b>","mots"],
+   ["Apprendre le tableau de <b>finir</b>","finir"],
+   ["Sprint <b>+1</b> et <b>+2</b>","tables"]]},
+ {k:"mer",n:"Mercredi",d:"14 octobre",t:[
+   ["Lire <b>Sans nuage</b> à voix haute + questions","lecture"],
+   ["<b>Dictée à l'oreille</b> de la liste 5","mots"],
+   ["Complète avec <b>finir</b>","finir"],
+   ["Sprint <b>−1</b> et <b>−2</b>","tables"]]},
+ {k:"jeu",n:"Jeudi",d:"15 octobre",t:[
+   ["Lire <b>Mon anniversaire</b> à voix haute + questions","lecture"],
+   ["Regarde, cache, écris : <b>liste 5</b>","mots"],
+   ["Défi : verbes comme <b>finir</b>","finir"],
+   ["Sprint <b>mélangé</b>","tables"]]},
+ {k:"ven",n:"Vendredi",d:"16 octobre",t:[
+   ["Relire les deux textes avec le ton","lecture"],
+   ["<b>Dictée</b> finale de la liste 5, montrée à un parent","mots"],
+   ["Écrire 3 phrases avec <b>finir</b>","finir"],
+   ["Sprint mélangé : battre mon record !","tables"]]}
+];
+function renderDays(){
+  $("days").innerHTML=DAYS.map(d=>{
+    if(d.off)return `<div class="day off"><h3>${d.n}</h3><div class="d">${d.d}</div><p style="margin-top:8px;font-family:var(--hand);font-size:1.25rem">🍂 ${d.off}</p></div>`;
+    const all=d.t.every((x,i)=>S.chk[d.k+i]);
+    return `<div class="day${all?" done":""}"><h3>${d.n}${all?" ✅":""}</h3><div class="d">${d.d}</div>`+
+      d.t.map((x,i)=>`<div class="chk"><input type="checkbox" id="c-${d.k}${i}" data-k="${d.k}${i}"><label for="c-${d.k}${i}">${x[0]} · <a href="#${x[1]}" data-go="${x[1]}">ouvrir</a></label></div>`).join("")+`</div>`}).join("");
+  bindChecks($("days"));
+}
+
+/* ---------- lecture ---------- */
+const TEXTES=[
+ {titre:"Sans nuage",p:[
+  "Ce matin-là, Léa ouvre ses rideaux. Le ciel est tout bleu, sans un seul nuage. « Parfait pour le pique-nique ! » crie-t-elle.",
+  "Avec son grand-père, elle prépare des sandwichs, des pommes et une bouteille d'eau. Ils marchent jusqu'au parc, près de la rivière. Le soleil chauffe fort. Grand-papa sort sa casquette et dit à Léa de mettre de la crème solaire.",
+  "Après le repas, Léa se couche dans l'herbe. Elle cherche des formes dans le ciel, mais elle ne voit rien du tout. « C'est bizarre, dit-elle. Sans nuages, je ne peux pas inventer d'animaux ! »",
+  "Grand-papa sourit. « Alors ferme les yeux et invente-les dans ta tête. » Léa imagine un dragon, un lapin géant et un bateau. C'est le plus beau ciel de toute sa vie."],
+  q:[
+   ["Avec qui Léa va-t-elle pique-niquer ?",["Avec sa mère","Avec son grand-père","Avec son ami"],1],
+   ["Comment est le ciel ?",["Gris et pluvieux","Plein de nuages","Bleu, sans nuage"],2],
+   ["Pourquoi grand-papa parle-t-il de crème solaire ?",["Parce que le soleil chauffe fort","Parce qu'il pleut","Parce qu'il fait nuit"],0],
+   ["Quel est le problème de Léa dans l'herbe ?",["Elle a froid","Elle ne peut pas trouver de formes dans le ciel","Elle a perdu sa casquette"],1],
+   ["Que veut dire « inventer » ?",["Imaginer quelque chose de nouveau","Manger vite","Courir loin"],0]],
+  oral:"À l'oral : toi, quelles formes as-tu déjà vues dans les nuages ?"},
+ {titre:"Mon anniversaire",p:[
+  "Aujourd'hui, j'ai neuf ans ! Je me réveille très tôt, avant tout le monde. Je descends l'escalier sur la pointe des pieds.",
+  "Dans la cuisine, il y a des ballons rouges et jaunes. Sur la table, maman a posé une carte avec mon nom. Je l'ouvre : « Cherche ton cadeau près de la porte d'entrée. »",
+  "Près de la porte, je trouve une deuxième carte : « Regarde sous ton lit. » Sous mon lit, une troisième carte me dit : « Va dans le jardin. » C'est une chasse au trésor !",
+  "Dans le jardin, papa et ma petite sœur crient : « Bonne fête ! » Ils tiennent un vélo bleu avec un gros ruban. Le soir, nous mangeons un gâteau au chocolat. Je souffle mes neuf bougies d'un seul coup. Quel anniversaire !"],
+  q:[
+   ["Quel âge a l'enfant aujourd'hui ?",["Huit ans","Neuf ans","Dix ans"],1],
+   ["Où l'enfant trouve-t-il la première carte ?",["Sur la table de la cuisine","Sous son lit","Dans le jardin"],0],
+   ["Combien de cartes l'enfant trouve-t-il en tout ?",["Deux","Trois","Quatre"],1],
+   ["Quel est le cadeau ?",["Un ballon","Un gâteau","Un vélo bleu"],2],
+   ["Pourquoi descend-il « sur la pointe des pieds » ?",["Pour ne réveiller personne","Parce qu'il a mal aux pieds","Pour aller plus vite"],0]],
+  oral:"À l'oral : raconte ton plus bel anniversaire en trois phrases."}
+];
+$("textes").innerHTML=TEXTES.map((t,ti)=>`<div class="bloc">
+  <div class="bloc-hd"><span class="ic">${ti?"🎂":"☀️"}</span><h3>${t.titre}</h3><span class="pill">texte d'entraînement</span></div>
+  <div class="texte">${t.p.map(p=>`<p>${p}</p>`).join("")}</div>
+  <div class="row noprint"><button class="btn small" data-lire="${ti}">🔊 Écouter le texte</button><button class="btn small" data-stop>⏹ Arrêter</button></div>
+  <h4 style="margin:14px 0 4px;font-size:.95rem">Questions</h4>
+  ${t.q.map((q,qi)=>`<div class="q"><div class="qt">${qi+1}. ${q[0]}</div><div class="opts">${q[1].map((o,oi)=>`<button class="opt" data-t="${ti}" data-q="${qi}" data-o="${oi}">${o}</button>`).join("")}</div></div>`).join("")}
+  <p class="oral">${t.oral}</p><p class="score" id="ls${ti}"></p></div>`).join("");
+S.lect=S.lect||{};
+function lectScore(ti){const r=S.lect[ti]||{};const n=Object.keys(r).length,ok=Object.values(r).filter(Boolean).length;
+  $("ls"+ti).textContent=n?`Premier essai : ${ok} / ${TEXTES[ti].q.length} bonnes réponses`:""}
+TEXTES.forEach((t,i)=>lectScore(i));
+$("textes").addEventListener("click",e=>{
+  const b=e.target.closest(".opt");
+  if(b){const ti=+b.dataset.t,qi=+b.dataset.q,oi=+b.dataset.o,good=TEXTES[ti].q[qi][2]===oi;
+    b.classList.add(good?"ok":"no");
+    S.lect[ti]=S.lect[ti]||{}; if(!(qi in S.lect[ti])){S.lect[ti][qi]=good;save();lectScore(ti)}
+    if(good)b.parentNode.querySelectorAll(".opt").forEach(x=>x.disabled=true);return}
+  const l=e.target.closest("[data-lire]");if(l)say(TEXTES[+l.dataset.lire].p.join(" "),.9);
+  if(e.target.closest("[data-stop]"))try{speechSynthesis.cancel()}catch(x){}
+});
+
+/* ---------- voix ---------- */
+let voice=null;
+function pickVoice(){try{const v=speechSynthesis.getVoices();voice=v.find(x=>/fr-CA/i.test(x.lang))||v.find(x=>/^fr/i.test(x.lang))||null}catch(e){}}
+try{pickVoice();speechSynthesis.onvoiceschanged=pickVoice}catch(e){}
+function say(txt,rate){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang=voice?voice.lang:"fr-CA";if(voice)u.voice=voice;u.rate=rate||.8;speechSynthesis.speak(u)}catch(e){}}
+
+/* ---------- mots ---------- */
+const words=()=>(S.liste||"").split(/\n|,/).map(w=>w.trim()).filter(Boolean);
+$("liste").value=S.liste||"";
+function renderMots(){const w=words();
+  $("nbMots").textContent=w.length?`${w.length} mot${w.length>1?"s":""} enregistré${w.length>1?"s":""}`:"";
+  $("motsVue").innerHTML=w.map((x,i)=>`<div class="mot">${esc(x)}<button data-say="${i}" aria-label="Écouter">🔊</button></div>`).join("");
+  dictee.reset();cache.reset();}
+$("saveListe").onclick=()=>{S.liste=$("liste").value;save();renderMots()};
+$("motsVue").onclick=e=>{const b=e.target.closest("[data-say]");if(b)say(words()[+b.dataset.say])};
+
+function trainer(zone,mode){
+  let order=[],i=0,ok=0,miss=[];
+  const z=$(zone);
+  function reset(){const w=words();
+    if(!w.length){z.innerHTML=`<p class="empty">Écris d'abord les mots de la liste 5 dans la boîte du haut.</p>`;return}
+    z.innerHTML=`<div class="row"><button class="btn primary">Commencer (${w.length} mots)</button></div>`;
+    z.querySelector("button").onclick=start}
+  function start(){order=shuffle(words());i=0;ok=0;miss=[];step()}
+  function step(){
+    if(i>=order.length){z.innerHTML=`<div class="big">${ok} / ${order.length}</div>`+
+      (miss.length?`<p class="muted" style="text-align:center">À revoir : <b>${miss.map(esc).join(", ")}</b></p>`:`<p class="muted" style="text-align:center">Parfait ! Montre ça à un parent pour la signature. ✍️</p>`)+
+      `<div class="row" style="justify-content:center"><button class="btn primary">Recommencer</button></div>`;
+      z.querySelector("button").onclick=start;
+      S["score-"+mode]=`${ok}/${order.length}`;save();return}
+    const w=order[i];
+    z.innerHTML=`<p class="muted">Mot ${i+1} sur ${order.length}</p>`+
+      (mode==="dictee"?`<div class="row"><button class="btn" data-a="say">🔊 Réécouter</button></div>`:`<div class="big" data-w>${esc(w)}</div>`)+
+      `<div class="row"><input class="ans" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Écris le mot ici" ${mode==="cache"?"hidden":""}><button class="btn primary" data-a="ok" ${mode==="cache"?"hidden":""}>Vérifier</button></div><div class="fb"></div>`;
+    const inp=z.querySelector(".ans"),fb=z.querySelector(".fb"),bt=z.querySelector('[data-a="ok"]');
+    if(mode==="dictee"){say(w);z.querySelector('[data-a="say"]').onclick=()=>say(w);inp.focus()}
+    else setTimeout(()=>{const el=z.querySelector("[data-w]");if(!el)return;el.textContent="✱ ✱ ✱";inp.hidden=false;bt.hidden=false;inp.focus()},5000);
+    let done=false;
+    const check=()=>{if(done){i++;step();return}
+      if(!inp.value.trim())return;done=true;
+      const good=norm(inp.value)===norm(w);if(good)ok++;else miss.push(w);
+      inp.classList.add(good?"ok":"no");inp.readOnly=true;
+      fb.className="fb "+(good?"ok":"no");fb.innerHTML=good?"Bravo ! ✓":`Presque. On écrit : <b>${esc(w)}</b>`;
+      bt.textContent="Mot suivant →";bt.focus()};
+    bt.onclick=check;inp.onkeydown=e=>{if(e.key==="Enter")check()};
+  }
+  return {reset};
+}
+const dictee=trainer("dicteeZone","dictee"),cache=trainer("cacheZone","cache");
+renderMots();
+
+/* ---------- finir ---------- */
+const PR=[["je","finis"],["tu","finis"],["il","finit"],["elle","finit"],["on","finit"],["nous","finissons"],["vous","finissez"],["ils","finissent"],["elles","finissent"]];
+const END={finis:"is",finit:"it",finissons:"issons",finissez:"issez",finissent:"issent"};
+const PHR=[
+ ["Je","mon dessin avant la récré.","finis"],["Tu","toujours ton assiette.","finis"],["Maman","son travail à cinq heures.","finit"],
+ ["Nous","le casse-tête ensemble.","finissons"],["Vous","vos devoirs très vite !","finissez"],["Les élèves","la dictée en silence.","finissent"],
+ ["Mon frère","son livre ce soir.","finit"],["Léa et Sam","la course en même temps.","finissent"],["On","la leçon à midi.","finit"],
+ ["Israël et moi, nous","la partie d'échecs.","finissons"],["Toi et ton ami, vous","le gâteau ?","finissez"],["Elles","leur chanson en riant.","finissent"],
+ ["Le film","à huit heures.","finit"],["J'aime quand je","premier !","finis"],["Est-ce que tu","bientôt ?","finis"]];
+function fillBlock(id,items){
+  $(id).innerHTML=items.map((x,i)=>`<div class="fill"><span>${esc(x[0])}</span><input data-i="${i}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="verbe"><span>${esc(x[1])}</span><span class="corr"></span></div>`).join("");
+  $(id).dataset.items=JSON.stringify(items.map(x=>x[2]));}
+function checkBlock(id){const ans=JSON.parse($(id).dataset.items);let ok=0;
+  $(id).querySelectorAll(".fill").forEach((f,i)=>{const inp=f.querySelector("input"),good=norm(inp.value)===ans[i];if(good)ok++;
+    inp.className=inp.value.trim()?(good?"ok":"no"):"";f.querySelector(".corr").textContent=inp.value.trim()&&!good?"→ "+ans[i]:""});
+  return [ok,ans.length]}
+const newFin=()=>{fillBlock("finEx",shuffle(PHR).slice(0,8));$("finScore").textContent=""};
+$("finNew").onclick=newFin;
+$("finCheck").onclick=()=>{const [o,n]=checkBlock("finEx");$("finScore").textContent=`${o} / ${n}`;
+  S.finir=Math.max(S.finir||0,o);S.finirN=n;save()};
+newFin();
+const VERBS=[["choisir","chois"],["grandir","grand"],["remplir","rempl"],["rougir","roug"],["réfléchir","réfléch"],["obéir","obé"]];
+const newDefi=()=>{const it=shuffle(VERBS).slice(0,6).map(([inf,rad])=>{const [p,f]=PR[Math.random()*PR.length|0];
+  const end=END[f];return [p+" ("+inf+")","…",(p==="je"&&/^[aeéiou]/.test(rad)?"":"")+rad+end]});
+  fillBlock("defiEx",it)};
+$("defiNew").onclick=newDefi;$("defiCheck").onclick=()=>checkBlock("defiEx");newDefi();
+$("cacherConj").onclick=function(){const on=this.getAttribute("aria-pressed")!=="true";this.setAttribute("aria-pressed",on);
+  document.querySelector(".conj").style.visibility=on?"hidden":"visible";this.textContent=on?"👀 Montrer le tableau":"🙈 Cacher le tableau"};
+
+/* ---------- tables ---------- */
+const MODES={"p1":"+1","p2":"+2","m1":"−1","m2":"−2","mix":"Tout mélangé"};
+let mode=S.mode||"p1";
+function facts(m){const f=[];
+  if(m==="p1"||m==="mix")for(let a=0;a<=10;a++){f.push([`${a} + 1`,a+1]);f.push([`1 + ${a}`,a+1])}
+  if(m==="p2"||m==="mix")for(let a=0;a<=10;a++){f.push([`${a} + 2`,a+2]);f.push([`2 + ${a}`,a+2])}
+  if(m==="m1"||m==="mix")for(let a=1;a<=11;a++)f.push([`${a} − 1`,a-1]);
+  if(m==="m2"||m==="mix")for(let a=2;a<=12;a++)f.push([`${a} − 2`,a-2]);
+  return f}
+function renderModes(){$("modes").innerHTML=Object.entries(MODES).map(([k,v])=>`<button class="btn small" aria-pressed="${k===mode}" data-m="${k}">${v}</button>`).join("");
+  $("best").textContent=S.best[mode]?`Mon record (${MODES[mode]}) : ${S.best[mode]} bonnes réponses en une minute 🏆`:"Pas encore de record pour cette table."}
+$("modes").onclick=e=>{const b=e.target.closest("[data-m]");if(!b||running)return;mode=b.dataset.m;S.mode=mode;save();renderModes()};
+$("pad").innerHTML=[1,2,3,4,5,6,7,8,9,"⌫",0,"✓"].map(k=>`<button data-k="${k}">${k}</button>`).join("");
+let running=false,cur=null,typed="",good=0,bad=0,errs=[],timer=null,end=0,last="";
+function next(){const f=facts(mode);do{cur=f[Math.random()*f.length|0]}while(f.length>1&&cur[0]===last);last=cur[0];
+  $("fact").textContent=cur[0]+" =";typed="";$("typed").textContent="";}
+function key(k){if(!running)return;
+  if(k==="⌫"){typed=typed.slice(0,-1)}
+  else if(k==="✓"){if(typed==="")return;const el=$("fact");el.classList.remove("flash-ok","flash-no");void el.offsetWidth;
+    if(+typed===cur[1]){good++;el.classList.add("flash-ok")}else{bad++;errs.push(`${cur[0]} = ${cur[1]}`);el.classList.add("flash-no")}
+    $("live").textContent=`✓ ${good}   ✗ ${bad}`;next();return}
+  else if(typed.length<2)typed+=k;
+  $("typed").textContent=typed}
+$("pad").onclick=e=>{const b=e.target.closest("[data-k]");if(b)key(b.dataset.k)};
+document.addEventListener("keydown",e=>{if(!running)return;
+  if(/^[0-9]$/.test(e.key))key(e.key);else if(e.key==="Backspace"){e.preventDefault();key("⌫")}else if(e.key==="Enter")key("✓")});
+function go(){running=true;good=0;bad=0;errs=[];$("sprintIdle").hidden=true;$("sprintEnd").hidden=true;$("sprintRun").hidden=false;
+  $("live").textContent="";end=Date.now()+60000;next();
+  timer=setInterval(()=>{const s=Math.max(0,Math.ceil((end-Date.now())/1000));$("clock").textContent=s+" s";if(s<=0)stop()},200)}
+function stop(){clearInterval(timer);running=false;$("sprintRun").hidden=true;$("sprintEnd").hidden=false;
+  const prev=S.best[mode]||0,rec=good>prev;if(rec)S.best[mode]=good;
+  const d=new Date();S.hist.unshift({d:`${d.getDate()}/${d.getMonth()+1} ${d.getHours()}h${String(d.getMinutes()).padStart(2,"0")}`,m:mode,g:good,b:bad});S.hist=S.hist.slice(0,40);save();
+  $("endScore").textContent=`${good} ✓`;
+  $("endMsg").textContent=rec&&prev?`Nouveau record ! Avant : ${prev}. 🎉`:rec?"Premier record enregistré ! 🎉":`Ton record est ${prev}. Essaie de le battre !`;
+  const u=[...new Set(errs)];$("endErr").innerHTML=u.length?`<p class="muted">À revoir : <b>${u.join(" · ")}</b></p>`:(bad?"":`<p class="muted">Aucune erreur ! 👏</p>`);
+  renderHist();renderModes()}
+$("go").onclick=go;$("again").onclick=go;
+function renderHist(){$("hist").innerHTML=S.hist.length?S.hist.map(h=>`<tr><td>${h.d}</td><td>${MODES[h.m]}</td><td><b>${h.g}</b></td><td>${h.b}</td></tr>`).join(""):`<tr><td colspan="4" class="muted">Aucun sprint pour l'instant.</td></tr>`}
+$("tabgrid").innerHTML=[["Table +1",a=>`${a} + 1 = ${a+1}`],["Table +2",a=>`${a} + 2 = ${a+2}`],["Table −1",a=>`${a+1} − 1 = ${a}`],["Table −2",a=>`${a+2} − 2 = ${a}`]]
+  .map(([h,f])=>`<div><h4>${h}</h4>${[...Array(11).keys()].map(f).join("<br>")}</div>`).join("");
+renderModes();renderHist();
+
+/* ---------- parents ---------- */
+const PCH=[
+ ["p-agenda","Vérifier qu'Israël a <b>copié les leçons</b> dans son agenda, puis <b>signer l'agenda</b>."],
+ ["p-dictee","Faire la dictée de la liste 5 vendredi et <b>signer la dictée</b> (ou la signer au retour, quand elle sera faite en classe)."],
+ ["p-liste","Obtenir les mots de la <b>liste 5</b> (cahier de mots, Mozaïk ou un parent de la classe) et les écrire dans l'onglet Liste 5."],
+ ["p-biblio","<b>15 octobre : bibliothèque.</b> Il sera absent : garder son livre de bibliothèque à la maison et le mettre dans son sac pour la prochaine période."],
+ ["p-mozaik","Surveiller la <b>première communication</b> sur le portail Mozaïk et la lire ensemble."],
+ ["p-reponse","Répondre à l'enseignante pour la remercier de l'agenda."]];
+$("parentChk").innerHTML=PCH.map(([k,t])=>`<div class="chk"><input type="checkbox" id="${k}" data-k="${k}"><label for="${k}">${t}</label></div>`).join("");
+bindChecks($("parentChk"));bindChecks($("agenda"));
+function bilan(){
+  const done=DAYS.filter(d=>d.t).map(d=>`${d.n} : ${d.t.filter((x,i)=>S.chk[d.k+i]).length}/${d.t.length}`).join(" · ");
+  const lec=TEXTES.map((t,i)=>{const r=S.lect[i]||{};const n=Object.keys(r).length;return n?`${t.titre} ${Object.values(r).filter(Boolean).length}/${t.q.length}`:`${t.titre} pas encore`}).join(" · ");
+  const best=Object.entries(S.best).map(([k,v])=>`${MODES[k]} : ${v}`).join(" · ")||"aucun sprint";
+  $("bilan").innerHTML=`<p><b>Jours :</b> ${done}</p><p><b>Lecture (1er essai) :</b> ${lec}</p><p><b>Liste 5 :</b> ${words().length} mots · dictée ${S["score-dictee"]||"pas encore"} · cache-écris ${S["score-cache"]||"pas encore"}</p><p><b>Finir :</b> ${S.finir!=null?S.finir+" / "+S.finirN+" (meilleur)":"pas encore"}</p><p><b>Records des tables (en 1 min) :</b> ${best}</p>`}
+
+/* ---------- start ---------- */
+const h=(location.hash||"").slice(1);
+show(tabs.some(b=>b.dataset.t===h)?h:"plan");
+})();
+</script>
+</body>
+</html>
