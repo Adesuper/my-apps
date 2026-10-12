@@ -204,7 +204,7 @@ footer{border-top:1px solid var(--line);margin-top:28px;padding-top:14px;font-si
 
 <!-- ============ PLAN ============ -->
 <section id="plan">
-  <p class="consigne">Un jour à la fois. Coche quand c'est fait !</p>
+  <div class="bloc" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span style="font-size:2rem">🚀</span><div style="flex:1 1 220px"><h3>Mission vacances d'Israël</h3><p class="muted">Son app de la semaine : chaque jour, lecture, liste 5, finir, tables et un petit texte, avec des étoiles. Les étoiles gagnées s'affichent ici.</p></div><a class="btn primary" href="mission-vacances.html" style="text-decoration:none">Ouvrir sa mission →</a></div>
   <div class="days" id="days"></div>
   <p class="note">Les tables, c'est chaque jour : une minute de sprint suffit. On veut aller plus vite que la veille.</p>
 </section>
@@ -376,7 +376,7 @@ footer{border-top:1px solid var(--line);margin-top:28px;padding-top:14px;font-si
 (function(){
 const KEY="semaine-12oct-v1";
 let S={};try{S=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
-S.chk=S.chk||{};S.hist=S.hist||[];S.best=S.best||{};
+S.chk=S.chk||{};S.hist=S.hist||[];S.best=S.best||{};S.kid=S.kid||{};
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -399,36 +399,18 @@ function bindChecks(root){root.querySelectorAll("input[data-k]").forEach(i=>{i.c
 /* ---------- plan ---------- */
 const DAYS=[
  {k:"lun",n:"Lundi",d:"12 octobre",off:"Congé à l'école ! Profite des vacances."},
- {k:"mar",n:"Mardi",d:"13 octobre",t:[
-   ["Copier les leçons dans <b>mon agenda</b>","agenda"],
-   ["Écrire et lire la <b>liste 5</b>","mots"],
-   ["Apprendre le tableau de <b>finir</b>","finir"],
-   ["Sprint <b>+1</b> et <b>+2</b>","tables"]]},
- {k:"mer",n:"Mercredi",d:"14 octobre",t:[
-   ["Lire <b>Sans nuage</b> à voix haute + questions","lecture"],
-   ["<b>Dictée à l'oreille</b> de la liste 5","mots"],
-   ["Complète avec <b>finir</b>","finir"],
-   ["Sprint <b>−1</b> et <b>−2</b>","tables"]]},
- {k:"jeu",n:"Jeudi",d:"15 octobre",t:[
-   ["Lire <b>Mon anniversaire</b> à voix haute + questions","lecture"],
-   ["Regarde, cache, écris : <b>liste 5</b>","mots"],
-   ["Défi : verbes comme <b>finir</b>","finir"],
-   ["Sprint <b>mélangé</b>","tables"]]},
- {k:"ven",n:"Vendredi",d:"16 octobre",t:[
-   ["Relire les deux textes avec le ton","lecture"],
-   ["<b>Dictée</b> finale de la liste 5, montrée à un parent","mots"],
-   ["Écrire 3 phrases avec <b>finir</b>","finir"],
-   ["Sprint mélangé : battre mon record !","tables"]]}
+ {k:"mar",n:"Mardi",d:"13 octobre",t:["Mon agenda","Lecture : Sans nuage","Liste 5 : découvrir","Finir : le tableau","Sprint +1 et +2","Écrire : 3 phrases avec finir"]},
+ {k:"mer",n:"Mercredi",d:"14 octobre",t:["Lecture : Mon anniversaire","Dictée : liste 5","Finir : quiz éclair","Sprint −1 et −2","Écrire : mon plus bel anniversaire"]},
+ {k:"jeu",n:"Jeudi",d:"15 octobre",t:["Lecture : La bonne clé","Liste 5 : cache-cache","Défi : verbes comme finir","Sprint mélangé","Écrire : carte postale"]},
+ {k:"ven",n:"Vendredi",d:"16 octobre",t:["Lecture : Le dernier jour","Grande dictée de la liste 5","Grand quiz : finir","Sprint : battre le record","Écrire : la clé magique"]}
 ];
 function renderDays(){
   $("days").innerHTML=DAYS.map(d=>{
     if(d.off)return `<div class="day off"><h3>${d.n}</h3><div class="d">${d.d}</div><p style="margin-top:8px;font-family:var(--hand);font-size:1.25rem">🍂 ${d.off}</p></div>`;
-    const all=d.t.every((x,i)=>S.chk[d.k+i]);
+    const all=d.t.every((x,i)=>S.kid&&S.kid[d.k+i]);
     return `<div class="day${all?" done":""}"><h3>${d.n}${all?" ✅":""}</h3><div class="d">${d.d}</div>`+
-      d.t.map((x,i)=>`<div class="chk"><input type="checkbox" id="c-${d.k}${i}" data-k="${d.k}${i}"><label for="c-${d.k}${i}">${x[0]} · <a href="#${x[1]}" data-go="${x[1]}">ouvrir</a></label></div>`).join("")+`</div>`}).join("");
-  bindChecks($("days"));
+      d.t.map((x,i)=>{const st=(S.kid||{})[d.k+i]||0;return `<div class="chk"><span style="color:${st?"var(--or,#E8A317)":"var(--ink-faint)"};white-space:nowrap">${st?"★".repeat(st)+"☆".repeat(3-st):"☆☆☆"}</span><span style="color:var(--ink-soft)">${x}</span></div>`}).join("")+`</div>`}).join("");
 }
-
 /* ---------- lecture ---------- */
 const TEXTES=[
  {titre:"Sans nuage",p:[
@@ -558,7 +540,8 @@ $("cacherConj").onclick=function(){const on=this.getAttribute("aria-pressed")!==
   document.querySelector(".conj").style.visibility=on?"hidden":"visible";this.textContent=on?"👀 Montrer le tableau":"🙈 Cacher le tableau"};
 
 /* ---------- tables ---------- */
-const MODES={"p1":"+1","p2":"+2","m1":"−1","m2":"−2","mix":"Tout mélangé"};
+const MODES={"p1":"+1","p2":"+2","m1":"−1","m2":"−2","mix":"Tout mélangé","kid-p12":"+1 et +2 (mission)","kid-m12":"−1 et −2 (mission)","kid-mix":"Mélangé (mission)"};
+const HM={p12:"+1 et +2",m12:"−1 et −2"};
 let mode=S.mode||"p1";
 function facts(m){const f=[];
   if(m==="p1"||m==="mix")for(let a=0;a<=10;a++){f.push([`${a} + 1`,a+1]);f.push([`1 + ${a}`,a+1])}
@@ -566,7 +549,7 @@ function facts(m){const f=[];
   if(m==="m1"||m==="mix")for(let a=1;a<=11;a++)f.push([`${a} − 1`,a-1]);
   if(m==="m2"||m==="mix")for(let a=2;a<=12;a++)f.push([`${a} − 2`,a-2]);
   return f}
-function renderModes(){$("modes").innerHTML=Object.entries(MODES).map(([k,v])=>`<button class="btn small" aria-pressed="${k===mode}" data-m="${k}">${v}</button>`).join("");
+function renderModes(){$("modes").innerHTML=Object.entries(MODES).filter(([k])=>!k.startsWith("kid-")).map(([k,v])=>`<button class="btn small" aria-pressed="${k===mode}" data-m="${k}">${v}</button>`).join("");
   $("best").textContent=S.best[mode]?`Mon record (${MODES[mode]}) : ${S.best[mode]} bonnes réponses en une minute 🏆`:"Pas encore de record pour cette table."}
 $("modes").onclick=e=>{const b=e.target.closest("[data-m]");if(!b||running)return;mode=b.dataset.m;S.mode=mode;save();renderModes()};
 $("pad").innerHTML=[1,2,3,4,5,6,7,8,9,"⌫",0,"✓"].map(k=>`<button data-k="${k}">${k}</button>`).join("");
@@ -594,7 +577,7 @@ function stop(){clearInterval(timer);running=false;$("sprintRun").hidden=true;$(
   const u=[...new Set(errs)];$("endErr").innerHTML=u.length?`<p class="muted">À revoir : <b>${u.join(" · ")}</b></p>`:(bad?"":`<p class="muted">Aucune erreur ! 👏</p>`);
   renderHist();renderModes()}
 $("go").onclick=go;$("again").onclick=go;
-function renderHist(){$("hist").innerHTML=S.hist.length?S.hist.map(h=>`<tr><td>${h.d}</td><td>${MODES[h.m]}</td><td><b>${h.g}</b></td><td>${h.b}</td></tr>`).join(""):`<tr><td colspan="4" class="muted">Aucun sprint pour l'instant.</td></tr>`}
+function renderHist(){$("hist").innerHTML=S.hist.length?S.hist.map(h=>`<tr><td>${h.d}</td><td>${MODES[h.m]||HM[h.m]||h.m}</td><td><b>${h.g}</b></td><td>${h.b}</td></tr>`).join(""):`<tr><td colspan="4" class="muted">Aucun sprint pour l'instant.</td></tr>`}
 $("tabgrid").innerHTML=[["Table +1",a=>`${a} + 1 = ${a+1}`],["Table +2",a=>`${a} + 2 = ${a+2}`],["Table −1",a=>`${a+1} − 1 = ${a}`],["Table −2",a=>`${a+2} − 2 = ${a}`]]
   .map(([h,f])=>`<div><h4>${h}</h4>${[...Array(11).keys()].map(f).join("<br>")}</div>`).join("");
 renderModes();renderHist();
@@ -610,11 +593,13 @@ const PCH=[
 $("parentChk").innerHTML=PCH.map(([k,t])=>`<div class="chk"><input type="checkbox" id="${k}" data-k="${k}"><label for="${k}">${t}</label></div>`).join("");
 bindChecks($("parentChk"));bindChecks($("agenda"));
 function bilan(){
-  const done=DAYS.filter(d=>d.t).map(d=>`${d.n} : ${d.t.filter((x,i)=>S.chk[d.k+i]).length}/${d.t.length}`).join(" · ");
+  const done=DAYS.filter(d=>d.t).map(d=>`${d.n} : ${d.t.filter((x,i)=>S.kid[d.k+i]).length}/${d.t.length} (★ ${d.t.reduce((a,x,i)=>a+(S.kid[d.k+i]||0),0)})`).join(" · ");
+  const ecr=Object.entries(S.ecrits||{}).filter(([k,v])=>v.trim()).map(([k,v])=>`<p style="margin-top:6px"><b>Texte de ${({mar:"mardi",mer:"mercredi",jeu:"jeudi",ven:"vendredi"})[k]} :</b> ${esc(v)}</p>`).join("");
   const lec=TEXTES.map((t,i)=>{const r=S.lect[i]||{};const n=Object.keys(r).length;return n?`${t.titre} ${Object.values(r).filter(Boolean).length}/${t.q.length}`:`${t.titre} pas encore`}).join(" · ");
   const best=Object.entries(S.best).map(([k,v])=>`${MODES[k]} : ${v}`).join(" · ")||"aucun sprint";
-  $("bilan").innerHTML=`<p><b>Jours :</b> ${done}</p><p><b>Lecture (1er essai) :</b> ${lec}</p><p><b>Liste 5 :</b> ${words().length} mots · dictée ${S["score-dictee"]||"pas encore"} · cache-écris ${S["score-cache"]||"pas encore"}</p><p><b>Finir :</b> ${S.finir!=null?S.finir+" / "+S.finirN+" (meilleur)":"pas encore"}</p><p><b>Records des tables (en 1 min) :</b> ${best}</p>`}
+  $("bilan").innerHTML=`<p><b>Jours :</b> ${done}</p><p><b>Lecture (1er essai) :</b> ${lec}</p><p><b>Liste 5 :</b> ${words().length} mots · dictée ${S["score-dictee"]||"pas encore"} · cache-écris ${S["score-cache"]||"pas encore"}</p><p><b>Finir :</b> ${S.finir!=null?S.finir+" / "+S.finirN+" (meilleur)":"pas encore"}</p><p><b>Records des tables (en 1 min) :</b> ${best}</p>${ecr}`}
 
+document.addEventListener("visibilitychange",()=>{if(!document.hidden){try{const f=JSON.parse(localStorage.getItem(KEY)||"{}");Object.assign(S,f)}catch(e){}renderDays();renderHist();renderModes();bilan()}});
 /* ---------- start ---------- */
 const h=(location.hash||"").slice(1);
 show(tabs.some(b=>b.dataset.t===h)?h:"plan");

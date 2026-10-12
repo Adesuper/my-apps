@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Mission vacances</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&family=Literata:opsz,wght@7..72,400;7..72,600&family=Caveat:wght@500;700&display=swap">
+<style>
+:root{
+  --paper:#F4F6FC; --panel:#FFFFFF; --panel-2:#FAFBFF;
+  --ink:#16213A; --ink-soft:#5A6484; --ink-faint:#8B95B4;
+  --rule:#CBD6F2; --grid:rgba(116,148,214,.15);
+  --marge:#D1495B; --encre:#2F4FC9; --encre-soft:#E7ECFC;
+  --vert:#2E8B57; --vert-soft:#E4F4EB; --craie:#B57A10; --craie-soft:#FBF0DA;
+  --or:#E8A317; --violet:#7B4FC9; --violet-soft:#EFE8FB; --corail:#E0684B; --corail-soft:#FCE9E3;
+  --line:#E2E7F5; --shadow:0 8px 22px rgba(22,33,58,.10);
+  --display:"Gabarito","Trebuchet MS",system-ui,sans-serif;
+  --body:"Literata",Georgia,serif; --hand:"Caveat","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0F141F; --panel:#171E2D; --panel-2:#1C2435; --ink:#E8ECF9; --ink-soft:#A2AECB; --ink-faint:#7A86A6;
+  --rule:#2B3752; --grid:rgba(140,170,255,.07); --marge:#E77A89; --encre:#8FA8FF; --encre-soft:#1E2946;
+  --vert:#66C795; --vert-soft:#16301F; --craie:#F0BC63; --craie-soft:#2E2513; --or:#F4C24F;
+  --violet:#B79BF0; --violet-soft:#2A2140; --corail:#F08D74; --corail-soft:#33201B; --line:#27314A; --shadow:0 8px 22px rgba(0,0,0,.35)}}
+:root[data-theme="dark"]{
+  --paper:#0F141F; --panel:#171E2D; --panel-2:#1C2435; --ink:#E8ECF9; --ink-soft:#A2AECB; --ink-faint:#7A86A6;
+  --rule:#2B3752; --grid:rgba(140,170,255,.07); --marge:#E77A89; --encre:#8FA8FF; --encre-soft:#1E2946;
+  --vert:#66C795; --vert-soft:#16301F; --craie:#F0BC63; --craie-soft:#2E2513; --or:#F4C24F;
+  --violet:#B79BF0; --violet-soft:#2A2140; --corail:#F08D74; --corail-soft:#33201B; --line:#27314A; --shadow:0 8px 22px rgba(0,0,0,.35)}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--display);color:var(--ink);background-color:var(--paper);
+  background-image:repeating-linear-gradient(to bottom,transparent 0 23px,var(--grid) 23px 24px),repeating-linear-gradient(to right,transparent 0 23px,var(--grid) 23px 24px);
+  line-height:1.5;font-size:17px;-webkit-text-size-adjust:100%;min-height:100vh}
+h1,h2,h3{margin:0;line-height:1.15;text-wrap:balance}
+p{margin:0}
+button,input,textarea{font-family:var(--display);color:inherit}
+button{cursor:pointer}
+a{color:var(--encre)}
+:focus-visible{outline:3px solid var(--encre);outline-offset:2px;border-radius:8px}
+.wrap{max-width:780px;margin:0 auto;padding:16px 16px 70px}
+.top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.top .back{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:8px 13px;font-weight:700;font-size:.92rem}
+.top .sp{flex:1}
+.stars-total{font-weight:800;background:var(--panel);border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:.95rem}
+.stars-total b{color:var(--or)}
+.hero{background:linear-gradient(135deg,var(--encre),var(--violet));color:#fff;border-radius:22px;padding:22px 20px;box-shadow:var(--shadow)}
+.hero .ey{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.8}
+.hero h1{font-size:clamp(1.7rem,6vw,2.4rem);font-weight:900;margin-top:4px}
+.hero p{margin-top:6px;opacity:.92;font-size:.98rem;max-width:56ch}
+.bar{height:12px;background:rgba(255,255,255,.25);border-radius:99px;margin-top:14px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--or);border-radius:99px;transition:width .5s}
+.days{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(165px,100%),1fr));gap:12px;margin-top:16px}
+.dcard{background:var(--panel);border:2px solid var(--line);border-radius:18px;padding:15px;text-align:left;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:4px;min-height:132px}
+.dcard:hover{border-color:var(--encre)}
+.dcard .dn{font-weight:800;font-size:1.2rem}
+.dcard .dd{font-size:.8rem;color:var(--ink-faint);font-weight:600}
+.dcard .ds{margin-top:auto;font-size:1.05rem;letter-spacing:1px}
+.dcard.today{border-color:var(--or)}
+.dcard.today::after{content:"aujourd'hui";align-self:flex-start;background:var(--or);color:#16213A;font-size:.68rem;font-weight:800;padding:2px 8px;border-radius:99px;margin-top:4px;text-transform:uppercase;letter-spacing:.06em}
+.dcard.done{border-color:var(--vert);background:var(--vert-soft)}
+.dcard.off{background:var(--craie-soft);border-color:transparent;cursor:default;box-shadow:none}
+.links{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;font-size:.88rem}
+.links a{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px 12px;text-decoration:none;font-weight:600}
+
+.missions{display:grid;gap:10px;margin-top:14px}
+.mtile{display:flex;align-items:center;gap:14px;background:var(--panel);border:2px solid var(--line);border-radius:18px;padding:14px 16px;text-align:left;box-shadow:var(--shadow);width:100%}
+.mtile:hover{border-color:var(--encre)}
+.mtile .ic{font-size:1.9rem;width:52px;height:52px;border-radius:15px;display:grid;place-items:center;flex:0 0 52px}
+.mtile .tx{flex:1;min-width:0}
+.mtile .tt{font-weight:800;font-size:1.06rem}
+.mtile .su{font-size:.86rem;color:var(--ink-soft)}
+.mtile .st{font-size:1.1rem;white-space:nowrap}
+.mtile.done{border-color:var(--vert)}
+.c-lec{background:var(--encre-soft)} .c-mot{background:var(--craie-soft)} .c-fin{background:var(--violet-soft)}
+.c-tab{background:var(--corail-soft)} .c-ecr{background:var(--vert-soft)} .c-age{background:var(--encre-soft)}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow);margin-top:12px}
+.mh{display:flex;align-items:center;gap:12px}
+.mh .ic{font-size:2rem}
+.mh h2{font-size:1.4rem;font-weight:800}
+.consigne{font-family:var(--hand);font-size:1.4rem;color:var(--marge);line-height:1.3;margin-top:8px}
+.muted{color:var(--ink-soft);font-size:.93rem}
+.btn{font-weight:700;font-size:1rem;border:1.5px solid var(--line);background:var(--panel-2);padding:10px 18px;border-radius:13px}
+.btn:hover:not(:disabled){border-color:var(--encre)}
+.btn.primary{background:var(--encre);border-color:var(--encre);color:#fff}
+.btn.good{background:var(--vert);border-color:var(--vert);color:#fff}
+.btn.small{font-size:.85rem;padding:7px 12px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.center{text-align:center}.center .row{justify-content:center}
+.texte{font-family:var(--body);font-size:1.12rem;line-height:1.95;background:var(--panel-2);border:1px solid var(--line);border-radius:14px;padding:15px 17px;margin-top:12px}
+.texte p+p{margin-top:10px}
+.prog{font-size:.85rem;color:var(--ink-faint);font-weight:700;letter-spacing:.04em}
+.qbig{font-weight:800;font-size:clamp(1.25rem,4.6vw,1.6rem);margin:10px 0 4px}
+.opts{display:grid;gap:9px;margin-top:12px}
+.opt{font-weight:700;font-size:1.06rem;border:2px solid var(--rule);background:var(--panel);border-radius:14px;padding:12px 14px;text-align:left}
+.opt:hover:not(:disabled){border-color:var(--encre)}
+.opt.ok{border-color:var(--vert);background:var(--vert-soft);color:var(--vert)}
+.opt.no{border-color:var(--marge);background:var(--craie-soft);text-decoration:line-through;opacity:.8}
+.opts.inline{grid-template-columns:repeat(auto-fit,minmax(min(120px,100%),1fr))}
+.big{font-weight:900;font-size:clamp(2rem,9vw,3rem);text-align:center;padding:14px 4px;letter-spacing:.02em}
+.ans{width:100%;max-width:440px;padding:12px 14px;font-size:1.25rem;font-weight:700;border:2px solid var(--rule);border-radius:13px;background:var(--panel-2)}
+.ans:focus{outline:none;border-color:var(--encre)}
+.ans.ok{border-color:var(--vert);background:var(--vert-soft)} .ans.no{border-color:var(--marge);background:var(--craie-soft)}
+.fb{font-weight:700;margin-top:8px;min-height:1.5em}
+.fb.ok{color:var(--vert)} .fb.no{color:var(--marge)}
+.conj{display:grid;grid-template-columns:auto 1fr;gap:5px 18px;font-size:1.3rem;font-weight:700;max-width:340px;margin:12px auto 0}
+.conj .p{color:var(--ink-faint);text-align:right;font-weight:600}
+.conj b{color:var(--marge)}
+.tip{background:var(--craie-soft);border-radius:13px;padding:11px 14px;margin-top:12px;font-size:.95rem}
+.clock{font-weight:800;font-size:1.15rem;color:var(--ink-soft)}
+.fact{font-weight:900;font-size:clamp(2.8rem,13vw,4.2rem);margin:6px 0}
+.typed{font-weight:900;font-size:2.1rem;min-height:2.7rem;color:var(--encre)}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:300px;margin:10px auto 0}
+.pad button{font-weight:900;font-size:1.5rem;padding:13px 0;border-radius:14px;border:1.5px solid var(--line);background:var(--panel-2)}
+.pad button:active{background:var(--encre-soft)}
+.shake{animation:sh .35s}
+@keyframes sh{0%,100%{transform:none}30%{transform:translateX(-6px)}60%{transform:translateX(6px)}}
+.pop{animation:pp .3s}
+@keyframes pp{0%{transform:scale(1)}50%{transform:scale(1.12)}100%{transform:scale(1)}}
+textarea.ecrit{width:100%;min-height:170px;border:2px solid var(--rule);border-radius:14px;padding:12px 14px;background:var(--panel-2);font-size:1.1rem;line-height:1.9;margin-top:12px}
+textarea.ecrit:focus{outline:none;border-color:var(--encre)}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:7px 0;font-size:.97rem}
+.chk input{width:22px;height:22px;flex:0 0 22px;accent-color:var(--vert);margin-top:1px}
+.idea{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.idea span{background:var(--encre-soft);color:var(--encre);border-radius:99px;padding:4px 11px;font-size:.88rem;font-weight:600}
+.agenda{background:var(--panel-2);border:1px solid var(--rule);border-left:5px solid var(--marge);border-radius:13px;padding:14px 16px;font-family:var(--hand);font-size:1.45rem;line-height:1.45;margin-top:12px}
+.agenda .h{color:var(--encre);font-weight:700}
+.win{text-align:center;padding:10px 0}
+.win .ws{font-size:3rem;letter-spacing:6px}
+.win h2{font-size:1.7rem;font-weight:900;margin-top:6px}
+.mots{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(150px,100%),1fr));gap:8px;margin-top:12px}
+.mot{background:var(--panel-2);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;font-weight:700;font-size:1.05rem;display:flex;justify-content:space-between;align-items:center;gap:6px}
+.mot button{border:none;background:none;padding:0;font-size:1rem}
+textarea.liste{width:100%;min-height:120px;border:2px solid var(--rule);border-radius:12px;padding:10px 12px;background:var(--panel-2);font-size:1rem;line-height:1.7;margin-top:8px}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden}
+.confetti i{position:absolute;top:-20px;width:10px;height:14px;border-radius:2px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@media (prefers-reduced-motion:reduce){.confetti{display:none}.shake,.pop{animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<script>
+(function(){
+/* Shared with semaine-12-octobre.html (same key): word list, sprint records, plan checkboxes. */
+const KEY="semaine-12oct-v1";
+let S={};
+function load(){try{S=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){S={}}
+  S.chk=S.chk||{};S.hist=S.hist||[];S.best=S.best||{};S.kid=S.kid||{};S.ecrits=S.ecrits||{}}
+load();
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+document.addEventListener("visibilitychange",()=>{if(!document.hidden){load();if(view.name==="home"||view.name==="day")render()}});
+const app=document.getElementById("app");
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm=s=>s.trim().toLowerCase().replace(/[’']/g,"'").replace(/\s+/g," ");
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const words=()=>(S.liste||"").split(/\n|,/).map(w=>w.trim()).filter(Boolean);
+const stars=n=>"★".repeat(n)+"☆".repeat(3-n);
+
+/* voix */
+let voice=null;
+function pickVoice(){try{const v=speechSynthesis.getVoices();voice=v.find(x=>/fr-CA/i.test(x.lang))||v.find(x=>/^fr/i.test(x.lang))||null}catch(e){}}
+try{pickVoice();speechSynthesis.onvoiceschanged=pickVoice}catch(e){}
+function say(t,r){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang=voice?voice.lang:"fr-CA";if(voice)u.voice=voice;u.rate=r||.8;speechSynthesis.speak(u)}catch(e){}}
+const hush=()=>{try{speechSynthesis.cancel()}catch(e){}};
+
+/* ================= CONTENT ================= */
+const TEXTES={
+ nuage:{titre:"Sans nuage",ic:"☀️",p:[
+  "Ce matin-là, Léa ouvre ses rideaux. Le ciel est tout bleu, sans un seul nuage. « Parfait pour le pique-nique ! » crie-t-elle.",
+  "Avec son grand-père, elle prépare des sandwichs, des pommes et une bouteille d'eau. Ils marchent jusqu'au parc, près de la rivière. Le soleil chauffe fort. Grand-papa sort sa casquette et dit à Léa de mettre de la crème solaire.",
+  "Après le repas, Léa se couche dans l'herbe. Elle cherche des formes dans le ciel, mais elle ne voit rien du tout. « C'est bizarre, dit-elle. Sans nuages, je ne peux pas inventer d'animaux ! »",
+  "Grand-papa sourit. « Alors ferme les yeux et invente-les dans ta tête. » Léa imagine un dragon, un lapin géant et un bateau. C'est le plus beau ciel de toute sa vie."],
+  q:[["Avec qui Léa va-t-elle pique-niquer ?",["Avec sa mère","Avec son grand-père","Avec son ami"],1],
+   ["Comment est le ciel ?",["Gris et pluvieux","Plein de nuages","Bleu, sans nuage"],2],
+   ["Pourquoi grand-papa parle-t-il de crème solaire ?",["Parce que le soleil chauffe fort","Parce qu'il pleut","Parce qu'il fait nuit"],0],
+   ["Quel est le problème de Léa dans l'herbe ?",["Elle a froid","Elle ne trouve pas de formes dans le ciel","Elle a perdu sa casquette"],1],
+   ["Que veut dire « inventer » ?",["Imaginer quelque chose de nouveau","Manger vite","Courir loin"],0]]},
+ anniv:{titre:"Mon anniversaire",ic:"🎂",p:[
+  "Aujourd'hui, j'ai neuf ans ! Je me réveille très tôt, avant tout le monde. Je descends l'escalier sur la pointe des pieds.",
+  "Dans la cuisine, il y a des ballons rouges et jaunes. Sur la table, maman a posé une carte avec mon nom. Je l'ouvre : « Cherche ton cadeau près de la porte d'entrée. »",
+  "Près de la porte, je trouve une deuxième carte : « Regarde sous ton lit. » Sous mon lit, une troisième carte me dit : « Va dans le jardin. » C'est une chasse au trésor !",
+  "Dans le jardin, papa et ma petite sœur crient : « Bonne fête ! » Ils tiennent un vélo bleu avec un gros ruban. Le soir, nous mangeons un gâteau au chocolat. Je souffle mes neuf bougies d'un seul coup. Quel anniversaire !"],
+  q:[["Quel âge a l'enfant aujourd'hui ?",["Huit ans","Neuf ans","Dix ans"],1],
+   ["Où l'enfant trouve-t-il la première carte ?",["Sur la table de la cuisine","Sous son lit","Dans le jardin"],0],
+   ["Combien de cartes l'enfant trouve-t-il en tout ?",["Deux","Trois","Quatre"],1],
+   ["Quel est le cadeau ?",["Un ballon","Un gâteau","Un vélo bleu"],2],
+   ["Pourquoi descend-il « sur la pointe des pieds » ?",["Pour ne réveiller personne","Parce qu'il a mal aux pieds","Pour aller plus vite"],0]]},
+ cle:{titre:"La bonne clé",ic:"🔑",p:[
+  "Théo et son oncle arrivent devant le vieux chalet. La porte est fermée à clé. Mon oncle me tend un gros trousseau : « Il y a cinq clés. Trouve la bonne ! »",
+  "J'essaie la grande clé noire. Elle est trop grosse pour la serrure. J'essaie la clé rouge. Elle entre, mais elle ne tourne pas. La petite clé dorée est beaucoup trop petite.",
+  "Il reste deux clés. Une clé verte et une clé avec une étoile dessinée dessus. Je réfléchis. Au-dessus de la porte, il y a aussi une étoile en bois !",
+  "Je glisse la clé à l'étoile dans la serrure. Clic ! La porte s'ouvre. À l'intérieur, deux cannes à pêche nous attendent. « Bravo, détective ! » dit mon oncle en riant."],
+  q:[["Combien de clés y a-t-il sur le trousseau ?",["Trois","Quatre","Cinq"],2],
+   ["Quel est le problème avec la clé rouge ?",["Elle est trop grosse","Elle ne tourne pas","Elle est cassée"],1],
+   ["Quel indice aide Théo à trouver la bonne clé ?",["Une étoile au-dessus de la porte","Un dessin sur le sol","Son oncle lui dit"],0],
+   ["Qu'est-ce qu'il y a dans le chalet ?",["Un vélo","Des cannes à pêche","Un gâteau"],1],
+   ["Pourquoi l'oncle dit-il « Bravo, détective » ?",["Parce que Théo a trouvé la solution en observant","Parce que Théo porte un chapeau","Parce que Théo a couru vite"],0]]},
+ fin:{titre:"Le dernier jour",ic:"🧩",p:[
+  "C'est le dernier jour des vacances. Maya et son frère Noé veulent finir leur grand casse-tête de 500 morceaux avant le souper.",
+  "« Je finis le ciel, et toi, tu finis la maison », dit Maya. Noé trie les morceaux par couleur. Il choisit d'abord les bords, parce que c'est plus facile.",
+  "Vers cinq heures, papa passe la tête dans la porte. « Vous finissez bientôt ? Le souper est prêt ! » Les enfants rougissent : il manque encore dix morceaux.",
+  "Alors toute la famille s'assoit autour de la table. Ensemble, ils finissent le casse-tête en cinq minutes. « Quand nous finissons ensemble, c'est plus rapide ! » dit Noé."],
+  q:[["Combien de morceaux a le casse-tête ?",["50","500","5 000"],1],
+   ["Pourquoi Noé choisit-il les bords d'abord ?",["Parce que c'est plus facile","Parce qu'ils sont bleus","Parce que papa le demande"],0],
+   ["Que veut dire « les enfants rougissent » ?",["Ils deviennent un peu gênés","Ils peignent en rouge","Ils ont froid"],0],
+   ["Dans « Vous finissez bientôt ? », qui parle ?",["Maya","Noé","Papa"],2],
+   ["Quelle phrase utilise « nous » avec finir ?",["Je finis le ciel","Quand nous finissons ensemble","Tu finis la maison"],1]]}
+};
+const ECRITS={
+ mar:{titre:"Trois phrases avec finir",min:3,txt:"Écris 3 phrases avec le verbe finir : une avec « je », une avec « nous » et une avec « ils ».",idees:["Je finis…","Nous finissons…","Ils finissent…"]},
+ mer:{titre:"Mon plus bel anniversaire",min:4,txt:"Raconte ton plus bel anniversaire en 4 phrases. Où étais-tu ? Avec qui ? Qu'as-tu fait ? Qu'as-tu aimé ?",idees:["gâteau","bougies","cadeau","amis","fête"]},
+ jeu:{titre:"Une carte postale de vacances",min:4,txt:"Écris une carte postale à ta classe. Dis où tu es, le temps qu'il fait et ce que tu fais.",idees:["Bonjour la classe !","il fait beau","le ciel est sans nuage","je m'amuse","À bientôt, Israël"]},
+ ven:{titre:"La clé magique",min:5,txt:"Invente une histoire : tu trouves une clé magique. Qu'est-ce qu'elle ouvre ? Écris au moins 5 phrases. Utilise des mots de ta liste 5 !",idees:["un jour","soudain","la serrure","j'ouvre","à la fin"]}
+};
+const MODES={p12:{n:"+1 et +2",s:["p1","p2"]},m12:{n:"−1 et −2",s:["m1","m2"]},mix:{n:"Tout mélangé",s:["p1","p2","m1","m2"]}};
+const DAYS=[
+ {k:"lun",n:"Lundi",d:"12 octobre",off:true},
+ {k:"mar",n:"Mardi",d:"13 octobre",m:[
+   {t:"agenda",tt:"Mon agenda",su:"Copier les leçons de la semaine"},
+   {t:"lecture",x:"nuage",tt:"Lecture : Sans nuage",su:"Lire à voix haute + 5 questions"},
+   {t:"mots",x:"decouvrir",tt:"Liste 5 : La bonne clé",su:"Découvrir les mots"},
+   {t:"finir",x:"apprendre",tt:"Le verbe finir",su:"Apprendre le tableau"},
+   {t:"tables",x:"p12",tt:"Sprint +1 et +2",su:"Une minute, le plus vite possible"},
+   {t:"ecrire",tt:"J'écris",su:ECRITS.mar.titre}]},
+ {k:"mer",n:"Mercredi",d:"14 octobre",m:[
+   {t:"lecture",x:"anniv",tt:"Lecture : Mon anniversaire",su:"Lire à voix haute + 5 questions"},
+   {t:"mots",x:"dictee",tt:"Dictée : liste 5",su:"J'écoute et j'écris"},
+   {t:"finir",x:"quiz",tt:"Le verbe finir",su:"Quiz éclair"},
+   {t:"tables",x:"m12",tt:"Sprint −1 et −2",su:"Une minute, le plus vite possible"},
+   {t:"ecrire",tt:"J'écris",su:ECRITS.mer.titre}]},
+ {k:"jeu",n:"Jeudi",d:"15 octobre",m:[
+   {t:"lecture",x:"cle",tt:"Lecture : La bonne clé",su:"Lire à voix haute + 5 questions"},
+   {t:"mots",x:"cache",tt:"Liste 5 : cache-cache",su:"Regarde, cache, écris"},
+   {t:"finir",x:"defi",tt:"Défi : les verbes comme finir",su:"choisir, grandir, rougir…"},
+   {t:"tables",x:"mix",tt:"Sprint mélangé",su:"+1 +2 −1 −2"},
+   {t:"ecrire",tt:"J'écris",su:ECRITS.jeu.titre}]},
+ {k:"ven",n:"Vendredi",d:"16 octobre",m:[
+   {t:"lecture",x:"fin",tt:"Lecture : Le dernier jour",su:"Lire avec le ton + 5 questions"},
+   {t:"mots",x:"dictee",tt:"Grande dictée de la liste 5",su:"À montrer à un parent pour la signature"},
+   {t:"finir",x:"grand",tt:"Grand quiz : finir et ses amis",su:"Tout ce que j'ai appris"},
+   {t:"tables",x:"mix",tt:"Sprint : bats ton record !",su:"+1 +2 −1 −2"},
+   {t:"ecrire",tt:"J'écris",su:ECRITS.ven.titre}]}
+];
+const ICON={agenda:["✏️","c-age"],lecture:["📖","c-lec"],mots:["🔑","c-mot"],finir:["🏁","c-fin"],tables:["⚡","c-tab"],ecrire:["✍️","c-ecr"]};
+const TOTAL=DAYS.reduce((a,d)=>a+(d.m?d.m.length:0),0)*3;
+const got=()=>Object.values(S.kid).reduce((a,b)=>a+b,0);
+const dayStars=d=>d.m.reduce((a,m,i)=>a+(S.kid[d.k+i]||0),0);
+
+/* ================= NAV ================= */
+let view={name:"home"},cleanup=null;
+function go(v){if(cleanup){cleanup();cleanup=null}hush();view=v;render();scrollTo(0,0)}
+function topbar(back,label){return `<div class="top">${back?`<button class="back" data-back>← ${label}</button>`:""}<span class="sp"></span><span class="stars-total"><b>★</b> ${got()} / ${TOTAL}</span></div>`}
+app.addEventListener("click",e=>{
+  if(e.target.closest("[data-back]")){go(view.name==="mission"?{name:"day",d:view.d}:{name:"home"});return}
+  const d=e.target.closest("[data-day]");if(d){go({name:"day",d:+d.dataset.day});return}
+  const m=e.target.closest("[data-mis]");if(m){go({name:"mission",d:view.d,i:+m.dataset.mis});return}
+});
+function render(){
+  if(view.name==="home")return home();
+  if(view.name==="day")return day();
+  const D=DAYS[view.d],M=D.m[view.i];
+  app.innerHTML=topbar(true,D.n)+`<div class="card"><div class="mh"><span class="ic">${ICON[M.t][0]}</span><div><h2>${M.tt}</h2><p class="muted">${M.su}</p></div></div><div id="body"></div></div>`;
+  ({agenda:mAgenda,lecture:mLecture,mots:mMots,finir:mFinir,tables:mTables,ecrire:mEcrire})[M.t](document.getElementById("body"),M,D);
+}
+function todayKey(){const t=new Date();if(t.getFullYear()!==2026||t.getMonth()!==9)return null;return {12:"lun",13:"mar",14:"mer",15:"jeu",16:"ven"}[t.getDate()]||null}
+function home(){
+  const g=got(),tk=todayKey();
+  app.innerHTML=topbar(false)+`<div class="hero"><p class="ey">Semaine du 12 octobre · en vacances</p><h1>Mission vacances d'Israël</h1>
+   <p>Ta classe continue d'apprendre, et toi aussi ! Chaque jour : lecture, mots, le verbe finir, les tables et un petit texte. Gagne jusqu'à 3 étoiles par mission.</p>
+   <div class="bar"><i style="width:${Math.round(g/TOTAL*100)}%"></i></div></div>
+   <div class="days">${DAYS.map((d,i)=>{
+     if(d.off)return `<div class="dcard off"><span class="dn">${d.n}</span><span class="dd">${d.d}</span><span style="font-family:var(--hand);font-size:1.3rem;margin-top:6px">🍂 Congé ! Repose-toi.</span></div>`;
+     const s=dayStars(d),max=d.m.length*3,done=d.m.every((m,j)=>S.kid[d.k+j]);
+     return `<button class="dcard${done?" done":""}${tk===d.k?" today":""}" data-day="${i}"><span class="dn">${d.n}${done?" ✅":""}</span><span class="dd">${d.d} · ${d.m.length} missions</span><span class="ds" style="color:var(--or)">★ ${s} / ${max}</span></button>`}).join("")}</div>
+   ${g>=TOTAL?`<div class="card win"><div class="ws">🏆</div><h2>Mission accomplie, champion !</h2><p class="muted">Tu es prêt pour le retour en classe.</p></div>`:""}
+   <div class="links"><a href="semaine-12-octobre.html">👪 Pour les parents</a><a href="index.html">🏠 Ma 3<sup>e</sup> année</a></div>`;
+}
+function day(){
+  const D=DAYS[view.d];
+  app.innerHTML=topbar(true,"Toute la semaine")+`<h1 style="font-size:1.8rem;font-weight:900">${D.n} <span style="color:var(--ink-faint);font-weight:600;font-size:1.1rem">${D.d}</span></h1>
+   <p class="muted" style="margin-top:4px">Fais les missions dans l'ordre que tu veux. Environ 25 minutes en tout.</p>
+   <div class="missions">${D.m.map((m,i)=>{const s=S.kid[D.k+i]||0;
+     return `<button class="mtile${s?" done":""}" data-mis="${i}"><span class="ic ${ICON[m.t][1]}">${ICON[m.t][0]}</span><span class="tx"><span class="tt">${m.tt}</span><br><span class="su">${m.su}</span></span><span class="st" style="color:${s?"var(--or)":"var(--ink-faint)"}">${stars(s)}</span></button>`}).join("")}</div>`;
+}
+function finish(body,n,msg){
+  if(cleanup){cleanup();cleanup=null}
+  const k=DAYS[view.d].k+view.i,prev=S.kid[k]||0;S.kid[k]=Math.max(prev,n);S.chk[k]=true;save();
+  if(n===3)confetti();
+  body.innerHTML=`<div class="win"><div class="ws" style="color:var(--or)">${stars(n)}</div><h2>${n===3?"Super !":n===2?"Bien joué !":"Mission terminée !"}</h2><p class="muted" style="margin-top:6px">${msg||""}</p>
+   <div class="row" style="justify-content:center"><button class="btn primary" data-back>Mission suivante →</button><button class="btn" id="again">Recommencer</button></div></div>`;
+  body.querySelector("#again").onclick=()=>render();
+}
+function confetti(){const c=document.createElement("div");c.className="confetti";
+  const cols=["#E8A317","#2F4FC9","#D1495B","#2E8B57","#7B4FC9"];
+  c.innerHTML=Array.from({length:60},()=>`<i style="left:${Math.random()*100}%;background:${cols[Math.random()*5|0]};animation-duration:${1.6+Math.random()*1.6}s;animation-delay:${Math.random()*.5}s"></i>`).join("");
+  document.body.appendChild(c);setTimeout(()=>c.remove(),4000)}
+
+/* generic MCQ runner */
+function quiz(body,qs,onEnd,opts){
+  let i=0,first=0;opts=opts||{};
+  function step(){
+    if(i>=qs.length)return onEnd(first,qs.length);
+    const q=qs[i];let tried=false;
+    body.innerHTML=(opts.head?opts.head():"")+`<p class="prog">Question ${i+1} sur ${qs.length}</p><p class="qbig">${q.q}</p>
+      <div class="opts${opts.inline?" inline":""}">${q.o.map((o,j)=>`<button class="opt" data-o="${j}">${o}</button>`).join("")}</div><div class="fb"></div>`;
+    if(opts.after)opts.after(body);
+    body.querySelector(".opts").onclick=e=>{const b=e.target.closest(".opt");if(!b||b.disabled)return;
+      const j=+b.dataset.o,fb=body.querySelector(".fb");
+      if(j===q.a){b.classList.add("ok","pop");if(!tried)first++;body.querySelectorAll(".opt").forEach(x=>x.disabled=true);
+        fb.className="fb ok";fb.textContent=q.why?"✓ "+q.why:"✓ Bravo !";setTimeout(()=>{i++;step()},q.why?1500:800)}
+      else{tried=true;b.classList.add("no","shake");b.disabled=true;fb.className="fb no";fb.textContent="Essaie encore !"}};
+  }
+  step();
+}
+const starsFor=(ok,n)=>ok>=n?3:ok>=Math.ceil(n*.7)?2:1;
+
+/* ================= MISSIONS ================= */
+function mAgenda(body){
+  body.innerHTML=`<p class="consigne">Ouvre ton agenda à la semaine du 12 octobre et copie ceci, lentement et proprement.</p>
+   <div class="agenda"><div><span class="h">Lecture :</span> Sans nuage et Mon anniversaire</div><div><span class="h">Vocabulaire :</span> Liste 5, La bonne clé</div>
+   <div><span class="h">Conjugaison :</span> Verbe finir au présent</div><div><span class="h">Math :</span> Tables d'additions et soustractions 1 et 2 (rapidité)</div>
+   <div><span class="h">Autres :</span> Signature de l'agenda et de la dictée</div><div><span class="h">12 octobre :</span> Congé</div><div><span class="h">15 octobre :</span> Bibliothèque</div><div>Première communication sur le portail Mozaïk</div></div>
+   <div class="chk" style="margin-top:12px"><input type="checkbox" id="a1"><label for="a1">J'ai tout copié dans mon agenda.</label></div>
+   <div class="chk"><input type="checkbox" id="a2"><label for="a2">Un parent a regardé et <b>signé mon agenda</b>.</label></div>
+   <div class="row"><button class="btn good" id="ok" disabled>Mission terminée ✓</button></div>`;
+  const a1=body.querySelector("#a1"),a2=body.querySelector("#a2"),ok=body.querySelector("#ok");
+  a1.onchange=a2.onchange=()=>ok.disabled=!a1.checked;
+  ok.onclick=()=>finish(body,a2.checked?3:2,a2.checked?"Agenda copié et signé.":"N'oublie pas de faire signer l'agenda pour la 3e étoile !");
+}
+
+function mLecture(body,M){
+  const T=TEXTES[M.x];let sec=0,tm=null;
+  body.innerHTML=`<p class="consigne">Lis le texte à voix haute à un adulte. Puis lis-le une 2e fois avec le ton !</p>
+   <div class="texte">${T.p.map(p=>`<p>${p}</p>`).join("")}</div>
+   <div class="row"><button class="btn small" id="ecoute">🔊 Écouter le texte</button><button class="btn small" id="stop">⏹</button><span class="muted" id="chrono">⏱ 0:00</span></div>
+   <div class="tip">📚 L'enseignante demande <b>15 minutes de lecture à voix haute</b> chaque jour. Après ce texte, continue avec un livre de ton choix jusqu'à 15 minutes.</div>
+   <div class="chk" style="margin-top:10px"><input type="checkbox" id="lu"><label for="lu">J'ai lu à voix haute à un adulte.</label></div>
+   <div class="row"><button class="btn primary" id="go" disabled>Aux questions →</button></div>`;
+  tm=setInterval(()=>{sec++;const c=body.querySelector("#chrono");if(c)c.textContent=`⏱ ${sec/60|0}:${String(sec%60).padStart(2,"0")}`},1000);
+  cleanup=()=>clearInterval(tm);
+  body.querySelector("#ecoute").onclick=()=>say(T.p.join(" "),.9);
+  body.querySelector("#stop").onclick=hush;
+  body.querySelector("#lu").onchange=e=>body.querySelector("#go").disabled=!e.target.checked;
+  body.querySelector("#go").onclick=()=>{clearInterval(tm);hush();
+    quiz(body,T.q.map(q=>({q:q[0],o:q[1],a:q[2]})),(ok,n)=>{
+      finish(body,starsFor(ok,n),`${ok} sur ${n} du premier coup. Raconte l'histoire à un adulte avec tes mots !`)},
+      {head:()=>`<details style="margin-bottom:8px"><summary class="muted" style="cursor:pointer">📖 Relire le texte</summary><div class="texte">${T.p.map(p=>`<p>${p}</p>`).join("")}</div></details>`})};
+}
+
+function needWords(body,M){
+  body.innerHTML=`<p class="consigne">Il faut d'abord les mots de la liste 5 !</p>
+   <p class="muted">Demande à papa ou maman de les écrire ici, un mot par ligne (ils sont dans ton cahier de mots ou envoyés par l'enseignante).</p>
+   <textarea class="liste" id="lst" placeholder="une clé&#10;la serrure&#10;…"></textarea>
+   <div class="row"><button class="btn primary" id="sv">Enregistrer les mots</button></div>`;
+  body.querySelector("#sv").onclick=()=>{const v=body.querySelector("#lst").value;if(!v.trim())return;S.liste=v;save();mMots(body,M)};
+}
+function mMots(body,M){
+  const w=words();if(!w.length)return needWords(body,M);
+  if(M.x==="decouvrir"){
+    body.innerHTML=`<p class="consigne">Écoute chaque mot, lis-le à voix haute et épelle-le.</p>
+     <div class="mots">${w.map((x,i)=>`<div class="mot">${esc(x)}<button data-s="${i}" aria-label="Écouter">🔊</button></div>`).join("")}</div>
+     <div class="tip">💡 Trouve les lettres difficiles : une lettre muette, un accent, une double consonne…</div>
+     <div class="row"><button class="btn primary" id="go">Je les connais, au jeu ! →</button></div>`;
+    body.querySelector(".mots").onclick=e=>{const b=e.target.closest("[data-s]");if(b)say(w[+b.dataset.s])};
+    body.querySelector("#go").onclick=()=>spell(body,"cache");return}
+  spell(body,M.x);
+}
+function spell(body,mode){
+  const order=shuffle(words());let i=0,ok=0,miss=[];
+  function step(){
+    if(i>=order.length){S["score-"+(mode==="dictee"?"dictee":"cache")]=`${ok}/${order.length}`;
+      return finish(body,starsFor(ok,order.length),miss.length?`À revoir : <b>${miss.map(esc).join(", ")}</b>`:"Aucune faute ! Montre ça à un parent. ✍️")}
+    const w=order[i];
+    body.innerHTML=`<p class="prog">Mot ${i+1} sur ${order.length}</p>`+
+      (mode==="dictee"?`<div class="big">🎧</div><div class="row" style="justify-content:center"><button class="btn" id="re">🔊 Réécouter</button></div>`:`<div class="big" id="w">${esc(w)}</div><p class="muted center" id="hint">Regarde bien… le mot va se cacher !</p>`)+
+      `<div class="row" style="justify-content:center"><input class="ans" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Écris le mot" ${mode==="cache"?"hidden":""}></div>
+       <div class="row" style="justify-content:center"><button class="btn primary" id="ck" ${mode==="cache"?"hidden":""}>Vérifier</button></div><div class="fb center"></div>`;
+    const inp=body.querySelector(".ans"),bt=body.querySelector("#ck"),fb=body.querySelector(".fb");
+    if(mode==="dictee"){say(w);body.querySelector("#re").onclick=()=>say(w);inp.focus()}
+    else{const t=setTimeout(()=>{const el=body.querySelector("#w");if(!el)return;el.textContent="✱ ✱ ✱";body.querySelector("#hint").textContent="Écris-le de mémoire !";inp.hidden=false;bt.hidden=false;inp.focus()},4000);cleanup=()=>clearTimeout(t)}
+    let done=false;
+    const check=()=>{if(done){i++;step();return}if(!inp.value.trim())return;done=true;
+      const good=norm(inp.value)===norm(w);if(good)ok++;else miss.push(w);
+      inp.classList.add(good?"ok":"no");inp.readOnly=true;fb.className="fb center "+(good?"ok":"no");
+      fb.innerHTML=good?"✓ Bravo !":`On écrit : <b>${esc(w)}</b>`;bt.textContent="Suivant →";bt.focus()};
+    bt.onclick=check;inp.onkeydown=e=>{if(e.key==="Enter")check()};
+  }
+  step();
+}
+
+const PR=[["je","is"],["tu","is"],["il","it"],["elle","it"],["on","it"],["nous","issons"],["vous","issez"],["ils","issent"],["elles","issent"]];
+const ENDS=["is","it","issons","issez","issent"];
+const SUJ={"Je":"is","Tu":"is","Maman":"it","Le film":"it","Mon ami":"it","On":"it","Nous":"issons","Vous":"issez","Les élèves":"issent","Mes cousins":"issent","Elles":"issent"};
+const COMP=["le casse-tête.","son assiette.","la course.","le travail.","la lecture.","le dessin."];
+const VERBS=[["finir","fin"],["choisir","chois"],["grandir","grand"],["remplir","rempl"],["rougir","roug"],["réfléchir","réfléch"],["obéir","obé"],["bâtir","bât"]];
+function conjQ(verbs){const [inf,rad]=verbs[Math.random()*verbs.length|0];
+  const subs=Object.keys(SUJ),s=subs[Math.random()*subs.length|0],e=SUJ[s];
+  const others=shuffle(ENDS.filter(x=>x!==e)).slice(0,2),o=shuffle([e,...others]);
+  const sub=s==="Je"&&/^[aeéiouh]/.test(rad)?"J'":s;
+  return {q:`${sub} ___ ${inf==="finir"?COMP[Math.random()*COMP.length|0]:""} <span class="muted">(${inf})</span>`,o:o.map(x=>rad+x),a:o.indexOf(e),why:`${s.toLowerCase()==="je"||s==="Tu"?s.toLowerCase():s} → ${rad}${e}`}}
+const TABLE=`<div class="conj"><span class="p">je</span><span>fin<b>is</b></span><span class="p">tu</span><span>fin<b>is</b></span><span class="p">il / elle / on</span><span>fin<b>it</b></span><span class="p">nous</span><span>fin<b>issons</b></span><span class="p">vous</span><span>fin<b>issez</b></span><span class="p">ils / elles</span><span>fin<b>issent</b></span></div>`;
+function mFinir(body,M){
+  const runQuiz=(qs,msg)=>quiz(body,qs,(ok,n)=>finish(body,starsFor(ok,n),`${ok} sur ${n} du premier coup. ${msg}`),{inline:true});
+  if(M.x==="apprendre"){
+    body.innerHTML=`<p class="consigne">Lis le tableau à voix haute 3 fois. Écoute bien le « iss » !</p>${TABLE}
+     <div class="tip">💡 On garde <b>fin-</b> et on ajoute : <b>-is, -is, -it, -issons, -issez, -issent</b>.<br>Avec nous, vous, ils, on entend <b>« iss »</b>.</div>
+     <div class="row center" style="justify-content:center"><button class="btn small" id="ec">🔊 Écouter</button></div>
+     <p class="consigne" style="margin-top:14px">Maintenant, cache le tableau et écris-le dans ton cahier de mémoire !</p>
+     <div class="row"><button class="btn primary" id="go">J'ai écrit le tableau. Au quiz ! →</button></div>`;
+    body.querySelector("#ec").onclick=()=>say("je finis, tu finis, il finit, nous finissons, vous finissez, ils finissent",.75);
+    body.querySelector("#go").onclick=()=>runQuiz(PR.map(([p,e])=>{const o=shuffle([e,...shuffle(ENDS.filter(x=>x!==e)).slice(0,2)]);return {q:`${p} ___`,o:o.map(x=>"fin"+x),a:o.indexOf(e)}}).slice(0,9).sort(()=>Math.random()-.5).slice(0,8),"Bravo !");
+    return}
+  const n=M.x==="grand"?15:10,v=M.x==="quiz"?VERBS.slice(0,1):M.x==="defi"?VERBS.slice(1):VERBS;
+  body.innerHTML=`${M.x==="defi"?`<p class="consigne">Ces verbes se conjuguent exactement comme finir !</p><p class="muted">choisir · grandir · remplir · rougir · réfléchir · obéir · bâtir</p>`:`<p class="consigne">Choisis la bonne forme, vite !</p>`}
+   <details style="margin-top:8px"><summary class="muted" style="cursor:pointer">👀 Voir le tableau de finir</summary>${TABLE}</details>
+   <div class="row"><button class="btn primary" id="go">Commencer (${n} questions)</button></div>`;
+  body.querySelector("#go").onclick=()=>runQuiz(Array.from({length:n},()=>conjQ(v)),M.x==="defi"?"Tu connais tout le groupe de finir !":"");
+}
+
+function factsFor(sets){const f=[];
+  if(sets.includes("p1"))for(let a=0;a<=10;a++){f.push([`${a} + 1`,a+1]);f.push([`1 + ${a}`,a+1])}
+  if(sets.includes("p2"))for(let a=0;a<=10;a++){f.push([`${a} + 2`,a+2]);f.push([`2 + ${a}`,a+2])}
+  if(sets.includes("m1"))for(let a=1;a<=11;a++)f.push([`${a} − 1`,a-1]);
+  if(sets.includes("m2"))for(let a=2;a<=12;a++)f.push([`${a} − 2`,a-2]);
+  return f}
+/* sprint records use the parent page's mode ids so both pages show the same records */
+const REC={p12:null,m12:null,mix:"mix"};
+function mTables(body,M){
+  const md=MODES[M.x],recKey="kid-"+M.x,best=S.best[recKey]||0;
+  body.innerHTML=`<div class="center"><p class="consigne">Une minute ! Réponds le plus vite possible.</p>
+   <p class="muted">Tape au clavier ou sur les boutons, puis ✓ (ou Entrée).</p>
+   <div class="big" style="font-size:1.3rem;padding:10px">Table : ${md.n}</div>
+   <p>${best?`🏆 Ton record : <b>${best}</b>`:"Pas encore de record ici."}</p>
+   <p class="muted" style="margin-top:6px">⭐ 1 étoile : finir · ⭐⭐ 15 bonnes · ⭐⭐⭐ 25 bonnes ou un nouveau record</p>
+   <div class="row"><button class="btn primary" id="go" style="font-size:1.2rem;padding:13px 30px">C'est parti !</button></div></div>`;
+  body.querySelector("#go").onclick=()=>{
+    const F=factsFor(md.s);let cur,last="",typed="",good=0,bad=0,errs=[],end=Date.now()+60000;
+    body.innerHTML=`<div class="center"><div class="clock" id="cl">60 s</div><div class="fact" id="fa"></div><div class="typed" id="ty"></div>
+      <div class="pad">${[1,2,3,4,5,6,7,8,9,"⌫",0,"✓"].map(k=>`<button data-k="${k}">${k}</button>`).join("")}</div><p style="margin-top:8px;font-weight:700" id="lv"></p></div>`;
+    const fa=body.querySelector("#fa"),ty=body.querySelector("#ty");
+    const next=()=>{do{cur=F[Math.random()*F.length|0]}while(cur[0]===last);last=cur[0];fa.textContent=cur[0]+" =";typed="";ty.textContent=""};
+    const key=k=>{if(k==="⌫")typed=typed.slice(0,-1);
+      else if(k==="✓"){if(!typed)return;fa.classList.remove("pop","shake");void fa.offsetWidth;
+        if(+typed===cur[1]){good++;fa.classList.add("pop")}else{bad++;errs.push(`${cur[0]} = ${cur[1]}`);fa.classList.add("shake")}
+        body.querySelector("#lv").textContent=`✓ ${good}   ✗ ${bad}`;next();return}
+      else if(typed.length<2)typed+=k;ty.textContent=typed};
+    body.querySelector(".pad").onclick=e=>{const b=e.target.closest("[data-k]");if(b)key(b.dataset.k)};
+    const kd=e=>{if(/^[0-9]$/.test(e.key))key(e.key);else if(e.key==="Backspace"){e.preventDefault();key("⌫")}else if(e.key==="Enter")key("✓")};
+    document.addEventListener("keydown",kd);
+    const tm=setInterval(()=>{const s=Math.max(0,Math.ceil((end-Date.now())/1000));body.querySelector("#cl").textContent=s+" s";if(s<=0)stop()},200);
+    cleanup=()=>{clearInterval(tm);document.removeEventListener("keydown",kd)};
+    function stop(){cleanup();cleanup=null;
+      const rec=good>best;if(rec)S.best[recKey]=good;
+      if(REC[M.x]&&good>(S.best[REC[M.x]]||0))S.best[REC[M.x]]=good;
+      const d=new Date();S.hist.unshift({d:`${d.getDate()}/${d.getMonth()+1} ${d.getHours()}h${String(d.getMinutes()).padStart(2,"0")}`,m:M.x,g:good,b:bad,lbl:md.n});S.hist=S.hist.slice(0,40);
+      const u=[...new Set(errs)];
+      finish(body,(good>=25||(rec&&best))?3:good>=15?2:1,`<b style="font-size:1.4rem">${good} bonnes réponses</b>${rec&&best?" · nouveau record ! 🎉":""}${u.length?`<br>À revoir : ${u.join(" · ")}`:bad?"":"<br>Aucune erreur ! 👏"}`)}
+    next();
+  };
+}
+
+function mEcrire(body,M,D){
+  const E=ECRITS[D.k];
+  body.innerHTML=`<p class="consigne">${E.txt}</p><div class="idea">${E.idees.map(x=>`<span>${x}</span>`).join("")}</div>
+   <textarea class="ecrit" id="tx" placeholder="J'écris ici… (ou dans mon cahier)">${esc(S.ecrits[D.k]||"")}</textarea>
+   <p class="muted" id="cnt"></p>
+   <p style="font-weight:800;margin-top:12px">Je vérifie mon texte :</p>
+   <div class="chk"><input type="checkbox" id="v1"><label for="v1">Chaque phrase commence par une <b>majuscule</b>.</label></div>
+   <div class="chk"><input type="checkbox" id="v2"><label for="v2">Chaque phrase finit par un <b>point</b>.</label></div>
+   <div class="chk"><input type="checkbox" id="v3"><label for="v3">J'ai relu pour vérifier l'<b>orthographe</b>.</label></div>
+   <div class="chk"><input type="checkbox" id="v4"><label for="v4">Un adulte a lu mon texte.</label></div>
+   <div class="row"><button class="btn good" id="ok" disabled>J'ai fini ✓</button><label class="muted"><input type="checkbox" id="cahier"> J'ai écrit dans mon cahier</label></div>`;
+  const tx=body.querySelector("#tx"),ok=body.querySelector("#ok"),cah=body.querySelector("#cahier");
+  const count=()=>(tx.value.match(/[^.!?]+[.!?]+/g)||[]).filter(s=>s.trim().split(/\s+/).length>=3).length;
+  const upd=()=>{const n=count();S.ecrits[D.k]=tx.value;save();
+    body.querySelector("#cnt").textContent=cah.checked?"Texte écrit dans le cahier.":`${n} phrase${n>1?"s":""} sur ${E.min}`;
+    ok.disabled=!(cah.checked||n>=E.min)||!body.querySelector("#v4").checked};
+  tx.oninput=upd;body.querySelectorAll("input[type=checkbox]").forEach(c=>c.onchange=upd);upd();
+  ok.onclick=()=>{const v=["#v1","#v2","#v3"].filter(s=>body.querySelector(s).checked).length;
+    finish(body,v===3?3:v>=1?2:1,"Bravo, écrivain ! Garde ton texte pour le montrer à l'enseignante.")};
+}
+
+render();
+})();
+</script>
+</body>
+</html>
