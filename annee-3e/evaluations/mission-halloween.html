@@ -103,6 +103,13 @@ section[hidden]{display:none}
 .ans.ok{border-color:var(--vert);background:var(--vert-soft)} .ans.no{border-color:var(--rouge);background:var(--rouge-soft)}
 .fb{font-weight:700;margin-top:8px;min-height:1.4em}
 .fb.ok{color:var(--vert)} .fb.no{color:var(--rouge)}
+.model{background:var(--vert-soft);border-radius:12px;padding:10px 13px;margin-top:8px;font-size:.95rem}
+.self{display:grid;gap:6px;margin-top:8px}
+.self label{display:flex;gap:9px;align-items:flex-start;font-size:.95rem}
+.self input{width:20px;height:20px;accent-color:var(--vert);flex:0 0 20px}
+.seqit{display:flex;gap:10px;align-items:center;text-align:left}
+.seqit .k{font-weight:900;color:var(--violet);min-width:22px}
+.src{font-size:.88rem}.src li{margin-bottom:3px}
 .why{background:var(--bleu-soft);border-radius:12px;padding:10px 13px;margin-top:8px;font-size:.95rem}
 pre.col{font-family:ui-monospace,Consolas,monospace;font-size:1.35rem;line-height:1.35;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 18px;display:inline-block;margin:8px 0 0}
 .win{text-align:center;padding:8px 0}
@@ -168,6 +175,7 @@ label.lb{font-weight:800;display:block;margin-top:12px}
     <div class="ch"><span class="ic">🔢</span><h3>Évaluation de maths · mercredi 28 octobre</h3></div>
     <p class="muted">Tu vas résoudre un <b>court problème d'Halloween</b>. Pour réussir, il faut savoir : <b>décomposer</b> un nombre, <b>additionner et soustraire de gros nombres</b>, et faire des <b>groupements</b> (ex. : 14 dizaines = 140).</p>
     <div class="tip"><b>Ma démarche en 4 étapes</b><ul><li><b>Je lis</b> le problème deux fois et j'encercle les nombres.</li><li><b>Je cherche</b> : je souligne la question.</li><li><b>Je calcule</b> : je pose mes calculs en colonnes, je vérifie.</li><li><b>Je réponds</b> avec une phrase : « Il y a … bonbons. »</li></ul></div>
+    <div class="tip"><b>« Laisse des traces de ta démarche »</b> : au Québec, l'enseignante corrige <b>comment</b> tu as trouvé, pas seulement la réponse. Sur ta feuille : un dessin ou un tableau si ça aide, chaque calcul posé, et la phrase-réponse. Attention, certains nombres du problème peuvent être <b>inutiles</b>.</div>
   </div>
   <div class="acts" id="actsMa"></div>
 </section>
@@ -176,8 +184,9 @@ label.lb{font-weight:800;display:block;margin-top:12px}
   <div class="card">
     <div class="ch"><span class="ic">📖</span><h3>Évaluation de lecture · jeudi 29 octobre</h3></div>
     <p class="muted">Tu vas lire <b>seul</b> une histoire et répondre à des questions. Il faudra nommer les <b>caractéristiques physiques</b> et les <b>traits de personnalité</b> des personnages.</p>
-    <div class="tip"><b>Physique ou personnalité ?</b><ul><li><b>Physique</b> = ce que je <b>vois</b> : grand, cheveux roux, yeux verts, lunettes…</li><li><b>Personnalité</b> = comment le personnage <b>est à l'intérieur</b> : courageux, gourmand, timide, généreux…</li><li>La personnalité se devine souvent par ce que le personnage <b>fait</b> ou <b>dit</b>. Cherche la <b>preuve</b> dans le texte !</li></ul></div>
+    <div class="tip"><b>Physique ou personnalité ?</b><ul><li><b>Caractéristiques physiques</b> = à quoi ressemble le personnage. <b>Je peux les voir</b> : sa taille, son âge, ses cheveux, ses yeux, et aussi <b>les vêtements et accessoires qu'il porte</b> (casquette, lunettes, cape…).</li><li><b>Traits de caractère</b> = sa personnalité. <b>Je ne peux pas les voir</b> : ses qualités, ses défauts, ses goûts et ses habitudes (courageux, gourmand, aime les blagues…).</li><li>Un trait se devine souvent par ce que le personnage <b>fait</b> ou <b>dit</b>. À l'évaluation, on te demandera souvent de <b>justifier avec le texte</b> : « Il est courageux, car il ouvre l'armoire. »</li></ul></div>
   </div>
+  <div class="tip" style="margin-bottom:14px"><b>Les sortes de questions</b> (comme dans les évaluations du Québec) : <b>remettre en ordre</b> des événements · <b>choix de réponses</b> · <b>réponse courte</b> écrite · <b>réponse élaborée</b> : « Oui / Non / Peut-être… Explique pourquoi. » Toujours <b>s'appuyer sur le texte</b>.</div>
   <div class="acts" id="actsLe"></div>
 </section>
 
@@ -185,7 +194,8 @@ label.lb{font-weight:800;display:block;margin-top:12px}
   <div class="card">
     <div class="ch"><span class="ic">🧪</span><h3>Évaluation de sciences · jeudi 29 octobre</h3></div>
     <p class="muted">Tu vas faire une <b>expérience sur la dissolution des bonbons d'Halloween</b>. On évalue si tu sais suivre la <b>démarche scientifique</b>, étape par étape.</p>
-    <div class="tip"><b>La démarche scientifique</b><ul><li>1. <b>Question</b> : qu'est-ce que je veux savoir ?</li><li>2. <b>Hypothèse</b> : « Je pense que… parce que… »</li><li>3. <b>Matériel</b> : ce dont j'ai besoin.</li><li>4. <b>Manipulation</b> : je fais l'expérience, en suivant les étapes.</li><li>5. <b>Observations / résultats</b> : ce que je vois, je le note.</li><li>6. <b>Conclusion</b> : mon hypothèse était-elle bonne ?</li></ul></div>
+    <div class="tip"><b>La démarche scientifique (affiche d'Alloprof pour le primaire)</b><ul><li>1. <b>Je me pose une question.</b></li><li>2. <b>Je formule une hypothèse.</b> Qu'est-ce qui va se passer, et <b>pourquoi</b> ? « Je pense que… parce que… »</li><li>3. <b>Je planifie ma démarche.</b> Quel matériel ? Quelles étapes ?</li><li>4. <b>Je fais l'expérience.</b> Je fais les manipulations et j'observe les résultats.</li><li>5. <b>Je fais un retour sur mon hypothèse et je réponds à la question.</b> Est-ce que j'avais raison, et pourquoi ?</li></ul></div>
+    <div class="tip"><b>Ce que l'enseignante regarde</b> (grille d'évaluation en sciences) : une hypothèse avec un « parce que », des étapes suivies correctement, le matériel manipulé avec soin et <b>en sécurité</b>, une conclusion qui explique si l'hypothèse était juste <b>en parlant de tes observations</b>, et les bons mots : <b>dissoudre, soluble, non soluble, mélange</b>.</div>
   </div>
   <div class="acts" id="actsSc"></div>
 </section>
@@ -231,6 +241,16 @@ GEN.dec=()=>{const t=R(0,5);const um=R(1,9),c=R(0,9),d=R(0,9),u=R(0,9),n=um*1000
    default:{const good=[um*1000,c*100,d*10,u].filter(x=>x).map(fmt).join(" + ");const bad1=[um*100,c*1000,d*10,u].filter(x=>x).map(fmt).join(" + ");const bad2=[um*1000,c*10,d*100,u].filter(x=>x).map(fmt).join(" + ");const bad3=[um*1000,c*100,d,u*10].filter(x=>x).map(fmt).join(" + ");
      const o=[...new Set([good,bad1,bad2,bad3])];const oo=shuffle(o);return qMc(`Quelle décomposition est égale à ${fmt(n)} ?`,oo,oo.indexOf(good),`${fmt(n)} = ${good}.`)}
   }};
+GEN.autre=()=>{const c=R(2,8),d=R(1,9);let u=R(1,9);while(u===d)u=R(1,9);const n=c*100+d*10+u;
+  const good=[`${c*100} + ${d*10+u}`,`${c} C + ${d} D + ${u} U`,`${c*10+d} D + ${u} U`,`${(c-1)*100} + ${100+d*10} + ${u}`,`${c*100-50} + 50 + ${d*10} + ${u}`];
+  const bad=[`${c*10} + ${d*10} + ${u}`,`${c} C + ${u} D + ${d} U`,`${c*100} + ${d} + ${u*10}`,`${c*10+d} C + ${u} U`];
+  const g=shuffle(good).slice(0,2),b=shuffle(bad).slice(0,2),o=shuffle([...g,...b]);
+  return {type:"multi",q:`Coche les DEUX façons qui sont égales à ${n}.`,o,a:g.map(x=>o.indexOf(x)),why:`${n} peut se décomposer de plusieurs façons : ${good.slice(0,3).join(" · ")}. Vérifie toujours en additionnant !`}};
+GEN.manque=()=>{const t=R(0,3),a=R(1200,5800),b=R(240,2900);
+  if(t===0)return qNum(`${fmt(a)} + ___ = ${fmt(a+b)}`,b,`Pour trouver le terme manquant, je soustrais : ${fmt(a+b)} − ${fmt(a)} = ${fmt(b)}.`);
+  if(t===1)return qNum(`___ + ${fmt(b)} = ${fmt(a+b)}`,a,`${fmt(a+b)} − ${fmt(b)} = ${fmt(a)}.`);
+  if(t===2)return qNum(`${fmt(a+b)} − ___ = ${fmt(a)}`,b,`Combien enlever pour arriver à ${fmt(a)} ? ${fmt(a+b)} − ${fmt(a)} = ${fmt(b)}.`);
+  return qNum(`___ − ${fmt(b)} = ${fmt(a)}`,a+b,`Le nombre de départ, c'est ${fmt(a)} + ${fmt(b)} = ${fmt(a+b)}.`)};
 function colLayout(a,b,op){const w=Math.max(String(a).length,String(b).length)+2;return `<pre class="col">${String(a).padStart(w)}\n${op}${String(b).padStart(w-1)}\n${"‾".repeat(w)}</pre>`}
 GEN.calc=()=>{const t=R(0,4);let a,b;
   if(t===0){a=R(150,899);b=R(150,899);}
@@ -260,12 +280,13 @@ GEN.prob=()=>{const t=R(0,5),nm=pick(NAMES);let st,steps;
   else{const goal=pick([2000,3000,2500]),has=R(1100,goal-250),plus=R(11,19);
     st=`Le fantôme Boubou veut ${fmt(goal)} bonbons pour sa fête. Il en a déjà ${fmt(has)}. Puis, ses amis lui donnent ${plus} dizaines de bonbons.`;
     steps=[[`Avant le cadeau de ses amis, combien de bonbons lui manque-t-il ?`,goal-has,`${fmt(goal)} − ${fmt(has)} = ${fmt(goal-has)}.`],[`Combien de bonbons a-t-il après le cadeau de ses amis ?`,has+plus*10,`${plus} dizaines = ${plus*10}. ${fmt(has)} + ${plus*10} = ${fmt(has+plus*10)}.`]]}
-  return steps.map(([q,a,w],i)=>({type:"num",q,a,why:w,story:st,step:`Étape ${i+1} sur 2`}))};
+  if(Math.random()<.6)st+=" "+pick(["Il fait 4 degrés dehors.","La fête commence à 18 h.","Il y a 3 chats noirs dans la rue.","Le costume coûte 25 $.","Il a 9 ans."]);
+  return steps.map(([q,a,w],i)=>({type:"num",q,a,why:w+(i===1?" Attention : dans un problème, certains nombres ne servent à rien !":""),story:st,step:`Étape ${i+1} sur 2`}))};
 
 /* ================= LECTURE ================= */
-const PHYS=["grand","petite","cheveux roux","yeux verts","taches de rousseur","mince","barbe blanche","lunettes rondes","dents pointues","nez crochu","cheveux bouclés","très maigre","joues rondes","longues jambes","cheveux en tresses","costaud"];
-const PERS=["courageux","peureux","généreux","gourmand","timide","curieux","gentil","farceur","patient","jaloux","drôle","têtu","honnête","impatient","travaillant","distrait"];
-GEN.sort=()=>{const isP=Math.random()<.5,w=pick(isP?PHYS:PERS);return qMc(`« ${w} » : est-ce une caractéristique physique ou un trait de personnalité ?`,["Physique (je le vois)","Personnalité (à l'intérieur)"],isP?0:1,isP?`« ${w} », on peut le voir avec nos yeux : c'est physique.`:`« ${w} », c'est une façon d'être ou d'agir : c'est la personnalité.`)};
+const PHYS=["grand","petite","cheveux roux","yeux verts","taches de rousseur","mince","barbe blanche","porte des lunettes rondes","dents pointues","nez crochu","cheveux bouclés","très maigre","longues jambes","cheveux en tresses","porte une casquette rouge","a huit ans","porte une cape noire","a un chapeau pointu"];
+const PERS=["courageux","peureux","généreux","gourmand","timide","curieux","gentil","farceur","patient","jaloux","drôle","têtu","honnête","impatient","travaillant","distrait","aime faire des blagues","n'aime pas les orages","adore lire le soir"];
+GEN.sort=()=>{const isP=Math.random()<.5,w=pick(isP?PHYS:PERS);return qMc(`« ${w} » : est-ce une caractéristique physique ou un trait de personnalité ?`,["Physique (je le vois)","Personnalité (à l'intérieur)"],isP?0:1,isP?`« ${w} » : on peut le voir. C'est une caractéristique physique (taille, âge, cheveux, yeux, vêtements, accessoires).`:`« ${w} » : on ne peut pas le voir. C'est un trait de caractère (qualité, défaut, goût ou habitude).`)};
 const ACTIONS=[
  ["Zoé donne la moitié de ses bonbons à son petit frère.","généreuse",["gourmande","timide"]],
  ["Léo entre le premier dans la maison hantée pour aider son ami.","courageux",["peureux","distrait"]],
@@ -292,7 +313,10 @@ const TEXTES={
    {type:"mc",q:"Au début de l'histoire, quel trait de personnalité a Max ?",o:["Peureux","Gourmand","Têtu"],a:0,why:"Le texte dit : « Max a peur de beaucoup de choses »."},
    {type:"mc",q:"Quelle phrase prouve que Max devient courageux ?",o:["Il porte de grosses lunettes rondes.","Il marche jusqu'à l'armoire et ouvre la porte d'un coup.","Les élèves crient."],a:1,why:"Il ouvre l'armoire même s'il a peur : c'est courageux."},
    {type:"multi",q:"Coche UNE caractéristique physique et UN trait de personnalité de madame Lune.",o:["très grande","blagueuse (farceuse)","timide","petite"],a:[0,1],why:"Physique : très grande, cheveux gris. Personnalité : elle adore faire des blagues, elle est farceuse."},
-   {type:"mc",q:"À la fin, Max partage les bonbons. Ça montre qu'il est…",o:["jaloux","généreux","distrait"],a:1,why:"Partager, c'est être généreux."}]},
+   {type:"mc",q:"À la fin, Max partage les bonbons. Ça montre qu'il est…",o:["jaloux","généreux","distrait"],a:1,why:"Partager, c'est être généreux."},
+   {type:"seq",q:"Remets les événements dans l'ordre. Le premier est déjà placé.",first:"Madame Lune annonce qu'un fantôme se cache dans la classe.",o:["La porte de l'armoire grince et les élèves crient.","Max voit qu'Inès pleure.","Max ouvre l'armoire d'un coup.","Max partage les bonbons avec ses amis."],why:"Annonce → grincement → Inès pleure → Max ouvre l'armoire → il partage."},
+   {type:"short",q:"Qu'est-ce qu'il y a dans l'armoire ?",kw:[["drap"],["bonbon"]],model:"Un drap blanc et un sac de bonbons.",why:"Réponse courte : quelques mots suffisent, mais ils doivent venir du texte."},
+   {type:"open",q:"Nomme un trait de caractère de Max à la fin de l'histoire. Justifie ta réponse avec le texte.",model:"Max est courageux, car même s'il a peur, il marche jusqu'à l'armoire et l'ouvre pour aider Inès.",check:["J'ai nommé un trait de caractère (pas une caractéristique physique).","J'ai donné une preuve qui vient du texte (« car… »).","J'ai écrit une phrase complète, avec majuscule et point."]}]},
  t2:{titre:"La sorcière Grignotte",p:[
   "Au fond de la forêt vit la sorcière Grignotte. Elle est très maigre, avec un long nez crochu et des cheveux verts tout emmêlés. Son vieux chapeau pointu est troué à trois endroits.",
   "Grignotte est très gourmande. Chaque nuit d'Halloween, elle prépare une énorme potion au chocolat. Mais cette année, elle est si distraite qu'elle met du sel à la place du sucre !",
@@ -303,7 +327,10 @@ const TEXTES={
    {type:"mc",q:"Pourquoi dit-on que Grignotte est distraite ?",o:["Parce qu'elle a un chapeau troué","Parce qu'elle met du sel à la place du sucre","Parce qu'elle vit dans la forêt"],a:1,why:"Se tromper d'ingrédient sans faire attention, c'est être distrait."},
    {type:"mc",q:"Quel trait de personnalité de Grignotte est nommé dans le texte ?",o:["Gourmande","Courageuse","Honnête"],a:0,why:"Le texte dit : « Grignotte est très gourmande »."},
    {type:"multi",q:"Coche les DEUX traits de personnalité de Lili.",o:["courageuse","généreuse","maigre","farceuse"],a:[0,1],why:"Elle n'a pas peur (courageuse) et elle offre ses bonbons (généreuse)."},
-   {type:"mc",q:"Que fait Grignotte pour remercier Lili ?",o:["Elle lui donne une potion","Elle transforme son chapeau en lanterne","Elle lui donne son balai"],a:1,why:"Dernière phrase du texte."}]},
+   {type:"mc",q:"Que fait Grignotte pour remercier Lili ?",o:["Elle lui donne une potion","Elle transforme son chapeau en lanterne","Elle lui donne son balai","Elle l'invite à souper"],a:1,why:"Dernière phrase du texte."},
+   {type:"seq",q:"Remets les événements dans l'ordre. Le premier est déjà placé.",first:"Grignotte prépare sa potion au chocolat.",o:["Elle met du sel à la place du sucre.","Elle s'assoit sur une souche, triste.","Lili lui offre la moitié de ses bonbons.","Grignotte transforme son chapeau en lanterne."],why:"Potion → sel → triste sur la souche → Lili partage → lanterne."},
+   {type:"short",q:"Pourquoi Grignotte crie-t-elle « Beurk ! » ?",kw:[["sel"]],model:"Parce qu'elle a mis du sel à la place du sucre dans sa potion.",why:"Il faut trouver la cause dans le texte : le sel."},
+   {type:"open",q:"Aurais-tu aidé la sorcière Grignotte comme Lili ? Oui, non ou peut-être ? Explique pourquoi.",model:"Oui, je l'aurais aidée, car elle était triste et seule. Comme Lili, je pense qu'il faut être gentil même avec quelqu'un qui a l'air bizarre.",check:["J'ai répondu oui, non ou peut-être.","J'ai expliqué pourquoi avec au moins deux phrases.","J'ai fait un lien avec l'histoire ou avec ma vie."]}]},
  t3:{titre:"La citrouille de Nora",p:[
   "Nora est petite pour son âge. Elle a des taches de rousseur sur le nez et des cheveux roux attachés en deux tresses. Cette année, elle veut sculpter la plus belle citrouille du quartier.",
   "Pendant tout un après-midi, Nora creuse, gratte et découpe avec soin. Quand un morceau se brise, elle ne se fâche pas : elle recommence doucement. Elle est très patiente.",
@@ -313,8 +340,10 @@ const TEXTES={
    {type:"multi",q:"Coche les caractéristiques physiques de Nora.",o:["petite","taches de rousseur","patiente","cheveux roux","impatiente"],a:[0,1,3],why:"Petite, taches de rousseur, cheveux roux en tresses : on les voit."},
    {type:"mc",q:"Quelle phrase prouve que Nora est patiente ?",o:["Elle a des cheveux roux.","Quand un morceau se brise, elle recommence doucement.","Sa citrouille gagne le concours."],a:1,why:"Recommencer calmement sans se fâcher, c'est être patient."},
    {type:"mc",q:"Arthur tape du pied et dit « C'est pas encore fini ? ». Il est…",o:["impatient","timide","honnête"],a:0,why:"Il n'aime pas attendre : il est impatient."},
-   {type:"multi",q:"Coche les DEUX caractéristiques physiques d'Arthur.",o:["grand","mince","jaloux","gentil"],a:[0,1],why:"Grand et mince. (La casquette rouge, c'est un vêtement.)"},
-   {type:"mc",q:"À la fin, Arthur boude un peu puis félicite sa sœur. Qu'est-ce que ça montre ?",o:["Il est un peu jaloux, mais gentil","Il est distrait","Il est peureux"],a:0,why:"Bouder montre un peu de jalousie, féliciter montre qu'il est gentil."}]}
+   {type:"multi",q:"Coche les TROIS caractéristiques physiques d'Arthur.",o:["grand","mince","porte une casquette rouge","impatient","gentil"],a:[0,1,2],why:"Grand, mince, et sa casquette rouge : les vêtements et accessoires qu'on voit sont des caractéristiques physiques."},
+   {type:"mc",q:"À la fin, Arthur boude un peu puis félicite sa sœur. Qu'est-ce que ça montre ?",o:["Il est un peu jaloux, mais gentil","Il est distrait","Il est peureux"],a:0,why:"Bouder montre un peu de jalousie, féliciter montre qu'il est gentil."},
+   {type:"short",q:"Quel âge a Nora ? Le texte le dit-il ?",kw:[["dit pas","pas dit","ne dit pas","non","on ne sait pas","sait pas"]],model:"Le texte ne le dit pas. Il dit seulement qu'elle est petite pour son âge.",why:"Piège ! Si l'information n'est pas dans le texte, on ne l'invente pas."},
+   {type:"open",q:"Nomme UN trait de caractère de Nora et UN trait de caractère d'Arthur. Justifie chacun avec le texte.",model:"Nora est patiente, car quand un morceau se brise, elle recommence doucement. Arthur est impatient, car il demande toutes les cinq minutes si c'est fini en tapant du pied.",check:["J'ai nommé un trait pour Nora ET un trait pour Arthur.","Chaque trait a une preuve du texte (« car… »).","J'ai écrit des phrases complètes."]}]}
 };
 
 /* ================= SCIENCES ================= */
@@ -340,20 +369,27 @@ const PRED=[
  ["« Je pense que le bonbon fondra plus vite dans l'eau chaude parce que la chaleur aide. » C'est…",["une hypothèse","une observation","du matériel"],0,"« Je pense que… parce que… » : c'est une hypothèse."],
  ["« Mon hypothèse était bonne : le bonbon a disparu plus vite dans l'eau chaude. » C'est…",["une conclusion","une question","une observation"],0,"On dit si l'hypothèse était bonne : c'est la conclusion."],
  ["Pour comparer la vitesse, qu'est-ce qui est le plus utile ?",["Un chronomètre","Une règle","Un aimant"],0,"On mesure le temps avec un chronomètre."]];
-const STEPS=["Question","Hypothèse","Matériel","Manipulation","Observations / résultats","Conclusion"];
+const SOL=[["le sucre","soluble"],["le sel","soluble"],["un bonbon dur","soluble"],["le chocolat chaud en poudre","soluble"],["la poudre à jus (Kool-Aid)","soluble"],["le poivre","non soluble"],["le sable","non soluble"],["un caillou","non soluble"],["un bouton de plastique","non soluble"],["des paillettes","non soluble"],["des copeaux de crayon","non soluble"]];
+const MIX=[["l'eau et le lait","se mélangent (miscibles)"],["l'eau et le jus","se mélangent (miscibles)"],["l'eau et l'huile","ne se mélangent pas (l'huile flotte)"]];
+GEN.sol=()=>{if(Math.random()<.25){const [m,a]=pick(MIX),o=["se mélangent (miscibles)","ne se mélangent pas (l'huile flotte)"];return qMc(`Si je verse ${m} dans un verre, ces deux liquides…`,o,o.indexOf(a),a.startsWith("se")?`${m} : on ne voit plus deux liquides séparés, ils sont miscibles.`:`L'eau et l'huile ne se mélangent pas : l'huile reste sur le dessus.`)}
+  const [x,a]=pick(SOL),o=["Soluble : il se dissout, je ne le vois plus","Non soluble : je le vois encore dans l'eau"];return qMc(`Je mets ${x} dans l'eau et je brasse. C'est…`,o,a==="soluble"?0:1,a==="soluble"?`${x[0].toUpperCase()+x.slice(1)} se dissout dans l'eau : c'est soluble, comme le sucre et le sel.`:`${x[0].toUpperCase()+x.slice(1)} reste visible au fond ou flotte : c'est non soluble, comme le sable et le poivre.`)};
+const STEPS=["Je me pose une question","Je formule une hypothèse","Je planifie ma démarche","Je fais l'expérience","Je fais un retour sur mon hypothèse"];
 
 /* ================= ACTIVITIES ================= */
 const ACTS={
  grp:{s:"ma",ic:"🧮",tt:"Les groupements",su:"14 dizaines = 140",n:10,gen:()=>GEN.grp()},
  dec:{s:"ma",ic:"🧩",tt:"La décomposition",su:"4 000 + 300 + 20 + 5",n:10,gen:()=>GEN.dec()},
+ autre:{s:"ma",ic:"🔀",tt:"Décomposer de différentes façons",su:"345 = 300 + 45 = 34 D + 5 U",n:6,gen:()=>GEN.autre()},
  calc:{s:"ma",ic:"➕",tt:"Additions et soustractions",su:"Gros nombres, en colonnes",n:8,gen:()=>GEN.calc()},
+ manque:{s:"ma",ic:"❓",tt:"Le terme manquant",su:"2 345 + ___ = 3 000",n:8,gen:()=>GEN.manque()},
  prob:{s:"ma",ic:"🎃",tt:"Problèmes d'Halloween",su:"Comme à l'évaluation",n:3,gen:()=>GEN.prob(),multi:true},
  sort:{s:"le",ic:"👀",tt:"Physique ou personnalité ?",su:"Classe chaque mot",n:12,gen:()=>GEN.sort()},
  trait:{s:"le",ic:"🕵️",tt:"Détective des traits",su:"Ce qu'il fait montre qui il est",n:8,gen:()=>GEN.trait()},
- t1:{s:"le",ic:"👻",tt:"Texte : Le fantôme de la classe",su:"Lire seul + 5 questions",text:"t1"},
- t2:{s:"le",ic:"🧙",tt:"Texte : La sorcière Grignotte",su:"Lire seul + 5 questions",text:"t2"},
- t3:{s:"le",ic:"🎃",tt:"Texte : La citrouille de Nora",su:"Lire seul + 5 questions",text:"t3"},
+ t1:{s:"le",ic:"👻",tt:"Texte : Le fantôme de la classe",su:"Lire seul + 8 questions",text:"t1"},
+ t2:{s:"le",ic:"🧙",tt:"Texte : La sorcière Grignotte",su:"Lire seul + 8 questions",text:"t2"},
+ t3:{s:"le",ic:"🎃",tt:"Texte : La citrouille de Nora",su:"Lire seul + 7 questions",text:"t3"},
  etapes:{s:"sc",ic:"🪜",tt:"Les étapes dans l'ordre",su:"La démarche scientifique",order:true},
+ sol:{s:"sc",ic:"🧂",tt:"Soluble ou non soluble ?",su:"Sucre, sel, sable, poivre…",n:10,gen:()=>GEN.sol()},
  mots:{s:"sc",ic:"📚",tt:"Les mots des scientifiques",su:"Dissoudre, soluble, hypothèse…",list:VOCAB},
  pred:{s:"sc",ic:"🔮",tt:"Que va-t-il se passer ?",su:"Prédire et expliquer",list:PRED},
  labo:{s:"sc",ic:"🧪",tt:"Mon expérience à la maison",su:"Bonbons dans l'eau chaude et froide",lab:true}
@@ -369,8 +405,8 @@ function renderActs(){[["ma","actsMa"],["le","actsLe"],["sc","actsSc"]].forEach(
 const DATES={ma:new Date(2026,9,28),le:new Date(2026,9,29)};
 const DAYS=[
  {d:new Date(2026,9,25),n:"Dimanche 25 octobre",a:["grp","dec","sort"]},
- {d:new Date(2026,9,26),n:"Lundi 26 octobre",a:["calc","t1","etapes","mots"]},
- {d:new Date(2026,9,27),n:"Mardi 27 octobre",a:["prob","trait","labo"],note:"Le soir : 10 minutes de révision des groupements, puis au lit tôt !"},
+ {d:new Date(2026,9,26),n:"Lundi 26 octobre",a:["autre","calc","t1","etapes","sol"]},
+ {d:new Date(2026,9,27),n:"Mardi 27 octobre",a:["manque","prob","trait","labo","mots"],note:"Le soir : 10 minutes de révision des groupements, puis au lit tôt !"},
  {d:new Date(2026,9,28),n:"Mercredi 28 octobre",exam:"🔢 Évaluation de maths aujourd'hui",a:["grp","t2","pred"],note:"Le matin : seulement 5 minutes de groupements pour réchauffer le cerveau. Le soir : lecture et sciences pour demain."},
  {d:new Date(2026,9,29),n:"Jeudi 29 octobre",exam:"📖 Lecture et 🧪 sciences aujourd'hui",a:["t3","etapes"],note:"Le matin : relire les 6 étapes de la démarche. Bon déjeuner, et confiance !"}];
 function renderPlan(){
@@ -382,7 +418,18 @@ function renderPlan(){
     <li><b>Maths :</b> demandez-lui d'écrire sa démarche sur papier (calcul en colonnes + phrase-réponse). À l'évaluation, la démarche compte autant que la réponse.</li>
     <li><b>Lecture :</b> l'évaluation se fait <b>seul</b>. Laissez-le lire les textes sans aide, puis faites-lui justifier à voix haute : « Comment le sais-tu ? Montre-moi la phrase. »</li>
     <li><b>Sciences :</b> faites l'expérience de l'onglet Sciences (2 verres, eau chaude et froide, 2 bonbons pareils). Laissez-le remplir la fiche lui-même.</li>
-    <li>Les étoiles sont gardées sur cet appareil. Chaque mission peut être refaite : les questions changent.</li></ul></div>`;
+    <li>Les étoiles sont gardées sur cet appareil. Chaque mission peut être refaite : les questions changent.</li></ul>
+    <h3 style="margin-top:12px">📚 D'où viennent ces exercices</h3>
+    <ul class="src">
+     <li><a href="https://www.alloprof.qc.ca/fr/eleves/bv/francais/les-caracteristiques-des-personnages-2e-cycle-f1741p34" target="_blank" rel="noopener">Alloprof · Les caractéristiques des personnages (3e et 4e année)</a> : définitions physique / traits de caractère.</li>
+     <li><a href="https://www.alloprof.qc.ca/fr/enseignants/ressources-pour-enseigner/etapes-demarche-scientifique-z0049" target="_blank" rel="noopener">Alloprof · Affiche « Fais de la science avec Flo »</a> : les 5 étapes de la démarche au primaire.</li>
+     <li><a href="https://www.alloprof.qc.ca/fr/eleves/bv/mathematiques/decomposer-des-nombres-primaire-m1660" target="_blank" rel="noopener">Alloprof · Décomposer des nombres</a></li>
+     <li><a href="https://cdn-contenu.quebec.ca/cdn-contenu/education/pfeq/primaire/progressions-apprentissages/PFEQ-progression-apprentissages-mathematique-primaire.pdf" target="_blank" rel="noopener">Ministère · Progression des apprentissages en mathématique</a> : décomposer « de différentes façons », terme manquant, calcul écrit jusqu'à 4 chiffres.</li>
+     <li><a href="https://cdn-contenu.quebec.ca/cdn-contenu/education/pfeq/primaire/progressions-apprentissages/PFEQ-progression-apprentissages-science-technologie-primaire.pdf" target="_blank" rel="noopener">Ministère · Progression des apprentissages en science</a> : soluble (sel, sucre) / non soluble (poivre, sable).</li>
+     <li><a href="https://csscdr.gouv.qc.ca/wp-content/uploads/2022/04/Guide_parents_francais_4e_Prim.pdf" target="_blank" rel="noopener">Ministère · Guide aux parents, épreuve de lecture (4e année)</a> : modèles des sortes de questions.</li>
+     <li><a href="https://cybersavoir.cssdm.gouv.qc.ca/evaluation/wp-content/uploads/sites/9/2021/11/Grille-devaluation-criteriee-Primaire-ST_2e3eCycles.pdf" target="_blank" rel="noopener">CSSDM · Grille d'évaluation en science (2e et 3e cycles)</a></li>
+    </ul>
+    <p class="muted" style="margin-top:6px">Les évaluations de 3e année sont préparées par l'enseignante : il n'existe pas d'anciens examens officiels. Les textes de lecture ici sont des textes d'entraînement originaux.</p></div>`;
 }
 function renderCountdown(){const t=new Date(),today=new Date(t.getFullYear(),t.getMonth(),t.getDate());
   const c=d=>{const n=Math.round((d-today)/864e5);return n>1?`${n} jours`:n===1?"Demain !":n===0?"Aujourd'hui !":"Terminé ✓"};
@@ -431,6 +478,30 @@ function runQuiz(body,qs,onEnd){let i=0,ok=0;
         else if(!tried){tried=true;inp.classList.add("no","shake");setTimeout(()=>inp.classList.remove("shake"),400);fb.className="fb no";fb.textContent="Pas tout à fait. Vérifie ton calcul et essaie encore !";inp.select()}
         else{done=true;inp.classList.add("no");inp.readOnly=true;fb.className="fb no";fb.innerHTML=`La réponse est <b>${fmt(q.a)}</b>.`;$("ck").remove();showWhy(false)}};
       $("ck").onclick=check;inp.onkeydown=e=>{if(e.key==="Enter")check()};
+    }else if(q.type==="seq"){
+      const order=[0,1,2,3].slice(0,q.o.length),mix=shuffle(order),picked=[];
+      const draw=()=>{body.innerHTML=head+`<div class="order"><div class="slot fill"><span class="n">1.</span>${esc(q.first)}</div>${q.o.map((x,j)=>`<div class="slot${picked[j]!=null?" fill":""}"><span class="n">${j+2}.</span>${picked[j]!=null?esc(q.o[picked[j]]):""}</div>`).join("")}</div>
+        <div class="opts" style="margin-top:12px">${mix.filter(j=>!picked.includes(j)).map(j=>`<button class="opt" data-q="${j}">${esc(q.o[j])}</button>`).join("")}</div><div class="fb" id="fb"></div>`;
+        body.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>{const j=+b.dataset.q;
+          if(j===picked.length){picked.push(j);if(picked.length===q.o.length){if(!tried)ok++;draw();$("fb").className="fb ok";$("fb").textContent=tried?"C'est le bon ordre maintenant.":"Bravo, le bon ordre du premier coup !";showWhy(!tried);return}draw()}
+          else{tried=true;b.classList.add("no","shake");$("fb").className="fb no";$("fb").textContent="Pas encore. Retourne au texte : qu'est-ce qui arrive juste après ?";setTimeout(()=>b.classList.remove("no","shake"),500)}})};
+      draw();
+    }else if(q.type==="short"){
+      body.innerHTML=head+`<div class="row"><input class="ans" id="in" style="max-width:520px;font-size:1.05rem;font-weight:600" autocomplete="off" placeholder="J'écris ma réponse ici"><button class="btn primary" id="ck">Vérifier</button></div><div class="fb" id="fb"></div>`;
+      const inp=$("in");inp.focus();
+      const norm=t=>t.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+      const check=()=>{if(!inp.value.trim())return;const v=norm(inp.value),good=q.kw.every(g=>g.some(k=>v.includes(norm(k))));
+        $("ck").remove();inp.readOnly=true;inp.classList.add(good?"ok":"no");if(good)ok++;
+        $("fb").className="fb "+(good?"ok":"no");$("fb").textContent=good?"Bravo !":"Compare avec la réponse attendue :";
+        body.insertAdjacentHTML("beforeend",`<div class="model">✍️ Réponse attendue : <b>${esc(q.model)}</b></div>`);showWhy(good)};
+      $("ck").onclick=check;inp.onkeydown=e=>{if(e.key==="Enter")check()};
+    }else if(q.type==="open"){
+      body.innerHTML=head+`<textarea class="f" id="ta" style="min-height:110px" placeholder="J'écris ma réponse en phrases complètes…"></textarea><div class="row"><button class="btn primary" id="ck">J'ai fini ma réponse</button></div>`;
+      $("ta").focus();
+      $("ck").onclick=()=>{if($("ta").value.trim().split(/\s+/).length<4){$("ta").classList.add("shake");setTimeout(()=>$("ta").classList.remove("shake"),400);return}
+        $("ta").readOnly=true;$("ck").parentNode.remove();
+        body.insertAdjacentHTML("beforeend",`<div class="model">💡 Exemple de bonne réponse : <b>${esc(q.model)}</b></div><p style="font-weight:800;margin-top:10px">Je vérifie ma réponse (avec un adulte) :</p><div class="self">${q.check.map((c,j)=>`<label><input type="checkbox" data-c="${j}"> ${esc(c)}</label>`).join("")}</div><div class="row"><button class="btn primary" id="nx">Suivant →</button></div>`);
+        $("nx").onclick=()=>{if(body.querySelectorAll("[data-c]:checked").length===q.check.length)ok++;next()}};
     }else if(q.type==="multi"){
       const sel=new Set();
       body.innerHTML=head+`<div class="opts">${q.o.map((o,j)=>`<button class="opt" data-o="${j}">${esc(o)}</button>`).join("")}</div><div class="row"><button class="btn primary" id="ck">Vérifier</button></div><div class="fb" id="fb"></div>`;
@@ -462,7 +533,7 @@ function runOrder(body,k){const mix=shuffle(STEPS.map((s,i)=>i));const placed=[]
     <div class="order">${STEPS.map((s,i)=>`<div class="slot${placed[i]!=null?" fill":""}"><span class="n">${i+1}.</span>${placed[i]!=null?STEPS[placed[i]]:""}</div>`).join("")}</div>
     <div class="opts inl" style="margin-top:14px">${mix.filter(i=>!placed.includes(i)).map(i=>`<button class="opt" data-s="${i}">${STEPS[i]}</button>`).join("")}</div><div class="fb" id="fb"></div>`;
     body.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{const i=+b.dataset.s;
-      if(i===placed.length){placed.push(i);if(placed.length===STEPS.length)return finish(body,k,0,0,err?`${err} erreur${err>1?"s":""}. Récite les 6 étapes à voix haute !`:"Parfait ! Tu connais la démarche par cœur.",err===0?3:err<=2?2:1);draw()}
+      if(i===placed.length){placed.push(i);if(placed.length===STEPS.length)return finish(body,k,0,0,err?`${err} erreur${err>1?"s":""}. Récite les 5 étapes à voix haute !`:"Parfait ! Tu connais la démarche par cœur.",err===0?3:err<=2?2:1);draw()}
       else{err++;b.classList.add("no","shake");$("fb").className="fb no";$("fb").textContent=`Pas encore ! Quelle étape vient après « ${placed.length?STEPS[placed.length-1]:"le début"} » ?`;setTimeout(()=>b.classList.remove("no","shake"),500)}})}
   draw()}
 
@@ -471,15 +542,15 @@ function runLab(body,k){const L=S.lab;
   const TIMES=["1 min","3 min","5 min","10 min"];
   body.innerHTML=`<h2 style="font-size:1.4rem;font-weight:900">🧪 Mon expérience : les bonbons qui disparaissent</h2>
    <p class="muted" style="margin-top:4px">Fais l'expérience avec un adulte (attention à l'eau chaude !). Remplis chaque étape toi-même.</p>
-   ${f("q","1. Ma question","Est-ce qu'un bonbon se dissout plus vite dans l'eau chaude ou dans l'eau froide ?")}
-   ${f("h","2. Mon hypothèse","Je pense que… parce que…")}
-   <label class="lb">3. Mon matériel</label><p class="muted">2 verres pareils · de l'eau chaude du robinet · de l'eau froide · 2 bonbons pareils (ex. : Skittles ou bonbons durs) · une tasse à mesurer · un chronomètre</p>
-   <label class="lb">4. Ma manipulation</label><ol class="muted" style="margin:4px 0 0;padding-left:20px"><li>Je verse la même quantité d'eau dans chaque verre : chaude dans un, froide dans l'autre.</li><li>Je mets un bonbon dans chaque verre en même temps.</li><li>Je ne brasse pas.</li><li>J'observe à 1, 3, 5 et 10 minutes et je note.</li></ol>
+   ${f("q","1. Je me pose une question","Est-ce qu'un bonbon se dissout plus vite dans l'eau chaude ou dans l'eau froide ?")}
+   ${f("h","2. Je formule une hypothèse","Je pense que… parce que…")}
+   <label class="lb">3. Je planifie ma démarche : mon matériel</label><p class="muted">2 verres pareils · de l'eau chaude du robinet · de l'eau froide · 2 bonbons pareils (ex. : Skittles ou bonbons durs) · une tasse à mesurer · un chronomètre</p>
+   <label class="lb">Mes étapes</label><ol class="muted" style="margin:4px 0 0;padding-left:20px"><li>Je verse la même quantité d'eau dans chaque verre : chaude dans un, froide dans l'autre.</li><li>Je mets un bonbon dans chaque verre en même temps.</li><li>Je ne brasse pas.</li><li>J'observe à 1, 3, 5 et 10 minutes et je note.</li></ol>
    <div class="row"><span class="timer" id="tmr">0:00</span><button class="btn primary" id="tgo">▶ Démarrer le chronomètre</button><button class="btn small" id="trs">Remettre à 0</button></div>
-   <label class="lb">5. Mes observations</label>
+   <label class="lb">4. Je fais l'expérience et j'observe</label><p class="muted">🦺 Sécurité : un adulte verse l'eau chaude. On ne goûte pas pendant l'expérience.</p>
    <div style="overflow-x:auto"><table class="lab"><tr><th>Temps</th><th>Eau chaude</th><th>Eau froide</th></tr>${TIMES.map((t,i)=>`<tr><td><b>${t}</b></td><td><input data-o="c${i}" value="${esc(L["c"+i]||"")}" placeholder="ce que je vois"></td><td><input data-o="f${i}" value="${esc(L["f"+i]||"")}" placeholder="ce que je vois"></td></tr>`).join("")}</table></div>
    ${f("r","Mes résultats","Le bonbon a disparu le plus vite dans…")}
-   ${f("c","6. Ma conclusion","Mon hypothèse était (bonne / pas bonne), car…")}
+   ${f("c","5. Je fais un retour sur mon hypothèse et je réponds à la question","Mon hypothèse était (juste / pas juste), car j'ai observé que… Donc, la réponse à ma question est…")}
    <div class="tip"><b>Mots à utiliser :</b> se dissout · dissolution · soluble · la couleur se répand · plus vite · moins vite</div>
    <div class="row"><button class="btn good" id="fin">J'ai fini mon expérience ✓</button><button class="btn small" onclick="window.print()">🖨️ Imprimer la fiche</button></div>`;
   body.querySelectorAll("textarea.f").forEach(t=>t.oninput=()=>{L[t.id]=t.value;save()});
