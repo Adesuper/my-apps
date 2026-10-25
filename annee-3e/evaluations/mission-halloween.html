@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Mission Halloween</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&family=Literata:opsz,wght@7..72,400;7..72,600&family=Caveat:wght@500;700&display=swap">
+<style>
+:root{
+  --paper:#FBF7F1; --panel:#FFFFFF; --panel-2:#FFFBF5;
+  --ink:#231A2E; --ink-soft:#5E5470; --ink-faint:#958BA6;
+  --grid:rgba(160,120,200,.10); --line:#EDE4F2; --rule:#D9CCE6;
+  --orange:#D9620F; --orange-soft:#FDEBDD; --violet:#6B3FB8; --violet-soft:#EFE7FB;
+  --vert:#2E8B57; --vert-soft:#E4F4EB; --rouge:#C8394A; --rouge-soft:#FBE6E9;
+  --bleu:#2F4FC9; --bleu-soft:#E7ECFC; --or:#E8A317;
+  --shadow:0 8px 22px rgba(35,26,46,.09);
+  --display:"Gabarito","Trebuchet MS",system-ui,sans-serif;
+  --body:"Literata",Georgia,serif; --hand:"Caveat","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#14101B; --panel:#1E1828; --panel-2:#241D30; --ink:#EEE8F6; --ink-soft:#B3A9C6; --ink-faint:#887E9C;
+  --grid:rgba(180,140,255,.06); --line:#30273E; --rule:#3C3150;
+  --orange:#F59A52; --orange-soft:#3A2414; --violet:#B597F2; --violet-soft:#2B2140;
+  --vert:#66C795; --vert-soft:#16301F; --rouge:#EE7D8B; --rouge-soft:#3A1C22; --bleu:#8FA8FF; --bleu-soft:#1E2946; --or:#F4C24F;
+  --shadow:0 8px 22px rgba(0,0,0,.4)}}
+:root[data-theme="dark"]{
+  --paper:#14101B; --panel:#1E1828; --panel-2:#241D30; --ink:#EEE8F6; --ink-soft:#B3A9C6; --ink-faint:#887E9C;
+  --grid:rgba(180,140,255,.06); --line:#30273E; --rule:#3C3150;
+  --orange:#F59A52; --orange-soft:#3A2414; --violet:#B597F2; --violet-soft:#2B2140;
+  --vert:#66C795; --vert-soft:#16301F; --rouge:#EE7D8B; --rouge-soft:#3A1C22; --bleu:#8FA8FF; --bleu-soft:#1E2946; --or:#F4C24F;
+  --shadow:0 8px 22px rgba(0,0,0,.4)}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--display);color:var(--ink);background-color:var(--paper);
+  background-image:repeating-linear-gradient(to bottom,transparent 0 23px,var(--grid) 23px 24px),repeating-linear-gradient(to right,transparent 0 23px,var(--grid) 23px 24px);
+  line-height:1.5;font-size:17px;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4{margin:0;line-height:1.15;text-wrap:balance}
+p{margin:0}
+button,input,textarea{font-family:var(--display);color:inherit}
+button{cursor:pointer}
+a{color:var(--bleu)}
+:focus-visible{outline:3px solid var(--violet);outline-offset:2px;border-radius:8px}
+.wrap{max-width:860px;margin:0 auto;padding-inline:16px}
+header.hero{background:linear-gradient(135deg,#3B1F63,#6B3FB8 55%,#D9620F);color:#fff;padding:22px 0 20px}
+.hero .ey{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.85}
+.hero .ey a{color:#fff}
+.hero h1{font-size:clamp(1.7rem,6vw,2.5rem);font-weight:900;margin-top:4px}
+.hero p.s{opacity:.92;margin-top:6px;max-width:60ch;font-size:.98rem}
+.cd{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(190px,100%),1fr));gap:10px;margin-top:14px}
+.cd div{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:10px 13px}
+.cd b{display:block;font-size:1.5rem;font-weight:900}
+.cd span{font-size:.85rem;opacity:.9}
+.bar{position:sticky;top:0;z-index:20;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+.tab{font-weight:700;font-size:.9rem;border:1px solid var(--line);background:var(--panel-2);padding:8px 13px;border-radius:12px;white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--violet);border-color:var(--violet);color:#fff}
+.tot{margin-left:auto;font-weight:800;white-space:nowrap;align-self:center;font-size:.92rem;padding-left:8px}
+.tot b{color:var(--or)}
+main{padding-block:18px 70px}
+section[hidden]{display:none}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:var(--shadow);margin-bottom:14px}
+.ch{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.ch .ic{font-size:1.5rem}
+.ch h3{font-size:1.15rem;flex:1 1 auto}
+.pill{font-size:.72rem;font-weight:700;letter-spacing:.04em;padding:3px 10px;border-radius:99px;background:var(--violet-soft);color:var(--violet);white-space:nowrap}
+.muted{color:var(--ink-soft);font-size:.94rem}
+.consigne{font-family:var(--hand);font-size:1.38rem;color:var(--orange);line-height:1.3;margin:6px 0}
+.tip{background:var(--orange-soft);border-radius:13px;padding:11px 14px;margin-top:10px;font-size:.95rem}
+.tip b{color:var(--orange)}
+.tip ul{margin:4px 0 0;padding-left:18px}
+.h2{font-size:1.35rem;font-weight:900;margin:22px 0 10px}
+.acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:10px}
+.act{display:flex;gap:12px;align-items:center;text-align:left;background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:13px 14px;box-shadow:var(--shadow);width:100%}
+.act:hover{border-color:var(--violet)}
+.act .ic{font-size:1.6rem;width:46px;height:46px;flex:0 0 46px;border-radius:13px;display:grid;place-items:center;background:var(--violet-soft)}
+.act.ma .ic{background:var(--bleu-soft)} .act.le .ic{background:var(--rouge-soft)} .act.sc .ic{background:var(--vert-soft)}
+.act .tt{font-weight:800;display:block}
+.act .su{font-size:.84rem;color:var(--ink-soft);display:block}
+.act .st{margin-left:auto;color:var(--or);white-space:nowrap;font-size:1.05rem}
+.act.done{border-color:var(--vert)}
+.btn{font-weight:700;font-size:1rem;border:1.5px solid var(--line);background:var(--panel-2);padding:10px 17px;border-radius:13px}
+.btn:hover:not(:disabled){border-color:var(--violet)}
+.btn.primary{background:var(--violet);border-color:var(--violet);color:#fff}
+.btn.good{background:var(--vert);border-color:var(--vert);color:#fff}
+.btn.small{font-size:.85rem;padding:7px 12px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.prog{font-size:.84rem;color:var(--ink-faint);font-weight:700}
+.qbig{font-weight:800;font-size:clamp(1.15rem,4.4vw,1.5rem);margin:8px 0 4px;line-height:1.35}
+.story{background:var(--panel-2);border:1px solid var(--line);border-left:5px solid var(--orange);border-radius:12px;padding:11px 14px;font-family:var(--body);font-size:1.02rem;line-height:1.7;margin-top:6px}
+.opts{display:grid;gap:8px;margin-top:10px}
+.opts.inl{grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr))}
+.opt{font-weight:700;font-size:1.02rem;border:2px solid var(--rule);background:var(--panel);border-radius:13px;padding:11px 13px;text-align:left}
+.opt:hover:not(:disabled){border-color:var(--violet)}
+.opt.ok{border-color:var(--vert);background:var(--vert-soft);color:var(--vert)}
+.opt.no{border-color:var(--rouge);background:var(--rouge-soft);text-decoration:line-through;opacity:.8}
+.opt.sel{border-color:var(--violet);background:var(--violet-soft)}
+.ans{width:100%;max-width:260px;padding:11px 13px;font-size:1.3rem;font-weight:800;border:2px solid var(--rule);border-radius:12px;background:var(--panel-2)}
+.ans:focus{outline:none;border-color:var(--violet)}
+.ans.ok{border-color:var(--vert);background:var(--vert-soft)} .ans.no{border-color:var(--rouge);background:var(--rouge-soft)}
+.fb{font-weight:700;margin-top:8px;min-height:1.4em}
+.fb.ok{color:var(--vert)} .fb.no{color:var(--rouge)}
+.why{background:var(--bleu-soft);border-radius:12px;padding:10px 13px;margin-top:8px;font-size:.95rem}
+pre.col{font-family:ui-monospace,Consolas,monospace;font-size:1.35rem;line-height:1.35;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 18px;display:inline-block;margin:8px 0 0}
+.win{text-align:center;padding:8px 0}
+.win .ws{font-size:2.8rem;letter-spacing:6px;color:var(--or)}
+.win h2{font-size:1.6rem;font-weight:900;margin-top:4px}
+.texte{font-family:var(--body);font-size:1.1rem;line-height:1.95;background:var(--panel-2);border:1px solid var(--line);border-radius:14px;padding:15px 17px;margin-top:10px}
+.texte p+p{margin-top:10px}
+.order{display:grid;gap:8px;margin-top:10px}
+.slot{border:2px dashed var(--rule);border-radius:12px;padding:10px 13px;min-height:46px;font-weight:700;display:flex;gap:10px;align-items:center}
+.slot .n{color:var(--ink-faint);width:22px}
+.slot.fill{border-style:solid;border-color:var(--vert);background:var(--vert-soft)}
+table.lab{width:100%;border-collapse:collapse;margin-top:8px;font-size:.95rem}
+table.lab th,table.lab td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+table.lab th{background:var(--panel-2);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
+table.lab input{width:100%;border:none;background:none;font-size:.95rem;padding:2px}
+textarea.f{width:100%;min-height:62px;border:1.5px solid var(--rule);border-radius:10px;padding:8px 10px;background:var(--panel-2);font-size:1rem;line-height:1.6;margin-top:4px}
+label.lb{font-weight:800;display:block;margin-top:12px}
+.timer{font-weight:900;font-size:2rem;font-variant-numeric:tabular-nums}
+.days{display:grid;gap:10px}
+.day{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:13px 15px;box-shadow:var(--shadow)}
+.day.today{border:2px solid var(--orange)}
+.day.exam{background:var(--orange-soft);border-color:transparent}
+.day h3{font-size:1.05rem}
+.day .d{font-size:.8rem;color:var(--ink-faint);font-weight:700}
+.day ul{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:6px}
+.day li a{font-weight:700;text-decoration:none}
+.day li .s{color:var(--or);margin-left:6px}
+.parent{border:2px dashed var(--rule);border-radius:16px;padding:14px 16px;margin-top:14px}
+.parent h3{color:var(--violet);font-size:1.05rem}
+.parent li{margin-bottom:4px;font-size:.94rem;color:var(--ink-soft)}
+.parent li b{color:var(--ink)}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden}
+.confetti i{position:absolute;top:-30px;font-size:22px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+.shake{animation:sh .35s}
+@keyframes sh{0%,100%{transform:none}30%{transform:translateX(-6px)}60%{transform:translateX(6px)}}
+@media (prefers-reduced-motion:reduce){.confetti{display:none}.shake{animation:none}}
+@media print{.bar,.noprint,header.hero .cd{display:none!important}body{background:#fff;background-image:none}.card{box-shadow:none}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <p class="ey"><a href="../index.html">Ma 3<sup>e</sup> année</a> · fin d'étape</p>
+    <h1>🎃 Mission Halloween</h1>
+    <p class="s">Trois évaluations arrivent. Chaque mission te prépare à une partie : les nombres et un problème d'Halloween, la lecture d'une histoire, et une expérience avec des bonbons qui fondent dans l'eau.</p>
+    <div class="cd" id="cd"></div>
+  </div>
+</header>
+<nav class="bar noprint"><div class="wrap tabs" id="tabs">
+  <button class="tab" data-t="plan">🗓️ Mon plan</button>
+  <button class="tab" data-t="maths">🔢 Maths</button>
+  <button class="tab" data-t="lecture">📖 Lecture</button>
+  <button class="tab" data-t="sciences">🧪 Sciences</button>
+  <span class="tot" id="tot"></span>
+</div></nav>
+
+<main class="wrap">
+<section id="plan"></section>
+
+<section id="maths" hidden>
+  <div class="card">
+    <div class="ch"><span class="ic">🔢</span><h3>Évaluation de maths · mercredi 28 octobre</h3></div>
+    <p class="muted">Tu vas résoudre un <b>court problème d'Halloween</b>. Pour réussir, il faut savoir : <b>décomposer</b> un nombre, <b>additionner et soustraire de gros nombres</b>, et faire des <b>groupements</b> (ex. : 14 dizaines = 140).</p>
+    <div class="tip"><b>Ma démarche en 4 étapes</b><ul><li><b>Je lis</b> le problème deux fois et j'encercle les nombres.</li><li><b>Je cherche</b> : je souligne la question.</li><li><b>Je calcule</b> : je pose mes calculs en colonnes, je vérifie.</li><li><b>Je réponds</b> avec une phrase : « Il y a … bonbons. »</li></ul></div>
+  </div>
+  <div class="acts" id="actsMa"></div>
+</section>
+
+<section id="lecture" hidden>
+  <div class="card">
+    <div class="ch"><span class="ic">📖</span><h3>Évaluation de lecture · jeudi 29 octobre</h3></div>
+    <p class="muted">Tu vas lire <b>seul</b> une histoire et répondre à des questions. Il faudra nommer les <b>caractéristiques physiques</b> et les <b>traits de personnalité</b> des personnages.</p>
+    <div class="tip"><b>Physique ou personnalité ?</b><ul><li><b>Physique</b> = ce que je <b>vois</b> : grand, cheveux roux, yeux verts, lunettes…</li><li><b>Personnalité</b> = comment le personnage <b>est à l'intérieur</b> : courageux, gourmand, timide, généreux…</li><li>La personnalité se devine souvent par ce que le personnage <b>fait</b> ou <b>dit</b>. Cherche la <b>preuve</b> dans le texte !</li></ul></div>
+  </div>
+  <div class="acts" id="actsLe"></div>
+</section>
+
+<section id="sciences" hidden>
+  <div class="card">
+    <div class="ch"><span class="ic">🧪</span><h3>Évaluation de sciences · jeudi 29 octobre</h3></div>
+    <p class="muted">Tu vas faire une <b>expérience sur la dissolution des bonbons d'Halloween</b>. On évalue si tu sais suivre la <b>démarche scientifique</b>, étape par étape.</p>
+    <div class="tip"><b>La démarche scientifique</b><ul><li>1. <b>Question</b> : qu'est-ce que je veux savoir ?</li><li>2. <b>Hypothèse</b> : « Je pense que… parce que… »</li><li>3. <b>Matériel</b> : ce dont j'ai besoin.</li><li>4. <b>Manipulation</b> : je fais l'expérience, en suivant les étapes.</li><li>5. <b>Observations / résultats</b> : ce que je vois, je le note.</li><li>6. <b>Conclusion</b> : mon hypothèse était-elle bonne ?</li></ul></div>
+  </div>
+  <div class="acts" id="actsSc"></div>
+</section>
+
+<section id="run" hidden><div class="card" id="runCard"></div></section>
+</main>
+
+<script>
+(function(){
+const KEY="mission-halloween-v1";
+let S={};try{S=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
+S.stars=S.stars||{};S.lab=S.lab||{};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const $=id=>document.getElementById(id);
+const R=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[Math.random()*a.length|0];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const fmt=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g," ");
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const stars=n=>"★".repeat(n)+"☆".repeat(3-n);
+
+/* ================= MATHS ================= */
+function qNum(q,a,why,extra){return {type:"num",q,a,why,extra}}
+function qMc(q,o,a,why,story){return {type:"mc",q,o,a,why,story}}
+const GEN={};
+GEN.grp=()=>{const t=R(0,6);let n,c,d,m;
+  switch(t){
+   case 0:n=R(11,99);return qNum(`${n} dizaines = ?`,n*10,`${n} dizaines, c'est ${n} paquets de 10 : ${n} × 10 = ${fmt(n*10)}. Truc : on ajoute un 0.`);
+   case 1:n=R(11,45);return qNum(`${n} centaines = ?`,n*100,`${n} centaines = ${n} × 100 = ${fmt(n*100)}. Truc : on ajoute deux 0.`);
+   case 2:n=R(12,99)*10;return qNum(`Combien de dizaines y a-t-il en tout dans ${fmt(n)} ?`,n/10,`Dans ${fmt(n)}, on cache le chiffre des unités : il y a ${n/10} dizaines en tout.`);
+   case 3:c=R(1,8);d=R(10,19);return qNum(`${c} centaines et ${d} dizaines = ?`,c*100+d*10,`${c} centaines = ${c*100}. ${d} dizaines = ${d*10}. ${c*100} + ${d*10} = ${fmt(c*100+d*10)}.`);
+   case 4:n=R(11,60)*100;return qNum(`Combien de centaines y a-t-il en tout dans ${fmt(n)} ?`,n/100,`Dans ${fmt(n)}, on cache les dizaines et les unités : ${n/100} centaines en tout.`);
+   case 5:d=R(10,19);n=R(1,9);return qNum(`${d} dizaines et ${n} unités = ?`,d*10+n,`${d} dizaines = ${d*10}, plus ${n} unités = ${d*10+n}.`);
+   default:m=R(1,8);c=R(10,15);return qNum(`${m} unités de mille et ${c} centaines = ?`,m*1000+c*100,`${m} UM = ${fmt(m*1000)}. ${c} centaines = ${fmt(c*100)}. Total : ${fmt(m*1000+c*100)}.`);
+  }};
+GEN.dec=()=>{const t=R(0,5);const um=R(1,9),c=R(0,9),d=R(0,9),u=R(0,9),n=um*1000+c*100+d*10+u;
+  switch(t){
+   case 0:{const parts=[um*1000,c*100,d*10,u].filter(x=>x);return qNum(`Quel nombre ? ${parts.map(fmt).join(" + ")}`,n,`On place chaque chiffre à sa position : ${um} UM, ${c} C, ${d} D, ${u} U → ${fmt(n)}. S'il manque une position, on écrit 0.`)}
+   case 1:{const lab=[[um,"UM"],[c,"C"],[d,"D"],[u,"U"]].filter(x=>x[0]).map(x=>x.join(" ")).join(" + ");return qNum(`Quel nombre ? ${lab}`,n,`${um} unités de mille, ${c} centaines, ${d} dizaines, ${u} unités → ${fmt(n)}.`)}
+   case 2:{const parts=[um*1000,c*100,d*10,u];let k=R(1,2);if(!parts[k])parts[k]=(k===1?R(1,9)*100:R(1,9)*10);const nn=parts.reduce((a,b)=>a+b,0);const shown=parts.map((x,i)=>i===k?"___":fmt(x));return qNum(`${fmt(nn)} = ${shown.join(" + ")}`,parts[k],`Il manque la valeur du chiffre des ${k===1?"centaines":"dizaines"} : ${fmt(parts[k])}.`)}
+   case 3:{const digs=[[um,1000,"unités de mille"],[c,100,"centaines"],[d,10,"dizaines"]].filter(x=>x[0]);const x=pick(digs);return qNum(`Dans ${fmt(n)}, quelle est la valeur du chiffre ${x[0]} (position des ${x[2]}) ?`,x[0]*x[1],`Le ${x[0]} est à la position des ${x[2]}, il vaut ${fmt(x[0]*x[1])}.`)}
+   case 4:{const cc=R(1,6),dd=R(10,19),uu=R(0,9),v=cc*100+dd*10+uu;return qNum(`${cc} C + ${dd} D + ${uu} U = ?`,v,`Attention : ${dd} dizaines = ${dd*10}. Donc ${cc*100} + ${dd*10} + ${uu} = ${v}.`)}
+   default:{const good=[um*1000,c*100,d*10,u].filter(x=>x).map(fmt).join(" + ");const bad1=[um*100,c*1000,d*10,u].filter(x=>x).map(fmt).join(" + ");const bad2=[um*1000,c*10,d*100,u].filter(x=>x).map(fmt).join(" + ");const bad3=[um*1000,c*100,d,u*10].filter(x=>x).map(fmt).join(" + ");
+     const o=[...new Set([good,bad1,bad2,bad3])];const oo=shuffle(o);return qMc(`Quelle décomposition est égale à ${fmt(n)} ?`,oo,oo.indexOf(good),`${fmt(n)} = ${good}.`)}
+  }};
+function colLayout(a,b,op){const w=Math.max(String(a).length,String(b).length)+2;return `<pre class="col">${String(a).padStart(w)}\n${op}${String(b).padStart(w-1)}\n${"‾".repeat(w)}</pre>`}
+GEN.calc=()=>{const t=R(0,4);let a,b;
+  if(t===0){a=R(150,899);b=R(150,899);}
+  else if(t===1){a=R(1200,6800);b=R(250,2900);}
+  else if(t===2){a=R(400,999);b=R(120,a-50)}
+  else if(t===3){a=pick([1000,2000,3000,5000,4005,3002,6001,2050]);b=R(137,a>1500?1499:899)}
+  else{a=R(3000,9500);b=R(1100,a-200)}
+  const add=t<2,res=add?a+b:a-b;
+  return qNum(`${fmt(a)} ${add?"+":"−"} ${fmt(b)} = ?`,res,add?`Je pose en colonnes, je commence par les unités et je fais la retenue quand ça dépasse 9. Réponse : ${fmt(res)}.`:`Je pose en colonnes, je commence par les unités. Si le chiffre du haut est trop petit, j'emprunte à la position voisine. Réponse : ${fmt(res)}. Vérifie : ${fmt(res)} + ${fmt(b)} = ${fmt(a)}.`,colLayout(a,b,add?"+":"−"))};
+const NAMES=["Léo","Noah","Liam","Félix","Samuel","Nathan"];
+GEN.prob=()=>{const t=R(0,5),nm=pick(NAMES);let st,steps;
+  if(t===0){const c=R(2,4),d=R(11,18),u=R(2,9),mine=c*100+d*10+u,s2=R(180,480);
+    st=`${nm} compte ses bonbons d'Halloween. Il a ${c} sacs de 100 bonbons, ${d} paquets de 10 bonbons et ${u} bonbons tout seuls. Sa cousine a ${s2} bonbons.`;
+    steps=[[`Combien de bonbons ${nm} a-t-il ?`,mine,`${c} centaines + ${d} dizaines + ${u} unités = ${c*100} + ${d*10} + ${u} = ${mine}.`],[`Combien de bonbons ont-ils ensemble ?`,mine+s2,`${mine} + ${s2} = ${mine+s2}. Phrase : Ensemble, ils ont ${fmt(mine+s2)} bonbons.`]]}
+  else if(t===1){const tot=R(1200,2400),l=R(250,600),m=R(250,600);
+    st=`Le magasin de costumes a ${fmt(tot)} citrouilles. Lundi, il en vend ${l}. Mardi, il en vend ${m}.`;
+    steps=[[`Combien de citrouilles le magasin a-t-il vendues en tout ?`,l+m,`${l} + ${m} = ${l+m}.`],[`Combien de citrouilles reste-t-il ?`,tot-l-m,`${fmt(tot)} − ${l+m} = ${fmt(tot-l-m)}. Phrase : Il reste ${fmt(tot-l-m)} citrouilles.`]]}
+  else if(t===2){const o=R(1100,2600),n=R(1100,2600),g=R(14,19)*100;
+    st=`Pour la fête de l'école, il y a ${fmt(o)} bonbons orange et ${fmt(n)} bonbons noirs. Les élèves en distribuent ${fmt(g)}.`;
+    steps=[[`Combien de bonbons y a-t-il au début ?`,o+n,`${fmt(o)} + ${fmt(n)} = ${fmt(o+n)}.`],[`Combien de bonbons reste-t-il après la distribution ?`,o+n-g,`${fmt(o+n)} − ${fmt(g)} = ${fmt(o+n-g)}.`]]}
+  else if(t===3){const s=R(18,59),f=R(12,39);
+    st=`${nm} fait des sacs de 10 bonbons pour ses amis. Il a ${s*10} bonbons. Son frère, lui, a rempli ${f} sacs de 10 bonbons.`;
+    steps=[[`Combien de sacs de 10 ${nm} peut-il remplir ?`,s,`${s*10} = ${s} dizaines, donc ${s} sacs.`],[`Combien de bonbons son frère a-t-il ?`,f*10,`${f} dizaines = ${f*10} bonbons.`]]}
+  else if(t===4){const a=R(1050,1600),b=R(600,990);
+    st=`Dans la rue des Squelettes, la maison mauve a donné ${fmt(a)} bonbons. La maison verte a donné ${b} bonbons.`;
+    steps=[[`Combien de bonbons la maison mauve a-t-elle donnés de plus ?`,a-b,`On cherche l'écart : ${fmt(a)} − ${b} = ${a-b}.`],[`Combien de bonbons les deux maisons ont-elles donnés ensemble ?`,a+b,`${fmt(a)} + ${b} = ${fmt(a+b)}.`]]}
+  else{const goal=pick([2000,3000,2500]),has=R(1100,goal-250),plus=R(11,19);
+    st=`Le fantôme Boubou veut ${fmt(goal)} bonbons pour sa fête. Il en a déjà ${fmt(has)}. Puis, ses amis lui donnent ${plus} dizaines de bonbons.`;
+    steps=[[`Avant le cadeau de ses amis, combien de bonbons lui manque-t-il ?`,goal-has,`${fmt(goal)} − ${fmt(has)} = ${fmt(goal-has)}.`],[`Combien de bonbons a-t-il après le cadeau de ses amis ?`,has+plus*10,`${plus} dizaines = ${plus*10}. ${fmt(has)} + ${plus*10} = ${fmt(has+plus*10)}.`]]}
+  return steps.map(([q,a,w],i)=>({type:"num",q,a,why:w,story:st,step:`Étape ${i+1} sur 2`}))};
+
+/* ================= LECTURE ================= */
+const PHYS=["grand","petite","cheveux roux","yeux verts","taches de rousseur","mince","barbe blanche","lunettes rondes","dents pointues","nez crochu","cheveux bouclés","très maigre","joues rondes","longues jambes","cheveux en tresses","costaud"];
+const PERS=["courageux","peureux","généreux","gourmand","timide","curieux","gentil","farceur","patient","jaloux","drôle","têtu","honnête","impatient","travaillant","distrait"];
+GEN.sort=()=>{const isP=Math.random()<.5,w=pick(isP?PHYS:PERS);return qMc(`« ${w} » : est-ce une caractéristique physique ou un trait de personnalité ?`,["Physique (je le vois)","Personnalité (à l'intérieur)"],isP?0:1,isP?`« ${w} », on peut le voir avec nos yeux : c'est physique.`:`« ${w} », c'est une façon d'être ou d'agir : c'est la personnalité.`)};
+const ACTIONS=[
+ ["Zoé donne la moitié de ses bonbons à son petit frère.","généreuse",["gourmande","timide"]],
+ ["Léo entre le premier dans la maison hantée pour aider son ami.","courageux",["peureux","distrait"]],
+ ["Mia cache une araignée en plastique dans le sac de son père pour le faire rire.","farceuse",["honnête","patiente"]],
+ ["Félix mange tous ses chocolats le soir même de l'Halloween.","gourmand",["généreux","patient"]],
+ ["Rosalie rougit et se cache derrière sa mère quand on lui parle.","timide",["courageuse","farceuse"]],
+ ["Noah pose plein de questions sur les chauves-souris au musée.","curieux",["têtu","jaloux"]],
+ ["Emma attend calmement son tour pendant une heure.","patiente",["impatiente","gourmande"]],
+ ["Liam crie : « Pas juste ! » parce que sa sœur a un plus beau costume.","jaloux",["généreux","gentil"]],
+ ["Arthur trouve un portefeuille et le rapporte au voisin.","honnête",["farceur","peureux"]],
+ ["Nora oublie encore son sac de bonbons chez sa grand-mère.","distraite",["travaillante","courageuse"]],
+ ["Max refuse de changer de costume même s'il pleut à verse.","têtu",["patient","timide"]],
+ ["Sam travaille trois heures pour creuser la plus belle citrouille.","travaillant",["paresseux","distrait"]]];
+GEN.trait=()=>{const [s,g,b]=pick(ACTIONS);const o=shuffle([g,...b]);return qMc(`Lis la phrase. Quel trait de personnalité montre-t-elle ?`,o,o.indexOf(g),`L'action le prouve : « ${s} » → ${g}.`,s)};
+
+const TEXTES={
+ t1:{titre:"Le fantôme de la classe",p:[
+  "Max est un petit garçon de huit ans. Il a des cheveux noirs tout bouclés et porte de grosses lunettes rondes. Max a peur de beaucoup de choses : du noir, des araignées et surtout des fantômes.",
+  "Le matin de l'Halloween, son enseignante, madame Lune, entre dans la classe. Elle est très grande et ses longs cheveux gris tombent jusqu'à sa taille. Elle adore faire des blagues. « Attention, dit-elle avec un clin d'œil, un fantôme se cache dans notre classe ! »",
+  "Tout à coup, la porte de l'armoire grince. Les élèves crient. Max tremble, mais il voit que sa voisine Inès pleure. Il prend une grande respiration, marche jusqu'à l'armoire et ouvre la porte d'un coup.",
+  "Dedans, il y a seulement un drap blanc et un sac de bonbons ! « Bravo, Max ! rit madame Lune. Tu es le plus brave de la classe. » Ce jour-là, Max partage les bonbons avec tous ses amis."],
+  q:[
+   {type:"multi",q:"Coche les DEUX caractéristiques physiques de Max.",o:["cheveux bouclés","courageux","lunettes rondes","farceur","peureux"],a:[0,2],why:"Les cheveux bouclés et les lunettes, on les voit : c'est physique."},
+   {type:"mc",q:"Au début de l'histoire, quel trait de personnalité a Max ?",o:["Peureux","Gourmand","Têtu"],a:0,why:"Le texte dit : « Max a peur de beaucoup de choses »."},
+   {type:"mc",q:"Quelle phrase prouve que Max devient courageux ?",o:["Il porte de grosses lunettes rondes.","Il marche jusqu'à l'armoire et ouvre la porte d'un coup.","Les élèves crient."],a:1,why:"Il ouvre l'armoire même s'il a peur : c'est courageux."},
+   {type:"multi",q:"Coche UNE caractéristique physique et UN trait de personnalité de madame Lune.",o:["très grande","blagueuse (farceuse)","timide","petite"],a:[0,1],why:"Physique : très grande, cheveux gris. Personnalité : elle adore faire des blagues, elle est farceuse."},
+   {type:"mc",q:"À la fin, Max partage les bonbons. Ça montre qu'il est…",o:["jaloux","généreux","distrait"],a:1,why:"Partager, c'est être généreux."}]},
+ t2:{titre:"La sorcière Grignotte",p:[
+  "Au fond de la forêt vit la sorcière Grignotte. Elle est très maigre, avec un long nez crochu et des cheveux verts tout emmêlés. Son vieux chapeau pointu est troué à trois endroits.",
+  "Grignotte est très gourmande. Chaque nuit d'Halloween, elle prépare une énorme potion au chocolat. Mais cette année, elle est si distraite qu'elle met du sel à la place du sucre !",
+  "« Beurk ! » crie-t-elle en goûtant. Il ne lui reste plus de chocolat. Elle s'assoit sur une souche, triste. C'est alors qu'une petite fille, Lili, passe par là avec son sac de bonbons.",
+  "Lili voit la sorcière qui pleure. Elle n'a pas peur. Elle lui offre la moitié de ses bonbons. Grignotte est si touchée qu'elle transforme le vieux chapeau en lanterne pour éclairer le chemin de Lili jusqu'à chez elle."],
+  q:[
+   {type:"multi",q:"Coche les TROIS caractéristiques physiques de Grignotte.",o:["très maigre","gourmande","nez crochu","cheveux verts","distraite"],a:[0,2,3],why:"Maigre, nez crochu, cheveux verts : on les voit."},
+   {type:"mc",q:"Pourquoi dit-on que Grignotte est distraite ?",o:["Parce qu'elle a un chapeau troué","Parce qu'elle met du sel à la place du sucre","Parce qu'elle vit dans la forêt"],a:1,why:"Se tromper d'ingrédient sans faire attention, c'est être distrait."},
+   {type:"mc",q:"Quel trait de personnalité de Grignotte est nommé dans le texte ?",o:["Gourmande","Courageuse","Honnête"],a:0,why:"Le texte dit : « Grignotte est très gourmande »."},
+   {type:"multi",q:"Coche les DEUX traits de personnalité de Lili.",o:["courageuse","généreuse","maigre","farceuse"],a:[0,1],why:"Elle n'a pas peur (courageuse) et elle offre ses bonbons (généreuse)."},
+   {type:"mc",q:"Que fait Grignotte pour remercier Lili ?",o:["Elle lui donne une potion","Elle transforme son chapeau en lanterne","Elle lui donne son balai"],a:1,why:"Dernière phrase du texte."}]},
+ t3:{titre:"La citrouille de Nora",p:[
+  "Nora est petite pour son âge. Elle a des taches de rousseur sur le nez et des cheveux roux attachés en deux tresses. Cette année, elle veut sculpter la plus belle citrouille du quartier.",
+  "Pendant tout un après-midi, Nora creuse, gratte et découpe avec soin. Quand un morceau se brise, elle ne se fâche pas : elle recommence doucement. Elle est très patiente.",
+  "Son grand frère Arthur, grand et mince avec une casquette rouge, passe toutes les cinq minutes. « C'est pas encore fini ? » demande-t-il en tapant du pied. Arthur n'aime pas attendre.",
+  "Le soir, la citrouille de Nora gagne le concours de la rue. Arthur boude un peu, car la sienne n'a rien gagné. Puis il sourit et dit : « Bravo, petite sœur. Tu le mérites ! »"],
+  q:[
+   {type:"multi",q:"Coche les caractéristiques physiques de Nora.",o:["petite","taches de rousseur","patiente","cheveux roux","impatiente"],a:[0,1,3],why:"Petite, taches de rousseur, cheveux roux en tresses : on les voit."},
+   {type:"mc",q:"Quelle phrase prouve que Nora est patiente ?",o:["Elle a des cheveux roux.","Quand un morceau se brise, elle recommence doucement.","Sa citrouille gagne le concours."],a:1,why:"Recommencer calmement sans se fâcher, c'est être patient."},
+   {type:"mc",q:"Arthur tape du pied et dit « C'est pas encore fini ? ». Il est…",o:["impatient","timide","honnête"],a:0,why:"Il n'aime pas attendre : il est impatient."},
+   {type:"multi",q:"Coche les DEUX caractéristiques physiques d'Arthur.",o:["grand","mince","jaloux","gentil"],a:[0,1],why:"Grand et mince. (La casquette rouge, c'est un vêtement.)"},
+   {type:"mc",q:"À la fin, Arthur boude un peu puis félicite sa sœur. Qu'est-ce que ça montre ?",o:["Il est un peu jaloux, mais gentil","Il est distrait","Il est peureux"],a:0,why:"Bouder montre un peu de jalousie, féliciter montre qu'il est gentil."}]}
+};
+
+/* ================= SCIENCES ================= */
+const VOCAB=[
+ ["Dissoudre, c'est…",["quand un solide se mélange dans un liquide et qu'on ne le voit plus","quand l'eau gèle","quand un bonbon change de couleur seulement"],0],
+ ["Une substance soluble…",["peut se dissoudre dans l'eau","ne se dissout jamais","flotte toujours"],0],
+ ["Une substance insoluble…",["ne se dissout pas dans le liquide","disparaît très vite","devient chaude"],0],
+ ["Une hypothèse, c'est…",["ce que je pense qui va arriver, avant l'expérience","ce que j'ai vu pendant l'expérience","la liste du matériel"],0],
+ ["Une observation, c'est…",["ce que je vois, sens ou mesure pendant l'expérience","ce que j'imagine","la question du début"],0],
+ ["La conclusion, c'est…",["ce que j'ai appris : mon hypothèse était bonne ou non","la liste des étapes","le nom de l'expérience"],0],
+ ["Le matériel, c'est…",["tout ce dont j'ai besoin pour faire l'expérience","les résultats","l'hypothèse"],0],
+ ["Le sucre dans l'eau, c'est…",["soluble","insoluble"],0],
+ ["Le sable dans l'eau, c'est…",["insoluble","soluble"],0],
+ ["Une variable, c'est…",["la seule chose que je change dans mon expérience","tout ce que je garde pareil","le résultat"],0]];
+const PRED=[
+ ["Un bonbon dans l'eau chaude et un dans l'eau froide. Lequel se dissout le plus vite ?",["Dans l'eau chaude","Dans l'eau froide","Pareil"],0,"La chaleur aide le sucre à se dissoudre plus vite."],
+ ["Si je brasse l'eau avec une cuillère, le bonbon se dissout…",["plus vite","moins vite","pas du tout"],0,"Brasser aide l'eau à toucher le bonbon partout : il se dissout plus vite."],
+ ["Un bonbon écrasé en petits morceaux et un bonbon entier. Lequel se dissout le plus vite ?",["Le bonbon écrasé","Le bonbon entier","Pareil"],0,"Les petits morceaux ont plus de surface en contact avec l'eau."],
+ ["Un bonbon dans l'eau et un bonbon dans l'huile. Où le sucre se dissout-il le mieux ?",["Dans l'eau","Dans l'huile"],0,"Le sucre se dissout dans l'eau, presque pas dans l'huile."],
+ ["Je veux savoir si l'eau chaude dissout plus vite. Qu'est-ce que je dois garder PAREIL ?",["La sorte de bonbon et la quantité d'eau","La température de l'eau","Rien du tout"],0,"Pour un test juste, on change UNE seule chose (la température). Tout le reste reste pareil."],
+ ["Pourquoi utiliser le même bonbon dans chaque verre ?",["Pour que le test soit juste","Pour que ce soit plus joli","Parce que c'est moins cher"],0,"Si les bonbons sont différents, on ne sait plus ce qui a causé le changement."],
+ ["Pendant l'expérience, la couleur du bonbon se répand dans l'eau. C'est…",["une observation","une hypothèse","une conclusion"],0,"C'est ce que je vois : une observation."],
+ ["« Je pense que le bonbon fondra plus vite dans l'eau chaude parce que la chaleur aide. » C'est…",["une hypothèse","une observation","du matériel"],0,"« Je pense que… parce que… » : c'est une hypothèse."],
+ ["« Mon hypothèse était bonne : le bonbon a disparu plus vite dans l'eau chaude. » C'est…",["une conclusion","une question","une observation"],0,"On dit si l'hypothèse était bonne : c'est la conclusion."],
+ ["Pour comparer la vitesse, qu'est-ce qui est le plus utile ?",["Un chronomètre","Une règle","Un aimant"],0,"On mesure le temps avec un chronomètre."]];
+const STEPS=["Question","Hypothèse","Matériel","Manipulation","Observations / résultats","Conclusion"];
+
+/* ================= ACTIVITIES ================= */
+const ACTS={
+ grp:{s:"ma",ic:"🧮",tt:"Les groupements",su:"14 dizaines = 140",n:10,gen:()=>GEN.grp()},
+ dec:{s:"ma",ic:"🧩",tt:"La décomposition",su:"4 000 + 300 + 20 + 5",n:10,gen:()=>GEN.dec()},
+ calc:{s:"ma",ic:"➕",tt:"Additions et soustractions",su:"Gros nombres, en colonnes",n:8,gen:()=>GEN.calc()},
+ prob:{s:"ma",ic:"🎃",tt:"Problèmes d'Halloween",su:"Comme à l'évaluation",n:3,gen:()=>GEN.prob(),multi:true},
+ sort:{s:"le",ic:"👀",tt:"Physique ou personnalité ?",su:"Classe chaque mot",n:12,gen:()=>GEN.sort()},
+ trait:{s:"le",ic:"🕵️",tt:"Détective des traits",su:"Ce qu'il fait montre qui il est",n:8,gen:()=>GEN.trait()},
+ t1:{s:"le",ic:"👻",tt:"Texte : Le fantôme de la classe",su:"Lire seul + 5 questions",text:"t1"},
+ t2:{s:"le",ic:"🧙",tt:"Texte : La sorcière Grignotte",su:"Lire seul + 5 questions",text:"t2"},
+ t3:{s:"le",ic:"🎃",tt:"Texte : La citrouille de Nora",su:"Lire seul + 5 questions",text:"t3"},
+ etapes:{s:"sc",ic:"🪜",tt:"Les étapes dans l'ordre",su:"La démarche scientifique",order:true},
+ mots:{s:"sc",ic:"📚",tt:"Les mots des scientifiques",su:"Dissoudre, soluble, hypothèse…",list:VOCAB},
+ pred:{s:"sc",ic:"🔮",tt:"Que va-t-il se passer ?",su:"Prédire et expliquer",list:PRED},
+ labo:{s:"sc",ic:"🧪",tt:"Mon expérience à la maison",su:"Bonbons dans l'eau chaude et froide",lab:true}
+};
+const TOTAL=Object.keys(ACTS).length*3;
+const got=()=>Object.values(S.stars).reduce((a,b)=>a+b,0);
+function renderActs(){[["ma","actsMa"],["le","actsLe"],["sc","actsSc"]].forEach(([s,id])=>{
+  $(id).innerHTML=Object.entries(ACTS).filter(([k,a])=>a.s===s).map(([k,a])=>{const st=S.stars[k]||0;
+    return `<button class="act ${s}${st?" done":""}" data-act="${k}"><span class="ic">${a.ic}</span><span><span class="tt">${a.tt}</span><span class="su">${a.su}</span></span><span class="st">${stars(st)}</span></button>`}).join("")});
+  $("tot").innerHTML=`<b>★</b> ${got()} / ${TOTAL}`}
+
+/* ================= PLAN ================= */
+const DATES={ma:new Date(2026,9,28),le:new Date(2026,9,29)};
+const DAYS=[
+ {d:new Date(2026,9,25),n:"Dimanche 25 octobre",a:["grp","dec","sort"]},
+ {d:new Date(2026,9,26),n:"Lundi 26 octobre",a:["calc","t1","etapes","mots"]},
+ {d:new Date(2026,9,27),n:"Mardi 27 octobre",a:["prob","trait","labo"],note:"Le soir : 10 minutes de révision des groupements, puis au lit tôt !"},
+ {d:new Date(2026,9,28),n:"Mercredi 28 octobre",exam:"🔢 Évaluation de maths aujourd'hui",a:["grp","t2","pred"],note:"Le matin : seulement 5 minutes de groupements pour réchauffer le cerveau. Le soir : lecture et sciences pour demain."},
+ {d:new Date(2026,9,29),n:"Jeudi 29 octobre",exam:"📖 Lecture et 🧪 sciences aujourd'hui",a:["t3","etapes"],note:"Le matin : relire les 6 étapes de la démarche. Bon déjeuner, et confiance !"}];
+function renderPlan(){
+  const t=new Date(),today=new Date(t.getFullYear(),t.getMonth(),t.getDate()).getTime();
+  $("plan").innerHTML=`<p class="consigne">Un petit bout chaque jour, environ 20 à 25 minutes. Clique sur une mission pour commencer !</p>
+   <div class="days">${DAYS.map(D=>`<div class="day${D.d.getTime()===today?" today":""}${D.exam?" exam":""}"><h3>${D.n}${D.d.getTime()===today?" · aujourd'hui":""}</h3>${D.exam?`<p class="d">${D.exam}</p>`:""}
+     <ul>${D.a.map(k=>`<li>${ACTS[k].ic} <a href="#" data-act="${k}">${ACTS[k].tt}</a><span class="s">${stars(S.stars[k]||0)}</span></li>`).join("")}</ul>${D.note?`<p class="muted" style="margin-top:8px">${D.note}</p>`:""}</div>`).join("")}</div>
+   <div class="parent"><h3>👪 Pour les parents</h3><ul>
+    <li><b>Maths :</b> demandez-lui d'écrire sa démarche sur papier (calcul en colonnes + phrase-réponse). À l'évaluation, la démarche compte autant que la réponse.</li>
+    <li><b>Lecture :</b> l'évaluation se fait <b>seul</b>. Laissez-le lire les textes sans aide, puis faites-lui justifier à voix haute : « Comment le sais-tu ? Montre-moi la phrase. »</li>
+    <li><b>Sciences :</b> faites l'expérience de l'onglet Sciences (2 verres, eau chaude et froide, 2 bonbons pareils). Laissez-le remplir la fiche lui-même.</li>
+    <li>Les étoiles sont gardées sur cet appareil. Chaque mission peut être refaite : les questions changent.</li></ul></div>`;
+}
+function renderCountdown(){const t=new Date(),today=new Date(t.getFullYear(),t.getMonth(),t.getDate());
+  const c=d=>{const n=Math.round((d-today)/864e5);return n>1?`${n} jours`:n===1?"Demain !":n===0?"Aujourd'hui !":"Terminé ✓"};
+  $("cd").innerHTML=`<div><b>${c(DATES.ma)}</b><span>🔢 Maths · mercredi 28 octobre</span></div><div><b>${c(DATES.le)}</b><span>📖 Lecture et 🧪 sciences · jeudi 29 octobre</span></div>`}
+
+/* ================= NAV ================= */
+const tabs=[...document.querySelectorAll(".tab")];let back="plan",cleanup=null;
+function show(t){if(cleanup){cleanup();cleanup=null}tabs.forEach(b=>b.setAttribute("aria-selected",b.dataset.t===t));
+  document.querySelectorAll("main>section").forEach(s=>s.hidden=s.id!==t);if(t!=="run"){back=t;try{history.replaceState(null,"","#"+t)}catch(e){}}
+  if(t==="plan")renderPlan();renderActs()}
+tabs.forEach(b=>b.onclick=()=>show(b.dataset.t));
+document.addEventListener("click",e=>{const a=e.target.closest("[data-act]");if(a){e.preventDefault();start(a.dataset.act)}
+  if(e.target.closest("[data-back]")){show(back);scrollTo(0,0)}});
+
+/* ================= RUNNERS ================= */
+function start(k){const A=ACTS[k];show("run");scrollTo(0,0);const C=$("runCard");
+  C.innerHTML=`<div class="row noprint" style="margin-top:0"><button class="btn small" data-back>← Retour</button><span style="flex:1"></span><span class="pill">${A.tt}</span></div><div id="body" style="margin-top:12px"></div>`;
+  const body=$("body");
+  if(A.text)return runText(body,k,A);
+  if(A.order)return runOrder(body,k);
+  if(A.lab)return runLab(body,k);
+  let qs;
+  if(A.list)qs=shuffle(A.list).map(x=>{const o=shuffle(x[1].map((t,i)=>({t,i})));return {type:"mc",q:x[0],o:o.map(z=>z.t),a:o.findIndex(z=>z.i===x[2]),why:x[3]}});
+  else if(A.multi){qs=[];for(let i=0;i<A.n;i++)qs.push(...A.gen())}
+  else{qs=[];const seen=new Set();let g=0;while(qs.length<A.n&&g++<200){const q=A.gen();if(!seen.has(q.q)){seen.add(q.q);qs.push(q)}}}
+  runQuiz(body,qs,(ok,n)=>finish(body,k,ok,n));
+}
+function finish(body,k,ok,n,msg,forced){const s=forced||(ok>=n?3:ok>=Math.ceil(n*.7)?2:1);S.stars[k]=Math.max(S.stars[k]||0,s);save();renderActs();if(s===3)boo();
+  body.innerHTML=`<div class="win"><div class="ws">${stars(s)}</div><h2>${s===3?"Effrayant de talent ! 🎃":s===2?"Bien joué !":"Mission terminée !"}</h2><p class="muted" style="margin-top:6px">${n?`${ok} sur ${n} du premier coup.`:""} ${msg||(s<3?"Refais-la : les questions changent !":"")}</p>
+   <div class="row" style="justify-content:center"><button class="btn primary" data-back>Retour aux missions</button><button class="btn" id="again">Recommencer</button></div></div>`;
+  $("again").onclick=()=>start(k)}
+function boo(){const c=document.createElement("div");c.className="confetti";c.innerHTML=Array.from({length:28},()=>`<i style="left:${Math.random()*100}%;animation-duration:${2+Math.random()*2}s;animation-delay:${Math.random()*.6}s">${pick(["🎃","👻","🍬","🦇","⭐"])}</i>`).join("");document.body.appendChild(c);setTimeout(()=>c.remove(),4800)}
+
+function runQuiz(body,qs,onEnd){let i=0,ok=0;
+  function step(){if(i>=qs.length)return onEnd(ok,qs.length);
+    const q=qs[i];let tried=false;
+    const head=`<p class="prog">Question ${i+1} sur ${qs.length}${q.step?" · "+q.step:""}</p>${q.story?`<div class="story">${esc(q.story)}</div>`:""}<p class="qbig">${esc(q.q)}</p>${q.extra||""}`;
+    const next=()=>{i++;step()};
+    const showWhy=good=>{if(q.why){const w=document.createElement("div");w.className="why";w.innerHTML=(good?"✓ ":"💡 ")+esc(q.why);body.appendChild(w)}
+      const b=document.createElement("div");b.className="row";b.innerHTML=`<button class="btn primary" id="nx">Suivant →</button>`;body.appendChild(b);$("nx").focus();$("nx").onclick=next};
+    if(q.type==="num"){
+      body.innerHTML=head+`<div class="row"><input class="ans" inputmode="numeric" autocomplete="off" id="in" aria-label="Réponse"><button class="btn primary" id="ck">Vérifier</button></div><div class="fb" id="fb"></div>`;
+      const inp=$("in"),fb=$("fb");inp.focus();let done=false;
+      const check=()=>{if(done)return;const v=inp.value.replace(/[\s .]/g,"");if(v==="")return;
+        if(+v===q.a){done=true;if(!tried)ok++;inp.classList.add("ok");inp.readOnly=true;fb.className="fb ok";fb.textContent="Bravo !";$("ck").remove();showWhy(true)}
+        else if(!tried){tried=true;inp.classList.add("no","shake");setTimeout(()=>inp.classList.remove("shake"),400);fb.className="fb no";fb.textContent="Pas tout à fait. Vérifie ton calcul et essaie encore !";inp.select()}
+        else{done=true;inp.classList.add("no");inp.readOnly=true;fb.className="fb no";fb.innerHTML=`La réponse est <b>${fmt(q.a)}</b>.`;$("ck").remove();showWhy(false)}};
+      $("ck").onclick=check;inp.onkeydown=e=>{if(e.key==="Enter")check()};
+    }else if(q.type==="multi"){
+      const sel=new Set();
+      body.innerHTML=head+`<div class="opts">${q.o.map((o,j)=>`<button class="opt" data-o="${j}">${esc(o)}</button>`).join("")}</div><div class="row"><button class="btn primary" id="ck">Vérifier</button></div><div class="fb" id="fb"></div>`;
+      body.querySelector(".opts").onclick=e=>{const b=e.target.closest(".opt");if(!b||b.disabled)return;const j=+b.dataset.o;sel.has(j)?sel.delete(j):sel.add(j);b.classList.toggle("sel")};
+      $("ck").onclick=()=>{if(!sel.size)return;const good=q.a.length===sel.size&&q.a.every(x=>sel.has(x));
+        if(good||tried){if(good&&!tried)ok++;body.querySelectorAll(".opt").forEach((b,j)=>{b.disabled=true;b.classList.remove("sel");if(q.a.includes(j))b.classList.add("ok");else if(sel.has(j))b.classList.add("no")});
+          $("ck").remove();$("fb").className="fb "+(good?"ok":"no");$("fb").textContent=good?"Bravo !":"Voici les bonnes réponses.";showWhy(good)}
+        else{tried=true;$("fb").className="fb no";$("fb").textContent="Pas tout à fait. Relis le texte et essaie encore !"}};
+    }else{
+      body.innerHTML=head+`<div class="opts${q.o.length<=3&&q.o.every(x=>x.length<22)?" inl":""}">${q.o.map((o,j)=>`<button class="opt" data-o="${j}">${esc(o)}</button>`).join("")}</div><div class="fb" id="fb"></div>`;
+      body.querySelector(".opts").onclick=e=>{const b=e.target.closest(".opt");if(!b||b.disabled)return;const j=+b.dataset.o;
+        if(j===q.a){if(!tried)ok++;b.classList.add("ok");body.querySelectorAll(".opt").forEach(x=>x.disabled=true);$("fb").className="fb ok";$("fb").textContent="Bravo !";showWhy(true)}
+        else{tried=true;b.classList.add("no","shake");b.disabled=true;$("fb").className="fb no";$("fb").textContent="Essaie encore !"}};
+    }}
+  step()}
+
+function runText(body,k,A){const T=TEXTES[A.text];let sec=0;
+  body.innerHTML=`<h2 style="font-size:1.5rem;font-weight:900">${T.titre}</h2><p class="consigne">Lis le texte seul, dans ta tête, comme à l'évaluation. Prends ton temps !</p>
+   <div class="tip"><b>Truc :</b> pendant que tu lis, cherche comment les personnages <b>sont</b> (physique) et comment ils <b>agissent</b> (personnalité).</div>
+   <div class="texte">${T.p.map(p=>`<p>${p}</p>`).join("")}</div>
+   <div class="row"><button class="btn primary" id="go">J'ai fini de lire. Aux questions →</button><span class="muted" id="chr">⏱ 0:00</span></div>`;
+  const tm=setInterval(()=>{sec++;const c=$("chr");if(c)c.textContent=`⏱ ${sec/60|0}:${String(sec%60).padStart(2,"0")}`},1000);cleanup=()=>clearInterval(tm);
+  $("go").onclick=()=>{clearInterval(tm);
+    const qs=T.q.map(q=>Object.assign({},q,{extra:`<details style="margin:6px 0"><summary class="muted" style="cursor:pointer">📖 Retourner au texte</summary><div class="texte">${T.p.map(p=>`<p>${p}</p>`).join("")}</div></details>`}));
+    runQuiz(body,qs,(ok,n)=>finish(body,k,ok,n,"À l'évaluation, réponds avec une phrase complète : « Max est courageux, car il ouvre l'armoire. »"))}}
+
+function runOrder(body,k){const mix=shuffle(STEPS.map((s,i)=>i));const placed=[];let err=0;
+  function draw(){body.innerHTML=`<p class="consigne">Touche les étapes dans le bon ordre, de la première à la dernière.</p>
+    <div class="order">${STEPS.map((s,i)=>`<div class="slot${placed[i]!=null?" fill":""}"><span class="n">${i+1}.</span>${placed[i]!=null?STEPS[placed[i]]:""}</div>`).join("")}</div>
+    <div class="opts inl" style="margin-top:14px">${mix.filter(i=>!placed.includes(i)).map(i=>`<button class="opt" data-s="${i}">${STEPS[i]}</button>`).join("")}</div><div class="fb" id="fb"></div>`;
+    body.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{const i=+b.dataset.s;
+      if(i===placed.length){placed.push(i);if(placed.length===STEPS.length)return finish(body,k,0,0,err?`${err} erreur${err>1?"s":""}. Récite les 6 étapes à voix haute !`:"Parfait ! Tu connais la démarche par cœur.",err===0?3:err<=2?2:1);draw()}
+      else{err++;b.classList.add("no","shake");$("fb").className="fb no";$("fb").textContent=`Pas encore ! Quelle étape vient après « ${placed.length?STEPS[placed.length-1]:"le début"} » ?`;setTimeout(()=>b.classList.remove("no","shake"),500)}})}
+  draw()}
+
+function runLab(body,k){const L=S.lab;
+  const f=(id,lab,ph)=>`<label class="lb" for="${id}">${lab}</label><textarea class="f" id="${id}" placeholder="${ph}">${esc(L[id]||"")}</textarea>`;
+  const TIMES=["1 min","3 min","5 min","10 min"];
+  body.innerHTML=`<h2 style="font-size:1.4rem;font-weight:900">🧪 Mon expérience : les bonbons qui disparaissent</h2>
+   <p class="muted" style="margin-top:4px">Fais l'expérience avec un adulte (attention à l'eau chaude !). Remplis chaque étape toi-même.</p>
+   ${f("q","1. Ma question","Est-ce qu'un bonbon se dissout plus vite dans l'eau chaude ou dans l'eau froide ?")}
+   ${f("h","2. Mon hypothèse","Je pense que… parce que…")}
+   <label class="lb">3. Mon matériel</label><p class="muted">2 verres pareils · de l'eau chaude du robinet · de l'eau froide · 2 bonbons pareils (ex. : Skittles ou bonbons durs) · une tasse à mesurer · un chronomètre</p>
+   <label class="lb">4. Ma manipulation</label><ol class="muted" style="margin:4px 0 0;padding-left:20px"><li>Je verse la même quantité d'eau dans chaque verre : chaude dans un, froide dans l'autre.</li><li>Je mets un bonbon dans chaque verre en même temps.</li><li>Je ne brasse pas.</li><li>J'observe à 1, 3, 5 et 10 minutes et je note.</li></ol>
+   <div class="row"><span class="timer" id="tmr">0:00</span><button class="btn primary" id="tgo">▶ Démarrer le chronomètre</button><button class="btn small" id="trs">Remettre à 0</button></div>
+   <label class="lb">5. Mes observations</label>
+   <div style="overflow-x:auto"><table class="lab"><tr><th>Temps</th><th>Eau chaude</th><th>Eau froide</th></tr>${TIMES.map((t,i)=>`<tr><td><b>${t}</b></td><td><input data-o="c${i}" value="${esc(L["c"+i]||"")}" placeholder="ce que je vois"></td><td><input data-o="f${i}" value="${esc(L["f"+i]||"")}" placeholder="ce que je vois"></td></tr>`).join("")}</table></div>
+   ${f("r","Mes résultats","Le bonbon a disparu le plus vite dans…")}
+   ${f("c","6. Ma conclusion","Mon hypothèse était (bonne / pas bonne), car…")}
+   <div class="tip"><b>Mots à utiliser :</b> se dissout · dissolution · soluble · la couleur se répand · plus vite · moins vite</div>
+   <div class="row"><button class="btn good" id="fin">J'ai fini mon expérience ✓</button><button class="btn small" onclick="window.print()">🖨️ Imprimer la fiche</button></div>`;
+  body.querySelectorAll("textarea.f").forEach(t=>t.oninput=()=>{L[t.id]=t.value;save()});
+  body.querySelectorAll("[data-o]").forEach(t=>t.oninput=()=>{L[t.dataset.o]=t.value;save()});
+  let t0=0,run=false,acc=0,iv=null;
+  const draw=()=>{const s=Math.floor((acc+(run?Date.now()-t0:0))/1000);$("tmr").textContent=`${s/60|0}:${String(s%60).padStart(2,"0")}`};
+  $("tgo").onclick=()=>{if(run){acc+=Date.now()-t0;run=false;clearInterval(iv);$("tgo").textContent="▶ Continuer"}else{t0=Date.now();run=true;iv=setInterval(draw,250);$("tgo").textContent="⏸ Pause"}};
+  $("trs").onclick=()=>{acc=0;run=false;clearInterval(iv);$("tgo").textContent="▶ Démarrer le chronomètre";draw()};
+  cleanup=()=>clearInterval(iv);
+  $("fin").onclick=()=>{const filled=["q","h","r","c"].filter(x=>(L[x]||"").trim()).length+(TIMES.some((t,i)=>(L["c"+i]||"").trim())?1:0);
+    if(filled<3){$("fin").insertAdjacentHTML("afterend",`<span class="fb no" style="margin-left:8px">Remplis au moins ton hypothèse, tes observations et ta conclusion.</span>`);return}
+    finish(body,k,0,0,filled>=5?"Fiche complète ! Montre-la à un adulte.":"Complète toutes les parties de ta fiche pour 3 étoiles.",filled>=5?3:filled>=4?2:1)};
+}
+
+/* ================= START ================= */
+renderCountdown();
+const h=(location.hash||"").slice(1);
+show(["plan","maths","lecture","sciences"].includes(h)?h:"plan");
+})();
+</script>
+</body>
+</html>
