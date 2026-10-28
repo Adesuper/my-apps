@@ -90,6 +90,7 @@ section[hidden]{display:none}
 .row{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:12px}
 .prog{font-size:.84rem;color:var(--ink-faint);font-weight:700}
 .qbig{font-weight:800;font-size:clamp(1.15rem,4.4vw,1.5rem);margin:8px 0 4px;line-height:1.35}
+.story table{border-collapse:collapse;margin:8px 0 2px;font-family:var(--display)} .story td,.story th{border:1px solid var(--line);padding:5px 10px;text-align:left} .story th{background:var(--orange-soft)} .story p{margin:4px 0}
 .story{background:var(--panel-2);border:1px solid var(--line);border-left:5px solid var(--orange);border-radius:12px;padding:11px 14px;font-family:var(--body);font-size:1.02rem;line-height:1.7;margin-top:6px}
 .opts{display:grid;gap:8px;margin-top:10px}
 .opts.inl{grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr))}
@@ -177,6 +178,7 @@ label.lb{font-weight:800;display:block;margin-top:12px}
     <div class="tip"><b>Ma démarche en 4 étapes</b><ul><li><b>Je lis</b> le problème deux fois et j'encercle les nombres.</li><li><b>Je cherche</b> : je souligne la question.</li><li><b>Je calcule</b> : je pose mes calculs en colonnes, je vérifie.</li><li><b>Je réponds</b> avec une phrase : « Il y a … bonbons. »</li></ul></div>
     <div class="tip"><b>« Laisse des traces de ta démarche »</b> : au Québec, l'enseignante corrige <b>comment</b> tu as trouvé, pas seulement la réponse. Sur ta feuille : un dessin ou un tableau si ça aide, chaque calcul posé, et la phrase-réponse. Attention, certains nombres du problème peuvent être <b>inutiles</b>.</div>
   </div>
+  <div class="tip" style="margin-bottom:14px"><b>🏚️ Commence par le « Grand problème d'Halloween »</b> : une longue histoire avec un tableau, découpée en parties A, B, C…, comme une situation-problème à l'évaluation. Une partie utilise souvent la réponse d'avant. Garde une feuille et un crayon à côté de toi !</div>
   <div class="acts" id="actsMa"></div>
 </section>
 
@@ -283,6 +285,52 @@ GEN.prob=()=>{const t=R(0,5),nm=pick(NAMES);let st,steps;
   if(Math.random()<.6)st+=" "+pick(["Il fait 4 degrés dehors.","La fête commence à 18 h.","Il y a 3 chats noirs dans la rue.","Le costume coûte 25 $.","Il a 9 ans."]);
   return steps.map(([q,a,w],i)=>({type:"num",q,a,why:w+(i===1?" Attention : dans un problème, certains nombres ne servent à rien !":""),story:st,step:`Étape ${i+1} sur 2`}))};
 
+/* Grand problème d'Halloween: a long scenario in several parts, like a Québec "situation-problème".
+   Each part combines groupements, décomposition and big-number + / −, with one useless number to spot. */
+const SPDECK=[];
+const spEnd=phrase=>({type:"open",q:"Dernière partie : écris ta phrase-réponse finale, comme sur ta feuille d'évaluation.",model:phrase,check:["J'ai posé chaque calcul en colonnes sur ma feuille.","Ma phrase-réponse est complète et dit ce que je compte (bonbons, masques…).","J'ai vérifié ma soustraction avec une addition."]});
+const SP=[
+ ()=>{const nm=pick(NAMES),c=R(2,4),d=R(11,19),u=R(2,9),rueA=c*100+d*10+u,rueB=R(1150,1890),don=R(6,9)*100+R(1,9)*10,el=pick([22,24,26]),tot=rueA+rueB;
+   return {t:"La grande collecte",html:`<p>Le soir de l'Halloween, ${nm} et sa classe de ${el} élèves ramassent des bonbons pour la banque alimentaire.</p><table><tr><th>Rue</th><th>Bonbons ramassés</th></tr><tr><td>Rue des Citrouilles</td><td>${c} sacs de 100, ${d} paquets de 10 et ${u} bonbons seuls</td></tr><tr><td>Rue des Fantômes</td><td>${fmt(rueB)} bonbons</td></tr></table><p>Le lendemain, la classe donne ${fmt(don)} bonbons à la banque alimentaire et garde le reste pour sa fête.</p>`,
+   q:[[`Partie A : combien de bonbons la classe a-t-elle ramassés dans la rue des Citrouilles ?`,rueA,`${c} centaines = ${c*100}, ${d} dizaines = ${d*10} (attention, plus de 9 dizaines !), et ${u} unités. ${c*100} + ${d*10} + ${u} = ${rueA}.`],
+      [`Partie B : combien de bonbons la classe a-t-elle ramassés en tout dans les deux rues ?`,tot,`${rueA} + ${fmt(rueB)} = ${fmt(tot)}. Pose-le en colonnes et fais les retenues.`],
+      [`Partie C : combien de bonbons reste-t-il pour la fête de la classe ?`,tot-don,`${fmt(tot)} − ${fmt(don)} = ${fmt(tot-don)}. Vérifie : ${fmt(tot-don)} + ${fmt(don)} = ${fmt(tot)}.`]],
+   mc:[`Quel nombre ne sert à rien pour résoudre ce problème ?`,[`${el} élèves`,`${fmt(rueB)} bonbons`,`${fmt(don)} bonbons`],`Le nombre d'élèves n'est utilisé dans aucun calcul : c'est une information inutile.`],
+   end:`La classe a ramassé ${fmt(tot)} bonbons et il en reste ${fmt(tot-don)} pour la fête.`}},
+ ()=>{const um=R(3,5),c=R(1,8),d=R(1,8),u=R(1,8),stock=um*1000+c*100+d*10+u,vend=R(1100,stock-900),bo=R(13,28),prix=pick([12,15,20]),apres=stock-vend,fin=apres+bo*10;
+   const good=`${fmt(um*1000)} + ${c*100} + ${d*10} + ${u}`,o=shuffle([good,`${um*100} + ${fmt(c*1000)} + ${d*10} + ${u}`,`${fmt(um*1000)} + ${c*10} + ${d*100} + ${u}`]);
+   return {t:"Le magasin de costumes",html:`<p>Au début d'octobre, le magasin « Frissons et Cie » a <b>${fmt(stock)}</b> masques d'Halloween. Un masque coûte ${prix} $.</p><p>Pendant le mois, le magasin vend <b>${fmt(vend)}</b> masques. Le 25 octobre, le camion livre <b>${bo} boîtes de 10 masques</b>.</p>`,
+   pre:{type:"mc",q:`Partie A : quelle décomposition est égale à ${fmt(stock)}, le nombre de masques au début ?`,o,a:o.indexOf(good),why:`${fmt(stock)} = ${um} UM + ${c} C + ${d} D + ${u} U = ${good}.`},
+   q:[[`Partie B : combien de masques reste-t-il après les ventes ?`,apres,`${fmt(stock)} − ${fmt(vend)} = ${fmt(apres)}. Si un chiffre du haut est trop petit, j'emprunte.`],
+      [`Partie C : combien de masques le camion a-t-il livrés ?`,bo*10,`${bo} boîtes de 10 = ${bo} dizaines = ${bo*10} masques.`],
+      [`Partie D : combien de masques le magasin a-t-il maintenant ?`,fin,`${fmt(apres)} + ${bo*10} = ${fmt(fin)}.`]],
+   mc:[`Quelle information ne sert à rien ici ?`,[`Un masque coûte ${prix} $.`,`Le magasin vend ${fmt(vend)} masques.`,`Le camion livre ${bo} boîtes de 10.`],`On ne calcule jamais d'argent : le prix est une information inutile.`],
+   end:`Après les ventes et la livraison, le magasin a ${fmt(fin)} masques.`}},
+ ()=>{const goal=5000,a=R(1210,1890),b=R(1310,1990),dz=R(24,58),h=pick([2,3]),tot=a+b+dz*10;
+   const bd=[1000,Math.floor(b%1000/100)*100,Math.floor(b%100/10)*10,b%10].filter(x=>x).map(fmt).join(" + ");
+   return {t:"La fête de l'école",html:`<p>L'école veut réunir <b>${fmt(goal)}</b> bonbons pour sa fête d'Halloween, qui dure ${h} heures.</p><table><tr><th>Qui ?</th><th>Bonbons apportés</th></tr><tr><td>Les classes de 3e année</td><td>${fmt(a)}</td></tr><tr><td>Les classes de 4e année</td><td>${bd}</td></tr><tr><td>Les parents</td><td>${dz} dizaines de bonbons</td></tr></table>`,
+   q:[[`Partie A : combien de bonbons les classes de 4e année ont-elles apportés ? (Écris le nombre.)`,b,`${bd} = ${fmt(b)}.`],
+      [`Partie B : combien de bonbons les parents ont-ils apportés ?`,dz*10,`${dz} dizaines = ${dz*10} bonbons.`],
+      [`Partie C : combien de bonbons l'école a-t-elle en tout ?`,tot,`${fmt(a)} + ${fmt(b)} + ${dz*10} = ${fmt(tot)}.`],
+      [`Partie D : combien de bonbons manque-t-il pour arriver à ${fmt(goal)} ?`,goal-tot,`${fmt(goal)} − ${fmt(tot)} = ${fmt(goal-tot)}. Avec les zéros, emprunte bien d'une position à l'autre !`]],
+   mc:[`Quel nombre du problème est inutile ?`,[`${h} heures`,`${fmt(goal)} bonbons`,`${dz} dizaines`],`La durée de la fête ne sert à aucun calcul.`],
+   end:`L'école a ${fmt(tot)} bonbons. Il en manque ${fmt(goal-tot)} pour arriver à ${fmt(goal)}.`}},
+ ()=>{const m=R(1,2),c=R(11,16),d=R(12,19),u=R(1,9),bou=m*1000+c*100+d*10+u,ma=R(1100,bou-200),reste=bou-ma,sor=R(reste+300,reste+2400),y=pick([4,6,8]);
+   return {t:"Le château de Boubou",html:`<p>Le fantôme Boubou compte son trésor de bonbons dans son château. Il a ${y} chauves-souris comme amies.</p><table><tr><th>Boîtes</th><th>Combien</th></tr><tr><td>Boîtes de 1 000</td><td>${m}</td></tr><tr><td>Sacs de 100</td><td>${c}</td></tr><tr><td>Paquets de 10</td><td>${d}</td></tr><tr><td>Bonbons seuls</td><td>${u}</td></tr></table><p>La sorcière Grignotte, elle, a <b>${fmt(sor)}</b> bonbons. Pendant la nuit, Boubou mange <b>${fmt(ma)}</b> bonbons.</p>`,
+   q:[[`Partie A : combien de bonbons Boubou a-t-il au début ?`,bou,`${m} × 1 000 = ${fmt(m*1000)}. ${c} centaines = ${fmt(c*100)}. ${d} dizaines = ${d*10}. Plus ${u}. Total : ${fmt(bou)}.`],
+      [`Partie B : combien de bonbons reste-t-il à Boubou après la nuit ?`,reste,`${fmt(bou)} − ${fmt(ma)} = ${fmt(reste)}.`],
+      [`Partie C : maintenant, combien de bonbons Grignotte a-t-elle de plus que Boubou ?`,sor-reste,`On cherche l'écart : ${fmt(sor)} − ${fmt(reste)} = ${fmt(sor-reste)}.`]],
+   mc:[`Quel nombre ne sert à rien ?`,[`${y} chauves-souris`,`${fmt(ma)} bonbons mangés`,`${fmt(sor)} bonbons de Grignotte`],`Les chauves-souris ne servent à aucun calcul.`],
+   end:`Après la nuit, Boubou a ${fmt(reste)} bonbons, et Grignotte en a ${fmt(sor-reste)} de plus que lui.`}}
+];
+GEN.sp=()=>{if(!SPDECK.length)SPDECK.push(...shuffle(SP.map((f,i)=>i)));const P=SP[SPDECK.pop()]();
+  const n=P.q.length+(P.pre?1:0)+2;let k=0;const tag=()=>`${P.t} · partie ${++k} sur ${n}`;
+  const hint=`<p class="muted" style="margin-top:6px">📝 Sur ta feuille : pose ton calcul en colonnes, puis écris la réponse ici.</p>`;
+  const out=[];if(P.pre)out.push(Object.assign(P.pre,{storyHtml:P.html,step:tag()}));
+  P.q.forEach(([q,a,w])=>out.push({type:"num",q,a,why:w,storyHtml:P.html,step:tag(),extra:hint}));
+  const o=shuffle(P.mc[1]);out.push({type:"mc",q:P.mc[0],o,a:o.indexOf(P.mc[1][0]),why:P.mc[2],storyHtml:P.html,step:tag()});
+  out.push(Object.assign(spEnd(P.end),{storyHtml:P.html,step:tag()}));return out};
+
 /* ================= LECTURE ================= */
 const PHYS=["grand","petite","cheveux roux","yeux verts","taches de rousseur","mince","barbe blanche","porte des lunettes rondes","dents pointues","nez crochu","cheveux bouclés","très maigre","longues jambes","cheveux en tresses","porte une casquette rouge","a huit ans","porte une cape noire","a un chapeau pointu"];
 const PERS=["courageux","peureux","généreux","gourmand","timide","curieux","gentil","farceur","patient","jaloux","drôle","têtu","honnête","impatient","travaillant","distrait","aime faire des blagues","n'aime pas les orages","adore lire le soir"];
@@ -377,12 +425,13 @@ const STEPS=["Je me pose une question","Je formule une hypothèse","Je planifie 
 
 /* ================= ACTIVITIES ================= */
 const ACTS={
+ sp:{s:"ma",ic:"🏚️",tt:"Grand problème d'Halloween",su:"Une longue histoire en parties A, B, C…",n:2,gen:()=>GEN.sp(),multi:true},
  grp:{s:"ma",ic:"🧮",tt:"Les groupements",su:"14 dizaines = 140",n:10,gen:()=>GEN.grp()},
  dec:{s:"ma",ic:"🧩",tt:"La décomposition",su:"4 000 + 300 + 20 + 5",n:10,gen:()=>GEN.dec()},
  autre:{s:"ma",ic:"🔀",tt:"Décomposer de différentes façons",su:"345 = 300 + 45 = 34 D + 5 U",n:6,gen:()=>GEN.autre()},
  calc:{s:"ma",ic:"➕",tt:"Additions et soustractions",su:"Gros nombres, en colonnes",n:8,gen:()=>GEN.calc()},
  manque:{s:"ma",ic:"❓",tt:"Le terme manquant",su:"2 345 + ___ = 3 000",n:8,gen:()=>GEN.manque()},
- prob:{s:"ma",ic:"🎃",tt:"Problèmes d'Halloween",su:"Comme à l'évaluation",n:3,gen:()=>GEN.prob(),multi:true},
+ prob:{s:"ma",ic:"🎃",tt:"Petits problèmes d'Halloween",su:"2 questions par histoire",n:3,gen:()=>GEN.prob(),multi:true},
  sort:{s:"le",ic:"👀",tt:"Physique ou personnalité ?",su:"Classe chaque mot",n:12,gen:()=>GEN.sort()},
  trait:{s:"le",ic:"🕵️",tt:"Détective des traits",su:"Ce qu'il fait montre qui il est",n:8,gen:()=>GEN.trait()},
  t1:{s:"le",ic:"👻",tt:"Texte : Le fantôme de la classe",su:"Lire seul + 8 questions",text:"t1"},
@@ -406,8 +455,8 @@ const DATES={ma:new Date(2026,9,28),le:new Date(2026,9,29)};
 const DAYS=[
  {d:new Date(2026,9,25),n:"Dimanche 25 octobre",a:["grp","dec","sort"]},
  {d:new Date(2026,9,26),n:"Lundi 26 octobre",a:["autre","calc","t1","etapes","sol"]},
- {d:new Date(2026,9,27),n:"Mardi 27 octobre",a:["manque","prob","trait","labo","mots"],note:"Le soir : 10 minutes de révision des groupements, puis au lit tôt !"},
- {d:new Date(2026,9,28),n:"Mercredi 28 octobre",exam:"🔢 Évaluation de maths aujourd'hui",a:["grp","t2","pred"],note:"Le matin : seulement 5 minutes de groupements pour réchauffer le cerveau. Le soir : lecture et sciences pour demain."},
+ {d:new Date(2026,9,27),n:"Mardi 27 octobre",a:["manque","prob","sp","trait","labo","mots"],note:"Le soir : 10 minutes de révision des groupements, puis au lit tôt !"},
+ {d:new Date(2026,9,28),n:"Mercredi 28 octobre",exam:"🔢 Évaluation de maths aujourd'hui",a:["sp","grp","t2","pred"],note:"Le matin : un Grand problème d'Halloween (environ 10 minutes) pour réchauffer le cerveau. Le soir : lecture et sciences pour demain."},
  {d:new Date(2026,9,29),n:"Jeudi 29 octobre",exam:"📖 Lecture et 🧪 sciences aujourd'hui",a:["t3","etapes"],note:"Le matin : relire les 6 étapes de la démarche. Bon déjeuner, et confiance !"}];
 function renderPlan(){
   const t=new Date(),today=new Date(t.getFullYear(),t.getMonth(),t.getDate()).getTime();
@@ -466,7 +515,7 @@ function boo(){const c=document.createElement("div");c.className="confetti";c.in
 function runQuiz(body,qs,onEnd){let i=0,ok=0;
   function step(){if(i>=qs.length)return onEnd(ok,qs.length);
     const q=qs[i];let tried=false;
-    const head=`<p class="prog">Question ${i+1} sur ${qs.length}${q.step?" · "+q.step:""}</p>${q.story?`<div class="story">${esc(q.story)}</div>`:""}<p class="qbig">${esc(q.q)}</p>${q.extra||""}`;
+    const head=`<p class="prog">Question ${i+1} sur ${qs.length}${q.step?" · "+q.step:""}</p>${q.storyHtml?`<div class="story">${q.storyHtml}</div>`:q.story?`<div class="story">${esc(q.story)}</div>`:""}<p class="qbig">${esc(q.q)}</p>${q.extra||""}`;
     const next=()=>{i++;step()};
     const showWhy=good=>{if(q.why){const w=document.createElement("div");w.className="why";w.innerHTML=(good?"✓ ":"💡 ")+esc(q.why);body.appendChild(w)}
       const b=document.createElement("div");b.className="row";b.innerHTML=`<button class="btn primary" id="nx">Suivant →</button>`;body.appendChild(b);$("nx").focus();$("nx").onclick=next};
