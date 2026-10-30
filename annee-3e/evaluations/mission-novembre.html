@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Mission Novembre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&family=Literata:opsz,wght@7..72,400;7..72,600&family=Caveat:wght@500;700&display=swap">
+<style>
+:root{
+  --paper:#FBF7F1; --panel:#FFFFFF; --panel-2:#FFFBF5;
+  --ink:#231A2E; --ink-soft:#5E5470; --ink-faint:#958BA6;
+  --grid:rgba(160,120,200,.10); --line:#EDE4F2; --rule:#D9CCE6;
+  --orange:#D9620F; --orange-soft:#FDEBDD; --violet:#6B3FB8; --violet-soft:#EFE7FB;
+  --vert:#2E8B57; --vert-soft:#E4F4EB; --rouge:#C8394A; --rouge-soft:#FBE6E9;
+  --bleu:#2F4FC9; --bleu-soft:#E7ECFC; --or:#E8A317;
+  --shadow:0 8px 22px rgba(35,26,46,.09);
+  --display:"Gabarito","Trebuchet MS",system-ui,sans-serif;
+  --body:"Literata",Georgia,serif; --hand:"Caveat","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#14101B; --panel:#1E1828; --panel-2:#241D30; --ink:#EEE8F6; --ink-soft:#B3A9C6; --ink-faint:#887E9C;
+  --grid:rgba(180,140,255,.06); --line:#30273E; --rule:#3C3150;
+  --orange:#F59A52; --orange-soft:#3A2414; --violet:#B597F2; --violet-soft:#2B2140;
+  --vert:#66C795; --vert-soft:#16301F; --rouge:#EE7D8B; --rouge-soft:#3A1C22; --bleu:#8FA8FF; --bleu-soft:#1E2946; --or:#F4C24F;
+  --shadow:0 8px 22px rgba(0,0,0,.4)}}
+:root[data-theme="dark"]{
+  --paper:#14101B; --panel:#1E1828; --panel-2:#241D30; --ink:#EEE8F6; --ink-soft:#B3A9C6; --ink-faint:#887E9C;
+  --grid:rgba(180,140,255,.06); --line:#30273E; --rule:#3C3150;
+  --orange:#F59A52; --orange-soft:#3A2414; --violet:#B597F2; --violet-soft:#2B2140;
+  --vert:#66C795; --vert-soft:#16301F; --rouge:#EE7D8B; --rouge-soft:#3A1C22; --bleu:#8FA8FF; --bleu-soft:#1E2946; --or:#F4C24F;
+  --shadow:0 8px 22px rgba(0,0,0,.4)}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--display);color:var(--ink);background-color:var(--paper);
+  background-image:repeating-linear-gradient(to bottom,transparent 0 23px,var(--grid) 23px 24px),repeating-linear-gradient(to right,transparent 0 23px,var(--grid) 23px 24px);
+  line-height:1.5;font-size:17px;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4{margin:0;line-height:1.15;text-wrap:balance}
+p{margin:0}
+button,input,textarea{font-family:var(--display);color:inherit}
+button{cursor:pointer}
+a{color:var(--bleu)}
+:focus-visible{outline:3px solid var(--violet);outline-offset:2px;border-radius:8px}
+.wrap{max-width:860px;margin:0 auto;padding-inline:16px}
+header.hero{background:linear-gradient(135deg,#0F1A3D,#2F4FC9 55%,#6B3FB8);color:#fff;padding:22px 0 20px}
+.hero .ey{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.85}
+.hero .ey a{color:#fff}
+.hero h1{font-size:clamp(1.7rem,6vw,2.5rem);font-weight:900;margin-top:4px}
+.hero p.s{opacity:.92;margin-top:6px;max-width:60ch;font-size:.98rem}
+.cd{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(190px,100%),1fr));gap:10px;margin-top:14px}
+.cd div{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:10px 13px}
+.cd b{display:block;font-size:1.5rem;font-weight:900}
+.cd span{font-size:.85rem;opacity:.9}
+.bar{position:sticky;top:0;z-index:20;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+.tab{font-weight:700;font-size:.9rem;border:1px solid var(--line);background:var(--panel-2);padding:8px 13px;border-radius:12px;white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--violet);border-color:var(--violet);color:#fff}
+.tot{margin-left:auto;font-weight:800;white-space:nowrap;align-self:center;font-size:.92rem;padding-left:8px}
+.tot b{color:var(--or)}
+main{padding-block:18px 70px}
+section[hidden]{display:none}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:var(--shadow);margin-bottom:14px}
+.ch{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.ch .ic{font-size:1.5rem}
+.ch h3{font-size:1.15rem;flex:1 1 auto}
+.pill{font-size:.72rem;font-weight:700;letter-spacing:.04em;padding:3px 10px;border-radius:99px;background:var(--violet-soft);color:var(--violet);white-space:nowrap}
+.muted{color:var(--ink-soft);font-size:.94rem}
+.consigne{font-family:var(--hand);font-size:1.38rem;color:var(--orange);line-height:1.3;margin:6px 0}
+.tip{background:var(--orange-soft);border-radius:13px;padding:11px 14px;margin-top:10px;font-size:.95rem}
+.tip b{color:var(--orange)}
+.tip ul{margin:4px 0 0;padding-left:18px}
+.h2{font-size:1.35rem;font-weight:900;margin:22px 0 10px}
+.acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:10px}
+.act{display:flex;gap:12px;align-items:center;text-align:left;background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:13px 14px;box-shadow:var(--shadow);width:100%}
+.act:hover{border-color:var(--violet)}
+.act .ic{font-size:1.6rem;width:46px;height:46px;flex:0 0 46px;border-radius:13px;display:grid;place-items:center;background:var(--violet-soft)}
+.act.ma .ic{background:var(--bleu-soft)} .act.le .ic{background:var(--rouge-soft)} .act.sc .ic{background:var(--vert-soft)}
+.act .tt{font-weight:800;display:block}
+.act .su{font-size:.84rem;color:var(--ink-soft);display:block}
+.act .st{margin-left:auto;color:var(--or);white-space:nowrap;font-size:1.05rem}
+.act.done{border-color:var(--vert)}
+.btn{font-weight:700;font-size:1rem;border:1.5px solid var(--line);background:var(--panel-2);padding:10px 17px;border-radius:13px}
+.btn:hover:not(:disabled){border-color:var(--violet)}
+.btn.primary{background:var(--violet);border-color:var(--violet);color:#fff}
+.btn.good{background:var(--vert);border-color:var(--vert);color:#fff}
+.btn.small{font-size:.85rem;padding:7px 12px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.prog{font-size:.84rem;color:var(--ink-faint);font-weight:700}
+.qbig{font-weight:800;font-size:clamp(1.15rem,4.4vw,1.5rem);margin:8px 0 4px;line-height:1.35}
+.story table{border-collapse:collapse;margin:8px 0 2px;font-family:var(--display)} .story td,.story th{border:1px solid var(--line);padding:5px 10px;text-align:left} .story th{background:var(--orange-soft)} .story p{margin:4px 0}
+.story{background:var(--panel-2);border:1px solid var(--line);border-left:5px solid var(--orange);border-radius:12px;padding:11px 14px;font-family:var(--body);font-size:1.02rem;line-height:1.7;margin-top:6px}
+.opts{display:grid;gap:8px;margin-top:10px}
+.opts.inl{grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr))}
+.opt{font-weight:700;font-size:1.02rem;border:2px solid var(--rule);background:var(--panel);border-radius:13px;padding:11px 13px;text-align:left}
+.opt:hover:not(:disabled){border-color:var(--violet)}
+.opt.ok{border-color:var(--vert);background:var(--vert-soft);color:var(--vert)}
+.opt.no{border-color:var(--rouge);background:var(--rouge-soft);text-decoration:line-through;opacity:.8}
+.opt.sel{border-color:var(--violet);background:var(--violet-soft)}
+.ans{width:100%;max-width:260px;padding:11px 13px;font-size:1.3rem;font-weight:800;border:2px solid var(--rule);border-radius:12px;background:var(--panel-2)}
+.ans:focus{outline:none;border-color:var(--violet)}
+.ans.ok{border-color:var(--vert);background:var(--vert-soft)} .ans.no{border-color:var(--rouge);background:var(--rouge-soft)}
+.fb{font-weight:700;margin-top:8px;min-height:1.4em}
+.fb.ok{color:var(--vert)} .fb.no{color:var(--rouge)}
+.model{background:var(--vert-soft);border-radius:12px;padding:10px 13px;margin-top:8px;font-size:.95rem}
+.self{display:grid;gap:6px;margin-top:8px}
+.self label{display:flex;gap:9px;align-items:flex-start;font-size:.95rem}
+.self input{width:20px;height:20px;accent-color:var(--vert);flex:0 0 20px}
+.seqit{display:flex;gap:10px;align-items:center;text-align:left}
+.seqit .k{font-weight:900;color:var(--violet);min-width:22px}
+.src{font-size:.88rem}.src li{margin-bottom:3px}
+.why{background:var(--bleu-soft);border-radius:12px;padding:10px 13px;margin-top:8px;font-size:.95rem}
+pre.col{font-family:ui-monospace,Consolas,monospace;font-size:1.35rem;line-height:1.35;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 18px;display:inline-block;margin:8px 0 0}
+.win{text-align:center;padding:8px 0}
+.win .ws{font-size:2.8rem;letter-spacing:6px;color:var(--or)}
+.win h2{font-size:1.6rem;font-weight:900;margin-top:4px}
+.texte{font-family:var(--body);font-size:1.1rem;line-height:1.95;background:var(--panel-2);border:1px solid var(--line);border-radius:14px;padding:15px 17px;margin-top:10px}
+.texte p+p{margin-top:10px}
+.order{display:grid;gap:8px;margin-top:10px}
+.slot{border:2px dashed var(--rule);border-radius:12px;padding:10px 13px;min-height:46px;font-weight:700;display:flex;gap:10px;align-items:center}
+.slot .n{color:var(--ink-faint);width:22px}
+.slot.fill{border-style:solid;border-color:var(--vert);background:var(--vert-soft)}
+table.lab{width:100%;border-collapse:collapse;margin-top:8px;font-size:.95rem}
+table.lab th,table.lab td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+table.lab th{background:var(--panel-2);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
+table.lab input{width:100%;border:none;background:none;font-size:.95rem;padding:2px}
+textarea.f{width:100%;min-height:62px;border:1.5px solid var(--rule);border-radius:10px;padding:8px 10px;background:var(--panel-2);font-size:1rem;line-height:1.6;margin-top:4px}
+label.lb{font-weight:800;display:block;margin-top:12px}
+.timer{font-weight:900;font-size:2rem;font-variant-numeric:tabular-nums}
+.days{display:grid;gap:10px}
+.day{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:13px 15px;box-shadow:var(--shadow)}
+.day.today{border:2px solid var(--orange)}
+.day.exam{background:var(--orange-soft);border-color:transparent}
+.day h3{font-size:1.05rem}
+.day .d{font-size:.8rem;color:var(--ink-faint);font-weight:700}
+.day ul{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:6px}
+.day li a{font-weight:700;text-decoration:none}
+.day li .s{color:var(--or);margin-left:6px}
+.parent{border:2px dashed var(--rule);border-radius:16px;padding:14px 16px;margin-top:14px}
+.parent h3{color:var(--violet);font-size:1.05rem}
+.parent li{margin-bottom:4px;font-size:.94rem;color:var(--ink-soft)}
+.parent li b{color:var(--ink)}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden}
+.confetti i{position:absolute;top:-30px;font-size:22px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+.shake{animation:sh .35s}
+@keyframes sh{0%,100%{transform:none}30%{transform:translateX(-6px)}60%{transform:translateX(6px)}}
+@media (prefers-reduced-motion:reduce){.confetti{display:none}.shake{animation:none}}
+@media print{.bar,.noprint,header.hero .cd{display:none!important}body{background:#fff;background-image:none}.card{box-shadow:none}}
+
+.act.ir .ic{background:var(--orange-soft)} .act.ec .ic{background:var(--violet-soft)}
+details.fiche{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);margin-bottom:10px}
+details.fiche summary{font-weight:800;font-size:1.08rem;padding:13px 16px;cursor:pointer}
+details.fiche .fb2{padding:0 16px 14px;font-size:.98rem}
+details.fiche ul{margin:0;padding-left:20px} details.fiche li{margin-bottom:5px}
+svg.grid{width:100%;max-width:400px;display:block;margin:10px 0;font-family:var(--display)}
+svg.grid .gl{stroke:var(--rule);stroke-width:1} svg.grid .ax{stroke:var(--ink);stroke-width:2.2}
+svg.grid .gt{font-size:11px;fill:var(--ink-soft)} svg.grid .pt{fill:var(--rouge)} svg.grid .pl{font-size:15px;font-weight:800;fill:var(--rouge)}
+svg.grid .hit{fill:transparent;cursor:pointer} svg.grid .hit:hover{fill:var(--violet-soft);opacity:.7}
+svg.grid .mk.ok{fill:var(--vert)} svg.grid .mk.no{fill:var(--rouge)}
+.story svg.grid{max-width:320px}
+.mods{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:10px;margin-top:10px}
+.mods figure{margin:0;background:var(--panel-2);border:1px solid var(--line);border-radius:14px;padding:10px;font-size:.9rem}
+svg.sky{width:100%;display:block;background:#101735;border-radius:12px}
+svg.sky.big{max-width:520px;cursor:crosshair}
+svg.sky .sl{stroke:#8FA8FF;stroke-width:1.5;stroke-dasharray:4 3} svg.sky .st{fill:#FFE27A}
+.skywrap{margin-top:8px} .skywrap.small svg{max-width:300px;cursor:default}
+.chip{display:inline-block;background:var(--violet-soft);color:var(--violet);border-radius:99px;padding:2px 10px;margin:2px 0;font-size:.85rem;font-weight:700}
+.cnt{margin-top:6px;font-size:.95rem} .okc{color:var(--vert)} .noc{color:var(--rouge)}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <p class="ey"><a href="../index.html">Ma 3<sup>e</sup> année</a> · début novembre</p>
+    <h1>🌙 Mission Novembre</h1>
+    <p class="s">Trois défis arrivent : un texte sur une constellation que tu vas inventer, l'évaluation sur les Iroquoiens vers 1500, et l'évaluation de maths. Une mission à la fois !</p>
+    <div class="cd" id="cd"></div>
+  </div>
+</header>
+<nav class="bar noprint"><div class="wrap tabs" id="tabs">
+  <button class="tab" data-t="plan">🗓️ Mon plan</button>
+  <button class="tab" data-t="iroq">🌽 Iroquoiens</button>
+  <button class="tab" data-t="maths">🔢 Maths</button>
+  <button class="tab" data-t="ecrit">✨ Écriture</button>
+  <span class="tot" id="tot"></span>
+</div></nav>
+
+<main class="wrap">
+<section id="plan"></section>
+
+<section id="iroq" hidden>
+  <div class="card">
+    <div class="ch"><span class="ic">🌽</span><h3>Évaluation : les Iroquoiens vers 1500 · mardi 3 novembre</h3></div>
+    <p class="muted"><b>Sans cahier de notes !</b> Il faut connaître : le <b>territoire</b>, les <b>activités selon les saisons</b>, le <b>mode de vie</b>, l'<b>habitation</b>, l'<b>organisation du clan</b> et la <b>population</b>. L'évaluation aura des <b>réponses courtes</b> et des <b>choix de réponses</b>.</p>
+    <div class="tip"><b>Comment étudier :</b> lis une fiche, ferme-la, puis fais la mission qui va avec. À la fin, fais l'<b>examen pour pratiquer</b>.</div>
+  </div>
+  <h2 class="h2">📒 Mes fiches (comme dans mon cahier)</h2>
+  <div id="fiches"></div>
+  <h2 class="h2">🎯 Mes missions</h2>
+  <div class="acts" id="actsIr"></div>
+</section>
+
+<section id="maths" hidden>
+  <div class="card">
+    <div class="ch"><span class="ic">🔢</span><h3>Évaluation des connaissances en maths · mercredi 4 novembre</h3></div>
+    <p class="muted">Petites et grosses <b>additions et soustractions</b>, le <b>plan cartésien</b> et un <b>petit problème</b> à résoudre.</p>
+    <div class="tip"><b>Le plan cartésien en une phrase :</b> pour trouver le point (4, 2), je <b>marche d'abord dans le corridor</b> → 4 cases vers la droite, <b>puis je prends l'ascenseur</b> ↑ 2 cases vers le haut. Le premier nombre est toujours l'axe <b>horizontal</b>, le deuxième l'axe <b>vertical</b>. Le point (0, 0) s'appelle l'<b>origine</b>.</div>
+    <div class="tip"><b>Pour le problème :</b> je lis deux fois, j'encercle les nombres utiles, je pose mes calculs en colonnes et j'écris une phrase-réponse.</div>
+  </div>
+  <div class="acts" id="actsMa"></div>
+</section>
+
+<section id="ecrit" hidden>
+  <div class="card">
+    <div class="ch"><span class="ic">✨</span><h3>Projet d'écriture · commence lundi 2 novembre</h3></div>
+    <p class="muted">Tu vas <b>inventer une constellation</b> et écrire un <b>court texte descriptif de 5 à 7 phrases</b>, en respectant les contraintes de ton enseignante. Prépare tes idées ici : en classe, tu seras prêt !</p>
+    <div class="tip"><b>Une constellation</b>, c'est un groupe d'étoiles qui, quand on les relie avec des lignes imaginaires, forment un dessin dans le ciel : un animal, un personnage, un objet. Depuis très longtemps, les gens leur donnent des noms et inventent des légendes.</div>
+    <div id="modeles"></div>
+    <div class="tip"><b>Un texte descriptif</b> fait <b>voir</b> quelque chose au lecteur. Il ne raconte pas une aventure : il décrit. Pour bien décrire, j'utilise :<ul><li>des <b>adjectifs</b> : brillante, minuscule, bleutée, immense…</li><li>des <b>mots de position</b> : en haut, à gauche, au centre, au bout de…</li><li>des <b>comparaisons</b> : « Elle ressemble à… », « Elle brille comme… »</li><li>des <b>nombres</b> : « Elle est formée de 7 étoiles. »</li></ul></div>
+  </div>
+  <div class="acts" id="actsEc"></div>
+</section>
+
+<section id="run" hidden><div class="card" id="runCard"></div></section>
+</main>
+
+<script>
+(function(){
+const KEY="mission-novembre-v1";
+let S={};try{S=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
+S.stars=S.stars||{};S.cons=S.cons||{pts:[],nom:""};S.plan=S.plan||{};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const $=id=>document.getElementById(id);
+const R=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[Math.random()*a.length|0];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const fmt=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g," ");
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const stars=n=>"★".repeat(n)+"☆".repeat(3-n);
+const mc=(q,good,bad,why,extra)=>{const o=shuffle([good,...bad]);return {type:"mc",q,o,a:o.indexOf(good),why,extra}};
+const sh=(q,kw,model,why)=>({type:"short",q,kw,model,why});
+
+/* ================= IROQUOIENS =================
+   Seasons and roles follow Israël's class notebook ("Les saisons chez les Iroquoiens en 1500").
+   Other facts: Alloprof, the Centre des mémoires montréalaises, and the population graph in his notebook. */
+const FICHES=[
+ {ic:"🗺️",t:"Le territoire",b:`<ul><li>Vers 1500, les Iroquoiens vivent dans les <b>Basses-terres du Saint-Laurent</b> : le long du <b>fleuve Saint-Laurent</b> (la <b>vallée du Saint-Laurent</b>) et autour des <b>Grands Lacs</b> (la <b>région des Grands Lacs</b>).</li><li>Au <b>nord</b>, il y a le <b>Bouclier canadien</b>. Au <b>sud</b>, il y a les montagnes des <b>Appalaches</b>.</li><li>Les Basses-terres sont surtout des <b>plaines</b> (un terrain plat). La <b>terre est fertile</b> et le <b>climat</b> est assez doux l'été : c'est parfait pour l'<b>agriculture</b>.</li><li>Il y a beaucoup d'eau (fleuve, lacs, rivières) et une forêt avec des <b>érables</b>.</li><li>Le savais-tu ? Le village iroquoien d'<b>Hochelaga</b> se trouvait là où est aujourd'hui <b>Montréal</b>, et <b>Stadaconé</b> là où est <b>Québec</b>.</li></ul>`},
+ {ic:"🍂",t:"Les activités selon les saisons",b:`<table class="lab"><tr><th>Saison</th><th>Ce qu'on fait</th></tr>
+  <tr><td><b>Printemps</b><br><span class="muted">(début)</span></td><td>Fabrication des raquettes. Les <b>hommes entaillent les érables</b>, puis les <b>femmes et les enfants récoltent la sève</b> d'érable.</td></tr>
+  <tr><td><b>Printemps</b><br><span class="muted">(fin)</span></td><td>Début de l'agriculture : les <b>hommes défrichent</b>, les <b>femmes bêchent le sol</b> et <b>sèment les 3 sœurs</b> : le <b>maïs</b>, le <b>haricot</b> et la <b>courge</b>. Les hommes font la <b>culture du tabac</b>.</td></tr>
+  <tr><td><b>Été</b></td><td>Les <b>femmes et les enfants cueillent des petits fruits sauvages</b>. Les <b>hommes chassent et pêchent</b>. On se déplace en <b>canot</b> sur l'eau et <b>à pied</b> dans les sentiers de la forêt.</td></tr>
+  <tr><td><b>Automne</b></td><td>C'est le <b>temps des récoltes</b>. Les femmes font <b>sécher</b> le maïs, les fruits et les légumes au soleil. Elles font aussi <b>fumer</b> la viande et le poisson. Les hommes font du <b>troc</b>. Le sport pratiqué est la <b>crosse</b>.</td></tr>
+  <tr><td><b>Hiver</b></td><td>Les hommes utilisent un <b>toboggan</b> pour transporter leur équipement de chasse et les animaux. Les <b>filles cuisinent, cousent</b> et s'occupent de la maison. Les <b>garçons chassent et pêchent</b>, et apprennent les techniques de guerre, de survie et d'orientation en forêt. Les <b>aînés racontent des légendes</b> aux enfants.</td></tr></table>`},
+ {ic:"🏕️",t:"Le mode de vie",b:`<ul><li>Les Iroquoiens sont <b>sédentaires</b> : ils restent au <b>même endroit pendant plusieurs années</b>. (Les Algonquiens, eux, sont <b>nomades</b> : ils se déplacent pour chasser.)</li><li>Ils peuvent rester au même endroit parce qu'ils sont <b>agriculteurs</b> : ils cultivent les <b>3 sœurs</b> (maïs, haricot, courge). Ils chassent, pêchent et cueillent aussi.</li><li>Ils gardent des <b>réserves de nourriture</b> pour l'hiver (aliments séchés et fumés).</li><li>Quand la <b>terre est épuisée</b> (elle ne donne plus de bonnes récoltes) et qu'il manque de bois autour, ils <b>déménagent le village</b> un peu plus loin.</li><li>Ils font du <b>troc</b> : ils <b>échangent</b> des objets (comme du maïs) contre d'autres objets, <b>sans argent</b>.</li><li>Le village est entouré d'une <b>palissade</b> (une clôture de grands pieux de bois) pour se <b>protéger</b>.</li></ul>`},
+ {ic:"🏠",t:"L'habitation : la maison longue",b:`<ul><li>L'habitation des Iroquoiens est la <b>maison longue</b>. (Pas le wigwam : c'est celle des Algonquiens. Pas l'iglou : c'est celle des Inuits.)</li><li>Elle est faite de <b>perches de bois</b> recouvertes d'<b>écorce</b>. Son toit est <b>arrondi</b>.</li><li>Au centre, il y a une <b>allée</b> avec des <b>feux</b>. Deux familles partagent un même feu.</li><li>Des <b>trous dans le toit</b> laissent sortir la <b>fumée</b>.</li><li>Le long des murs, il y a des <b>plateformes</b> pour dormir et ranger les choses.</li><li>Dans une maison longue vivent <b>plusieurs familles</b> du même clan, parentes par la mère.</li></ul>`},
+ {ic:"👵",t:"L'organisation du clan",b:`<ul><li>Un <b>clan</b>, c'est un groupe de familles qui ont une <b>ancêtre commune du côté de la mère</b>.</li><li>La société iroquoienne est <b>matrilinéaire</b> : un enfant fait partie du <b>clan de sa mère</b>.</li><li>La <b>femme la plus âgée</b>, la <b>mère de clan</b>, dirige la maison longue.</li><li>Les <b>mères de clan choisissent le chef</b> (et peuvent le remplacer).</li><li>Quand un homme se marie, il va vivre dans la <b>maison longue de la famille de sa femme</b>.</li><li>Les clans portent souvent un <b>nom d'animal</b> : l'Ours, le Loup, la Tortue…</li></ul>`},
+ {ic:"📊",t:"La population",b:`<div id="popFiche"></div><ul><li>Vers <b>1500</b>, il y a environ <b>100 000</b> Iroquoiens.</li><li><b>Que remarques-tu ?</b> De 1400 à 1500, la population <b>augmente</b>.</li><li><b>Qu'est-ce qui explique ça ?</b> Grâce à l'<b>agriculture</b>, les Iroquoiens ont <b>plus de nourriture</b> et des <b>réserves pour l'hiver</b>. Ils sont sédentaires, donc les familles grandissent au même endroit.</li></ul>`}
+];
+const popSvg=()=>{const W=330,H=210,x0=58,y0=170,sc=1.35;const bars=[[1400,70],[1450,85],[1500,102]];
+  const tk=[20,40,60,80,100].map(v=>`<line x1="${x0-4}" x2="${x0}" y1="${y0-v*sc}" y2="${y0-v*sc}" stroke="currentColor"/><text x="${x0-8}" y="${y0-v*sc+4}" text-anchor="end" font-size="11" fill="currentColor">${v} 000</text>`).join("");
+  const b=bars.map(([y,v],i)=>`<rect x="${x0+20+i*85}" y="${y0-v*sc}" width="60" height="${v*sc}" fill="var(--bleu-soft)" stroke="var(--bleu)" stroke-width="1.5"/><text x="${x0+50+i*85}" y="${y0+16}" text-anchor="middle" font-size="12" fill="currentColor">${y}</text>`).join("");
+  return `<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:380px;display:block;margin:6px 0;color:var(--ink)" role="img" aria-label="Diagramme : population iroquoienne de 1400 à 1500"><line x1="${x0}" y1="${y0}" x2="${W-6}" y2="${y0}" stroke="currentColor" stroke-width="2"/><line x1="${x0}" y1="${y0}" x2="${x0}" y2="18" stroke="currentColor" stroke-width="2"/>${tk}${b}<text x="${x0}" y="12" font-size="11" fill="currentColor">Nombre d'habitants</text><text x="${W/2+20}" y="${H-4}" text-anchor="middle" font-size="11" font-weight="700" fill="currentColor">Population iroquoienne dans la vallée du St-Laurent</text></svg>`};
+
+const SAISONS=[
+ ["Les hommes entaillent les érables.","Printemps"],["Les femmes et les enfants récoltent la sève d'érable.","Printemps"],["On fabrique des raquettes (au début de la saison).","Printemps"],
+ ["Les hommes défrichent la terre.","Printemps"],["Les femmes bêchent le sol et sèment les trois sœurs.","Printemps"],["Les hommes font la culture du tabac.","Printemps"],
+ ["Les femmes et les enfants cueillent des petits fruits sauvages.","Été"],["Les Iroquoiens se déplacent en canot sur l'eau et à pied dans les sentiers de la forêt.","Été"],
+ ["C'est le temps des récoltes.","Automne"],["Les femmes font sécher le maïs, les fruits et les légumes au soleil.","Automne"],["Les femmes font fumer la viande et le poisson.","Automne"],["Les hommes font du troc.","Automne"],["On pratique le sport de la crosse.","Automne"],
+ ["Les hommes utilisent un toboggan pour transporter l'équipement de chasse et les animaux.","Hiver"],["Les filles cuisinent, cousent et s'occupent de la maison.","Hiver"],["Les garçons apprennent les techniques de guerre, de survie et d'orientation en forêt.","Hiver"],["Les aînés racontent des légendes aux enfants.","Hiver"]];
+const QUI=[["entaillent les érables au printemps","Les hommes"],["récoltent la sève d'érable","Les femmes et les enfants"],["défrichent la terre avant les semis","Les hommes"],["bêchent le sol et sèment les trois sœurs","Les femmes"],["font la culture du tabac","Les hommes"],["cueillent des petits fruits sauvages en été","Les femmes et les enfants"],["font sécher et fumer les aliments en automne","Les femmes"],["font du troc en automne","Les hommes"],["cuisinent, cousent et s'occupent de la maison en hiver","Les filles"],["apprennent les techniques de survie et d'orientation en forêt en hiver","Les garçons"],["racontent des légendes aux enfants","Les aînés"]];
+const WHO=["Les hommes","Les femmes","Les femmes et les enfants","Les filles","Les garçons","Les aînés"];
+const SEASON_O=["Printemps","Été","Automne","Hiver"];
+const GEN={};
+GEN.sai=()=>{if(Math.random()<.6){const [s,a]=pick(SAISONS);return {type:"mc",q:`En quelle saison ? « ${s} »`,o:SEASON_O,a:SEASON_O.indexOf(a),why:`${a} : ${s}`}}
+  const [act,who]=pick(QUI);return mc(`Chez les Iroquoiens, qui ${act} ?`,who,shuffle(WHO.filter(w=>w!==who)).slice(0,3),`${who} ${act}.`)};
+const TROUS=[
+ sh("Les trois sœurs sont le maïs, le haricot et la ___.",[["courge"]],"la courge","Les 3 sœurs : maïs, haricot, courge. On les sème ensemble."),
+ sh("Nomme les trois sœurs.",[["mais"],["haricot"],["courge"]],"Le maïs, le haricot et la courge.","Les 3 sœurs poussent ensemble : le maïs sert de tuteur au haricot, la courge garde le sol humide."),
+ sh("Au début du printemps, les hommes ___ les érables.",[["entaill"]],"entaillent","Entailler = faire une petite fente dans l'arbre pour recueillir la sève."),
+ sh("Les femmes et les enfants récoltent la ___ d'érable.",[["seve"]],"la sève",""),
+ sh("À la fin du printemps, les hommes ___ la terre (ils enlèvent les arbres et les roches).",[["defrich"]],"défrichent",""),
+ sh("En été, les hommes ___ et ___.",[["chass"],["pech"]],"chassent et pêchent","Attention : on écrit le verbe, pas « Iroquoiens » !"),
+ sh("En été, les Iroquoiens se déplacent en ___ sur l'eau.",[["canot"]],"en canot",""),
+ sh("En automne, les femmes font ___ le maïs, les fruits et les légumes au soleil.",[["sech"]],"sécher",""),
+ sh("Elles font aussi ___ la viande et le poisson.",[["fumer"]],"fumer","On écrit « fumer » (le verbe), pas « fumée »."),
+ sh("En automne, les hommes font du ___ : ils échangent des objets sans argent.",[["troc"]],"troc",""),
+ sh("Le sport pratiqué en automne est la ___.",[["crosse"]],"la crosse",""),
+ sh("En hiver, les hommes utilisent un ___ pour déposer leur équipement de chasse et les animaux.",[["tobog"]],"un toboggan","Ça s'écrit t-o-b-o-g-g-a-n."),
+ sh("En hiver, les filles ___, ___ et s'occupent de la maison.",[["cuisin"],["cous"]],"cuisinent, cousent",""),
+ sh("En hiver, les aînés racontent des ___ aux enfants.",[["legende"]],"des légendes","Avec un « s » : des légendes."),
+ sh("Quand les Iroquoiens font des réserves en automne, c'est le temps des ___.",[["recolte"]],"des récoltes","")];
+const TER=[
+ ()=>mc("Où vivent les Iroquoiens vers 1500 ?","Dans les Basses-terres du Saint-Laurent, près du fleuve et des Grands Lacs",["Dans le Grand Nord, où il fait très froid","Au bord de l'océan Pacifique"],"Ils vivent dans la vallée du Saint-Laurent et la région des Grands Lacs."),
+ ()=>mc("Quel grand cours d'eau traverse le territoire iroquoien ?","Le fleuve Saint-Laurent",["Le fleuve Mississippi","Le Nil"],"Le fleuve Saint-Laurent."),
+ ()=>mc("Au nord du territoire iroquoien, il y a…","le Bouclier canadien",["les Appalaches","l'océan Atlantique"],"Nord : Bouclier canadien. Sud : Appalaches."),
+ ()=>mc("Au sud du territoire iroquoien, il y a les montagnes…","des Appalaches",["du Bouclier canadien","des Rocheuses"],"Les Appalaches sont au sud."),
+ ()=>mc("Pourquoi ce territoire est-il bon pour l'agriculture ?","La terre est fertile et l'été est assez chaud",["Il y a beaucoup de neige toute l'année","Il y a des montagnes partout"],"Terre fertile + climat doux = bonnes récoltes."),
+ ()=>mc("Les Basses-terres du Saint-Laurent, c'est surtout…","des plaines (un terrain plat)",["de hautes montagnes","un désert"],"Basses-terres = terres basses et plates : des plaines."),
+ ()=>mc("Quelle région ne fait PAS partie du territoire iroquoien ?","Le Grand Nord (la toundra)",["La vallée du Saint-Laurent","La région des Grands Lacs"],"Le Grand Nord, c'est le territoire des Inuits."),
+ ()=>mc("Le village d'Hochelaga se trouvait là où il y a aujourd'hui…","Montréal",["Toronto","Gaspé"],"Hochelaga = Montréal. Stadaconé = Québec."),
+ ()=>mc("Quel arbre du territoire donne la sève au printemps ?","L'érable",["Le palmier","Le cactus"],"Les hommes entaillent les érables."),
+ ()=>sh("Nomme une région où vivent les Iroquoiens vers 1500.",[["saint-laurent","st-laurent","saint laurent","st laurent","grands lacs","basses-terres","basses terres"]],"La vallée du Saint-Laurent (ou la région des Grands Lacs, les Basses-terres du Saint-Laurent).","")];
+const VIE=[
+ ()=>mc("Les Iroquoiens sont sédentaires. Ça veut dire…","qu'ils restent au même endroit pendant plusieurs années",["qu'ils déménagent à chaque saison","qu'ils vivent sur des bateaux"],"Sédentaire = qui reste au même endroit."),
+ ()=>mc("Pourquoi les Iroquoiens peuvent-ils rester au même endroit ?","Parce qu'ils cultivent la terre (l'agriculture)",["Parce qu'ils n'aiment pas marcher","Parce qu'il n'y a pas d'animaux"],"L'agriculture leur donne de la nourriture sans se déplacer."),
+ ()=>mc("Quand les Iroquoiens déménagent-ils leur village ?","Quand la terre est épuisée et qu'il manque de bois",["Chaque hiver","Jamais"],"La terre ne donne plus de bonnes récoltes : on déménage plus loin."),
+ ()=>mc("Les Iroquoiens sont…","sédentaires",["nomades"],"Les Algonquiens sont nomades. Les Iroquoiens sont sédentaires."),
+ ()=>mc("Le troc, c'est…","échanger des objets sans argent",["acheter au magasin","un sport d'équipe"],"Ex. : échanger du maïs contre des fourrures."),
+ ()=>mc("Pourquoi le village est-il entouré d'une palissade ?","Pour se protéger des ennemis et des animaux",["Pour faire joli","Pour faire sécher le maïs"],"La palissade est une clôture de grands pieux de bois."),
+ ()=>mc("En hiver, comment se déplace-t-on sur la neige ?","En raquettes, avec un toboggan pour transporter",["En canot","En voiture"],"Raquettes et toboggan pour l'hiver ; canot l'été."),
+ ()=>mc("Comment les Iroquoiens gardent-ils de la nourriture pour l'hiver ?","Ils font sécher et fumer les aliments",["Ils les mettent au réfrigérateur","Ils ne gardent rien"],"Les aliments séchés et fumés se conservent longtemps."),
+ ()=>sh("Explique le mot « sédentaire ».",[["meme endroit","même place","meme place","rest","ne demenag","ne bouge","longtemps","plusieurs annee"]],"Sédentaire veut dire qu'on reste au même endroit pendant plusieurs années.",""),
+ ()=>sh("Que cultivent les Iroquoiens ? Nomme deux plantes.",[["mais","haricot","courge","tabac"]],"Le maïs et le haricot (aussi la courge et le tabac).","Une seule bonne plante suffit pour que l'appli accepte, mais à l'évaluation, nomme les deux !")];
+const HAB=[
+ ()=>mc("Comment s'appelle l'habitation des Iroquoiens ?","La maison longue",["Le wigwam","L'iglou"],"Wigwam = Algonquiens. Iglou = Inuits."),
+ ()=>mc("Avec quoi la maison longue est-elle construite ?","Des perches de bois et de l'écorce",["De la neige","Des briques"],"Une structure en bois recouverte d'écorce."),
+ ()=>mc("À quoi servent les trous dans le toit de la maison longue ?","À laisser sortir la fumée des feux",["À regarder les étoiles","À faire entrer la pluie"],"Les feux sont dans l'allée du centre."),
+ ()=>mc("Qui vit dans une maison longue ?","Plusieurs familles du même clan",["Une seule famille","Seulement les chefs"],"Plusieurs familles parentes par la mère."),
+ ()=>mc("Où sont les feux dans la maison longue ?","Dans l'allée au centre",["Sur le toit","Dehors seulement"],"Deux familles partagent un même feu."),
+ ()=>mc("Où dort-on dans la maison longue ?","Sur des plateformes le long des murs",["Sur le toit","Dans des hamacs dehors"],"Les plateformes servent de lits et de rangement."),
+ ()=>mc("Quelle est la forme du toit de la maison longue ?","Arrondi",["Pointu comme un tipi","Plat"],"Regarde le dessin de ton cahier : le toit est arrondi."),
+ ()=>sh("Nomme deux matériaux de la maison longue.",[["bois","perche","tronc","arbre","branche"],["ecorce"]],"Du bois (des perches) et de l'écorce.","")];
+const CLAN=[
+ ()=>mc("Un clan, c'est…","un groupe de familles qui ont une ancêtre commune du côté de la mère",["une équipe de crosse","un village entier de plusieurs nations"],"Le clan, c'est la grande famille du côté de la mère."),
+ ()=>mc("« Matrilinéaire » veut dire…","qu'un enfant fait partie du clan de sa mère",["qu'un enfant fait partie du clan de son père","qu'il n'y a pas de clans"],"Matri- = mère."),
+ ()=>mc("Qui dirige la maison longue ?","La femme la plus âgée (la mère de clan)",["Le plus jeune garçon","Le chasseur le plus fort"],"La mère de clan a beaucoup de pouvoir."),
+ ()=>mc("Qui choisit le chef ?","Les mères de clan",["Les enfants","Le chef choisit tout seul"],"Les mères de clan choisissent le chef et peuvent le remplacer."),
+ ()=>mc("Quand un homme se marie, où va-t-il vivre ?","Dans la maison longue de la famille de sa femme",["Dans la maison longue de sa mère","Seul dans la forêt"],"Il rejoint la famille de sa femme."),
+ ()=>mc("Les clans portent souvent le nom…","d'un animal (l'Ours, le Loup, la Tortue)",["d'une couleur","d'une saison"],"Ours, Loup, Tortue…"),
+ ()=>mc("La mère d'Ahsen est du clan de l'Ours. Son père est du clan de la Tortue. Ahsen est du clan…","de l'Ours",["de la Tortue","du Loup"],"Matrilinéaire : l'enfant est du clan de sa mère."),
+ ()=>sh("Dans le clan iroquoien, qui a beaucoup de pouvoir ?",[["femme","mere","dame"]],"Les femmes, surtout la femme la plus âgée (la mère de clan).","")];
+const POP=[
+ ()=>mc("Regarde le diagramme. Que remarques-tu ?","La population augmente",["La population diminue","La population reste pareille"],"Les bandes sont de plus en plus hautes de 1400 à 1500.",popSvg()),
+ ()=>mc("En quelle année y a-t-il le plus d'Iroquoiens ?","1500",["1400","1450"],"La plus haute bande est celle de 1500.",popSvg()),
+ ()=>mc("Vers 1500, environ combien d'Iroquoiens y a-t-il ?","100 000",["1 000","10 000"],"La bande de 1500 arrive à environ 100 000.",popSvg()),
+ ()=>mc("Qu'est-ce qui explique que la population augmente ?","L'agriculture leur donne plus de nourriture et des réserves pour l'hiver",["Ils déménagent tout le temps","Il fait plus froid"],"Plus de nourriture → plus de familles en santé → la population grandit."),
+ ()=>mc("En 1400, il y avait… d'Iroquoiens qu'en 1500.","moins",["plus","autant"],"La bande de 1400 est plus basse.",popSvg()),
+ ()=>sh("Explique pourquoi la population iroquoienne augmente.",[["agricult","nourriture","mais","cultiv","recolte","reserve","manger"]],"Elle augmente parce que, grâce à l'agriculture, les Iroquoiens ont plus de nourriture et des réserves pour l'hiver.","")];
+const MOTS=[["sédentaire","qui reste au même endroit plusieurs années"],["nomade","qui se déplace souvent pour trouver sa nourriture"],["le troc","échanger des objets sans argent"],["une palissade","une clôture de grands pieux autour du village"],["matrilinéaire","on fait partie du clan de sa mère"],["défricher","enlever les arbres et les roches pour faire un champ"],["entailler","faire une petite fente dans l'arbre pour recueillir la sève"],["les aînés","les personnes âgées du village"],["un toboggan","un long traîneau plat en bois"],["la crosse","un sport avec un bâton et une balle"],["l'écorce","la « peau » d'un arbre"],["les récoltes","ce qu'on cueille dans les champs quand c'est mûr"],["fumer la viande","la conserver en la mettant dans la fumée"]];
+GEN.mots=()=>{const [m,d]=pick(MOTS);if(Math.random()<.5)return mc(`Que veut dire « ${m} » ?`,d,shuffle(MOTS.filter(x=>x[0]!==m)).slice(0,2).map(x=>x[1]),`${m} : ${d}.`);
+  return mc(`Quel mot veut dire : « ${d} » ?`,m,shuffle(MOTS.filter(x=>x[0]!==m)).slice(0,2).map(x=>x[0]),`${m} : ${d}.`)};
+const fromBank=(bank,n)=>()=>shuffle(bank).slice(0,n).map(f=>f());
+GEN.exam=()=>[...shuffle(TER).slice(0,3).map(f=>f()),GEN.sai(),GEN.sai(),...shuffle(TROUS).slice(0,3),...shuffle(VIE).slice(0,3).map(f=>f()),...shuffle(HAB).slice(0,3).map(f=>f()),...shuffle(CLAN).slice(0,3).map(f=>f()),...shuffle(POP).slice(0,2).map(f=>f())];
+
+/* ================= MATHS ================= */
+const qNum=(q,a,why,extra)=>({type:"num",q,a,why,extra});
+GEN.petit=()=>{const t=R(0,6);let a,b;
+  switch(t){
+   case 0:b=R(4,9);a=R(2,8)*10+R(10-b,9);return qNum(`${a} + ${b} = ?`,a+b,`Je passe par la dizaine : ${a} + ${b} = ${a+b}.`);
+   case 1:a=R(31,95);b=R(5,9);return qNum(`${a} − ${b} = ?`,a-b,`${a} − ${b} = ${a-b}. Truc : je recule jusqu'à la dizaine, puis le reste.`);
+   case 2:a=R(23,68);b=R(12,29);return qNum(`${a} + ${b} = ?`,a+b,`Dizaines : ${a-a%10} + ${b-b%10} = ${a-a%10+b-b%10}. Unités : ${a%10} + ${b%10} = ${a%10+b%10}. Total : ${a+b}.`);
+   case 3:a=R(52,98);b=R(13,39);return qNum(`${a} − ${b} = ?`,a-b,`${a} − ${b} = ${a-b}. Vérifie : ${a-b} + ${b} = ${a}.`);
+   case 4:a=R(1,9)*10;return qNum(`${a} + ___ = 100`,100-a,`Les compléments à 100 : ${a} + ${100-a} = 100.`);
+   case 5:a=R(120,980);b=pick([10,100]);const add=Math.random()<.5;return qNum(`${a} ${add?"+":"−"} ${b} = ?`,add?a+b:a-b,`${add?"+":"−"} ${b} : seul le chiffre des ${b===10?"dizaines":"centaines"} change. Réponse : ${add?a+b:a-b}.`);
+   default:a=R(2,9)*100;b=R(1,9)*100;if(a+b>1500)b=100;return qNum(`${a} + ${b} = ?`,a+b,`${a/100} centaines + ${b/100} centaines = ${(a+b)/100} centaines = ${a+b}.`)}};
+function colLayout(a,b,op){const w=Math.max(String(a).length,String(b).length)+2;return `<pre class="col">${String(a).padStart(w)}\n${op}${String(b).padStart(w-1)}\n${"‾".repeat(w)}</pre>`}
+GEN.calc=()=>{const t=R(0,4);let a,b;
+  if(t===0){a=R(150,899);b=R(150,899)}
+  else if(t===1){a=R(1200,6800);b=R(250,2900)}
+  else if(t===2){a=R(400,999);b=R(120,a-50)}
+  else if(t===3){a=pick([1000,2000,3000,5000,4005,3002,6001,2050]);b=R(137,a>1500?1499:899)}
+  else{a=R(3000,9500);b=R(1100,a-200)}
+  const add=t<2,res=add?a+b:a-b;
+  return qNum(`${fmt(a)} ${add?"+":"−"} ${fmt(b)} = ?`,res,add?`Je pose en colonnes, je commence par les unités et je fais la retenue quand ça dépasse 9. Réponse : ${fmt(res)}.`:`Je pose en colonnes, je commence par les unités. Si le chiffre du haut est trop petit, j'emprunte à la position voisine. Réponse : ${fmt(res)}. Vérifie : ${fmt(res)} + ${fmt(b)} = ${fmt(a)}.`,colLayout(a,b,add?"+":"−"))};
+
+/* Plan cartésien: first quadrant, 0 to 10, written (horizontal, vertical) as on Alloprof. */
+const N=10,U=30,PX=34,PY=14;const gx=x=>PX+x*U,gy=y=>PY+(N-y)*U;
+function grid(o){o=o||{};const pts=o.pts||[];let s=`<svg class="grid" viewBox="0 0 ${PX+N*U+16} ${PY+N*U+40}" role="img" aria-label="Plan cartésien">`;
+  for(let i=0;i<=N;i++){s+=`<line x1="${gx(i)}" y1="${gy(0)}" x2="${gx(i)}" y2="${gy(N)}" class="gl"/><line x1="${gx(0)}" y1="${gy(i)}" x2="${gx(N)}" y2="${gy(i)}" class="gl"/>`;
+    s+=`<text x="${gx(i)}" y="${gy(0)+17}" text-anchor="middle" class="gt">${i}</text>`;if(i)s+=`<text x="${gx(0)-9}" y="${gy(i)+4}" text-anchor="end" class="gt">${i}</text>`}
+  s+=`<line x1="${gx(0)}" y1="${gy(0)}" x2="${gx(N)+10}" y2="${gy(0)}" class="ax"/><line x1="${gx(0)}" y1="${gy(0)}" x2="${gx(0)}" y2="${gy(N)-6}" class="ax"/><text x="${gx(N)}" y="${gy(0)+33}" text-anchor="end" class="gt">axe horizontal →</text>`;
+  pts.forEach(p=>{s+=`<circle cx="${gx(p.x)}" cy="${gy(p.y)}" r="6" class="pt"/><text x="${gx(p.x)+8}" y="${gy(p.y)-8}" class="pl">${esc(p.l)}</text>`});
+  if(o.click)for(let x=0;x<=N;x++)for(let y=0;y<=N;y++)s+=`<circle cx="${gx(x)}" cy="${gy(y)}" r="12" class="hit" data-gx="${x}" data-gy="${y}"><title>(${x}, ${y})</title></circle>`;
+  return s+`</svg>`}
+const LET="ABCDEFGH";
+function somePts(n){const used=new Set(),out=[];while(out.length<n){const x=R(1,9),y=R(1,9),k=x+","+y;if(used.has(k)||used.has(y+","+x))continue;used.add(k);out.push({x,y,l:LET[out.length]})}return out}
+const pair=(x,y)=>`(${x}, ${y})`;
+GEN.lire=()=>{let p;do{p=somePts(1)[0]}while(p.x===p.y);const good=pair(p.x,p.y);const bad=[...new Set([pair(p.y,p.x),pair(p.x+1,p.y),pair(p.x,p.y-1),pair(p.x-1,p.y+1)])].filter(b=>b!==good).slice(0,3);
+  return mc(`Quelles sont les coordonnées du point ${p.l} ?`,good,bad,`Je pars de l'origine (0, 0). J'avance de ${p.x} vers la droite → puis je monte de ${p.y} ↑. Le point ${p.l} est à ${good}. Attention : ${pair(p.y,p.x)}, c'est un autre point !`,grid({pts:[p]}))};
+GEN.trouver=()=>{const pts=somePts(5);const t=pts[R(0,4)];const o=pts.map(p=>p.l);
+  return {type:"mc",q:`Quel point est situé à ${pair(t.x,t.y)} ?`,o,a:o.indexOf(t.l),why:`→ ${t.x} vers la droite, ↑ ${t.y} vers le haut : c'est le point ${t.l}.`,extra:grid({pts})}};
+GEN.placer=()=>{const x=R(0,9),y=R(1,9);return {type:"plot",q:`Touche le point ${pair(x,y)}.`,x,y,why:`→ ${x} vers la droite, puis ↑ ${y} vers le haut.`}};
+GEN.depl=()=>{const x=R(1,5),y=R(1,5),dx=R(1,4),dy=R(1,4),up=Math.random()<.6,ny=up?y+dy:Math.max(0,y-dy),rdy=Math.abs(ny-y);const good=pair(x+dx,ny);
+  const bad=[...new Set([pair(x+dx,up?y-dy<0?y+dy+1:y-dy:y+dy),pair(ny,x+dx),pair(x+dy,up?y+dx:y)])].filter(b=>b!==good).slice(0,3);
+  return mc(`Une fourmi est au point ${pair(x,y)}. Elle avance de ${dx} vers la droite, puis ${up?"monte":"descend"} de ${rdy}. Où arrive-t-elle ?`,good,bad,`Horizontal : ${x} + ${dx} = ${x+dx}. Vertical : ${y} ${up?"+":"−"} ${rdy} = ${ny}. Elle arrive à ${good}.`,grid({pts:[{x,y,l:"🐜"}]}))};
+
+const NAMES=["Léo","Noah","Liam","Félix","Samuel","Nathan"];
+const PB=[
+ ()=>{const r=R(2100,3800),s=R(900,1499),n=R(1500,1900),f=pick([7,8,9]);const reste=r-s;
+   return {t:"Les récoltes du village",html:`<p>Dans un village iroquoien, les femmes ont récolté <b>${fmt(r)}</b> épis de maïs. Elles en font sécher <b>${fmt(s)}</b> au soleil pour l'hiver. Le village compte ${f} maisons longues.</p><p>La semaine suivante, elles récoltent encore <b>${fmt(n)}</b> épis.</p>`,
+   q:[[`Partie A : combien d'épis ne sont pas mis à sécher ?`,reste,`${fmt(r)} − ${fmt(s)} = ${fmt(reste)}.`],[`Partie B : combien d'épis ont-elles récoltés en tout, les deux semaines ensemble ?`,r+n,`${fmt(r)} + ${fmt(n)} = ${fmt(r+n)}.`]],
+   mc:[`Quel nombre ne sert à rien ?`,[`${f} maisons longues`,`${fmt(s)} épis`,`${fmt(n)} épis`],`Le nombre de maisons longues ne sert à aucun calcul.`],
+   end:`Elles ont récolté ${fmt(r+n)} épis en tout, et ${fmt(reste)} épis n'ont pas été mis à sécher la première semaine.`}},
+ ()=>{const nm=pick(NAMES),a=R(1200,2400),b=R(450,980),c=R(250,690);const apres=a-b,fin=apres+c;
+   return {t:"Le troc",html:`<p>Le village a <b>${fmt(a)}</b> peaux de castor. ${nm} et les hommes en échangent <b>${b}</b> contre du maïs avec un autre village. Ensuite, les chasseurs rapportent <b>${c}</b> nouvelles peaux. ${nm} a 9 ans.</p>`,
+   q:[[`Partie A : combien de peaux reste-t-il après le troc ?`,apres,`${fmt(a)} − ${b} = ${fmt(apres)}.`],[`Partie B : combien de peaux le village a-t-il à la fin ?`,fin,`${fmt(apres)} + ${c} = ${fmt(fin)}.`]],
+   mc:[`Quelle information ne sert à rien ?`,[`${nm} a 9 ans.`,`Le village a ${fmt(a)} peaux.`,`Les chasseurs rapportent ${c} peaux.`],`L'âge ne sert à aucun calcul.`],
+   end:`À la fin, le village a ${fmt(fin)} peaux de castor.`}},
+ ()=>{const M={x:R(1,3),y:R(6,9),l:"M"},C={x:R(5,8),y:R(5,9),l:"C"},Ri={x:R(6,9),y:R(1,3),l:"R"};const pm=R(1300,2600),pc=R(1100,2200);
+   const map=grid({pts:[M,C,Ri]});
+   return {t:"La carte du village",html:`<p>Voici la carte du village. <b>M</b> = la maison longue, <b>C</b> = le champ de maïs, <b>R</b> = la rivière.</p>${map}<p>Il y a <b>${fmt(pm)}</b> plants de maïs dans le champ et <b>${fmt(pc)}</b> plants de courges.</p>`,
+   pre:mc(`Partie A : quelles sont les coordonnées du champ de maïs (C) ?`,pair(C.x,C.y),[pair(C.y,C.x),pair(C.x+1,C.y)].filter(b=>b!==pair(C.x,C.y)),`→ ${C.x}, ↑ ${C.y} : ${pair(C.x,C.y)}.`),
+   q:[[`Partie B : combien de plants y a-t-il en tout dans le champ ?`,pm+pc,`${fmt(pm)} + ${fmt(pc)} = ${fmt(pm+pc)}.`],[`Partie C : combien de plants de maïs de plus que de courges ? (Si c'est l'inverse, écris l'écart quand même.)`,Math.abs(pm-pc),`On cherche l'écart : ${fmt(Math.max(pm,pc))} − ${fmt(Math.min(pm,pc))} = ${fmt(Math.abs(pm-pc))}.`]],
+   mc:[`Quel point est à ${pair(Ri.x,Ri.y)} ?`,["R (la rivière)","M (la maison longue)","C (le champ)"],`→ ${Ri.x}, ↑ ${Ri.y} : c'est la rivière.`],
+   end:`Il y a ${fmt(pm+pc)} plants en tout dans le champ.`}}];
+const PBDECK=[];
+GEN.prob=()=>{if(!PBDECK.length)PBDECK.push(...shuffle(PB.map((f,i)=>i)));const P=PB[PBDECK.pop()]();
+  const n=P.q.length+(P.pre?1:0)+2;let k=0;const tag=()=>`${P.t} · partie ${++k} sur ${n}`;
+  const hint=`<p class="muted" style="margin-top:6px">📝 Sur ta feuille : pose ton calcul en colonnes, puis écris la réponse ici.</p>`;
+  const out=[];if(P.pre)out.push(Object.assign(P.pre,{storyHtml:P.html,step:tag()}));
+  P.q.forEach(([q,a,w])=>out.push({type:"num",q,a,why:w,storyHtml:P.html,step:tag(),extra:hint}));
+  const o=shuffle(P.mc[1]);out.push({type:"mc",q:P.mc[0],o,a:o.indexOf(P.mc[1][0]),why:P.mc[2],storyHtml:P.html,step:tag()});
+  out.push({type:"open",q:"Dernière partie : écris ta phrase-réponse.",model:P.end,check:["J'ai posé mes calculs en colonnes sur ma feuille.","Ma phrase-réponse est complète.","J'ai vérifié ma soustraction avec une addition."],storyHtml:P.html,step:tag()});return out};
+GEN.mixMa=()=>[...Array.from({length:4},GEN.petit),GEN.calc(),GEN.calc(),GEN.calc(),GEN.lire(),GEN.trouver(),GEN.placer(),GEN.placer(),GEN.depl()];
+
+/* ================= ÉCRITURE ================= */
+const MODELES=[
+ {n:"La Grande Ourse",d:"On y trouve la Grande Casserole : 4 étoiles pour le chaudron et 3 pour le manche.",p:[[20,40],[62,34],[98,48],[132,62],[140,104],[196,112],[204,68]],l:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,3]]},
+ {n:"Cassiopée",d:"Elle a la forme d'un grand W (ou d'un M selon la saison).",p:[[20,50],[60,100],[105,62],[150,110],[200,40]],l:[[0,1],[1,2],[2,3],[3,4]]},
+ {n:"Orion, le chasseur",d:"Ses 3 étoiles alignées au centre forment sa ceinture.",p:[[60,20],[150,30],[90,78],[108,82],[126,86],[50,140],[160,135]],l:[[0,2],[1,4],[2,3],[3,4],[2,5],[4,6]]}];
+function sky(p,l,w,h,big){const W=w||220,H=h||150;let s=`<svg viewBox="0 0 ${W} ${H}" class="sky${big?" big":""}" role="img" aria-label="Constellation">`;
+  (l||p.map((_,i)=>i?[i-1,i]:null).filter(Boolean)).forEach(([a,b])=>{s+=`<line x1="${p[a][0]}" y1="${p[a][1]}" x2="${p[b][0]}" y2="${p[b][1]}" class="sl"/>`});
+  p.forEach(([x,y])=>{s+=`<circle cx="${x}" cy="${y}" r="${big?5:4}" class="st"/>`});return s+`</svg>`}
+const ECQ=[
+ ()=>mc("Une constellation, c'est…","un groupe d'étoiles qui forment un dessin imaginaire dans le ciel",["une seule étoile très brillante","une planète avec des anneaux"],"On relie les étoiles par des lignes imaginaires."),
+ ()=>mc("Quelle constellation a la forme d'un W ?","Cassiopée",["Orion","La Grande Ourse"],"Cassiopée ressemble à un W."),
+ ()=>mc("La Grande Casserole fait partie de quelle constellation ?","La Grande Ourse",["Cassiopée","Orion"],"La Grande Casserole est dans la Grande Ourse."),
+ ()=>mc("Un texte descriptif sert à…","faire voir quelque chose au lecteur, en le décrivant",["raconter une aventure avec un problème","expliquer comment fabriquer un objet"],"Décrire = dire comment c'est."),
+ ()=>mc("Quelle phrase est la plus descriptive ?","Ses sept étoiles bleutées brillent comme des diamants.",["Il y a des étoiles.","J'aime le ciel."],"Elle a un nombre, un adjectif (bleutées) et une comparaison."),
+ ()=>mc("Dans « une étoile minuscule et dorée », quels mots sont des adjectifs ?","minuscule, dorée",["une, étoile","et, étoile"],"Les adjectifs décrivent le nom « étoile »."),
+ ()=>mc("Quelle phrase contient une comparaison ?","Ma constellation ressemble à un dragon qui dort.",["Ma constellation a six étoiles.","On la voit en hiver."],"« ressemble à » compare."),
+ ()=>mc("Quel groupe de mots indique une position ?","en haut à gauche",["très brillante","depuis longtemps"],"En haut, à gauche, au centre… indiquent où."),
+ ()=>{const t=pick([["Ma constellation s'appelle le Hibou. Elle a huit étoiles. Ses yeux sont deux étoiles jaunes. On la voit en hiver.",4],["Voici le Cerf-volant. Il est formé de cinq étoiles. La plus grosse est au sommet. Sa queue est longue et courbée. Il brille au-dessus de la forêt. On le voit l'été.",6],["Le Serpent d'argent glisse dans le ciel. Il a sept étoiles. Sa tête est ronde comme une bille.",3]]);
+   return {type:"num",q:`Combien y a-t-il de phrases dans ce texte ?`,a:t[1],why:"Une phrase commence par une majuscule et finit par un point.",storyHtml:`<p>${t[0]}</p>`}},
+ ()=>mc("Ton texte doit avoir 5 à 7 phrases. Lequel est correct ?","6 phrases",["3 phrases","10 phrases"],"Entre 5 et 7 : 5, 6 ou 7 phrases.")];
+
+/* ================= ACTIVITIES ================= */
+const ACTS={
+ ter:{s:"ir",ic:"🗺️",tt:"Le territoire",su:"Basses-terres, fleuve, Grands Lacs",gen:fromBank(TER,8),bank:1},
+ sai:{s:"ir",ic:"🍂",tt:"Les saisons : quand ? qui ?",su:"Printemps, été, automne, hiver",n:12,gen:()=>GEN.sai()},
+ trous:{s:"ir",ic:"✏️",tt:"Mon tableau des saisons",su:"Réponses courtes, comme dans mon cahier",gen:fromBank(TROUS.map(q=>()=>q),10),bank:1},
+ vie:{s:"ir",ic:"🏕️",tt:"Le mode de vie",su:"Sédentaires, agriculture, troc",gen:fromBank(VIE,8),bank:1},
+ hab:{s:"ir",ic:"🏠",tt:"La maison longue",su:"L'habitation",gen:fromBank(HAB,7),bank:1},
+ clan:{s:"ir",ic:"👵",tt:"L'organisation du clan",su:"Matrilinéaire, mère de clan",gen:fromBank(CLAN,7),bank:1},
+ pop:{s:"ir",ic:"📊",tt:"La population",su:"Lire le diagramme",gen:fromBank(POP,6),bank:1},
+ mots:{s:"ir",ic:"📚",tt:"Les mots à connaître",su:"Troc, palissade, défricher…",n:10,gen:()=>GEN.mots()},
+ examI:{s:"ir",ic:"📝",tt:"Examen pour pratiquer",su:"18 questions, comme le 3 novembre",gen:()=>GEN.exam(),bank:1},
+ petit:{s:"ma",ic:"⚡",tt:"Petites additions et soustractions",su:"Calcul mental",n:12,gen:()=>GEN.petit()},
+ calc:{s:"ma",ic:"➕",tt:"Grosses additions et soustractions",su:"En colonnes, avec retenues et emprunts",n:8,gen:()=>GEN.calc()},
+ lire:{s:"ma",ic:"📍",tt:"Plan cartésien : lire un point",su:"Quelles sont ses coordonnées ?",n:8,gen:()=>GEN.lire()},
+ trouver:{s:"ma",ic:"🔎",tt:"Plan cartésien : trouver le point",su:"Quel point est à (3, 7) ?",n:8,gen:()=>GEN.trouver()},
+ placer:{s:"ma",ic:"👆",tt:"Plan cartésien : placer un point",su:"Touche le bon endroit",n:8,gen:()=>GEN.placer()},
+ depl:{s:"ma",ic:"🐜",tt:"Plan cartésien : la fourmi se déplace",su:"Défi !",n:6,gen:()=>GEN.depl()},
+ prob:{s:"ma",ic:"🌽",tt:"Le petit problème",su:"Une histoire en parties A, B, C",n:2,gen:()=>GEN.prob(),multi:true},
+ examM:{s:"ma",ic:"📝",tt:"Examen de maths pour pratiquer",su:"12 questions de tout",gen:()=>GEN.mixMa(),bank:1},
+ ecq:{s:"ec",ic:"🌌",tt:"Constellations et texte descriptif",su:"Ce qu'il faut savoir",gen:fromBank(ECQ,8),bank:1},
+ cree:{s:"ec",ic:"⭐",tt:"Je crée ma constellation",su:"Je place mes étoiles et je la nomme",special:"cree"},
+ idees:{s:"ec",ic:"🗒️",tt:"Mon plan d'idées",su:"Nom, forme, étoiles, légende…",special:"idees"},
+ texte:{s:"ec",ic:"✍️",tt:"J'écris mon texte (5 à 7 phrases)",su:"Avec les contraintes de l'enseignante",special:"texte"}
+};
+const TOTAL=Object.keys(ACTS).length*3;
+const got=()=>Object.values(S.stars).reduce((a,b)=>a+b,0);
+function renderActs(){[["ir","actsIr"],["ma","actsMa"],["ec","actsEc"]].forEach(([s,id])=>{
+  $(id).innerHTML=Object.entries(ACTS).filter(([k,a])=>a.s===s).map(([k,a])=>{const st=S.stars[k]||0;
+    return `<button class="act ${s}${st?" done":""}" data-act="${k}"><span class="ic">${a.ic}</span><span><span class="tt">${a.tt}</span><span class="su">${a.su}</span></span><span class="st">${stars(st)}</span></button>`}).join("")});
+  $("tot").innerHTML=`<b>★</b> ${got()} / ${TOTAL}`}
+function renderFiches(){$("fiches").innerHTML=FICHES.map((f,i)=>`<details class="fiche"${i===0?" open":""}><summary>${f.ic} ${f.t}</summary><div class="fb2">${f.b}</div></details>`).join("");const p=$("popFiche");if(p)p.innerHTML=popSvg();
+  $("modeles").innerHTML=`<div class="mods">${MODELES.map(m=>`<figure>${sky(m.p,m.l)}<figcaption><b>${m.n}</b><br><span class="muted">${m.d}</span></figcaption></figure>`).join("")}</div>`}
+
+/* ================= PLAN ================= */
+const DATES={ec:new Date(2026,10,2),ir:new Date(2026,10,3),ma:new Date(2026,10,4)};
+const DAYS=[
+ {d:new Date(2026,9,30),n:"Vendredi 30 octobre",a:["ter","sai","petit"],note:"Lis d'abord les fiches « Le territoire » et « Les saisons »."},
+ {d:new Date(2026,9,31),n:"Samedi 31 octobre · Halloween 🎃",a:["ecq","cree"],note:"Journée légère ! Ce soir, regarde le ciel : vois-tu des étoiles ?"},
+ {d:new Date(2026,10,1),n:"Dimanche 1er novembre",a:["trous","vie","hab","lire","calc"]},
+ {d:new Date(2026,10,2),n:"Lundi 2 novembre",exam:"✨ Début du projet d'écriture en classe",a:["clan","pop","mots","idees","placer"],note:"Après l'école : écris dans l'onglet Écriture les contraintes données par l'enseignante."},
+ {d:new Date(2026,10,3),n:"Mardi 3 novembre",exam:"🌽 Évaluation sur les Iroquoiens",a:["examI","trouver","prob","texte"],note:"Le matin : relis les fiches 10 minutes. Le soir : maths pour demain."},
+ {d:new Date(2026,10,4),n:"Mercredi 4 novembre",exam:"🔢 Évaluation de maths",a:["examM"],note:"Le matin : seulement 5 minutes de calcul mental. Confiance !"}];
+function renderPlan(){const t=new Date(),today=new Date(t.getFullYear(),t.getMonth(),t.getDate()).getTime();
+  $("plan").innerHTML=`<p class="consigne">Environ 20 à 25 minutes par jour. Clique sur une mission pour commencer !</p>
+   <div class="days">${DAYS.map(D=>`<div class="day${D.d.getTime()===today?" today":""}${D.exam?" exam":""}"><h3>${D.n}${D.d.getTime()===today?" · aujourd'hui":""}</h3>${D.exam?`<p class="d">${D.exam}</p>`:""}
+     <ul>${D.a.map(k=>`<li>${ACTS[k].ic} <a href="#" data-act="${k}">${ACTS[k].tt}</a><span class="s">${stars(S.stars[k]||0)}</span></li>`).join("")}</ul>${D.note?`<p class="muted" style="margin-top:8px">${D.note}</p>`:""}</div>`).join("")}</div>
+   <div class="parent"><h3>👪 Pour les parents</h3><ul>
+    <li><b>Corrections dans son cahier (tableau des saisons) :</b> en été, il a écrit « Les hommes <i>iroquoiens</i> et <i>chasse et pêchent</i> » : c'est « Les hommes <b>chassent</b> et <b>pêchent</b> ». En automne : « font <b>fumer</b> » (pas « fumée »). En hiver : <b>toboggan</b> (il a écrit « tabaggan ») et « des <b>légendes</b> » avec un s. La mission « Mon tableau des saisons » revient exactement sur ces trous.</li>
+    <li><b>Maison longue :</b> les rabats de son cahier (mode de vie, clan, nombre de familles) étaient fermés sur la photo. Si l'enseignante a donné un nombre précis de familles, faites-le-lui répéter : l'application dit seulement « plusieurs familles du même clan ».</li>
+    <li><b>Iroquoiens :</b> l'évaluation est sans cahier. Après chaque fiche, demandez-lui de vous la raconter sans regarder. Réponses courtes : une phrase complète, avec les mots du cahier.</li>
+    <li><b>Plan cartésien :</b> l'application écrit les coordonnées comme Alloprof, (horizontal, vertical), de 0 à 10. Si sa classe utilise des lettres sur un axe, dites-le-moi et j'ajuste.</li>
+    <li><b>Écriture :</b> les contraintes de l'enseignante ne sont pas encore connues. Le 2 novembre, écrivez-les dans la mission « J'écris mon texte » : elles deviennent sa liste de vérification.</li>
+    <li>Les étoiles sont gardées sur cet appareil. Chaque mission peut être refaite : les questions changent.</li></ul>
+    <h3 style="margin-top:12px">📚 Sources</h3>
+    <ul class="src">
+     <li>Le cahier de notes d'Israël (saisons, territoire, population, maison longue).</li>
+     <li><a href="https://www.alloprof.qc.ca/en/students/vl/history/the-different-indigenous-ways-of-life-iroquoians-algonquians-and-inuit-h1505" target="_blank" rel="noopener">Alloprof · Les modes de vie autochtones : Iroquoiens, Algonquiens, Inuits</a></li>
+     <li><a href="https://ville.montreal.qc.ca/memoiresdesmontrealais/les-iroquoiens-du-saint-laurent" target="_blank" rel="noopener">Centre des mémoires montréalaises · Les Iroquoiens du Saint-Laurent</a></li>
+     <li><a href="https://www.alloprof.qc.ca/en/students/vl/mathematics/the-cartesian-plane-cycle-2-m1707p34" target="_blank" rel="noopener">Alloprof · Le plan cartésien (2e cycle)</a></li>
+    </ul></div>`}
+function renderCountdown(){const t=new Date(),today=new Date(t.getFullYear(),t.getMonth(),t.getDate());
+  const c=d=>{const n=Math.round((d-today)/864e5);return n>1?`${n} jours`:n===1?"Demain !":n===0?"Aujourd'hui !":"Terminé ✓"};
+  $("cd").innerHTML=`<div><b>${c(DATES.ec)}</b><span>✨ Projet d'écriture · lundi 2 novembre</span></div><div><b>${c(DATES.ir)}</b><span>🌽 Iroquoiens · mardi 3 novembre</span></div><div><b>${c(DATES.ma)}</b><span>🔢 Maths · mercredi 4 novembre</span></div>`}
+
+/* ================= NAV ================= */
+const tabs=[...document.querySelectorAll(".tab")];let back="plan",cleanup=null;
+function show(t){if(cleanup){cleanup();cleanup=null}tabs.forEach(b=>b.setAttribute("aria-selected",b.dataset.t===t));
+  document.querySelectorAll("main>section").forEach(s=>s.hidden=s.id!==t);if(t!=="run"){back=t;try{history.replaceState(null,"","#"+t)}catch(e){}}
+  if(t==="plan")renderPlan();renderActs()}
+tabs.forEach(b=>b.onclick=()=>show(b.dataset.t));
+document.addEventListener("click",e=>{const a=e.target.closest("[data-act]");if(a){e.preventDefault();start(a.dataset.act)}
+  if(e.target.closest("[data-back]")){show(back);scrollTo(0,0)}});
+
+function start(k){const A=ACTS[k];show("run");scrollTo(0,0);const C=$("runCard");
+  C.innerHTML=`<div class="row noprint" style="margin-top:0"><button class="btn small" data-back>← Retour</button><span style="flex:1"></span><span class="pill">${A.tt}</span></div><div id="body" style="margin-top:12px"></div>`;
+  const body=$("body");
+  if(A.special==="cree")return runCree(body,k);
+  if(A.special==="idees")return runIdees(body,k);
+  if(A.special==="texte")return runTexte(body,k);
+  let qs;
+  if(A.bank)qs=A.gen();
+  else if(A.multi){qs=[];for(let i=0;i<A.n;i++)qs.push(...A.gen())}
+  else{qs=[];const seen=new Set();let g=0;while(qs.length<A.n&&g++<300){const q=A.gen();if(!seen.has(q.q+(q.extra||"")+q.o)){seen.add(q.q+(q.extra||"")+q.o);qs.push(q)}}}
+  runQuiz(body,qs,(ok,n)=>finish(body,k,ok,n));
+}
+
+function finish(body,k,ok,n,msg,forced){const s=forced||(ok>=n?3:ok>=Math.ceil(n*.7)?2:1);S.stars[k]=Math.max(S.stars[k]||0,s);save();renderActs();if(s===3)boo();
+  body.innerHTML=`<div class="win"><div class="ws">${stars(s)}</div><h2>${s===3?"Brillant comme une étoile ! ⭐":s===2?"Bien joué !":"Mission terminée !"}</h2><p class="muted" style="margin-top:6px">${n?`${ok} sur ${n} du premier coup.`:""} ${msg||(s<3?"Refais-la : les questions changent !":"")}</p>
+   <div class="row" style="justify-content:center"><button class="btn primary" data-back>Retour aux missions</button><button class="btn" id="again">Recommencer</button></div></div>`;
+  $("again").onclick=()=>start(k)}
+function boo(){const c=document.createElement("div");c.className="confetti";c.innerHTML=Array.from({length:28},()=>`<i style="left:${Math.random()*100}%;animation-duration:${2+Math.random()*2}s;animation-delay:${Math.random()*.6}s">${pick(["⭐","🌙","🌽","✨","🍂"])}</i>`).join("");document.body.appendChild(c);setTimeout(()=>c.remove(),4800)}
+
+function runQuiz(body,qs,onEnd){let i=0,ok=0;
+  function step(){if(i>=qs.length)return onEnd(ok,qs.length);
+    const q=qs[i];let tried=false;
+    const head=`<p class="prog">Question ${i+1} sur ${qs.length}${q.step?" · "+q.step:""}</p>${q.storyHtml?`<div class="story">${q.storyHtml}</div>`:q.story?`<div class="story">${esc(q.story)}</div>`:""}<p class="qbig">${esc(q.q)}</p>${q.extra||""}`;
+    const next=()=>{i++;step()};
+    const showWhy=good=>{if(q.why){const w=document.createElement("div");w.className="why";w.innerHTML=(good?"✓ ":"💡 ")+esc(q.why);body.appendChild(w)}
+      const b=document.createElement("div");b.className="row";b.innerHTML=`<button class="btn primary" id="nx">Suivant →</button>`;body.appendChild(b);$("nx").focus();$("nx").onclick=next};
+    if(q.type==="num"){
+      body.innerHTML=head+`<div class="row"><input class="ans" inputmode="numeric" autocomplete="off" id="in" aria-label="Réponse"><button class="btn primary" id="ck">Vérifier</button></div><div class="fb" id="fb"></div>`;
+      const inp=$("in"),fb=$("fb");inp.focus();let done=false;
+      const check=()=>{if(done)return;const v=inp.value.replace(/[\s .]/g,"");if(v==="")return;
+        if(+v===q.a){done=true;if(!tried)ok++;inp.classList.add("ok");inp.readOnly=true;fb.className="fb ok";fb.textContent="Bravo !";$("ck").remove();showWhy(true)}
+        else if(!tried){tried=true;inp.classList.add("no","shake");setTimeout(()=>inp.classList.remove("shake"),400);fb.className="fb no";fb.textContent="Pas tout à fait. Vérifie ton calcul et essaie encore !";inp.select()}
+        else{done=true;inp.classList.add("no");inp.readOnly=true;fb.className="fb no";fb.innerHTML=`La réponse est <b>${fmt(q.a)}</b>.`;$("ck").remove();showWhy(false)}};
+      $("ck").onclick=check;inp.onkeydown=e=>{if(e.key==="Enter")check()};
+    }else if(q.type==="plot"){
+      body.innerHTML=head+grid({click:true})+`<div class="fb" id="fb"></div>`;
+      const svg=body.querySelector("svg.grid");let done=false;
+      const mark=(x,y,c)=>{const e=document.createElementNS("http://www.w3.org/2000/svg","circle");e.setAttribute("cx",gx(x));e.setAttribute("cy",gy(y));e.setAttribute("r",7);e.setAttribute("class","mk "+c);svg.appendChild(e)};
+      svg.querySelectorAll("[data-gx]").forEach(c=>c.onclick=()=>{if(done)return;const x=+c.dataset.gx,y=+c.dataset.gy;
+        if(x===q.x&&y===q.y){done=true;if(!tried)ok++;mark(x,y,"ok");$("fb").className="fb ok";$("fb").textContent="Bravo !";showWhy(true)}
+        else if(!tried){tried=true;mark(x,y,"no");$("fb").className="fb no";$("fb").textContent=`Tu as touché (${x}, ${y}). D'abord → vers la droite (horizontal), ensuite ↑ vers le haut (vertical). Essaie encore !`}
+        else{done=true;mark(x,y,"no");mark(q.x,q.y,"ok");$("fb").className="fb no";$("fb").textContent=`Le point (${q.x}, ${q.y}) est en vert.`;showWhy(false)}});
+    }else if(q.type==="seq"){
+      const order=[0,1,2,3].slice(0,q.o.length),mix=shuffle(order),picked=[];
+      const draw=()=>{body.innerHTML=head+`<div class="order"><div class="slot fill"><span class="n">1.</span>${esc(q.first)}</div>${q.o.map((x,j)=>`<div class="slot${picked[j]!=null?" fill":""}"><span class="n">${j+2}.</span>${picked[j]!=null?esc(q.o[picked[j]]):""}</div>`).join("")}</div>
+        <div class="opts" style="margin-top:12px">${mix.filter(j=>!picked.includes(j)).map(j=>`<button class="opt" data-q="${j}">${esc(q.o[j])}</button>`).join("")}</div><div class="fb" id="fb"></div>`;
+        body.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>{const j=+b.dataset.q;
+          if(j===picked.length){picked.push(j);if(picked.length===q.o.length){if(!tried)ok++;draw();$("fb").className="fb ok";$("fb").textContent=tried?"C'est le bon ordre maintenant.":"Bravo, le bon ordre du premier coup !";showWhy(!tried);return}draw()}
+          else{tried=true;b.classList.add("no","shake");$("fb").className="fb no";$("fb").textContent="Pas encore. Retourne au texte : qu'est-ce qui arrive juste après ?";setTimeout(()=>b.classList.remove("no","shake"),500)}})};
+      draw();
+    }else if(q.type==="short"){
+      body.innerHTML=head+`<div class="row"><input class="ans" id="in" style="max-width:520px;font-size:1.05rem;font-weight:600" autocomplete="off" placeholder="J'écris ma réponse ici"><button class="btn primary" id="ck">Vérifier</button></div><div class="fb" id="fb"></div>`;
+      const inp=$("in");inp.focus();
+      const norm=t=>t.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+      const check=()=>{if(!inp.value.trim())return;const v=norm(inp.value),good=q.kw.every(g=>g.some(k=>v.includes(norm(k))));
+        $("ck").remove();inp.readOnly=true;inp.classList.add(good?"ok":"no");if(good)ok++;
+        $("fb").className="fb "+(good?"ok":"no");$("fb").textContent=good?"Bravo !":"Compare avec la réponse attendue :";
+        body.insertAdjacentHTML("beforeend",`<div class="model">✍️ Réponse attendue : <b>${esc(q.model)}</b></div>`);showWhy(good)};
+      $("ck").onclick=check;inp.onkeydown=e=>{if(e.key==="Enter")check()};
+    }else if(q.type==="open"){
+      body.innerHTML=head+`<textarea class="f" id="ta" style="min-height:110px" placeholder="J'écris ma réponse en phrases complètes…"></textarea><div class="row"><button class="btn primary" id="ck">J'ai fini ma réponse</button></div>`;
+      $("ta").focus();
+      $("ck").onclick=()=>{if($("ta").value.trim().split(/\s+/).length<4){$("ta").classList.add("shake");setTimeout(()=>$("ta").classList.remove("shake"),400);return}
+        $("ta").readOnly=true;$("ck").parentNode.remove();
+        body.insertAdjacentHTML("beforeend",`<div class="model">💡 Exemple de bonne réponse : <b>${esc(q.model)}</b></div><p style="font-weight:800;margin-top:10px">Je vérifie ma réponse (avec un adulte) :</p><div class="self">${q.check.map((c,j)=>`<label><input type="checkbox" data-c="${j}"> ${esc(c)}</label>`).join("")}</div><div class="row"><button class="btn primary" id="nx">Suivant →</button></div>`);
+        $("nx").onclick=()=>{if(body.querySelectorAll("[data-c]:checked").length===q.check.length)ok++;next()}};
+    }else if(q.type==="multi"){
+      const sel=new Set();
+      body.innerHTML=head+`<div class="opts">${q.o.map((o,j)=>`<button class="opt" data-o="${j}">${esc(o)}</button>`).join("")}</div><div class="row"><button class="btn primary" id="ck">Vérifier</button></div><div class="fb" id="fb"></div>`;
+      body.querySelector(".opts").onclick=e=>{const b=e.target.closest(".opt");if(!b||b.disabled)return;const j=+b.dataset.o;sel.has(j)?sel.delete(j):sel.add(j);b.classList.toggle("sel")};
+      $("ck").onclick=()=>{if(!sel.size)return;const good=q.a.length===sel.size&&q.a.every(x=>sel.has(x));
+        if(good||tried){if(good&&!tried)ok++;body.querySelectorAll(".opt").forEach((b,j)=>{b.disabled=true;b.classList.remove("sel");if(q.a.includes(j))b.classList.add("ok");else if(sel.has(j))b.classList.add("no")});
+          $("ck").remove();$("fb").className="fb "+(good?"ok":"no");$("fb").textContent=good?"Bravo !":"Voici les bonnes réponses.";showWhy(good)}
+        else{tried=true;$("fb").className="fb no";$("fb").textContent="Pas tout à fait. Relis le texte et essaie encore !"}};
+    }else{
+      body.innerHTML=head+`<div class="opts${q.o.length<=3&&q.o.every(x=>x.length<22)?" inl":""}">${q.o.map((o,j)=>`<button class="opt" data-o="${j}">${esc(o)}</button>`).join("")}</div><div class="fb" id="fb"></div>`;
+      body.querySelector(".opts").onclick=e=>{const b=e.target.closest(".opt");if(!b||b.disabled)return;const j=+b.dataset.o;
+        if(j===q.a){if(!tried)ok++;b.classList.add("ok");body.querySelectorAll(".opt").forEach(x=>x.disabled=true);$("fb").className="fb ok";$("fb").textContent="Bravo !";showWhy(true)}
+        else{tried=true;b.classList.add("no","shake");b.disabled=true;$("fb").className="fb no";$("fb").textContent="Essaie encore !"}};
+    }}
+  step()}
+
+
+
+/* ================= ÉCRITURE RUNNERS ================= */
+function runCree(body,k){const C=S.cons;const W=320,H=220;
+  const draw=()=>{body.innerHTML=`<h2 style="font-size:1.4rem;font-weight:900">⭐ Je crée ma constellation</h2>
+   <p class="consigne">Touche le ciel pour placer tes étoiles, dans l'ordre où tu veux les relier.</p>
+   <div class="skywrap" id="skyw">${sky(C.pts,null,W,H,true)}</div>
+   <div class="row"><button class="btn small" id="undo">↩ Enlever la dernière étoile</button><button class="btn small" id="clr">Tout effacer</button><span class="muted">${C.pts.length} étoile${C.pts.length>1?"s":""}</span></div>
+   <label class="lb" for="nom">Le nom de ma constellation</label><input class="ans" id="nom" style="max-width:420px;font-size:1.1rem" value="${esc(C.nom||"")}" placeholder="Ex. : le Dragon endormi">
+   <div class="tip"><b>Idée :</b> 5 à 10 étoiles, c'est parfait. Pense à un animal, un objet ou un personnage. Qu'est-ce que ta forme te rappelle ?</div>
+   <div class="row"><button class="btn good" id="fin">J'ai fini ma constellation ✓</button></div><div class="fb" id="fb"></div>`;
+   const svg=body.querySelector("svg.sky");svg.onclick=e=>{const r=svg.getBoundingClientRect();const x=Math.round((e.clientX-r.left)/r.width*W),y=Math.round((e.clientY-r.top)/r.height*H);if(C.pts.length>=14)return;C.pts.push([x,y]);save();draw()};
+   $("undo").onclick=()=>{C.pts.pop();save();draw()};$("clr").onclick=()=>{C.pts=[];save();draw()};
+   $("nom").oninput=e=>{C.nom=e.target.value;save()};
+   $("fin").onclick=()=>{if(C.pts.length<4||!(C.nom||"").trim()){$("fb").className="fb no";$("fb").textContent="Place au moins 4 étoiles et donne un nom à ta constellation.";return}
+     finish(body,k,0,0,`Bravo ! « ${esc(C.nom)} » a ${C.pts.length} étoiles. Maintenant, remplis ton plan d'idées.`,3)}};
+  draw()}
+const IDEES=[["nom","Son nom","Le Dragon endormi"],["forme","À quoi ressemble-t-elle ? (forme, comparaison)","Elle ressemble à un dragon couché, avec une longue queue."],["etoiles","Combien d'étoiles ? Où sont les plus brillantes ?","Elle a 8 étoiles. La plus brillante est son œil, en haut à gauche."],["couleur","Couleurs et lumière (adjectifs)","Des étoiles bleutées, une étoile dorée, scintillantes…"],["ou","Où et quand la voit-on dans le ciel ?","Au-dessus de la forêt, les nuits d'hiver."],["legende","Une petite légende ou un fait inventé","On dit qu'un dragon protège le village pendant que les enfants dorment."]];
+function runIdees(body,k){const P=S.plan;if(!P.nom&&S.cons.nom)P.nom=S.cons.nom;
+  body.innerHTML=`<h2 style="font-size:1.4rem;font-weight:900">🗒️ Mon plan d'idées</h2><p class="muted">Écris des mots-clés ou des bouts de phrases. Ce plan t'aidera en classe.</p>
+   ${S.cons.pts.length?`<div class="skywrap small">${sky(S.cons.pts,null,320,220,true)}</div>`:""}
+   ${IDEES.map(([id,lab,ph])=>`<label class="lb" for="i_${id}">${lab}</label><textarea class="f" id="i_${id}" placeholder="${esc(ph)}">${esc(P[id]||"")}</textarea>`).join("")}
+   <div class="row"><button class="btn good" id="fin">Mon plan est prêt ✓</button><button class="btn small" onclick="window.print()">🖨️ Imprimer</button></div><div class="fb" id="fb"></div>`;
+  body.querySelectorAll("textarea").forEach(t=>t.oninput=()=>{P[t.id.slice(2)]=t.value;save()});
+  $("fin").onclick=()=>{const n=IDEES.filter(([id])=>(P[id]||"").trim()).length;if(n<3){$("fb").className="fb no";$("fb").textContent="Remplis au moins 3 parties.";return}
+    finish(body,k,0,0,n===IDEES.length?"Plan complet ! Tu es prêt pour lundi.":"Complète toutes les parties pour 3 étoiles.",n===IDEES.length?3:n>=5?2:1)}}
+const AIDE=["Ma constellation s'appelle…","Elle ressemble à…","Elle est formée de … étoiles.","En haut / Au centre / À gauche, il y a…","Ses étoiles sont … et …","On peut la voir…","Selon la légende, …"];
+function runTexte(body,k){
+  body.innerHTML=`<h2 style="font-size:1.4rem;font-weight:900">✍️ Mon texte descriptif</h2>
+   <label class="lb" for="ctr">Les contraintes de mon enseignante <span class="muted">(un adulte les écrit ici, une par ligne)</span></label>
+   <textarea class="f" id="ctr" placeholder="Ex. : 5 à 7 phrases&#10;au moins 3 adjectifs&#10;une comparaison">${esc(S.contraintes||"")}</textarea>
+   ${S.cons.pts.length?`<div class="skywrap small">${sky(S.cons.pts,null,320,220,true)}</div>`:""}
+   <p class="muted">Débuts de phrases pour t'aider : ${AIDE.map(a=>`<span class="chip">${esc(a)}</span>`).join(" ")}</p>
+   <textarea class="f" id="txt" style="min-height:170px;font-family:var(--body);font-size:1.05rem" placeholder="J'écris mon texte ici…">${esc(S.texte||"")}</textarea>
+   <div class="cnt" id="cnt"></div>
+   <p style="font-weight:800;margin-top:10px">Je vérifie mon texte :</p><div class="self" id="chk"></div>
+   <details style="margin-top:10px"><summary class="muted" style="cursor:pointer">💡 Voir un exemple de texte</summary><div class="texte"><p>Ma constellation s'appelle le Hibou des neiges. Elle est formée de huit étoiles blanches et bleutées. En haut, deux étoiles dorées brillent comme de grands yeux ronds. Au centre, quatre petites étoiles dessinent son ventre tout rond. On peut la voir au-dessus de la forêt pendant les longues nuits d'hiver. Selon la légende, ce hibou veille sur les enfants qui dorment.</p></div></details>
+   <div class="row"><button class="btn good" id="fin">J'ai fini mon texte ✓</button><button class="btn small" onclick="window.print()">🖨️ Imprimer</button></div><div class="fb" id="fb"></div>`;
+  const BASE=["J'ai écrit entre 5 et 7 phrases.","Chaque phrase commence par une majuscule et finit par un point.","J'ai utilisé au moins 3 adjectifs (brillante, minuscule…).","J'ai écrit au moins un mot de position (en haut, à gauche…).","J'ai fait une comparaison (ressemble à, comme…).","J'ai relu mes accords : des étoiles brillantes."];
+  const items=()=>[...BASE,...(S.contraintes||"").split(/\n+/).map(s=>s.trim()).filter(Boolean).map(s=>"Contrainte : "+s)];
+  S.chk=S.chk||{};
+  const drawChk=()=>{$("chk").innerHTML=items().map((c,j)=>`<label><input type="checkbox" data-c="${esc(c)}"${S.chk[c]?" checked":""}> ${esc(c)}</label>`).join("");
+    $("chk").querySelectorAll("input").forEach(i=>i.onchange=()=>{S.chk[i.dataset.c]=i.checked;save()})};
+  const count=()=>{const t=$("txt").value.trim();const ph=t?t.split(/(?<=[.!?…])\s+/).filter(s=>s.trim()).length:0;const w=t?t.split(/\s+/).length:0;
+    const ok=ph>=5&&ph<=7;$("cnt").innerHTML=`<b class="${ok?"okc":ph>7?"noc":""}">${ph} phrase${ph>1?"s":""}</b> · ${w} mots ${ok?"✓ entre 5 et 7":ph>7?"· c'est trop, enlève une phrase":"· il en faut 5 à 7"}`;return ph};
+  $("txt").oninput=()=>{S.texte=$("txt").value;save();count()};$("ctr").oninput=()=>{S.contraintes=$("ctr").value;save();drawChk()};
+  drawChk();count();
+  $("fin").onclick=()=>{const ph=count(),all=items(),n=all.filter(c=>S.chk[c]).length;
+    if(ph<5||ph>7){$("fb").className="fb no";$("fb").textContent="Ton texte doit avoir entre 5 et 7 phrases.";return}
+    finish(body,k,0,0,n===all.length?"Super texte ! Lis-le à voix haute à un adulte.":"Coche toute ta liste de vérification pour 3 étoiles.",n===all.length?3:n>=all.length-2?2:1)}}
+
+/* ================= START ================= */
+renderCountdown();renderFiches();
+const h=(location.hash||"").slice(1);
+show(["plan","iroq","maths","ecrit"].includes(h)?h:"plan");
+})();
+
+</script>
+</body>
+</html>

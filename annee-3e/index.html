@@ -160,6 +160,9 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding-top:14px;font-si
 /* Dated items: each shows on the home row only between "from" and "to". Add the next tests here. */
 const D=(m,d)=>new Date(2026,m-1,d);
 const NOW=[
+  {from:D(10,30),to:D(11,3),cls:"c-us",when:"Évaluation · mardi 3 novembre",title:"Les Iroquoiens vers 1500",date:D(11,3),txt:"Sans cahier. Territoire, saisons, mode de vie, maison longue, clan et population.",href:"evaluations/mission-novembre.html#iroq",go:"Je me prépare →"},
+  {from:D(10,30),to:D(11,4),cls:"c-ma",when:"Évaluation · mercredi 4 novembre",title:"Maths : calculs et plan cartésien",date:D(11,4),txt:"Petites et grosses additions et soustractions, le plan cartésien et un petit problème.",href:"evaluations/mission-novembre.html#maths",go:"Je me prépare →"},
+  {from:D(10,30),to:D(11,13),cls:"c-fr",when:"Projet d’écriture · dès le 2 novembre",title:"J’invente une constellation",date:D(11,2),txt:"Créer sa constellation, planifier ses idées, écrire un texte descriptif de 5 à 7 phrases.",href:"evaluations/mission-novembre.html#ecrit",go:"Commencer →"},
   {from:D(10,19),to:D(10,28),cls:"c-ma",when:"Évaluation · mercredi 28 octobre",title:"Maths : problème d’Halloween",date:D(10,28),txt:"Décomposition, groupements (14 dizaines = 140), additions et soustractions de gros nombres.",href:"evaluations/mission-halloween.html#maths",go:"Je me prépare →"},
   {from:D(10,19),to:D(10,29),cls:"c-fr",when:"Évaluations · jeudi 29 octobre",title:"Lecture et sciences",date:D(10,29),txt:"Lire seul, traits physiques et de personnalité. Expérience : dissolution des bonbons.",href:"evaluations/mission-halloween.html#lecture",go:"Je me prépare →"},
   {from:D(9,1),to:D(10,5),cls:"c-us",when:"Évaluation · lundi 5 octobre",title:"Univers social",date:D(10,5),txt:"Sans cahier de notes. Temps, planète à rue, saisons, cartes, lignes du temps.",href:"evaluations/mission-evaluations.html#us",go:"Je me prépare →",subj:"us"},
