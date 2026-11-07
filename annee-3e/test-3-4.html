@@ -497,8 +497,7 @@ function render(){badge();if(MODE==="fix"||MODE==="fixreview"){$("#tabs").innerH
 function viewCover(){
   const done=ALL.filter(it=>stateOf(it)!=="blank").length,sub=META.status==="submitted";
   $("#app").innerHTML=`<div class="card" style="display:flex;flex-direction:column;gap:10px">
-    <p style="font-family:var(--display);font-size:1.15rem">Hi Israël! This is Wunmi’s Test 3 and 4, ready to answer on screen. No printing, no photos.</p>
-    <p class="muted">Your answers save by themselves as you go, so you can stop and come back later. When everything is done, press <b>Hand it in</b> so Wunmi can mark it.</p>
+    ${READONLY?`<p style="font-family:var(--display);font-size:1.15rem">Israël’s answers to Test 3 and 4</p><p class="muted">Open a part below to see his answers as he wrote them, or go to <b>Marking</b> to mark them.</p>`:`<p style="font-family:var(--display);font-size:1.15rem">Hi Israël! This is Test 3 and 4, ready to answer on screen.</p><p class="muted">Your answers save by themselves as you go, so you can stop and come back later. When everything is done, press <b>Hand it in</b> so Wunmi can mark it.</p>`}
     ${sub?`<div class="notice ok"><b>Handed in</b> ${META.submittedAt?new Date(META.submittedAt).toLocaleString():""}. Wunmi can now see your answers.</div>`:""}
     ${!db&&!READONLY?`<div class="notice">Your answers save on this computer as you go. Switching to another laptop? Press <b>Continue on another computer</b> and open that link there. When you have finished, press <b>Hand it in</b>, then <b>Send to Wunmi</b>.</div>`:""}
     <p style="font-family:var(--display);font-weight:700">${done} of ${ALL.length} answers done</p>
@@ -507,8 +506,8 @@ function viewCover(){
   </div>
   <p class="k">The ${PARTS.length} parts · same order as the PDF</p>
   <div class="parts">${PARTS.map((p,i)=>{const [a,b]=progress(p);return `<button class="pbtn${a===b?" done":""}" data-go="${p.id}"><span class="n">${i+1}</span><b>${p.title}</b><span class="m"><span class="track"><i style="width:${a/b*100}%"></i></span>${a}/${b}</span></button>`}).join("")}</div>
-  <p class="k">When you have finished</p>
-  <div class="card" id="handin">${sub?`<p>Handed in! Now send it to Wunmi.</p><div id="send" style="margin-top:10px"><button class="btn primary" id="sendbtn">Send to Wunmi</button></div><p class="muted" style="margin-top:8px">If Wunmi asks for changes, a grown-up can reopen it from the Marking tab.</p>`:READONLY?`<p class="muted">Only Israël’s account can hand the test in.</p>`:`<div class="row"><button class="btn primary" id="hand">Hand it in</button><span class="muted">${ALL.length-done?`${ALL.length-done} answers are still empty.`:"Everything is answered!"}</span></div>`}</div>
+  <p class="k"${READONLY?" hidden":""}>When you have finished</p>
+  <div class="card" id="handin"${READONLY?" hidden":""}>${sub?`<p>Handed in! Now send it to Wunmi.</p><div id="send" style="margin-top:10px"><button class="btn primary" id="sendbtn">Send to Wunmi</button></div><p class="muted" style="margin-top:8px">If Wunmi asks for changes, a grown-up can reopen it from the Marking tab.</p>`:READONLY?`<p class="muted">Only Israël’s account can hand the test in.</p>`:`<div class="row"><button class="btn primary" id="hand">Hand it in</button><span class="muted">${ALL.length-done?`${ALL.length-done} answers are still empty.`:"Everything is answered!"}</span></div>`}</div>
   <footer>Test 3 and 4 · typed from Wunmi’s PDF (24 pages) · question 5 on PDF page 20 is cut off in the PDF, so it is not included.</footer>`;
   const sb=$("#sendbtn");if(sb)sb.onclick=()=>sendBox($("#send"));
   const mb=$("#movebtn");if(mb)mb.onclick=()=>sendBox($("#moveb"),"s",{a:ANS,s:META.status,t:META.submittedAt,v:META.savedAt},link=>`Israël’s Test 3 and 4, answers so far. Open this link to carry on: ${link}`);
