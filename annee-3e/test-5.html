@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Israël’s Test 5</title>
+<style>
+/* Layout: an exam booklet — cover page (progress per part + submit), one part per screen in the PDF's order, and a marking view for Wunmi. */
+:root{
+  --paper:#F5F6FA; --panel:#FFFFFF; --panel-2:#F9FAFD;
+  --ink:#1A2236; --ink-soft:#586180; --ink-faint:#8A93AE;
+  --rule:#CDD4E6; --line:#E3E7F1; --grid:#E3E7F1;
+  --accent:#2F55C9; --accent-soft:#E6ECFB;
+  --ok:#24865A; --ok-soft:#E1F3EA;
+  --no:#C8423F; --no-soft:#FBE6E5;
+  --rev:#A87310; --rev-soft:#FBF0D8;
+  --mirror:#D14B4B; --pen:#2F55C9;
+  --shadow:0 8px 22px rgba(26,34,54,.08);
+  --display:"Gabarito","Trebuchet MS",system-ui,sans-serif;
+  --body:"Literata",Georgia,serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#10141E; --panel:#181E2C; --panel-2:#1D2434;
+    --ink:#E7EBF7; --ink-soft:#A3ADC8; --ink-faint:#78829F;
+    --rule:#2D3851; --line:#273147; --grid:#2A3449;
+    --accent:#8FA9FF; --accent-soft:#1F2A47;
+    --ok:#62C894; --ok-soft:#163023; --no:#F08583; --no-soft:#3A1E1E; --rev:#F0C060; --rev-soft:#2F2614;
+    --mirror:#F07A7A; --pen:#8FA9FF;
+    --shadow:0 8px 22px rgba(0,0,0,.35);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10141E; --panel:#181E2C; --panel-2:#1D2434;
+  --ink:#E7EBF7; --ink-soft:#A3ADC8; --ink-faint:#78829F;
+  --rule:#2D3851; --line:#273147; --grid:#2A3449;
+  --accent:#8FA9FF; --accent-soft:#1F2A47;
+  --ok:#62C894; --ok-soft:#163023; --no:#F08583; --no-soft:#3A1E1E; --rev:#F0C060; --rev-soft:#2F2614;
+  --mirror:#F07A7A; --pen:#8FA9FF;
+  --shadow:0 8px 22px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0;text-wrap:balance}
+p{margin:0}
+button,input{font-family:var(--display);color:inherit;font-size:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+.wrap{max-width:860px;margin:0 auto;padding-inline:16px}
+header.top{background:var(--panel);border-bottom:1px solid var(--line);padding-block:16px 12px}
+.top-in{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.eyebrow{font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
+header h1{font-size:clamp(1.4rem,5vw,1.9rem);margin-top:2px}
+.save{font-family:var(--display);font-size:.82rem;font-weight:600;border-radius:99px;padding:5px 12px;background:var(--panel-2);border:1px solid var(--line);color:var(--ink-soft);white-space:nowrap}
+.save.ok{color:var(--ok);border-color:var(--ok-soft);background:var(--ok-soft)}
+.save.warn{color:var(--rev);background:var(--rev-soft);border-color:var(--rev-soft)}
+nav.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--panel);border-bottom:1px solid var(--line)}
+.bar-in{display:flex;gap:6px;padding-block:8px;overflow-x:auto;scrollbar-width:none}
+.tab{border:none;background:none;font-weight:600;font-size:.9rem;padding:7px 12px;border-radius:9px;color:var(--ink-soft);white-space:nowrap}
+.tab[aria-current="true"]{background:var(--ink);color:var(--panel)}
+main{padding-block:20px 90px}
+.btn{font-family:var(--display);font-weight:600;font-size:.92rem;border:1px solid var(--line);background:var(--panel-2);padding:9px 15px;border-radius:11px;display:inline-flex;gap:6px;align-items:center}
+.btn:hover:not(:disabled){border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+.btn.small{font-size:.82rem;padding:6px 11px;border-radius:9px}
+.btn.danger{color:var(--no);border-color:var(--no)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.muted{color:var(--ink-faint);font-size:.9rem}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
+.notice{border-radius:12px;padding:10px 14px;font-size:.95rem;background:var(--accent-soft)}
+.notice.warn{background:var(--rev-soft)}
+.notice.ok{background:var(--ok-soft)}
+.k{font-family:var(--display);font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--accent);margin:24px 0 10px}
+
+/* cover */
+.parts{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.pbtn{text-align:left;border:1px solid var(--line);background:var(--panel);border-radius:13px;padding:10px 12px;display:grid;grid-template-columns:30px 1fr;gap:2px 8px;align-items:start}
+.pbtn:hover{border-color:var(--accent)}
+.pbtn .n{grid-row:span 2;font-family:var(--display);font-weight:800;font-size:1.1rem;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+.pbtn b{font-family:var(--display);font-size:.95rem;line-height:1.25}
+.pbtn .m{display:flex;align-items:center;gap:6px;font-family:var(--display);font-size:.75rem;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+.track{flex:1;height:6px;border-radius:99px;background:var(--accent-soft);overflow:hidden}
+.track i{display:block;height:100%;background:var(--ok);border-radius:99px}
+.pbtn.done .n{color:var(--ok)}
+
+/* part */
+.phead{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.phead h2{font-size:clamp(1.3rem,4.5vw,1.7rem)}
+.items{display:flex;flex-direction:column;gap:10px}
+.it{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;grid-template-columns:34px 1fr;gap:8px}
+.it > .no{font-family:var(--display);font-weight:800;color:var(--ink-faint);padding-top:2px;font-variant-numeric:tabular-nums}
+.it .body{min-width:0;display:flex;flex-direction:column;gap:8px}
+.q{font-family:var(--display);font-size:1.06rem;font-weight:500}
+.q b{font-weight:700}
+.opts{display:flex;flex-wrap:wrap;gap:7px}
+.opt{border:2px solid var(--line);background:var(--panel-2);border-radius:11px;padding:8px 13px;font-weight:600;font-size:1rem}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.opt.sym{font-size:1.5rem;min-width:56px;padding:4px 10px}
+.opt:disabled{cursor:default}
+.inp{width:120px;max-width:100%;padding:7px 10px;font-size:1.1rem;font-weight:700;border:2px solid var(--rule);border-radius:10px;background:var(--panel-2);font-variant-numeric:tabular-nums}
+.inp.wide{width:min(100%,320px)}
+.inp.tiny{width:58px;text-align:center;padding:5px 4px}
+.inp:focus{border-color:var(--accent);outline:none}
+.money{display:inline-flex;align-items:center;gap:4px;font-family:var(--display);font-weight:700}
+.calc{font-family:var(--display);font-size:1.1rem;font-variant-numeric:tabular-nums}
+.frac{display:inline-flex;flex-direction:column;align-items:center;font-family:var(--display);font-weight:700;font-size:1.15rem;line-height:1.05;vertical-align:middle;font-variant-numeric:tabular-nums}
+.frac > span:first-child{border-bottom:2px solid currentColor;padding:0 3px 2px}
+.frac > span:last-child{padding-top:2px}
+.frac .inp{margin:2px 0}
+.fracrow{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.fracrow .eq{font-family:var(--display);font-weight:700;color:var(--ink-faint)}
+.cell{border:1.5px solid var(--rule);border-radius:10px;padding:5px 8px;background:var(--panel-2)}
+.cmprow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.cmprow .side{font-family:var(--display);font-weight:700;font-size:1.2rem;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+.ordpool,.ordseq{display:flex;flex-wrap:wrap;gap:6px}
+.ordseq{min-height:44px;border:2px dashed var(--rule);border-radius:11px;padding:6px;align-items:center}
+.chip{border:2px solid var(--accent);background:var(--panel);border-radius:99px;padding:5px 12px;font-weight:700;font-variant-numeric:tabular-nums}
+.chip.placed{background:var(--accent-soft)}
+.chip .i{color:var(--accent);margin-right:4px}
+.pricelist{display:grid;grid-template-columns:auto auto;gap:2px 22px;font-family:var(--display);font-size:1.05rem;width:max-content;max-width:100%;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 16px;font-variant-numeric:tabular-nums}
+.pricelist b{text-align:right}
+.big{font-family:var(--display);font-size:1.6rem;font-weight:800;font-variant-numeric:tabular-nums}
+.big u{text-decoration-thickness:3px;text-underline-offset:5px}
+.sub{font-family:var(--display);font-size:1.25rem;font-variant-numeric:tabular-nums;text-align:right;line-height:1.3;border-bottom:2px solid var(--ink);padding-bottom:2px;display:inline-block}
+.svg{display:block;max-width:100%;height:auto}
+.s-ink{stroke:var(--ink);fill:none;stroke-width:2.2}
+.s-ink-f{fill:var(--ink)}
+.s-txt{fill:var(--ink);font-family:var(--display);font-size:14px;font-weight:700}
+.s-txt-s{fill:var(--ink-soft);font-family:var(--display);font-size:11px}
+.s-grid{stroke:var(--grid);stroke-width:1}
+.s-axis{stroke:var(--ink-soft);stroke-width:1.6}
+.s-mirror{stroke:var(--mirror);stroke-width:2.4;stroke-dasharray:6 4}
+.s-shape{stroke:var(--ink);stroke-width:2.6;fill:none;stroke-linejoin:round}
+.s-pen{stroke:var(--pen);stroke-width:3;fill:var(--accent-soft);fill-opacity:.55;stroke-linejoin:round}
+.s-dot{fill:var(--pen)}
+.s-hit{fill:transparent;cursor:pointer}
+.s-hit:hover{fill:var(--accent-soft)}
+.s-shade{fill:var(--ink-faint)} .s-blank{fill:var(--panel)}
+.s-pt{fill:var(--pen)} .s-ptl{fill:var(--pen);font-family:var(--display);font-size:13px;font-weight:800}
+.plotlabs{display:flex;gap:6px;flex-wrap:wrap}
+.pl{border:2px solid var(--line);background:var(--panel-2);border-radius:9px;padding:4px 10px;font-weight:700;font-size:.92rem}
+.pl.on{border-color:var(--accent);background:var(--accent);color:var(--panel)}
+.pl.set{border-color:var(--ok)}
+.q3img{width:100%;max-width:520px;border-radius:10px;border:1px solid var(--line);background:#fff}
+.partnav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:16px}
+.locked .opt,.locked .chip,.locked .pl{pointer-events:none}
+
+/* teacher */
+.score{display:flex;gap:16px;flex-wrap:wrap;align-items:baseline}
+.score b{font-family:var(--display);font-size:2.4rem;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.tbl{width:100%;border-collapse:collapse;font-family:var(--display);font-size:.9rem}
+.tbl th,.tbl td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+.tblwrap{overflow-x:auto}
+.st{display:inline-block;font-weight:700;font-size:.75rem;border-radius:99px;padding:2px 9px;white-space:nowrap}
+.st.ok{background:var(--ok-soft);color:var(--ok)} .st.no{background:var(--no-soft);color:var(--no)}
+.st.review{background:var(--rev-soft);color:var(--rev)} .st.blank{background:var(--panel-2);color:var(--ink-faint)}
+.wm{display:flex;gap:5px}
+.wm button{font-family:var(--display);font-weight:800;font-size:.95rem;width:38px;height:34px;border-radius:9px;border:1.5px solid var(--line);background:var(--panel-2);color:var(--ink-faint);cursor:pointer}
+.wm button.ok.on{background:var(--ok);border-color:var(--ok);color:#fff} .wm button.no.on{background:var(--no);border-color:var(--no);color:#fff}
+.tp{margin-top:18px}
+.tp h3{font-size:1.05rem;margin-bottom:6px}
+.confirm{display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:var(--rev-soft);border-radius:12px;padding:10px 12px}
+#toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--panel);font-family:var(--display);font-weight:700;padding:9px 16px;border-radius:99px;z-index:30}
+textarea.copybox{width:100%;min-height:160px;font-family:ui-monospace,Consolas,monospace;font-size:.8rem;border:1px solid var(--line);border-radius:10px;background:var(--panel-2);color:var(--ink);padding:10px}
+footer{border-top:1px solid var(--line);margin-top:30px;padding-top:12px;font-size:.82rem;color:var(--ink-faint)}
+
+textarea.work{width:100%;min-height:96px;padding:9px 11px;font:500 1rem/1.5 var(--display);border:2px solid var(--rule);border-radius:10px;background:var(--panel-2);color:var(--ink);resize:vertical;margin:4px 0 8px}
+.wlab{display:block;font-family:var(--display);font-weight:700;font-size:.9rem;color:var(--ink-soft);margin-top:6px}
+.tip5{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap">
+
+</head>
+<body>
+<header class="top"><div class="wrap top-in">
+  <div><p class="eyebrow"><a href="./" style="color:inherit">Ma 3<sup>e</sup> année</a> · maths with Wunmi</p><h1>Test 5</h1></div>
+  <span class="save" id="save">Loading…</span>
+</div></header>
+<nav class="bar"><div class="wrap bar-in" id="tabs"></div></nav>
+<main class="wrap" id="app"></main>
+<div id="toast" hidden></div>
+
+<script>
+(function(){
+"use strict";
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm=s=>String(s||"").toLowerCase().replace(/[^a-z0-9]/g,"");
+const gcd=(a,b)=>b?gcd(b,a%b):a;
+function num(s){s=String(s||"").trim().replace(/[\s$¢]/g,"").replace(",",".");return /^-?\d*\.?\d+$/.test(s)?+s:NaN}
+function toast(m){const t=$("#toast");t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,2400)}
+
+/* ================= state ================= */
+const LKEY="test5-israel";
+let ANS={},META={status:"draft",savedAt:0,submittedAt:null};
+try{const d=JSON.parse(localStorage.getItem(LKEY));if(d){ANS=d.answers||{};META=Object.assign(META,d.meta||{})}}catch(e){}
+const v=k=>ANS[k]==null?"":String(ANS[k]);
+const locked=()=>META.status==="submitted"||READONLY;
+let READONLY=false;
+
+/* ================= item builders ================= */
+const PARTS=[];let CUR=null;
+function part(title,page,intro,items){const id="p"+(PARTS.length+1);items.forEach((it,i)=>{it.id=id+"-"+(i+1);it.no=it.no||String(i+1)});PARTS.push({id,title,page,intro,items})}
+const dis=()=>locked()?"disabled":"";
+function inp(k,cls="",ph="",mode="decimal"){return `<input class="inp ${cls}" data-k="${k}" value="${esc(v(k))}" placeholder="${ph}" inputmode="${mode}" autocomplete="off" ${dis()} aria-label="Answer">`}
+function opts(k,list,cls=""){return `<div class="opts">${list.map(o=>`<button class="opt ${cls}${v(k)===o?" on":""}" data-k="${k}" data-v="${esc(o)}" ${dis()}>${esc(o)}</button>`).join("")}</div>`}
+function mopts(k,list){const sel=v(k).split("|").filter(Boolean);return `<div class="opts">${list.map(o=>`<button class="opt${sel.includes(o)?" on":""}" data-m="${k}" data-v="${esc(o)}" ${dis()}>${esc(o)}</button>`).join("")}</div>`}
+const stChoice=(k,key)=>!v(k)?"blank":v(k)===key?"ok":"no";
+function stNum(k,key,tol=.0051){if(!v(k))return "blank";const n=num(v(k));return isNaN(n)?"review":Math.abs(n-key)<tol?"ok":"no"}
+function stWords(k,words){if(!v(k))return "blank";const s=norm(v(k));return words.some(w=>s.includes(norm(w)))?"ok":"review"}
+const MC=(q,list,key,o={})=>({q,label:o.label||q,kind:"mc",render(it){return `<p class="q">${q}</p>${o.vis||""}${opts(it.id,list,o.cls)}`},mark(it){return stChoice(it.id,key)},show(it){return v(it.id)},key:key});
+const YN=(q,key)=>MC(q,["Yes","No"],key);
+const TXT=(q,words,key)=>({q,label:q,kind:"txt",render(it){return `<p class="q">${q}</p>${inp(it.id,"wide","","text")}`},mark(it){return stWords(it.id,words)},show(it){return v(it.id)},key});
+const NUM=(q,key,o={})=>({q,label:o.label||q,kind:"num",render(it){return `${q?`<p class="q">${q}</p>`:""}${o.vis||""}<div class="row">${o.money?`<span class="money">$${inp(it.id,"","0.00")}</span>`:inp(it.id,"","")}${o.after||""}</div>`},mark(it){return stNum(it.id,key,o.tol)},show(it){return v(it.id)},key:o.money?"$"+key.toFixed(2):String(key)});
+const fr=(n,d)=>`<span class="frac"><span>${n}</span><span>${d}</span></span>`;
+const frIn=(k)=>`<span class="frac"><span>${inp(k+".n","tiny","","numeric")}</span><span>${inp(k+".d","tiny","","numeric")}</span></span>`;
+function stFrac(k,val){const n=num(v(k+".n")),d=num(v(k+".d"));if(!v(k+".n")&&!v(k+".d"))return "blank";if(isNaN(n)||isNaN(d)||d===0)return "no";return Math.abs(n/d-val)<1e-9?"ok":"no"}
+const showFrac=k=>v(k+".n")||v(k+".d")?`${v(k+".n")||"?"}/${v(k+".d")||"?"}`:"";
+const CMP=(a,b,av,bv,syms)=>({label:`${a.replace(/<[^>]+>/g,"").trim()} ○ ${b.replace(/<[^>]+>/g,"").trim()}`,kind:"cmp",render(it){return `<div class="cmprow"><span class="side">${a}</span>${opts(it.id,syms,"sym")}<span class="side">${b}</span></div>`},mark(it){return stChoice(it.id,av>bv?">":av<bv?"<":"=")},show(it){return v(it.id)},key:av>bv?">":av<bv?"<":"="});
+const fv=s=>{const [n,d]=s.split("/").map(Number);return n/d};
+const fh=s=>{const [n,d]=s.split("/");return fr(n,d)};
+function ORDER(list,asc){const items=list.map(String),sorted=items.slice().sort((x,y)=>asc?x-y:y-x);
+  return {label:items.join(", "),kind:"order",render(it){const seq=v(it.id)?JSON.parse(v(it.id)):[];return `<p class="q">${items.join(", ")}</p><div class="ordseq">${seq.length?seq.map((s,i)=>`<button class="chip placed" data-ob="${it.id}" data-i="${i}" ${dis()}><span class="i">${i+1}</span>${s}</button>`).join(""):`<span class="muted">Tap the numbers in order…</span>`}</div><div class="ordpool">${items.filter(s=>!seq.includes(s)).map(s=>`<button class="chip" data-of="${it.id}" data-v="${s}" ${dis()}>${s}</button>`).join("")}</div>`},
+    mark(it){if(!v(it.id))return "blank";const seq=JSON.parse(v(it.id));return seq.length<items.length?"no":seq.join()===sorted.join()?"ok":"no"},show(it){return v(it.id)?JSON.parse(v(it.id)).join(", "):""},key:sorted.join(", ")}}
+
+/* ----- drawings ----- */
+const ARROW=`<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" class="s-ink-f"/></marker></defs>`;
+function angleSVG(deg){
+  if(deg>=180)return `<svg class="svg" viewBox="0 0 180 80" width="180">${ARROW}<line x1="12" y1="62" x2="168" y2="62" class="s-ink" marker-start="url(#ah)" marker-end="url(#ah)"/><path d="M76 62 A14 14 0 0 1 104 62" class="s-ink"/></svg>`;
+  const vx=deg>90?95:22,vy=92,r=deg>90?72:110,t=deg*Math.PI/180,ex=vx+r*Math.cos(t),ey=vy-r*Math.sin(t);
+  const mk=deg===90?`<path d="M${vx+12} ${vy} V${vy-12} H${vx}" class="s-ink" style="stroke-width:1.6"/>`:`<path d="M${vx+15} ${vy} A15 15 0 0 0 ${vx+15*Math.cos(t)} ${vy-15*Math.sin(t)}" class="s-ink" style="stroke-width:1.6"/>`;
+  return `<svg class="svg" viewBox="0 0 190 105" width="190">${ARROW}<line x1="${vx}" y1="${vy}" x2="${vx+(deg>90?85:150)}" y2="${vy}" class="s-ink" marker-end="url(#ah)"/><line x1="${vx}" y1="${vy}" x2="${ex.toFixed(1)}" y2="${ey.toFixed(1)}" class="s-ink" marker-end="url(#ah)"/>${mk}</svg>`;
+}
+function rayFig(){
+  const A=[210,150],R={B:0,C:25,D:70,E:160,F:180};let s=`<svg class="svg" viewBox="0 0 420 190" width="420">${ARROW}`;
+  for(const [k,d] of Object.entries(R)){const t=d*Math.PI/180,len=d===0||d===180?185:150,x=A[0]+len*Math.cos(t),y=A[1]-len*Math.sin(t);s+=`<line x1="${A[0]}" y1="${A[1]}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" class="s-ink" marker-end="url(#ah)"/><text x="${(A[0]+(len-14)*Math.cos(t)+(d>90?-4:6)).toFixed(1)}" y="${(A[1]-(len-14)*Math.sin(t)+(d===0||d===180?18:-6)).toFixed(1)}" class="s-txt">${k}</text>`}
+  const t1=70*Math.PI/180,t2=160*Math.PI/180,r=13,p1=[A[0]+r*Math.cos(t1),A[1]-r*Math.sin(t1)],p2=[A[0]+r*Math.cos(t2),A[1]-r*Math.sin(t2)],c=[p1[0]+p2[0]-A[0],p1[1]+p2[1]-A[1]];
+  s+=`<path d="M${p1[0].toFixed(1)} ${p1[1].toFixed(1)} L${c[0].toFixed(1)} ${c[1].toFixed(1)} L${p2[0].toFixed(1)} ${p2[1].toFixed(1)}" class="s-ink" style="stroke-width:1.4"/><text x="${A[0]-4}" y="${A[1]+20}" class="s-txt">A</text></svg>`;
+  return s;
+}
+const LINEP={par1:[[30,20,110,70],[15,45,95,95]],perp1:[[10,55,120,55],[65,10,65,100]],int1:[[15,30,115,80],[15,80,115,30]],perp2:[[10,85,120,85],[65,85,65,12]],int2:[[45,12,85,98],[25,85,108,28]],par2:[[48,12,48,98],[80,12,80,98]],int3:[[50,12,74,98],[74,12,50,98]],par3:[[28,98,78,12],[52,98,102,12]],perp3:[[12,38,120,38],[34,10,34,100]]};
+function linesSVG(k){const L=LINEP[k];let s=`<svg class="svg" viewBox="0 0 130 110" width="130">${ARROW}`;for(const l of L)s+=`<line x1="${l[0]}" y1="${l[1]}" x2="${l[2]}" y2="${l[3]}" class="s-ink" marker-start="url(#ah)" marker-end="url(#ah)"/>`;
+  if(k.startsWith("perp")){const x=L[1][0],y=L[0][1];s+=`<path d="M${x+9} ${y} V${y-9} H${x}" class="s-ink" style="stroke-width:1.3"/>`}
+  return s+`</svg>`}
+function modelSVG(n){let s=`<svg class="svg" viewBox="0 0 152 62" width="152">`;for(let i=0;i<10;i++){const x=1+(i%5)*30,y=1+Math.floor(i/5)*30;s+=`<rect x="${x}" y="${y}" width="30" height="30" class="${i<n?"s-shade":"s-blank"}" style="stroke:var(--ink);stroke-width:1.5"/>`}return s+`</svg>`}
+
+/* ----- reflection grid ----- */
+const CELL=34;
+function REFLECT(cols,rows,mirror,shape){
+  const mir=p=>mirror.x!=null?[2*mirror.x-p[0],p[1]]:[p[0],2*mirror.y-p[1]];
+  const key=shape.map(mir);
+  return {label:"Reflect the shape in the mirror line",kind:"reflect",render(it){
+    const pts=v(it.id)?JSON.parse(v(it.id)):[],W=cols*CELL,Hh=rows*CELL,P=([x,y])=>`${x*CELL+10},${y*CELL+10}`;
+    let s=`<svg class="svg" viewBox="0 0 ${W+20} ${Hh+20}" width="${W+20}" style="touch-action:manipulation">`;
+    for(let i=0;i<=cols;i++)s+=`<line x1="${i*CELL+10}" y1="10" x2="${i*CELL+10}" y2="${Hh+10}" class="s-grid"/>`;
+    for(let j=0;j<=rows;j++)s+=`<line x1="10" y1="${j*CELL+10}" x2="${W+10}" y2="${j*CELL+10}" class="s-grid"/>`;
+    s+=mirror.x!=null?`<line x1="${mirror.x*CELL+10}" y1="6" x2="${mirror.x*CELL+10}" y2="${Hh+14}" class="s-mirror"/>`:`<line x1="6" y1="${mirror.y*CELL+10}" x2="${W+14}" y2="${mirror.y*CELL+10}" class="s-mirror"/>`;
+    s+=`<polygon points="${shape.map(P).join(" ")}" class="s-shape"/>`;
+    if(pts.length>1)s+=`<polygon points="${pts.map(P).join(" ")}" class="s-pen"/>`;
+    pts.forEach(p=>s+=`<circle cx="${p[0]*CELL+10}" cy="${p[1]*CELL+10}" r="5" class="s-dot"/>`);
+    if(!locked())for(let i=0;i<=cols;i++)for(let j=0;j<=rows;j++)s+=`<circle cx="${i*CELL+10}" cy="${j*CELL+10}" r="11" class="s-hit" data-rf="${it.id}" data-x="${i}" data-y="${j}"/>`;
+    s+=`</svg>`;
+    return `<p class="q">Tap the grid corners to draw the reflected shape, one corner after another.</p><div style="overflow-x:auto">${s}</div><div class="row"><button class="btn small" data-rfu="${it.id}" ${dis()}>Undo last corner</button><button class="btn small" data-rfc="${it.id}" ${dis()}>Clear</button><span class="muted">${pts.length} corner${pts.length===1?"":"s"}</span></div>`},
+    mark(it){if(!v(it.id))return "blank";const pts=JSON.parse(v(it.id));const a=pts.map(p=>p.join(",")).sort().join(";"),b=key.map(p=>p.join(",")).sort().join(";");return a===b?"ok":"no"},
+    show(it){return v(it.id)?JSON.parse(v(it.id)).map(p=>`(${p.join(",")})`).join(" "):""},key:key.map(p=>`(${p.join(",")})`).join(" ")};
+}
+/* ----- coordinates ----- */
+const SEL={};
+function PLOT(points){
+  const labs=Object.keys(points);
+  return {label:"Plot "+labs.map(l=>`${l}=(${points[l].join(", ")})`).join("  "),kind:"plot",render(it){
+    const cur=v(it.id)?JSON.parse(v(it.id)):{},sel=SEL[it.id]||labs.find(l=>!cur[l])||labs[0];SEL[it.id]=sel;
+    const C=44,X=x=>40+x*C,Y=y=>250-y*C;let s=`<svg class="svg" viewBox="0 0 300 290" width="300" style="touch-action:manipulation">${ARROW}`;
+    for(let i=0;i<=5;i++){s+=`<line x1="${X(i)}" y1="${Y(0)}" x2="${X(i)}" y2="${Y(5)-10}" class="s-grid"/><line x1="${X(0)}" y1="${Y(i)}" x2="${X(5)+10}" y2="${Y(i)}" class="s-grid"/><text x="${X(i)}" y="${Y(0)+20}" class="s-txt-s" text-anchor="middle">${i}</text><text x="${X(0)-14}" y="${Y(i)+4}" class="s-txt-s" text-anchor="middle">${i}</text>`}
+    s+=`<line x1="${X(0)}" y1="${Y(0)}" x2="${X(5)+26}" y2="${Y(0)}" class="s-axis" marker-end="url(#ah)"/><line x1="${X(0)}" y1="${Y(0)}" x2="${X(0)}" y2="${Y(5)-26}" class="s-axis" marker-end="url(#ah)"/><text x="${X(5)+26}" y="${Y(0)+20}" class="s-txt-s">x</text><text x="${X(0)-24}" y="${Y(5)-20}" class="s-txt-s">y</text>`;
+    const byPos={};for(const l of labs)if(cur[l]){const kk=cur[l].join(",");(byPos[kk]=byPos[kk]||[]).push(l)}
+    for(const kk in byPos){const [x,y]=kk.split(",").map(Number);s+=`<circle cx="${X(x)}" cy="${Y(y)}" r="5.5" class="s-pt"/><text x="${X(x)+8}" y="${Y(y)-7}" class="s-ptl">${byPos[kk].join(",")}</text>`}
+    if(!locked())for(let i=0;i<=5;i++)for(let j=0;j<=5;j++)s+=`<circle cx="${X(i)}" cy="${Y(j)}" r="13" class="s-hit" data-pp="${it.id}" data-x="${i}" data-y="${j}"/>`;
+    s+=`</svg>`;
+    return `<p class="q">${labs.map(l=>`${l} = (${points[l].join(", ")})`).join(" · ")}</p><div class="plotlabs">${labs.map(l=>`<button class="pl${l===sel?" on":""}${cur[l]?" set":""}" data-pl="${it.id}" data-v="${l}" ${dis()}>${l}${cur[l]?" ✓":""}</button>`).join("")}</div><p class="muted">Pick a letter, then tap where it goes. Go across (x) first, then up (y).</p>${s}`},
+    mark(it){const cur=v(it.id)?JSON.parse(v(it.id)):{};if(!Object.keys(cur).length)return "blank";return labs.every(l=>cur[l]&&cur[l].join()===points[l].join())?"ok":"no"},
+    show(it){const cur=v(it.id)?JSON.parse(v(it.id)):{};return labs.map(l=>`${l}${cur[l]?`(${cur[l].join(",")})`:"(–)"}`).join(" ")},key:labs.map(l=>`${l}(${points[l].join(",")})`).join(" "),labs,points};
+}
+
+/* ================= Test 5, in the PDF's order ================= */
+/* Several boxes in one question: fields = [[label before, key, unit after]] (key null = Wunmi checks). */
+function FIELDS(q,fields,o={}){return {q,label:o.label||q.replace(/<[^>]+>/g,""),kind:"fields",
+  render(it){return `<p class="q">${q}</p><div class="row" style="gap:8px 14px">${fields.map(([a,k,u],i)=>`<label class="row" style="gap:6px">${a?`<span class="muted">${a}</span>`:""}${inp(it.id+"."+i,typeof k==="number"?"":"wide","",typeof k==="number"?"decimal":"text")}${u?`<span>${u}</span>`:""}</label>`).join("")}</div>`},
+  mark(it){const vals=fields.map((_,i)=>v(it.id+"."+i));if(vals.every(x=>!x))return "blank";
+    if(fields.some(f=>typeof f[1]!=="number"))return "review";return fields.every((f,i)=>Math.abs(num(vals[i])-f[1])<.0051)?"ok":"no"},
+  show(it){return fields.map(([a,k,u],i)=>`${a?a+" ":""}${v(it.id+"."+i)||"–"}${u?" "+u:""}`).join(", ")},
+  key:o.key||fields.map(([a,k,u])=>`${a?a+" ":""}${k}${u?" "+u:""}`).join(", ")}}
+/* A word problem: a big box for the working, then the answer with its unit. */
+function WORK(q,key,unit,o={}){return {q,label:o.label||q,kind:"work",
+  render(it){return `<p class="q">${q}</p><label class="wlab" for="w-${it.id}">My working</label><textarea class="work" id="w-${it.id}" data-k="${it.id}.w" ${dis()} placeholder="Write your working here: what you change, then your calculation.">${esc(v(it.id+".w"))}</textarea><div class="row"><b>Answer:</b>${inp(it.id+".a","","")}<span>${unit}</span></div>`},
+  mark(it){if(!v(it.id+".a")&&!v(it.id+".w"))return "blank";if(!v(it.id+".a"))return "review";return Math.abs(num(v(it.id+".a"))-key)<.0051?"ok":"no"},
+  show(it){return `${v(it.id+".a")||"–"} ${unit}${v(it.id+".w")?" · Working: "+v(it.id+".w").replace(/\s*\n\s*/g," / "):""}`},
+  key:`${key} ${unit}${o.how?" ("+o.how+")":""}`}}
+const ABC=(q,list,key)=>MC(q,list.map((x,i)=>"ABC"[i]+". "+x),"ABC"[list.indexOf(key)]+". "+key);
+
+part("Questions on Polygons",1,"Answer the following questions.",[
+  TXT("What is a polygon?",["straight","closed","side","line"],"A closed flat shape made only of straight sides (at least 3)"),
+  NUM("How many sides does a triangle have?",3),
+  NUM("How many sides does a pentagon have?",5),
+  TXT("What is the name of a polygon with 6 sides?",["hexagon"],"hexagon"),
+  NUM("How many angles does a quadrilateral have?",4),
+  TXT("What is the name of a polygon with 8 sides?",["octagon"],"octagon"),
+  FIELDS("How many sides and vertices does a hexagon have?",[["sides:",6],["vertices:",6]]),
+  MC("Which polygon has 5 sides: a pentagon, a hexagon or an octagon?",["a pentagon","a hexagon","an octagon"],"a pentagon"),
+  TXT("What is the name of a polygon with 10 sides?",["decagon"],"decagon"),
+  FIELDS("Is a circle a polygon? Give a reason for your answer.",[["Yes or No:","No"],["Reason:","It has no straight sides (it is curved)"]],{key:"No, because it has no straight sides; it is curved"}),
+  TXT("A shape has 4 equal sides and 4 corners. What is its name?",["square","rhombus"],"square (a rhombus also has 4 equal sides)"),
+  NUM("How many sides does a heptagon have?",7),
+  TXT("What is the difference between a regular and an irregular polygon?",["equal","same"],"A regular polygon has all sides and all angles equal; an irregular one does not"),
+  TXT("A polygon has 9 sides. What is its name?",["nonagon","enneagon"],"nonagon"),
+  NUM("How many diagonals can you draw in a quadrilateral?",2),
+]);
+part("Solid shapes",3,"Answer the following questions.",[
+  TXT("What is a solid shape?",["3d","three","space","length","height","width","depth"],"A 3D shape: it has length, width and height (it takes up space)"),
+  TXT("What is a net of a solid shape?",["flat","fold","open"],"A flat shape that can be folded to make the solid"),
+  FIELDS("Mention four examples of solid shapes.",[["1.","cube"],["2.","cuboid"],["3.","cone"],["4.","cylinder"]],{key:"e.g. cube, cuboid, sphere, cone, cylinder, pyramid"}),
+  NUM("How many faces does a cube have?",6),
+  NUM("How many edges does a cube have?",12),
+  NUM("How many vertices does a cuboid have?",8),
+  TXT("Which solid shape has a circular base and one vertex?",["cone"],"cone"),
+  TXT("What is the name of a solid shape that looks like a ball?",["sphere"],"sphere"),
+  NUM("How many rectangular faces does a cuboid have?",6),
+  TXT("Which solid shape has two circular faces and one curved surface?",["cylinder"],"cylinder"),
+  NUM("How many vertices does a cone have?",1),
+  TXT("What is the difference between a cube and a cuboid?",["equal","same","square","rectangle"],"All faces of a cube are equal squares; a cuboid has rectangular faces (not all the same)"),
+  TXT("Which solid shape has no edges and no vertices?",["sphere"],"sphere"),
+  FIELDS("How many faces, edges and vertices does a cube have?",[["faces:",6],["edges:",12],["vertices:",8]]),
+  TXT("Name a solid shape that looks like a tin of milk.",["cylinder"],"cylinder"),
+]);
+part("Word Problems on Length",5,"Show your working, then write your answer.",[
+  WORK("A rope is 6 metres long. If 250 centimetres are cut off, how many metres of rope are left?",3.5,"m",{how:"600 cm − 250 cm = 350 cm = 3.5 m"}),
+  {q:"",label:"A tailor has 450 centimetres of cloth. How many metres and centimetres of cloth does he have?",kind:"work2",
+    render(it){return `<p class="q">A tailor has 450 centimetres of cloth. How many metres and centimetres of cloth does he have?</p><label class="wlab" for="w-${it.id}">My working</label><textarea class="work" id="w-${it.id}" data-k="${it.id}.w" ${dis()} placeholder="Write your working here.">${esc(v(it.id+".w"))}</textarea><div class="row"><b>Answer:</b>${inp(it.id+".m","tiny","")}<span>m</span>${inp(it.id+".c","tiny","")}<span>cm</span></div>`},
+    mark(it){if(!v(it.id+".m")&&!v(it.id+".c"))return v(it.id+".w")?"review":"blank";return num(v(it.id+".m"))===4&&num(v(it.id+".c"))===50?"ok":"no"},
+    show(it){return `${v(it.id+".m")||"–"} m ${v(it.id+".c")||"–"} cm${v(it.id+".w")?" · Working: "+v(it.id+".w").replace(/\s*\n\s*/g," / "):""}`},key:"4 m 50 cm (450 cm = 400 cm + 50 cm)"},
+  WORK("A boy walks 1 kilometre 500 metres to school and 750 metres back home. What total distance does he walk in metres?",2250,"m",{how:"1 500 m + 750 m"}),
+  WORK("A ribbon is 3 metres 25 centimetres long. What is its length in centimetres?",325,"cm",{how:"300 cm + 25 cm"}),
+  WORK("A farmer has 2 kilometres of fencing. If he uses 850 metres, how many metres of fencing remain?",1150,"m",{how:"2 000 m − 850 m"}),
+  WORK("A carpenter joins two pieces of wood measuring 275 centimetres and 325 centimetres. What is their total length in metres?",6,"m",{how:"275 + 325 = 600 cm = 6 m"}),
+  WORK("A bus travels 4 kilometres in the morning and 3,500 metres in the afternoon. What is the total distance travelled in kilometres?",7.5,"km",{how:"4 000 m + 3 500 m = 7 500 m = 7.5 km"}),
+  WORK("A rectangular garden is 15 metres long and 9 metres wide. What is its perimeter?",48,"m",{how:"15 + 9 + 15 + 9"}),
+  WORK("A woman buys 5 metres of fabric. She uses 180 centimetres to make a dress. How many centimetres of fabric are left?",320,"cm",{how:"500 cm − 180 cm"}),
+  WORK("A runner has to complete a 5-kilometre race. If she has already run 3,250 metres, how many metres does she have left?",1750,"m",{how:"5 000 m − 3 250 m"}),
+]);
+part("Questions on Measuring Length",7,"Choose A, B or C.",[
+  ABC("Which of these can be measured in metres (m)?",["The length of a classroom","The weight of a bag","The amount of water in a bottle"],"The length of a classroom"),
+  ABC("Which unit is best for measuring the length of a pencil?",["Kilometre","Centimetre","Litre"],"Centimetre"),
+  ABC("What unit would you use to measure the distance between two towns?",["Metre","Centimetre","Kilometre"],"Kilometre"),
+  ABC("Which of these is best measured in metres?",["The height of a building","The length of an ant","The weight of a chair"],"The height of a building"),
+  ABC("What unit would you use to measure the length of a school ruler?",["Centimetre","Kilometre","Kilogram"],"Centimetre"),
+  ABC("Which of these is usually measured in kilometres?",["The length of a classroom","The distance between cities","The length of a spoon"],"The distance between cities"),
+  ABC("Which unit is suitable for measuring the height of a door?",["Metre","Litre","Gram"],"Metre"),
+  ABC("Which of these is measured in centimetres?",["The distance from Lagos to Abuja","The length of a fingernail","The length of a football field"],"The length of a fingernail"),
+  ABC("Which of these is NOT a unit of length?",["Metre","Centimetre","Kilogram"],"Kilogram"),
+]);
+const ALL=PARTS.flatMap(p=>p.items.map(it=>Object.assign(it,{part:p})));
+const ITEM=Object.fromEntries(ALL.map(it=>[it.id,it]));
+
+/* ================= saving ================= */
+let db=null,ref=null,saving=false,again=false,timer=null,dirty=false,online=false;
+function badge(){const b=$("#save");if(READONLY){b.className="save";b.textContent="Viewing Israël’s answers";return}
+  if(saving||dirty){b.className="save";b.textContent="Saving…";return}
+  if(online){b.className="save ok";b.textContent=META.status==="submitted"?"Submitted ✓":"Saved ✓";return}
+  b.className="save ok";b.textContent=META.status==="submitted"?"Handed in ✓":"Saved on this device ✓"}
+function localSave(){if(MODE==="fixreview"||MODE==="review")return;try{if(MODE==="fix")localStorage.setItem(FKEY,JSON.stringify({sig:fixSig(),answers:ANS}));else localStorage.setItem(LKEY,JSON.stringify({answers:ANS,meta:META}))}catch(e){}}
+function changed(){META.savedAt=Date.now();localSave();if(!db){badge();return}dirty=true;badge();clearTimeout(timer);timer=setTimeout(flush,1200)}
+async function flush(){if(!ref)return;if(saving){again=true;return}saving=true;badge();
+  try{await ref.set({answers:Object.assign({},ANS),status:META.status,savedAt:META.savedAt,submittedAt:META.submittedAt});dirty=false;online=true}
+  catch(e){online=false;if(e&&e.code==="invalid_argument"){READONLY=true;render()}}
+  saving=false;badge();if(again){again=false;flush()}}
+function apply(d){ANS=Object.assign({},d.answers||{});META={status:d.status||"draft",savedAt:d.savedAt||0,submittedAt:d.submittedAt||null};localSave()}
+async function connect(){
+  try{db=window.claude&&window.claude.use?await window.claude.use("db"):null}catch(e){db=null}
+  let user=null;try{user=window.claude&&window.claude.use?await window.claude.use("user"):null}catch(e){}
+  if(user){try{const w=await user.can("data.write");if(w===false){READONLY=true}}catch(e){}}
+  if(!db){badge();return}
+  try{ref=db.doc("tests/test5");const s=await ref.get();online=true;
+    if(s.exists){const d=s.data();if((d.savedAt||0)>=META.savedAt)apply(d);else if(!READONLY)changed()}
+    else if(!READONLY&&Object.keys(ANS).length)changed();
+    ref.onSnapshot(snap=>{if(!snap.exists||snap.metadata.hasPendingWrites)return;const d=snap.data();if((d.savedAt||0)>META.savedAt&&!dirty){apply(d);const a=document.activeElement;if(!(a&&a.tagName==="INPUT"))render()}},()=>{});
+  }catch(e){online=false}
+  if(READONLY&&VIEW==="cover")VIEW="teacher";
+  render();
+}
+
+/* ================= send by link ================= */
+let SHARED=false;
+const b64u=u8=>{let x="";for(let i=0;i<u8.length;i++)x+=String.fromCharCode(u8[i]);return btoa(x).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"")};
+const ub64=x=>{x=x.replace(/-/g,"+").replace(/_/g,"/");while(x.length%4)x+="=";const b=atob(x);return Uint8Array.from(b,c=>c.charCodeAt(0))};
+async function pack(obj){const json=JSON.stringify(obj||{a:ANS,s:META.status,t:META.submittedAt});
+  try{const buf=await new Response(new Blob([json]).stream().pipeThrough(new CompressionStream("deflate-raw"))).arrayBuffer();return "z"+b64u(new Uint8Array(buf))}
+  catch(e){return "j"+b64u(new TextEncoder().encode(json))}}
+async function unpack(p){const u8=ub64(p.slice(1));const json=p[0]==="z"?await new Response(new Blob([u8]).stream().pipeThrough(new DecompressionStream("deflate-raw"))).text():new TextDecoder().decode(u8);return JSON.parse(json)}
+async function sendBox(el,tag="r",obj=null,msgFn=null){
+  el.innerHTML=`<p class="muted">Making the link…</p>`;
+  const link=location.origin+location.pathname+"#"+tag+"="+await pack(obj);
+  const msg=msgFn?msgFn(link):`Hi Wunmi, here are Israël’s answers to Test 5. Open this link to see and mark them: ${link}`;
+  const subj=tag==="c"?"Test 5: corrections to do":tag==="k"?"Test 5: Israël’s corrections":tag==="s"?"Test 5: continue on another computer":"Test 5: Israël’s answers";
+  el.innerHTML=`<div class="row"><a class="btn primary" href="https://wa.me/?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">Send by WhatsApp</a><a class="btn" href="mailto:?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(msg)}">Send by email</a><button class="btn" id="cplink">Copy the link</button></div><p class="muted" style="margin-top:6px">${tag==="s"?"Open this link on the other computer (email it to yourself, or copy it). It brings all the answers so far.":tag==="c"?"The link holds only the questions you ticked.":tag==="k"?"The link holds only these corrections.":"The link holds all his answers. Send it again if he changes anything."} Copy the link to use it anywhere else.</p>`;
+  $("#cplink").onclick=async()=>{try{await navigator.clipboard.writeText(link);toast("Link copied")}catch(e){el.insertAdjacentHTML("beforeend",`<textarea class="copybox" readonly style="min-height:70px">${esc(link)}</textarea>`);const t=el.querySelector("textarea");t.focus();t.select()}};
+}
+
+/* ================= correction rounds ================= */
+let MODE="normal",FIX=null,PREV={};const SB=new Set();
+/* Wunmi marks every answer herself. The automatic check and the key stay hidden until she asks for them. */
+let SHOWAUTO=false,WM={};
+const wmKey=()=>{let h=0;const t=location.hash;for(let i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))|0;return "test5-wm-"+h};
+function wmLoad(){try{const d=JSON.parse(localStorage.getItem(wmKey())||"{}");WM=d.m||{};SHOWAUTO=!!d.auto;(d.sb||[]).forEach(id=>SB.add(id))}catch(e){}}
+function wmSave(){try{localStorage.setItem(wmKey(),JSON.stringify({m:WM,auto:SHOWAUTO,sb:[...SB]}))}catch(e){}}
+const wmCell=it=>`<div class="wm"><button class="ok${WM[it.id]==="ok"?" on":""}" data-wm="${it.id}" data-v="ok" aria-label="Correct">✓</button><button class="no${WM[it.id]==="no"?" on":""}" data-wm="${it.id}" data-v="no" aria-label="Wrong">✗</button></div>`;
+function wmTally(items){let ok=0,no=0;items.forEach(it=>{if(WM[it.id]==="ok")ok++;else if(WM[it.id]==="no")no++});return {ok,no,left:items.length-ok-no}}
+function wmHead(items){const t=wmTally(items);return `<div class="score"><b>${t.ok} / ${items.length}</b><span>correct by your marking · ${t.no} wrong · ${t.left} not marked yet</span></div>`}
+function wmTools(){return `<div class="row"><button class="btn small" id="autotgl">${SHOWAUTO?"Hide the answer key":"Show the answer key and automatic check"}</button>${SHOWAUTO?`<button class="btn small" id="autofill">Fill my unmarked boxes from the automatic check</button>`:""}</div>`}
+function wmBind(items){
+  const a=$("#autotgl");if(a)a.onclick=()=>{SHOWAUTO=!SHOWAUTO;wmSave();render()};
+  const f=$("#autofill");if(f)f.onclick=()=>{items.forEach(it=>{if(!WM[it.id]){const st=stateOf(it);if(st==="ok"){WM[it.id]="ok";SB.delete(it.id)}else if(st==="no"||st==="blank"){WM[it.id]="no";SB.add(it.id)}}});wmSave();render();toast("Done. Answers marked “check” are still for you.")};
+}
+const keysOf=(map,id)=>Object.keys(map).filter(k=>k===id||k.startsWith(id+"."));
+const subset=(map,ids)=>{const o={};ids.forEach(id=>keysOf(map,id).forEach(k=>{if(map[k]!=="")o[k]=map[k]}));return o};
+function withAns(map,fn){const s=ANS;ANS=map;try{return fn()}finally{ANS=s}}
+const FKEY="test5-fix";
+const fixSig=()=>FIX.round+":"+FIX.ids.join(",");
+const stLabel=st=>st==="ok"?"correct":st==="no"?"wrong":st==="review"?"check":"empty";
+function sbNote(){return `<p class="muted">Mark each answer ✓ or ✗. Every ✗ is ticked to go back to Israël for correcting. You can also tick or untick any question yourself.</p>`}
+function sendFix(el,src){const ids=ALL.filter(it=>SB.has(it.id)).map(it=>it.id);if(!ids.length){toast("Tick at least one question first");return}
+  const round=(FIX?FIX.round:0)+1;
+  sendBox(el,"c",{ids,prev:subset(src,ids),round},link=>`Hi Israël, please correct these ${ids.length} question${ids.length>1?"s":""} from Test 5 (round ${round}): ${link}`)}
+function viewFix(){
+  const groups=PARTS.map((p,i)=>({p,i,items:p.items.filter(it=>FIX.ids.includes(it.id))})).filter(g=>g.items.length);
+  const done=FIX.ids.filter(id=>stateOf(ITEM[id])!=="blank").length,n=FIX.ids.length;
+  $("#app").innerHTML=`<div class="card" style="display:flex;flex-direction:column;gap:8px"><p class="eyebrow">Corrections · round ${FIX.round}</p><h2 style="font-size:1.35rem">Wunmi marked your test. Correct these ${n} question${n>1?"s":""}.</h2><p class="muted">Your first answer is shown crossed out above each question. Have another go, then send your corrections to Wunmi. Your work saves by itself.</p><p style="font-family:var(--display);font-weight:700">${done} of ${n} done</p><div class="track"><i style="width:${done/n*100}%"></i></div></div>
+  ${groups.map(g=>`<p class="k">Part ${g.i+1} · ${g.p.title}</p>${g.p.intro?`<div class="q" style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px">${g.p.intro}</div>`:""}<div class="items">${g.items.map(it=>`<div class="it"><span class="no">${it.no}.</span><div class="body"><p class="muted">Your first answer: <s>${esc(withAns(FIX.prev,()=>it.show(it)))||"(empty)"}</s></p><div id="c-${it.id}" style="display:flex;flex-direction:column;gap:8px">${it.render(it)}</div></div></div>`).join("")}</div>`).join("")}
+  <p class="k">When you have finished</p><div class="card" id="fixsend"><div class="row"><button class="btn primary" id="fixbtn">Send my corrections to Wunmi</button><span class="muted">${n-done?`${n-done} still empty.`:"All done!"}</span></div></div>
+  ${done&&done<n?`<div id="fixmove" style="margin-top:10px"><button class="btn small" id="fixmovebtn">Continue on another computer</button></div>`:""}`;
+  const fm=$("#fixmovebtn");if(fm)fm.onclick=()=>sendBox($("#fixmove"),"c",{ids:FIX.ids,prev:FIX.prev,round:FIX.round,a:subset(ANS,FIX.ids)},link=>`Israël’s corrections so far. Open this link to carry on: ${link}`);
+  $("#fixbtn").onclick=()=>sendBox($("#fixsend"),"k",{ids:FIX.ids,a:subset(ANS,FIX.ids),prev:FIX.prev,round:FIX.round},link=>`Hi Wunmi, here are Israël’s corrections for Test 5 (round ${FIX.round}): ${link}`);
+}
+function viewFixReview(){
+  const items=ALL.filter(it=>FIX.ids.includes(it.id));
+  $("#app").innerHTML=`<div class="card" style="display:flex;flex-direction:column;gap:10px"><p class="eyebrow">For Wunmi · corrections round ${FIX.round}</p><h2 style="font-size:1.35rem">Israël’s corrections</h2>
+    ${wmHead(items)}${sbNote()}${wmTools()}
+    <div class="row"><button class="btn primary" id="sendfix">Send another round to Israël (<span id="sbn">${SB.size}</span>)</button></div><div id="copyout"></div></div>
+  <div class="tblwrap" style="margin-top:14px"><table class="tbl"><tr><th>Part</th><th>#</th><th>Question</th><th>First answer</th><th>Corrected</th><th>Your mark</th>${SHOWAUTO?"<th>Key</th><th>Auto</th>":""}<th>Send back</th></tr>${items.map(it=>{const st=stateOf(it);return `<tr><td>${PARTS.indexOf(it.part)+1}</td><td>${it.no}</td><td>${esc(String(it.label).replace(/<[^>]+>/g,""))}</td><td><s>${esc(withAns(PREV,()=>it.show(it)))||"—"}</s></td><td><b>${esc(it.show(it))||"—"}</b></td><td>${wmCell(it)}</td>${SHOWAUTO?`<td>${esc(it.key)}</td><td><span class="st ${st}">${stLabel(st)}</span></td>`:""}<td><input type="checkbox" data-sb="${it.id}" ${SB.has(it.id)?"checked":""} aria-label="Send back"></td></tr>`}).join("")}</table></div>`;
+  $("#sendfix").onclick=()=>sendFix($("#copyout"),ANS);wmBind(items);
+}
+
+/* ================= views ================= */
+let VIEW="cover";
+const stateOf=it=>it.mark(it);
+function progress(p){const n=p.items.filter(it=>stateOf(it)!=="blank").length;return [n,p.items.length]}
+function go(vw){VIEW=vw;render();window.scrollTo({top:0})}
+function tabs(){$("#tabs").innerHTML=[["cover","Booklet"],...(CUR?[[CUR,"Part "+CUR.slice(1)]]:[]),["teacher","Marking (Wunmi)"]].map(([k,l])=>`<button class="tab" data-go="${k}" aria-current="${VIEW===k}">${l}</button>`).join("")}
+function render(){badge();if(MODE==="fix"||MODE==="fixreview"){$("#tabs").innerHTML="";return MODE==="fix"?viewFix():viewFixReview()}if(VIEW.startsWith("p")&&PARTS.find(p=>p.id===VIEW)){CUR=VIEW;tabs();return viewPart(PARTS.find(p=>p.id===VIEW))}tabs();if(VIEW==="teacher")return viewTeacher();viewCover()}
+function viewCover(){
+  const done=ALL.filter(it=>stateOf(it)!=="blank").length,sub=META.status==="submitted";
+  $("#app").innerHTML=`<div class="card" style="display:flex;flex-direction:column;gap:10px">
+    <p style="font-family:var(--display);font-size:1.15rem">Hi Israël! This is Wunmi’s Test 5, ready to answer on screen. No printing, no photos.</p>
+    <p class="muted">Your answers save by themselves as you go, so you can stop and come back later. When everything is done, press <b>Hand it in</b> so Wunmi can mark it.</p>
+    ${sub?`<div class="notice ok"><b>Handed in</b> ${META.submittedAt?new Date(META.submittedAt).toLocaleString():""}. Wunmi can now see your answers.</div>`:""}
+    ${!db&&!READONLY?`<div class="notice">Your answers save on this computer as you go. Switching to another laptop? Press <b>Continue on another computer</b> and open that link there. When you have finished, press <b>Hand it in</b>, then <b>Send to Wunmi</b>.</div>`:""}
+    <p style="font-family:var(--display);font-weight:700">${done} of ${ALL.length} answers done</p>
+    <div class="track"><i style="width:${done/ALL.length*100}%"></i></div>
+    ${!READONLY&&done?`<div id="moveb"><button class="btn small" id="movebtn">Continue on another computer</button></div>`:""}
+  </div>
+  <p class="k">The ${PARTS.length} parts · same order as the PDF</p>
+  <div class="parts">${PARTS.map((p,i)=>{const [a,b]=progress(p);return `<button class="pbtn${a===b?" done":""}" data-go="${p.id}"><span class="n">${i+1}</span><b>${p.title}</b><span class="m"><span class="track"><i style="width:${a/b*100}%"></i></span>${a}/${b}</span></button>`}).join("")}</div>
+  <p class="k">When you have finished</p>
+  <div class="card" id="handin">${sub?`<p>Handed in! Now send it to Wunmi.</p><div id="send" style="margin-top:10px"><button class="btn primary" id="sendbtn">Send to Wunmi</button></div><p class="muted" style="margin-top:8px">If Wunmi asks for changes, a grown-up can reopen it from the Marking tab.</p>`:READONLY?`<p class="muted">Only Israël’s account can hand the test in.</p>`:`<div class="row"><button class="btn primary" id="hand">Hand it in</button><span class="muted">${ALL.length-done?`${ALL.length-done} answers are still empty.`:"Everything is answered!"}</span></div>`}</div>
+  <footer>Test 5 · typed from Wunmi’s PDF (9 pages): polygons, solid shapes, word problems on length, measuring length.</footer>`;
+  const sb=$("#sendbtn");if(sb)sb.onclick=()=>sendBox($("#send"));
+  const mb=$("#movebtn");if(mb)mb.onclick=()=>sendBox($("#moveb"),"s",{a:ANS,s:META.status,t:META.submittedAt,v:META.savedAt},link=>`Israël’s Test 5, answers so far. Open this link to carry on: ${link}`);
+  const h=$("#hand");if(h)h.onclick=()=>{$("#handin").innerHTML=`<div class="confirm"><span>Hand in now? You won’t be able to change your answers after.</span><button class="btn primary" id="hy">Yes, hand it in</button><button class="btn small" id="hn">Not yet</button></div>`;$("#hn").onclick=()=>render();$("#hy").onclick=()=>{META.status="submitted";META.submittedAt=Date.now();changed();flush();toast("Handed in. Well done, Israël!");render()}};
+}
+function viewPart(p){
+  const i=PARTS.indexOf(p),prev=PARTS[i-1],next=PARTS[i+1];
+  $("#app").innerHTML=`<div class="${locked()?"locked":""}"><div class="phead"><p class="eyebrow">Part ${i+1} of ${PARTS.length} · PDF page ${p.page}</p><h2>${p.title}</h2>${p.intro?`<div class="q" style="display:flex;flex-direction:column;gap:8px">${p.intro}</div>`:""}</div>
+  ${locked()&&!READONLY?`<div class="notice ok" style="margin-bottom:10px">Handed in. Answers are locked.</div>`:""}
+  <div class="items">${p.items.map(it=>`<div class="it" id="it-${it.id}"><span class="no">${it.no}.</span><div class="body" id="c-${it.id}">${it.render(it)}</div></div>`).join("")}</div>
+  <div class="partnav">${prev?`<button class="btn" data-go="${prev.id}">← Part ${i}</button>`:`<span></span>`}<button class="btn" data-go="cover">Booklet</button>${next?`<button class="btn primary" data-go="${next.id}">Part ${i+2} →</button>`:`<button class="btn primary" data-go="cover">Finish →</button>`}</div></div>`;
+}
+function rerender(id){const it=ITEM[id],c=$("#c-"+id);if(it&&c)c.innerHTML=it.render(it)}
+function waText(){
+  const L=[`Israël — Test 5 (online)`,META.status==="submitted"?`Handed in: ${new Date(META.submittedAt).toLocaleString()}`:"Not handed in yet",""];
+  if(SHARED){const t=wmTally(ALL);if(t.ok+t.no)L.push(`Wunmi’s marking: ${t.ok} correct, ${t.no} wrong, ${t.left} not marked`,"")}
+  PARTS.forEach((p,i)=>{L.push(`PART ${i+1} — ${p.title} (PDF p.${p.page})`);p.items.forEach(it=>{const m=SHARED?WM[it.id]:"";L.push(`${it.no}) ${it.show(it)||"—"} ${m==="ok"?"✓":m==="no"?"✗":""}`.trim())});L.push("")});
+  return L.join("\n");
+}
+function summary(){let ok=0,no=0,review=0,blank=0;ALL.forEach(it=>{const s=stateOf(it);s==="ok"?ok++:s==="no"?no++:s==="review"?review++:blank++});return {ok,no,review,blank,gradable:ALL.length-ALL.filter(it=>it.key==="Wunmi checks").length}}
+function viewTeacher(){
+  const sub=META.status==="submitted",auto=SHARED&&SHOWAUTO;
+  $("#app").innerHTML=`<div class="card" style="display:flex;flex-direction:column;gap:10px">
+    <p class="eyebrow">For Wunmi</p><h2 style="font-size:1.4rem">Israël’s answers</h2>
+    ${SHARED?`<div class="notice">These are the answers Israël sent you. Nothing is marked yet: mark each answer ✓ or ✗. You can also open each part (tabs above) to see his work as he did it.</div>`:`<div class="notice">This is what Wunmi will see. The marking and the answer key are only on Wunmi’s side.</div>`}
+    ${sub?`<div class="notice ok">Handed in ${META.submittedAt?new Date(META.submittedAt).toLocaleString():""}.</div>`:`<div class="notice warn">Not handed in yet. This shows his answers so far.</div>`}
+    ${SHARED?wmHead(ALL)+sbNote()+wmTools():""}<div class="row">${!SHARED?`<button class="btn primary" id="sendt">Send to Wunmi (link)</button>`:`<button class="btn primary" id="sendfix">Send corrections to Israël (<span id="sbn">${SB.size}</span>)</button>`}<button class="btn" id="copy">Copy as text</button>${sub&&!READONLY?`<button class="btn small danger" id="reopen">Reopen for changes</button>`:""}</div>
+    <div id="copyout"></div>
+  </div>
+  ${PARTS.map((p,i)=>{const [a,b]=progress(p);const t=wmTally(p.items);return `<div class="tp"><h3>Part ${i+1} · ${p.title} <span class="muted">(PDF p.${p.page}) · ${SHARED&&t.ok+t.no?`${t.ok}/${b} correct · ${t.left} to mark`:`${a}/${b} answered`}</span></h3><div class="tblwrap"><table class="tbl"><tr><th>#</th><th>Question</th><th>His answer</th>${SHARED?"<th>Your mark</th>":""}${auto?"<th>Key</th><th>Auto</th>":""}${SHARED?"<th>Send back</th>":""}</tr>${p.items.map(it=>{const st=stateOf(it);return `<tr><td>${it.no}</td><td>${esc(String(it.label).replace(/<[^>]+>/g,""))}</td><td><b>${esc(it.show(it))||"—"}</b></td>${SHARED?`<td>${wmCell(it)}</td>`:""}${auto?`<td>${esc(it.key)}</td><td><span class="st ${st}">${stLabel(st)}</span></td>`:""}${SHARED?`<td><input type="checkbox" data-sb="${it.id}" ${SB.has(it.id)?"checked":""} aria-label="Send back"></td>`:""}</tr>`}).join("")}</table></div></div>`}).join("")}
+  ${SHARED?`<footer>The automatic check is only a helper, and it stays hidden until you ask for it. Words, drawings and the “which reflection is correct” question always need your judgement. For word problems, his working is shown next to his answer.</footer>`:""}`;
+  const st=$("#sendt");if(st)st.onclick=()=>sendBox($("#copyout"));
+  const sf=$("#sendfix");if(sf)sf.onclick=()=>sendFix($("#copyout"),ANS);
+  if(SHARED)wmBind(ALL);
+  $("#copy").onclick=async()=>{const t=waText();try{await navigator.clipboard.writeText(t);toast("Copied. Paste it into WhatsApp.")}catch(e){$("#copyout").innerHTML=`<p class="muted">Select all and copy:</p><textarea class="copybox" readonly>${esc(t)}</textarea>`;const ta=$("#copyout textarea");ta.focus();ta.select()}};
+  const r=$("#reopen");if(r)r.onclick=()=>{r.outerHTML=`<span class="confirm"><span>Reopen so Israël can change answers?</span><button class="btn small" id="ry">Reopen</button><button class="btn small" id="rn">Cancel</button></span>`;$("#rn").onclick=()=>render();$("#ry").onclick=()=>{META.status="draft";META.submittedAt=null;changed();render()}};
+}
+
+/* ================= events ================= */
+document.addEventListener("click",e=>{
+  const g=e.target.closest("[data-go]");if(g){go(g.dataset.go);return}
+  const wb=e.target.closest("[data-wm]");if(wb){const id=wb.dataset.wm,val=wb.dataset.v;if(WM[id]===val)delete WM[id];else WM[id]=val;
+    if(WM[id]==="no")SB.add(id);else SB.delete(id);wmSave();const y=scrollY;render();scrollTo(0,y);return}
+  if(locked())return;
+  const o=e.target.closest(".opt[data-k]");if(o){ANS[o.dataset.k]=o.dataset.v;$$(`.opt[data-k="${CSS.escape(o.dataset.k)}"]`).forEach(b=>b.classList.toggle("on",b===o));changed();return}
+  const m=e.target.closest(".opt[data-m]");if(m){const k=m.dataset.m;let sel=v(k).split("|").filter(Boolean);const x=m.dataset.v;sel=sel.includes(x)?sel.filter(y=>y!==x):[...sel,x];if(x==="None of them")sel=sel.includes(x)?[x]:[];else sel=sel.filter(y=>y!=="None of them");ANS[k]=sel.join("|");rerender(k);changed();return}
+  const of=e.target.closest("[data-of]");if(of){const k=of.dataset.of,seq=v(k)?JSON.parse(v(k)):[];seq.push(of.dataset.v);ANS[k]=JSON.stringify(seq);rerender(k);changed();return}
+  const ob=e.target.closest("[data-ob]");if(ob){const k=ob.dataset.ob,seq=JSON.parse(v(k));seq.splice(+ob.dataset.i,1);ANS[k]=seq.length?JSON.stringify(seq):"";rerender(k);changed();return}
+  const rf=e.target.closest("[data-rf]");if(rf){const k=rf.dataset.rf,pts=v(k)?JSON.parse(v(k)):[],p=[+rf.dataset.x,+rf.dataset.y];if(!pts.some(q=>q[0]===p[0]&&q[1]===p[1])){pts.push(p);ANS[k]=JSON.stringify(pts);rerender(k);changed()}return}
+  const rfu=e.target.closest("[data-rfu]");if(rfu){const k=rfu.dataset.rfu,pts=v(k)?JSON.parse(v(k)):[];pts.pop();ANS[k]=pts.length?JSON.stringify(pts):"";rerender(k);changed();return}
+  const rfc=e.target.closest("[data-rfc]");if(rfc){ANS[rfc.dataset.rfc]="";rerender(rfc.dataset.rfc);changed();return}
+  const pl=e.target.closest("[data-pl]");if(pl){SEL[pl.dataset.pl]=pl.dataset.v;rerender(pl.dataset.pl);return}
+  const pp=e.target.closest("[data-pp]");if(pp){const k=pp.dataset.pp,it=ITEM[k],cur=v(k)?JSON.parse(v(k)):{},lab=SEL[k]||it.labs[0];cur[lab]=[+pp.dataset.x,+pp.dataset.y];ANS[k]=JSON.stringify(cur);const nx=it.labs.find(l=>!cur[l]);if(nx)SEL[k]=nx;rerender(k);changed();return}
+});
+document.addEventListener("change",e=>{const c=e.target.closest("[data-sb]");if(c){c.checked?SB.add(c.dataset.sb):SB.delete(c.dataset.sb);wmSave();const n=$("#sbn");if(n)n.textContent=SB.size}});
+document.addEventListener("input",e=>{const t=e.target;if(t.matches("input[data-k],textarea[data-k]")&&!locked()){ANS[t.dataset.k]=t.value;changed()}});
+(async()=>{const h=location.hash||"";
+  try{
+    if(h.startsWith("#r=")){const d=await unpack(h.slice(3));MODE="review";ANS=d.a||{};META={status:d.s||"draft",savedAt:0,submittedAt:d.t||null};READONLY=true;SHARED=true;VIEW="teacher";
+      wmLoad();render();return}
+    if(h.startsWith("#c=")){const d=await unpack(h.slice(3));MODE="fix";FIX={ids:(d.ids||[]).filter(id=>ITEM[id]),prev:d.prev||{},round:d.round||1};META={status:"draft",savedAt:0,submittedAt:null};ANS={};
+      try{const f=JSON.parse(localStorage.getItem(FKEY));if(f&&f.sig===fixSig()&&Object.keys(f.answers||{}).length)ANS=f.answers}catch(e){}
+      if(!Object.keys(ANS).length&&d.a){ANS=Object.assign({},d.a);localSave()}
+      render();return}
+    if(h.startsWith("#s=")){const d=await unpack(h.slice(3));const here=Object.keys(ANS).length;
+      const load=()=>{ANS=Object.assign({},d.a||{});META={status:d.s||"draft",savedAt:Date.now(),submittedAt:d.t||null};localSave();try{history.replaceState(null,"",location.pathname)}catch(e){}toast("Answers loaded on this computer");render()};
+      if(!here){load();return}
+      $("#app").innerHTML=`<div class="card" style="display:flex;flex-direction:column;gap:10px"><h2 style="font-size:1.3rem">Bring the answers onto this computer?</h2><p>This computer already has ${here} saved answer box${here>1?"es":""}. The link has ${Object.keys(d.a||{}).length}. Loading the link replaces what is here.</p><div class="row"><button class="btn primary" id="ly">Use the answers from the link</button><button class="btn" id="ln">Keep what is on this computer</button></div></div>`;
+      $("#ly").onclick=load;$("#ln").onclick=()=>{try{history.replaceState(null,"",location.pathname)}catch(e){}render()};return}
+    if(h.startsWith("#k=")){const d=await unpack(h.slice(3));MODE="fixreview";FIX={ids:(d.ids||[]).filter(id=>ITEM[id]),round:d.round||1};ANS=d.a||{};PREV=d.prev||{};META={status:"submitted",savedAt:0,submittedAt:null};READONLY=true;SHARED=true;
+      wmLoad();render();return}
+  }catch(e){toast("This link looks incomplete. Ask for it to be sent again.")}
+  render();connect();})();
+window.__T={ALL,ANS,ITEM,PARTS};
+})();
+</script>
+</body>
+</html>

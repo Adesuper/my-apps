@@ -121,6 +121,7 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding-top:14px;font-si
     <section class="shelf c-ma">
       <h3>Mathématiques <span class="tag">Tam Tam</span></h3>
       <a class="item" href="evaluations/mission-evaluations.html#ma"><b>Mission évaluations : maths</b><span>Nombres jusqu’à 9 999, l’heure, petits problèmes. Jeux et examen blanc.</span></a>
+      <a class="item" href="test-5.html"><b>Test 5 de Wunmi (en ligne)</b><span>Polygones, solides, problèmes sur les longueurs. Avec une case pour sa démarche. À la fin : « Hand it in », puis « Send to Wunmi ».</span></a>
       <a class="item" href="test-3-4.html"><b>Test 3 et 4 de Wunmi (en ligne)</b><span>Le test PDF à faire à l’écran. À la fin : « Hand it in », puis « Send to Wunmi ».</span></a>
       <a class="item" href="revision-maths.html"><b>Révision avec Wunmi (en anglais)</b><span>Tout ce que Wunmi lui a appris : division, problèmes, multiples, décimales, et les leçons de l’été. Test modèle avec corrigé.</span></a>
       <a class="item" href="../summer-quest/ecole/entraineur-maths.html"><b>L’entraîneur de maths</b><span>20 thèmes du cahier, qui se corrigent tout seuls.</span></a>
@@ -160,6 +161,7 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding-top:14px;font-si
 /* Dated items: each shows on the home row only between "from" and "to". Add the next tests here. */
 const D=(m,d)=>new Date(2026,m-1,d);
 const NOW=[
+  {from:D(11,6),to:D(11,30),cls:"c-ma",when:"Test de Wunmi · en ligne",title:"Test 5",txt:"Polygons, solid shapes and length. Write your working, then your answer. When finished: Hand it in, then Send to Wunmi.",href:"test-5.html",go:"Start the test →"},
   {from:D(11,6),to:D(11,9),cls:"c-ma",when:"Petit problème · lundi 9 novembre",title:"Maths : le plan cartésien",date:D(11,9),txt:"Lire et placer des points, suivre un trajet, trouver le sommet qui manque, et un petit problème.",href:"evaluations/mission-espace.html#maths",go:"Je me prépare →"},
   {from:D(11,6),to:D(11,10),cls:"c-us",when:"Minitest · mardi 10 novembre",title:"Sciences : la Terre et l’espace",date:D(11,10),txt:"Soleil, Terre et Lune, jour et nuit, saisons, phases de la Lune, planètes, roches, eau et météo.",href:"evaluations/mission-espace.html#sci",go:"Je me prépare →"},
   {from:D(11,6),to:D(11,11),cls:"c-fr",when:"Évaluation de lecture · mercredi 11 novembre",title:"Lire un texte informatif",date:D(11,11),txt:"Titre, sous-titre, intertitre, schéma, encadré, et trois textes avec questions de compréhension.",href:"evaluations/mission-espace.html#lect",go:"Je me prépare →"},
