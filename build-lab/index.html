@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Israël's Build Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;600;700;800;900&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap">
+<style>
+:root{--bg:#F6F4EE;--panel:#FFFFFF;--panel-2:#FAF8F3;--ink:#1A2236;--ink-soft:#586180;--line:#E3E7F1;--rule:#CDD4E6;
+  --night:#101735;--blue:#2F4FC9;--blue-soft:#E7ECFC;--teal:#14998A;--teal-soft:#E0F4F1;--orange:#D9620F;--orange-soft:#FDEBDD;
+  --violet:#6B3FB8;--violet-soft:#EFE7FB;--green:#2E8B57;--green-soft:#E4F4EB;--red:#C8394A;--red-soft:#FBE6E9;--gold:#E8A317;
+  --display:"Gabarito",system-ui,sans-serif;--body:"Literata",Georgia,serif;--mono:ui-monospace,Consolas,"Cascadia Mono",monospace;
+  --shadow:0 1px 2px rgba(20,30,60,.06),0 6px 18px rgba(20,30,60,.06)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1426;--panel:#171E36;--panel-2:#1C2440;--ink:#E7EBF7;--ink-soft:#A3ADC8;--line:#2A3355;--rule:#3A4570;
+  --blue:#8FA8FF;--blue-soft:#1E2946;--teal:#4FC9B9;--teal-soft:#15302D;--orange:#F59A52;--orange-soft:#3A2414;--violet:#B597F2;--violet-soft:#2B2140;
+  --green:#66C795;--green-soft:#16301F;--red:#EE7D8B;--red-soft:#3A1C22;--shadow:none}}
+:root[data-theme="dark"]{--bg:#0F1426;--panel:#171E36;--panel-2:#1C2440;--ink:#E7EBF7;--ink-soft:#A3ADC8;--line:#2A3355;--rule:#3A4570;
+  --blue:#8FA8FF;--blue-soft:#1E2946;--teal:#4FC9B9;--teal-soft:#15302D;--orange:#F59A52;--orange-soft:#3A2414;--violet:#B597F2;--violet-soft:#2B2140;
+  --green:#66C795;--green-soft:#16301F;--red:#EE7D8B;--red-soft:#3A1C22;--shadow:none}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--display);line-height:1.5}
+a{color:var(--blue)}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px}
+.hero{background:linear-gradient(135deg,#0B1230,#24318A 55%,#14998A);color:#fff;padding:26px 0 22px}
+.hero .ey{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800;opacity:.85;margin:0}
+.hero .ey a{color:#fff}
+.hero h1{font-size:clamp(1.8rem,5vw,2.6rem);font-weight:900;margin:4px 0 6px;line-height:1.1}
+.hero p.s{max-width:680px;margin:0;opacity:.92}
+.prog{margin-top:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.track{flex:1;min-width:160px;height:12px;border-radius:99px;background:rgba(255,255,255,.22);overflow:hidden}
+.track i{display:block;height:100%;background:#FFC93C;border-radius:99px}
+nav.bar{position:sticky;top:0;z-index:5;background:var(--panel);border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px;scrollbar-width:thin}
+.tab{flex:none;font:700 .92rem var(--display);padding:8px 13px;border-radius:99px;border:1px solid var(--line);background:var(--panel-2);color:var(--ink);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--night);color:#fff;border-color:var(--night)}
+main{padding:18px 0 60px}
+section[hidden]{display:none}
+h2.h{font-size:1.5rem;font-weight:900;margin:18px 0 8px}
+h3{margin:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px 18px;box-shadow:var(--shadow);margin-bottom:14px}
+.muted{color:var(--ink-soft)}
+.tip{background:var(--orange-soft);border-radius:13px;padding:11px 14px;margin:10px 0;font-size:.96rem}
+.note{background:var(--blue-soft);border-radius:13px;padding:11px 14px;margin:10px 0;font-size:.96rem}
+.warn{background:var(--red-soft);border-radius:13px;padding:11px 14px;margin:10px 0;font-size:.96rem}
+.levels{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(270px,100%),1fr));gap:12px}
+.lv{border-radius:18px;padding:16px;color:#fff;cursor:pointer;border:0;text-align:left;font-family:var(--display)}
+.lv h3{font-size:1.25rem;font-weight:900}.lv p{margin:6px 0 0;opacity:.93;font-size:.95rem}
+.lv .k{font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.l1{background:linear-gradient(140deg,#14998A,#0E7C8E)}.l2{background:linear-gradient(140deg,#D9620F,#B8401C)}.l3{background:linear-gradient(140deg,#6B3FB8,#2F4FC9)}.lb{background:linear-gradient(140deg,#2E8B57,#5E8F1F)}
+.sess{border-left:6px solid var(--teal)}
+.sess.l2s{border-left-color:var(--orange)}.sess.l3s{border-left-color:var(--violet)}
+.sh{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.num{flex:none;width:44px;height:44px;border-radius:14px;background:var(--night);color:#fff;font-weight:900;font-size:1.2rem;display:grid;place-items:center}
+.sh .t{flex:1;min-width:200px}
+.sh h3{font-size:1.2rem;font-weight:800}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.chip{font-size:.78rem;font-weight:700;padding:2px 9px;border-radius:99px;background:var(--panel-2);border:1px solid var(--line)}
+.done{display:flex;align-items:center;gap:8px;font-weight:800;padding:8px 12px;border-radius:12px;background:var(--green-soft);color:var(--green);cursor:pointer;user-select:none}
+.done input{width:20px;height:20px;accent-color:var(--green)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:12px;margin-top:10px}
+.box{background:var(--panel-2);border:1px solid var(--line);border-radius:13px;padding:10px 13px}
+.box b.l{display:block;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px}
+.box ul,.box ol{margin:0;padding-left:20px}.box li{margin-bottom:3px}
+table.t{width:100%;border-collapse:collapse;font-size:.93rem}
+table.t th,table.t td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+table.t th{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.tw{overflow-x:auto}
+details.code{margin-top:10px;border:1px solid var(--line);border-radius:13px;background:var(--panel-2)}
+details.code summary{cursor:pointer;font-weight:800;padding:10px 13px}
+.ctool{display:flex;gap:8px;flex-wrap:wrap;padding:0 13px 8px}
+.btn{font:700 .88rem var(--display);padding:7px 12px;border-radius:10px;border:1px solid var(--rule);background:var(--panel);color:var(--ink);cursor:pointer;text-decoration:none;display:inline-block}
+.btn.p{background:var(--night);color:#fff;border-color:var(--night)}
+pre{margin:0;padding:12px 14px;overflow-x:auto;font:.84rem/1.5 var(--mono);background:#0F1426;color:#E6EAFF;border-radius:0 0 12px 12px;tab-size:4}
+code.i{font:.88em var(--mono);background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:1px 5px}
+.term{font:.85rem/1.6 var(--mono);background:#0F1426;color:#9FF5C8;border-radius:12px;padding:10px 13px;overflow-x:auto;white-space:pre;margin:8px 0}
+.pins{display:grid;grid-template-columns:1fr auto auto 1fr;gap:3px 6px;font-size:.82rem;align-items:center;max-width:620px}
+.pins .lab{padding:2px 6px;border-radius:6px}.pins .lab.r{text-align:left}.pins .lab.lft{text-align:right}
+.pins .pn{width:30px;height:24px;border-radius:6px;display:grid;place-items:center;font-weight:800;font-size:.75rem;background:var(--panel-2);border:1px solid var(--line)}
+.pins .use{background:var(--teal-soft);color:var(--teal);font-weight:800}
+.pins .pw{background:var(--red-soft);color:var(--red)}.pins .gd{background:#2A2F3F;color:#fff}
+.shop td.c{width:34px}.shop input{width:20px;height:20px;accent-color:var(--green)}
+.shop tr.got td{opacity:.55;text-decoration:line-through}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.tot{font-size:1.05rem;font-weight:800}
+.nb{border:2px dashed var(--rule);border-radius:14px;padding:14px;min-height:90px;margin:8px 0}
+footer{margin-top:24px;font-size:.85rem;color:var(--ink-soft)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--night);color:#fff;padding:9px 16px;border-radius:12px;font-weight:700;z-index:20}
+@media print{nav.bar,.ctool,.done,.noprint{display:none!important}section[hidden]{display:block!important}details.code{display:none}.card{break-inside:avoid;box-shadow:none}.hero{background:#24318A!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <p class="ey"><a href="../">My apps</a> · family maker project · holidays 2026</p>
+  <h1>🔧 Israël's Build Lab</h1>
+  <p class="s">Three real projects, from the simplest to the "wow": a <b>Smart Room</b> you control from a phone, a <b>robot car</b> you build and program, and his very own <b>touchscreen "phone"</b> with apps he writes himself.</p>
+  <div class="prog"><div class="track"><i id="bar" style="width:0"></i></div><b id="progtxt">0 of 17 sessions done</b></div>
+</div></header>
+<nav class="bar noprint"><div class="wrap tabs" id="tabs">
+  <button class="tab" data-t="road">🗺️ The plan</button>
+  <button class="tab" data-t="start">🧰 Before you start</button>
+  <button class="tab" data-t="lv1">🏠 Level 1 · Smart Room</button>
+  <button class="tab" data-t="lv2">🚗 Level 2 · Robot car</button>
+  <button class="tab" data-t="lv3">📱 Level 3 · Israël Phone</button>
+  <button class="tab" data-t="bonus">🌱 Bonus</button>
+  <button class="tab" data-t="shop">🛒 Shopping list</button>
+  <button class="tab" data-t="help">🆘 Help & notebook</button>
+</div></nav>
+<main class="wrap">
+
+<section id="road">
+  <div class="card">
+    <h2 class="h" style="margin-top:0">The plan: simplest first</h2>
+    <p>Each level uses what he learned in the one before. <b>Level 1 costs nothing</b> (it uses the Freenove kit you already have). Buy the Level 2 kit only when Level 1 works. That way the money goes in only once he's clearly hooked.</p>
+    <div class="levels" style="margin-top:12px">
+      <button class="lv l1" data-go="lv1"><span class="k">Level 1 · 5 sessions · $0</span><h3>🏠 Smart Room</h3><p>Blinking light → doorbell → motion alarm → temperature screen → <b>control it all from a phone</b>.</p></button>
+      <button class="lv l2" data-go="lv2"><span class="k">Level 2 · 6 sessions · about $175</span><h3>🚗 Robot car</h3><p>Build a 4-wheel car with a camera, drive it from a phone, program dances and a car that won't crash. Race day!</p></button>
+      <button class="lv l3" data-go="lv3"><span class="k">Level 3 · 6 sessions · about $170 (≈ $310 with a 2nd Pi)</span><h3>📱 The Israël Phone</h3><p>A real touchscreen handheld with a camera and <b>apps he writes</b>: camera, calculator, quiz, flashlight, Smart Room remote.</p></button>
+      <button class="lv lb" data-go="bonus"><span class="k">Bonus · any time</span><h3>🌱 Extra projects</h3><p>Smart plant that waters itself, weather station, retro game console.</p></button>
+    </div>
+  </div>
+  <div class="card">
+    <h3>A suggested holiday rhythm</h3>
+    <div class="tw"><table class="t" style="margin-top:8px">
+      <tr><th>When</th><th>What</th><th>Sessions</th></tr>
+      <tr><td>First holiday week</td><td>🏠 Level 1, one session a day (45–60 min). End the week with the phone demo for the family.</td><td>1 to 5</td></tr>
+      <tr><td>If Level 1 went well</td><td>Order the Level 2 car kit and batteries (they take a few days to arrive).</td><td></td></tr>
+      <tr><td>Second holiday week</td><td>🚗 Level 2: build the car (2 sessions), drive it, program it, then <b>Race day</b>.</td><td>6 to 11</td></tr>
+      <tr><td>Weekends in January–February</td><td>📱 Level 3, one session per weekend. Finish with a family "launch event" for the Israël Phone.</td><td>12 to 17</td></tr>
+    </table></div>
+    <div class="tip"><b>Family roles.</b> <b>Israël</b> is the builder and programmer: he plugs the wires and types the code. <b>A parent</b> is the safety officer and helper: checks wiring before power goes on, reads instructions with him, handles anything sharp or hot. <b>Everyone else</b> is the test team and the audience at the end of each session: "Show us what it does!"</div>
+    <div class="note"><b>Golden rule:</b> every session ends with something that works and a quick demo. If it doesn't work yet, that's normal: that's what real engineers deal with every day. Write the problem in the builder's notebook and fix it next time.</div>
+  </div>
+</section>
+
+<section id="start" hidden>
+  <div class="card">
+    <h2 class="h" style="margin-top:0">🧰 Before you start (one evening, a parent)</h2>
+    <div class="cols">
+      <div class="box"><b class="l">You need</b><ul><li>The <b>Freenove Raspberry Pi 4 kit</b> you have (Pi, breadboard, wires, LEDs, sensors).</li><li>A <b>microSD card</b> with <b>Raspberry Pi OS</b> (the normal version with the desktop).</li><li>A screen (TV or monitor with micro-HDMI cable), keyboard and mouse.</li><li>The <b>official Pi power supply</b>.</li><li>Home Wi-Fi.</li></ul></div>
+      <div class="box"><b class="l">Check the Freenove box for these</b><ul><li>LEDs (red + another colour) and <b>220 Ω</b> resistors</li><li>A push button</li><li>An <b>active buzzer</b> (and the small transistor the kit uses with it)</li><li>A <b>PIR motion sensor</b> (HC-SR501, white dome)</li><li>A <b>DHT11</b> temperature &amp; humidity sensor (blue)</li><li>An <b>LCD1602 screen with an I2C board</b> (4 pins)</li></ul><p class="muted" style="margin:6px 0 0">Missing one? It's in the shopping list under Level 1, and it's cheap.</p></div>
+    </div>
+    <h3 style="margin-top:14px">1. Get the Pi ready (type in the Terminal)</h3>
+    <div class="term">sudo apt update &amp;&amp; sudo apt full-upgrade -y
+sudo raspi-config        # Interface Options → I2C → Yes   (for the LCD screen)
+mkdir ~/buildlab &amp;&amp; cd ~/buildlab</div>
+    <h3>2. Download all the programs onto the Pi</h3>
+    <div class="term">cd ~/buildlab
+for f in s1_blink s2_doorbell s3_motion_alarm s4_room_screen s5_smart_room car_dance car_guard israel_phone; do
+  wget -q https://adesuper.github.io/my-apps/build-lab/code/$f.py
+done
+ls</div>
+    <h3>3. Copy two helper files from the Freenove kit</h3>
+    <p>The kit's own code folder has <code class="i">LCD1602.py</code> (in the I2C LCD1602 lesson) and <code class="i">Freenove_DHT.py</code> (in the DHT11 lesson). Copy both into <code class="i">~/buildlab</code>. Sessions 4 and 5 need them.</p>
+    <div class="warn"><b>Safety rules (read them together):</b><ol style="margin:4px 0 0;padding-left:20px"><li><b>Power OFF</b> the Pi before changing any wire.</li><li>A parent <b>checks the wiring</b> before the power goes back on.</li><li>Never connect <b>5V</b> straight to <b>GND</b>, and never connect a pin to 5V.</li><li>Nothing that plugs into a wall socket ever touches the breadboard.</li><li>The car batteries (Level 2) are only charged with their charger, with an adult around.</li></ol></div>
+  </div>
+  <div class="card">
+    <h3>The Pi's pins: everything Level 1 uses</h3>
+    <p class="muted">The 40 pins are numbered by position (1 to 40). The code uses the <b>GPIO</b> number. Pin 1 is the corner pin with the square solder pad, closest to the SD card side.</p>
+    <div class="pins" id="pins"></div>
+    <p class="muted" style="margin-top:8px"><span class="chip" style="background:var(--teal-soft);color:var(--teal)">teal</span> used in Level 1 · <span class="chip" style="background:var(--red-soft);color:var(--red)">red</span> power · <span class="chip" style="background:#2A2F3F;color:#fff">dark</span> ground (GND)</p>
+  </div>
+</section>
+
+<section id="lv1" hidden>
+  <div class="card"><h2 class="h" style="margin-top:0">🏠 Level 1 · Smart Room</h2><p>Five sessions. Each one adds a new part, and all five come together in session 5, where <b>a phone controls his room</b>. Cost: <b>$0</b> with the Freenove kit.</p></div>
+  <div id="L1"></div>
+</section>
+<section id="lv2" hidden>
+  <div class="card"><h2 class="h" style="margin-top:0">🚗 Level 2 · Robot car</h2><p>The <b>Freenove 4WD Smart Car Kit for Raspberry Pi</b> uses the Pi you already have. Freenove's own tutorial (a PDF and code on their website and GitHub) is excellent: follow it for building and testing. This guide tells you <b>which part to do each session</b> and adds Israël's own programs.</p>
+    <div class="warn"><b>Before ordering:</b> the car needs <b>2 rechargeable 18650 batteries</b>, which are <b>not included</b> in the kit, plus a charger for them. Order them at the same time.</div>
+    <div class="note">The car uses the Pi from his Freenove kit. While the Pi is on the car, the Smart Room is "off". That's fine, or see Level 3 for a second Pi.</div></div>
+  <div id="L2"></div>
+</section>
+<section id="lv3" hidden>
+  <div class="card"><h2 class="h" style="margin-top:0">📱 Level 3 · The Israël Phone</h2><p>A handheld touchscreen computer with a camera and <b>apps he programs himself</b>. It can't make phone calls (that needs a phone company SIM card and is very complicated), but everything else is his.</p>
+    <div class="note"><b>Recommended: a second Raspberry Pi</b> for this level, so the robot car keeps its Pi. Without it, you can move the Pi from the car to the phone, but he can't use both at once.</div></div>
+  <div id="L3"></div>
+</section>
+
+<section id="bonus" hidden>
+  <div class="card"><h2 class="h" style="margin-top:0">🌱 Bonus projects</h2><p>For any time he wants a change. Tell me which one he picks and I'll write the step-by-step sessions and code for it.</p></div>
+  <div class="cols">
+    <div class="card"><h3>🌱 The plant that waters itself</h3><p>A soil sensor checks if the plant is thirsty. If it is, a tiny pump gives it water, and the Smart Room page says "I'm thirsty!" Great link with his science unit (the water cycle).</p><p class="muted">Buy: capacitive soil sensors, a mini 5V pump with tubing and a relay module, a small pot. The Freenove kit's ADC module reads the soil sensor (the Pi can't read it alone).</p></div>
+    <div class="card"><h3>🌦️ Weather station</h3><p>Uses the DHT11 from Level 1, plus a pressure sensor. It records every 10 minutes and draws a chart on the phone. Compare it each morning with the weather forecast: who was right?</p><p class="muted">Buy (optional): a BMP280 pressure sensor.</p></div>
+    <div class="card"><h3>🕹️ Retro game console</h3><p>Install RetroPie on a microSD card, plug in a USB controller and play classic games he's allowed to. Less building, more playing: a nice reward after Level 2.</p><p class="muted">Buy: a USB game controller and a spare microSD card.</p></div>
+  </div>
+</section>
+
+<section id="shop" hidden>
+  <div class="card"><h2 class="h" style="margin-top:0">🛒 What to buy</h2>
+    <p>Prices are <b>approximate, in Canadian dollars</b> (November 2026), and change often. Good Canadian stores: <b>PiShop.ca</b>, <b>CanaKit.com</b>, <b>Amazon.ca</b>. Tick each item when you have it; ticks are saved on this device.</p>
+    <div class="tip"><b>Buy in steps.</b> Level 1: nothing (only buy what's missing from the kit). Level 2: buy when Level 1 is done. Level 3: buy when Level 2 is done.</div></div>
+  <div id="shoplist"></div>
+  <div class="card"><p class="tot" id="shoptot"></p><p class="muted" id="shopsub"></p></div>
+</section>
+
+<section id="help" hidden>
+  <div class="card"><h2 class="h" style="margin-top:0">🆘 When something doesn't work</h2>
+    <div class="tw"><table class="t">
+      <tr><th>Problem</th><th>Try this</th></tr>
+      <tr><td>The LED doesn't light</td><td>Turn the LED around: the <b>long leg</b> goes towards the GPIO pin. Check the resistor is in the same breadboard row.</td></tr>
+      <tr><td><code class="i">GPIO busy</code> or <code class="i">pin already in use</code></td><td>Another program is still running. Close it (Ctrl + C) or restart the Pi.</td></tr>
+      <tr><td>The buzzer is very quiet or silent</td><td>Build it with the small transistor, the way the kit's buzzer lesson shows. Check that it's the <b>active</b> buzzer (it has a sticker on top).</td></tr>
+      <tr><td>The motion sensor goes off all the time</td><td>Wait the full 30 seconds of warm-up. Turn the sensitivity knob down. Keep it away from heaters and windows.</td></tr>
+      <tr><td>The LCD lights up but shows nothing</td><td>Turn the small blue knob on the back (contrast). Check the address with <code class="i">i2cdetect -y 1</code> and put it in the code (0x27 or 0x3f).</td></tr>
+      <tr><td><code class="i">No module named LCD1602</code> (or <code class="i">Freenove_DHT</code>)</td><td>Copy that file from the Freenove kit's code folder into <code class="i">~/buildlab</code>.</td></tr>
+      <tr><td>The temperature says "Sensor busy" forever</td><td>Check the DHT11 wire on GPIO23 (pin 16). Read step 4 at the top of <code class="i">s4_room_screen.py</code> about the pin number.</td></tr>
+      <tr><td>The phone can't open the Smart Room page</td><td>The phone must be on the <b>same Wi-Fi</b> as the Pi. Use the address from <code class="i">hostname -I</code> and add <code class="i">:5000</code>. The program must still be running on the Pi.</td></tr>
+      <tr><td>The car turns the wrong way</td><td>Swap the + and − in <code class="i">spin_left</code> and <code class="i">spin_right</code>. Re-check the motor wires against the kit's tutorial.</td></tr>
+      <tr><td>The camera isn't found</td><td>Power off and check the ribbon cable: the right way round, pushed all the way in, latch closed. Then test with <code class="i">rpicam-hello</code>.</td></tr>
+    </table></div></div>
+  <div class="card"><h3>📓 The builder's notebook</h3>
+    <p>Real engineers keep a notebook. It's also exactly <b>la démarche scientifique</b> he just learned at school. Print this page (one per session) or copy it into a notebook.</p>
+    <p><b>Session number: ______ &nbsp; Date: __________</b></p>
+    <p><b>1. My question / what I want to build:</b></p><div class="nb"></div>
+    <p><b>2. My hypothesis (I think that…):</b></p><div class="nb"></div>
+    <p><b>3. My wiring drawing:</b></p><div class="nb" style="min-height:170px"></div>
+    <p><b>4. What happened (observations):</b></p><div class="nb"></div>
+    <p><b>5. What I fixed or what I'll try next time:</b></p><div class="nb"></div>
+    <div class="row noprint"><button class="btn p" onclick="window.print()">🖨️ Print</button></div>
+  </div>
+  <footer>Israël's Build Lab · guide and programs written for the family. Robot car building steps come from Freenove's own tutorial for the kit. Product facts checked November 2026.</footer>
+</section>
+</main>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function(){
+const CODE={"car_dance.py": "# ==================================================================\n#  LEVEL 2  --  MY ROBOT CAR DANCE (Israel's own program)\n#  Run this on the car, from the kit's  Code/Server  folder, AFTER the\n#  kit's own motor test works. Put the car on the floor with space\n#  around it (or lift it so the wheels spin in the air the first time).\n#\n#  Freenove kits come in two versions. This program works with both:\n#    newer kits have  motor.py  with  Ordinary_Car / set_motor_model\n#    older kits have  Motor.py  with  Motor / setMotorModel\n#\n#  Run it:   python3 car_dance.py\n# ==================================================================\n\nimport time\n\ntry:\n    from motor import Ordinary_Car\n    _car = Ordinary_Car()\n    drive = _car.set_motor_model\nexcept ImportError:\n    from Motor import Motor\n    _car = Motor()\n    drive = _car.setMotorModel\n\nSPEED = 1500        # 0 = stopped, 4095 = full speed. Start slow!\n\n# the 4 numbers are: left-front, left-back, right-front, right-back\n\n\ndef forward(seconds):\n    drive(SPEED, SPEED, SPEED, SPEED)\n    time.sleep(seconds)\n\n\ndef backward(seconds):\n    drive(-SPEED, -SPEED, -SPEED, -SPEED)\n    time.sleep(seconds)\n\n\ndef spin_left(seconds):\n    drive(-SPEED, -SPEED, SPEED, SPEED)\n    time.sleep(seconds)\n\n\ndef spin_right(seconds):\n    drive(SPEED, SPEED, -SPEED, -SPEED)\n    time.sleep(seconds)\n\n\ndef stop(seconds=0.5):\n    drive(0, 0, 0, 0)\n    time.sleep(seconds)\n\n\ntry:\n    print(\"Let's dance!\")\n    forward(1)\n    stop()\n    spin_left(0.8)\n    stop()\n    spin_right(0.8)\n    stop()\n    backward(1)\n    stop()\n    for wiggle in range(3):        # wiggle 3 times\n        spin_left(0.2)\n        spin_right(0.2)\n    print(\"Ta-da!\")\nfinally:\n    drive(0, 0, 0, 0)              # always stop the motors at the end\n\n# TRY THIS:\n#   1. Make the car draw a square: forward, turn, 4 times (use a for loop).\n#   2. Find how long spin_left must be to turn exactly a quarter turn.\n#   3. Write your own dance and perform it to music for the family!\n", "car_guard.py": "# ==================================================================\n#  LEVEL 2  --  CAR THAT WON'T CRASH (ultrasonic \"eyes\")\n#  The car drives forward. When something is closer than 25 cm, it\n#  stops, backs up a little and turns to find a free path.\n#\n#  Run it from the kit's  Code/Server  folder, after the kit's own\n#  ultrasonic test works:   python3 car_guard.py      Stop: Ctrl + C\n#  (Works with both kit versions, like car_dance.py.)\n# ==================================================================\n\nimport time\n\ntry:\n    from motor import Ordinary_Car\n    _car = Ordinary_Car()\n    drive = _car.set_motor_model\nexcept ImportError:\n    from Motor import Motor\n    _car = Motor()\n    drive = _car.setMotorModel\n\ntry:\n    from ultrasonic import Ultrasonic\nexcept ImportError:\n    from Ultrasonic import Ultrasonic\neyes = Ultrasonic()\n\nSPEED = 1200\nSAFE_DISTANCE = 25      # centimetres\n\ntry:\n    while True:\n        distance = eyes.get_distance()\n        print(\"Distance:\", distance, \"cm\")\n        if distance > SAFE_DISTANCE:\n            drive(SPEED, SPEED, SPEED, SPEED)            # path is clear\n        else:\n            drive(0, 0, 0, 0)                            # too close!\n            time.sleep(0.3)\n            drive(-SPEED, -SPEED, -SPEED, -SPEED)        # back up\n            time.sleep(0.4)\n            drive(SPEED, SPEED, -SPEED, -SPEED)          # turn right\n            time.sleep(0.5)\n        time.sleep(0.1)\nexcept KeyboardInterrupt:\n    pass\nfinally:\n    drive(0, 0, 0, 0)\n\n# TRY THIS:\n#   1. Change SAFE_DISTANCE. What is the smallest number that still works?\n#   2. Turn LEFT instead of right every second time.\n#   3. Build a maze with boxes and see if the car finds the way out.\n", "israel_phone.py": "# ==================================================================\n#  LEVEL 3  --  THE ISRAEL PHONE (home screen with my own apps)\n#  For a Raspberry Pi with the Touch Display 2 and Camera Module 3.\n#  Every app is a Python function. Add your own apps at the bottom!\n#\n#  Run it:   python3 israel_phone.py\n#  Quit:     the red  X  button on the home screen\n#  Photos are saved in the  Pictures  folder.\n# ==================================================================\n\nimport os\nimport random\nimport shutil\nimport subprocess\nimport time\nimport tkinter as tk\nimport webbrowser\n\nOWNER = \"Israel\"                       # <-- your name on the home screen\nSMART_ROOM = \"http://localhost:5000\"   # the Smart Room page from level 1\nPHOTOS = os.path.expanduser(\"~/Pictures\")\n\nroot = tk.Tk()\nroot.title(OWNER + \" Phone\")\nroot.attributes(\"-fullscreen\", True)\nroot.configure(bg=\"#101735\")\nBIG = (\"DejaVu Sans\", 22, \"bold\")\nHUGE = (\"DejaVu Sans\", 34, \"bold\")\nscreen = tk.Frame(root, bg=\"#101735\")\nscreen.pack(fill=\"both\", expand=True)\n\n\ndef clear():\n    for child in screen.winfo_children():\n        child.destroy()\n\n\ndef button(parent, text, command, colour=\"#ffc93c\"):\n    return tk.Button(parent, text=text, command=command, font=BIG, bg=colour,\n                     fg=\"#101735\", activebackground=\"#ffe27a\", bd=0,\n                     padx=10, pady=18, wraplength=260)\n\n\ndef back_button():\n    button(screen, \"< Home\", home, \"#8fa8ff\").pack(side=\"bottom\", fill=\"x\", padx=12, pady=12)\n\n\n# ------------------------------------------------------------------ apps\ndef camera_app():\n    clear()\n    tk.Label(screen, text=\"Camera\", font=HUGE, bg=\"#101735\", fg=\"white\").pack(pady=10)\n    status = tk.Label(screen, text=\"Smile! Press the button.\", font=BIG, bg=\"#101735\", fg=\"white\")\n    status.pack(pady=10)\n    picture = tk.Label(screen, bg=\"#101735\")\n    picture.pack(pady=10)\n\n    def snap():\n        os.makedirs(PHOTOS, exist_ok=True)\n        path = os.path.join(PHOTOS, \"photo_\" + time.strftime(\"%Y%m%d_%H%M%S\") + \".png\")\n        tool = shutil.which(\"rpicam-still\") or shutil.which(\"libcamera-still\")\n        if not tool:\n            status.config(text=\"Camera program not found.\")\n            return\n        status.config(text=\"3... 2... 1...\")\n        root.update()\n        subprocess.run([tool, \"-t\", \"2000\", \"-e\", \"png\", \"--width\", \"640\",\n                        \"--height\", \"480\", \"-o\", path])\n        if os.path.exists(path):\n            img = tk.PhotoImage(file=path).subsample(2)\n            picture.config(image=img)\n            picture.image = img          # keep a reference so it stays visible\n            status.config(text=\"Saved in Pictures!\")\n        else:\n            status.config(text=\"No photo. Is the camera cable in?\")\n\n    button(screen, \"Take a photo\", snap).pack(pady=10)\n    back_button()\n\n\ndef calculator_app():\n    clear()\n    shown = tk.StringVar(value=\"\")\n    tk.Label(screen, textvariable=shown, font=HUGE, bg=\"white\", fg=\"#101735\",\n             anchor=\"e\", padx=12).pack(fill=\"x\", padx=12, pady=12)\n    pad = tk.Frame(screen, bg=\"#101735\")\n    pad.pack(expand=True)\n    keys = [\"7\", \"8\", \"9\", \"/\", \"4\", \"5\", \"6\", \"*\", \"1\", \"2\", \"3\", \"-\", \"C\", \"0\", \"=\", \"+\"]\n\n    def press(k):\n        if k == \"C\":\n            shown.set(\"\")\n        elif k == \"=\":\n            text = shown.get()\n            if text and all(ch in \"0123456789+-*/. \" for ch in text):\n                try:\n                    result = eval(text)        # safe: only digits and + - * / allowed\n                    shown.set(str(round(result, 4)))\n                except (ZeroDivisionError, SyntaxError):\n                    shown.set(\"Oops!\")\n        else:\n            if shown.get() == \"Oops!\":\n                shown.set(\"\")\n            shown.set(shown.get() + k)\n\n    for i, k in enumerate(keys):\n        tk.Button(pad, text=k, font=HUGE, width=3, bg=\"#24318a\", fg=\"white\", bd=0,\n                  command=lambda k=k: press(k)).grid(row=i // 4, column=i % 4, padx=4, pady=4)\n    back_button()\n\n\ndef quiz_app():\n    clear()\n    score = {\"right\": 0, \"asked\": 0}\n    question = tk.Label(screen, font=HUGE, bg=\"#101735\", fg=\"white\")\n    question.pack(pady=20)\n    answer = tk.Entry(screen, font=HUGE, width=6, justify=\"center\")\n    answer.pack(pady=10)\n    result = tk.Label(screen, font=BIG, bg=\"#101735\", fg=\"#ffe27a\")\n    result.pack(pady=10)\n    numbers = {}\n\n    def new_question():\n        numbers[\"a\"], numbers[\"b\"] = random.randint(2, 12), random.randint(2, 12)\n        question.config(text=\"%d x %d = ?\" % (numbers[\"a\"], numbers[\"b\"]))\n        answer.delete(0, \"end\")\n\n    def check():\n        score[\"asked\"] += 1\n        good = numbers[\"a\"] * numbers[\"b\"]\n        if answer.get().strip() == str(good):\n            score[\"right\"] += 1\n            result.config(text=\"Bravo!  Score: %d / %d\" % (score[\"right\"], score[\"asked\"]))\n        else:\n            result.config(text=\"It was %d.  Score: %d / %d\" % (good, score[\"right\"], score[\"asked\"]))\n        new_question()\n\n    button(screen, \"Check\", check).pack(pady=10)\n    new_question()\n    back_button()\n\n\ndef flashlight_app():\n    clear()\n    light = tk.Button(screen, text=\"Tap to turn off\", font=BIG, bg=\"white\", fg=\"#888888\",\n                      bd=0, command=home)\n    light.pack(fill=\"both\", expand=True)\n\n\ndef smart_room_app():\n    webbrowser.open(SMART_ROOM)\n\n\n# ------------------------------------------------------------- home screen\nAPPS = [\n    (\"Camera\", camera_app),\n    (\"Calculator\", calculator_app),\n    (\"Times tables\", quiz_app),\n    (\"Flashlight\", flashlight_app),\n    (\"Smart Room\", smart_room_app),\n]\n\n\ndef home():\n    clear()\n    tk.Label(screen, text=OWNER + \" Phone\", font=HUGE, bg=\"#101735\", fg=\"white\").pack(pady=(16, 2))\n    tk.Label(screen, text=time.strftime(\"%H:%M\"), font=BIG, bg=\"#101735\", fg=\"#ffe27a\").pack()\n    grid = tk.Frame(screen, bg=\"#101735\")\n    grid.pack(expand=True, fill=\"both\", padx=12, pady=12)\n    for i, (name, app) in enumerate(APPS):\n        button(grid, name, app).grid(row=i // 2, column=i % 2, sticky=\"nsew\", padx=6, pady=6)\n    for c in range(2):\n        grid.columnconfigure(c, weight=1)\n    button(screen, \"X\", root.destroy, \"#ee7d8b\").pack(side=\"bottom\", pady=8)\n\n\nhome()\nroot.mainloop()\n\n# TRY THIS (your own apps!):\n#   1. A \"Dice\" app: a big button that shows a random number from 1 to 6.\n#   2. A \"Secret code\" app like the Secret Door from the summer.\n#   3. Add your app to the APPS list so it appears on the home screen.\n", "s1_blink.py": "# ==================================================================\n#  SESSION 1  --  HELLO LIGHT\n#  Make one LED blink. This is the \"Hello world\" of hardware.\n#\n#  Wiring (power the Pi OFF first):\n#    GPIO17 (pin 11) -> 220 ohm resistor -> LED long leg (+)\n#    LED short leg (-) -> GND (pin 9)\n#\n#  Run it:   python3 s1_blink.py      Stop it:  Ctrl + C\n# ==================================================================\n\nfrom gpiozero import LED\nfrom time import sleep\n\nlight = LED(17)          # the LED is on GPIO17\n\nprint(\"Blinking! Press Ctrl+C to stop.\")\n\nwhile True:\n    light.on()\n    sleep(0.5)           # wait half a second\n    light.off()\n    sleep(0.5)\n\n# TRY THIS:\n#   1. Make it blink faster (change 0.5 to 0.1).\n#   2. Blink S.O.S. in Morse code: 3 short, 3 long, 3 short.\n#   3. Add a second LED on GPIO27 and make them take turns.\n", "s2_doorbell.py": "# ==================================================================\n#  SESSION 2  --  MY DOORBELL\n#  Press the button: the buzzer rings and the light turns on.\n#\n#  Wiring (power the Pi OFF first):\n#    LED:     GPIO17 (pin 11) -> 220 ohm resistor -> LED (+) ... LED (-) -> GND\n#    Button:  one leg -> GPIO18 (pin 12), the other leg -> GND (pin 14)\n#    Buzzer:  GPIO22 (pin 15). Build it the way your Freenove kit's\n#             \"Doorbell / Active buzzer\" lesson shows (it uses a small\n#             transistor so the buzzer is loud and the Pi stays safe).\n#\n#  Run it:   python3 s2_doorbell.py      Stop it:  Ctrl + C\n# ==================================================================\n\nfrom gpiozero import Button, Buzzer, LED\nfrom signal import pause\n\nbell = Button(18)\nbuzzer = Buzzer(22)\nlight = LED(17)\n\ndef ding():\n    print(\"Ding dong! Someone is at the door!\")\n    light.on()\n    buzzer.beep(on_time=0.2, off_time=0.1, n=2, background=True)\n\ndef done():\n    light.off()\n\nbell.when_pressed = ding      # run ding() when the button goes down\nbell.when_released = done     # run done() when it comes back up\n\nprint(\"Doorbell ready. Press the button!\")\npause()                       # wait forever for button presses\n\n# TRY THIS:\n#   1. Count the visitors: add a number that goes up at each ding.\n#   2. Make a \"secret knock\": 3 quick presses plays a special tune.\n", "s3_motion_alarm.py": "# ==================================================================\n#  SESSION 3  --  ROOM GUARD (motion alarm)\n#  When someone walks into the room, the red light flashes and the\n#  buzzer beeps.\n#\n#  Wiring (power the Pi OFF first):\n#    PIR motion sensor (HC-SR501):  VCC -> 5V (pin 2)\n#                                   OUT -> GPIO4 (pin 7)\n#                                   GND -> GND (pin 6)\n#    Red LED:  GPIO27 (pin 13) -> 220 ohm resistor -> LED (+) ... LED (-) -> GND\n#    Buzzer:   GPIO22 (pin 15), same as session 2\n#\n#  Run it:   python3 s3_motion_alarm.py      Stop it:  Ctrl + C\n# ==================================================================\n\nfrom gpiozero import MotionSensor, LED, Buzzer\nfrom time import sleep, strftime\n\npir = MotionSensor(4)\nalarm = LED(27)\nbuzzer = Buzzer(22)\n\nprint(\"Warming up the motion sensor (30 seconds). Stay still...\")\nsleep(30)\nprint(\"Room guard is ON. Walk in front of the sensor!\")\n\ncount = 0\nwhile True:\n    pir.wait_for_motion()\n    count = count + 1\n    print(\"Intruder alert number\", count, \"at\", strftime(\"%H:%M:%S\"))\n    alarm.blink(on_time=0.1, off_time=0.1)\n    buzzer.beep(on_time=0.1, off_time=0.1, n=5, background=True)\n\n    pir.wait_for_no_motion()\n    alarm.off()\n    print(\"All clear.\")\n\n# TRY THIS:\n#   1. Only beep for the first 3 alerts, then just flash the light.\n#   2. Add the button from session 2 as an ON/OFF switch for the guard.\n#\n# The sensor has two small orange knobs: one changes how far it sees,\n# the other how long it stays \"on\". Experiment with a screwdriver!\n", "s4_room_screen.py": "# ==================================================================\n#  SESSION 4  --  ROOM SCREEN (temperature + humidity on the LCD)\n#\n#  Wiring (power the Pi OFF first):\n#    DHT11 sensor:  VCC (+) -> 3.3V (pin 1)\n#                   DATA    -> GPIO23 (pin 16)\n#                   GND (-) -> GND (pin 20)\n#    LCD1602 (I2C): GND -> GND (pin 9)   VCC -> 5V (pin 4)\n#                   SDA -> GPIO2 (pin 3) SCL -> GPIO3 (pin 5)\n#\n#  Before running (once):\n#    1. Turn on I2C:  sudo raspi-config -> Interface Options -> I2C -> Yes\n#    2. Find the screen address:  i2cdetect -y 1   (usually 27 or 3f)\n#    3. Copy these two files from your Freenove kit's code folders into\n#       THIS folder:  LCD1602.py   (from the \"I2C LCD1602\" lesson)\n#                     Freenove_DHT.py  (from the \"DHT11\" lesson)\n#    4. Open the kit's DHT11 example. If it says  DHTPin = 11,  the kit\n#       counts pins by board position: set DHT_PIN = 16 below.\n#       If it says  DHTPin = 17  (a GPIO number), keep DHT_PIN = 23.\n#\n#  Run it:   python3 s4_room_screen.py      Stop it:  Ctrl + C\n# ==================================================================\n\nimport time\nimport LCD1602\nimport Freenove_DHT as DHT\n\nDHT_PIN = 23          # see step 4 above\nLCD_ADDRESS = 0x27    # use YOUR address from i2cdetect (0x27 or 0x3f)\n\ndht = DHT.DHT(DHT_PIN)\nLCD1602.init(LCD_ADDRESS, 1)\nLCD1602.clear()\n\n\ndef read_room():\n    \"\"\"Ask the sensor up to 15 times. Returns (temperature, humidity).\"\"\"\n    for attempt in range(15):\n        if dht.readDHT11() == dht.DHTLIB_OK:\n            return dht.temperature, dht.humidity\n        time.sleep(0.1)\n    return None, None\n\n\ntry:\n    while True:\n        temp, hum = read_room()\n        LCD1602.clear()\n        if temp is None:\n            LCD1602.write(0, 0, \"Sensor busy...\")\n        else:\n            LCD1602.write(0, 0, \"Temp: %d C\" % temp)\n            LCD1602.write(0, 1, \"Humidity: %d %%\" % hum)\n            print(\"Temperature:\", temp, \"C    Humidity:\", hum, \"%\")\n        time.sleep(2)\nexcept KeyboardInterrupt:\n    LCD1602.clear()\n\n# TRY THIS:\n#   1. Breathe on the sensor. What happens to the humidity? Why?\n#   2. Show \"Too hot!\" on the screen when the temperature is above 25.\n#   3. If it shows an error, open the kit's DHT11 example and compare\n#      how it reads the sensor (some kit versions use other names).\n", "s5_smart_room.py": "# ==================================================================\n#  SESSION 5  --  SMART ROOM: control it from the phone!\n#  Everything from sessions 1 to 4 together, plus a web page that\n#  any phone on the home Wi-Fi can open.\n#\n#  Wiring: keep everything from sessions 1-4 plugged in:\n#    light LED GPIO17 | alarm LED GPIO27 | buzzer GPIO22 | button GPIO18\n#    motion sensor GPIO4 | DHT11 GPIO23 | LCD on SDA/SCL\n#\n#  Needs: Flask (already on Raspberry Pi OS; if not:\n#         sudo apt install python3-flask)\n#         and LCD1602.py + Freenove_DHT.py in this folder (session 4).\n#\n#  Run it:   python3 s5_smart_room.py\n#  Find the Pi's address:   hostname -I     (example: 192.168.1.42)\n#  On the phone (same Wi-Fi), open:   http://192.168.1.42:5000\n# ==================================================================\n\nimport threading\nimport time\nfrom flask import Flask, redirect\nfrom gpiozero import LED, Buzzer, MotionSensor, Button\nimport LCD1602\nimport Freenove_DHT as DHT\n\nROOM_NAME = \"Israel's Smart Room\"   # <-- name your room!\nDHT_PIN = 23                        # same as session 4\nLCD_ADDRESS = 0x27                  # same as session 4\n\nlight = LED(17)\nalarm = LED(27)\nbuzzer = Buzzer(22)\npir = MotionSensor(4)\nbell = Button(18)\ndht = DHT.DHT(DHT_PIN)\n\nstate = {\"temp\": None, \"hum\": None, \"guard\": True,\n         \"motions\": 0, \"last_motion\": \"none yet\", \"last_bell\": \"none yet\"}\n\n\ndef sensor_loop():\n    \"\"\"Every 3 seconds: read the room and update the little screen.\"\"\"\n    while True:\n        for attempt in range(15):\n            if dht.readDHT11() == dht.DHTLIB_OK:\n                state[\"temp\"], state[\"hum\"] = dht.temperature, dht.humidity\n                break\n            time.sleep(0.1)\n        LCD1602.clear()\n        if state[\"temp\"] is not None:\n            LCD1602.write(0, 0, \"Temp: %d C\" % state[\"temp\"])\n            LCD1602.write(0, 1, \"Guard: %s\" % (\"ON\" if state[\"guard\"] else \"off\"))\n        time.sleep(3)\n\n\ndef on_motion():\n    state[\"motions\"] += 1\n    state[\"last_motion\"] = time.strftime(\"%H:%M:%S\")\n    if state[\"guard\"]:\n        alarm.blink(on_time=0.1, off_time=0.1, n=10, background=True)\n        buzzer.beep(on_time=0.1, off_time=0.1, n=5, background=True)\n\n\ndef on_bell():\n    state[\"last_bell\"] = time.strftime(\"%H:%M:%S\")\n    buzzer.beep(on_time=0.2, off_time=0.1, n=2, background=True)\n\n\npir.when_motion = on_motion\nbell.when_pressed = on_bell\n\napp = Flask(__name__)\n\nSTYLE = (\"body{font-family:sans-serif;max-width:480px;margin:auto;padding:16px;\"\n         \"background:#101735;color:#fff} .box{background:#24318a;border-radius:16px;\"\n         \"padding:14px;margin:10px 0;font-size:20px} a.btn{display:inline-block;\"\n         \"padding:14px 20px;margin:6px 6px 0 0;border-radius:12px;background:#ffc93c;\"\n         \"color:#101735;font-weight:bold;text-decoration:none;font-size:18px}\")\n\n\n@app.route(\"/\")\ndef home():\n    temp = \"--\" if state[\"temp\"] is None else \"%d &deg;C\" % state[\"temp\"]\n    hum = \"--\" if state[\"hum\"] is None else \"%d %%\" % state[\"hum\"]\n    return (\"<!doctype html><html><head><meta name='viewport' content='width=device-width'>\"\n            \"<meta http-equiv='refresh' content='5'><title>Smart Room<\/title>\"\n            \"<style>\" + STYLE + \"<\/style><\/head><body>\"\n            \"<h1>\" + ROOM_NAME + \"<\/h1>\"\n            \"<div class='box'>Temperature: <b>\" + temp + \"<\/b><br>Humidity: <b>\" + hum + \"<\/b><\/div>\"\n            \"<div class='box'>Light: <b>\" + (\"ON\" if light.is_lit else \"off\") + \"<\/b><br>\"\n            \"<a class='btn' href='/light/on'>Light ON<\/a><a class='btn' href='/light/off'>Light OFF<\/a><\/div>\"\n            \"<div class='box'>Room guard: <b>\" + (\"ON\" if state[\"guard\"] else \"off\") + \"<\/b><br>\"\n            \"Motion seen: \" + str(state[\"motions\"]) + \" times (last: \" + state[\"last_motion\"] + \")<br>\"\n            \"<a class='btn' href='/guard/on'>Guard ON<\/a><a class='btn' href='/guard/off'>Guard OFF<\/a><\/div>\"\n            \"<div class='box'>Doorbell last rang: \" + state[\"last_bell\"] + \"<br>\"\n            \"<a class='btn' href='/beep'>Beep from my phone<\/a><\/div>\"\n            \"<\/body><\/html>\")\n\n\n@app.route(\"/light/<what>\")\ndef set_light(what):\n    if what == \"on\":\n        light.on()\n    else:\n        light.off()\n    return redirect(\"/\")\n\n\n@app.route(\"/guard/<what>\")\ndef set_guard(what):\n    state[\"guard\"] = (what == \"on\")\n    return redirect(\"/\")\n\n\n@app.route(\"/beep\")\ndef beep():\n    buzzer.beep(on_time=0.1, off_time=0.1, n=3, background=True)\n    return redirect(\"/\")\n\n\nif __name__ == \"__main__\":\n    LCD1602.init(LCD_ADDRESS, 1)\n    threading.Thread(target=sensor_loop, daemon=True).start()\n    print(\"Smart Room is running! On the phone open  http://<Pi address>:5000\")\n    print(\"(type  hostname -I  in another terminal to see the Pi address)\")\n    app.run(host=\"0.0.0.0\", port=5000)\n\n# TRY THIS:\n#   1. Change the colours in STYLE (the #ffc93c is the button colour).\n#   2. Add a \"Party mode\" button that blinks both lights 10 times.\n#   3. Show \"It's cold!\" on the page when the temperature is under 18.\n"};
+const KEY="build-lab-v1";let S={};try{S=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
+S.done=S.done||{};S.got=S.got||{};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const toast=m=>{const t=$("toast");t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,2200)};
+
+/* ---------- sessions ---------- */
+const W=(rows)=>`<div class="tw"><table class="t"><tr><th>Part</th><th>Connect to</th></tr>${rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("")}</table></div>`;
+const L1=[
+ {n:1,t:"Hello light",time:"45 min",make:"An LED that blinks, controlled by his first hardware program.",
+  parts:["1 LED","1 resistor 220 Ω","2 jumper wires","breadboard"],
+  wire:W([["LED long leg (+)","through the 220 Ω resistor to <b>GPIO17</b> (pin 11)"],["LED short leg (−)","<b>GND</b> (pin 9)"]]),
+  steps:["Power off the Pi. Build the circuit; a parent checks it.","Power on. Open the Terminal: <code class='i'>cd ~/buildlab</code>","Run <code class='i'>python3 s1_blink.py</code>. Stop with <b>Ctrl + C</b>.","Open the file in Thonny (the Python editor in the menu) to change the numbers."],
+  works:"The LED blinks once a second.",challenge:"Blink S.O.S. in Morse code (3 short, 3 long, 3 short).",nb:"What happens if you change 0.5 to 0.05? Why?",code:"s1_blink.py"},
+ {n:2,t:"My doorbell",time:"45–60 min",make:"A button that rings the buzzer and turns on a light.",
+  parts:["The LED from session 1","1 push button","1 active buzzer (+ the kit's transistor and resistor)","wires"],
+  wire:W([["Button, one leg","<b>GPIO18</b> (pin 12)"],["Button, other leg","<b>GND</b> (pin 14)"],["Buzzer","<b>GPIO22</b> (pin 15), built like the kit's buzzer lesson (with the transistor)"],["LED","stays on GPIO17 like session 1"]]),
+  steps:["Build the button and the buzzer. A parent checks.","Run <code class='i'>python3 s2_doorbell.py</code>","Press the button!"],
+  works:"Pressing the button rings twice and lights the LED.",challenge:"Count the visitors and print the number each time.",nb:"Draw your doorbell circuit. Where does the electricity go when you press?",code:"s2_doorbell.py"},
+ {n:3,t:"Room guard (motion alarm)",time:"60 min",make:"A sensor that sees movement and sets off an alarm.",
+  parts:["PIR motion sensor HC-SR501","1 red LED + 220 Ω","the buzzer from session 2","3 female-to-male wires"],
+  wire:W([["PIR VCC","<b>5V</b> (pin 2)"],["PIR OUT","<b>GPIO4</b> (pin 7)"],["PIR GND","<b>GND</b> (pin 6)"],["Red LED","<b>GPIO27</b> (pin 13) through 220 Ω, short leg to GND"]]),
+  steps:["Wire the PIR sensor (check which pin is which: the labels are under the white dome).","Run <code class='i'>python3 s3_motion_alarm.py</code>","Wait 30 seconds without moving, then walk past."],
+  works:"Walking in front of it flashes the red LED and beeps.",challenge:"How far away can it see you? Measure with a tape measure!",nb:"The sensor sees the heat of your body. Does it see a ball rolling past? Test it.",code:"s3_motion_alarm.py"},
+ {n:4,t:"Room screen (temperature)",time:"60 min",make:"The room's temperature and humidity on a little screen.",
+  parts:["DHT11 sensor","LCD1602 with I2C board","wires","the two Freenove helper files (see Before you start)"],
+  wire:W([["DHT11 + (VCC)","<b>3.3V</b> (pin 1)"],["DHT11 DATA","<b>GPIO23</b> (pin 16)"],["DHT11 − (GND)","<b>GND</b> (pin 20)"],["LCD GND / VCC","<b>GND</b> (pin 9) / <b>5V</b> (pin 4)"],["LCD SDA / SCL","<b>GPIO2</b> (pin 3) / <b>GPIO3</b> (pin 5)"]]),
+  steps:["Turn on I2C (Before you start). Find the screen address: <code class='i'>i2cdetect -y 1</code>","Copy <code class='i'>LCD1602.py</code> and <code class='i'>Freenove_DHT.py</code> into ~/buildlab.","Read step 4 at the top of the program about the DHT pin number.","Run <code class='i'>python3 s4_room_screen.py</code>"],
+  works:"The screen shows Temp and Humidity and updates every 2 seconds.",challenge:"Show \"Too hot!\" when it's above 25 °C.",nb:"Breathe on the sensor. What happens to the humidity? Why? (Think about water vapour!)",code:"s4_room_screen.py"},
+ {n:5,t:"Smart Room: control it from a phone",time:"60–90 min",make:"A web page on the phone that shows the room and controls the light, the alarm and the buzzer.",
+  parts:["Everything from sessions 1 to 4, all plugged in together","a phone on the home Wi-Fi"],
+  wire:W([["Light LED","GPIO17"],["Alarm LED","GPIO27"],["Buzzer","GPIO22"],["Button","GPIO18"],["Motion sensor","GPIO4"],["DHT11","GPIO23"],["LCD","SDA/SCL (pins 3 and 5)"]]),
+  steps:["Plug everything in (the pins don't overlap, so it all fits). A parent checks.","Run <code class='i'>python3 s5_smart_room.py</code>","In a second Terminal: <code class='i'>hostname -I</code> shows the Pi's address (like 192.168.1.42).","On the phone, open <b>http://that-address:5000</b>","Press the buttons on the phone. Ask someone to walk into the room!"],
+  works:"The phone shows the temperature, turns the light on and off, and counts motion alerts.",challenge:"Add a \"Party mode\" button that blinks both lights 10 times.",nb:"How does the message travel from the phone to the light? Draw it: phone → Wi-Fi → Pi → wire → LED.",code:"s5_smart_room.py",demo:"🎉 <b>Family demo:</b> everyone tries the page on their own phone."}
+];
+const L2=[
+ {n:6,t:"Build the car (part 1)",time:"90 min",make:"The chassis, motors and wheels.",parts:["Freenove 4WD Smart Car Kit","small screwdriver (in the kit)","a tray for the screws"],
+  steps:["Read the Freenove tutorial's first chapters together (the PDF is on Freenove's website and GitHub page for the kit).","Sort the pieces into a tray. Count the screws.","Build the chassis, motors and wheels following the tutorial pictures."],works:"The car stands on its 4 wheels and nothing is loose.",challenge:"Take a photo at each step for a 'how I built it' poster.",nb:"Which part was the hardest to fit? How did you solve it?"},
+ {n:7,t:"Build the car (part 2) and test it",time:"90 min",make:"Electronics, Pi, camera and the first test.",parts:["the car","the Pi (move it from the Smart Room)","2 charged 18650 batteries"],
+  steps:["Mount the Pi, the camera and the sensor board, following the tutorial.","On the Pi, download Freenove's car code as the tutorial explains.","Run the tutorial's tests one at a time: motors, LEDs, buzzer, ultrasonic sensor, line sensors, camera. <b>Lift the car</b> so the wheels spin in the air."],works:"Every tutorial test passes.",challenge:"Which wheel spins first in the motor test? Write it down.",nb:"List the car's sensors. What does each one 'feel'?"},
+ {n:8,t:"Drive it from a phone or computer",time:"60 min",make:"Remote control with the camera view.",parts:["the car","a phone, tablet or the family computer"],
+  steps:["Start the car's server program (from the tutorial).","Connect with Freenove's client app (on the computer, or the phone app the tutorial lists).","Drive slowly first. Watch the camera picture."],works:"He drives the car around the house and sees what the car sees.",challenge:"Drive to the kitchen using only the camera view (no peeking!).",nb:"Why is it harder to drive using only the camera?"},
+ {n:9,t:"My own program: the car dance",time:"60 min",make:"A dance he programs himself, with forward, backward and spins.",parts:["the car"],
+  steps:["Copy <code class='i'>car_dance.py</code> into the kit's <b>Code/Server</b> folder.","Lift the car the first time, then put it on the floor with space around.","Run <code class='i'>python3 car_dance.py</code>"],works:"The car does the dance and stops at the end.",challenge:"Make the car draw a square with a for loop.",nb:"How many seconds does a quarter turn take? Find it by testing.",code:"car_dance.py"},
+ {n:10,t:"The car that won't crash",time:"60 min",make:"The car uses its ultrasonic 'eyes' to avoid walls; then try the kit's line-following mode.",parts:["the car","boxes or books for walls","black electrical tape for a line"],
+  steps:["Copy <code class='i'>car_guard.py</code> into the Code/Server folder.","Run <code class='i'>python3 car_guard.py</code> in a hallway.","Then make a black tape loop on the floor and try the tutorial's line-following mode."],works:"The car stops, backs up and turns before touching a wall.",challenge:"Find the smallest SAFE_DISTANCE that still works.",nb:"The sensor sends a sound and listens for the echo, like a bat. Why does it work badly on soft things like pillows?",code:"car_guard.py"},
+ {n:11,t:"🏁 Race day",time:"as long as it's fun!",make:"A family event.",parts:["painter's tape for a track","a phone stopwatch","boxes for obstacles"],
+  steps:["Israël designs the track: a start, curves, an obstacle zone and a finish line.","Each family member drives one lap with the phone or computer while someone times it.","Final round: the car does the course by itself with car_guard.py."],works:"Everyone has driven it, and there's a winner.",challenge:"Make a trophy for the winner.",nb:"Draw the track. What would you change to make it harder?",demo:"🏆 Invite grandparents or friends on video call."}
+];
+const L3=[
+ {n:12,t:"Second Pi and the touchscreen",time:"90 min",make:"A Pi with its own touch screen.",parts:["Raspberry Pi (second one, recommended)","official power supply","microSD with Raspberry Pi OS","Raspberry Pi Touch Display 2"],
+  steps:["Install Raspberry Pi OS on the new microSD card with Raspberry Pi Imager (a parent).","Attach the Pi to the back of the display with the screws included.","Connect the display's ribbon cable and the 2 power wires, following the leaflet in the box (the right cable for your Pi model is included).","Power on: the desktop appears on the touchscreen. Turn it to landscape in Screen Configuration if you prefer."],works:"He can tap and open programs with his finger.",challenge:"Change the desktop picture to one he drew.",nb:"How does the screen know where your finger is?"},
+ {n:13,t:"The camera",time:"60 min",make:"Photos taken by his device.",parts:["Raspberry Pi Camera Module 3","the camera cable for your Pi model"],
+  steps:["Power off. Connect the camera ribbon (blue side and latch as shown in the camera leaflet).","Power on and test: <code class='i'>rpicam-hello</code> (a 5-second preview)","Take a photo: <code class='i'>rpicam-still -o first_photo.jpg</code>"],works:"The photo appears in the file manager.",challenge:"Take a photo of every family member.",nb:"The camera is a sensor too. What does it 'feel'? (light!)"},
+ {n:14,t:"My home screen",time:"60 min",make:"The Israël Phone home screen with 5 apps.",parts:["the Pi with screen and camera"],
+  steps:["Download <code class='i'>israel_phone.py</code> into ~/buildlab (see Before you start).","Run <code class='i'>python3 israel_phone.py</code>","Try each app: Camera, Calculator, Times tables, Flashlight, Smart Room. The red X closes it."],works:"All 5 apps open from the home screen and come back with \"Home\".",challenge:"Change OWNER and the button colour (#ffc93c) to make it his.",nb:"An app is a function in the code. Find the function for the Flashlight. How many lines is it?",code:"israel_phone.py"},
+ {n:15,t:"My own app",time:"60–90 min",make:"An app he invents and adds to the home screen.",parts:["the Israël Phone"],
+  steps:["Choose an idea: dice, secret code, a French spelling quiz, a joke of the day, a drawing pad…","Copy the shape of flashlight_app or quiz_app and change it.","Add it to the <code class='i'>APPS</code> list so it gets a button."],works:"His own app has its own button on the home screen.",challenge:"Ask a family member to test it without explaining: is it easy to use?",nb:"Draw your app's screen before coding it (like real app designers do)."},
+ {n:16,t:"Go wireless: battery and case",time:"60–90 min",make:"Unplug it from the wall and design a case.",parts:["USB-C power bank (5V 3A or more)","cardboard, tape, markers (or a case)"],
+  steps:["Plug the power bank into the Pi instead of the wall power supply.","Make it start the home screen by itself (a parent sets this up: add it to the desktop autostart).","Design and build a cardboard case with holes for the camera and cables."],works:"He carries it around the house and it works.",challenge:"How long does the battery last? Note the start and end time.",nb:"Measure the device: width, height, thickness. Draw the case plan with the measurements."},
+ {n:17,t:"🚀 Launch event",time:"30 min",make:"Present the Israël Phone to the family like a real product launch.",parts:["the Israël Phone","the Smart Room (if a Pi is free)"],
+  steps:["Israël prepares a short presentation: what it does, how he built it, what was hard.","He shows each app live, including controlling the Smart Room from his own device.","Questions from the audience!"],works:"He presented it, start to finish.",challenge:"What would version 2 have? Write the wish list.",nb:"What are you proudest of from all the levels?",demo:"🎤 Record the presentation on video to keep."}
+];
+function sessHtml(s,cls){return `<div class="card sess ${cls}" id="s${s.n}"><div class="sh"><span class="num">${s.n}</span><div class="t"><h3>${s.t}</h3><div class="chips"><span class="chip">⏱ ${s.time}</span></div><p class="muted" style="margin:6px 0 0">${s.make}</p></div>
+  <label class="done noprint"><input type="checkbox" data-done="${s.n}"${S.done[s.n]?" checked":""}> Done!</label></div>
+  <div class="cols"><div class="box"><b class="l">Parts</b><ul>${s.parts.map(p=>`<li>${p}</li>`).join("")}</ul></div>
+  ${s.wire?`<div class="box"><b class="l">Wiring (power off first!)</b>${s.wire}</div>`:""}
+  <div class="box"><b class="l">Steps</b><ol>${s.steps.map(p=>`<li>${p}</li>`).join("")}</ol></div></div>
+  ${s.code?`<details class="code"><summary>🐍 The program: ${s.code}</summary><div class="ctool"><button class="btn p" data-copy="${s.code}">Copy the code</button><a class="btn" href="code/${s.code}" download>Download ${s.code}</a></div><pre>${esc(CODE[s.code]||"")}</pre></details>`:""}
+  <div class="cols"><div class="box" style="background:var(--green-soft)"><b class="l">✅ It works when…</b>${s.works}</div><div class="box" style="background:var(--violet-soft)"><b class="l">⭐ Challenge</b>${s.challenge}</div><div class="box" style="background:var(--orange-soft)"><b class="l">📓 Notebook question</b>${s.nb}</div></div>
+  ${s.demo?`<div class="tip" style="margin-bottom:0">${s.demo}</div>`:""}</div>`}
+
+/* ---------- pins ---------- */
+const PIN={1:"3.3V",2:"5V",3:"GPIO2 · SDA",4:"5V",5:"GPIO3 · SCL",6:"GND",7:"GPIO4",8:"GPIO14",9:"GND",10:"GPIO15",11:"GPIO17",12:"GPIO18",13:"GPIO27",14:"GND",15:"GPIO22",16:"GPIO23",17:"3.3V",18:"GPIO24",19:"GPIO10",20:"GND",21:"GPIO9",22:"GPIO25",23:"GPIO11",24:"GPIO8",25:"GND",26:"GPIO7",27:"ID_SD",28:"ID_SC",29:"GPIO5",30:"GND",31:"GPIO6",32:"GPIO12",33:"GPIO13",34:"GND",35:"GPIO19",36:"GPIO16",37:"GPIO26",38:"GPIO20",39:"GND",40:"GPIO21"};
+const USE={1:"DHT11 +",2:"PIR VCC",3:"LCD SDA",4:"LCD VCC",5:"LCD SCL",6:"PIR GND",7:"PIR OUT (motion)",9:"LED + LCD ground",11:"light LED",12:"button",13:"alarm LED",14:"button ground",15:"buzzer",16:"DHT11 data",20:"DHT11 ground"};
+function pinsHtml(){let h="";for(let r=0;r<20;r++){const a=2*r+1,b=a+1;const cls=p=>PIN[p]==="GND"?"gd":/V$/.test(PIN[p])?"pw":USE[p]?"use":"";
+  h+=`<span class="lab lft ${USE[a]?"use":""}">${USE[a]?`<b>${USE[a]}</b> · `:""}${PIN[a]}</span><span class="pn ${cls(a)}">${a}</span><span class="pn ${cls(b)}">${b}</span><span class="lab r ${USE[b]?"use":""}">${PIN[b]}${USE[b]?` · <b>${USE[b]}</b>`:""}</span>`}return h}
+
+/* ---------- shopping ---------- */
+const SHOP=[
+ {g:"Level 1 · Smart Room (only what's missing from the Freenove kit)",items:[
+  ["jw","Jumper wire pack (male-male, male-female, female-female)",12,"Amazon.ca","Handy even if the kit has some."],
+  ["pir","PIR motion sensor HC-SR501 (pack of 3)",12,"Amazon.ca","Only if not in the kit."],
+  ["dht","DHT11 temperature & humidity sensor",8,"Amazon.ca, PiShop.ca","Only if not in the kit."],
+  ["lcd","LCD1602 screen with I2C board",12,"Amazon.ca, PiShop.ca","Only if not in the kit; get the I2C version (4 pins)."],
+  ["nb1","Builder's notebook (grid paper)",5,"any store",""]]},
+ {g:"Level 2 · Robot car",items:[
+  ["car","Freenove 4WD Smart Car Kit for Raspberry Pi (camera, ultrasonic, line sensors)",130,"Amazon.ca","Raspberry Pi not included: it uses the one from his kit. Check the listing says it supports a Raspberry Pi 4.",1],
+  ["bat","2 rechargeable 18650 batteries (flat top, good brand)",25,"Amazon.ca, battery store","NOT included in the car kit. Required.",1],
+  ["chg","18650 battery charger",20,"Amazon.ca","Charge with an adult around.",1],
+  ["tape","Painter's tape + black electrical tape (track and line)",8,"hardware store",""]]},
+ {g:"Level 3 · The Israël Phone",items:[
+  ["pi2","Second Raspberry Pi (Pi 5 4 GB, or Pi 4 4 GB)",95,"PiShop.ca, CanaKit.com","Recommended so the car keeps its Pi."],
+  ["psu","Official power supply for that Pi (Pi 5: 27W USB-C)",20,"PiShop.ca, CanaKit.com","Needed with the second Pi."],
+  ["sd","microSD card 32 GB or 64 GB (A1/A2)",15,"Amazon.ca","Needed with the second Pi."],
+  ["cool","Active cooler (Pi 5) or heatsinks (Pi 4)",10,"PiShop.ca","Keeps it from getting too hot in a case."],
+  ["disp","Raspberry Pi Touch Display 2 (7 inch)",90,"PiShop.ca, CanaKit.com, Amazon.ca","Includes the cables for Pi 4 and Pi 5.",1],
+  ["cam","Raspberry Pi Camera Module 3",38,"PiShop.ca, CanaKit.com","",1],
+  ["camc","Camera cable for Pi 5 (22-pin to 15-pin, 200 mm)",4,"PiShop.ca","Only if the second Pi is a Pi 5."],
+  ["pb","USB-C power bank, 5V 3A or more, 10 000 mAh+",40,"Amazon.ca","Makes it portable.",1]]},
+ {g:"Bonus projects (only if he picks them)",items:[
+  ["soil","Capacitive soil moisture sensors (pack of 3)",12,"Amazon.ca","Plant project."],
+  ["pump","Mini 5V water pump + tubing + relay module kit",20,"Amazon.ca","Plant project."],
+  ["bmp","BMP280 pressure sensor",8,"Amazon.ca, PiShop.ca","Weather station."],
+  ["pad","USB game controller",20,"Amazon.ca","Retro console."]]}];
+function shopHtml(){return SHOP.map(G=>`<div class="card"><h3>${G.g}</h3><div class="tw"><table class="t shop" style="margin-top:6px"><tr><th></th><th>Item</th><th>≈ CAD</th><th>Where</th><th>Note</th></tr>${G.items.map(([id,n,p,w,note,req])=>`<tr class="${S.got[id]?"got":""}"><td class="c"><input type="checkbox" data-got="${id}"${S.got[id]?" checked":""} aria-label="Have it"></td><td>${req?"<b>"+n+"</b>":n}</td><td>$${p}</td><td>${w}</td><td class="muted">${note}</td></tr>`).join("")}</table></div><p class="muted" style="margin:6px 0 0">Bold = required for that level.</p></div>`).join("")}
+function shopTot(){let all=0,left=0,req=[0,0,0,0];SHOP.forEach((G,gi)=>G.items.forEach(([id,n,p,w,note,r])=>{all+=p;if(!S.got[id])left+=p;if(r)req[gi]+=p}));
+  $("shoptot").textContent=`Still to buy (unticked items): about $${left} CAD`;
+  $("shopsub").innerHTML=`Required items only: Level 2 ≈ $${req[1]} · Level 3 ≈ $${req[2]} (+ about $145 more for a second Pi, power supply, card and cooler). Level 1 is free with the kit. Everything on this page together ≈ $${all}.`}
+
+/* ---------- render & nav ---------- */
+function renderAll(){$("L1").innerHTML=L1.map(s=>sessHtml(s,"")).join("");$("L2").innerHTML=L2.map(s=>sessHtml(s,"l2s")).join("");$("L3").innerHTML=L3.map(s=>sessHtml(s,"l3s")).join("");
+  $("pins").innerHTML=pinsHtml();$("shoplist").innerHTML=shopHtml();shopTot();prog()}
+function prog(){const n=Object.values(S.done).filter(Boolean).length;$("bar").style.width=(n/17*100)+"%";$("progtxt").textContent=`${n} of 17 sessions done`}
+const tabs=[...document.querySelectorAll(".tab")];
+function show(t){tabs.forEach(b=>b.setAttribute("aria-selected",b.dataset.t===t));document.querySelectorAll("main>section").forEach(s=>s.hidden=s.id!==t);try{history.replaceState(null,"","#"+t)}catch(e){}scrollTo(0,0)}
+tabs.forEach(b=>b.onclick=()=>show(b.dataset.t));
+document.addEventListener("click",async e=>{const g=e.target.closest("[data-go]");if(g)return show(g.dataset.go);
+  const c=e.target.closest("[data-copy]");if(c){try{await navigator.clipboard.writeText(CODE[c.dataset.copy]);toast("Copied! Paste it in Thonny.")}catch(err){toast("Use the Download button instead")}}});
+document.addEventListener("change",e=>{const d=e.target.closest("[data-done]");if(d){S.done[d.dataset.done]=d.checked;save();prog();if(d.checked)toast("Great job! ⭐")}
+  const h=e.target.closest("[data-got]");if(h){S.got[h.dataset.got]=h.checked;save();h.closest("tr").classList.toggle("got",h.checked);shopTot()}});
+renderAll();const h=(location.hash||"").slice(1);show(["road","start","lv1","lv2","lv3","bonus","shop","help"].includes(h)?h:"road");
+})();
+</script>
+</body>
+</html>
