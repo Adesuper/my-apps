@@ -114,9 +114,9 @@ footer{margin-top:24px;font-size:.85rem;color:var(--ink-soft)}
     <h2 class="h" style="margin-top:0">The plan: simplest first</h2>
     <p>Each level uses what he learned in the one before. <b>Level 1 costs nothing</b> (it uses the Freenove kit you already have). Buy the Level 2 kit only when Level 1 works. That way the money goes in only once he's clearly hooked.</p>
     <div class="levels" style="margin-top:12px">
-      <button class="lv l1" data-go="lv1"><span class="k">Level 1 · 5 sessions · $0</span><h3>🏠 Smart Room</h3><p>Blinking light → doorbell → motion alarm → temperature screen → <b>control it all from a phone</b>.</p></button>
+      <button class="lv l1" data-go="lv1"><span class="k">Level 1 · 5 sessions · $0 (≈ $30 for a real lamp)</span><h3>🏠 Smart Room</h3><p>Blinking light → doorbell → motion alarm → temperature screen → <b>control it all from a phone</b>.</p></button>
       <button class="lv l2" data-go="lv2"><span class="k">Level 2 · 6 sessions · about $175</span><h3>🚗 Robot car</h3><p>Build a 4-wheel car with a camera, drive it from a phone, program dances and a car that won't crash. Race day!</p></button>
-      <button class="lv l3" data-go="lv3"><span class="k">Level 3 · 6 sessions · about $170 (≈ $310 with a 2nd Pi)</span><h3>📱 The Israël Phone</h3><p>A real touchscreen handheld with a camera and <b>apps he writes</b>: camera, calculator, quiz, flashlight, Smart Room remote.</p></button>
+      <button class="lv l3" data-go="lv3"><span class="k">Level 3 · 6 sessions · about $170 (≈ $370 with a 2nd Pi)</span><h3>📱 The Israël Phone</h3><p>A real touchscreen handheld with a camera and <b>apps he writes</b>: camera, calculator, quiz, flashlight, Smart Room remote.</p></button>
       <button class="lv lb" data-go="bonus"><span class="k">Bonus · any time</span><h3>🌱 Extra projects</h3><p>Smart plant that waters itself, weather station, retro game console.</p></button>
     </div>
   </div>
@@ -311,23 +311,28 @@ function pinsHtml(){let h="";for(let r=0;r<20;r++){const a=2*r+1,b=a+1;const cls
 /* ---------- shopping ---------- */
 const SHOP=[
  {g:"Level 1 · Smart Room (only what's missing from the Freenove kit)",items:[
+  ["plug","TP-Link Kasa Smart Plug Mini EP10 (2-pack): the real lamp switch",28,"Best Buy, Amazon.ca, Walmart","Plug a normal lamp into it; the Pi switches it over Wi-Fi. EP10 is fully supported by the Python library. Session 5b (coming).",1],
+  ["ring","WS2812 RGB LED ring, 16 LEDs (mood light)",12,"Amazon.ca, PiShop.ca","Optional colour light for his room. Low voltage (5V), safe with the Pi 4."],
   ["jw","Jumper wire pack (male-male, male-female, female-female)",12,"Amazon.ca","Handy even if the kit has some."],
   ["pir","PIR motion sensor HC-SR501 (pack of 3)",12,"Amazon.ca","Only if not in the kit."],
   ["dht","DHT11 temperature & humidity sensor",8,"Amazon.ca, PiShop.ca","Only if not in the kit."],
   ["lcd","LCD1602 screen with I2C board",12,"Amazon.ca, PiShop.ca","Only if not in the kit; get the I2C version (4 pins)."],
-  ["nb1","Builder's notebook (grid paper)",5,"any store",""]]},
+  ["nb1","Builder's notebook (grid paper)",5,"any store",""],
+  ["hdmi","Micro-HDMI to HDMI cable (if you don't have one)",12,"Amazon.ca","The Pi 4 and Pi 5 use micro-HDMI to connect to a TV or monitor."],
+  ["rdr","USB microSD card reader (if your computer has no slot)",12,"Amazon.ca","To install Raspberry Pi OS on new cards."],
+  ["box","Small parts organizer box + small screwdriver set",20,"Canadian Tire, Dollarama, Amazon.ca","Keeps screws, sensors and wires together."]]},
  {g:"Level 2 · Robot car",items:[
   ["car","Freenove 4WD Smart Car Kit for Raspberry Pi (camera, ultrasonic, line sensors)",130,"Amazon.ca","Raspberry Pi not included: it uses the one from his kit. Check the listing says it supports a Raspberry Pi 4.",1],
   ["bat","2 rechargeable 18650 batteries (flat top, good brand)",25,"Amazon.ca, battery store","NOT included in the car kit. Required.",1],
   ["chg","18650 battery charger",20,"Amazon.ca","Charge with an adult around.",1],
   ["tape","Painter's tape + black electrical tape (track and line)",8,"hardware store",""]]},
  {g:"Level 3 · The Israël Phone",items:[
-  ["pi2","Second Raspberry Pi (Pi 5 4 GB, or Pi 4 4 GB)",95,"PiShop.ca, CanaKit.com","Recommended so the car keeps its Pi."],
+  ["pi2","Second Raspberry Pi (Pi 5 4 GB)",155,"CanaKit.com, PiShop.ca","Recommended so the car keeps its Pi. Pi prices went up in 2026; a Pi 5 2 GB or Pi 4 4 GB is cheaper and enough for this project."],
   ["psu","Official power supply for that Pi (Pi 5: 27W USB-C)",20,"PiShop.ca, CanaKit.com","Needed with the second Pi."],
   ["sd","microSD card 32 GB or 64 GB (A1/A2)",15,"Amazon.ca","Needed with the second Pi."],
   ["cool","Active cooler (Pi 5) or heatsinks (Pi 4)",10,"PiShop.ca","Keeps it from getting too hot in a case."],
-  ["disp","Raspberry Pi Touch Display 2 (7 inch)",90,"PiShop.ca, CanaKit.com, Amazon.ca","Includes the cables for Pi 4 and Pi 5.",1],
-  ["cam","Raspberry Pi Camera Module 3",38,"PiShop.ca, CanaKit.com","",1],
+  ["disp","Raspberry Pi Touch Display 2 (7 inch)",87,"PiShop.ca, CanaKit.com, Amazon.ca","Includes the cables for Pi 4 and Pi 5.",1],
+  ["cam","Raspberry Pi Camera Module 3 (standard, not Wide or NoIR)",37,"PiShop.ca, CanaKit.com","",1],
   ["camc","Camera cable for Pi 5 (22-pin to 15-pin, 200 mm)",4,"PiShop.ca","Only if the second Pi is a Pi 5."],
   ["pb","USB-C power bank, 5V 3A or more, 10 000 mAh+",40,"Amazon.ca","Makes it portable.",1]]},
  {g:"Bonus projects (only if he picks them)",items:[
@@ -338,7 +343,7 @@ const SHOP=[
 function shopHtml(){return SHOP.map(G=>`<div class="card"><h3>${G.g}</h3><div class="tw"><table class="t shop" style="margin-top:6px"><tr><th></th><th>Item</th><th>≈ CAD</th><th>Where</th><th>Note</th></tr>${G.items.map(([id,n,p,w,note,req])=>`<tr class="${S.got[id]?"got":""}"><td class="c"><input type="checkbox" data-got="${id}"${S.got[id]?" checked":""} aria-label="Have it"></td><td>${req?"<b>"+n+"</b>":n}</td><td>$${p}</td><td>${w}</td><td class="muted">${note}</td></tr>`).join("")}</table></div><p class="muted" style="margin:6px 0 0">Bold = required for that level.</p></div>`).join("")}
 function shopTot(){let all=0,left=0,req=[0,0,0,0];SHOP.forEach((G,gi)=>G.items.forEach(([id,n,p,w,note,r])=>{all+=p;if(!S.got[id])left+=p;if(r)req[gi]+=p}));
   $("shoptot").textContent=`Still to buy (unticked items): about $${left} CAD`;
-  $("shopsub").innerHTML=`Required items only: Level 2 ≈ $${req[1]} · Level 3 ≈ $${req[2]} (+ about $145 more for a second Pi, power supply, card and cooler). Level 1 is free with the kit. Everything on this page together ≈ $${all}.`}
+  $("shopsub").innerHTML=`Required items only: Level 2 ≈ $${req[1]} · Level 3 ≈ $${req[2]} (+ about $200 more for a second Pi 5 with power supply, card and cooler). Level 1 is free with the kit (about $28 more for the smart plug that switches a real lamp). Everything on this page together ≈ $${all}.`}
 
 /* ---------- render & nav ---------- */
 function renderAll(){$("L1").innerHTML=L1.map(s=>sessHtml(s,"")).join("");$("L2").innerHTML=L2.map(s=>sessHtml(s,"l2s")).join("");$("L3").innerHTML=L3.map(s=>sessHtml(s,"l3s")).join("");
